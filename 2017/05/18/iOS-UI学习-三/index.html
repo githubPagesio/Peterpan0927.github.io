@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS-UI学习(三) | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UI初步（三）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS-UI学习(三)">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/iOS-UI学习-三/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="UI初步（三）">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8810.32.56.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8811.32.03.png">
+<meta property="og:updated_time" content="2017-05-18T07:32:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS-UI学习(三)">
+<meta name="twitter:description" content="UI初步（三）">
+<meta name="twitter:image" content="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-iOS-UI学习-三" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/18/iOS-UI学习-三/" class="article-date">
+      <time datetime="2017-05-18T07:30:00.000Z" itemprop="datePublished">2017-05-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS-UI学习(三)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/KVC字典快速赋值/">KVC字典快速赋值</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/较完善的App/">较完善的App</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>UI初步（三）<br><a id="more"></a></p>
+<h1 id="UI基础Day4"><a href="#UI基础Day4" class="headerlink" title="UI基础Day4"></a>UI基础Day4</h1><h2 id="1-应用图标的启动图片的设置"><a href="#1-应用图标的启动图片的设置" class="headerlink" title="1.应用图标的启动图片的设置"></a>1.应用图标的启动图片的设置</h2><blockquote>
+<p>应用图标：将尺寸合适的图片拖入Assets.xcassets中的Applcon中</p>
+<p>启动图片：在项目栏中找到Launch Images Source,点击后面的方框,删掉Launch Screen File来进行修改(iOS7及之前，iOS8以后直接在Launch Screen进行插入图片),<a href="http://www.jianshu.com/p/a3315f6896a7" target="_blank" rel="external">参考7</a>，<a href="http://www.liuchuo.net/archives/2537" target="_blank" rel="external">参考8</a>,注意屏幕尺寸一定要做适配</p>
+</blockquote>
+<h2 id="2-屏幕尺寸和图片规格介绍"><a href="#2-屏幕尺寸和图片规格介绍" class="headerlink" title="2.屏幕尺寸和图片规格介绍"></a>2.屏幕尺寸和图片规格介绍</h2><p>屏幕尺寸：</p>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png" alt=""></p>
+<p>图片规格：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8810.32.56.png" alt=""></p>
+<h2 id="3-状态栏的设置参考博客"><a href="#3-状态栏的设置参考博客" class="headerlink" title="3.状态栏的设置参考博客"></a>3.状态栏的设置<a href="http://www.jianshu.com/p/5aa05983b445" target="_blank" rel="external">参考博客</a></h2><p>加载启动图片时，如果不想显示状态栏可以在project中设置属性Hide status bar</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8811.32.03.png" alt=""></p>
+<p>进入main.storyboard,在背景图片是黑色的时候，如果要显示状态栏，可以通过代码实现，<a href="http://www.jianshu.com/p/9f7f3fa624e7" target="_blank" rel="external">app状态栏样式设计</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-(UIStatusBarStyle)preferredStatusBarStyle&#123;</div><div class="line">    return UIStatusBarStyleLightContent;</div><div class="line">&#125;</div><div class="line">//隐藏状态栏</div><div class="line">-(BOOL)preferredStatusBarStyle&#123;</div><div class="line">    return YES;</div></pre></td></tr></table></figure>
+<h2 id="4-不同状态的按钮设置（代码）"><a href="#4-不同状态的按钮设置（代码）" class="headerlink" title="4.不同状态的按钮设置（代码）"></a>4.不同状态的按钮设置（代码）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer&quot; ] forState:UIControlStateNormal];</div><div class="line">[button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer_highlighted&quot; ] forState:UIControlStateHighlighted];</div><div class="line">//记得最后初始化之后要将按钮加入到父控件当中</div><div class="line">[_answerView addSubview:button];</div></pre></td></tr></table></figure>
+<h2 id="5-对于self-super-init-的思考"><a href="#5-对于self-super-init-的思考" class="headerlink" title="5.对于self = [super init]的思考"></a>5.对于self = [super init]的思考</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        // Custom initialization</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">//alloc返回一个有效的未初始化的对象实例。对于self是alloc 返回的指针，同时可以在所有的方法作用域内访问。</div><div class="line">//如果初始化一个对象失败，就会返回nil，当返回nil的时候self = [super init]测试的主体就不会再继续执行。如果不这样做，你可能会操作一个不可用的对象，它的行为是不可预测的，最终可能会导致你的程序崩溃。</div></pre></td></tr></table></figure>
+<p><code>self</code>表示当前这个类的对象，而<code>super</code>是一个编译器标示符，和<code>self</code>指向同一个消息接受者。在本例中，无论是<code>[self class]</code>还是<code>[super class]</code>，接受消息者都是<code>Son</code>对象，但<code>super</code>与<code>self</code>不同的是，<code>self</code>调用<code>class</code>方法时，是在子类<code>Son</code>中查找方法，而<code>super</code>调用<code>class</code>方法时，是在父类<code>Father</code>中查找方法。</p>
+<h2 id="6-对象初始化方式的比较"><a href="#6-对象初始化方式的比较" class="headerlink" title="6.对象初始化方式的比较"></a>6.对象初始化方式的比较</h2><p>[class new]和[[class alloc]init]源码分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">+ new </div><div class="line">&#123; </div><div class="line">    id newObject = (*_alloc)((Class)self, 0); </div><div class="line">    Class metaClass = self-&gt;isa; </div><div class="line">    if (class_getVersion(metaClass) &gt; 1) </div><div class="line">    return [newObject init]; </div><div class="line">    else </div><div class="line">    return newObject; </div><div class="line">&#125; </div><div class="line"></div><div class="line">//而 alloc/init 像这样： </div><div class="line">+ alloc </div><div class="line">&#123; </div><div class="line">    return (*_zoneAlloc)((Class)self, 0, malloc_default_zone());  </div><div class="line">&#125; </div><div class="line">- init </div><div class="line">&#123; </div><div class="line">    return self; </div><div class="line">&#125;</div><div class="line">//[class new]默认调用 alloc与init方法，那么我们无法使用自定义的初始化方法，多了更多的局限性。那么[class alloc] init] 会更方便， 当然[class alloc] init] 的设计也是由于历史的原因。</div></pre></td></tr></table></figure>
+<p>##7.字典转模型实现懒加载的过程</p>
+<blockquote>
+<p>读取文件路径</p>
+<p>读取文件到临时数组</p>
+<p>创建一个可变数组</p>
+<p>遍历临时数组中的字典转为模型，存放到可变数组</p>
+<p>把可变数组赋值给属性数组</p>
+</blockquote>
+<h2 id="8-清除子控件的方法"><a href="#8-清除子控件的方法" class="headerlink" title="8.清除子控件的方法"></a>8.清除子控件的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//1.遍历子控件，一个个删除</div><div class="line">for(UIView *view in _answer.subviews)&#123;</div><div class="line">	[view removeFromSuperiew];</div><div class="line">&#125;</div><div class="line">//2.让让数组中所有的元素都执行清除方法</div><div class="line"> [_answerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];</div><div class="line">//为了内存优化，需要将上一次加载的子控件的内存释放掉</div></pre></td></tr></table></figure>
+<h2 id="9-猜字谜代码讲解"><a href="#9-猜字谜代码讲解" class="headerlink" title="9.猜字谜代码讲解"></a>9.猜字谜代码讲解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div></pre></td><td class="code"><pre><div class="line">//ViewController.m</div><div class="line"></div><div class="line">#import &quot;ViewController.h&quot;</div><div class="line"></div><div class="line">#import &quot;GuessModel.h&quot;</div><div class="line"></div><div class="line">#define kButtonWidth 30</div><div class="line"></div><div class="line">#define kMargin 10</div><div class="line"></div><div class="line">#define kScreenSize [UIScreen mainScreen].bounds.size</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line">@property (weak, nonatomic) IBOutlet UILabel *indexLabel;</div><div class="line">@property (weak, nonatomic) IBOutlet UILabel *titleLabel;</div><div class="line">@property (weak, nonatomic) IBOutlet UIButton *coinButton;</div><div class="line">@property (weak, nonatomic) IBOutlet UIButton *imageButton;</div><div class="line">@property (weak, nonatomic) IBOutlet UIView *answerView;</div><div class="line">@property (weak, nonatomic) IBOutlet UIView *optionView;</div><div class="line">@property (weak, nonatomic) IBOutlet UIButton *nextButton;</div><div class="line">@property (strong, nonatomic) NSArray *dataArray;</div><div class="line">@property (nonatomic, assign) NSInteger index;</div><div class="line">@property (weak ,nonatomic) UIView *coverView;</div><div class="line">@property (weak, nonatomic) IBOutlet UITextField *gua;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line">-(NSArray *)dataArray&#123;</div><div class="line">    if(_dataArray==nil)&#123;</div><div class="line">        NSString *path = [[NSBundle mainBundle]pathForResource:@&quot;questions.plist&quot; ofType:nil];</div><div class="line">        NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];</div><div class="line">        NSMutableArray *mutableArray = [NSMutableArray array];</div><div class="line">        for (NSDictionary *dict in tempArray)&#123;</div><div class="line">            GuessModel *guessModel = [GuessModel guessModelDict:dict];</div><div class="line">            [mutableArray addObject:guessModel];</div><div class="line">        &#125;</div><div class="line">        _dataArray = mutableArray;</div><div class="line">    &#125;</div><div class="line">    return _dataArray;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.index = 1;</div><div class="line">    [self setupUI];</div><div class="line">    [self initCoverView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)initCoverView&#123;</div><div class="line">    UIView *coverView = [[UIView alloc]initWithFrame:self.view.bounds];</div><div class="line">    //进行属性的关联</div><div class="line">    self.coverView = coverView;</div><div class="line">    coverView.alpha = 0;</div><div class="line">    [coverView setBackgroundColor:[UIColor blackColor]];</div><div class="line">    [self.view addSubview:coverView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)setupUI&#123;</div><div class="line">    GuessModel *guessModel = self.dataArray[_index-1];</div><div class="line">    _indexLabel.text = [NSString stringWithFormat:@&quot;%ld/%ld&quot;,_index, self.dataArray.count];</div><div class="line">    _titleLabel.text = guessModel.title;</div><div class="line">    NSString *imageName = guessModel.icon;</div><div class="line">    [_imageButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];</div><div class="line">    //获取答案的长度</div><div class="line">    NSString *answer = guessModel.answer;</div><div class="line">    NSInteger length = answer.length;</div><div class="line">    [self setupAnswerViewWithLength:length];</div><div class="line">    [self setupOptionViewWithOptions:guessModel.options];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)setupOptionViewWithOptions:(NSArray *)options&#123;</div><div class="line">    int column = 7;</div><div class="line">    NSInteger count = options.count;</div><div class="line">    CGFloat margin = (kScreenSize.width - column*kButtonWidth)/(column+1);</div><div class="line">    [_optionView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];</div><div class="line">    for(int i = 0;i &lt; count;i++)&#123;</div><div class="line">        NSInteger rowIndex = i/column;</div><div class="line">        NSInteger columnIndex = i%column;</div><div class="line">        CGFloat buttonX = (columnIndex + 1)*margin + columnIndex*kButtonWidth;</div><div class="line">        CGFloat buttonY = rowIndex*margin + rowIndex*kButtonWidth;</div><div class="line">        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(buttonX, buttonY, kButtonWidth, kButtonWidth)];</div><div class="line">        [button setBackgroundImage:[UIImage imageNamed:@&quot;btn_option&quot;] forState:UIControlStateNormal];</div><div class="line">        [button setBackgroundImage:[UIImage imageNamed:@&quot;btn_option_highlighted&quot; ] forState:UIControlStateHighlighted];</div><div class="line">        [button setTitle:options[i] forState:UIControlStateNormal];</div><div class="line">        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];</div><div class="line">        [button addTarget:self action:@selector(didClickOptionButton:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">        [_optionView addSubview:button];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)setupAnswerViewWithLength:(NSInteger)count&#123;</div><div class="line">    </div><div class="line">    CGFloat startX = (kScreenSize.width - count*kButtonWidth - (count-1)*kMargin)/2;</div><div class="line">    //添加本题的时候要清除上一题的Button,让数组中所有的元素都执行清除方法</div><div class="line">    [_answerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];</div><div class="line">    for(int i = 0;i &lt; count;i++)&#123;</div><div class="line">        CGFloat buttonX = i*kButtonWidth + i*kMargin + startX;</div><div class="line">        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(buttonX, kMargin, kButtonWidth, kButtonWidth)];</div><div class="line">        [button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer&quot; ] forState:UIControlStateNormal];</div><div class="line">        [button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer_highlighted&quot; ] forState:UIControlStateHighlighted];</div><div class="line">        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];</div><div class="line">        [button addTarget:self action:@selector(didClickAnswerButton:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">        [_answerView addSubview:button];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(IBAction)nextQuestion:(UIButton *)sender &#123;</div><div class="line">    _index++;</div><div class="line">    [self setupUI];</div><div class="line">    _nextButton.enabled = (_index != self.dataArray.count);</div><div class="line">     _optionView.userInteractionEnabled = YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)didClickOptionButton:(UIButton *)optionButton&#123;</div><div class="line">    //取出文字</div><div class="line">    NSString *title = optionButton.currentTitle;</div><div class="line">    //隐藏被点击按钮</div><div class="line">    optionButton.hidden = YES;</div><div class="line">    //将点击的按钮文字显示到答案区域</div><div class="line">    //obj --&gt;数组对象</div><div class="line">    //idx --&gt;下标</div><div class="line">    //stop --&gt;判断结束</div><div class="line">    [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *answerButton = obj;</div><div class="line">        if(answerButton.currentTitle.length==0)&#123;</div><div class="line">            [answerButton setTitle:title forState:UIControlStateNormal];</div><div class="line">            *stop = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    __block BOOL isComplete = YES;</div><div class="line">    [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *answerButton = obj;</div><div class="line">        if(answerButton.currentTitle.length==0)&#123;</div><div class="line">            isComplete = NO;</div><div class="line">            *stop = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    if (isComplete) &#123;</div><div class="line">        //用户不能再点击选项区域中的按钮</div><div class="line">        //userInteractionEnabled = NO,禁止任何用户交互，如果是父View设置了这个属性，那么他的子View也将不会接受用户交互</div><div class="line">        _optionView.userInteractionEnabled = NO;</div><div class="line">        //判断用户是否输入正确，取出用户的答案和标准答案做对比</div><div class="line">        //取出用户答案</div><div class="line">        NSMutableString *userAnswer = [NSMutableString string];</div><div class="line">        [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">            UIButton *answerButton = obj;</div><div class="line">            [userAnswer appendString:answerButton.currentTitle];</div><div class="line">        &#125;];</div><div class="line">        //取出正确答案</div><div class="line">        GuessModel *guessModel = self.dataArray[_index-1];</div><div class="line">        NSString *rightAnswer = guessModel.answer;</div><div class="line">        NSInteger currentCoin = _coinButton.currentTitle.integerValue;</div><div class="line">        if ([userAnswer isEqualToString:rightAnswer])&#123;</div><div class="line">            //自动跳转下一题，增加一百金币</div><div class="line">            currentCoin += 100;</div><div class="line">            //防止最后一题回答正确后继续跳转下一题而导致报错</div><div class="line">            if(_index != self.dataArray.count)</div><div class="line">                [self performSelector:@selector(nextQuestion:) withObject:nil afterDelay:1];</div><div class="line">        &#125;else &#123;</div><div class="line">            //答案区域字体变红，减少500金币</div><div class="line">            currentCoin -= 500;</div><div class="line">            if(currentCoin &lt; 0)&#123;</div><div class="line">                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;亲，你的钱不够了&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">                [alertView addAction:cancelAction];</div><div class="line">                [alertView addAction:sureAction];</div><div class="line">                [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">             [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">                 UIButton *answerButton = obj;</div><div class="line">                 </div><div class="line">                 [answerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];</div><div class="line">             &#125;];</div><div class="line">        &#125;</div><div class="line">        NSString *coinTitle = [NSString stringWithFormat: @&quot;%ld&quot;,currentCoin ];</div><div class="line">        [_coinButton setTitle:coinTitle forState:UIControlStateNormal];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)didClickAnswerButton:(UIButton *)answerButton&#123;</div><div class="line">    //如果没有文本就直接返回</div><div class="line">    if(answerButton.currentTitle.length == 0)&#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    //取出文本</div><div class="line">    NSString *title = answerButton.currentTitle;</div><div class="line">    //清空按钮区域的文本</div><div class="line">    [answerButton setTitle:@&quot;&quot; forState:UIControlStateNormal];</div><div class="line">    [_optionView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *optionButton = obj;</div><div class="line">        //将选项中的相应文字显示出来</div><div class="line">        if([optionButton.currentTitle isEqualToString:title])&#123;</div><div class="line">            optionButton.hidden = NO;</div><div class="line">            *stop = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *answerButton = obj;</div><div class="line">        </div><div class="line">        [answerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];</div><div class="line">    &#125;];</div><div class="line">    //打开选项区域的用户交互</div><div class="line">    _optionView.userInteractionEnabled=YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(UIStatusBarStyle)preferredStatusBarStyle&#123;</div><div class="line">    //在黑色的背景下显示状态栏</div><div class="line">    return UIStatusBarStyleLightContent;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (IBAction)didClickTipButton:(UIButton *)sender &#123;</div><div class="line">    </div><div class="line">    NSInteger currentCoin = _coinButton.currentTitle.integerValue;</div><div class="line">    currentCoin -= 1000;</div><div class="line">    //做一个判断分数是否大于1000</div><div class="line">    if(currentCoin &lt; 0)&#123;</div><div class="line">        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;亲，你的钱不够了&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">        [alertView addAction:cancelAction];</div><div class="line">        [alertView addAction:sureAction];</div><div class="line">        [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    NSString *coinstring = [NSString stringWithFormat:@&quot;%ld&quot;,currentCoin];</div><div class="line">    [_coinButton setTitle:coinstring forState:UIControlStateNormal];</div><div class="line">    GuessModel *guessModel = self.dataArray[_index-1];</div><div class="line">    NSString *rightAnswer = guessModel.answer;</div><div class="line">    NSString *firststring = [rightAnswer substringToIndex:1];</div><div class="line">    [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *answerButton = obj;</div><div class="line">        if(idx == 0)&#123;</div><div class="line">            [answerButton setTitle:firststring forState:UIControlStateNormal];</div><div class="line">        &#125;else &#123;</div><div class="line">            //如果不是第一个字符串，则清空</div><div class="line">            [answerButton setTitle:@&quot;&quot; forState:UIControlStateNormal];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line">    [_optionView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *optionButton = obj;</div><div class="line">        if([optionButton.currentTitle isEqualToString:firststring])&#123;</div><div class="line">            //如果字符串相等，就把button隐藏</div><div class="line">            optionButton.hidden = YES;</div><div class="line">        &#125;else&#123;</div><div class="line">            //如果不是第一个就要回到原位</div><div class="line">            optionButton.hidden = NO;</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop)&#123;</div><div class="line">        UIButton *answerButton = obj;</div><div class="line">        </div><div class="line">        [answerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];</div><div class="line">    &#125;];</div><div class="line">    _optionView.userInteractionEnabled = YES;</div><div class="line">&#125;</div><div class="line">- (IBAction)didClickimageButton:(UIButton *)sender &#123;</div><div class="line">    [UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">         _coverView.alpha = 0.6;</div><div class="line">        //将图片放大至原来的1.5倍</div><div class="line">        _imageButton.transform = CGAffineTransformMakeScale(1.5, 1.5);</div><div class="line">    &#125;];</div><div class="line">    [self.view addSubview:_coverView];</div><div class="line">    //将图片按钮放在coverView的上面</div><div class="line">    [self.view bringSubviewToFront:_imageButton];</div><div class="line">&#125;</div><div class="line">- (IBAction)didClickBigImageButton:(id)sender &#123;</div><div class="line">        //通过coverView的alpha值作判断</div><div class="line">        if(_coverView.alpha == 0)</div><div class="line">        &#123;</div><div class="line">            [self didClickimageButton:nil];</div><div class="line">        &#125;else &#123;</div><div class="line">            [UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">        //将透明度和图片的大小复原</div><div class="line">                _coverView.alpha = 0;</div><div class="line">                //CGAffineTransformIdentity如果赋值回去，那么之前通过transform改变的属性都会复原</div><div class="line">                _imageButton.transform = CGAffineTransformIdentity;</div><div class="line">            &#125;];</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line">- (IBAction)didClickHelp:(id)sender &#123;</div><div class="line">    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;亲爱的玩家&quot; message:@&quot;你需要我们的帮助吗？&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action)&#123;</div><div class="line">        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;通道入口&quot; message:@&quot;请问你是哪种类型的玩家呢？&quot; preferredStyle:UIAlertControllerStyleActionSheet];</div><div class="line">        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;非RMB&quot; style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action)&#123;</div><div class="line">            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;智障！！！&quot; message:@&quot;没钱玩个毛，滚犊子！&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;我这就滚～&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">            [alertView addAction:sureAction];</div><div class="line">             [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">        &#125;];</div><div class="line">        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;RMB&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action)&#123;</div><div class="line">            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;尊敬的玩家&quot; message:@&quot;我的支付宝账号是15629085780，我们加个好友慢慢聊&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;我马上加&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">            [alertView addAction:sureAction];</div><div class="line">            [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">        &#125;];</div><div class="line">        [alertView addAction:cancelAction];</div><div class="line">        [alertView addAction:sureAction];</div><div class="line">        [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">    &#125;];</div><div class="line">    [alertView addAction:cancelAction];</div><div class="line">    [alertView addAction:sureAction];</div><div class="line">    [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">&#125;</div><div class="line">- (IBAction)kaigua:(id)sender &#123;</div><div class="line">    if ([self.gua.text isEqualToString:@&quot;Kana&quot;]) &#123;</div><div class="line">         UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@&quot;特殊的玩家&quot; message:@&quot;题目的答案问问你旁边的人就知道了哟&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;这真是个好主意&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">        [alertView addAction:sureAction];</div><div class="line">        [self presentViewController:alertView animated:YES completion:nil];</div><div class="line">    &#125;else if ([self.gua.text isEqualToString:@&quot;潘振鹏&quot;])&#123;</div><div class="line">        NSInteger currentCoin = _coinButton.currentTitle.integerValue;</div><div class="line">        currentCoin += 10000;</div><div class="line">        NSString *coinString = [NSString stringWithFormat:@&quot;%ld&quot;, currentCoin];</div><div class="line">        [_coinButton setTitle:coinString forState:UIControlStateNormal];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//猜测字谜的答案部分，字典转模型</div><div class="line">//  GuessModel.m</div><div class="line">#import &quot;GuessModel.h&quot;</div><div class="line"></div><div class="line">@implementation GuessModel</div><div class="line">-(instancetype)initWithDict:(NSDictionary *)dict&#123;</div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        [self setValuesForKeysWithDictionary:dict];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">+(instancetype)guessModelDict:(NSDictionary *)dict&#123;</div><div class="line">    return [[self alloc]initWithDict:dict];</div><div class="line">&#125;</div><div class="line">@end</div><div class="line">//  GuessModel.h</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface GuessModel : NSObject</div><div class="line">@property (nonatomic, copy)NSString *answer;</div><div class="line">@property (nonatomic, copy)NSString *icon;</div><div class="line">@property (nonatomic, copy)NSString *title;</div><div class="line">@property (nonatomic, copy)NSArray *options;</div><div class="line"></div><div class="line">-(instancetype)initWithDict:(NSDictionary *)dict;</div><div class="line">+(instancetype)guessModelDict:(NSDictionary *)dict;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="10-UIAlertController提示框"><a href="#10-UIAlertController提示框" class="headerlink" title="10.UIAlertController提示框"></a>10.UIAlertController提示框</h2><p>两种提示的方式：</p>
+<p>1.中部弹出：style为UIAlertControllerStyleAlert</p>
+<p>2.底部弹出：style为UIAlertControllerStyleActionSheet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//创建点击的选项并加入提示框</div><div class="line">UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:nil];</div><div class="line">        [alertView addAction:cancelAction];</div><div class="line">        [alertView addAction:sureAction];</div><div class="line">//在handler中可以进行回调，nil则没有触发事件</div></pre></td></tr></table></figure>
+<h2 id="11-KVC模型"><a href="#11-KVC模型" class="headerlink" title="11.KVC模型"></a>11.KVC模型</h2><p>使用kvc进行快速赋值<a href="http://www.jianshu.com/p/870eb4b4170a" target="_blank" rel="external">字典快速赋值</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">test.name=dic[@&quot;name&quot;];</div><div class="line">test.sex=dic[@&quot;sex&quot;];</div><div class="line">test.age=dic[@&quot;age&quot;];</div><div class="line">//将赋值的过程替换为一句话</div><div class="line">[test setValuesForKeysWithDictionary:dic];</div><div class="line">//如果model中有不存在于dict中的元素</div><div class="line">@property (nonatomic,copy)NSString *other;</div><div class="line">//此时如果打印一下other的值，可以看到他的值为null，显而易见,dic中的值可以完全赋值给model，而other没有被赋值，所以值是空的</div><div class="line">NSLog(@&quot;test.other=%@&quot;,test.other);</div><div class="line">test.other=(null)</div><div class="line">//如果dict中有不存在于Model中的元素</div><div class="line">Terminating app due to uncaught exception &apos;NSUnknownKeyException&apos;,</div><div class="line">reason: &apos;[&lt;PersonModel 0x7fd731517910&gt; setValue:forUndefinedKey:]:</div><div class="line">this class is not key value coding-compliant for the key age.&apos;</div><div class="line">//通过了编译，但是运行时报错,解决方式就是实现一个方法setValue:forUndefinedKey: 这个方法能过滤掉不存在的键值。在model.h／m文件中添加</div><div class="line">-(void)setValue:(id)value forUndefinedKey:(NSString *)key;</div><div class="line">-(void)setValue:(id)value forUndefinedKey:(NSString *)key&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">//在.m文件中不需要写任何的内容，现在就可以成功运行了</div></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年05月18日 - 15时30分</p>
+        <p><span>最后更新:</span>2017年05月18日 - 15时32分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/18/iOS-UI学习-三/" title="iOS-UI学习(三)">http://yoursite.com/2017/05/18/iOS-UI学习-三/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/05/18/iOS-UI学习-三/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/12/iOS-UI学习-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS-UI学习(二)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UI基础Day4"><span class="toc-number">1.</span> <span class="toc-text">UI基础Day4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-应用图标的启动图片的设置"><span class="toc-number">1.1.</span> <span class="toc-text">1.应用图标的启动图片的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-屏幕尺寸和图片规格介绍"><span class="toc-number">1.2.</span> <span class="toc-text">2.屏幕尺寸和图片规格介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-状态栏的设置参考博客"><span class="toc-number">1.3.</span> <span class="toc-text">3.状态栏的设置参考博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-不同状态的按钮设置（代码）"><span class="toc-number">1.4.</span> <span class="toc-text">4.不同状态的按钮设置（代码）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-对于self-super-init-的思考"><span class="toc-number">1.5.</span> <span class="toc-text">5.对于self = [super init]的思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-对象初始化方式的比较"><span class="toc-number">1.6.</span> <span class="toc-text">6.对象初始化方式的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-清除子控件的方法"><span class="toc-number">1.7.</span> <span class="toc-text">8.清除子控件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-猜字谜代码讲解"><span class="toc-number">1.8.</span> <span class="toc-text">9.猜字谜代码讲解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-UIAlertController提示框"><span class="toc-number">1.9.</span> <span class="toc-text">10.UIAlertController提示框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-KVC模型"><span class="toc-number">1.10.</span> <span class="toc-text">11.KVC模型</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/05/18/iOS-UI学习-三/" data-title="iOS-UI学习(三)" data-url="http://yoursite.com/2017/05/18/iOS-UI学习-三/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/05/12/iOS-UI学习-二/" title="下一篇: iOS-UI学习(二)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/19/hello-world/">页面教程</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
