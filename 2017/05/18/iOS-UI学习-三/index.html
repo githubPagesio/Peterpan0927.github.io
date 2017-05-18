@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS-UI学习(三) | Hexo</title>
+  <title>iOS-UI学习(三) | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="UI初步（三）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS-UI学习(三)">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/iOS-UI学习-三/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="UI初步（三）">
 <meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8810.32.56.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8811.32.03.png">
-<meta property="og:updated_time" content="2017-05-18T07:32:12.000Z">
+<meta property="og:updated_time" content="2017-05-18T07:34:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS-UI学习(三)">
 <meta name="twitter:description" content="UI初步（三）">
 <meta name="twitter:image" content="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -292,8 +292,7 @@
 <p><code>self</code>表示当前这个类的对象，而<code>super</code>是一个编译器标示符，和<code>self</code>指向同一个消息接受者。在本例中，无论是<code>[self class]</code>还是<code>[super class]</code>，接受消息者都是<code>Son</code>对象，但<code>super</code>与<code>self</code>不同的是，<code>self</code>调用<code>class</code>方法时，是在子类<code>Son</code>中查找方法，而<code>super</code>调用<code>class</code>方法时，是在父类<code>Father</code>中查找方法。</p>
 <h2 id="6-对象初始化方式的比较"><a href="#6-对象初始化方式的比较" class="headerlink" title="6.对象初始化方式的比较"></a>6.对象初始化方式的比较</h2><p>[class new]和[[class alloc]init]源码分析：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">+ new </div><div class="line">&#123; </div><div class="line">    id newObject = (*_alloc)((Class)self, 0); </div><div class="line">    Class metaClass = self-&gt;isa; </div><div class="line">    if (class_getVersion(metaClass) &gt; 1) </div><div class="line">    return [newObject init]; </div><div class="line">    else </div><div class="line">    return newObject; </div><div class="line">&#125; </div><div class="line"></div><div class="line">//而 alloc/init 像这样： </div><div class="line">+ alloc </div><div class="line">&#123; </div><div class="line">    return (*_zoneAlloc)((Class)self, 0, malloc_default_zone());  </div><div class="line">&#125; </div><div class="line">- init </div><div class="line">&#123; </div><div class="line">    return self; </div><div class="line">&#125;</div><div class="line">//[class new]默认调用 alloc与init方法，那么我们无法使用自定义的初始化方法，多了更多的局限性。那么[class alloc] init] 会更方便， 当然[class alloc] init] 的设计也是由于历史的原因。</div></pre></td></tr></table></figure>
-<p>##7.字典转模型实现懒加载的过程</p>
-<blockquote>
+<h2 id="7-字典转模型实现懒加载的过程"><a href="#7-字典转模型实现懒加载的过程" class="headerlink" title="7.字典转模型实现懒加载的过程"></a>7.字典转模型实现懒加载的过程</h2><blockquote>
 <p>读取文件路径</p>
 <p>读取文件到临时数组</p>
 <p>创建一个可变数组</p>
@@ -366,7 +365,7 @@
         <p><span>本文标题:</span><a href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年05月18日 - 15时30分</p>
-        <p><span>最后更新:</span>2017年05月18日 - 15时32分</p>
+        <p><span>最后更新:</span>2017年05月18日 - 15时34分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/05/18/iOS-UI学习-三/" title="iOS-UI学习(三)">http://yoursite.com/2017/05/18/iOS-UI学习-三/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/05/18/iOS-UI学习-三/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -395,7 +394,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UI基础Day4"><span class="toc-number">1.</span> <span class="toc-text">UI基础Day4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-应用图标的启动图片的设置"><span class="toc-number">1.1.</span> <span class="toc-text">1.应用图标的启动图片的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-屏幕尺寸和图片规格介绍"><span class="toc-number">1.2.</span> <span class="toc-text">2.屏幕尺寸和图片规格介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-状态栏的设置参考博客"><span class="toc-number">1.3.</span> <span class="toc-text">3.状态栏的设置参考博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-不同状态的按钮设置（代码）"><span class="toc-number">1.4.</span> <span class="toc-text">4.不同状态的按钮设置（代码）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-对于self-super-init-的思考"><span class="toc-number">1.5.</span> <span class="toc-text">5.对于self = [super init]的思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-对象初始化方式的比较"><span class="toc-number">1.6.</span> <span class="toc-text">6.对象初始化方式的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-清除子控件的方法"><span class="toc-number">1.7.</span> <span class="toc-text">8.清除子控件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-猜字谜代码讲解"><span class="toc-number">1.8.</span> <span class="toc-text">9.猜字谜代码讲解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-UIAlertController提示框"><span class="toc-number">1.9.</span> <span class="toc-text">10.UIAlertController提示框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-KVC模型"><span class="toc-number">1.10.</span> <span class="toc-text">11.KVC模型</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UI基础Day4"><span class="toc-number">1.</span> <span class="toc-text">UI基础Day4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-应用图标的启动图片的设置"><span class="toc-number">1.1.</span> <span class="toc-text">1.应用图标的启动图片的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-屏幕尺寸和图片规格介绍"><span class="toc-number">1.2.</span> <span class="toc-text">2.屏幕尺寸和图片规格介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-状态栏的设置参考博客"><span class="toc-number">1.3.</span> <span class="toc-text">3.状态栏的设置参考博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-不同状态的按钮设置（代码）"><span class="toc-number">1.4.</span> <span class="toc-text">4.不同状态的按钮设置（代码）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-对于self-super-init-的思考"><span class="toc-number">1.5.</span> <span class="toc-text">5.对于self = [super init]的思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-对象初始化方式的比较"><span class="toc-number">1.6.</span> <span class="toc-text">6.对象初始化方式的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-字典转模型实现懒加载的过程"><span class="toc-number">1.7.</span> <span class="toc-text">7.字典转模型实现懒加载的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-清除子控件的方法"><span class="toc-number">1.8.</span> <span class="toc-text">8.清除子控件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-猜字谜代码讲解"><span class="toc-number">1.9.</span> <span class="toc-text">9.猜字谜代码讲解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-UIAlertController提示框"><span class="toc-number">1.10.</span> <span class="toc-text">10.UIAlertController提示框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-KVC模型"><span class="toc-number">1.11.</span> <span class="toc-text">11.KVC模型</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
