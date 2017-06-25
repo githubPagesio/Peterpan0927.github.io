@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>内存管理 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="内存管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理">
+<meta property="og:url" content="http://yoursite.com/2017/06/24/内存管理/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="内存管理">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%882.14.59.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.55.52.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.56.54.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8812.15.12.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8811.50.55.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8B%E5%8D%884.55.31.png">
+<meta property="og:updated_time" content="2017-06-24T01:29:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内存管理">
+<meta name="twitter:description" content="内存管理">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%882.14.59.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-内存管理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/24/内存管理/" class="article-date">
+      <time datetime="2017-06-24T01:28:01.000Z" itemprop="datePublished">2017-06-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      内存管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/MRC初步/">MRC初步</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存管理-MRC/">内存管理 MRC</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>内存管理<br><a id="more"></a></p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><hr>
+<h2 id="内存中的五大区域"><a href="#内存中的五大区域" class="headerlink" title="内存中的五大区域"></a>内存中的五大区域</h2><ul>
+<li>栈：局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收</li>
+<li>堆：OC对象，使用C函数申请的空间</li>
+<li>BSS段：未初始化的全局变量，静态变量，一旦初始化就回收，并转存到数据段中</li>
+<li>数据段：已经初始化的全局变量，静态变量，知道程序结束时才会回收</li>
+<li>代码段：代码，程序结束的时候，系统会自动回收存储在代码段中的数据</li>
+</ul>
+<p>栈、BSS段、数据段、代码段存储在它们中的数据的回收，是由系统自动完成的，不需要人为干预</p>
+<h2 id="回收分配在堆中对象"><a href="#回收分配在堆中对象" class="headerlink" title="回收分配在堆中对象"></a>回收分配在堆中对象</h2><p><strong>iPhone的内存机制：</strong></p>
+<blockquote>
+<p>40M 发送第一次警告</p>
+<p>45M 发送第二次警告</p>
+<p>120M 直接闪退</p>
+</blockquote>
+<p>这也是为什么iOS系统流畅的原因，一是它是直接基于Unix的，而是它的内存管理机制。</p>
+<p>存储在堆中的OC对象，系统不会自动回收。直到程序结束的时候才会被回收。</p>
+<p><strong>引用计数器：</strong></p>
+<p>但是对象在用完之后就需要被释放掉，避免占用内存，那么我们用什么方法来判断对象是否被用完呢？这个时候我们就需要使用<code>引用计数器</code></p>
+<ul>
+<li>每一个对象都有一个属性，叫做retainCount.叫做引用计数器，类型是unsigned long,占据八个字节，用来记录当前这个对象有多少个人在使用，默认情况下，创建一个对象出来，这个属性默认是1。</li>
+</ul>
+<ul>
+<li><p>多一个人使用的时候计数器的值加一，少一个人计数器的值减一</p>
+</li>
+<li><p>当对象的引用计数器变为0的时候，代表对象无人使用，系统将会自动回收</p>
+</li>
+</ul>
+<p>如何操作引用计数器：</p>
+<ul>
+<li>为对象发送一条retain消息。对象的引用计数器就会加一（调用对象的retain方法）</li>
+<li>为对象发送一条release消息，对象的引用计数器就会减一（调用对象的release方法）</li>
+<li>为对象发送一条retainCount消息，就可以取到对象的引用计数器</li>
+</ul>
+<p>在对象被回收时，会自动调用对象的dealloc方法。</p>
+<h2 id="内存管理的分类"><a href="#内存管理的分类" class="headerlink" title="内存管理的分类"></a>内存管理的分类</h2><p><strong>MRC：</strong>Manual Reference Counting.    手动引用计数，手动内存管理</p>
+<p>当使用对象的人增加或减少的时候，程序员需要手动的发送retain或者release消息</p>
+<p><strong>ARC</strong>：Automatic Reference Counting. 自动引用计数，自动内存管理</p>
+<p>系统自动的在合适的地方发送retain、release方法</p>
+<p>学习MRC的理由：面试必考、早期的APP开发使用的MRC技术、MRC更加精确一些、ARC是基于MRC的</p>
+<p>因为从Xcode7开始就默认使用ARC进行开发，所以在进行MRC开发的时候就要把ARC模式关闭</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%882.14.59.png" alt="屏幕快照 2017-06-21 下午2.14.59.png"></p>
+<p>重写dealloc的规范：</p>
+<p>必须要调用父类的dealloc方法，并且放到最后一句代码。</p>
+<h2 id="内存管理原则"><a href="#内存管理原则" class="headerlink" title="内存管理原则"></a>内存管理原则</h2><p>1.内存管理之中的重点就是掌握好给对象发送retain和release方法的时机</p>
+<p>2.在ARC机制下，retain、release、dealloc方法都是无法调用的</p>
+<p>3.内存管理的原则：</p>
+<ul>
+<li>有对象的创建，就要匹配一个release</li>
+<li>retain的次数和release的次数要匹配</li>
+<li>谁用谁retain，谁不用谁release</li>
+<li>只有在多一个人的时候才retain，少一个人使用的时候才release</li>
+</ul>
+<p>总的来说，就是有始有终，有加就有减。</p>
+<h2 id="野指针和僵尸对象"><a href="#野指针和僵尸对象" class="headerlink" title="野指针和僵尸对象"></a>野指针和僵尸对象</h2><p>1.野指针：</p>
+<p>C语言中的野指针：定义一个指针变量，没有初始化，这个指针变量的值是一个垃圾值，指向一块随机的空间</p>
+<p>OC中的野指针： 指针指向的对象已经被回收了，这样的指针就叫做野指针</p>
+<p>2.对象回收的本质</p>
+<ul>
+<li>内存回收的本质：</li>
+</ul>
+<p>申请一个变量，实际上就是向系统申请指定字节数的空间，这些空间就不会再分配给别人了。</p>
+<p>当变量被回收的时候，代表变量占用的空间从此以后系统可以分配给别人使用了。</p>
+<p>但是字节空间中存储的数据还在，这就是垃圾数据的来源，声明一个未初始化的变量系统可能就会将那片空间分配给这个变量，于是这个变量的值就是之前残留下来的垃圾数据。</p>
+<ul>
+<li>回收对象：</li>
+</ul>
+<p>所谓的对象回收，指的是对象占用的空间可以分配给别人这个对象占用的空间还没有分配给别人的时候，其实对象的数据还在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">//将p1对象的引用计数器减一，对象被释放</div><div class="line">[p1 release];</div><div class="line">//虽然对象被释放，如果内存没有被分配出去，数据还在</div><div class="line">p1.age = 10;</div><div class="line">//仍然可以执行方法</div><div class="line">[p1 sayHi];</div></pre></td></tr></table></figure>
+<p>一个已经被释放的对象，但是占用的空间还没有分配给别人，这样的对象叫做僵尸对象。</p>
+<p>我们认为只要成为了僵尸对象，就不应该被允许访问，所以我们可以开启这样的一个机制</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.55.52.png" alt="屏幕快照 2017-06-21 下午3.55.52.png"></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.56.54.png" alt="屏幕快照 2017-06-21 下午3.56.54.png"></p>
+<p>那么，我们为什么不默认的打开僵尸对象检测呢？</p>
+<p>一旦打开僵尸对象检测，那么每访问一个对象的时候，都会先检查这个对象是否是僵尸对象，这样很消耗性能。</p>
+<p>使用野指针访问僵尸对象会报错，所以只需要在一个指针称为野指针的时候，将这个指针的值设置为nil。</p>
+<p>当一个指针的值为nil，通过这个指针去调用对象的方法的时候，不会报错，只是没有反应。</p>
+<p>但是如果直接访问属性’-&gt;’，就会报错。</p>
+<h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>指的是1个对象没有及时的被回收，在该回收的时候而没有被回收，一直驻留在内存中，直到程序结束才回收。</p>
+<p><strong>单个对象的内存泄漏</strong>：</p>
+<ul>
+<li>有对象的创建，但是没有对应的release</li>
+<li>retain的次数release次数不匹配</li>
+<li>在不适当的时候，为指针赋值为nil</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">p1 = nil;</div><div class="line">//这样会造成对象无法释放，从而导致内存泄漏</div></pre></td></tr></table></figure>
+<ul>
+<li>在方法中为传入的对象进行不适当的retain</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//上帝杀人</div><div class="line">Person *p1 = [Person new];</div><div class="line">God *g1 = [God new];</div><div class="line">[g1 killWithPerson:p1];</div><div class="line">//在杀人方法的内部，使person的计数加了1</div><div class="line">- (void)killWithPerson:(Person *)per&#123;</div><div class="line">  [per retain];</div><div class="line">  NSLog(@&quot;去死吧&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="setter方法内存管理"><a href="#setter方法内存管理" class="headerlink" title="setter方法内存管理"></a>setter方法内存管理</h2><p>以类实现一个人开车去拉萨为例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//主函数中</div><div class="line">Person *p1 = [Person new];</div><div class="line">Car *bmw = [Car new];</div><div class="line">bmw.speed = 100;</div><div class="line"></div><div class="line">p1.car = bmw;</div><div class="line">[p1 drive];</div><div class="line"></div><div class="line">[bmw release];</div><div class="line">[p1 drive];</div><div class="line">[p1 release];</div><div class="line">//在Person的car的setter方法中：</div><div class="line">- (void)setCar:(Car *)car&#123;</div><div class="line">  //将传入的车对象复制给当前对象的_car属性</div><div class="line">  //代表：传入的对象多了一个人使用</div><div class="line">  //那么就要先为这个对象发送一条retain消息</div><div class="line">  _car = [car retain];</div><div class="line">&#125;</div><div class="line">//在Person的dealloc方法中</div><div class="line">- (void)dealloc&#123;</div><div class="line">  //此时人对象要被释放，意味着不会再使用_car属性，可以释放掉</div><div class="line">  [_car release];</div><div class="line">  NSLog(@&quot;人死了&quot;);</div><div class="line">  [super dealloc];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>内存图示意：          <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8812.15.12.png" alt="屏幕快照 2017-06-22 上午12.15.12.png"></p>
+<p>当一个属性是1个OC对象的时候，setter方法的写法：</p>
+<p>将传进来的对象赋值给当前对象的属性，代表传入的对象多了一个人使用，所以我们应该先为传入的对象发送一条retain消息。</p>
+<p>当一个对象销毁的时候。代表属性指向的对象少一个人使用，就应该在dealloc中release掉。</p>
+<h2 id="setter方法内存管理（二）"><a href="#setter方法内存管理（二）" class="headerlink" title="setter方法内存管理（二）"></a>setter方法内存管理（二）</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8811.50.55.png" alt=""></p>
+<p>如上图所示的情况也会造成内存的泄漏，因为重新将benz赋值给人的car属性之后，人对象被release掉之后，dealloc中只是让benz的引用计数减一，释放掉了benz对象，但是bmw还有一个计数，所以没有被释放，从而造成内存泄漏。</p>
+<p>所以在Person对象的setCar方法中我们需要重新思考:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)setCar&#123;</div><div class="line">  [_car release];</div><div class="line">  _car = [car retain];</div><div class="line">  //当我们将传入的对象复制给car属性的时候</div><div class="line">  //代表1:_car属性原本指向的对象少一个人使用</div><div class="line">  //代表2:传入的对象多一个人使用</div><div class="line">  //所以我们要把_car属性原本指向的对象先release</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，如果属性是OC对象的时候，setter方法按照上面的写法还是会发生内存泄漏，我们为属性赋值的时候，代表旧对象少一个人使用，新对象多一个人使用，所以要先release掉旧的，再retain新的。</p>
+<h2 id="setter方法内存管理（三）"><a href="#setter方法内存管理（三）" class="headerlink" title="setter方法内存管理（三）"></a>setter方法内存管理（三）</h2><p>当新旧对象是同一个对象的时候也会出现僵尸对象错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">Car *bmw = [Car new];//car对象计数为一</div><div class="line">bmw.speed = 100;</div><div class="line">p1.car = bmw;//car对象计数为二</div><div class="line">[bmw release];//car对象计数为一</div><div class="line">bmw.speed = 200;</div><div class="line">p1.car = bmw;</div><div class="line">[p1 release];//car对象计数减一，被释放，再加一，引用僵尸对象，报错。</div></pre></td></tr></table></figure>
+<p>解决的方案：当发现新旧对象是同一个对象的时候，什么都不用做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//这才是最终完美版的setter方法的写法。</div><div class="line">- (void)setCar:(Car *)car&#123;</div><div class="line">  if(!_car == car)&#123;</div><div class="line">    [_car release];</div><div class="line">    _car = [car retain];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后特别注意，内存管理的范围是OC的对象，所以只有属性的类型是OC对象的时候，对应的setter方法才需要像那样写，如果不是，直接赋值即可。</p>
+<h2 id="property参数概述"><a href="#property参数概述" class="headerlink" title="@property参数概述"></a>@property参数概述</h2><p>因为@property会自动生成私有属性和对应的getter,setter方法的声明和实现，但是在生成的setter方法中，无论是什么类型的都是直接赋值。</p>
+<p><strong>@property的参数：</strong></p>
+<p>1.格式：</p>
+<p>@property(参数1,参数2……)数据类型 名称;</p>
+<p>2.介绍一下@property的四组参数：</p>
+<ul>
+<li>与多线程相关的参数</li>
+</ul>
+<blockquote>
+<p>atomic、nonatomic</p>
+</blockquote>
+<ul>
+<li>与生成的setter方法相关的参数</li>
+</ul>
+<blockquote>
+<p>assign、retain</p>
+</blockquote>
+<ul>
+<li>与生成只读，读写相关的参数</li>
+</ul>
+<blockquote>
+<p>readonly、readwrite</p>
+</blockquote>
+<ul>
+<li>与生成getter,setter方法名字相关的参数</li>
+</ul>
+<blockquote>
+<p>getter、setter</p>
+</blockquote>
+<p><strong>与多线程相关的参数</strong>：</p>
+<p>atomic:默认值，如果写atomic,这个时候生成的setter方法的代码就会加上一把线程安全锁，特点就是安全但是效率低。</p>
+<p>nonatomic:生成的setter方法不会加上线程安全锁，但是效率高。建议使用这种。</p>
+<p><strong>与生成的setter方法相关的参数</strong>：</p>
+<p>assign：生成的setter方法是自动赋值</p>
+<p>retain：生成的setter方法是标准的MRC内存管理代码</p>
+<p>⚠️：retain参数只是生成标准的setter方法，没有自动的生成dealloc中的release代码，所以我们还需要手动的在dealloc中去release.</p>
+<p><strong>与生成只读，读写的封装</strong>:</p>
+<p>readwrite:默认值，会自动的生成getter和setter方法</p>
+<p>readonly:只会生成getter</p>
+<p><strong>生成getter,setter方法名称相关的参数</strong>：</p>
+<p>默认情况下，@property生成的getter和setter方法生成的都是最标准的名字</p>
+<p>其实我们可以通过参数来制定getter和setter方法指定的名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign, getter=xxx) int age;</div><div class="line">//此时对应的getter方法变为了-(int)xxx;</div><div class="line">@property(nonatomic, assign, setter=ooo:) int age;</div><div class="line">//因为setter方法是带参数的，所以要加一个冒号</div></pre></td></tr></table></figure>
+<p>在修改了getter和setter方法的名字以后，使用点语法，编译器就会默认调用重命名之后的方法。</p>
+<p>一般而言，无论在什么情况下都不会改setter方法的名字，当属性的类型是一个BOOL类型的时候，就修改这个getter方法的名字以is开头，提高代码的阅读性。</p>
+<p>g</p>
+<h2 id="class"><a href="#class" class="headerlink" title="@class"></a>@class</h2><p>当两个类相互包含的时候，当Person.h中包含Book.h,而Book.h又包含Person.h的时候，就会出现循环引用的问题，就会造成无限递归，导致编译无法通过。</p>
+<p>所以当出现这种情况的时候，为了避免循环引用，其中一边不要使用<code>#import</code>引入对方的头文件，而是使用<code>@class</code>类名，来标注这是一个类，这样子就可以在不引入对方的头文件的情况下，告诉编译器这是一个类。然后在.m文件中再<code>#import</code>对方的头文件就可以使用了</p>
+<p><strong>@class和#import的区别</strong>：</p>
+<ul>
+<li>import是将指定文件的内容拷贝到写指令的地方</li>
+<li>@class并不会拷贝任何内容，只是告诉编译器这是一个类</li>
+</ul>
+<h2 id="循环retain"><a href="#循环retain" class="headerlink" title="循环retain"></a>循环retain</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8B%E5%8D%884.55.31.png" alt="屏幕快照 2017-06-22 下午4.55.31.png"></p>
+<p>出现这种情况的时候，因为两个对象循环引用，A对象的属性是B对象，B对象的属性是A属性，所以两个都无法触发dealloc方法，所以会导致内存泄漏。</p>
+<p>解决的方案就是一端使用retain，另一段使用assign即可，使用assign的一段在dealloc方法中就不需要release了。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/24/内存管理/">内存管理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年06月24日 - 09时28分</p>
+        <p><span>最后更新:</span>2017年06月24日 - 09时29分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/24/内存管理/" title="内存管理">http://yoursite.com/2017/06/24/内存管理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/24/内存管理/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/21/OC特有语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OC特有语法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内存管理"><span class="toc-number">1.</span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存中的五大区域"><span class="toc-number">1.1.</span> <span class="toc-text">内存中的五大区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回收分配在堆中对象"><span class="toc-number">1.2.</span> <span class="toc-text">回收分配在堆中对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理的分类"><span class="toc-number">1.3.</span> <span class="toc-text">内存管理的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理原则"><span class="toc-number">1.4.</span> <span class="toc-text">内存管理原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#野指针和僵尸对象"><span class="toc-number">1.5.</span> <span class="toc-text">野指针和僵尸对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存泄漏"><span class="toc-number">1.6.</span> <span class="toc-text">内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setter方法内存管理"><span class="toc-number">1.7.</span> <span class="toc-text">setter方法内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setter方法内存管理（二）"><span class="toc-number">1.8.</span> <span class="toc-text">setter方法内存管理（二）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setter方法内存管理（三）"><span class="toc-number">1.9.</span> <span class="toc-text">setter方法内存管理（三）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#property参数概述"><span class="toc-number">1.10.</span> <span class="toc-text">@property参数概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class"><span class="toc-number">1.11.</span> <span class="toc-text">@class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环retain"><span class="toc-number">1.12.</span> <span class="toc-text">循环retain</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/06/24/内存管理/" data-title="内存管理" data-url="http://yoursite.com/2017/06/24/内存管理/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/06/21/OC特有语法/" title="下一篇: OC特有语法">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
