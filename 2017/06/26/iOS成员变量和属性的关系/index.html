@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RSA密钥生成的过程(数学证明) | Peterpan&#39;s Blog</title>
+  <title>iOS成员变量和属性的关系 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RSA算法分析">
+  <meta name="description" content="成员变量和属性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RSA密钥生成的过程(数学证明)">
-<meta property="og:url" content="http://yoursite.com/2017/05/12/RSA密钥生成的过程-数学证明/index.html">
+<meta property="og:title" content="iOS成员变量和属性的关系">
+<meta property="og:url" content="http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="RSA算法分析">
-<meta property="og:updated_time" content="2017-05-12T11:45:50.000Z">
+<meta property="og:description" content="成员变量和属性">
+<meta property="og:updated_time" content="2017-06-26T07:50:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RSA密钥生成的过程(数学证明)">
-<meta name="twitter:description" content="RSA算法分析">
+<meta name="twitter:title" content="iOS成员变量和属性的关系">
+<meta name="twitter:description" content="成员变量和属性">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
   
@@ -228,11 +228,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-RSA密钥生成的过程-数学证明" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS成员变量和属性的关系" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/12/RSA密钥生成的过程-数学证明/" class="article-date">
-      <time datetime="2017-05-12T11:43:26.000Z" itemprop="datePublished">2017-05-12</time>
+      <a href="/2017/06/26/iOS成员变量和属性的关系/" class="article-date">
+      <time datetime="2017-06-26T07:44:58.000Z" itemprop="datePublished">2017-06-26</time>
 </a>
     </div>
   
@@ -245,7 +245,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RSA密钥生成的过程(数学证明)
+      iOS成员变量和属性的关系
     </h1>
   
 
@@ -253,10 +253,14 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/非对称加密算法/">非对称加密算法</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/成员变量和属性变量-真私有属性/">成员变量和属性变量 真私有属性</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -266,90 +270,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>RSA算法分析<br><a id="more"></a></p>
-<h1 id="RSA密钥生成的过程-数学证明"><a href="#RSA密钥生成的过程-数学证明" class="headerlink" title="RSA密钥生成的过程(数学证明)"></a>RSA密钥生成的过程(数学证明)</h1><p>1.随机生成两个不相等的质数p和q。</p>
-<p>2.计算着两个质数的乘积n。</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　n = p × q</div></pre></td></tr></table></figure>
-<p>3.计算n的欧拉函数</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">φ(n) = (p<span class="number">-1</span>)(q<span class="number">-1</span>)</div></pre></td></tr></table></figure>
-<p>4.随机选择一个整数e,条件是1 &lt; e &lt; φ(n)，且e与φ(n) 互质。</p>
-<p>5.计算e对于φ(n)的模反元素d。</p>
-<p>所谓<a href="http://zh.wikipedia.org/wiki/%E6%A8%A1%E5%8F%8D%E5%85%83%E7%B4%A0" target="_blank" rel="external">“模反元素”</a>就是指有一个整数d，可以使得ed被φ(n)除的余数为1。</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ed ≡ <span class="number">1</span> (mod φ(n))</div></pre></td></tr></table></figure>
-<p>这个式子等价于</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　ed - <span class="number">1</span> = kφ(n)</div></pre></td></tr></table></figure>
-<p>于是，找到模反元素d，实质上就是对下面这个二元一次方程求解。</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ex + φ(n)y = <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>如果已知 e=a, φ(n)=b，</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ax + by = <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>这个方程可以用<a href="http://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95" target="_blank" rel="external">“扩展欧几里得算法”</a>求解，此处省略具体过程。总之，爱丽丝算出一组整数解为 (x,y)=(2753,-15)，即 d=2753。</p>
-<p>至此所有计算完成。</p>
-<p>6.将n和e封装成公钥，n和d封装成私钥。 </p>
-<p>在爱丽丝的例子中，n=3233，e=17，d=2753，所以公钥就是 (3233,17)，私钥就是（3233, 2753）。</p>
-<p>实际应用中，公钥和私钥的数据都采用<a href="http://zh.wikipedia.org/zh-cn/ASN.1" target="_blank" rel="external">ASN.1</a>格式表达（<a href="http://hi.baidu.com/mathack/item/d0ad4cc1514a3663f7c95da2" target="_blank" rel="external">实例</a>）。</p>
-<p>7.RSA算法的可靠性</p>
-<p>回顾上面的密钥生成步骤，一共出现六个数字：</p>
-<blockquote>
-<p>　　p<br>　　q<br>　　n<br>　　φ(n)<br>　　e<br>　　d</p>
-</blockquote>
-<p>这六个数字之中，公钥用到了两个（n和e），其余四个数字都是不公开的。其中最关键的是d，因为n和d组成了私钥，一旦d泄漏，就等于私钥泄漏。</p>
-<p>那么，有无可能在已知n和e的情况下，推导出d？</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>)ed≡<span class="number">1</span> (mod φ(n))。只有知道e和φ(n)，才能算出d。</div><div class="line"></div><div class="line">(<span class="number">2</span>)φ(n)=(p<span class="number">-1</span>)(q<span class="number">-1</span>)。只有知道p和q，才能算出φ(n)。</div><div class="line"></div><div class="line">(<span class="number">3</span>)n=pq  只有将n因数分解，才能算出p和q。</div></pre></td></tr></table></figure>
-<p>结论：如果n可以被因数分解，d就可以算出，也就意味着私钥被破解。</p>
-<p>可是，大整数的因数分解，是一件非常困难的事情。目前，除了暴力破解，还没有发现别的有效方法。维基百科这样写道：</p>
-<blockquote>
-<p>　　“对极大整数做因数分解的难度决定了RSA算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA算法愈可靠。</p>
-<p>　　假如有人找到一种快速因数分解的算法，那么RSA的可靠性就会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的RSA密钥才可能被暴力破解。到2008年为止，世界上还没有任何可靠的攻击RSA算法的方式。</p>
-<p>　　只要密钥长度足够长，用RSA加密的信息实际上是不能被解破的。”</p>
-</blockquote>
-<p>举例来说，你可以对3233进行因数分解（61×53），但是你没法对下面这个整数进行因数分解。</p>
-<blockquote>
-<p>　　12301866845301177551304949<br>　　58384962720772853569595334<br>　　79219732245215172640050726<br>　　36575187452021997864693899<br>　　56474942774063845925192557<br>　　32630345373154826850791702<br>　　61221429134616704292143116<br>　　02221240479274737794080665<br>　　351419597459856902143413</p>
-</blockquote>
-<p>它等于这样两个质数的乘积：</p>
-<blockquote>
-<p>　　33478071698956898786044169<br>　　84821269081770479498371376<br>　　85689124313889828837938780<br>　　02287614711652531743087737<br>　　814467999489<br>　　　　×<br>　　36746043666799590428244633<br>　　79962795263227915816434308<br>　　76426760322838157396665112<br>　　79233373417143396810270092<br>　　798736308917</p>
-</blockquote>
-<p>事实上，这大概是人类已经分解的最大整数（232个十进制位，768个二进制位）。比它更大的因数分解，还没有被报道过，因此目前被破解的最长RSA密钥就是768位。</p>
-<p>8.加密和解密</p>
-<p>有了公钥和密钥，就能进行加密和解密了。</p>
-<p>（1）加密要用公钥 (n,e)</p>
-<p>假设鲍勃要向爱丽丝发送加密信息m，他就要用爱丽丝的公钥 (n,e) 对m进行加密。这里需要注意，m必须是整数（字符串可以取ascii值或unicode值），且m必须小于n。</p>
-<p>所谓”加密”，就是算出下式的c：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">me ≡ c (mod n)</div></pre></td></tr></table></figure>
-<p>爱丽丝的公钥是 (3233, 17)，鲍勃的m假设是65，那么可以算出下面的等式：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">6517</span> ≡ <span class="number">2790</span> (mod <span class="number">3233</span>)</div></pre></td></tr></table></figure>
-<p>于是，c等于2790，鲍勃就把2790发给了爱丽丝。</p>
-<p>（2）解密要用私钥(n,d)</p>
-<p>爱丽丝拿到鲍勃发来的2790以后，就用自己的私钥(3233, 2753) 进行解密。可以证明，下面的等式一定成立：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>也就是说，c的d次方除以n的余数为m。现在，c等于2790，私钥是(3233, 2753)，那么，爱丽丝算出<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">27902753</span> ≡ <span class="number">65</span> (mod <span class="number">3233</span>)</div></pre></td></tr></table></figure></p>
-<p>因此，爱丽丝知道了鲍勃加密前的原文就是65。</p>
-<p>至此，”加密–解密”的整个过程全部完成。</p>
-<p>我们可以看到，如果不知道d，就没有办法从c求出m。而前面已经说过，要知道d就必须分解n，这是极难做到的，所以RSA算法保证了通信安全。</p>
-<p>你可能会问，公钥(n,e) 只能加密小于n的整数m，那么如果要加密大于n的整数，该怎么办？有两种解决方法：一种是把长信息分割成若干段短消息，每段分别加密；另一种是先选择一种”对称性加密算法”（比如<a href="https://zh.wikipedia.org/wiki/%E8%B5%84%E6%96%99%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86" target="_blank" rel="external">DES</a>），用这种算法的密钥加密信息，再用RSA公钥加密DES密钥。</p>
-<p>9.私钥解密的证明</p>
-<p>最后，我们来证明，为什么用私钥解密，一定可以正确地得到m。也就是证明下面这个式子：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>因为，根据加密规则<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ｍe ≡ c (mod n)</div></pre></td></tr></table></figure></p>
-<p>于是，c可以写成下面的形式：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c = me - kn</div></pre></td></tr></table></figure></p>
-<p>将c代入要我们要证明的那个解密规则：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(me - kn)d ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>它等同于求证<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">med ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>由于<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ed ≡ <span class="number">1</span> (mod φ(n))</div></pre></td></tr></table></figure></p>
-<p>所以<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ed = hφ(n)+<span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>将ed代入：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mhφ(n)+m ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>接下来，分成两种情况证明上面这个式子。</p>
-<p>（1）m与n互质。</p>
-<p>根据欧拉定理，此时<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mφ(n) ≡ <span class="number">1</span> (mod n)</div></pre></td></tr></table></figure></p>
-<p>得到<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(mφ(n))h × m ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>原式得到证明。</p>
-<p>（2）m与n不是互质关系。</p>
-<p>此时，由于n等于质数p和q的乘积，所以m必然等于kp或kq。</p>
-<p>以 m = kp为例，考虑到这时k与q必然互质，则根据欧拉定理，下面的式子成立：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(kp)q<span class="number">-1</span> ≡ <span class="number">1</span> (mod q)</div></pre></td></tr></table></figure></p>
-<p>进一步得到<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[(kp)q<span class="number">-1</span>]h(p<span class="number">-1</span>) × kp ≡ kp (mod q)</div></pre></td></tr></table></figure></p>
-<p>即<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(kp)ed ≡ kp (mod q)</div></pre></td></tr></table></figure></p>
-<p>将它改写成下面的等式<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(kp)ed = tq + kp</div></pre></td></tr></table></figure></p>
-<p>这时t必然能被p整除，即 t=t’p<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(kp)ed = t<span class="string">'pq + kp</span></div></pre></td></tr></table></figure></p>
-<p>因为 m=kp，n=pq，所以<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">med ≡ m (mod n)</div></pre></td></tr></table></figure></p>
-<p>得证</p>
+        <p>成员变量和属性<br><a id="more"></a></p>
+<h1 id="iOS-成员变量和属性的关系"><a href="#iOS-成员变量和属性的关系" class="headerlink" title="iOS 成员变量和属性的关系"></a>iOS 成员变量和属性的关系</h1><p>@property 和@synthesizer在objective-c 1.0中，我们为interface同时声明了属性和底层实例变量，那时，属性是oc语言的一个新的机制，并且要求你必须声明与之对应的实例变量，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface MyViewController :UIViewController</div><div class="line">&#123;</div><div class="line">    UIButton *myButton;</div><div class="line">&#125;</div><div class="line">@property (nonatomic, retain) UIButton *myButton;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>在objective-c 2.0中，@property它将自动创建一个以下划线开头的实例变量。因此，在这个版本中，我们不再为interface声明实例变量。变成我们常见的形式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@interface MyViewController :UIViewController</div><div class="line">@property (nonatomic, retain) UIButton *myButton;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>在MyViewController.m文件中，编译器也会自动的生成一个实例变量_myButton。那么在.m文件中可以直接的使用_myButton实例变量，也可以通过属性self.myButton.都是一样的。注意这里的self.myButton其实是调用的myButton属性的getter/setter方法。这与C++中点的使用是有区别的，C++中的点可以直接访问成员变量(也就是实例变量)。例如在oc的.h文件中有如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface MyViewController :UIViewController</div><div class="line">&#123;</div><div class="line">    NSString *name;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>.m文件中，self.name 这样的表达式是错误的。xcode会提示你使用-&gt;,改成self-&gt;name就可以了。因为oc中点表达式是表示调用方法，而上面的代码中没有name这个方法。所以在oc中点表达式其实就是调用对象的setter和getter方法的一种快捷方式。你可能还见过这种写法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import &quot;ViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@property (nonatomic, strong) UIButton *myButton;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">@synthesize myButton;</div></pre></td></tr></table></figure>
+<p>@synthesize 语句只能被用在 @implementation 代码段中，@synthesize的作用就是让编译器为你自动生成setter与getter方法，@synthesize 还有一个作用，可以指定与属性对应的实例变量，例如@synthesize myButton = xxx；那么self.myButton其实是操作的实例变量xxx，而不是_myButton了。如果.m文件中写了@synthesize myButton;那么生成的实例变量就是myButton；如果没写@synthesize myButton;那么生成的实例变量就是_myButton。所以跟以前的用法还是有点细微的区别。</p>
+<p>二、类别中的属性property</p>
+<p>类与类别中添加的属性要区分开来，因为类别中只能添加方法，不能添加实例变量。经常会在ios的代码中看到在类别中添加属性，这种情况下，是不会自动生成实例变量的。比如在：UINavigationController.h文件中会对UIViewController类进行扩展</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@interface UIViewController (UINavigationControllerItem)</div><div class="line">@property(nonatomic,readonly,retain) UINavigationItem *navigationItem;</div><div class="line">@property(nonatomic) BOOL hidesBottomBarWhenPushed;</div><div class="line">@property(nonatomic,readonly,retain) UINavigationController *navigationController;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>这里添加的属性，不会自动生成实例变量，这里添加的属性其实是添加的getter与setter方法。注意一点，匿名类别(匿名扩展)是可以添加实例变量的，非匿名类别是不能添加实例变量的，只能添加方法，或者属性（其实也是方法），常用的扩展是在.m文件中声明私有属性和方法。 Category理论上不能添加变量，但是可以使用rRuntime机制来弥补这种不足。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#import</div><div class="line">static const void * externVariableKey =&amp;externVariableKey;</div><div class="line">@implementation NSObject (Category)</div><div class="line">@dynamic variable；</div><div class="line">- (id) variable</div><div class="line">  &#123;</div><div class="line">       return objc_getAssociatedObject(self, externVariableKey);</div><div class="line">  &#125;</div><div class="line">- (void)setVariable:(id) variable</div><div class="line">  &#123;</div><div class="line">    objc_setAssociatedObject(self, externVariableKey, variable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>三、@private、@protect、@public</p>
+<p>@protected</p>
+<p>是受保护的，只能在本类及其子类中访问，在{}声明的变量默认是@protect</p>
+<p>  @private</p>
+<p>是私有的，只能在本类访问</p>
+<p>  @public</p>
+<p>公开的，可以被在任何地方访问。</p>
+<p>在头文件.h中：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@interface ViewController : UIViewController</div><div class="line">&#123;</div><div class="line">// 成员变量</div><div class="line">      @public</div><div class="line">          NSString* publicString;</div><div class="line"></div><div class="line">      @protected</div><div class="line">          NSString* protectedString;</div><div class="line"></div><div class="line">      @private</div><div class="line">          NSString* privateString;</div><div class="line">&#125;</div><div class="line">//属性变量</div><div class="line">@property (nonatomic,strong) NSArray *propertyString;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>成员变量用于类内部，无需与外界接触的变量。根据成员变量的私有性，为了方便访问，所以就有了属性变量。属性变量是用于与其他对象交互的变量。（属性变量的好处就是允许让其他对象访问到该变量。当然，你可以设置只读或者可写等，设置方法也可自定义。）一些建议:<br>  1.如果只是单纯的private变量，最好声明在implementation里.<br>  2.如果是类的public属性，就用property写在.h文件里<br>  3.如果自己内部需要setter和getter来实现一些东西，就在.m文件的类目里用property来声明.h中的interface的大括号{}之间的实例(成员)变量，.m中可以直接使用  .h中的property(属性)变量，.m中需要使用self.propertyVariable的方式使用propertyVariable变量</p>
+<p>四、成员变量和成员属性的关系</p>
+<p>属性对成员变量扩充了存取方法 .属性默认会生成带下划线的成员变量 .但只声明了变量，是不会有属性的，可以通过以下代码证明<br>  在Person.h 头文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject &#123;</div><div class="line">   @private</div><div class="line">   //name为私有成员变量</div><div class="line">   NSString *name;</div><div class="line">  &#125;</div><div class="line">  // age 为成员属性</div><div class="line">  @property (nonatomic ,copy) NSString *age;</div></pre></td></tr></table></figure>
+<p>在viewController.m 中，通过RunTime机制获得对象的所有成员变量和成员属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">  Person *p = [Person new];</div><div class="line">  unsigned int count = 0; //count记录变量的数量</div><div class="line"></div><div class="line">// 获取类的所有成员变量</div><div class="line">Ivar *members = class_copyIvarList([Person class], &amp;count);</div><div class="line">for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">    Ivar ivar = members[i];</div><div class="line">    // 取得变量名并转成字符串类型</div><div class="line">    const char *memberName = ivar_getName(ivar);</div><div class="line">    NSLog(@&quot;变量名 = %s&quot;,memberName);</div><div class="line">&#125;</div><div class="line">// 获取类的所有成员属性</div><div class="line">objc_property_t *properties =class_copyPropertyList([Person class], &amp;count);</div><div class="line">for (int i = 0; i&lt;count; i++)</div><div class="line">&#123;</div><div class="line">    objc_property_t property = properties[i];</div><div class="line">    const char* char_f =property_getName(property);</div><div class="line">    NSString *propertyName = [NSString stringWithUTF8String:char_f];</div><div class="line">    NSLog(@&quot;属性名 = %@&quot;,propertyName);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">打印结果为</div><div class="line"></div><div class="line">2016-08-12 11:31:50.225 modifyPrivate[777:143231] 变量名 = name</div><div class="line"></div><div class="line">2016-08-12 11:31:50.226 modifyPrivate[777:143231] 变量名 = _age</div><div class="line"></div><div class="line">2016-08-12 11:31:50.226 modifyPrivate[777:143231] 属性名 = age</div></pre></td></tr></table></figure>
+<p><a href="http://www.jianshu.com/p/55f781f8c915" target="_blank" rel="external">参考博客</a></p>
 
       
       
@@ -404,13 +352,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
-        <p><span>发布时间:</span>2017年05月12日 - 19时43分</p>
-        <p><span>最后更新:</span>2017年05月12日 - 19时45分</p>
+        <p><span>发布时间:</span>2017年06月26日 - 15时44分</p>
+        <p><span>最后更新:</span>2017年06月26日 - 15时50分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/12/RSA密钥生成的过程-数学证明/" title="RSA密钥生成的过程(数学证明)">http://yoursite.com/2017/05/12/RSA密钥生成的过程-数学证明/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/05/12/RSA密钥生成的过程-数学证明/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/26/iOS成员变量和属性的关系/" title="iOS成员变量和属性的关系">http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -423,18 +371,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/05/12/网络爬虫/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          网络爬虫
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/12/土家购农村电商爬虫代码示例/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">土家购农村电商爬虫代码示例</div>
+    <a href="/2017/06/26/ARC与分类/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ARC与分类</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -445,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RSA密钥生成的过程-数学证明"><span class="toc-number">1.</span> <span class="toc-text">RSA密钥生成的过程(数学证明)</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS-成员变量和属性的关系"><span class="toc-number">1.</span> <span class="toc-text">iOS 成员变量和属性的关系</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -493,7 +432,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/05/12/RSA密钥生成的过程-数学证明/" data-title="RSA密钥生成的过程(数学证明)" data-url="http://yoursite.com/2017/05/12/RSA密钥生成的过程-数学证明/"></div>
+    <div class="ds-thread" data-thread-key="2017/06/26/iOS成员变量和属性的关系/" data-title="iOS成员变量和属性的关系" data-url="http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -516,13 +455,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/12/网络爬虫/" title="上一篇: 网络爬虫">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/05/12/土家购农村电商爬虫代码示例/" title="下一篇: 土家购农村电商爬虫代码示例">
+            <a href="/2017/06/26/ARC与分类/" title="下一篇: ARC与分类">
                 <i class="fa fa-angle-right"></i>
             </a>
         
