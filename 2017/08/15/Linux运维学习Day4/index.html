@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux运维学习Day4 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="管道和重定向都是经常用到的操作，权限的理解对于我们后续的学习也是很有帮助的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux运维学习Day4">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/Linux运维学习Day4/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="管道和重定向都是经常用到的操作，权限的理解对于我们后续的学习也是很有帮助的">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/B9F4B48A32282207CA2513049D5FE217.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/67FB1FAF1A65123443B519A7321790B3.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.48.35.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.57.38.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.59.21.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.07.06.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.29.19.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.33.01.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.35.08.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.55.35.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%882.12.09.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/9AE0B66687A4F6228B1234C0E7FF34F1.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/6973EC7222C204B5D6414903CE6AF26E.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/1E40EA4891F54EE870F89ECEC563EEB3.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.15.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.48.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.41.14.png">
+<meta property="og:updated_time" content="2017-08-15T11:51:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux运维学习Day4">
+<meta name="twitter:description" content="管道和重定向都是经常用到的操作，权限的理解对于我们后续的学习也是很有帮助的">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/B9F4B48A32282207CA2513049D5FE217.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/阎魔爱.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://118.89.38.168">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/阎魔爱.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://118.89.38.168">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Linux运维学习Day4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/15/Linux运维学习Day4/" class="article-date">
+      <time datetime="2017-08-15T11:26:18.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux运维学习Day4
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/重定向和管道-用户、组权限管理/">重定向和管道 用户、组权限管理</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/权限管理和I-O重定向、管道/">权限管理和I/O重定向、管道</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>管道和重定向都是经常用到的操作，权限的理解对于我们后续的学习也是很有帮助的</p>
+<a id="more"></a>
+<h1 id="Linux运维学习Day4"><a href="#Linux运维学习Day4" class="headerlink" title="Linux运维学习Day4"></a>Linux运维学习Day4</h1><h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><h3 id="cp命令："><a href="#cp命令：" class="headerlink" title="cp命令："></a>cp命令：</h3><p><strong>cp SRC DEST(src是单个文件)</strong></p>
+<p>1.如果目标不存在，新建DEST，并将SRC中的内容填充进去</p>
+<p>2.如果目标存在：</p>
+<p>如果是文件，就会将原内容覆盖，最好使用选项<code>-i</code>（交互式，避免误操作）</p>
+<p>如果是目录，就新建一个和原文件同名的文件，然后将内容填充进去</p>
+<p><strong>cp SRC… DEST(src是多个文件)</strong></p>
+<p>这个时候DEST必须存在且为目录，其他情况均会出错</p>
+<p><strong>cp SRC DEST(src是目录)</strong></p>
+<p>这个时候要使用选项<code>-r</code></p>
+<p>1.如果目标不存在，创建指定的目录，复制SRC目录中所有的文件至DEST中</p>
+<p>2.如果目标存在，if是文件，直接报错，if是目录，直接将SRC目录中的文件复制过去</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/B9F4B48A32282207CA2513049D5FE217.jpg" alt="B9F4B48A32282207CA2513049D5FE217.jpg"></p>
+<p>其中<code>--preserve选项太长了</code>，可以写为<code>-p</code>,<code>-v</code>选项用来显示过程，不必多说</p>
+<h3 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h3><p><strong>mv SRC DEST</strong></p>
+<p>1.如果目标文件不存在，就创建一个同名文件，然后将src中的数据复制过去，并删除src的源文件</p>
+<p>2.如果目标文件存在：</p>
+<p>如果是目标是文件，就是覆盖</p>
+<p>如果是目录，就新建一个同名文件，然后复制数据，删除源文件</p>
+<p><strong>mv SRC… DEST</strong></p>
+<p>同cp命令的这种情况，如果移动的是目录，不需要额外的添加选项</p>
+<p>tips:如果mv到同一个目录下，可以视作重命名</p>
+<p>mv命令常用选项也就是<code>-i</code>、<code>-f</code></p>
+<h3 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h3><p>常用选项：</p>
+<p><code>-r</code>、<code>-f</code></p>
+<p>用于删除文件，基本的使用很简单，但是要注意的是使用递归删除风险很大，使用需谨慎。</p>
+<h2 id="bash-的基础特性-2"><a href="#bash-的基础特性-2" class="headerlink" title="bash 的基础特性(2)"></a>bash 的基础特性(2)</h2><h3 id="1-命令别名"><a href="#1-命令别名" class="headerlink" title="1.命令别名"></a>1.命令别名</h3><p>通过alias命令实现；</p>
+<blockquote>
+<p>alias:显示当前shell进程所有可用的命令别名</p>
+<p>alias NAME=’VALUE’：定义别名NAME,其相当于执行命令VALUE</p>
+<p>unalias:取消命令的别名</p>
+</blockquote>
+<p>注意：在命令行中定义的别名，仅对当前shell进程有效，如果要永久有效，要定义在配置文件中去：</p>
+<p>当前用户有效：~/.bashrc</p>
+<p>对所有用户有效：/etc/bashrc</p>
+<p>在修改了配置文件之后，创建新的进程才会读取配置文件，如果想要当前进程也更改，可以使用命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#如让别名生效</div><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<p>如果别名同原命令的名称，则要执行原命令，可使用”\COMMAND”</p>
+<h3 id="glob-globbing"><a href="#glob-globbing" class="headerlink" title="glob(globbing)"></a>glob(globbing)</h3><p>bash中用于实现文件名”通配”</p>
+<p>通配符：*，？，[]</p>
+<p>1.*：任意长度的任意字符</p>
+<p>a*b:aab、a123b、ab</p>
+<p>2.?：任意的单个字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf ?.py</div></pre></td></tr></table></figure>
+<p>3.[]：匹配指定范围内的任意的单个字符</p>
+<p>[0-9]、[a-z]<code>不区分大小写</code>、[A-Z]<code>大写字母</code></p>
+<p>4.[^]:匹配指定范围外的任意单个字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls a[^0-9a-z]b</div></pre></td></tr></table></figure>
+<p><strong>专用字符集合</strong>：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/67FB1FAF1A65123443B519A7321790B3.jpg" alt="67FB1FAF1A65123443B519A7321790B3.jpg"></p>
+<h3 id="bash的I-O重定向和管道"><a href="#bash的I-O重定向和管道" class="headerlink" title="bash的I/O重定向和管道"></a>bash的I/O重定向和管道</h3><p>打开的文件都有一个fd:file descriptor（文件描述符）</p>
+<p>标准输入：keyboard，0</p>
+<p>标准输出：monitor(显示器)，1</p>
+<p>标准错误输出： monitor，2</p>
+<h4 id="I-O重定向也就是改变标准位置："><a href="#I-O重定向也就是改变标准位置：" class="headerlink" title="I/O重定向也就是改变标准位置："></a>I/O重定向也就是改变标准位置：</h4><p><strong>1.输出重定向：</strong></p>
+<blockquote>
+<p>‘&gt;’    :    command &gt; NEW_POS    覆盖重定向，目标文件中原有内容会被消除</p>
+<p>‘&gt;&gt;’  :    command &gt;&gt; NEW_POS    追加重定向，新内容会追加到目标文件尾部</p>
+<p>‘2&gt;’  ：    command 2&gt; NEW_POS    将错误输出流覆盖重定向</p>
+<p>‘2&gt;&gt;’:    command 2&gt;&gt; NEW_POS    将错误输出流追加重定向</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#禁止将内容覆盖输出至已有文件</div><div class="line">set -C</div><div class="line">#允许将内容覆盖输出至已有文件</div></pre></td></tr></table></figure>
+<p>如果要强制覆盖则使用 <code>&gt;|</code></p>
+<p>如果要使正确、错误输出到不同位置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#如果是错误输出流则只会执行前面的，但是两个文件都会创建</div><div class="line">cat /etc/ssh/ssh_config &gt; /tmp/testfile 2&gt; /tmp/testfile2 </div><div class="line">#但是上述的写法太过麻烦，可以合并标准和错误输出为同一个数据流进行覆盖重定向，追加重定向同理</div><div class="line">echo $PATH &amp;&gt; /tmp/path.out</div><div class="line">#还有一种写法看起来更清晰一点</div><div class="line">echo $SHELL &gt; /tmp/path.out 2&gt;&amp;1</div></pre></td></tr></table></figure>
+<p><strong>2.输入重定向</strong></p>
+<blockquote>
+<p>tr [OPTIONS…]… SET1 [SET2]        转换或删除字符</p>
+</blockquote>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.48.35.png" alt="屏幕快照 2017-07-23 下午3.48.35.png"></p>
+<p>如上图所示的例子，将输入的小写字母全部转换为大写字母输出</p>
+<p>如果要删除字符可以使用修饰符<code>-d</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#删除所有的大写&apos;U&apos;</div><div class="line">tr -d &apos;U&apos;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>HERE Document    ‘&lt;&lt;’</p>
+</blockquote>
+<p>当遇到’&lt;&lt;’后面的字符或字符串时停止输入，举个例子：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.57.38.png" alt="屏幕快照 2017-07-23 下午3.57.38.png"></p>
+<p>当然我们也可以对输出在做一次重定向,用于保存我们键入的文档：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.59.21.png" alt="屏幕快照 2017-07-23 下午3.59.21.png"></p>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>第一个命令的输出作为第二个命令的输入….依次类推</p>
+<p>command1 | command2 | command3 |…</p>
+<p>最后一个命令会在当前shell的子shell进程中执行</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.07.06.png" alt="屏幕快照 2017-07-25 下午1.07.06.png"></p>
+<p>如上图所示就是利用管道使配置文件在转换大小写的同时分屏显示</p>
+<p> tee命令：</p>
+<p>tee命令可以将显示在屏幕上的信息也保存一份在文件中，通常在管道中使用（注意，tee是覆盖输出的）</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.29.19.png" alt="屏幕快照 2017-07-25 下午1.29.19.png"></p>
+<p>练习测试：</p>
+<p>1.将/etc/passwd文件中的前五行转换为大写保存至/tmp/passwd.out</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.33.01.png" alt="屏幕快照 2017-07-25 下午1.33.01.png"></p>
+<p>2.将登陆至当前系统上的用户信息的后三位的信息转换为大写后保存至/tmp/who.out文件中</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.35.08.png" alt="屏幕快照 2017-07-25 下午1.35.08.png"></p>
+<h3 id="文件处理工具"><a href="#文件处理工具" class="headerlink" title="文件处理工具"></a>文件处理工具</h3><p>接下来再来说一下一些文件处理的工具：</p>
+<p>1.<code>wc</code>命令，常用选项：<code>-l</code>,<code>-w</code>,<code>-c</code></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.55.35.png" alt="屏幕快照 2017-07-25 下午1.55.35.png"></p>
+<p>2.<code>cut</code>命令，将文件切割成段来显示，并使用修饰符来达到我们的目的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#-d修饰符表示以什么作为分隔,-f表示显示文件的第几段</div><div class="line">cut -d : -f 1,2 /etc/passwd</div></pre></td></tr></table></figure>
+<p>还有一个修饰符可以自定的替换分隔符：<code>--output-delimiter</code></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%882.12.09.png" alt="屏幕快照 2017-07-25 下午2.12.09.png"></p>
+<p>3.<code>sort</code>命令，对文本排序</p>
+<blockquote>
+<p>-f:忽略大小写</p>
+<p>-r:逆序</p>
+<p>-t  DELIMITER:字段分隔符</p>
+<p>-k:以指定字段为标准来排序</p>
+<p>-n:以数值大小进行排序</p>
+<p>-u:去重显示，相同的命令只显示一次</p>
+</blockquote>
+<p>4.uniq命令：</p>
+<p>tips:连续且一样才叫重复</p>
+<p>uniq是一个用来去重的命令，相较于<code>sort -u</code>来说，有一些独有的特性</p>
+<blockquote>
+<p>-u：仅显示重复过的行</p>
+<p>-c：显示每行重复的次数</p>
+<p>-d：仅显示重复过的行</p>
+</blockquote>
+<h2 id="用户及组管理"><a href="#用户及组管理" class="headerlink" title="用户及组管理"></a>用户及组管理</h2><p>用户机制实质上是实现资源分派的机制：</p>
+<blockquote>
+<p>Authentication:认证</p>
+<p>Authorization:授权</p>
+<p>Accounting:审计</p>
+</blockquote>
+<h4 id="Linux用户：Username-UID"><a href="#Linux用户：Username-UID" class="headerlink" title="Linux用户：Username/UID"></a>Linux用户：Username/UID</h4><blockquote>
+<p>管理员：root，0</p>
+<p>普通用户：1-65535</p>
+<p>—系统用户：1-499（不同发行版本不一样）</p>
+<p>对守护进程获取资源进行权限分配</p>
+<p>—普通用户：500+</p>
+<p>交互式登陆</p>
+</blockquote>
+<h4 id="Linux组：Groupname-GID"><a href="#Linux组：Groupname-GID" class="headerlink" title="Linux组：Groupname/GID"></a>Linux组：Groupname/GID</h4><blockquote>
+<p>管理员组：root，0</p>
+<p>普通组：</p>
+<p>—系统组：1-499(不同发行版本不一样)</p>
+<p>—普通组：500+</p>
+</blockquote>
+<h4 id="Linux的安全上下文"><a href="#Linux的安全上下文" class="headerlink" title="Linux的安全上下文"></a>Linux的安全上下文</h4><p>运行中的程序：进程（process）以进程发起者的身份去执行</p>
+<p>进程所能够访问的所有资源的权限取决于进程发起者的身份</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/9AE0B66687A4F6228B1234C0E7FF34F1.jpg" alt="9AE0B66687A4F6228B1234C0E7FF34F1.jpg"></p>
+<p>/etc/passwd:</p>
+<p>​name : passwd : UID: GID: GESOS : directory : shell </p>
+<p>/etc/group:</p>
+<p>​group_name : password : GID : user_list</p>
+<p>组名：密码：GID：以当前组为附加组的用户列表（分隔符为逗号）</p>
+<p>/etc/shadow</p>
+<p>用户名：加密了的密码 ：最近一次更改密码的日期 ：密码的最小使用期限 ： 最大密码使用期限 ：密码警告时间段 ：密码禁用期 ：账号的过期日期</p>
+<p>加密机制：</p>
+<blockquote>
+<p>加密：明文—&gt;密文</p>
+<p>解密：密文—&gt;明文</p>
+</blockquote>
+<p>单向加密：提取数据指纹</p>
+<blockquote>
+<p>md5:message digest , 128bits</p>
+<p>sha1:secure hash algorithm（安全的哈希算法）,160bits</p>
+<p>sha224:224bits</p>
+<p>sha256…sha512等·都是一样的道理</p>
+</blockquote>
+<p>如果在linux中有两个用户的登录密码是相同的，所以为了避免密码被猜出，密码在被加密的时候会被加上一段杂质，然后这样再加密生成的密码就完全看不出来了。</p>
+<h3 id="用户和组相关的管理命令"><a href="#用户和组相关的管理命令" class="headerlink" title="用户和组相关的管理命令"></a>用户和组相关的管理命令</h3><h4 id="用户创建"><a href="#用户创建" class="headerlink" title="用户创建"></a>用户创建</h4><p>所谓的创建用户事实上是从/etc/skel目录中将一些信息复制到新用户的家目录中去</p>
+<table>
+<thead>
+<tr>
+<th>useradd [options] LOGIN</th>
+<th>LOGIN是用户名，也就是登录名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-u UID:[UID_MIN, UID_MAX]</td>
+<td>定义在/etc/login.defs中</td>
+</tr>
+<tr>
+<td>-g GID:</td>
+<td>指明用户所属基本组，可为GID或者组名</td>
+</tr>
+<tr>
+<td>-c  “Comment”</td>
+<td>用户的注释信息</td>
+</tr>
+<tr>
+<td>-d  /path</td>
+<td>以指定的目录为家目录，那个目录最好为空</td>
+</tr>
+<tr>
+<td>-s   /bin/shell</td>
+<td>指定默认的shell,可用列表在/etc/shells文件中</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>创建一个系统用户(centos6:id&lt;500、centos7:id&lt;1000)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="组创建"><a href="#组创建" class="headerlink" title="组创建"></a>组创建</h4><table>
+<thead>
+<tr>
+<th>groupadd (options) groupname</th>
+<th>添加一个组</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-g GID</td>
+<td>指明GID号</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>创建一个系统组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="查看用户相关的ID信息"><a href="#查看用户相关的ID信息" class="headerlink" title="查看用户相关的ID信息"></a>查看用户相关的ID信息</h4><table>
+<thead>
+<tr>
+<th>id [options]…[USERS]</th>
+<th>查看信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-u</td>
+<td>UID</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>GID</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>groups</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>name</td>
+</tr>
+</tbody>
+</table>
+<h2 id="用户及权限管理"><a href="#用户及权限管理" class="headerlink" title="用户及权限管理"></a>用户及权限管理</h2><h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="切换用户或以其他用户身份执行命令"><a href="#切换用户或以其他用户身份执行命令" class="headerlink" title="切换用户或以其他用户身份执行命令"></a>切换用户或以其他用户身份执行命令</h4><p>切换用户的方式：</p>
+<p>su UserName:非登录式切换，即不会读取目标用户的配置文件</p>
+<p>su - UserName：登陆式切换，会读取目标用户的配置文件，完全切换</p>
+<p>su - UserName -c ‘COMMAND’ 换个身份执行命令</p>
+<h4 id="用户-组属性修改"><a href="#用户-组属性修改" class="headerlink" title="用户/组属性修改"></a>用户/组属性修改</h4><p>usermod [options] login</p>
+<p>这个命令的选项和useradd差不多，只不过意思是重新设置相关的属性，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">usermod -g 2000 peterpan #表示重新设置用户peterpan的基本组</div><div class="line">usermod -G mygrp peterpan #新附加组，原来的附加组将会被覆盖，若要保留原有，则要同时使用-a（append）选项</div><div class="line">usermod -d /homepath  #新的家目录，原有的目录中的文件不会同时移动到新的家目录，如果要移动，要同时加上-m选项</div><div class="line">usermod -l login_name #新的名字</div><div class="line">usermod -L user_name  #lock指定用户</div><div class="line">usermod -U user_name  #解锁指定用户</div></pre></td></tr></table></figure>
+<p>groupmod [options] group</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">groupmod -n pan peterpan  #新名字</div><div class="line">groupmod -g 200 peterpan  #修改GID</div></pre></td></tr></table></figure>
+<h4 id="给用户-组添加密码"><a href="#给用户-组添加密码" class="headerlink" title="给用户/组添加密码"></a>给用户/组添加密码</h4><p>passwd  username</p>
+<p>修改指定用户的密码，仅限root权限，如果仅仅是passwd，就是修改当前用户的密码，当前用户就可以修改</p>
+<p>因为passwd命令是修改/etc/shadow文件，所以可以修改在这个文件中参数，如修改密码的时间等</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/6973EC7222C204B5D6414903CE6AF26E.jpg" alt="6973EC7222C204B5D6414903CE6AF26E.jpg"></p>
+<p>gpasswd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gpasswd -a user mygrp #将user添加至指定用户组</div><div class="line">gpasswd -d user mygrp #将用户从指定组中删除,如果该组为这个用户的基本组无法删除</div><div class="line">gpasswd -A user1,user2 mygrp  #设置有管理权限的用户列表</div></pre></td></tr></table></figure>
+<p>newgrp</p>
+<p>临时切换基本组，如果用户本不属于此组，则需要输密码</p>
+<h4 id="删除用户-组"><a href="#删除用户-组" class="headerlink" title="删除用户/组"></a>删除用户/组</h4><p>userdel [options]… login</p>
+<p>-r：删除用户家目录</p>
+<p>groupdel  group</p>
+<h4 id="验证本地认证信息的正确性"><a href="#验证本地认证信息的正确性" class="headerlink" title="验证本地认证信息的正确性"></a>验证本地认证信息的正确性</h4><p><strong>pwck</strong> 命令通过检查全部用户的定义来验证用户数据库文件中密码信息的正确性。<strong>pwck</strong> 命令内部调用带有 <strong>-n</strong> 和 <strong>ALL</strong> 选项的 <strong>pwdck</strong>命令。</p>
+<h4 id="修改用户密码过期信息"><a href="#修改用户密码过期信息" class="headerlink" title="修改用户密码过期信息"></a>修改用户密码过期信息</h4><p>chage命令：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/1E40EA4891F54EE870F89ECEC563EEB3.jpg" alt="1E40EA4891F54EE870F89ECEC563EEB3.jpg"></p>
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><p>chfn:修改指纹信息</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.15.png" alt="屏幕快照 2017-07-26 下午2.46.15.png"></p>
+<p>chsh:修改shell，如果不需要交互式可以加上选项<code>-s</code>和新shell的路径</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.48.png" alt="屏幕快照 2017-07-26 下午2.46.48.png"></p>
+<p>finger:查看指纹信息</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.41.14.png" alt="屏幕快照 2017-07-26 下午2.41.14.png"></p>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>文件的权限管理主要针对三类对象进行定义：</p>
+<p>owner、group、other</p>
+<p>每个文件针对每类访问者都定义了三种权限：r,w,x</p>
+<p>文件：</p>
+<p>​    r:可使用文件查看类工具获取其内容</p>
+<p>​    w:可以修改其内容</p>
+<p>​    x:可以把此文件提请内核启动为一个进程</p>
+<p>目录：</p>
+<p>​    r:可以获取此目录下的文件列表</p>
+<p>​    w:可以在在此目录中创建文件，也可以删除此目录中的文件</p>
+<p>​    x:可以使用<code>ls -l</code>命令查看此目录中的文件列表，也可以<code>cd</code>进入此目录</p>
+<h4 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#修改权限的几种写法</div><div class="line">chmod -R 775 /tmp/test #-R表示递归修改权限</div><div class="line">chmod u(+/-)x /tmp/test    #修改一类用户的单个或某些位权限  </div><div class="line">chmod u=rwx /tmp/test  #修改一类用户的所有权限 </div><div class="line">chmod --reference=test.py test2.py. #以一个文件的权限为参照修改另一个文件的权限</div></pre></td></tr></table></figure>
+<h4 id="修改文件的属主和属组"><a href="#修改文件的属主和属组" class="headerlink" title="修改文件的属主和属组"></a>修改文件的属主和属组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#其中选项的用法可以参考chmod</div><div class="line">chown tom fstab  #将文件的属主改为tom</div><div class="line">chown tom:wheel  #除了修改属主，将文件的属组改为wheel</div><div class="line">chgrp root /tmp/path.out  #专门修改属组的命令，选项可以参考chmod</div></pre></td></tr></table></figure>
+<h4 id="文件或目录创建时的掩码：umask"><a href="#文件或目录创建时的掩码：umask" class="headerlink" title="文件或目录创建时的掩码：umask"></a>文件或目录创建时的掩码：umask</h4><p>文件：666-umask</p>
+<p>如果某类用户的权限减得的结果中包含x权限，则将其权限加一</p>
+<p>目录：777-umask</p>
+<p>umask:查看</p>
+<p>umask  #:设置umask的值</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年08月15日 - 19时26分</p>
+        <p><span>最后更新:</span>2017年08月15日 - 19时51分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/15/Linux运维学习Day4/" title="Linux运维学习Day4">http://yoursite.com/2017/08/15/Linux运维学习Day4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/15/Linux运维学习Day4/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/08/15/Linux运维学习Day5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux运维学习Day5
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/Linux运维学习Day3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux运维学习Day3</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day4"><span class="toc-number">1.</span> <span class="toc-text">Linux运维学习Day4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件管理"><span class="toc-number">1.1.</span> <span class="toc-text">文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cp命令："><span class="toc-number">1.1.1.</span> <span class="toc-text">cp命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mv命令"><span class="toc-number">1.1.2.</span> <span class="toc-text">mv命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rm命令"><span class="toc-number">1.1.3.</span> <span class="toc-text">rm命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bash-的基础特性-2"><span class="toc-number">1.2.</span> <span class="toc-text">bash 的基础特性(2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-命令别名"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.命令别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glob-globbing"><span class="toc-number">1.2.2.</span> <span class="toc-text">glob(globbing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bash的I-O重定向和管道"><span class="toc-number">1.2.3.</span> <span class="toc-text">bash的I/O重定向和管道</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#I-O重定向也就是改变标准位置："><span class="toc-number">1.2.3.1.</span> <span class="toc-text">I/O重定向也就是改变标准位置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#管道"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件处理工具"><span class="toc-number">1.2.4.</span> <span class="toc-text">文件处理工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户及组管理"><span class="toc-number">1.3.</span> <span class="toc-text">用户及组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux用户：Username-UID"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">Linux用户：Username/UID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux组：Groupname-GID"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">Linux组：Groupname/GID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux的安全上下文"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">Linux的安全上下文</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户和组相关的管理命令"><span class="toc-number">1.3.1.</span> <span class="toc-text">用户和组相关的管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户创建"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">用户创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组创建"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">组创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看用户相关的ID信息"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">查看用户相关的ID信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户及权限管理"><span class="toc-number">1.4.</span> <span class="toc-text">用户及权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-number">1.4.1.</span> <span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#切换用户或以其他用户身份执行命令"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">切换用户或以其他用户身份执行命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户-组属性修改"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">用户/组属性修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给用户-组添加密码"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">给用户/组添加密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除用户-组"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">删除用户/组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#验证本地认证信息的正确性"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">验证本地认证信息的正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改用户密码过期信息"><span class="toc-number">1.4.1.6.</span> <span class="toc-text">修改用户密码过期信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他命令"><span class="toc-number">1.4.1.7.</span> <span class="toc-text">其他命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限管理"><span class="toc-number">1.4.2.</span> <span class="toc-text">权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改文件权限"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">修改文件权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改文件的属主和属组"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">修改文件的属主和属组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件或目录创建时的掩码：umask"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">文件或目录创建时的掩码：umask</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/08/15/Linux运维学习Day4/" data-title="Linux运维学习Day4" data-url="http://yoursite.com/2017/08/15/Linux运维学习Day4/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/08/15/Linux运维学习Day5/" title="上一篇: Linux运维学习Day5">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/15/Linux运维学习Day3/" title="下一篇: Linux运维学习Day3">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

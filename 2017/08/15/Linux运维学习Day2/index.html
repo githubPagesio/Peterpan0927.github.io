@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux运维学习Day2 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接着第一天的继续完善基础的知识吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux运维学习Day2">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/Linux运维学习Day2/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="接着第一天的继续完善基础的知识吧！">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/gldt1210.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/6B77F5F6-E55D-4963-A2E1-B9C185FBC40E.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png">
+<meta property="og:updated_time" content="2017-08-15T11:33:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux运维学习Day2">
+<meta name="twitter:description" content="接着第一天的继续完善基础的知识吧！">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/gldt1210.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/阎魔爱.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://118.89.38.168">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/阎魔爱.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://118.89.38.168">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Linux运维学习Day2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/15/Linux运维学习Day2/" class="article-date">
+      <time datetime="2017-08-15T11:26:11.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux运维学习Day2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/命令帮助-终端、虚拟机使用/">命令帮助 终端、虚拟机使用</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux的前世今生/">Linux的前世今生</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>接着第一天的继续完善基础的知识吧！</p>
+<a id="more"></a>
+<h1 id="Linux运维学习Day2"><a href="#Linux运维学习Day2" class="headerlink" title="Linux运维学习Day2"></a>Linux运维学习Day2</h1><h2 id="计算机基础知识"><a href="#计算机基础知识" class="headerlink" title="计算机基础知识"></a>计算机基础知识</h2><blockquote>
+<p>CPU、Memory、I/O</p>
+<p>— |程序运行模式：</p>
+<p>—— |用户空间：user space ,us</p>
+<p>—— |内核空间：system space</p>
+<p>— |POS:Portable Operating System. 可移植操作系统</p>
+<p>—— |POSIX：可移植操作系统接口，是定义API的一系列互相关联的标准总称</p>
+<p>— |运行系统格式</p>
+<p>—— |Windows：EXE 、 dll</p>
+<p>—— |Linux :ELF，so(shared object)</p>
+<p>—— |程序：指令 + 数据</p>
+<p>——— | 指令： 只读</p>
+<p>——— | 数据：读写</p>
+<p>—— |程序：算法 + 数据结构</p>
+<p>—— |编程语言：</p>
+<p>——— |汇编语言：微码编程，系统中和硬件相关的特有代码，驱动程序开发</p>
+<p>——— |高级语言C、C++：系统级应用、驱动程序</p>
+<p>——— |高级应用java、python、PHP：应用程序</p>
+</blockquote>
+<p>Linux 的主要发行版本有</p>
+<blockquote>
+<p><code>slackware</code></p>
+<blockquote>
+<p>suse</p>
+<blockquote>
+<p>Opensuse</p>
+</blockquote>
+</blockquote>
+<p><code>Debian</code></p>
+<blockquote>
+<p>ubuntu</p>
+<blockquote>
+<p>mint</p>
+</blockquote>
+</blockquote>
+<p><code>redhat</code></p>
+<blockquote>
+<p>rhel:企业版，每十八个月发新一个版本</p>
+<p>fedora：每六个月发行一版本</p>
+<p>Centos:兼容rhel的格式，除了界面不一样</p>
+</blockquote>
+</blockquote>
+<p>可以参考,还有一些非主流发行版比如说Gentoo、LFS(Linux From scratch)，Android也能算是linux的发行版本，就是kernel+<a href="https://zh.wikipedia.org/wiki/BusyBox" target="_blank" rel="external"> busybox</a>+java虚拟机。<img src="http://omunhj2f1.bkt.clouddn.com/gldt1210.png" alt="gldt1210.png"></p>
+<p><a href="http://www.ha97.com/833.html" target="_blank" rel="external">开源协议及其比较</a></p>
+<p>程序包管理器:</p>
+<p>​        rpm:rhel fedora suse centos</p>
+<p>​    dpt(debian packge tool): Debian ubuntu</p>
+<p>Linux的哲学思想：</p>
+<p>1.一切皆文件，把几乎所有的资源，包括硬件设备都组织为文件格式</p>
+<p>2.有众多的单一目的的小程序组成，一个程序只实现一个功能，而且要做好，组合小程序完成复杂任务</p>
+<p>3.尽量避免跟用户交互，目标：实现脚本编程，自动完成某些功能</p>
+<p>4.使用纯文本文件保存配置信息，目标：使用文本编辑器即能完成系统配置工作</p>
+<p>镜像站点推荐<a href="http://mirrors.aliyun.com/" target="_blank" rel="external">阿里云</a>、<a href="http://mirrors.souhu.com" target="_blank" rel="external">搜狐</a></p>
+<h2 id="计算机基础知识（二）"><a href="#计算机基础知识（二）" class="headerlink" title="计算机基础知识（二）"></a>计算机基础知识（二）</h2><p>终端：用户与主机交互，必然用到的设备</p>
+<blockquote>
+<p>物理终端：直接接入本机的显示器和键盘设备：console</p>
+<p>虚拟终端：附加在物理终端之上的以软件方式虚拟实现的终端，centos默认6个终端</p>
+<p>模拟终端：图形界面下打开的命令行接口，基于ssh协议或telnet协议远程打开的界面</p>
+<p>设备文件：/dev/pts/# [0,+∞]</p>
+</blockquote>
+<p>查看当前的终端设备:tty命令</p>
+<p>从图形化切换到命令行，可以使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init 2/3</div></pre></td></tr></table></figure>
+<p>转换回图形化的时候使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init 5</div></pre></td></tr></table></figure>
+<p>交互式接口：启动终端后，在终端设备附加一个交互式应用程序</p>
+<p>GUI:</p>
+<blockquote>
+<p>X protocol ， window manager ， desktop</p>
+<blockquote>
+<p>Desktop:GNOME(c,gtk图形开发库)、KDE(c++，qt图形开发库)、XFCE(轻量级桌面)</p>
+</blockquote>
+</blockquote>
+<p>CLI：</p>
+<blockquote>
+<p>Shell程序：sh、bash(遵从GPL协议)、csh(接近于C语言风格的shell)、ksh、zsh</p>
+</blockquote>
+<p>使用当前使用的shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $SHELL</div></pre></td></tr></table></figure>
+<p>显示当前系统支持的所有shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/shells</div></pre></td></tr></table></figure>
+<p>在shell中的可执行命令有两类：</p>
+<blockquote>
+<p>内建命令：通过某命令形式提供</p>
+<p>外部命令：当前系统的某目录下存放的对应可执行二进制文件</p>
+</blockquote>
+<p>区别内部和外部命令：<code>type xxx</code></p>
+<p>运行命令的格式：</p>
+<p><code>COMMAND [OPTIONS… ] [Arguments..]</code></p>
+<blockquote>
+<p>选项：用于开启或者关闭某些功能</p>
+<blockquote>
+<p>短选项：-c</p>
+<p>长选项：–word</p>
+</blockquote>
+<p>参数：命令的作用对象，向命令提供数据</p>
+</blockquote>
+<h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><h3 id="工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><a href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧" class="headerlink" title="工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"></a>工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</h3><p>文件系统：</p>
+<p>文件有两类数据，一种叫做元数据：metadata（存放在索引中），数据：data（文件真正包含的内容）</p>
+<p>命令获取帮助</p>
+<p>内部命令：<code>help command</code></p>
+<p>外部命令：<code>command --help</code>、<code>man command</code>、<code>info command</code></p>
+<p>hash命令：shell搜寻到的外部命令会缓存至kv(key-value)存储中</p>
+<p>history命令：登陆shell时，会读取命令历史文件中记录下的命令：~/.bash_history，登陆进shell后执行的命令只会记录在缓存中，这些命令会在用户退出的时候”追加”到命令历史文件中</p>
+<table>
+<thead>
+<tr>
+<th>-a</th>
+<th>追加本次会话新执行的命令历史列表到历史文件中</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d</td>
+<td>删除历史中指定的命令，如:history -d 40</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>清空命令历史</td>
+</tr>
+</tbody>
+</table>
+<p>快捷操作</p>
+<table>
+<thead>
+<tr>
+<th>!#</th>
+<th>调用历史中的第#条命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>!string</td>
+<td>调用历史中最近一个以string开头的命令</td>
+</tr>
+<tr>
+<td>!!</td>
+<td>上一条命令</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg" alt="2CD6B9BF918F0F2CA30546E568B8F2BE.jpg"></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/6B77F5F6-E55D-4963-A2E1-B9C185FBC40E.png" alt="6B77F5F6-E55D-4963-A2E1-B9C185FBC40E.png"></p>
+<p>程序自身的帮助文档：/usr/share/doc/COMMAND-VERSION,或者查看官方文档</p>
+<p>推荐一个网站，<a href="https://www.slideshare.net/" target="_blank" rel="external">需先翻墙再使用</a></p>
+<h3 id="接下来就是一些基础的命令讲解"><a href="#接下来就是一些基础的命令讲解" class="headerlink" title="接下来就是一些基础的命令讲解"></a>接下来就是一些基础的命令讲解</h3><p><code>date</code>命令使用：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg" alt="D8911B61C1A277643C894624ECB1A171.jpg"></p>
+<p>e.g.-&gt;:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png" alt="屏幕快照 2017-07-19 下午12.34.54.png"></p>
+<p>Linux的两种时钟：</p>
+<blockquote>
+<p>系统时钟：由Linux内核通过CPU工作频率进行的计时</p>
+<p>硬件时钟：主板上由电池供电的时钟</p>
+</blockquote>
+<p><code>hwclock</code>：显示硬件时钟</p>
+<table>
+<thead>
+<tr>
+<th>-s</th>
+<th>–hctosys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-w</td>
+<td>–systohc</td>
+</tr>
+</tbody>
+</table>
+<p>关于ls命令：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg" alt="E2F2AAF76EE99590341C80F28AF90A07.jpg"></p>
+<p>获取指定文件的元数据信息可用<code>stat</code>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stat test</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png" alt="屏幕快照 2017-07-19 下午1.27.39.png"></p>
+<p>文件查看命令：<code>cat</code>、<code>tac</code></p>
+<p>cat命令是通过你键入的文件路径来显示文件，事实上文件是以文件流的方式存储的，一个换行符是$，一个空格是$$，如果你的cat命令后面没有键入任何的路径，那么默认就会读取你之后输入的信息输出，就像一个复读机一样，是不是突然变的有意思了么？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png" alt="屏幕快照 2017-07-19 下午1.43.40.png"></p>
+<table>
+<thead>
+<tr>
+<th>-E</th>
+<th>显示行结束符$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-n</td>
+<td>对显示的每一行编号</td>
+</tr>
+</tbody>
+</table>
+<p>文件内容查看命令:file</p>
+<p><code>which</code>:显示命令对应的程序文件路径</p>
+<p><code>whereis</code>：显示的比which更加详细，包括手册的位置等</p>
+<p><code>whatis</code> :使用<code>mkwhatis</code>命令可以将当前系统上所有的帮助手册和与之对应的关键字创建为一个数据库：</p>
+<h3 id="然后进入到系统管理类命令"><a href="#然后进入到系统管理类命令" class="headerlink" title="然后进入到系统管理类命令"></a>然后进入到系统管理类命令</h3><p>关机命令：<code>shutdown</code>、<code>halt(关机且不会重启)</code>、<code>poweroff</code>、<code>init 0</code></p>
+<p>重启命令：<code>reboot</code>、 <code>shutdown</code>、 <code>init 6</code></p>
+<p>用户登录相关：<code>whoami</code>、 <code>who</code>、 <code>w</code></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年08月15日 - 19时26分</p>
+        <p><span>最后更新:</span>2017年08月15日 - 19时33分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/15/Linux运维学习Day2/" title="Linux运维学习Day2">http://yoursite.com/2017/08/15/Linux运维学习Day2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/15/Linux运维学习Day2/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/08/15/Linux运维学习Day3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux运维学习Day3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/Linux运维学习Day1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux运维学习Day1</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day2"><span class="toc-number">1.</span> <span class="toc-text">Linux运维学习Day2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机基础知识"><span class="toc-number">1.1.</span> <span class="toc-text">计算机基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机基础知识（二）"><span class="toc-number">1.2.</span> <span class="toc-text">计算机基础知识（二）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux命令"><span class="toc-number">1.3.</span> <span class="toc-text">Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><span class="toc-number">1.3.1.</span> <span class="toc-text">工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来就是一些基础的命令讲解"><span class="toc-number">1.3.2.</span> <span class="toc-text">接下来就是一些基础的命令讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#然后进入到系统管理类命令"><span class="toc-number">1.3.3.</span> <span class="toc-text">然后进入到系统管理类命令</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/08/15/Linux运维学习Day2/" data-title="Linux运维学习Day2" data-url="http://yoursite.com/2017/08/15/Linux运维学习Day2/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/08/15/Linux运维学习Day3/" title="上一篇: Linux运维学习Day3">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/15/Linux运维学习Day1/" title="下一篇: Linux运维学习Day1">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
