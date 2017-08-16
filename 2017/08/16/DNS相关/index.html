@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DNS相关 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS相关">
+<meta property="og:url" content="http://yoursite.com/2017/08/16/DNS相关/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png">
+<meta property="og:updated_time" content="2017-08-16T06:32:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS相关">
+<meta name="twitter:description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件（交换机）/" style="font-size: 10px;">网络硬件（交换机）</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-DNS相关" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/16/DNS相关/" class="article-date">
+      <time datetime="2017-08-16T06:30:02.000Z" itemprop="datePublished">2017-08-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DNS相关
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/github博客绑定个性域名-域名记录类型、解析/">github博客绑定个性域名 域名记录类型、解析</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络服务器/">网络服务器</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下<br><a id="more"></a></p>
+<h1 id="DNS相关"><a href="#DNS相关" class="headerlink" title="DNS相关"></a>DNS相关</h1><h2 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h2><p>网域名称系统（Domain Name System）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够让人更方便访问互联网。DNS使用TCP、UDP，端口53.当前对于每一级域名长度的限制是63的字符，总长不能超过253个字符。</p>
+<h2 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h2><ul>
+<li>主机记录（A记录）：用来指定主机名对应的IP地址记录，用户可以将该域名下的网站服务器指向到自己的web server上。同时也可以设置您域名的二级域名。</li>
+<li>别名记录（CNAME）：这种记录允许你将多个名字映射到同一台计算机，通常用于同时提供WWW和MAIL服务的计算机。同样也可以应用到多个域名指向同一个服务器的IP，此时将一个域名做A记录指向服务器，其他的域名作别名（CNAME）到A记录的域名上，当服务器IP变更时，只需要修改A记录即可。</li>
+<li>IPv6主机记录（AAAA记录）：将特定的主机名映射到一个主机的IPv6地址</li>
+<li>服务位置记录（SRV记录）：用于定义提供特定服务的服务器的位置，如主机（hostname），端口（port number）等。</li>
+<li>NAPTR记录：NAPTR是以<a href="https://zh.wikipedia.org/wiki/%E4%BC%9A%E8%AF%9D%E5%8F%91%E8%B5%B7%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">SIP</a>为基础，泛化了对传输协议有要求的服务,它提供了正则表达式的方式去映射一个域名</li>
+</ul>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>DNS的查询有两种方式：递归、迭代。DNS客户端设置使用的DNS服务器一般都是递归服务器，它负责全权处理客户端的DNS查询请求，直到返回最终结果。DNS服务器之间一般采用的都是迭代查询的方式。</p>
+<p>以我的博客举个例子：</p>
+<ul>
+<li><p>客户端发送查询报文”query Peterpan0927.github.io”，DNS服务器首先检查自身的缓存，若存在则直接返回结果</p>
+</li>
+<li><p>如果记录老化或不存在：</p>
+<p>1.DNS向根域名服务器发送查询报文”query peterpan0927.github.io”,根域名服务器返回.io的权威域名服务器地址，这一级首先返回的是顶级域名的权威域名服务器</p>
+<p>2.DNS服务器向.io域的权威域名服务器发送查询报文”query peterpan0927.github.io”，得到.github.io域的权威域名服务器地址</p>
+<p>3.反复迭代，直到获得主机的A记录，存入自身的缓存并返回给客户端</p>
+<p>​</p>
+</li>
+</ul>
+<h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><h3 id="国际化域名"><a href="#国际化域名" class="headerlink" title="国际化域名"></a>国际化域名</h3><p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
+<h3 id="TTL值"><a href="#TTL值" class="headerlink" title="TTL值"></a>TTL值</h3><p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了。</p>
+<h3 id="关于hexo博客重新关联域名"><a href="#关于hexo博客重新关联域名" class="headerlink" title="关于hexo博客重新关联域名"></a>关于hexo博客重新关联域名</h3><p>相信大部分初次搭建hexo博客的人都会选择使用github的那个免费域名,但是时间一久真的很丑的说….所以一定拥有一个自己的个性域名啊，那么基本上分为下面的三步就可以搞定了（以腾讯云为例，默默为被嫌弃的github默哀3秒）</p>
+<ul>
+<li>购买一个域名，可以使用GoDaddy或者国内一些信得过的，我是因为优惠劵的缘故所以选了腾讯云…并且免费选了大天朝的cn域名，虽然审核很麻烦🐸的说。</li>
+<li>然后在云解析界面将我们的github添加到CNAME中去，将新买的域名指向原来的github域名，主机记录选择@，也就是直接解析主机名,如下图所示：</li>
+</ul>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt="屏幕快照 2017-08-16 下午2.18.46.png"></p>
+<ul>
+<li>这个时候还没有结束，只在域名商处修改CNAME之后，输入的域名会被重定向到Github pages的页面，但是由于你这个域名github不知道，所以直接就果断拒绝并且给一你巴掌，上面写着404，所以还是乖乖的把名字告诉他：在<code>你博客的本地目录/source/</code>目录下创建一个CNAME文件，里面写上你买的域名，然后就可以推送了：</li>
+</ul>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt="屏幕快照 2017-08-16 下午2.27.26.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
+<p><a href="http://blog.zfan.me/2015/09/03/%E4%B8%BA%E9%83%A8%E7%BD%B2%E5%9C%A8Github%E4%B8%8A%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D/" target="_blank" rel="external">参考博客</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/16/DNS相关/">DNS相关</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年08月16日 - 14时30分</p>
+        <p><span>最后更新:</span>2017年08月16日 - 14时32分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/16/DNS相关/" title="DNS相关">http://yoursite.com/2017/08/16/DNS相关/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/16/DNS相关/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/15/计算机网络硬件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计算机网络硬件</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS相关"><span class="toc-number">1.</span> <span class="toc-text">DNS相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DNS？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是DNS？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记录类型"><span class="toc-number">1.2.</span> <span class="toc-text">记录类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名解析"><span class="toc-number">1.3.</span> <span class="toc-text">域名解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他相关"><span class="toc-number">1.4.</span> <span class="toc-text">其他相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化域名"><span class="toc-number">1.4.1.</span> <span class="toc-text">国际化域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TTL值"><span class="toc-number">1.4.2.</span> <span class="toc-text">TTL值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于hexo博客重新关联域名"><span class="toc-number">1.4.3.</span> <span class="toc-text">关于hexo博客重新关联域名</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="youyan" id="comments">
+  <div id="uyan_frame"></div>
+  <script src="http://v2.uyan.cc/code/uyan.js?uid=2141724"></script>
+</section>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/15/计算机网络硬件/" title="下一篇: 计算机网络硬件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
