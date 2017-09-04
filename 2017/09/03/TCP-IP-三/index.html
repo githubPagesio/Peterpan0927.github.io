@@ -16,7 +16,14 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png">
-<meta property="og:updated_time" content="2017-09-03T13:06:47.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png">
+<meta property="og:updated_time" content="2017-09-04T07:04:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP/IP(三)">
 <meta name="twitter:description" content="接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）">
@@ -401,8 +408,60 @@
 <p>因为全局IP要求保持全球内的唯一，但是私有地址不需要，只需要在同一个域内保持唯一即可。不同域内的私有IP相同不会影响使用。</p>
 <p>当下学校、医院等地方的IP地址分配都是用私有IP结合NAT技术使用，尽管如此，和全局IP比还是有一些限制，但由于IPv6没有得到普及，IPv4又快耗尽，所以NAT配上私有IP也是互联网的现状。</p>
 <p>Tips：为了安全问题，我们必须通过IP地址和主机找到管理人，可以使用<code>whois</code>命令来查看IP来源</p>
-<h2 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h2><p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
-<p>路由表的形成方式有两种，一种是管理员手动设置，叫做静态路由控制，还有一种是路由器和其他路由器相互交换信息的时候自动刷新，叫做动态路由控制。为了让动态路由及时刷新路由表，在网络互连的路由器之间都必须设置好路由协议，保证正常的读取路由控制信息。</p>
+<h3 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h3><p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
+<p>路由表的形成方式有两种，一种是管理员手动设置，叫做静态路由控制，还有一种是路由器和其他路由器相互交换信息的时候自动刷新，叫做动态路由控制。为了让动态路由及时刷新路由表，在网络互连的路由器之间都必须设置好路由协议，保证正常的读取路由控制信息。这个表是根据路由协议制作而成的。</p>
+<p>发送IP包的时候，首先要确定IP包首部中的目标地址，根据该记录转发给下一个路由器。当然也会出现路由控制表中存在多条相同网络地址的记录,这时候选择相同位数最长的：</p>
+<p>比如172.20.100.52的网络地址与172.20.100/24和172.20/16网络地址相同，这时候选择前者。话不多说，直接上图方便理解：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png" alt="11CB028F403A47C3FB4083FFB89D8CF2.png"></p>
+<h2 id="IP分割与再构成处理"><a href="#IP分割与再构成处理" class="headerlink" title="IP分割与再构成处理"></a>IP分割与再构成处理</h2><h3 id="IP报文分片与重组"><a href="#IP报文分片与重组" class="headerlink" title="IP报文分片与重组"></a>IP报文分片与重组</h3><p>因为每种数据链路的最大传输单元（MTU）都不尽相同。因为每种数据链路的使用目的不同，可承载的MTU自然也就不同了。</p>
+<p>任何一台主机都有必要对IP包进行分片的处理，往往是因为碰到较大的报文无法一次发出去。因为IP包的大小超过了MTU，所以需要将IP数据包划分成若干个片段进行传输，这种操作只要路由器认为有必要，就会周而复始地进行。</p>
+<p>经过分片之后的IP数据报只会由目标主机重组，因为无法保证IP数据报是否通过同一个路径传送。此外，经过下一站的时候需不需要重新再分片，所以如果每一次重新组装就会加重路由器的负担。</p>
+<h3 id="路径MTU发现"><a href="#路径MTU发现" class="headerlink" title="路径MTU发现"></a>路径MTU发现</h3><p>同时分片机制也有它的不足。首先这会加重路由器的负担，因为现下路由器需要做的其他处理越来越多，如果网络过滤(指带有一定参数的IP数据报才能通过路由器)等，所以不希望让路由器去做IP分片的工作。</p>
+<p>其次，在分片的处理中，只要丢失一个分片，整个IP数据报都会废掉。所以为了应对这种情况，出现了一种新的技术叫做路径MTU发现。路径MTU是指从发送端到接收端主机之间不需要分片的最大MTU大小，也就是途中经过的数据链路中最小的MTU。而路径MTU发现就是根据这个路径MTU的大小从发送主机将IP数据报分片之后进行传输。</p>
+<p>这样一来，不仅可以避免路由器上进行分片处理，还可以在TCP中发送更大的包。</p>
+<h3 id="路径MTU工作原理"><a href="#路径MTU工作原理" class="headerlink" title="路径MTU工作原理"></a>路径MTU工作原理</h3><p>首先将发送端主机发送IP数据报的时候将其首部的禁止标志位设为1。根据这个标志位，图中的路由器即使遇到分片才能处理的大包也不会进行分片，而是丢弃。然后通过一个ICMP的不可达消息将该数据链路的MTU发送给发送端主机。</p>
+<p>发送端主机获取了这个MTU值之后，将其设置为当前的MTU值，根据这个MTU值进行分片处理。然后再次发送IP数据报，如此循环往复，直到被发送到目标主机没有再受到任何的ICMP，就认为最后一次通知的MTU值是一个合适的MTU值，当然这个值也有一个缓存的时间，过了之后就要根据链路上的MTU重新做一次路径MTU发现。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png" alt="5B393B9F59B4BD914AE16343323387FE.png"></p>
+<p>上图中是UDP的例子，如果是TCP的话，会根据路径MTU计算出最大段的长度(MSS)，根据这个信息再进行数据报的发送，IP层则不会再进行分片处理，而且到达目标端在IP层也不需要重组，直接发送给目标主机的TCP层：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png" alt="358886AC7DEC0B850831B644FAC15141.png"></p>
+<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><h3 id="IPv6特点"><a href="#IPv6特点" class="headerlink" title="IPv6特点"></a>IPv6特点</h3><p>IPv6是为了从根本解决IPv4地址耗尽而被标准化的一种网际协议，IPv4长度是32位，IPv6则是128位，一般写成8个16位的格式。IPv6不仅可以解决IPv4地址被耗尽的问题，还可以弥补一些在IPv4中缺陷，因为有些功能在IPv4中并未完全实现，需要管理员介入或者根本无法实现，而这些在IPv6中都作为了必要功能：</p>
+<ul>
+<li>IP地址扩大和路由控制表聚合</li>
+</ul>
+<p>IP地址依然适应互联网分层结构，分配与其结构相适应的IP地址，避免路由表膨大，而且IPv6地址可以表示的数字高达38位数（2的128次方约为3.4e+38）。足以为人们想到的所有主机的路由器分配IP地址。</p>
+<ul>
+<li>性能提升</li>
+</ul>
+<p>包首部长度采用固定的值（40字节），不再采用首部校验码。简化首部的结构，减轻了路由器的负荷。路由器也不在做分片处理（通过路径MTU发现）</p>
+<ul>
+<li>支持即插即用</li>
+</ul>
+<p>即使没有DHCP服务器也可以实现自动分配IP地址</p>
+<ul>
+<li>采用认证和加密功能</li>
+</ul>
+<p>应对伪造IP地址的网络安全功能以及防止线路窃听的功能</p>
+<ul>
+<li>多播、Mobile IP成为扩展功能</li>
+</ul>
+<p>被定义为IPv6的扩展功能。由此可见，在IPv4中难以应用的和两个功能在IPv6中能够顺利使用</p>
+<h3 id="IPv6地址结构"><a href="#IPv6地址结构" class="headerlink" title="IPv6地址结构"></a>IPv6地址结构</h3><p>IPv6地址因为太长，所以就算以十进制数来表示的时候还是不方便，所以采用的是十六进制</p>
+<p>如FEDC:BA98:7654:3210:FEDC:BA98:7654:3210，每组用冒号隔开，如果中间有连续的0可以用两个连续的冒号来替代，但是一个IP地址中只允许出现一次两个连续的冒号。</p>
+<p>接下来再说一下IPv6中的一些地址的结构：</p>
+<h4 id="全局单播地址"><a href="#全局单播地址" class="headerlink" title="全局单播地址"></a>全局单播地址</h4><p>全局单播地址是互联网通信和各个域内部通信最常用的一个IPv6地址，格式如下：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png" alt="EF5E051776872AA6E25EF5A4AC10A12E.png"></p>
+<p>现在的IPv6网络中所用的格式，n=48,m=16，即前64位是网络标识，后六十四位是主机标识。</p>
+<p>通常接口ID中保存的是64比特版的MAC地址值，但是有时不想让对端知道这种设备固有的属性，所以就可以在接口ID设置一个随机产生，定时更新的与MAC地址没有关系的”临时地址”。这个由操作系统的具体装置来决定。</p>
+<h4 id="链路单播地址"><a href="#链路单播地址" class="headerlink" title="链路单播地址"></a>链路单播地址</h4><p>链路单播地址是指在同一个数据链路内唯一的IP地址。用于不经过路由器，在同一个链路中的通信。通常接口ID保存64位的MAC地址：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png" alt="1FFD2B3F7FB03C2172E51E954D3CE88A.png"></p>
+<p>举个简单的例子就是一个企业内市场部内部之间交流用的链路单播地址。</p>
+<h4 id="唯一本地地址"><a href="#唯一本地地址" class="headerlink" title="唯一本地地址"></a>唯一本地地址</h4><p>唯一本地地址是不进行互联网通信的时候所使用的地址，设备控制的限制型网络和一些核心网会和互联网隔离，这些企业在和互联网通信的时候通常会使用NAT以及代理联网。唯一本地地址就是在这种不联网或者通过NAT或者代理上网的环境下准备的。</p>
+<p>虽然唯一本地地址不会连接互联网，但是还是需要分配一个全局ID，这是为了在用唯一本地地址进行网络连接的时候人们可以不改动IP地址实现网络统一。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png" alt="D3D6F10A4F65BC720EB725BDD44D71C6.png"></p>
+<p>举个例子就是在企业内市场部和营销部之间通信用的是唯一本地地址，有点类似于IPv4的私有地址。</p>
+<h2 id="IPv4首部"><a href="#IPv4首部" class="headerlink" title="IPv4首部"></a>IPv4首部</h2><p>从之前的知识我们了解到IP数据包的首部包含了源地址和目标地址的信息，那么其中还包含了什么呢？</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png" alt="77F5D3A7D0E0D78B5EF4A40E97DD2E85.png"></p>
+<p>没错上面这张图就是IPv4首部中所包含的信息，下面就来详细的解释其中每个部分的意义：</p>
 
       
       
@@ -460,7 +519,7 @@
         <p><span>本文标题:</span><a href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月03日 - 20时56分</p>
-        <p><span>最后更新:</span>2017年09月03日 - 21时06分</p>
+        <p><span>最后更新:</span>2017年09月04日 - 15时04分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/03/TCP-IP-三/" title="TCP/IP(三)">http://yoursite.com/2017/09/03/TCP-IP-三/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/03/TCP-IP-三/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -489,7 +548,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-三"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(三)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP即网际协议"><span class="toc-number">1.1.</span> <span class="toc-text">IP即网际协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP初探"><span class="toc-number">1.1.1.</span> <span class="toc-text">IP初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层与数据链路层的关系"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP基础知识"><span class="toc-number">1.2.</span> <span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制"><span class="toc-number">1.2.1.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP地址基础知识"><span class="toc-number">1.3.</span> <span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP地址的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播和多播"><span class="toc-number">1.3.2.</span> <span class="toc-text">广播和多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码"><span class="toc-number">1.3.3.</span> <span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIDR和VLSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">CIDR和VLSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局地址和私有地址"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局地址和私有地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由控制-1"><span class="toc-number">1.4.</span> <span class="toc-text">路由控制</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-三"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(三)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP即网际协议"><span class="toc-number">1.1.</span> <span class="toc-text">IP即网际协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP初探"><span class="toc-number">1.1.1.</span> <span class="toc-text">IP初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层与数据链路层的关系"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP基础知识"><span class="toc-number">1.2.</span> <span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制"><span class="toc-number">1.2.1.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP地址基础知识"><span class="toc-number">1.3.</span> <span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP地址的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播和多播"><span class="toc-number">1.3.2.</span> <span class="toc-text">广播和多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码"><span class="toc-number">1.3.3.</span> <span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIDR和VLSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">CIDR和VLSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局地址和私有地址"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局地址和私有地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制-1"><span class="toc-number">1.3.6.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP分割与再构成处理"><span class="toc-number">1.4.</span> <span class="toc-text">IP分割与再构成处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP报文分片与重组"><span class="toc-number">1.4.1.</span> <span class="toc-text">IP报文分片与重组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU发现"><span class="toc-number">1.4.2.</span> <span class="toc-text">路径MTU发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU工作原理"><span class="toc-number">1.4.3.</span> <span class="toc-text">路径MTU工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">1.5.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6特点"><span class="toc-number">1.5.1.</span> <span class="toc-text">IPv6特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6地址结构"><span class="toc-number">1.5.2.</span> <span class="toc-text">IPv6地址结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局单播地址"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">全局单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#链路单播地址"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">链路单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#唯一本地地址"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4首部"><span class="toc-number">1.6.</span> <span class="toc-text">IPv4首部</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
