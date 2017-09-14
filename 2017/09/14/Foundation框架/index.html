@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Foundation框架 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundation框架">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/Foundation框架/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
+<meta property="og:updated_time" content="2017-09-14T07:49:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Foundation框架">
+<meta name="twitter:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux测试/" style="font-size: 10px;">Linux测试</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TCP-IP/" style="font-size: 20px;">TCP/IP</a> <a href="/tags/TCP-IP协议/" style="font-size: 10px;">TCP/IP协议</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/基础框架/" style="font-size: 10px;">基础框架</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/沙盒和app主流框架/" style="font-size: 10px;">沙盒和app主流框架</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Foundation框架" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/14/Foundation框架/" class="article-date">
+      <time datetime="2017-09-14T07:46:19.000Z" itemprop="datePublished">2017-09-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Foundation框架
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/核心三大库/">核心三大库</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础框架/">基础框架</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>才发现居然没有发上来….这个算是必备技能吧</p>
+<a id="more"></a>
+<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
+<p>核心三大库：字符串(NSString,NSMutableString)，集合(NSArray,NSMutableArray,键值对：NSDictionary,NSMutableDictionary)，文件(NSFileManager)</p>
+<p>推荐一个网站<a href="opensource.apple.com">苹果所有开源项目的托管网站</a></p>
+<p>学习构造方法和其他方法主要分为五类：增、删、改、查、其他</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>1.单例的特点</p>
+<p>1个类的对象无论在何时何地创建，创建出来的都是同一个对象</p>
+<p>2.无论如何创建对象，都会调用alloc方法来创建对象</p>
+<ul>
+<li>alloc方法的内部，只是调用了allocWithZone方法</li>
+<li>实际上申请空间，创建对象的事allocWithZone在做</li>
+</ul>
+<p>3.要实现单例模式，也就是重写allocWithZone方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone&#123;</div><div class="line">    static id instance = nil;</div><div class="line">  //只有第一次才会创建对象，后面的每一次都是把第一次创建的对象返回</div><div class="line">    if( instance == nil )&#123;</div><div class="line">        instance = [super allocWithZone:zone];</div><div class="line">    &#125;</div><div class="line">    return instance;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4.单例模式的规范</p>
+<p>如果类是一个单例模式，要求为类提供一个类方法，来返回这个单例对象</p>
+<p>类方法的名称必须以shared类名；default类名；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//以Person类为例子</div><div class="line">+ (instancetype)sharedPerson;</div><div class="line">+ (instancetype)defaultPerson;</div><div class="line"></div><div class="line">+ (instancetype)sharedPerson&#123;</div><div class="line">  return [self new];</div><div class="line">&#125;</div><div class="line">+ (instancetype)defaultPerson&#123;</div><div class="line">  return [self new];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>5.什么时候需要让类变成单例</p>
+<p>比如要做一个游戏的面板的尺寸，如果直接写就把程序写死，宏在程序运行的时候无法更改</p>
+<p>如果程序需要被整个程序共享，将数据以属性的方式存储在单例对象中，也就是说在A类中改了尺寸，B类访问的时候就是那个修改过的，因为只有一个对象。</p>
+<h2 id="NSString字符串"><a href="#NSString字符串" class="headerlink" title="NSString字符串"></a>NSString字符串</h2><p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
+<p>1.构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">initWithUTF8String: //将C语言字符串转换为OC字符串，因为OC没有输入函数，所以如果要读入字符串要用这种方法转换</div><div class="line">initWithFormat:  //</div><div class="line">initWithContentsOfURL: //</div><div class="line">initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息，先使用 nil//从文件中获取字符串</div><div class="line">//文件编码在mac上默认使用utf-8，或者用4</div></pre></td></tr></table></figure>
+<p>2.文件编码</p>
+<p>早期的计算机用的是纸带打点，为了解释他们的意思，于是对数据进行了编码，当时由于计算机的内存比较小，所以只用了七个二进制位，也就是128个字符，被称作ASCII码，前三十二个字符是控制字符。</p>
+<p>后来IBM把七个二进制位扩展到了一个字节，但是只能在早期的长城机和IBM机上才能看到。</p>
+<p>随着计算机的普及，亚洲区域一些非英语使用者的国家，显然ASCII码不够用，于是采用了双字节编码：Unicode ，也就是utf-16，有65535个字符，基本把全世界常用的都包括了进来。</p>
+<p>utf其他格式最流行的就是utf-8格式，所有的汉字是三个字节，英文是一个字节，现在的网站大部分都是utf-8格式。</p>
+<p>3.构造方法详解：</p>
+<blockquote>
+<p>读取文件：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int main()&#123;</div><div class="line">    NSError *err;</div><div class="line">    NSString *file = [[NSString alloc] initWithContentsOfFile:@&quot;/Users/peterpan/Downloads/MARKDOWN_FORMAT_URLS.txt&quot; encoding:NSUTF8StringEncoding error:&amp;err];</div><div class="line">  //如果文件不存在，err中存放的的是错误的信息，如果文件存在，err中就没有数据</div><div class="line">  //如果正确，err中就是null也就是0</div><div class="line">  //如果出现了错误，err中就会被赋值，它就会指向一个错误的对象</div><div class="line">  	if(!err)&#123;</div><div class="line">    NSLog(@&quot;%@&quot;,file);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//函数参数是值传递，那么参数和外界变量之间没有关系</div><div class="line">//函数参数如果是引用传递，函数内和函数外访问的是同一个变量。</div></pre></td></tr></table></figure>
+<p>用一个内存图来方便理解</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png" alt="屏幕快照 2017-06-28 下午4.30.01.png"></p>
+<p>总结的来说，想从文件中读取数据，需要三个参数：文件的路径、文件的编码格式、错误信息对象的指针（容器，如果出现了错误，在方法中会生成一个错误对象，赋值给该容器，如果没有出现读取错误，那么就正常执行返回读取的数据）</p>
+<blockquote>
+<p><strong>读取URL：</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSError *err;</div><div class="line">NSString *html = [[NSString alloc] initWithContentsOfURL:[[NSURL alloc]initWithString:@&quot;http://www.douyu.com&quot;] encoding:4 error:&amp;err];</div><div class="line">if(!err)&#123;</div><div class="line">        NSLog(@&quot;%@&quot;,html);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>格式化字符串</strong></p>
+</blockquote>
+<p>就是利用格式生成一个字符串并返回，NSLog就是格式化输出，利用格式生成字符串，直接打印出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *x = @&quot;hello&quot;;</div><div class="line">NSString *str = [[NSString alloc] initWithFormat:@&quot;%@&quot;,x];</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>转换C语言字符串为OC字符串</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//写一个输入OC字符串的函数</div><div class="line">NSString *inputString()&#123;</div><div class="line">  char arr[256];</div><div class="line">  int length = 0;</div><div class="line">  //OC中没有输入函数，要调用C语言中的</div><div class="line">  //因为scanf不能识别空格，所以要用getchar</div><div class="line">  //getchar()函数，是从输入流中获取一个字符，并返回其ASCII码（字符）</div><div class="line">  while((ch = getchar())!=&apos;\n&apos;)&#123;</div><div class="line">   		arr[length] = ch;</div><div class="line">    	length++;</div><div class="line">  	&#125;</div><div class="line">  arr[length] = &apos;\0&apos;;</div><div class="line">  return [[NSString alloc] initWithUTF8String:arr];</div><div class="line">&#125;</div><div class="line">//最后可以把它封装成一个类的类方法</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串比较方法</p>
+</blockquote>
+<p>OC中NSString提供的两种方法</p>
+<blockquote>
+<p>isEqualToString    返回值是BOOL类型</p>
+<p>compare</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//为了让比较的结果更加的形象,封装一个函数</div><div class="line">NSString *NSStringFromBOOL(BOOL isTrue)&#123;</div><div class="line">  return isTrue ? @&quot;YES&quot; : @&quot;NO&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//compare方法返回的是一个枚举类型</div><div class="line">NSString *s1 = @&quot;123&quot;;</div><div class="line"></div><div class="line">NSComparisonResult res = [s1 compare:@&quot;40&quot;];</div><div class="line">//还可以给比较的方法加参数来满足不同的需求,下面这意思就是忽略大小写的比较</div><div class="line">NSComparisonResult res = [s1 compare:@&quot;40&quot; options:NSCaseInsensitiveSearch];</div><div class="line">//比较字符串中的数字，例如f1.txt和f2.txt</div><div class="line">NSComparisonResult res = [file compare:html options:NSNumericSearch];</div><div class="line">NSLog(@&quot;%ld&quot;, res);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串开头结尾判断</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">BOOL pre = [str hasPrefix:@&quot;http://&quot;];   //判断前缀，返回值是BOOL类型</div><div class="line">BOOL res = [str hasSuffix:@&quot;.com&quot;];    //判断结尾，也是BOOl类型的返回值</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在主串中搜寻子串</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//NSRange结构体</div><div class="line">typedef struct _NSRange &#123;</div><div class="line">    NSUInteger location;   //代表子串在主串中出现的下标，如果没有找到就是最大值</div><div class="line">    NSUInteger length;     //代表子串在主串中匹配的长度</div><div class="line">&#125; NSRange;    </div><div class="line"></div><div class="line">NSString *str = @&quot;jack&quot;;</div><div class="line">NSRange range = [str rangeOfString:@&quot;j&quot;];</div><div class="line">if(range.location == NSNotFound)&#123;</div><div class="line">  NSLog(@&quot;没有找到&quot;);   //NSNotFound定义为最大值</div><div class="line">&#125;</div><div class="line">//然后可以通过&apos;range.xxx&apos;来输出我们想要的数据</div><div class="line">//改变搜索的顺序</div><div class="line">NSRange range = [str rangeOfString:@&quot;sa&quot; options:NSBackwardsSearch];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>快速声明，打印一个结构体</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//初始化结构体变量,下面这个方法会返回一个指定属性的结构体变量</div><div class="line">NSRange ran = NSMakeRange(3, 7);</div><div class="line">//将结构体变量转换为一个字符串</div><div class="line">NSLog(@&quot;%@&quot;, NSStringFromRange(ran));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串截取</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//从下标为3的字符开始截取一直到最后</div><div class="line">NSString *str1 = [str subStringFromIndex:3];</div><div class="line">//从开始字符截取3个</div><div class="line">NSString *str1 = [str subStringToIndex:3];</div><div class="line">//截取中间的一段,从下标为2的字符开始截取三个</div><div class="line">NSString *str1 = [str subStringWithRange:NSMakeRange(2,3)];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串的替换</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//将str字符串中的123替换为456,原来的指针指向的字符串的内容是不会改变的，而且替换是全部替换，这个还可以做删除，就是替换为空字符串</div><div class="line">str = [str stringByReplacingOccurrencesOfString:@&quot;123&quot; withString:@&quot;456&quot;];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串类型转换</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSString *str = @&quot;12&quot;;</div><div class="line">//转换为整型，当然也可以转换为浮点数等，但是在转换的时候只有数字才能转换，遇到第一个非数字结束转换</div><div class="line">int num = str.intValue;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>去掉字符串中的特殊字符</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *str = @&quot;   as   &quot;;</div><div class="line">//去掉空格</div><div class="line">str = [str stringByTrimmingCharactersInSet:[NSCharacterSet   whitespaceCharacterSet]];</div><div class="line">//去掉大写字符</div><div class="line">str = [str stringByTrimmingCharactersInSet:[NSCharacterSet uppercaseLetterCharacterSet]];</div><div class="line">//去掉指定字符串</div><div class="line">str = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@&quot;asdsa&quot;]];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>大小写转换</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSSString *str = @&quot;test&quot;;</div><div class="line">str = [str uppercaseString];</div><div class="line">str = [str lowercaseString];</div></pre></td></tr></table></figure>
+<h2 id="NSMutableString字符串"><a href="#NSMutableString字符串" class="headerlink" title="NSMutableString字符串"></a>NSMutableString字符串</h2><blockquote>
+<p>字符串的恒定性</p>
+</blockquote>
+<p>一旦创建一个字符串对象，那么这个字符串对象的内容就无法更改，我们修改字符串的时候，其实是重新创建了一个字符串对象，所以如果需要频繁的修改一个字符串，可以将其定义为NSMutableString，NSMutableString在父类NSString的基础之上做了扩展，存储在其中的字符串具有可变性，不会新创建对象。</p>
+<blockquote>
+<p>NSMutableString用法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//直接追加字符串</div><div class="line">NSMutableString *str = [NSMutableString string];</div><div class="line">[str appendString:@&quot;sasa&quot;];</div><div class="line">//以拼接的方式追加内容</div><div class="line">int num = 1;</div><div class="line">[str appendFormat:@&quot;%d&quot;, num];</div><div class="line">//创建对象的时候，下面这种初始化方式是不行的</div><div class="line">NSMutableString *str = @&quot;hello&quot;;</div><div class="line">//因为@&quot;hello&quot;是一个NSString对象，子类指针指向父类对象，如果调用子类独有的方法就会运行出错。</div><div class="line">//剩下的因为继承的关系，和NSString的方法一致</div></pre></td></tr></table></figure>
+<h2 id="NSArray数组"><a href="#NSArray数组" class="headerlink" title="NSArray数组"></a>NSArray数组</h2><p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
+<blockquote>
+<p>初始化方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//通过下面方法创建的数组长度为0，没有意义</div><div class="line">NSArray *arr1 = [NSArray new];</div><div class="line">NSArray *arr2 = [NSArray array];</div><div class="line">NSArray *arr3 = [[NSArray alloc] init];</div><div class="line">//常用的方式</div><div class="line">NSArray *arr = [NSArray arrayWithObjects:@&quot;s&quot;, @&quot;s&quot;, nil];//结尾要加nil,表示元素到此结束</div><div class="line">NSArray *arr = @[@&quot;s&quot;, @&quot;s&quot;]; //这种方式就是上面的简化版，不需要加nil</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//可以用下标访问数组中所有的元素,如果下标越界会直接报错</div><div class="line">NSLog(@&quot;%@&quot;, arr[0]);</div><div class="line">//得到元素个数</div><div class="line">arr.count</div><div class="line">//判断是否含有某个元素,返回值为BOOL类型</div><div class="line">[arr containsObject:@&quot;hello&quot;];  </div><div class="line">//查找指定元素在数组中第一次出现的下标</div><div class="line">[arr indexOfObject:@&quot;jack&quot;];</div><div class="line">//得到数组首尾元素，这种方法如果数组为空不会报错，只会返回nil</div><div class="line">arr.firstObject</div><div class="line">//根据返回数组元素</div><div class="line">[arr objectAtIndex:1];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>遍历方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//通常遍历方法</div><div class="line">for(int i = 0;i &lt; arr.count;i++)</div><div class="line">//迭代遍历法，迭代变量的类型和数组元素的类型保持一致</div><div class="line">for(NSString *str in arr)</div><div class="line">//使用block遍历,可以在代码块中进行自定义的输出，idx是下标，如果想停止遍历，就将stop指针指向YES</div><div class="line">  [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">        NSLog(@&quot;%@&quot;, obj);</div><div class="line">    	if(idx==2)</div><div class="line">          *stop = YES;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串与数组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将数组元素和字符串连接起来</div><div class="line">NSString *str =  [arr componentsJoinedByString:@&quot;#&quot;];</div><div class="line">//将字符串转换为数组,以‘,’作为分隔</div><div class="line">NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];</div></pre></td></tr></table></figure>
+<h2 id="NSMutableArray数组"><a href="#NSMutableArray数组" class="headerlink" title="NSMutableArray数组"></a>NSMutableArray数组</h2><p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
+<p>数组的创建可以参考NSSMutableArray</p>
+<p>可变数组添加元素的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *arr = [NSMutableArray new];</div><div class="line">[arr addObject:@&quot;test&quot;];</div><div class="line">//将另一个数组作为可变数组的一个元素</div><div class="line">[arr addObject:arr1];</div><div class="line">//将另一个数组中的元素加进来</div><div class="line">[arr addObjectFromArray:arr1];</div><div class="line">//在可变数组指定的下标处加入一个元素</div><div class="line">[arr insertObject:@&quot;test&quot; atIndex:1];</div><div class="line">//删除指定下标的值</div><div class="line">[arr removeObjectAtIndex:1];</div><div class="line">//删除可变数组中所有的指定元素</div><div class="line">[arr removeObject@&quot;test&quot;];</div><div class="line">//删除指定范围内的元素</div><div class="line">[arr removeObject:@&quot;test&quot; inRange:NSMakeRange(0,3)];</div><div class="line">//删除最后一个元素</div><div class="line">[arr removeLastObject]</div><div class="line">//删除所有元素</div><div class="line">[arr removeAllObjects];</div></pre></td></tr></table></figure>
+<h2 id="NSNumber"><a href="#NSNumber" class="headerlink" title="NSNumber"></a>NSNumber</h2><p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
+<blockquote>
+<p>基本数据类型存储到数组中的步骤</p>
+</blockquote>
+<p>1.先将基本数据类型包装到NSNumber对象中</p>
+<p>2.将NSNumber对象存储到NSArray数组中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSNumber *number = [NSNumber numberWithFloat:10.1f];</div><div class="line">NSArray *arr = @[number];</div><div class="line">//简写方式</div><div class="line">NSNumber *number1 = @10;</div><div class="line">//@10代表这个对象中包装的是整型数据10</div><div class="line">NSArray *arr1 = @[@10,@20,@30];</div><div class="line">//注意，如果后面的数据是一个变量，就要用小括弧扩起来</div><div class="line">int num  = 10;</div><div class="line">NSNumber *number2 = @(num);</div></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = @[@&quot;test&quot;, @10];</div><div class="line">[arr writeToFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
+<p>然后下次想要调用的时候就可以直接从plist文件中读取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = [NSArray arrayWithContentsOfFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
+<h2 id="NSDictionary"><a href="#NSDictionary" class="headerlink" title="NSDictionary"></a>NSDictionary</h2><p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
+<p>存储数据的时候，要为存储的数据取一个别名，用来确定这个别名对应的数据。</p>
+<p>这种存储数据的方式就叫做键值对的存储方式 </p>
+<blockquote>
+<p>创建字典数组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//如果只是简单初始化，此时字典数组中没有任何元素，没有意义</div><div class="line">NSDictionary *dict = [NSDictionary new];</div><div class="line">//一般创建方式</div><div class="line">NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;jack&quot;,@&quot;name&quot;,@&quot;北京市&quot;,@&quot;address&quot;, nil];</div><div class="line">//简要创建方式</div><div class="line">NSDictionary *dict = @&#123;@&quot;name&quot;:@&quot;jack&quot;,@&quot;age&quot;:@&quot;18&quot;&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>存储数据的原理</p>
+</blockquote>
+<p>1.以键值对的形式存储数据</p>
+<p>2.字典数组一旦创建，其中的元素不能动态的新增和删除</p>
+<p>3.键：只能是遵守了NSCoping协议的对象,而NSString就是遵守了这个协议</p>
+<p>   值：只能是OC对象</p>
+<p>4.当往字典数组中存入一个键值对的时候，并不是按照顺序挨个存储，而是根据键和数组的长度做一个哈希算法算出一个下标，再将这个键值对存入这个下标对应的空间。</p>
+<p>5.取值的时候，也可以通过键做一个哈希算法，算出下标，然后直接找到对应的数据取出即可</p>
+<blockquote>
+<p>字典数组的使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//取出存储在字典数组中的数据</div><div class="line">//使用中括弧的方式</div><div class="line">NSLog(@&quot;%@&quot;,dict[@&quot;name&quot;]);</div><div class="line">//使用字典数组对象的方法,如果给定的key在数组中不存在，取到的值就是nil，不会报错</div><div class="line">NSString *name = [dict objectForKey:@&quot;name&quot;];</div><div class="line">//取到字典数组键值对的个数</div><div class="line">dict.count</div><div class="line">//在向字典数组中存储键值对的时候，键不允许重复，若重复后加的就无效</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字典的遍历</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//这样方法遍历出来的是字典中所有的键</div><div class="line">for(id item in dict)&#123;</div><div class="line">  NSLog(@&quot;%@ = %@&quot;, item, dict[item]);</div><div class="line">&#125;</div><div class="line">//使用block</div><div class="line">[dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">        NSLog(@&quot;%@ = %@&quot;, key, obj);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<p><strong>和NSArray对比，存储数据的效率是NSArray更高，不需要进行计算；在取数据的时候，如果是全部取出来，也是NSArray的效率更高，但是如果是取出指定的几个的数据，就是NSDictionary了，因为不需要遍历。</strong></p>
+<h2 id="NSMutableDictionary"><a href="#NSMutableDictionary" class="headerlink" title="NSMutableDictionary"></a>NSMutableDictionary</h2><p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
+<p>新增和删除键值对</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//新增，如果添加的键有重复，后添加的就会覆盖原有的</div><div class="line">[dict setObject:@&quot;jack&quot; forKey:@&quot;name&quot;];</div><div class="line">//删除所有键值对</div><div class="line">[dict removeAllObjects];</div><div class="line">//根据键来删除</div><div class="line">[dict removeObjectForKey:@&quot;age&quot;];</div></pre></td></tr></table></figure>
+<p>字典数组的持久化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[dict writeToFile:@&quot;/Users/peterpan/Downloads/dict.plist&quot; atomically:NO];</div><div class="line">//从plist文件中读取</div><div class="line">NSDictionary *dict = [NSDictionary dictWithContentsOfFile@&quot;/Users/peterpan/Downloads/dict.plist&quot;];</div></pre></td></tr></table></figure>
+<h2 id="集合的内存管理"><a href="#集合的内存管理" class="headerlink" title="集合的内存管理"></a>集合的内存管理</h2><p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
+<p>2.使用@[]或@{}创建的集合是已经被autorelease过的，直接调用和类同名的类方法创建的对象也是。</p>
+<p>3.在ARC的模式下，集合的元素是一个强类型的指针。</p>
+<h2 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h2><p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSFileManager *manager = [NSFileManager defaultManager];</div></pre></td></tr></table></figure>
+<p>常用判断方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//判断文件夹或文件是否存在,返回值为BOOL类型</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的路径是否真实存储在我们的磁盘上，并且判断这个路径是一个文件夹还是文件</div><div class="line">BOOL flag = NO;</div><div class="line">//执行完后，如果flag是YES，那么给定路径是一个文件夹路径，否则就是文件路径</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot; isDirectory:&amp;flag];</div><div class="line">//判断指定的文件或文件夹是否可以读取</div><div class="line">[manager isReadableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以写入</div><div class="line">[manager isWritableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以删除</div><div class="line">[manager isDeletableFilePath:@&quot;/Users/peterpan/test.py&quot;];</div></pre></td></tr></table></figure>
+<p>常用获取信息方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//拿到这个文件的属性信息，可以通过key拿到指定信息</div><div class="line">[manager attributesOfItemAtPath:@&quot;/Users/peterpan/test.py&quot; error:nil];</div><div class="line">NSLog(@&quot;%@&quot;, dict[NSFileSize]);</div><div class="line">//获取指定目录下所有的文件和目录，包括子目录的子目录...</div><div class="line">NSArray *arr = [manager subpathAtPath:@&quot;/Users/peterpan&quot;];</div><div class="line">//获取指定文件夹的所有子文件和子目录，不包括继续下层的目录和文件</div><div class="line">NSArray *arr = [manager contentsOfFileAtPath:@&quot;／Users/mac/Desktop&quot;];</div></pre></td></tr></table></figure>
+<p>常用操控方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//存储在磁盘上的任何文件都是以二进制的形式存储的</div><div class="line">//第二个参数是文件的内容，要求是文件的二进制内容,第三个参数可以自定义文件的属性</div><div class="line">//NSData对象就是专门用来保护二进制数据的</div><div class="line">NSString *str1 = @&quot;saaasaxas&quot;;</div><div class="line">    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    NSFileManager *manager = [NSFileManager new];</div><div class="line">    BOOL res = [manager createFileAtPath:@&quot;/Users/peterpan/test.txt&quot; contents:data attributes:nil];</div><div class="line">//在指定目录下创建文件夹，第二个参数是是否允许一路创建，第三个属性是指定属性</div><div class="line"> [manager createDirectoryAtPath:@&quot;/Users/peterpan/test&quot; withIntermediateDirectories:YES attributes:nil error:nil];</div><div class="line">//拷贝文件</div><div class="line">[manager copyItemAtPath:@&quot;xxx&quot; toPath@&quot;xxx&quot; error:nil];</div><div class="line">//移动文件,重命名</div><div class="line">[manager moveItemAtPath:@&quot;xxx&quot; toPath:@&quot;xxx&quot;error:nil];</div><div class="line">//删除文件</div><div class="line">[manager removeItemAtPath:@&quot;xxx&quot; error:nil];</div></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">while(1)&#123;</div><div class="line">	NSFileManager *manager = [NSManager defaultManager];</div><div class="line">	NSString *path = @&quot;/Users/peterpan/Desktop&quot;</div><div class="line">	NSArray *arr = [manager contentsOfFileDirectoryAtPath:path error:nil];</div><div class="line">	if(arr.count &gt; 0)&#123;</div><div class="line">		for(NSString *str in arr)&#123;</div><div class="line">          	NSString *str1 = [NSString stringWithFormat:@&quot;%@%@&quot;, path,str];</div><div class="line">  			if([manager isDeletableFileAtPath:str])</div><div class="line">              [manager removeItemAtPath:str1 error:nil];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  NSLog(@&quot;扫描完成&quot;);</div><div class="line">  //CPU暂停指定的时间</div><div class="line">  [NSThread sleepForTimeInterval:10];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="CGPoint"><a href="#CGPoint" class="headerlink" title="CGPoint"></a>CGPoint</h2><p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
+<p>CGPoint和NSPoint是同一个结构体，只不过定义了两个名字。</p>
+<blockquote>
+<p>初始化方式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGPoint p1 = CGPointMake(20, 30);</div></pre></td></tr></table></figure>
+<h2 id="CGSize"><a href="#CGSize" class="headerlink" title="CGSize"></a>CGSize</h2><p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
+<p>NSSize和CGSize也是同一个结构体，只不过定义了两个名称</p>
+<blockquote>
+<p>初始化方式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGSize *s1 = CGSizeMake(20,20);</div></pre></td></tr></table></figure>
+<h2 id="CGRect"><a href="#CGRect" class="headerlink" title="CGRect"></a>CGRect</h2><p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
+<p>NSRect和CGRect同样也是一个结构体，定义了两个名称。</p>
+<blockquote>
+<p>初始化方式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGRect *r1 = CGRectMake(10 ,20 ,30 ,40);</div></pre></td></tr></table></figure>
+<h2 id="NSValue"><a href="#NSValue" class="headerlink" title="NSValue"></a>NSValue</h2><p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CGPoint *p1 = CGPointMake(20, 30);</div><div class="line">//下面代码还可以改成valueWithSize等等结构体</div><div class="line">NSValue *v1 = [NSValue valueWithPoint:p1];</div><div class="line">//v1的属性都存放在sizeValue之中</div><div class="line">NSLog(@&quot;%@&quot;, NSStringFromPoint(v1.sizeValue));</div></pre></td></tr></table></figure>
+<h2 id="字符串和日期转换"><a href="#字符串和日期转换" class="headerlink" title="字符串和日期转换"></a>字符串和日期转换</h2><p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate new];</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">//代表显示年月日十分秒</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSString *str = [formatter stringFromDate:date];</div><div class="line">//这样输出的就是当前时区的格式化时间,可以在时间之间随意的添加自定义的效果,e.g-&gt;yyyy年MM月dd日</div><div class="line">NSLog(@&quot;%@&quot;, str);</div></pre></td></tr></table></figure>
+<p>将字符串转换为时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *str = @&quot;2016-09-27 12:12:12&quot;;</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSDate *date = [formatter dateFromString:str];</div></pre></td></tr></table></figure>
+<h2 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h2><p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//获取的默认是零时区的时间，到东八区的时间就是加八个小时</div><div class="line">NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5000];</div><div class="line">//求两个时间之差</div><div class="line">NSDate *date1 = [NSDate new];</div><div class="line">NSDate *date2 = [NSDate new];</div><div class="line">double res = [date1 timeIntervalSinceDate:date2];</div></pre></td></tr></table></figure>
+<h2 id="得到日期对象的各个部分"><a href="#得到日期对象的各个部分" class="headerlink" title="得到日期对象的各个部分"></a>得到日期对象的各个部分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate date];</div><div class="line">//创建一个日历对象，可以从日历对象中取到日期的各个部分</div><div class="line">NSCalendar *calendar = [NSCalendar currentCalendar];</div><div class="line">NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];</div><div class="line">//可以直接使用成员运算符取出日期对象的各个部分</div><div class="line">NSLog(@&quot;%lu&quot;, com.year);</div></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/09/14/Foundation框架/">Foundation框架</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年09月14日 - 15时46分</p>
+        <p><span>最后更新:</span>2017年09月14日 - 15时49分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/14/Foundation框架/" title="Foundation框架">http://yoursite.com/2017/09/14/Foundation框架/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/14/Foundation框架/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/03/TCP-IP-三/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TCP/IP(三)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">1.</span> <span class="toc-text">Foundation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#框架"><span class="toc-number">1.1.</span> <span class="toc-text">框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.2.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSString字符串"><span class="toc-number">1.3.</span> <span class="toc-text">NSString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableString字符串"><span class="toc-number">1.4.</span> <span class="toc-text">NSMutableString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray数组"><span class="toc-number">1.5.</span> <span class="toc-text">NSArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableArray数组"><span class="toc-number">1.6.</span> <span class="toc-text">NSMutableArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNumber"><span class="toc-number">1.7.</span> <span class="toc-text">NSNumber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.8.</span> <span class="toc-text">补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary"><span class="toc-number">1.9.</span> <span class="toc-text">NSDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary"><span class="toc-number">1.10.</span> <span class="toc-text">NSMutableDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合的内存管理"><span class="toc-number">1.11.</span> <span class="toc-text">集合的内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSFileManager"><span class="toc-number">1.12.</span> <span class="toc-text">NSFileManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGPoint"><span class="toc-number">1.13.</span> <span class="toc-text">CGPoint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGSize"><span class="toc-number">1.14.</span> <span class="toc-text">CGSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGRect"><span class="toc-number">1.15.</span> <span class="toc-text">CGRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSValue"><span class="toc-number">1.16.</span> <span class="toc-text">NSValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串和日期转换"><span class="toc-number">1.17.</span> <span class="toc-text">字符串和日期转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期计算"><span class="toc-number">1.18.</span> <span class="toc-text">日期计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到日期对象的各个部分"><span class="toc-number">1.19.</span> <span class="toc-text">得到日期对象的各个部分</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/09/03/TCP-IP-三/" title="下一篇: TCP/IP(三)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/OSI模型初探/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
