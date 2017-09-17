@@ -5,16 +5,12 @@
   
   <title>CTF-隐写术 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网络安全之隐写术什么是隐写术？隐写术是关于信息隐藏，即不让计划的接受者以外的任何人知道信息的传递事件的一门技巧与学科，英文名叫做”Steganography”。是不是觉得听起来非常的帅气～
-####实现原理
-那么隐写术是通过什么来实现的呢？由于掩饰文本的数据含量越大，隐藏后者就越容易，所以数字图像被广泛的应用于隐藏消息。例如：一个24位图中的每个像素的三个颜色分量（红、绿、蓝）哥使用三个比特去表示">
+  <meta name="description" content="表面平平无奇的图片深处隐藏着的是另一个世界的钥匙">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF-隐写术">
 <meta property="og:url" content="http://yoursite.com/2017/09/17/CTF-隐写术/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="网络安全之隐写术什么是隐写术？隐写术是关于信息隐藏，即不让计划的接受者以外的任何人知道信息的传递事件的一门技巧与学科，英文名叫做”Steganography”。是不是觉得听起来非常的帅气～
-####实现原理
-那么隐写术是通过什么来实现的呢？由于掩饰文本的数据含量越大，隐藏后者就越容易，所以数字图像被广泛的应用于隐藏消息。例如：一个24位图中的每个像素的三个颜色分量（红、绿、蓝）哥使用三个比特去表示">
+<meta property="og:description" content="表面平平无奇的图片深处隐藏着的是另一个世界的钥匙">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png">
@@ -25,12 +21,10 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png">
-<meta property="og:updated_time" content="2017-09-17T09:00:40.000Z">
+<meta property="og:updated_time" content="2017-09-17T09:27:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-隐写术">
-<meta name="twitter:description" content="网络安全之隐写术什么是隐写术？隐写术是关于信息隐藏，即不让计划的接受者以外的任何人知道信息的传递事件的一门技巧与学科，英文名叫做”Steganography”。是不是觉得听起来非常的帅气～
-####实现原理
-那么隐写术是通过什么来实现的呢？由于掩饰文本的数据含量越大，隐藏后者就越容易，所以数字图像被广泛的应用于隐藏消息。例如：一个24位图中的每个像素的三个颜色分量（红、绿、蓝）哥使用三个比特去表示">
+<meta name="twitter:description" content="表面平平无奇的图片深处隐藏着的是另一个世界的钥匙">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -287,7 +281,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="网络安全之隐写术"><a href="#网络安全之隐写术" class="headerlink" title="网络安全之隐写术"></a>网络安全之隐写术</h1><h2 id="什么是隐写术？"><a href="#什么是隐写术？" class="headerlink" title="什么是隐写术？"></a>什么是隐写术？</h2><p>隐写术是关于信息隐藏，即不让计划的接受者以外的任何人知道信息的传递事件的一门技巧与学科，英文名叫做”Steganography”。是不是觉得听起来非常的帅气～</p>
+        <p>表面平平无奇的图片深处隐藏着的是另一个世界的钥匙</p>
+<a id="more"></a>
+<h1 id="网络安全之隐写术"><a href="#网络安全之隐写术" class="headerlink" title="网络安全之隐写术"></a>网络安全之隐写术</h1><h2 id="什么是隐写术？"><a href="#什么是隐写术？" class="headerlink" title="什么是隐写术？"></a>什么是隐写术？</h2><p>隐写术是关于信息隐藏，即不让计划的接受者以外的任何人知道信息的传递事件的一门技巧与学科，英文名叫做”Steganography”。是不是觉得听起来非常的帅气～</p>
 <p>####实现原理</p>
 <p>那么隐写术是通过什么来实现的呢？由于掩饰文本的数据含量越大，隐藏后者就越容易，所以数字图像被广泛的应用于隐藏消息。例如：一个24位图中的每个像素的三个颜色分量（红、绿、蓝）哥使用三个比特去表示，如果我们只考虑蓝色的话，就有 2^8种不同的数值来表示蓝色的深浅不一。如果只是替换掉其中的最低有效位，肉眼也是不可见的，那么就可以利用这个最低有效位来存储颜色之外的信息，其他颜色也是同理。</p>
 <h4 id="用途所在"><a href="#用途所在" class="headerlink" title="用途所在"></a>用途所在</h4><p>因为这项技术可以将私密信息嵌入数字媒介而不影响它的载体质量，第三方察觉不到秘密信息的存在，因此秘钥，数字签名，私密信息都可以在开放的环境中安全传送。隐写术也可以作为数字水印隐藏在图像中，使得其来源可以被跟踪或校验。比如说用于防盗版。</p>
@@ -381,7 +377,7 @@
         <p><span>本文标题:</span><a href="/2017/09/17/CTF-隐写术/">CTF-隐写术</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月17日 - 16时59分</p>
-        <p><span>最后更新:</span>2017年09月17日 - 17时00分</p>
+        <p><span>最后更新:</span>2017年09月17日 - 17时27分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/17/CTF-隐写术/" title="CTF-隐写术">http://yoursite.com/2017/09/17/CTF-隐写术/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/17/CTF-隐写术/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
