@@ -20,7 +20,10 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%888.18.56.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%888.28.58.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%889.55.39.png">
-<meta property="og:updated_time" content="2017-09-18T15:56:13.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8A%E5%8D%8811.48.01.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.56.12.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.58.01.png">
+<meta property="og:updated_time" content="2017-09-19T05:07:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-安全杂项(一)">
 <meta name="twitter:description" content="赛前抱佛脚刷题的安全杂项系列，不用花松果就可以看到的write up岂不美哉">
@@ -324,6 +327,31 @@
 <p>提交括号内的值成功，大功告成！</p>
 <p>这里提供一个暴力破解栅栏密码的python脚本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python3</span></div><div class="line">e = raw_input(<span class="string">'please input the string\n'</span>)</div><div class="line">elen = len(e)</div><div class="line">field=[]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,elen):</div><div class="line">    <span class="keyword">if</span>(elen%i == <span class="number">0</span>):</div><div class="line">        field.append(i)</div><div class="line"></div><div class="line"><span class="keyword">for</span> f <span class="keyword">in</span> field:</div><div class="line">    b = elen / f</div><div class="line">    result = &#123;x:<span class="string">''</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(b)&#125;</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(elen):</div><div class="line">        a = i % b;</div><div class="line">        result.update(&#123;a:result[a] + e[i]&#125;)</div><div class="line">    d = <span class="string">''</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(b):</div><div class="line">        d = d + result[i]</div><div class="line">    <span class="keyword">print</span> (<span class="string">'num:\t'</span>+str(f)+<span class="string">'\t'</span>+<span class="string">'result:\t'</span>+d)</div><div class="line">raw_input()</div></pre></td></tr></table></figure>
+<h2 id="安全杂项之图片里的动漫"><a href="#安全杂项之图片里的动漫" class="headerlink" title="安全杂项之图片里的动漫"></a>安全杂项之图片里的动漫</h2><p>经历前面的题目之后，我们对于CTF中坑爹的尿性有了一定的了解，这次我们又拿到了一张图片，表面上看起来是一副非常优美的风景呀（谁关心这种问题呀，魂淡！！！）</p>
+<p>当然标准的步骤自然是先用我们的神器binwalk扫一扫，果然不出所料，出来了一个压缩包，虽然知道事情并没有那么的简单，但是还是手贱的点了一下，好了，加密的rar压缩包，打不开，暴力破解后无果。</p>
+<p>那么试着用文本格式打开看一下，从头部看出果然是个A货，这玩意其实是个jpg图片呀！转换之后发现是一张倒置的七龙珠图片：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8A%E5%8D%8811.48.01.png" alt="屏幕快照 2017-09-19 上午11.48.01.png"></p>
+<p>满心欢喜提交了CTF{qlz}，嗯，不对。那么因为图片是反着的，那么就提交CTF{zlq}把，还是不对。</p>
+<p>好吧，和图片相关的隐写用binwalk总是不亏的，一扫发现真的还有一个压缩包，大兄弟你是俄罗斯套娃么？？？提取出来之后又是一个加密的压缩包，这个时候可以使用我们的工具rarcrack，因为kali linux中这个工具不是自带的，所以先安装一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install rarcrack</div></pre></td></tr></table></figure>
+<p>那么就开始暴力破解吧，首先要创建一个和压缩包同名的xml文件，然后开始怼：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">touch 1.rar.xml</div><div class="line">#开多线程破解</div><div class="line">rarcrack --threads 28 --type rar 1.rar</div></pre></td></tr></table></figure>
+<p>我也没有等到成功，而是又去搜了一下（怨念太深，为什么不是七龙珠，明明说了是一个动漫的小写字母啊），然后在百度百科上发现还有一种说法叫做dragonball！</p>
+<p>于是乎就使用CTF{逆置的dragonball}成功夺旗，这个题就分享到这吧。</p>
+<h2 id="安全杂项之藏在图片里的秘密"><a href="#安全杂项之藏在图片里的秘密" class="headerlink" title="安全杂项之藏在图片里的秘密"></a>安全杂项之藏在图片里的秘密</h2><p>这么多图片题你干脆叫隐写术好了，干嘛叫misc。到这里也算是有点套路了，下载图片，打开后，图片上面写着16 06 68 88。先记下来，说不定后面有个加密的压缩包等着我。</p>
+<p>然后也是使用binwalk扫一下，但是只发现了zip压缩文件的尾，没有发现头，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">binwalk -e 1.jpg</div></pre></td></tr></table></figure>
+<p>也是无法分离的，难道是要让我补全头部之类的操作，用sublime打开之后搜索504B0304发现其实是存在的，好吧binwalk还需要提高，那我们既然找到了就自己抠出来保存为out.zip吧，但是这种方式感觉过于麻烦，在kali linux下我们可以直接使用foremost:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foremost 1.jpg</div></pre></td></tr></table></figure>
+<p>果然是个加密压缩吧，难道密码为16 06 68 88？肯定不是，这么简单做个毛啊！将图片反转之后发现原来是88 89 90 91，对应的ASCII码是”XYZ[“这4个字符，嘿嘿，还是被我发现了，输入之后仍然不对，好吧，直接上工具怼：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#先将对应的xml的初始密码设置为XYZ[吧，也许会有用</div><div class="line">rarcrack --threads 28 --type zip 1.zip</div></pre></td></tr></table></figure>
+<p>一怼就怼出来了，原来是’XZY[‘，得到数字42433331，难道他就是让我们再使用一趟工具么？反正得到了答案就算了吧，不计较了。</p>
+<p>你以为这样就结束了吗？？？愚蠢的人类，不管是直接输入还是ASCII码都不是flag值，蛤蛤蛤，到这里是不是就想放弃了，在一直寻找未果之后还是要回到源头，那个包含压缩包的图片，在十六进制编辑器中惊奇的发现其中有一串类似摩斯电码的玩意：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.56.12.png" alt="屏幕快照 2017-09-19 下午12.56.12.png"></p>
+<p>不得不说作者是真的恶心，在使用winhex或者Mac上的hex friend的时候都会出现如下情况：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.58.01.png" alt="屏幕快照 2017-09-19 下午12.58.01.png">这个时候就更难发现其中的秘密了。</p>
+<p>接下来应该怎么解读呢？这个时候已经比较简单了，用到我们刚才的数字42433331，不正是对摩斯电码进行分隔么？按照分隔得到了摩斯电码：…./.-/.-../—/.–/—/-../.</p>
+<p>使用工具转换后得到字母HALOWODE，使用格式CTF{HALOWODE}提交，终于成功。</p>
+<p>ps:摩斯电码的脑洞是参考了别人的Writeup,太坑了</p>
 
       
       
@@ -381,7 +409,7 @@
         <p><span>本文标题:</span><a href="/2017/09/18/CTF-安全杂项-一/">CTF-安全杂项(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月18日 - 23时55分</p>
-        <p><span>最后更新:</span>2017年09月18日 - 23时56分</p>
+        <p><span>最后更新:</span>2017年09月19日 - 13时07分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/18/CTF-安全杂项-一/" title="CTF-安全杂项(一)">http://yoursite.com/2017/09/18/CTF-安全杂项-一/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/18/CTF-安全杂项-一/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -410,7 +438,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络安全之安全杂项"><span class="toc-number">1.</span> <span class="toc-text">网络安全之安全杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之base64"><span class="toc-number">1.1.</span> <span class="toc-text">安全杂项之base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之misc50"><span class="toc-number">1.2.</span> <span class="toc-text">安全杂项之misc50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之破损的磁带"><span class="toc-number">1.3.</span> <span class="toc-text">安全杂项之破损的磁带</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之功夫秘籍"><span class="toc-number">1.4.</span> <span class="toc-text">安全杂项之功夫秘籍</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络安全之安全杂项"><span class="toc-number">1.</span> <span class="toc-text">网络安全之安全杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之base64"><span class="toc-number">1.1.</span> <span class="toc-text">安全杂项之base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之misc50"><span class="toc-number">1.2.</span> <span class="toc-text">安全杂项之misc50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之破损的磁带"><span class="toc-number">1.3.</span> <span class="toc-text">安全杂项之破损的磁带</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之功夫秘籍"><span class="toc-number">1.4.</span> <span class="toc-text">安全杂项之功夫秘籍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之图片里的动漫"><span class="toc-number">1.5.</span> <span class="toc-text">安全杂项之图片里的动漫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之藏在图片里的秘密"><span class="toc-number">1.6.</span> <span class="toc-text">安全杂项之藏在图片里的秘密</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
