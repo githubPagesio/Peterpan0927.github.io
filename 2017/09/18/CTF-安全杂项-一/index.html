@@ -23,7 +23,9 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8A%E5%8D%8811.48.01.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.56.12.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.58.01.png">
-<meta property="og:updated_time" content="2017-09-19T05:07:10.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8810.45.52.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8A%E5%8D%8812.31.21.png">
+<meta property="og:updated_time" content="2017-09-19T16:32:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-安全杂项(一)">
 <meta name="twitter:description" content="赛前抱佛脚刷题的安全杂项系列，不用花松果就可以看到的write up岂不美哉">
@@ -352,6 +354,13 @@
 <p>接下来应该怎么解读呢？这个时候已经比较简单了，用到我们刚才的数字42433331，不正是对摩斯电码进行分隔么？按照分隔得到了摩斯电码：…./.-/.-../—/.–/—/-../.</p>
 <p>使用工具转换后得到字母HALOWODE，使用格式CTF{HALOWODE}提交，终于成功。</p>
 <p>ps:摩斯电码的脑洞是参考了别人的Writeup,太坑了</p>
+<h2 id="安全杂项之理查德"><a href="#安全杂项之理查德" class="headerlink" title="安全杂项之理查德"></a>安全杂项之理查德</h2><p>其实真的不想吐槽这个名字了…这到底是什么鬼名字，这么随便真的好么？？？</p>
+<p>算了，首先下载文件，扩展名为flac，搜索一下发现是音频文件，然后用音频分析文件打开：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8810.45.52.png" alt="屏幕快照 2017-09-19 下午10.45.52.png"></p>
+<p>显然是摩斯密码，按照表解密之后得到flag值</p>
+<h2 id="安全杂项之WTF？"><a href="#安全杂项之WTF？" class="headerlink" title="安全杂项之WTF？"></a>安全杂项之WTF？</h2><p>打开之后，发现是全屏的字符，直接下滑到底，出现了两个等号，一看是base64编码，解码之后全屏的0、1，看的头都要大了，并没有什么头绪，苦死未果之后去看了一下write up，居然是二维码…可以使用python的PIL库，或者使用其他的二维码生成工具，来生成二维码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意txt文件中是要有256行和256列，避免列表越界</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">im=Image.new(<span class="string">'RGB'</span>,(<span class="number">256</span>,<span class="number">256</span>))</div><div class="line">pix = im.load()</div><div class="line"><span class="keyword">with</span> open(<span class="string">'code.txt'</span>) <span class="keyword">as</span> f:</div><div class="line">    txt=f.read()</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(txt)):</div><div class="line">        <span class="keyword">if</span> txt[x] == <span class="string">'1'</span>:</div><div class="line">            pix[x/<span class="number">256</span>,x%<span class="number">256</span>]=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pix[x/<span class="number">256</span>,x%<span class="number">256</span>]=(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>)</div><div class="line">im.show()</div><div class="line">im.save(<span class="string">'1.png'</span>)</div></pre></td></tr></table></figure>
+<p>最后得到二维码：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8A%E5%8D%8812.31.21.png" alt="屏幕快照 2017-09-20 上午12.31.21.png"></p>
 
       
       
@@ -409,7 +418,7 @@
         <p><span>本文标题:</span><a href="/2017/09/18/CTF-安全杂项-一/">CTF-安全杂项(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月18日 - 23时55分</p>
-        <p><span>最后更新:</span>2017年09月19日 - 13时07分</p>
+        <p><span>最后更新:</span>2017年09月20日 - 00时32分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/18/CTF-安全杂项-一/" title="CTF-安全杂项(一)">http://yoursite.com/2017/09/18/CTF-安全杂项-一/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/18/CTF-安全杂项-一/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -438,7 +447,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络安全之安全杂项"><span class="toc-number">1.</span> <span class="toc-text">网络安全之安全杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之base64"><span class="toc-number">1.1.</span> <span class="toc-text">安全杂项之base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之misc50"><span class="toc-number">1.2.</span> <span class="toc-text">安全杂项之misc50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之破损的磁带"><span class="toc-number">1.3.</span> <span class="toc-text">安全杂项之破损的磁带</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之功夫秘籍"><span class="toc-number">1.4.</span> <span class="toc-text">安全杂项之功夫秘籍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之图片里的动漫"><span class="toc-number">1.5.</span> <span class="toc-text">安全杂项之图片里的动漫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之藏在图片里的秘密"><span class="toc-number">1.6.</span> <span class="toc-text">安全杂项之藏在图片里的秘密</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络安全之安全杂项"><span class="toc-number">1.</span> <span class="toc-text">网络安全之安全杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之base64"><span class="toc-number">1.1.</span> <span class="toc-text">安全杂项之base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之misc50"><span class="toc-number">1.2.</span> <span class="toc-text">安全杂项之misc50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之破损的磁带"><span class="toc-number">1.3.</span> <span class="toc-text">安全杂项之破损的磁带</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之功夫秘籍"><span class="toc-number">1.4.</span> <span class="toc-text">安全杂项之功夫秘籍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之图片里的动漫"><span class="toc-number">1.5.</span> <span class="toc-text">安全杂项之图片里的动漫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之藏在图片里的秘密"><span class="toc-number">1.6.</span> <span class="toc-text">安全杂项之藏在图片里的秘密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之理查德"><span class="toc-number">1.7.</span> <span class="toc-text">安全杂项之理查德</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全杂项之WTF？"><span class="toc-number">1.8.</span> <span class="toc-text">安全杂项之WTF？</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
