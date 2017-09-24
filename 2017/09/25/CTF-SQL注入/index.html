@@ -3,18 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>多终端同步hexo博客 | Peterpan&#39;s Blog</title>
+  <title>CTF-SQL注入 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="多终端同步hexo">
+  <meta name="description" content="虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多终端同步hexo博客">
-<meta property="og:url" content="http://yoursite.com/2017/03/21/多终端同步hexo博客/index.html">
+<meta property="og:title" content="CTF-SQL注入">
+<meta property="og:url" content="http://yoursite.com/2017/09/25/CTF-SQL注入/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="多终端同步hexo">
-<meta property="og:updated_time" content="2017-03-21T09:00:07.000Z">
+<meta property="og:description" content="虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png">
+<meta property="og:updated_time" content="2017-09-24T16:46:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多终端同步hexo博客">
-<meta name="twitter:description" content="多终端同步hexo">
+<meta name="twitter:title" content="CTF-SQL注入">
+<meta name="twitter:description" content="虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
   
@@ -228,11 +235,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-多终端同步hexo博客" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CTF-SQL注入" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/21/多终端同步hexo博客/" class="article-date">
-      <time datetime="2017-03-21T08:34:56.000Z" itemprop="datePublished">2017-03-21</time>
+      <a href="/2017/09/25/CTF-SQL注入/" class="article-date">
+      <time datetime="2017-09-24T16:43:40.000Z" itemprop="datePublished">2017-09-25</time>
 </a>
     </div>
   
@@ -245,7 +252,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      多终端同步hexo博客
+      CTF-SQL注入
     </h1>
   
 
@@ -254,13 +261,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/多终端同步/">多终端同步</a>
+    <a class="article-category-link" href="/categories/SQL注入-实战演练/">SQL注入 实战演练</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-github/">hexo github</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -270,24 +277,108 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>多终端同步hexo<br><a id="more"></a></p>
-<p>使用hexo是一个很棒的体验，但是由于它是一个静态博客，优点与缺点共存，它存活的生命周期更长，但没有和由于数据库连接，所以想要在多机上更新自己的博客会显得有些麻烦，但是事实上只要回想一下当初搭建时候的步骤，此时便会简化很多。而且有<a href="https://www.zhihu.com/question/21193762" target="_blank" rel="external">多种方案可供选择</a></p>
-<p>重部署流程</p>
+        <p>虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。</p>
+<a id="more"></a>
+<h1 id="SQL注入原理和讲解"><a href="#SQL注入原理和讲解" class="headerlink" title="SQL注入原理和讲解"></a>SQL注入原理和讲解</h1><h2 id="实验原理和三层架构"><a href="#实验原理和三层架构" class="headerlink" title="实验原理和三层架构"></a>实验原理和三层架构</h2><p>####实验原理</p>
+<p>SQL注入是通过将恶意的SQL查询或添加语句插入到应用的参数中，再再后台的SQL服务器中解析执行进行的攻击，它是目前黑客对数据库对数据库进行攻击的最常用手段之一。或者说是将恶意sql，植入到系统中。或者跳过系统本身校验，访问系统数据。</p>
+<h4 id="Web程序三层架构"><a href="#Web程序三层架构" class="headerlink" title="Web程序三层架构"></a>Web程序三层架构</h4><p>通常意义上我们把整个业务应用划分为：</p>
+<ul>
+<li>界面层（User Interface layer）</li>
+<li>业务逻辑层（Business Logic Layer）</li>
+<li>数据访问层（Data access layer）</li>
+</ul>
+<p>区分层次的目的即为了”高内聚低耦合”的思想。在软件体系架构设计中，分层式结构是最常见，也是最重要的一种结构被应用于众多类型的软件开发：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png" alt="屏幕快照 2017-09-22 下午10.44.48.png"></p>
+<p>在上图中，用户访问实验楼主页进行了如下过程：</p>
+<ul>
+<li>在 Web 浏览器中输入 <code>www.shiyanlou.com</code> 连接到实验楼服务器。</li>
+<li>业务逻辑层的 Web 服务器从本地存储中加载 <code>index.php</code> 脚本并解析。</li>
+<li>脚本连接位于数据访问层的 <code>DBMS</code>（数据库管理系统），并执行 <code>Sql</code> 语句。</li>
+<li>数据访问层的数据库管理系统返回 <code>Sql</code> 语句执行结果给 Web 服务器。</li>
+<li>业务逻辑层的 Web 服务器将 Web 页面封装成 HTML 格式发送给表示层的 Web 浏览器。</li>
+<li>表示层的 Web 浏览器解析 HTML 文件，将内容展示给用户。</li>
+</ul>
+<p>在三层架构中，所有通信都必须要经过中间层，简单地说，三层架构是一种<strong>线性关系</strong>。</p>
+<h2 id="SQL注入漏洞"><a href="#SQL注入漏洞" class="headerlink" title="SQL注入漏洞"></a>SQL注入漏洞</h2><p>SQL请求一般不会有问题，但实际情况是很多时候需要结合用户的输入数据来动态的构造SQL语句，如果用户的输入的数据被构造成恶意的SQL代码，如果没有对这些参数进行审查的话，就会带来意想不到的危险。</p>
+<ul>
+<li>猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
+<li>绕过认证，列如绕过验证登录网站后台。</li>
+<li>注入可以借助数据库的存储过程进行提权等操作</li>
+</ul>
+<h4 id="注入实例之猜解数据库"><a href="#注入实例之猜解数据库" class="headerlink" title="注入实例之猜解数据库"></a>注入实例之猜解数据库</h4><p>来到一个页面我们需要利用漏洞来获取登陆权限的时候，可以对这个网站的数据库进行一些猜测的攻击：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select userName from users where username = &apos;$id&apos;;</div></pre></td></tr></table></figure>
+<p>当我们在输入框中猜测数据库是通过这种方式来进行查询，所以就进行对应的注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1&apos; order by 1#</div></pre></td></tr></table></figure>
+<p>这样的话实际执行的语句就变成了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select userName from users where use_id = &apos;1&apos; order by 1#&apos;;</div><div class="line">#按照mysql的语法，#后面的内容都会被注释掉，来屏蔽后面的单引号，避免语法错误</div></pre></td></tr></table></figure>
+<p>这样的话，我们可以利用这个漏洞来获取我们更多想要的信息嘿嘿嘿：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT userName FROM users WHERE user_id = &apos;1&apos; union select database(),user()#;</div><div class="line">#比如利用union语句来拼接多条查询语句,获取当前查询的用户名</div></pre></td></tr></table></figure>
+<p>当然这些信息都没有什么卵用，接下来直接上一个重量级的，爆出它所有的账号密码吧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select userName from users where user_id = &apos;1&apos; union select user,password from users;</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png" alt="屏幕快照 2017-09-22 下午11.24.40.png"></p>
+<p>虽然密码使用md5加密过了，但是这种玩意去网上随便找个在线工具就破开了，还是挺有意思</p>
+<h4 id="注入实例之验证绕过"><a href="#注入实例之验证绕过" class="headerlink" title="注入实例之验证绕过"></a>注入实例之验证绕过</h4><p>接下来再来试试一个利用SQL漏洞绕过登陆验证的实验，如果我们不知道登陆的话干脆就不要理他好了，悄悄的从旁边绕过去～</p>
+<p>这种情况下后台的代码验证类似于这种情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username=&apos;123&apos; and password=&apos;123&apos;</div></pre></td></tr></table></figure>
+<p>当数据库存在对应的的用户数据的时候，自然就会返回登陆成功，而我们所做的就是就是伪造一个恒等式让后台判定成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">123&apos; or &apos;1&apos;=&apos;1</div><div class="line">#这样以来查询语句就变成了：</div><div class="line">select * from users where username=&apos;123&apos; or &apos;1&apos;=&apos;1&apos; and password=&apos;123&apos; or &apos;1&apos;=&apos;1&apos;</div><div class="line">#当然也可以只输入账号，将后面的语句注销掉，那么就变成了：</div><div class="line">123&apos; or 1=1#&apos;</div><div class="line">select * from users where username=&apos;123&apos; or 1=1 #&apos; and password=&apos;123&apos; or 1=1 #&apos;</div></pre></td></tr></table></figure>
+<h4 id="判断SQL注入点"><a href="#判断SQL注入点" class="headerlink" title="判断SQL注入点"></a>判断SQL注入点</h4><p>当然之前的那几种情况都是我们大概都知道了后台的语句之后才做出了漏洞的判断和注入，在我们不知道后台的验证代码的时候，就需要我们自己去判断注入点了：</p>
+<p>对 Sql 注入的判断，主要有两个方面：</p>
+<ul>
+<li>判断该带参数的 Url 是否存在 Sql 注入？</li>
+<li>如果存在 Sql 注入，那么属于哪种 Sql 注入？</li>
+</ul>
+<p>可能存在 Sql 注入攻击的 ASP/PHP/JSP 动态网页中，一个动态网页中可能只有一个参数，有时可能有多个参数。有时是整型参数，有时是字符串型参数，不能一概而论。总之只要是带有参数的 动态网页且此网页访问了数据库，那么就有可能存在 Sql 注入。如果程序员没有足够的安全意识，没有进行必要的字符过滤，存在SQL注入的可能性就非常大。</p>
 <blockquote>
-<p>因为新电脑上面已经完全没有了hexo的环境，所以要重新部署一下。<br>1.先安装 <a href="http://nodejs.cn" target="_blank" rel="external">Node.js</a> 和 <a href="https://git-scm.com/downloads" target="_blank" rel="external">Git</a>，再安装完这两者后，再通过之前的步骤安装 Hexo。<br>2.在public下创建一个文件夹把整一个your_name.github.io 文件夹同步过来cd 到同步的 your_name.github.io 内， 然后再安装 Hexo：</p>
+<p>判断SQL漏洞是否存在</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
-<p> <strong>为了部署，还要执行</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<p>至此，在新的平台上运行 hexo clean，hexo generate ，hexo server 等命令应该就没有问题了。</p>
-<p>Github配置<br>Step 1：Setting up Git。在 Git Bash 中执行如下代码即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name <span class="string">"YOUR NAME"</span> <span class="comment">#YOUR NAME 是自己取的名字</span></div><div class="line">git config --global user.email <span class="string">"YOUR EMAIL ADDRESS"</span> <span class="comment">#YOUR EMAIL ADDRESS 是自己的 Github 邮箱</span></div></pre></td></tr></table></figure></p>
-<p>Step 2：Authenticating with GitHub from Git。<br>在 Git Bash 下执行如下命令，生成 SSH key<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -b 4096 -C     <span class="string">"your_email@example.com"</span></div><div class="line"><span class="comment">#your_email@example.com 是你的 Github 注册邮箱，剩下的一路回车即可。</span></div></pre></td></tr></table></figure></p>
-<p>接下来将其保存在主目录下，其中id_rsa是你的私钥，不要被他人知道，你所要做的是把那个后缀.pub的公钥添加到你的github账户</p>
-<p>将 SSH key 添加到 Github 账户<br>在 Git Bash 中将 SSH Key 拷贝出来：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clip &lt; ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
-<p>此时，SSH Key 已经在我们的剪切板里了。然后登录 Github 帐号，依次点击自己的头像，Settings，SSH and GPG keys， Add SSH key， 在 Title 这里输入 Key 的label，比如 your_name - PC，然后在 Key 里面把 SSH Key 粘贴进去，点击 Add SSH key 大功告成。<br>测试 SSH 连接，在 Git Bash 中敲入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
-<p>应该可以看到提示你成功的信息。<br>Hexo 部署：执行hexo deploy 应该就可以大功告成了。</p>
-<p>另外附上一种高手方法，新手慎用：<a href="https://github.com/zjhou/E2P" target="_blank" rel="external">自动部署更新博客</a></p>
-<p>​        </p>
+<p>最为经典的单引号引用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxxx.com/abc.php?id=1&apos;</div></pre></td></tr></table></figure>
+<p>如果页面返回错误，则存在SQL注入，原因是无论字符型还是整型都会引号个数不匹配而报错。就算没有报错当然也不能说明不存在SQL注入漏洞，有可能只是对单引号做了过滤。</p>
+<blockquote>
+<p>判断SQL注入类型</p>
+</blockquote>
+<p>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分<strong>常用</strong>的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png" alt="屏幕快照 2017-09-24 下午11.01.27.png"></p>
+<ul>
+<li>字符型</li>
+</ul>
+<p>当输入的参数为字符型的时候，通常abc.php中的SQL语句类型大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from &lt;表名&gt; where id = &apos;x&apos;</div></pre></td></tr></table></figure>
+<p>这种类型我们同样可以使用<code>and &#39;1&#39;=&#39;1</code>和<code>and &#39;1&#39;=&#39;2</code>来判断：</p>
+<ol>
+<li>Url 地址中输入 <code>http://xxx/abc.php?id= x&#39; and &#39;1&#39;=&#39;1</code> 页面运行正常，继续进行下一步。</li>
+<li>Url 地址中继续输入 <code>http://xxx/abc.php?id= x&#39; and &#39;1&#39;=&#39;2</code> 页面运行错误，则说明此 Sql 注入为字符型注入。</li>
+</ol>
+<p>当输入<code>and &#39;1&#39;=&#39;1</code>时，后台执行SQL语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from &lt;表名&gt; where id = &apos;x&apos; and &apos;1&apos;=&apos;1&apos;</div></pre></td></tr></table></figure>
+<p>当输入 <code>and &#39;1&#39;=&#39;2</code>时，后台执行 Sql 语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from &lt;表名&gt; where id = &apos;x&apos; and &apos;1&apos;=&apos;2&apos;</div></pre></td></tr></table></figure>
+<p>语法正确，但逻辑判断错误，所以返回正确。我们同样可以使用假设法来验证。</p>
+<ul>
+<li>数字型</li>
+</ul>
+<p>当输入参数为整型的时候，通常SQL语句类型大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from &lt;表名&gt; where id=x</div></pre></td></tr></table></figure>
+<p>这种类型就可以直接使用经典的<code>and 1=1</code>和<code>and 1=2</code>来判断了：</p>
+<ol>
+<li>Url 地址中输入 <code>http://xxx/abc.php?id= x and 1=1</code> 页面依旧运行正常，继续进行下一步。</li>
+<li>Url 地址中继续输入 <code>http://xxx/abc.php?id= x and 1=2</code> 页面运行错误，则说明此 Sql 注入为数字型注入。</li>
+</ol>
+<p>至于后台执行的SQL语句可以直接参考字符型的。</p>
+<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h3 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h3><p>刚刚点进去的时候如右图所示：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png" alt="屏幕快照 2017-09-25 上午12.23.25.png"></p>
+<p> 1.为了知道到底传递了什么参数，我们输入了1并提交，然后发现了<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png" alt="屏幕快照 2017-09-25 上午12.24.49.png"></p>
+<p> 2.而在输入1’的时候报错，所以判断存在注入点，因为需要获得flag值，初步预估后台存储flag的表应该为flag,所以需要构造一条语句来查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select flag from flag</div></pre></td></tr></table></figure>
+<p> 3.根据第二步的报错信息看，多加个‘，后面的语句需要再构造一个条件来结束’，注入语句为：1’  union select flag from flag where ‘t’=’t</p>
+<p>执行后报错：heck the manual that corresponds to your MySQL server version for the right syntax to use near ‘flag flag ‘t’=’t’’ at line 1</p>
+<p>分析：根据错误信息发现只有变量了，其他的关键字都被过滤了。</p>
+<p> 4.把关键字写2遍提交，发现如下报错： corresponds to your MySQL server version for the right syntax to use near ‘unionselectflag fromflag where’t’=’t’’ at line 1</p>
+<p>  分析：发现空格被过滤了</p>
+<p> 5.使用+号在空格之前连接(在url中进行拼接)：</p>
+<p>1’+unionunion +selectselect +flag+fromfrom +flag+wherewhere+’t’=’t</p>
+<p>这样的话就可以提交成功了，这种事情比较需要坚持不懈的毅力，半途而废是找不到漏洞的！</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png" alt="屏幕快照 2017-09-25 上午12.37.50.png"></p>
 
       
       
@@ -342,13 +433,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></p>
+        <p><span>本文标题:</span><a href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
-        <p><span>发布时间:</span>2017年03月21日 - 16时34分</p>
-        <p><span>最后更新:</span>2017年03月21日 - 17时00分</p>
+        <p><span>发布时间:</span>2017年09月25日 - 00时43分</p>
+        <p><span>最后更新:</span>2017年09月25日 - 00时46分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/03/21/多终端同步hexo博客/" title="多终端同步hexo博客">http://yoursite.com/2017/03/21/多终端同步hexo博客/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/03/21/多终端同步hexo博客/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/25/CTF-SQL注入/" title="CTF-SQL注入">http://yoursite.com/2017/09/25/CTF-SQL注入/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/25/CTF-SQL注入/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -361,18 +452,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/05/12/土家购农村电商爬虫代码示例/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          土家购农村电商爬虫代码示例
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/20/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">页面教程</div>
+    <a href="/2017/09/18/CTF-安全杂项-一/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CTF-安全杂项(一)</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -383,7 +465,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL注入原理和讲解"><span class="toc-number">1.</span> <span class="toc-text">SQL注入原理和讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实验原理和三层架构"><span class="toc-number">1.1.</span> <span class="toc-text">实验原理和三层架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Web程序三层架构"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">Web程序三层架构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入漏洞"><span class="toc-number">1.2.</span> <span class="toc-text">SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注入实例之猜解数据库"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">注入实例之猜解数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注入实例之验证绕过"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">注入实例之验证绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断SQL注入点"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">判断SQL注入点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入实战"><span class="toc-number">1.3.</span> <span class="toc-text">SQL注入实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实战一"><span class="toc-number">1.3.1.</span> <span class="toc-text">实战一</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -450,13 +532,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/12/土家购农村电商爬虫代码示例/" title="上一篇: 土家购农村电商爬虫代码示例">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/03/20/hello-world/" title="下一篇: 页面教程">
+            <a href="/2017/09/18/CTF-安全杂项-一/" title="下一篇: CTF-安全杂项(一)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
