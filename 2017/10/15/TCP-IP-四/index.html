@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.06.36.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.15.03.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.20.50.png">
-<meta property="og:updated_time" content="2017-10-15T09:30:24.000Z">
+<meta property="og:updated_time" content="2017-10-15T12:40:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP/IP(四)">
 <meta name="twitter:description" content="这次来说说TCP的三次握手还有一些控制机制，另外补充DNS之后的网络传输部分">
@@ -297,7 +297,7 @@
 <ol>
 <li>同样的大雄也向静香打电话，用的是UDP协议—“香，明出去玩么”</li>
 </ol>
-<p>虽然缺少了其中的一部分，但是并不会影响到整体的童话。此外，在广播和多播通信中也使用的是UDP而不是TCP。</p>
+<p>虽然缺少了其中的一部分，但是并不会影响到整体的通话。此外，在广播和多播通信中也使用的是UDP而不是TCP。</p>
 <hr>
 <h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p>TCP为了实现可靠的传输，需要考虑很多的事情，比如数据的破坏，丢包，重复以及分片顺序混乱等问题，为了解决这些问题，TCP通过检验和，序列号，确认应答，重发控制，连接管理以及窗口控制等机制实现可靠性传输。</p>
 <h3 id="TCP连接的建立与断开控制"><a href="#TCP连接的建立与断开控制" class="headerlink" title="TCP连接的建立与断开控制"></a>TCP连接的建立与断开控制</h3><p>还是通过一个例子来说明，在DNS相关的博客中我们曾经说过，DNS进程查询到域名对应的IP之后，会将打包好的http请求发给TCP进程。TCP进程想着，我如果直接把这个加上头部之后丢给IP进程，最后这个IP包生死不知，也不知道是因为什么原因死在了路上，最终想出了一个办法，先不发 HTTP，先要确保自己的 IP 包（没有任何用户数据）可以到达服务器，并且服务器的 IP 包也可以返回，这样做的好处是：<br>一方面，可以保证双向的路径（路由）是畅通的，没有防火墙或访问列表的阻挡；<br>另一方面，如果 IP 包可以返回，说明服务器是正常工作的。这样所有担忧就都一一化解了。</p>
@@ -459,7 +459,7 @@
         <p><span>本文标题:</span><a href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年10月15日 - 17时22分</p>
-        <p><span>最后更新:</span>2017年10月15日 - 17时30分</p>
+        <p><span>最后更新:</span>2017年10月15日 - 20时40分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/15/TCP-IP-四/" title="TCP/IP(四)">http://yoursite.com/2017/10/15/TCP-IP-四/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/15/TCP-IP-四/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
