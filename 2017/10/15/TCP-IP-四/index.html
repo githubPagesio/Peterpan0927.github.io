@@ -5,16 +5,12 @@
   
   <title>TCP/IP(四) | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TCP/IP(四)简单介绍解释完了网络层协议及相关的技术应用之后再说说网络层的上一层—传输层，在TCP/IP中能够实现传输层功能的，具有代表性的协议就是TCP和UDP协议。
-
-TCP是面向连接型，可靠的流协议。流就是指不间断的发送数据，可以类比成排水管中的水流。当应用程序采用TCP发送消息时，虽然可以保证发送的顺序，但还是犹如没有任何间隔的数据流发送给接收端，所以这也是为什么发送端的应用程序可以">
+  <meta name="description" content="这次来说说TCP的三次握手还有一些控制机制，另外补充DNS之后的网络传输部分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP/IP(四)">
 <meta property="og:url" content="http://yoursite.com/2017/10/15/TCP-IP-四/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="TCP/IP(四)简单介绍解释完了网络层协议及相关的技术应用之后再说说网络层的上一层—传输层，在TCP/IP中能够实现传输层功能的，具有代表性的协议就是TCP和UDP协议。
-
-TCP是面向连接型，可靠的流协议。流就是指不间断的发送数据，可以类比成排水管中的水流。当应用程序采用TCP发送消息时，虽然可以保证发送的顺序，但还是犹如没有任何间隔的数据流发送给接收端，所以这也是为什么发送端的应用程序可以">
+<meta property="og:description" content="这次来说说TCP的三次握手还有一些控制机制，另外补充DNS之后的网络传输部分">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%884.54.15.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.24.19.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.24.42.png">
@@ -26,12 +22,10 @@ TCP是面向连接型，可靠的流协议。流就是指不间断的发送数�
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.06.36.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.15.03.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%885.20.50.png">
-<meta property="og:updated_time" content="2017-10-15T09:26:01.000Z">
+<meta property="og:updated_time" content="2017-10-15T09:30:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP/IP(四)">
-<meta name="twitter:description" content="TCP/IP(四)简单介绍解释完了网络层协议及相关的技术应用之后再说说网络层的上一层—传输层，在TCP/IP中能够实现传输层功能的，具有代表性的协议就是TCP和UDP协议。
-
-TCP是面向连接型，可靠的流协议。流就是指不间断的发送数据，可以类比成排水管中的水流。当应用程序采用TCP发送消息时，虽然可以保证发送的顺序，但还是犹如没有任何间隔的数据流发送给接收端，所以这也是为什么发送端的应用程序可以">
+<meta name="twitter:description" content="这次来说说TCP的三次握手还有一些控制机制，另外补充DNS之后的网络传输部分">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%884.54.15.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -288,7 +282,8 @@ TCP是面向连接型，可靠的流协议。流就是指不间断的发送数�
     <div class="article-entry" itemprop="articleBody">
       
           
-        <a id="more"></a>
+        <p>这次来说说TCP的三次握手还有一些控制机制，另外补充DNS之后的网络传输部分</p>
+<a id="more"></a>
 <h1 id="TCP-IP-四"><a href="#TCP-IP-四" class="headerlink" title="TCP/IP(四)"></a>TCP/IP(四)</h1><h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>解释完了网络层协议及相关的技术应用之后再说说网络层的上一层—传输层，在TCP/IP中能够实现传输层功能的，具有代表性的协议就是TCP和UDP协议。</p>
 <ul>
 <li>TCP是面向连接型，可靠的流协议。流就是指不间断的发送数据，可以类比成排水管中的水流。当应用程序采用TCP发送消息时，虽然可以保证发送的顺序，但还是犹如没有任何间隔的数据流发送给接收端，所以这也是为什么发送端的应用程序可以在自己发送的消息中设置一个表示长度或者间隔的字段。</li>
@@ -464,7 +459,7 @@ TCP是面向连接型，可靠的流协议。流就是指不间断的发送数�
         <p><span>本文标题:</span><a href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年10月15日 - 17时22分</p>
-        <p><span>最后更新:</span>2017年10月15日 - 17时26分</p>
+        <p><span>最后更新:</span>2017年10月15日 - 17时30分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/15/TCP-IP-四/" title="TCP/IP(四)">http://yoursite.com/2017/10/15/TCP-IP-四/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/15/TCP-IP-四/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
