@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png">
-<meta property="og:updated_time" content="2017-10-10T04:19:38.000Z">
+<meta property="og:updated_time" content="2017-10-17T05:44:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-隐写术">
 <meta name="twitter:description" content="表面平平无奇的图片深处隐藏着的是另一个世界的钥匙">
@@ -312,7 +312,7 @@
 <p>从github上当下一份测试工具，开始进行测试：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/matthewgao/F5-steganography</div></pre></td></tr></table></figure>
 <p>然后cd到该目录下执行命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java Extract ~/Desktop/123456.jpg -p 123456</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#密码123456是根据图片的名字猜测的，不然就只能猜测是弱密码，写脚本爆破</div><div class="line">java Extract ~/Desktop/123456.jpg -p 123456</div></pre></td></tr></table></figure>
 <p>解密之后就可以在output.txt中查看输出的flag了</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png" alt="屏幕快照 2017-09-17 下午4.41.52.png"></p>
 <p>这里仅介绍了其中几例，CTF常见的隐写方式可以<a href="http://zjw.dropsec.xyz/uncategorized/2016/08/18/CTF%E4%B8%AD%E5%B8%B8%E8%A7%81%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99.html" target="_blank" rel="external">参考博客</a></p>
@@ -373,7 +373,7 @@
         <p><span>本文标题:</span><a href="/2017/09/17/CTF-隐写术/">CTF-隐写术</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月17日 - 16时59分</p>
-        <p><span>最后更新:</span>2017年10月10日 - 12时19分</p>
+        <p><span>最后更新:</span>2017年10月17日 - 13时44分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/17/CTF-隐写术/" title="CTF-隐写术">http://yoursite.com/2017/09/17/CTF-隐写术/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/17/CTF-隐写术/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
