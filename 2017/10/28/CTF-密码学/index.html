@@ -5,22 +5,12 @@
   
   <title>CTF-密码学 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)
-密码学概述与发展历程###古典密码的璀璨
-
-看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：
-
-爱丽丝使用纸飞机告诉兔子，红皇后要对他不">
+  <meta name="description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF-密码学">
 <meta property="og:url" content="http://yoursite.com/2017/10/28/CTF-密码学/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)
-密码学概述与发展历程###古典密码的璀璨
-
-看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：
-
-爱丽丝使用纸飞机告诉兔子，红皇后要对他不">
+<meta property="og:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png">
@@ -39,15 +29,10 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png">
-<meta property="og:updated_time" content="2017-10-27T17:14:55.000Z">
+<meta property="og:updated_time" content="2017-10-27T17:17:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-密码学">
-<meta name="twitter:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)
-密码学概述与发展历程###古典密码的璀璨
-
-看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：
-
-爱丽丝使用纸飞机告诉兔子，红皇后要对他不">
+<meta name="twitter:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -304,10 +289,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <a id="more"></a>
-<p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
-<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><p>###古典密码的璀璨</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt="屏幕快照 2017-10-27 下午1.10.06.png"></p>
+        <p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
+<a id="more"></a>
+<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><h3 id="古典密码的璀璨"><a href="#古典密码的璀璨" class="headerlink" title="古典密码的璀璨"></a>古典密码的璀璨</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt="屏幕快照 2017-10-27 下午1.10.06.png"></p>
 <p>看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：</p>
 <ol>
 <li>爱丽丝使用纸飞机告诉兔子，红皇后要对他不利</li>
@@ -319,8 +303,7 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png" alt="屏幕快照 2017-10-27 下午1.21.30.png"></p>
 <p>在中国的古代也有类似的例子，比如说藏头诗就是其中的一种，这既可以称作隐写术也可以称作古典密码的起源：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png" alt="屏幕快照 2017-10-27 下午6.07.35.png"></p>
-<p>####近代密码的发展</p>
-<p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
+<h4 id="近代密码的发展"><a href="#近代密码的发展" class="headerlink" title="近代密码的发展"></a>近代密码的发展</h4><p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png" alt="屏幕快照 2017-10-27 下午2.58.32.png"></p>
 <p>正是因为这个机械密码机德军在二战时期才成为了通信强国，还有一点不得不提的就是降服恩尼格玛机的图灵炸弹，我们都知道图灵被称作计算机之父，因为他的理论才奠定了现代计算机的基础，在当时为了对付德军的恩尼格玛机，图灵制作了图灵炸弹来破解德军的密文，从下图中可以看到齿轮数远多于德军的机械密码机：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png" alt="屏幕快照 2017-10-27 下午5.46.13.png"></p>
@@ -441,7 +424,7 @@
         <p><span>本文标题:</span><a href="/2017/10/28/CTF-密码学/">CTF-密码学</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年10月28日 - 01时13分</p>
-        <p><span>最后更新:</span>2017年10月28日 - 01时14分</p>
+        <p><span>最后更新:</span>2017年10月28日 - 01时17分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/28/CTF-密码学/" title="CTF-密码学">http://yoursite.com/2017/10/28/CTF-密码学/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/28/CTF-密码学/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -470,7 +453,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-number">1.</span> <span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-number">1.1.</span> <span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-number">1.2.</span> <span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-number">2.</span> <span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-number">2.1.</span> <span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-number">2.2.</span> <span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-number">2.3.</span> <span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-number">2.4.</span> <span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-number">2.5.</span> <span class="toc-text">他的情书</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-number">1.</span> <span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码的璀璨"><span class="toc-number">1.1.</span> <span class="toc-text">古典密码的璀璨</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#近代密码的发展"><span class="toc-number">1.1.1.</span> <span class="toc-text">近代密码的发展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-number">1.2.</span> <span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-number">1.3.</span> <span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-number">2.</span> <span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-number">2.1.</span> <span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-number">2.2.</span> <span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-number">2.3.</span> <span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-number">2.4.</span> <span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-number">2.5.</span> <span class="toc-text">他的情书</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
