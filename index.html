@@ -229,6 +229,148 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-CTF-密码学" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/28/CTF-密码学/" class="article-date">
+      <time datetime="2017-10-27T17:13:47.000Z" itemprop="datePublished">2017-10-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/28/CTF-密码学/">CTF-密码学</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
+<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><p>###古典密码的璀璨</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt="屏幕快照 2017-10-27 下午1.10.06.png"></p>
+<p>看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：</p>
+<ol>
+<li>爱丽丝使用纸飞机告诉兔子，红皇后要对他不利</li>
+<li>红皇后截取了纸飞机，发现了这条消息并篡改之为原地别动</li>
+<li>兔子收到篡改的消息最后为红皇后所害</li>
+</ol>
+<p>通过这个例子我们可以看到，如果爱丽丝和兔子之间使用只有她们知道的语言交流的话，那么这样的悲剧就不会发生了，这就是密码学的作用所在了，只有通信双方（或者多方）才会知道通信的具体内容。</p>
+<p>密码学从古代时期就已经得到了发展，在军事、文化领域等得到了广泛的应用（<a href="https://baike.baidu.com/item/%E8%B4%B9%E6%96%AF%E6%89%98%E6%96%AF%E5%9C%86%E7%9B%98" target="_blank" rel="external">菲斯托斯圆盘</a>、<a href="https://baike.baidu.com/item/%E5%AF%86%E7%A0%81%E6%A3%92" target="_blank" rel="external">斯巴达棒</a>）：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png" alt="屏幕快照 2017-10-27 下午1.21.30.png"></p>
+<p>在中国的古代也有类似的例子，比如说藏头诗就是其中的一种，这既可以称作隐写术也可以称作古典密码的起源：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png" alt="屏幕快照 2017-10-27 下午6.07.35.png"></p>
+<p>####近代密码的发展</p>
+<p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png" alt="屏幕快照 2017-10-27 下午2.58.32.png"></p>
+<p>正是因为这个机械密码机德军在二战时期才成为了通信强国，还有一点不得不提的就是降服恩尼格玛机的图灵炸弹，我们都知道图灵被称作计算机之父，因为他的理论才奠定了现代计算机的基础，在当时为了对付德军的恩尼格玛机，图灵制作了图灵炸弹来破解德军的密文，从下图中可以看到齿轮数远多于德军的机械密码机：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png" alt="屏幕快照 2017-10-27 下午5.46.13.png"></p>
+<p>之后在二十世纪四十年代美国终于造出了第一台计算机，并凭借其精密的计算使日本在中途岛海战中一败涂地，从此密码学也迈入了一个新的领域。人们可以使用更加复杂的加密方式了。同时也因为军事机密对于其要求很高，所以密码学在战争中得到了飞速的发展。</p>
+<h3 id="出现公钥密码学"><a href="#出现公钥密码学" class="headerlink" title="出现公钥密码学"></a>出现公钥密码学</h3><p>1976年Diffie$Hellman提出了不对称密码（公钥密码）1977年Rivest,Shamir&amp;Aleman提出了RSA公钥算法，1977年DES正式成为了标准，纵观密码学的发展，我们可以发现：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.58.05.png" alt="屏幕快照 2017-10-27 下午5.58.05.png"></p>
+<h3 id="密码学基本概念"><a href="#密码学基本概念" class="headerlink" title="密码学基本概念"></a>密码学基本概念</h3><ul>
+<li>明文（消息）（PlainText）:被隐蔽消息。</li>
+<li>密文（Ciphertext）或密报（Cryptogram）:明文经密码变换成的一种隐蔽形式</li>
+<li>加密（Encryption）：将明文变换成密文的过程</li>
+<li>解密（Decryption）：加密的逆过程，即由密文恢复原明文的过程</li>
+<li>加密算法（Encryption algorithm）：密码员对明文加密产生的一组规则</li>
+<li>解密算法：接受这对密文进行解密时所采用的一种规则</li>
+<li>密钥：控制加密和解密算法操作的数据处理，分别称作加密密钥和解密密钥</li>
+</ul>
+<h2 id="古典密码的发展"><a href="#古典密码的发展" class="headerlink" title="古典密码的发展"></a>古典密码的发展</h2><p>之前我们曾经说过凯撒密码，栅栏密码，培根密码，甚至将其按类划分成了置换密码，代换密码等。还有一个很重要的点就是维吉尼亚密码，在这里出现了密钥的雏形：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.16.12.png" alt="屏幕快照 2017-10-27 下午6.16.12.png"></p>
+<p>至于置换密码之前没有多做讲解，在这里举一个列置换的例子就比较好理解了，这个是根据数字列的顺序对明文重新排序</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.18.05.png" alt="屏幕快照 2017-10-27 下午6.18.05.png"></p>
+<p>说了这么多，接下来来几个案例来演示一下吧！</p>
+<h3 id="困在栅栏里的凯撒"><a href="#困在栅栏里的凯撒" class="headerlink" title="困在栅栏里的凯撒"></a>困在栅栏里的凯撒</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png" alt="屏幕快照 2017-10-27 下午11.13.53.png"></p>
+<p>这道题的题干中首先说了是困在栅栏中的凯撒，所以我们首先应该解决的应该就是栅栏，在比赛中我们为了追求效率，一般都不会自己重新去造轮子，所以直接用CTFCrackTools这个工具就好(github中自寻)。首先跑一次栅栏：</p>
+<blockquote>
+<p>1：NEQ{etlydsf}</p>
+<p>2：Ny{flQstEde}</p>
+<p>3：NQeldfE{tys}</p>
+<p>4：N{lsEeyfQtd}</p>
+</blockquote>
+<p>根据题目中说的很六的字符，有两种可能，一种是分了六个栅栏，或者是一个栅栏有6个字符，这一题显然是后者，果断的选择第一个之后，再跑一次凯撒：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png" alt="80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png"></p>
+<h3 id="传统知识加古典密码"><a href="#传统知识加古典密码" class="headerlink" title="传统知识加古典密码"></a>传统知识加古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png" alt="屏幕快照 2017-10-27 下午11.34.48.png"></p>
+<p>传统知识应该指的就是天干地址所代表的数字，至于古典密码经典的凯撒和栅栏感觉应该是没跑的，通过查询资料得到了天干地址对应的数字，再加上60（一甲子）之后进行ASCII码转换得到了XZSDMFLZ</p>
+<p>emm，首先使用凯撒发现不通，再使用栅栏：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.37.27.png" alt="屏幕快照 2017-10-27 下午11.37.27.png"></p>
+<p>解出来两个，第一个代换之后并没有规律。接着试试第二个，果断跑通：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="屏幕快照 2017-10-27 下午11.40.36.png"></p>
+<p>ps:绕是如此，找这个破玩意还是花费了我不少时间。</p>
+<h3 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png" alt="屏幕快照 2017-10-27 下午11.52.31.png"></p>
+<p>第一反应就是十进制转ASCII码，不要问我为什么，这都做不到就可以卸甲归田了。然后得到一串字符串：</p>
+<blockquote>
+<p>OCU{CFTELXOUYDECTNGAHOHRNFIENM}IOTA</p>
+</blockquote>
+<p>根据题目中的提示，应该是最后构造成CTF{xxx}的格式，尝试了栅栏密码之后发现并不对，就算是再使用一次凯撒也是一样，那么问题到底出在哪里呢？</p>
+<p>苦思一番之后突然想到了置换密码，可以先看看列置换，因为说了利用key值的固定结构，所以如果把字符串分割一下</p>
+<blockquote>
+<p>OCU{CFT</p>
+<p>ELXOUYD</p>
+<p>ECTNGAH</p>
+<p>OHRNFIE</p>
+<p>NM}IOTA</p>
+</blockquote>
+<p>按照2，7，6，4，5，1，3重新排列一下，也就是CTF{xx}的形式，至于中间xx两列的顺序都尝试一下，最后发现有规律的就是flag了：CTF{COULDYOUEXCHANGETHEINFORMATION}</p>
+<h3 id="杯酒人生"><a href="#杯酒人生" class="headerlink" title="杯酒人生"></a>杯酒人生</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png" alt="屏幕快照 2017-10-28 上午12.45.17.png"></p>
+<p>在古典密码中涉及到密钥的应该就是维吉尼亚密码了，首先这里有一个自己加密过的密钥，使用凯撒和栅栏试一次之后得到了密钥：COMPUTER，那么接下来就是对密码进行加密就完成了，可以参照上面的对照表，也可以直接使用工具。</p>
+<p>有一点需要注意的是，实验吧上的题目格式并不统一，所以提交的时候如果不对转换一下格式就好。</p>
+<h3 id="他的情书"><a href="#他的情书" class="headerlink" title="他的情书"></a>他的情书</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png" alt="屏幕快照 2017-10-28 上午1.03.31.png"></p>
+<p>做完题目之后才发现这个出题者似乎是个超级英雄（原谅绿帽侠、或者单思狂魔），这里有一个解题链接，点进去之后跳转到一个网站，点击是没有用的，上面写着不要相信眼睛相信爱，然后我选择了<code>view-source</code>:</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png" alt="屏幕快照 2017-10-28 上午1.08.38.png"></p>
+<p>那么我们就选择相信眼睛吧，通过escape解码之后得到了一串代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!--<span class="function"><span class="keyword">function</span> <span class="title">zhegejiamiyidiandoubuku</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> pass=<span class="built_in">document</span>.form.passwd.value;<span class="keyword">var</span> cry=<span class="string">"Rm9yM0re354v5E4FUg5FasDboooo=="</span>;<span class="keyword">var</span> addr=<span class="string">'soroki.php?passwd='</span>;<span class="keyword">var</span> locatie=location.href;<span class="keyword">var</span> out=<span class="string">''</span>;<span class="keyword">var</span> pass2=cry.substring(<span class="number">15</span>,<span class="number">4</span>*<span class="number">4</span>)+cry.substring(<span class="number">24</span>,<span class="number">5</span>*<span class="number">5</span>)+cry.substring(<span class="number">0</span>,<span class="number">1</span>)+cry.substr(<span class="number">7</span>,<span class="number">1</span>)+cry.substr(<span class="number">11</span>,<span class="number">1</span>)+cry.substr(<span class="number">13</span>,<span class="number">1</span>)+cry.substring(<span class="number">3</span>+<span class="number">3</span>,<span class="number">7</span>);pass=locatie.substr(locatie.indexOf(<span class="string">'?'</span>)+<span class="number">1</span>);addr=addr.substring(<span class="number">0</span>,addr.indexOf(<span class="string">'?'</span>)+<span class="number">1</span>)+<span class="string">'l0vau='</span>;<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;pass.Len;i++)&#123;<span class="keyword">if</span>(pass.charAt(i)==pass2.charAt(i))&#123;<span class="built_in">document</span>.write(pass.charAt(i))&#125;&#125;location=addr+pass&#125;--&gt;</div></pre></td></tr></table></figure>
+<p>在看懂了代码的意思之后，不会js的我选择了python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">cry=<span class="string">"Rm9yM0re354v5E4FUg5FasDboooo=="</span></div><div class="line">addr=<span class="string">'soroki.php?passwd='</span></div><div class="line">locatie=<span class="string">"http://ctf4.shiyanbar.com/crypto/4/"</span></div><div class="line">pass2=cry[<span class="number">15</span>:<span class="number">16</span>]+cry[<span class="number">24</span>:<span class="number">25</span>]+cry[<span class="number">0</span>:<span class="number">1</span>]+cry[<span class="number">7</span>:<span class="number">8</span>]+cry[<span class="number">11</span>:<span class="number">12</span>]+cry[<span class="number">13</span>:<span class="number">14</span>]+cry[<span class="number">6</span>:<span class="number">7</span>]</div><div class="line">addr=addr[:addr.index(<span class="string">'?'</span>)+<span class="number">1</span>]+<span class="string">'l0vau='</span></div><div class="line">location=locatie+addr+pass2</div><div class="line"><span class="keyword">print</span> location</div><div class="line">html=requests.get(location)</div></pre></td></tr></table></figure>
+<p>跑一次之后得到了一串网址，链接过去发现了一串base64字符串，解码之后得到：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png" alt="屏幕快照 2017-10-28 上午1.11.46.png"></p>
+<p>因为最后的答案是ctf{}的格式，最后再跑一次凯撒/栅栏吧–ctf{intwo_is_big_sb}(题主节哀)</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-大话CTF" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -698,76 +840,9 @@
 
 
   
-    <article id="post-CTF-隐写术" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/09/17/CTF-隐写术/" class="article-date">
-      <time datetime="2017-09-17T08:59:58.000Z" itemprop="datePublished">2017-09-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/隐写术-kali工具/">隐写术 kali工具</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/09/17/CTF-隐写术/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
