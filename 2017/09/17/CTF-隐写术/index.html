@@ -38,7 +38,8 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png">
-<meta property="og:updated_time" content="2017-10-26T16:25:47.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png">
+<meta property="og:updated_time" content="2017-10-28T16:44:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-信息隐藏技术">
 <meta name="twitter:description" content="表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）">
@@ -325,6 +326,7 @@
 <li>透明性</li>
 </ol>
 <p>上述这些特点，会随着信息隐藏目的和应用而有着不同的侧重，接下来要说的是信息隐藏技术中的一部分—隐写术</p>
+<p>隐写术可以使用图片作为载体，这也是常用的隐写方式，还有一些隐写的方式是通过word或者pdf的方式进行隐藏、还有HTML问津啊、windows的交换数据流甚至还有VMware的镜像中。</p>
 <h2 id="隐写术实例一"><a href="#隐写术实例一" class="headerlink" title="隐写术实例一"></a>隐写术实例一</h2><p>现在有一张图片，如果从其中找到隐藏的信息呢？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png" alt="屏幕快照 2017-09-17 上午10.50.08.png"></p>
 <p>首先我们可以使用notepad++来打开这个图像，然后我们意外的发现：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png" alt="屏幕快照 2017-09-17 上午10.51.00.png"></p>
@@ -414,6 +416,8 @@
 <p>从题目中下载了一个word文件，其中什么都没有，一开始以为是格式问题（本人不太了解word），于是使用了winhex/hexfriend寻找看看有没有什么有用的信息；</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png" alt="屏幕快照 2017-10-26 上午12.22.08.png"></p>
 <p>然后就直接拿到了flag值，看起来轻松便捷，但其实还有一种做法就是打开这个word文档，然后在选项中选择打印隐藏文件，然后打印预览，那么flag值同样会跃然眼前。</p>
+<h2 id="隐写术实例十二"><a href="#隐写术实例十二" class="headerlink" title="隐写术实例十二"></a>隐写术实例十二</h2><h4 id=""><a href="#" class="headerlink" title=""></a><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png" alt="屏幕快照 2017-10-28 下午3.54.46.png"></h4><p>下载了一个虚拟的磁盘映像文件，网上说什么要使用winRAR或者其他的去解压，我一想，太麻烦了，并不想再去鼓捣这玩意，于是乎直接用<code>binwalk</code>先扫了一扫，发现其中有很多的jpg文件还有一个png（png是无损压缩的，所以我就直接提取了），果断使用<code>foremost</code>,然后从output中找到了我们所需要的flag值。</p>
+<p>思考：永远不要被传统的思路所束缚住，不要被后缀名所迷惑，从十六进制窥得真假。</p>
 
       
       
@@ -471,7 +475,7 @@
         <p><span>本文标题:</span><a href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月17日 - 16时59分</p>
-        <p><span>最后更新:</span>2017年10月27日 - 00时25分</p>
+        <p><span>最后更新:</span>2017年10月29日 - 00时44分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/17/CTF-隐写术/" title="CTF-信息隐藏技术">http://yoursite.com/2017/09/17/CTF-隐写术/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/17/CTF-隐写术/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -509,7 +513,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#信息隐藏概述"><span class="toc-number">1.</span> <span class="toc-text">信息隐藏概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例一"><span class="toc-number">1.1.</span> <span class="toc-text">隐写术实例一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例二"><span class="toc-number">1.2.</span> <span class="toc-text">隐写术实例二</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LSB介绍"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">LSB介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始实战"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">开始实战</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例三"><span class="toc-number">1.3.</span> <span class="toc-text">隐写术实例三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例四"><span class="toc-number">1.4.</span> <span class="toc-text">隐写术实例四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例五"><span class="toc-number">1.5.</span> <span class="toc-text">隐写术实例五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例六"><span class="toc-number">1.6.</span> <span class="toc-text">隐写术实例六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例七"><span class="toc-number">1.7.</span> <span class="toc-text">隐写术实例七</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例八"><span class="toc-number">1.8.</span> <span class="toc-text">隐写术实例八</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例九"><span class="toc-number">1.9.</span> <span class="toc-text">隐写术实例九</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例十"><span class="toc-number">1.10.</span> <span class="toc-text">隐写术实例十</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例十一"><span class="toc-number">1.11.</span> <span class="toc-text">隐写术实例十一</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#信息隐藏概述"><span class="toc-number">1.</span> <span class="toc-text">信息隐藏概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例一"><span class="toc-number">1.1.</span> <span class="toc-text">隐写术实例一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例二"><span class="toc-number">1.2.</span> <span class="toc-text">隐写术实例二</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LSB介绍"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">LSB介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始实战"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">开始实战</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例三"><span class="toc-number">1.3.</span> <span class="toc-text">隐写术实例三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例四"><span class="toc-number">1.4.</span> <span class="toc-text">隐写术实例四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例五"><span class="toc-number">1.5.</span> <span class="toc-text">隐写术实例五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例六"><span class="toc-number">1.6.</span> <span class="toc-text">隐写术实例六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例七"><span class="toc-number">1.7.</span> <span class="toc-text">隐写术实例七</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例八"><span class="toc-number">1.8.</span> <span class="toc-text">隐写术实例八</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例九"><span class="toc-number">1.9.</span> <span class="toc-text">隐写术实例九</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例十"><span class="toc-number">1.10.</span> <span class="toc-text">隐写术实例十</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例十一"><span class="toc-number">1.11.</span> <span class="toc-text">隐写术实例十一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐写术实例十二"><span class="toc-number">1.12.</span> <span class="toc-text">隐写术实例十二</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.12.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 

@@ -29,7 +29,8 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png">
-<meta property="og:updated_time" content="2017-10-27T17:17:18.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png">
+<meta property="og:updated_time" content="2017-10-28T07:16:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-密码学">
 <meta name="twitter:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
@@ -367,6 +368,15 @@
 <p>跑一次之后得到了一串网址，链接过去发现了一串base64字符串，解码之后得到：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png" alt="屏幕快照 2017-10-28 上午1.11.46.png"></p>
 <p>因为最后的答案是ctf{}的格式，最后再跑一次凯撒/栅栏吧–ctf{intwo_is_big_sb}(题主节哀)</p>
+<h3 id="凯撒和某某加密"><a href="#凯撒和某某加密" class="headerlink" title="凯撒和某某加密"></a>凯撒和某某加密</h3><p>先看题目提示是“凯撒和某某加密”，首先确定一下有凯撒加密(ps:你这不是说废话麼)，然后还有一种加密方式是未知的。</p>
+<p>看下密文：aZZg/x\ZbavpZiEZp+n)o+ 密文中有很多的符号/+)+根据这些可以确定，首先另外一种加密方式不是MD5和base64，原因就是：字母过多，而没有数字，并且通过移位以后符号也不能全部变成字母或者数字。</p>
+<p>到这里觉得要不先解决一下凯撒加密，看看结果字符串是一个什么样的格式吧。这么多的符号，应该不是按照字母序来移动字母了，并且里面也没有代表flag{}格式的字符，可能是按照ascii码表来移动的，并且字母和符号都进行移动。那应该移动多少位呢？既然是ascii码表移动的，那就先把字符转化成ascii码吧。（其实是先用工具试了一波）</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png" alt="屏幕快照 2017-10-28 下午3.10.57.png"></p>
+<p>可以看出，其中ascii最大的是120，对应的字符是X，ascii最大是126，那如果向ascii增加的方向移动的话，移动的位数应该是小于6的；其中最小的是41，如果向ascii减小的方向去移动的话，移动位数应该小于9。</p>
+<p>这里先选择向ascii增加的方向移动，因为我看到了”X”移动5位会变成”}”，那么写一个C语言就可以实现了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> a[<span class="number">1000</span>];</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,a)!=EOF)&#123;</div><div class="line">		<span class="keyword">int</span> i;</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(a);i++)</div><div class="line">		&#123;</div><div class="line">			a[i]=a[i]+<span class="number">5</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s"</span>,a);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>然后得到了一串类似栅栏的密码：<code>f__14}a_ggf{u_nJ_u0s.t0</code>，用栅栏密码解不出来，后来发现其实这是一个变异版的栅栏，三三两两而不是每个栅栏都同样的。</p>
+<p>所以从这道题中我们可以学到要发散自己的思维，不能总是停留在常规的加密方式，有时候要大胆的去猜想一下。</p>
 
       
       
@@ -424,7 +434,7 @@
         <p><span>本文标题:</span><a href="/2017/10/28/CTF-密码学/">CTF-密码学</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年10月28日 - 01时13分</p>
-        <p><span>最后更新:</span>2017年10月28日 - 01时17分</p>
+        <p><span>最后更新:</span>2017年10月28日 - 15时16分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/28/CTF-密码学/" title="CTF-密码学">http://yoursite.com/2017/10/28/CTF-密码学/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/28/CTF-密码学/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -453,7 +463,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-number">1.</span> <span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码的璀璨"><span class="toc-number">1.1.</span> <span class="toc-text">古典密码的璀璨</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#近代密码的发展"><span class="toc-number">1.1.1.</span> <span class="toc-text">近代密码的发展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-number">1.2.</span> <span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-number">1.3.</span> <span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-number">2.</span> <span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-number">2.1.</span> <span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-number">2.2.</span> <span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-number">2.3.</span> <span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-number">2.4.</span> <span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-number">2.5.</span> <span class="toc-text">他的情书</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-number">1.</span> <span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码的璀璨"><span class="toc-number">1.1.</span> <span class="toc-text">古典密码的璀璨</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#近代密码的发展"><span class="toc-number">1.1.1.</span> <span class="toc-text">近代密码的发展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-number">1.2.</span> <span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-number">1.3.</span> <span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-number">2.</span> <span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-number">2.1.</span> <span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-number">2.2.</span> <span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-number">2.3.</span> <span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-number">2.4.</span> <span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-number">2.5.</span> <span class="toc-text">他的情书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#凯撒和某某加密"><span class="toc-number">2.6.</span> <span class="toc-text">凯撒和某某加密</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
