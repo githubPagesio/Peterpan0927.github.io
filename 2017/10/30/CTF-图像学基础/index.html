@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CTF-图像学基础 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="似乎要一脚踏进了计算机图像学的大坑？不存在的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF-图像学基础">
+<meta property="og:url" content="http://yoursite.com/2017/10/30/CTF-图像学基础/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="似乎要一脚踏进了计算机图像学的大坑？不存在的">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%881.26.14.png">
+<meta property="og:updated_time" content="2017-10-29T17:47:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF-图像学基础">
+<meta name="twitter:description" content="似乎要一脚踏进了计算机图像学的大坑？不存在的">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/CTF/" style="font-size: 20px;">CTF</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux测试/" style="font-size: 10px;">Linux测试</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TCP-IP/" style="font-size: 16.67px;">TCP/IP</a> <a href="/tags/TCP-IP协议/" style="font-size: 10px;">TCP/IP协议</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/iOS多线程/" style="font-size: 13.33px;">iOS多线程</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/基础框架/" style="font-size: 10px;">基础框架</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/沙盒和app主流框架/" style="font-size: 10px;">沙盒和app主流框架</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络安全/" style="font-size: 10px;">网络安全</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-CTF-图像学基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/30/CTF-图像学基础/" class="article-date">
+      <time datetime="2017-10-29T17:40:43.000Z" itemprop="datePublished">2017-10-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CTF-图像学基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/图像处理方式-存储结构/">图像处理方式 存储结构</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>似乎要一脚踏进了计算机图像学的大坑？不存在的</p>
+<a id="more"></a>
+<h1 id="0x00前言"><a href="#0x00前言" class="headerlink" title="0x00前言"></a>0x00前言</h1><p>随着在CTF道路上的前进，从一开始看到图种都惊为天人的小白，到现在三板斧就能砍死这种杂碎的时候，中间肯定是经历了一些惨痛的经历的。但是由于隐写术这方面的学习路线并没有一个很成体系的学习方向，只能说在做题的过程中，了解到了各种密码学的知识，图像学的知识，可这些领域都算是过于陌生。现在只能算是入了门，但是我深刻的体会到在现在的做题中缺乏了对应的知识完全是寸步难行，所以决定总结一篇关于图像学方面的基础。</p>
+<h2 id="0x01位图"><a href="#0x01位图" class="headerlink" title="0x01位图"></a>0x01位图</h2><p>位图可以有两种概念，一种是指使用像素阵列来表示的图像，哟可以称作栅格图或者是点阵图。</p>
+<p>还有一种则是指数据结构上的位图，也就是Bit-map，也就是用一个bit位去标记某个元素对应的value值，这个Key值即为该元素。由于采用了bit为单位去存储数据，因此在存储空间的方面可以大大地节省。</p>
+<p>下面举一个例子来说明什么是Bit-map的村塾。假设我们现在需要对0-7内的五个元素去进行排序（这里假设为4，5，7，3，2），先假设这些元素并没有重复。</p>
+<p>要表示8个数，我们就只需要8个Bit（1Bytes），首先我们开辟1Byte的空间，将这些空间的所有Bit位都置为0</p>
+<p>然后遍历这5个元素，首先第一个元素是4，那么就把4对应的位置为1（可以这样操作 p+(i/8)|(0×01&lt;&lt;(i%8)) 当然了这里的操作涉及到Big-ending和Little-ending的情况，这里默认为Big-ending）,因为是从零开始的，所以要把第五位置为1。</p>
+<p>然后再处理第二个元素5，将第六个位置置为1，如此直至处理完所有的元素，将相应的位置置为1。</p>
+<p>然后我们现在遍历一遍Bit区域，将该位是一的位的编号输出（2，3，4，5，7），这样就达到了排序的目的。</p>
+<p>其实就是把计数排序用的统计数组的每个单位缩小成bit级别的布尔数组，一种非常精妙的方式，然后看看实现的方式；</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"># -*- encoding:utf-8 -*-</div><div class="line">class Bitmap():</div><div class="line">    def __init__(self,max):</div><div class="line">        '确定所需数组个数'</div><div class="line">        self.size = int ((max + 31 - 1) / 31)</div><div class="line">        self.array = [0 for i in range(self.size)]</div><div class="line"></div><div class="line">    def bitindex(self,num):</div><div class="line">        '确定数组中元素的位索引'</div><div class="line">        return num % 31</div><div class="line"></div><div class="line">    def set_1(self,num):</div><div class="line">        '将元素所在的位置1'</div><div class="line">        elemindex = num / 31</div><div class="line">        byteindex = self.bitindex(num)</div><div class="line">        ele = self.array[elemindex]</div><div class="line">        self.array[elemindex] = ele | (1 &lt;&lt; byteindex)</div><div class="line"></div><div class="line">    def test_1(self,i):</div><div class="line">        '检测元素存在的位置'</div><div class="line">        elemindex = i / 31</div><div class="line">        byteindex = self.bitindex(i)</div><div class="line">        if self.array[elemindex] &amp; (1 &lt;&lt; byteindex):</div><div class="line">            return True</div><div class="line">        return False</div><div class="line">if __name__ == '__main__':</div><div class="line">    Max = ord('z')</div><div class="line">    suffle_array = [x for x in 'qwelmfg']</div><div class="line">    result = []</div><div class="line">    bitmap = Bitmap(Max)</div><div class="line">    for c in suffle_array:</div><div class="line">        bitmap.set_1(ord(c))</div><div class="line">    for i in range(Max+1):</div><div class="line">        if bitmap.test_1(i):</div><div class="line">            result.append(chr(i))</div><div class="line">    print u'原始数组为:    %s' % suffle_array</div><div class="line">    print u'排序后的数组为: %s' % result</div></pre></td></tr></table></figure>
+<p>当然还有一个看起来更加简洁的C++版，但是并不是那么的友好：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MASK  0X1F</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SHIFT 5    </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> WORD 32   <span class="comment">// the bits of a word</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10000000   <span class="comment">//the max number</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> bitmap[N/WORD];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bitmap_set</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">    bitmap[i&gt;&gt;SHIFT] |= <span class="number">1</span> &lt;&lt; (i &amp; MASK);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bitmap_test</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> bitmap[i&gt;&gt;SHIFT] &amp; (<span class="number">1</span> &lt;&lt; (i&amp;MASK));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bitmap_clear</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">    bitmap[i&gt;&gt;SHIFT] &amp;= ~(<span class="number">1</span> &lt;&lt; (i &amp; MASK));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    bitmap_set(<span class="number">38</span>);</div><div class="line">    <span class="keyword">int</span> two = bitmap_test(<span class="number">38</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; two &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    bitmap_clear(<span class="number">38</span>);</div><div class="line">    two = bitmap_test(<span class="number">38</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; two &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种在索引和数据压缩等方面有广泛的应用，代表了有限域中的稠集。</p>
+<p>位图的像素都分配有特定的位置和的颜色值。每个像素的颜色信息由RGB组合或者灰度值表示。</p>
+<p>根据位深度，可以将位图分为1、4、8、16、24及32位图像等。每个像素使用的信息位数越多，可用的颜色就越多，颜色表现的就越逼真，那么相应的数据量也会越大。例如位深度位1的像素位图只有两个可能的值(黑色和白色)，所以又称为二值位图。</p>
+<p>下面就来看一下彩色图像，灰度图像（灰度图是一种特殊的伪彩色图）和二值图像的一个对比，这样应该会更加清楚：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png" alt="屏幕快照 2017-10-30 上午12.43.23.png"></p>
+<h2 id="0x02图像处理"><a href="#0x02图像处理" class="headerlink" title="0x02图像处理"></a>0x02图像处理</h2><p>了解到了一些基本的概念之后，我们再来讨论一下计算机的几种图像处理方式：</p>
+<h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255。一般有以下四种方法对彩色图像进行灰度化： 　　</p>
+<ol>
+<li>分量法 　　</li>
+</ol>
+<p>将彩色图像中的三分量的亮度作为三个灰度图像的灰度值，可根据应用需要选取一种灰度图像。f1(i,j)=R(i,j) f2(i,j)=G(i,j) f3(i,j)=B(i,j) 其中fk(i,j)(k=1,2,3)为转换后的灰度图像在（i,j）处的灰度值。</p>
+<ol>
+<li>最大值法</li>
+</ol>
+<p>将彩色图像中的三分量亮度的最大值作为灰度图的灰度值。 　　f(i,j)=max(R(i,j),G(i,j),B(i,j)) 　　</p>
+<ol>
+<li>平均值法 　　</li>
+</ol>
+<p>将彩色图像中的三分量亮度求平均得到一个灰度图。 　　f(i,j)=(R(i,j)+G(i,j)+B(i,j)) /3 　　</p>
+<ol>
+<li>加权平均法 　　</li>
+</ol>
+<p>根据重要性及其它指标，将三个分量以不同的权值进行加权平均。由于人眼对绿色的敏感最高，对蓝色敏感最低，因此，按下式对RGB三分量进行加权平均能得到较合理的灰度图像。 　　f(i,j)=0.30R(i,j)+0.59G(i,j)+0.11B(i,j))</p>
+<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><ol>
+<li>全局二值化</li>
+</ol>
+<p>一幅图像包括目标物体、背景还有噪声，要想从多值的数字图像中直接提取出目标物体，最常用的方法就是设定一个全局的阈值T，用T将图像的数据分成两部分：大于T的像素群和小于T的像素群。将大于T的像素群的像素值设定为白色（或者黑色），小于T的像素群的像素值设定为黑色（或者白色）。</p>
+<p>全局二值化，在表现图像细节方面存在很大缺陷。为了弥补这个缺陷，出现了局部二值化方法。</p>
+<ol>
+<li>局部二值化</li>
+</ol>
+<p>局部二值化的方法就是按照一定的规则将整幅图像划分为N个窗口，对这N个窗口中的每一个窗口再按照一个统一的阈值T将该窗口内的像素划分为两部分，进行二值化处理。</p>
+<p>局部二值化也有一个缺陷。这个缺陷存在于那个统一阈值的选定。这个阈值是没有经过合理的运算得来，一般是取该窗口的平局值。这就导致在每一个窗口内仍然出现的是全局二值化的缺陷。为了解决这个问题，就出现了局部自适应二值化方法。</p>
+<ol>
+<li>局部自适应二值化</li>
+</ol>
+<p>该方法就是在局部二值化的基础之上，将阈值的设定更加合理化。该方法的阈值是通过对该窗口像素的平均值E，像素之间的差平方P，像素之间的均方根值Q等各种局部特征，设定一个参数方程进行阈值的计算，例如：T=a<em>E+b</em>P+c*Q，其中a,b,c是自由参数。这样得出来的二值化图像就更能表现出二值化图像中的细节。</p>
+<h3 id="反色"><a href="#反色" class="headerlink" title="反色"></a>反色</h3><p>反色的实际含义是将R、G、B值反转。若颜色的量化级别是256，则新图的R、G、B值为255减去原图的R、G、B值。这里针对的是所有图，包括真彩图、带调色板的彩色图(又称为伪彩色图)、和灰度图。针对不同种类有不同的处理。先看看真彩图。我们知道真彩图不带调色板，每个象素用3个字节，表示R、G、B三个分量。所以处理很简单，把反转后的R、G、B值写入新图即可，比如一个点的颜色为(0,0,0)，反色后为(255,255,255)。再来看看带调色板的彩色图，我们知道位图中的数据只是对应调色板中的一个索引值，我们只需要将调色板中的颜色反转，形成新调色板，而位图数据不用动，就能够实现反转。</p>
+<p>灰度图是一种特殊的伪彩色图，只不过调色板中的R、G、B值都是一样的而已。所以反转的处理和上面讲的一样。</p>
+<p>下面贴一下写的一个对灰度图像的本值，均值作分析的一个代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> pylab <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="comment">#设置存储的列表</span></div><div class="line">point_list = []</div><div class="line">power_list = []</div><div class="line"></div><div class="line"><span class="comment">#存储一开始矩阵的长度</span></div><div class="line">length = <span class="number">0</span></div><div class="line"><span class="comment">#设置矩阵的输出</span></div><div class="line">np.set_printoptions(threshold=<span class="string">'nan'</span>)</div><div class="line"></div><div class="line"><span class="comment">#得到所有的本值和坐标</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_allpoints</span><span class="params">(array)</span>:</span></div><div class="line">    x_range = range(<span class="number">2</span>, len(array)<span class="number">-2</span>)</div><div class="line">    y_range = x_range</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> x_range:</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> y_range:</div><div class="line">            point_list.append([i, j, array[i, j]])</div><div class="line">    <span class="keyword">return</span> point_list</div><div class="line"></div><div class="line"><span class="comment">#根据得到的本值坐标计算均值并加入对应列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_averageValue</span><span class="params">(point_range, array)</span>:</span></div><div class="line">    <span class="keyword">for</span> point <span class="keyword">in</span> point_range:</div><div class="line">        temp = get_averageValue(array, point[<span class="number">0</span>], point[<span class="number">1</span>])</div><div class="line">        point.append(temp)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_averageValue</span><span class="params">(array, x ,y)</span>:</span></div><div class="line">    <span class="keyword">return</span> get_aroundValue(array, x, y)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_aroundValue</span><span class="params">(array, x, y)</span>:</span></div><div class="line">    average_sum = <span class="number">0</span></div><div class="line">    rangeListX = range(x<span class="number">-1</span>, x+<span class="number">2</span>)</div><div class="line">    rangeListY = range(y<span class="number">-1</span>, y+<span class="number">2</span>)</div><div class="line"><span class="comment">#    print(rangeListX)</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> rangeListX:</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> rangeListY:</div><div class="line">                average_sum += array[i][j]</div><div class="line">    average_sum -= array[x][y]</div><div class="line">    average_sum /= <span class="number">8</span></div><div class="line"><span class="comment">#    print(average_sum)</span></div><div class="line">    <span class="keyword">return</span> average_sum</div><div class="line"></div><div class="line"><span class="comment">#得到所有的作用力点</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_allPowerPoint</span><span class="params">(array)</span>:</span></div><div class="line">    power_sum = <span class="number">0</span></div><div class="line">    start = length - <span class="number">3</span></div><div class="line">    <span class="keyword">while</span> start &lt; ((length<span class="number">-4</span>)*(length<span class="number">-5</span>)<span class="number">-1</span>):</div><div class="line">        power_sum = get_aroundPower(array, start)</div><div class="line">        power_list.append([array[start][<span class="number">0</span>], array[start][<span class="number">1</span>], array[start][<span class="number">2</span>], array[start][<span class="number">3</span>], power_sum])</div><div class="line">        <span class="keyword">if</span> start%(length<span class="number">-4</span>) == (length<span class="number">-6</span>):</div><div class="line">            start += <span class="number">3</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            start += <span class="number">1</span></div><div class="line"><span class="comment">#        print(start)</span></div><div class="line">        print(length)</div><div class="line">    <span class="keyword">return</span> power_list</div><div class="line"></div><div class="line"><span class="comment">#将每个点的作用力存入列表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_aroundPower</span><span class="params">(array, start)</span>:</span></div><div class="line">    power_sum = <span class="number">0</span></div><div class="line">    power_sum += array[start+<span class="number">1</span>][<span class="number">2</span>] + array[start<span class="number">-1</span>][<span class="number">2</span>] + array[start<span class="number">-216</span>][<span class="number">2</span>] + array[start+<span class="number">216</span>][<span class="number">2</span>] + array[start+<span class="number">215</span>][<span class="number">2</span>] + array[start<span class="number">-215</span>][<span class="number">2</span>] + array[start+<span class="number">217</span>][<span class="number">2</span>] + array[start<span class="number">-217</span>][<span class="number">2</span>]</div><div class="line">    <span class="keyword">return</span> power_sum</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</div><div class="line">        path = raw_input(<span class="string">"Please input the image path: "</span>)</div><div class="line">        image = Image.open(path).convert(<span class="string">"L"</span>)</div><div class="line">        image_array = np.array(image)</div><div class="line">        new_image_array = image_array/<span class="number">255.0</span>;</div><div class="line">        length = len(new_image_array)</div><div class="line">        a = get_allpoints(new_image_array)</div><div class="line">        get_all_averageValue(a, new_image_array)</div><div class="line">        b = get_allPowerPoint(a)</div><div class="line">        print(power_list)</div></pre></td></tr></table></figure>
+<h2 id="0x03调色板"><a href="#0x03调色板" class="headerlink" title="0x03调色板"></a>0x03调色板</h2><p>我们知道，自然界中的所有颜色都可以由红、绿、蓝(R，G，B)组合而成。有的颜色含有红色成分多一些，如深红；有的含有红色成分少一些，如浅红。针对含有红色成分的多少，可以分成0到255共256个等级，0级表示不含红色成分；255级表示含有100%的红色成分。同样，绿色和蓝色也被分成256级。这种分级概念称为量化。</p>
+<p>这样，根据红、绿、蓝各种不同的组合我们就能表示出256×256×256，约1600万种颜色。这么多颜色对于我们人眼来说已经足够丰富了。</p>
+<p>你大概已经明白了，当一幅图中每个像素赋予不同的RGB值时，能呈现出五彩缤纷的颜色了，这样就形成了彩色图。的确是这样的，但实际上的做法还有些差别。</p>
+<p>让我们来看看下面的例子。</p>
+<p>​        有一个长宽各为200个象素，颜色数为16色的彩色图，每一个象素都用R、G、B三个分量表示。因为每个分量有256个级别，要用8位(bit)，即一个字节(byte)来表示，所以每个像素需要用3个字节。整个图象要用200×200×3，约120k字节，可不是一个小数目呀！如果我们用下面的方法，就能省的多。</p>
+<p>​        因为是一个16色图，也就是说这幅图中最多只有16种颜色，我们可以用一个表：表中的每一行记录一种颜色的R、G、B值。这样当我们表示一个象素的颜色时，只需要指出该颜色是在第几行，即该颜色在表中的索引值。举个例子，如果表的第0行为255，0，0(红色)，那么当某个象素为红色时，只需要标明0即可。</p>
+<p>​        让我们再来计算一下：16种状态可以用4位(bit)表示，所以一个象素要用半个字节。整个图象要用200×200×0.5，约20k字节，再加上表占用的字节为3×16=48字节.整个占用的字节数约为前面的1/6，省很多吧？</p>
+<p>这张R、G、B的表，就是我们常说的调色板(Palette)，另一种叫法是颜色查找表LUT(Look Up Table)，似乎更确切一些。Windows位图中便用到了调色板技术。其实不光是Windows位图，许多图象文件格式如pcx、tif、gif等都用到了。所以很好地掌握调色板的概念是十分有用的。</p>
+<h4 id="真彩色"><a href="#真彩色" class="headerlink" title="真彩色"></a>真彩色</h4><p>有一种图，它的颜色数高达256×256×256种，也就是说包含我们上述提到的R、G、B颜色表示方法中所有的颜色，这种图叫做真彩色图(true color)。真彩色图并不是说一幅图包含了所有的颜色，而是说它具有显示所有颜色的能力，即最多可以包含所有的颜色。表示真彩色图时，每个像素直接用R、G、B三个分量字节表示，而不采用调色板技术。原因很明显：如果用调色板，表示一个像素也要用24位，这是因为每种颜色的索引要用24位(因为总共有2^24种颜色，即调色板有2^24行)，和直接用R，G，B三个分量表示用的字节数一样，不但没有任何便宜，还要加上一个256×256×256×3个字节的大调色板。所以真彩色图直接用R、G、B三个分量表示，它又叫做24位色图。</p>
+<p>我们知道，真彩图中包含最多达2^24种颜色，怎样从中选出256种颜色，又要使颜色的失真比较小，这是一个比较复杂的问题。一种简单的做法是将R：G：B以3：3：2表示，即取R，G的高3位，B的高两位，组成一个字节，这样就可以表示256种颜色了，但不难想象，这种方法的失真肯定很严重。</p>
+<p>我们下面介绍的算法能够比较好地实现真彩图到256色图的转换。它的思想是：准备一个长度为4096的数组，代表4096种颜色。对图中的每一个象素，取R、G、B的最高四位，拼成一个12位的整数，对应的数组元素加1。全部统计完后，就得到了这4096种颜色的使用频率。其中，可能有一些颜色一次也没用到，即对应的数组元素为零(假设不为零的数组元素共有PalCounts个)。将这些为零的数组元素清除出去，使得前PalCounts个元素都不为零。将这PalCounts个数按从大到小的顺序排列。这样，前256种颜色就是用的最多的颜色，它们将作为调色板上的256种颜色。对于剩下的PalCounts-256种颜色并不是简单地丢弃，而是用前256种颜色中的一种来代替，代替的原则是找有最小平方误差的那个。再次对图中的每一个象素，取R、G、B的最高四位，拼成一个12位的整数，如果对应值在前256种颜色中，则直接将该索引值填入位图数据中，如果是在后PalCounts-256种颜色中，则用代替色的索引值填入位图数据中。</p>
+<p>下面的两幅图中，图5.3是原真彩图，图.54是用上面的算法转换成的256色图，可以看出，效果还不错。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%881.26.14.png" alt="屏幕快照 2017-10-30 上午1.26.14.png"></p>
+<p>那么可能有人会问，不是还有32位的么，现在最大只有24位啊。这里就补充一下。如果存在第四个字节，则表示该图像表示alpha通道。尽管alpha通道只是一个透明通道，从图像学来说意义不大。然而这种32位元的图像却在桌面时代大行其道。因为有了阿尔法通道，在屏幕上描绘半透明图像变得简单，（这往往是对绘图硬件加速设备的要求）在电脑桌面上能更为轻而易举地实现半透明窗口、菜单渐隐和阴影等效果。</p>
+<p>虽然阿尔法通道对于显示缓冲来说没有意义，但是在现实系统中仍然使用着32位元真彩色，这是因为在32位的图中对于像素的寻址更加容易。对24位像素寻址需要乘以3，这样比通过移位就可以实现的乘以4的计算量更大。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年10月30日 - 01时40分</p>
+        <p><span>最后更新:</span>2017年10月30日 - 01时47分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/30/CTF-图像学基础/" title="CTF-图像学基础">http://yoursite.com/2017/10/30/CTF-图像学基础/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/30/CTF-图像学基础/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/29/PNG在隐写中的应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PNG在隐写中的应用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00前言"><span class="toc-number">1.</span> <span class="toc-text">0x00前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01位图"><span class="toc-number">1.1.</span> <span class="toc-text">0x01位图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02图像处理"><span class="toc-number">1.2.</span> <span class="toc-text">0x02图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#灰度化"><span class="toc-number">1.2.1.</span> <span class="toc-text">灰度化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二值化"><span class="toc-number">1.2.2.</span> <span class="toc-text">二值化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反色"><span class="toc-number">1.2.3.</span> <span class="toc-text">反色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03调色板"><span class="toc-number">1.3.</span> <span class="toc-text">0x03调色板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#真彩色"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">真彩色</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/10/29/PNG在隐写中的应用/" title="下一篇: PNG在隐写中的应用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-安全杂项</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/OSI模型初探/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
