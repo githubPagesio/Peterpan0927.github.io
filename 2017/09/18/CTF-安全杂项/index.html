@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8A%E5%8D%8812.29.30.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8A%E5%8D%8812.30.22.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8A%E5%8D%8812.38.26.png">
-<meta property="og:updated_time" content="2017-10-28T16:44:30.000Z">
+<meta property="og:updated_time" content="2017-10-29T03:40:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-安全杂项">
 <meta name="twitter:description" content="赛前抱佛脚刷题的安全杂项系列，不用花松果就可以看到的write up岂不美哉">
@@ -433,8 +433,54 @@
 <li>后四个字节<strong>00 00 03 00</strong>（即为十进制的768），代表该图片的高，<strong>该段数据是由图片的实际高度决定的</strong></li>
 </ul>
 </li>
-<li>剩余的4位<strong>40 5C AB 95</strong>为该png的CRC检验码，也就是本篇文章要重点讨论的地方，<strong>该段数据是由IDCH以及十三位数据块（即上文中的49 48 44 52 00 00 05 56 00 00 03 00 08 02 00 00 00）计算得到的</strong></li>
+<li>剩余的4位<strong>40 5C AB 95</strong>为该png的CRC检验码，也就是本篇文章要重点讨论的地方，<strong>该段数据是由IDCH以及十三位数据块（即上文中的49 48 44 52 00 00 05 56 00 00 03 00 08 02 00 00 00）计算得到的</strong>，可以参考下图：</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>域的名称</th>
+<th>字节数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Width</td>
+<td>4 bytes</td>
+<td>图像宽度，以像素为单位</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>4 bytes</td>
+<td>图像高度，以像素为单位</td>
+</tr>
+<tr>
+<td>Bit depth</td>
+<td>1 byte</td>
+<td>图像深度：索引彩色图像：1，2，4或8灰度图像：1，2，4，8或16真彩色图像：8或16</td>
+</tr>
+<tr>
+<td>ColorType</td>
+<td>1 byte</td>
+<td>颜色类型：0：灰度图像, 1，2，4，8或162：真彩色图像，8或163：索引彩色图像，1，2，4或84：带α通道数据的灰度图像，8或166：带α通道数据的真彩色图像，8或16</td>
+</tr>
+<tr>
+<td>Compression method</td>
+<td>1 byte</td>
+<td>压缩方法(LZ77派生算法)</td>
+</tr>
+<tr>
+<td>Filter method</td>
+<td>1 byte</td>
+<td>滤波器方法</td>
+</tr>
+<tr>
+<td>Interlace method</td>
+<td>1 byte</td>
+<td>隔行扫描方法：0：非隔行扫描1： Adam7(由Adam M. Costello开发的7 遍隔行扫描方法)</td>
+</tr>
+</tbody>
+</table>
 <p>拥有了上述知识之后我们就开始着手复原，我们选择将图片的高度增大，然后发现图片就挂了，打不开了，没错，就是打不来了。这个时候其实我就在想，这种情况才是正常的，因为CRC检验码会根据前面的高度做计算，单纯的去改变高度显然是无法通过CRC校验的，但是我又找不到这个校验码生成的算法，难道就要这样胎死腹中？？</p>
 <p>显然这是可能的，结合了一下以前的一些问题是因为平台问题产生的，于是我再次搜寻了一下CRC校验对于Mac/Linux的影响，然后在一篇博客中发现了这样的话：</p>
 <blockquote>
@@ -503,7 +549,7 @@
         <p><span>本文标题:</span><a href="/2017/09/18/CTF-安全杂项/">CTF-安全杂项</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年09月18日 - 23时55分</p>
-        <p><span>最后更新:</span>2017年10月29日 - 00时44分</p>
+        <p><span>最后更新:</span>2017年10月29日 - 11时40分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/18/CTF-安全杂项/" title="CTF-安全杂项">http://yoursite.com/2017/09/18/CTF-安全杂项/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/18/CTF-安全杂项/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
