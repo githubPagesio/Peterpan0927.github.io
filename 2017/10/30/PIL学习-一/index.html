@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PIL学习(一) | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="突破script kid的境界了～离解锁脚本大师的成就又近一步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PIL学习(一)">
+<meta property="og:url" content="http://yoursite.com/2017/10/30/PIL学习-一/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="突破script kid的境界了～离解锁脚本大师的成就又近一步">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8810.11.14.png">
+<meta property="og:updated_time" content="2017-10-30T15:19:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PIL学习(一)">
+<meta name="twitter:description" content="突破script kid的境界了～离解锁脚本大师的成就又近一步">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/CTF/" style="font-size: 20px;">CTF</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux测试/" style="font-size: 10px;">Linux测试</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/TCP-IP/" style="font-size: 16.67px;">TCP/IP</a> <a href="/tags/TCP-IP协议/" style="font-size: 10px;">TCP/IP协议</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/iOS多线程/" style="font-size: 13.33px;">iOS多线程</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/基础框架/" style="font-size: 10px;">基础框架</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/沙盒和app主流框架/" style="font-size: 10px;">沙盒和app主流框架</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络安全/" style="font-size: 10px;">网络安全</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-PIL学习-一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/30/PIL学习-一/" class="article-date">
+      <time datetime="2017-10-30T15:16:27.000Z" itemprop="datePublished">2017-10-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PIL学习(一)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/图形处理-python脚本/">图形处理 python脚本</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>突破script kid的境界了～离解锁脚本大师的成就又近一步</p>
+<a id="more"></a>
+<h2 id="0x00-前言-amp-PIL介绍和安装"><a href="#0x00-前言-amp-PIL介绍和安装" class="headerlink" title="0x00-前言&amp;PIL介绍和安装"></a>0x00-前言&amp;PIL介绍和安装</h2><p>在对于隐写术的学习的同时我们也了解到了许多图像学的知识,虽然诸如<code>binwalk</code>、<code>stegsolve</code>、<code>stegdetect</code>这样的工具对我们的解题的帮助非常大，但是从博客中也不难看到，有很多题目是通过python的脚本去生成二维码或者提取图像的最低位，这个时候工具的帮助也是有限的，熟练的编写这样的脚本就成为了一个优秀的CTFer的基本素养。现在就让我们一起来进行PIL库的学习吧～</p>
+<p>Pillow是Python里的图像处理库（PIL：Python Image Library），提供了了广泛的文件格式支持，强大的图像处理能力，主要包括图像储存、图像显示、格式转换以及基本的图像处理操作等。</p>
+<p>虽然本篇介绍的是 PIL，但实际上安装的却是 Pillow。PIL 的更新速度很慢，而且存在一些难以配置的问题，不推荐使用；而 Pillow 库则是 PIL 的一个分支，维护和开发活跃，Pillow 兼容 PIL 的绝大多数语法，推荐使用。</p>
+<p>在Mac上可以先使用Homebrew安装python3,然后再使用pip安装pillow模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install Pillow</div></pre></td></tr></table></figure>
+<p>安装好之后，打开 Python 解释器，输入 <code>from PIL import Image</code> 来测试是否安装成功。</p>
+<p>⚠️注意：有一些教程默认是用import Image的，但是在window 的64位系统中如果没有在cmd中执行pip install PIL是找不到Image模块的，所以呢必须先安装Pillow，在cmd中运行pip install Pillow，这里也要变成from PIL import Image</p>
+<hr>
+<h2 id="0x01-Image模块"><a href="#0x01-Image模块" class="headerlink" title="0x01-Image模块"></a>0x01-Image模块</h2><p>Image可以说是PIL中最重要的一个模块了，它可以用作创建图片对象，并进行一些图像的基本操作。</p>
+<h3 id="读取和存储操作"><a href="#读取和存储操作" class="headerlink" title="读取和存储操作"></a>读取和存储操作</h3><ol>
+<li>PIL的open()函数用于创建PIL对象，比如读取一张图片：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div></pre></td></tr></table></figure>
+<ol>
+<li>存储图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"><span class="comment">#生成缩略图</span></div><div class="line">img.thumbnail((<span class="number">128</span>,<span class="number">128</span>))</div><div class="line"></div><div class="line"><span class="comment">#保存图片</span></div><div class="line">img.save(<span class="string">'test1.jpg'</span>, <span class="string">'JPEG'</span>)</div></pre></td></tr></table></figure>
+<h3 id="生成新的图像"><a href="#生成新的图像" class="headerlink" title="生成新的图像"></a>生成新的图像</h3><p>Image的new方法用来生成新的图像，下面是他的定义</p>
+<blockquote>
+<p>Image.new(mode,size) ⇒ image</p>
+<p> Image.new(mode, size, color) ⇒ image</p>
+</blockquote>
+<p>使用给定的变量mode和size生成新的图像。Size是给定的宽/高二元组，这是按照像素数来计算的。对于单通道图像，变量color只给定一个值；对于多通道图像，变量color给定一个元组（每个通道对应一个值）。在版本1.1.4及其之后，用户也可以用颜色的名称，比如给变量color赋值为“red”。如果没有对变量color赋值，图像内容将会被全部赋值为0（图像即为黑色）。如果变量color是空，图像将不会被初始化，即图像的内容全为0。这对向该图像复制或绘制某些内容是有用的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im= Image.new(<span class="string">"RGB"</span>, (<span class="number">128</span>, <span class="number">128</span>), <span class="string">"red"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im.show()</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png" alt="屏幕快照 2017-10-30 下午6.47.31.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>im= Image.new(<span class="string">"RGB"</span>, (<span class="number">128</span>, <span class="number">128</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im.show()</div></pre></td></tr></table></figure>
+<p>图像im为128x128大小的黑色图像，因为变量color不赋值的话，图像内容被设置为0，即黑色。</p>
+<h3 id="图像的一些基本操作"><a href="#图像的一些基本操作" class="headerlink" title="图像的一些基本操作"></a>图像的一些基本操作</h3><ol>
+<li>输出图片的信息（格式、尺寸以及图像类型）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"></div><div class="line"><span class="comment">#输出信息</span></div><div class="line">print(img.format, img.size, img.mode)</div></pre></td></tr></table></figure>
+<ol>
+<li>显示图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"></div><div class="line">img.show()</div></pre></td></tr></table></figure>
+<ol>
+<li>旋转图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"><span class="comment">#逆时针旋转45度</span></div><div class="line">rorate1 = img.rotate(<span class="number">45</span>)</div><div class="line">rorate1.show()</div><div class="line"><span class="comment"># 逆时针旋转90</span></div><div class="line">rorate2 = img.transpose(Image.ROTATE_90)</div><div class="line">rorate2.show()</div></pre></td></tr></table></figure>
+<p>⚠️：只有选择90度，180度以及270度的时候才能用img.transpose(Image.ROTATE_90)，其他角度用rotate，就像iOS中的tranform方法一样，可以类比一下。</p>
+<ol>
+<li>缩放图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 缩放图片为50*50</span></div><div class="line">resize1 = img.resize((<span class="number">50</span>, <span class="number">50</span>))</div><div class="line">resize1.show()</div></pre></td></tr></table></figure>
+<ol>
+<li>生成缩略图</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"><span class="comment">#生成缩略图</span></div><div class="line">img.thumbnail((<span class="number">128</span>,<span class="number">128</span>))</div><div class="line"></div><div class="line">img.show()</div></pre></td></tr></table></figure>
+<p>那么这个时候一定会有人心生疑虑了，这个生成缩略图和缩放图片到底有什么区别呢，根据代码和代码注释, 这两个函数都是对图片进行缩放, 两者的主要区别如下:</p>
+<ul>
+<li><code>resize()</code>函数会返回一个Image对象, <code>thumbnail()</code>函数返回None</li>
+<li><code>resize()</code>修改后的图片在返回的Image中, 而原图片没有被修改; <code>thumbnail()</code>直接对内存中的原图进行了修改, 但是修改需要保存</li>
+<li><code>resize()</code>中的size参数直接设定了resize之后图片的规格, 而<code>thumbnail()</code>中的size参数则是设定了x/y上的最大值. 也就是说, 经过<code>resize()</code>处理的图片可能会被拉伸, 而经过<code>thumbnail()</code>处理的图片不会被拉伸</li>
+<li><code>thumbnail()</code>函数内部调用了<code>resize()</code>, 可以认为<code>thumbnail()</code>是对<code>resize()</code>的一种封装</li>
+</ul>
+<ol>
+<li>图片灰度化</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line">grey = img .convert(<span class="string">'L'</span>)</div><div class="line">grey.show()</div></pre></td></tr></table></figure>
+<ol>
+<li>某个像素点的获取和修改</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"><span class="comment">#打印某个像素点的值</span></div><div class="line">print(img.getpixel((<span class="number">100</span>,<span class="number">100</span>)))</div><div class="line"><span class="comment">#更改像素点的值</span></div><div class="line">img.putpixel((<span class="number">100</span>, <span class="number">100</span>),(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div></pre></td></tr></table></figure>
+<ol>
+<li>裁剪图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"></div><div class="line"><span class="comment">#裁剪图片，box为裁剪图片的区域范围</span></div><div class="line">box = (<span class="number">100</span>, <span class="number">100</span>, <span class="number">250</span>, <span class="number">250</span>)</div><div class="line">region = img.crop(box)</div><div class="line">region.show()</div></pre></td></tr></table></figure>
+<ol>
+<li>粘贴图片</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> PIl <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">img = Image.open(<span class="string">'test.jpg'</span>)</div><div class="line"><span class="comment"># 裁剪图片  box为裁剪图片的区域范围</span></div><div class="line">box = (<span class="number">100</span>, <span class="number">100</span>, <span class="number">250</span>, <span class="number">250</span>)</div><div class="line">region = img.crop(box)</div><div class="line">region.show()</div><div class="line"></div><div class="line"><span class="comment"># 逆时针旋转图片180度</span></div><div class="line">region2 = region.transpose(Image.ROTATE_180)</div><div class="line">region2.show()</div><div class="line"></div><div class="line"><span class="comment"># 图片的粘贴</span></div><div class="line">img.paste(region2, box)</div><div class="line">img.show()</div></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上述的方法中我们可以看到Image模块已然可以满足我们的基本需求，但是如果我们需要有更高的要求，可以使用Matplotlib类库，它具有比PIL更加强大的绘图功能，比如说绘制条状图，饼状图，散点图等。</p>
+<p>其实Image中还有许多方法没有讲述，留待补充。</p>
+<hr>
+<h2 id="0x02-ImageDraw模块"><a href="#0x02-ImageDraw模块" class="headerlink" title="0x02-ImageDraw模块"></a>0x02-ImageDraw模块</h2><p>ImageDraw模块提供了对图像对象的简单2D绘制，用户可以通过这个模块创建新的图像，为web应用实战产生各类的图形，但其实还有更高级的绘图库<a href="http://effbot.org/zone/aggdraw-index.htm" target="_blank" rel="external">The aggdraw Module</a></p>
+<p>ImageDraw绘图接口使用的是和PIL一样的坐标系统，下面就来说一下ImageDraw模块中的函数。</p>
+<h3 id="ImageDraw中的函数"><a href="#ImageDraw中的函数" class="headerlink" title="ImageDraw中的函数"></a>ImageDraw中的函数</h3><blockquote>
+<p>Draw方法：Draw(image) =&gt; Draw instance</p>
+</blockquote>
+<p>含义：创建一个可以在给定图像上绘图的对象，图像的内容会被修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageDraw, Image</div><div class="line">im = Image.open(<span class="string">"test.jpg"</span>)</div><div class="line">draw = ImageDraw.Draw(im)</div><div class="line">draw.line((<span class="number">0</span>, <span class="number">0</span>)+im.size, fill = <span class="number">128</span>)</div><div class="line">draw.line((<span class="number">0</span>,im01.size[<span class="number">1</span>], im.size[<span class="number">0</span>], <span class="number">0</span>), fill = <span class="number">128</span>)</div><div class="line">im.show()</div><div class="line"><span class="keyword">del</span> draw</div></pre></td></tr></table></figure>
+<p>在图片上绘制了两条灰色的对角线，如下图：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8810.11.14.png" alt="屏幕快照 2017-10-30 下午10.11.14.png"></p>
+<h3 id="ImageDraw模块中的方法"><a href="#ImageDraw模块中的方法" class="headerlink" title="ImageDraw模块中的方法"></a>ImageDraw模块中的方法</h3><ol>
+<li>Arc</li>
+</ol>
+<p>定义：draw.arc(xy, start, end, options)</p>
+<p>含义：在给定的区域内，在开始和结束角度之间绘制一条弧（圆的一部分）。</p>
+<p>变量options中fill设置弧的颜色。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image,ImageDraw</div><div class="line">im01 = Image.open(<span class="string">"test.jpg"</span>)</div><div class="line">draw =ImageDraw.Draw(im01)</div><div class="line">draw.arc((<span class="number">0</span>,<span class="number">0</span>,<span class="number">200</span>,<span class="number">200</span>),<span class="number">0</span>, <span class="number">90</span>, fill = (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">draw.arc((<span class="number">300</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">500</span>), <span class="number">0</span>, <span class="number">-90</span>, fill = (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>))</div><div class="line">draw.arc((<span class="number">200</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">300</span>),<span class="number">-90</span>, <span class="number">0</span>, fill = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>))</div><div class="line">im01.show()</div><div class="line"><span class="keyword">del</span> draw</div></pre></td></tr></table></figure>
+<ol>
+<li>Chord</li>
+</ol>
+<p>定义：draw.chord(xy,start, end, options)</p>
+<p>含义：和方法arc()一样，但是使用直线连接起始点。</p>
+<p>变量options的outline给定弦轮廓的颜色。Fill给定弦内部的颜色。</p>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw</div><div class="line"></div><div class="line">im01 =Image.open(<span class="string">"test.jpg"</span>)</div><div class="line"></div><div class="line">draw =ImageDraw.Draw(im01)</div><div class="line"></div><div class="line">draw.chord((<span class="number">0</span>,<span class="number">0</span>,<span class="number">200</span>,<span class="number">200</span>),<span class="number">0</span>, <span class="number">90</span>, fill = (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line"></div><div class="line">draw.chord((<span class="number">300</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">500</span>), <span class="number">0</span>, <span class="number">-90</span>, fill = (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>))</div><div class="line"></div><div class="line">draw.chord((<span class="number">200</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">300</span>), <span class="number">-90</span>, <span class="number">0</span>, fill = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>))</div><div class="line"></div><div class="line">im01.show()</div></pre></td></tr></table></figure>
+<ol>
+<li>Point</li>
+</ol>
+<p>定义：draw.point(xy,options)</p>
+<p>含义：在给定的坐标点上画一些点。</p>
+<p>坐标列表是包含2元组[(x,y),…]或者数字[x,y,…]的任何序列对象。</p>
+<p>变量options的fill给定点的颜色。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw</div><div class="line"></div><div class="line">im01 = Image.open(<span class="string">"test.jpg"</span>)</div><div class="line"></div><div class="line">draw = ImageDraw.Draw(im01)</div><div class="line"></div><div class="line">draw.point([(<span class="number">0</span>,<span class="number">0</span>),(<span class="number">100</span>,<span class="number">150</span>), (<span class="number">110</span>, <span class="number">50</span>)], fill = (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line"></div><div class="line">draw.point([<span class="number">0</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">110</span>, <span class="number">210</span>, <span class="number">150</span>], fill = (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>))</div><div class="line"></div><div class="line">im01.show()</div></pre></td></tr></table></figure>
+<p>还有一些诸如绘制图形，折线之类的方法就不多赘述了，接下来我们利用学的两个模块来分析一个脚本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python3</span></div><div class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval <span class="keyword">as</span> make_tuple</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw</div><div class="line">f = open(<span class="string">'p&amp;s.txt'</span>, <span class="string">'r'</span>)</div><div class="line">points = [make_tuple(line) <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</div><div class="line">f.close()</div><div class="line">image = Image.new(<span class="string">'RGB'</span>, (<span class="number">270</span>, <span class="number">270</span>), <span class="string">'#ffffff'</span>)</div><div class="line">draw = ImageDraw.Draw(image)</div><div class="line"><span class="keyword">for</span> point <span class="keyword">in</span> points:</div><div class="line">	draw.point(point, fill=<span class="string">"#000000"</span>)</div><div class="line">image.save(<span class="string">'qrcode.png'</span>)</div></pre></td></tr></table></figure>
+<p>这个代码中打开txt文件，将其中的坐标点画成黑色，使用到了我们的ImageDraw，那么我们可以尝试着去使用只用Image改写这个脚本来验证今天学习的成果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python3</span></div><div class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval <span class="keyword">as</span> make_tuple</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">f = open(<span class="string">'p&amp;s.txt'</span>, <span class="string">'r'</span>)</div><div class="line">points = [make_tuple(line) <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</div><div class="line">f.close()</div><div class="line">image = Image.new(<span class="string">'RGB'</span>, (<span class="number">270</span>, <span class="number">270</span>), <span class="string">'#ffffff'</span>)</div><div class="line"><span class="keyword">for</span> point <span class="keyword">in</span> points:</div><div class="line"> 	image.putpixel((point[<span class="number">0</span>]<span class="number">-1</span>, point[<span class="number">1</span>]<span class="number">-1</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line">image.save(<span class="string">"qrcode.png"</span>)</div></pre></td></tr></table></figure>
+<p>这样就完成了，那么PIL学习的第一天就先告一段落吧！</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年10月30日 - 23时16分</p>
+        <p><span>最后更新:</span>2017年10月30日 - 23时19分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/30/PIL学习-一/" title="PIL学习(一)">http://yoursite.com/2017/10/30/PIL学习-一/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/30/PIL学习-一/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/30/CTF-图像学基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CTF-图像学基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-前言-amp-PIL介绍和安装"><span class="toc-number">1.</span> <span class="toc-text">0x00-前言&PIL介绍和安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Image模块"><span class="toc-number">2.</span> <span class="toc-text">0x01-Image模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读取和存储操作"><span class="toc-number">2.1.</span> <span class="toc-text">读取和存储操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的图像"><span class="toc-number">2.2.</span> <span class="toc-text">生成新的图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图像的一些基本操作"><span class="toc-number">2.3.</span> <span class="toc-text">图像的一些基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">2.4.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-ImageDraw模块"><span class="toc-number">3.</span> <span class="toc-text">0x02-ImageDraw模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageDraw中的函数"><span class="toc-number">3.1.</span> <span class="toc-text">ImageDraw中的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageDraw模块中的方法"><span class="toc-number">3.2.</span> <span class="toc-text">ImageDraw模块中的方法</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/10/30/CTF-图像学基础/" title="下一篇: CTF-图像学基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-安全杂项</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/OSI模型初探/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
