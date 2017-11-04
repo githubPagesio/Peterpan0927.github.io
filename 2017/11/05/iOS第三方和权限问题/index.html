@@ -5,31 +5,22 @@
   
   <title>iOS第三方和权限问题 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS第三方和权限问题很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：
-
-这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。
-CocoapodsCocoaPods是OS X和iOS下的一个第">
+  <meta name="description" content="开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS第三方和权限问题">
 <meta property="og:url" content="http://yoursite.com/2017/11/05/iOS第三方和权限问题/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="iOS第三方和权限问题很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：
-
-这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。
-CocoapodsCocoaPods是OS X和iOS下的一个第">
+<meta property="og:description" content="开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.39.21.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.41.55.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png">
-<meta property="og:updated_time" content="2017-11-04T17:26:38.000Z">
+<meta property="og:updated_time" content="2017-11-04T17:29:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS第三方和权限问题">
-<meta name="twitter:description" content="iOS第三方和权限问题很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：
-
-这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。
-CocoapodsCocoaPods是OS X和iOS下的一个第">
+<meta name="twitter:description" content="开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -286,7 +277,9 @@ CocoapodsCocoaPods是OS X和iOS下的一个第">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="iOS第三方和权限问题"><a href="#iOS第三方和权限问题" class="headerlink" title="iOS第三方和权限问题"></a>iOS第三方和权限问题</h1><p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
+        <p>开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理</p>
+<a id="more"></a>
+<h1 id="iOS第三方和权限问题"><a href="#iOS第三方和权限问题" class="headerlink" title="iOS第三方和权限问题"></a>iOS第三方和权限问题</h1><p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt="屏幕快照 2017-11-04 上午8.32.40.png"></p>
 <p>这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。</p>
 <h2 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h2><p>CocoaPods是OS X和iOS下的一个第三类库管理工具，通过CocoaPods工具我们可以为项目添加被称为<code>Pods</code>的依赖库（这些类库必须是CocoaPods本身所支持的），并且可以轻松管理其版本。比如说我们会经常使用的SDWebImage之类的框架，都可以使用它来进行管理。</p>
@@ -403,7 +396,7 @@ CocoapodsCocoaPods是OS X和iOS下的一个第">
         <p><span>本文标题:</span><a href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月05日 - 01时25分</p>
-        <p><span>最后更新:</span>2017年11月05日 - 01时26分</p>
+        <p><span>最后更新:</span>2017年11月05日 - 01时29分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/05/iOS第三方和权限问题/" title="iOS第三方和权限问题">http://yoursite.com/2017/11/05/iOS第三方和权限问题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/05/iOS第三方和权限问题/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
