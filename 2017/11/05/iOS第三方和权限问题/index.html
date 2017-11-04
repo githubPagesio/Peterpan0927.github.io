@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png">
-<meta property="og:updated_time" content="2017-11-04T17:29:48.000Z">
+<meta property="og:updated_time" content="2017-11-04T17:36:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS第三方和权限问题">
 <meta name="twitter:description" content="开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理">
@@ -329,6 +329,28 @@
 <li>在iTunes Connect,您输入bundle ID来识别你的应用。在你第一个构建版本上传到iTunes Connect之后,你不能改变你的bundle ID或删除相关的明确App ID。·</li>
 <li>在Member Center，您创建一个与应用程序的bundle ID相匹配的AppID。如果AppID是一个显式的App ID,它完全匹配bundle ID。然而,与域名不同, bundle ID是区分大小写的。 如果应用程序ID是小写,你的包ID必须是小写的。·在iCloud,您所指定的容器id在Xcode项目是基于一个或多个应用程序的bundle ID</li>
 </ol>
+<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p>ios certificates就是证书。它的作用就是证明你的mac具有开发或发布某个开发者账号下应用的权限。而且证书还分成两种，一种是开发证书，也叫Development certificate; 另一种是发布证书或叫生产证书，英文名叫Production  certificate。</p>
+<ul>
+<li><p>development certificate</p>
+<p>开发证书是证明你的mac具有开发和真机调试你的程序的东西。但是每个证书关联着一个开发者账号，也就是说，你只能使用这个证书开发这个账号底下的应用，它是通过bundle id来知道该应用是不是属于自己的账号。所以，每次为一个开发者帐号开发应用，就得需要这个账号创建的开发证书。</p>
+</li>
+<li><p>Production certificate</p>
+<p>生产证书是证明你的mac是否具有发布应用的权限。在archive到appstore的时候，必须有生产证书，否则时上传不成功的。</p>
+</li>
+<li><p>根证书</p>
+<p>无论是开发证书还是生产证书，都必须从根证书上派生。根证书就是根mac产生的证书，menber center上保存的那个证书就是根证书，它只能安装在创建它的那台mac上，其他的开发mac必须从那台根mac上导出证书使用。也就是所有的子证书都只能从根证书派生而来。</p>
+</li>
+</ul>
+<h3 id="描述文件"><a href="#描述文件" class="headerlink" title="描述文件"></a>描述文件</h3><p>iOS Provisioning Profiles也叫描述文件，它用来标识某个设备是否具有安装某个应用的权限。描述文件分为开发描述文件和发布描述文件。其中发布描述文件又分为临时发布描述文件和正式发布描述文件。</p>
+<ol>
+<li><p>开发描述文件(develop provisioning profile)<br>开发描述文件，创建它需要<code>bundle ID + 开发证书 ＋ 测试设备(在devices中添加)</code>; 编译的时候必须三者对应，否则编译器会报错。</p>
+</li>
+<li><p>临时发布描述文件(distribution ad hoc)<br>临时发布描述文件是用来在有限设备上发布的。创建它需要<code>bundle ID ＋发布证书＋发布设备</code>，编译时也必须三者对应。</p>
+</li>
+<li><p>正式发布描述文件(distribution appstore/distribution ad house)</p>
+<p>个人账号和企业账号创建的正式发布描述文件是不同的。因为个人账号是在appstrore上发布，所以创建的是distribution appstore描述文件，而企业账号只能内部发布，所以创建的叫distribution ad house描述文件。但是它们创建所需要的东西都是一样的：bundle ID + 发布证书。 因为他们是在不确定的设备上安装的，所以不需要选择设备。</p>
+</li>
+</ol>
 <h3 id="Xcode项目分配"><a href="#Xcode项目分配" class="headerlink" title="Xcode项目分配"></a>Xcode项目分配</h3><p>每个Xcode项目与一个单独团队关联。如果你注册作为个人开发者,你被看做一个单人团队。团队账户用于存储应用程序需要的证书,标识符,和描述文件。所有的应用程序在设备上运行和使用某些应用程序服务都需要代码签名。Xcode会在需要的时候为你创建这些资产，但是你现在设置团队可以以后的避免警告对话框。</p>
 <p>所有的iOS、watchOS之类的应用程序在设备上启动都需要代码签名，在进行Xcode项目分配的时候，Xcode将会使用你的信息去创建一个团队描述文件。例如Xcode会自动创建你的开发证书和注册一个链接设备或者你的Mac。Xcode使用这些信息来创建一个最终安装在设备上描述文件。如果设备在描述文件中，Xcode在这个设备上运行app。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt="屏幕快照 2017-11-05 上午1.18.36.png"></p>
@@ -338,6 +360,7 @@
 <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
 <li><a href="http://www.jianshu.com/p/0c5e856a2c88" target="_blank" rel="external">Doris_Lee的博客</a></li>
 <li><a href="http://www.jianshu.com/p/0c5e856a2c88" target="_blank" rel="external">前端学习之iOS开发</a></li>
+<li><a href="http://www.jianshu.com/p/21ebca8cadf6" target="_blank" rel="external">huangman的博客</a></li>
 </ol>
 
       
@@ -396,7 +419,7 @@
         <p><span>本文标题:</span><a href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月05日 - 01时25分</p>
-        <p><span>最后更新:</span>2017年11月05日 - 01时29分</p>
+        <p><span>最后更新:</span>2017年11月05日 - 01时36分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/05/iOS第三方和权限问题/" title="iOS第三方和权限问题">http://yoursite.com/2017/11/05/iOS第三方和权限问题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/05/iOS第三方和权限问题/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -425,7 +448,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS第三方和权限问题"><span class="toc-number">1.</span> <span class="toc-text">iOS第三方和权限问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cocoapods"><span class="toc-number">1.1.</span> <span class="toc-text">Cocoapods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xcworkspace"><span class="toc-number">1.2.</span> <span class="toc-text">xcworkspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#账号管理和配置ID"><span class="toc-number">1.3.</span> <span class="toc-text">账号管理和配置ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#账号管理"><span class="toc-number">1.3.1.</span> <span class="toc-text">账号管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundle-ID配置"><span class="toc-number">1.3.2.</span> <span class="toc-text">bundle ID配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xcode项目分配"><span class="toc-number">1.3.3.</span> <span class="toc-text">Xcode项目分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考博客"><span class="toc-number">1.4.</span> <span class="toc-text">参考博客</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS第三方和权限问题"><span class="toc-number">1.</span> <span class="toc-text">iOS第三方和权限问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cocoapods"><span class="toc-number">1.1.</span> <span class="toc-text">Cocoapods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xcworkspace"><span class="toc-number">1.2.</span> <span class="toc-text">xcworkspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#账号管理和配置ID"><span class="toc-number">1.3.</span> <span class="toc-text">账号管理和配置ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#账号管理"><span class="toc-number">1.3.1.</span> <span class="toc-text">账号管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundle-ID配置"><span class="toc-number">1.3.2.</span> <span class="toc-text">bundle ID配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#证书"><span class="toc-number">1.3.3.</span> <span class="toc-text">证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#描述文件"><span class="toc-number">1.3.4.</span> <span class="toc-text">描述文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xcode项目分配"><span class="toc-number">1.3.5.</span> <span class="toc-text">Xcode项目分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考博客"><span class="toc-number">1.4.</span> <span class="toc-text">参考博客</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
