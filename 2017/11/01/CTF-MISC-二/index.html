@@ -18,7 +18,8 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.25.48.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.29.18.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.31.42.png">
-<meta property="og:updated_time" content="2017-11-01T15:43:17.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%885.38.00.png">
+<meta property="og:updated_time" content="2017-11-04T09:53:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-MISC(二)">
 <meta name="twitter:description" content="安全领域博大精深，今天我们来继续领略其中的奥妙吧～">
@@ -311,6 +312,13 @@
 <p>感觉这里应该就是突破点所在了，可能这两个txt文件是同样的txt文件，所以可以利用它做一次明文攻击（明文攻击使用条件是我们有一个加密压缩包中的一个文件），所以我们对tips.txt压缩一次：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.31.42.png" alt="屏幕快照 2017-11-01 下午11.31.42.png"></p>
 <p>丢到这个里面跑个十分钟左右应该就OK了，应该考察的是观察能力和工具的利用吧。</p>
+<h2 id="0X05-妹子的陌陌"><a href="#0X05-妹子的陌陌" class="headerlink" title="0X05-妹子的陌陌"></a>0X05-妹子的陌陌</h2><p>下载下来一张图片之后使用binwalk一扫果然内有乾坤，然后使用<code>foremost</code>分离之后有一个压缩包，然而需要密码，回头找密码应该就在图片找，一开始想的是这是一个jpg文件，那么很可能有jhide之类的隐藏算法，就用<code>stegdetect</code>测试了一下，结果通过修改敏感度居然检测到了jhide，于是我非常兴奋的开始寻找密码（以下省略一万字…）</p>
+<p>最好搞了半天也搞不出来，肯定是遗忘了什么东西，回到图，发现上面有”喜欢我么.”这样的字符，题目从来不会出没有必要的东西，那么显然这个应该是密码，尝试了一波还是不对，接着又试了一波压缩包的密码，压缩包就解压了…难道是一开始就想错了方向么？？？</p>
+<p>然后就出来下面所示的文本文件，我们打开看看：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">嘟嘟嘟嘟</div><div class="line">士兵：报告首长！已截获纳粹的加密电报！</div><div class="line">首长：拿来看看</div><div class="line"></div><div class="line">电报内容：</div><div class="line">..../-/-/.--./---.../-..-./-..-././-./-.-./---/-.././.-.-.-/-.-./..../.-/..../..-/---/.-.-.-/-.-./---/--/-..-.</div><div class="line"></div><div class="line">首长：我操你在逗我吗？你确定是他们纳粹发的吗？</div><div class="line">士兵：难道我弄错了？哦。。。等等是这一条</div><div class="line"></div><div class="line">内容：http://c.bugku.com/U2FsdGVkX18tl8Yi7FaGiv6jK1SBxKD30eYb52onYe0=</div><div class="line">      AES Key：@<span class="comment">#@#¥%⋯⋯¥¥%%⋯⋯&amp;¥</span></div><div class="line"></div><div class="line">士兵：二维码真的扫不出来吗？？肯定可以扫出来</div></pre></td></tr></table></figure>
+<p>既然都说了是AES算法，接下来就很简单了，直接解出来是一个图片的url，下载之后发现扫不出来，定睛一看，诶这个二维码似乎有点不对啊：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%885.38.00.png" alt="屏幕快照 2017-11-04 下午5.38.00.png"></p>
+<p>可以直接通过Mac上的预览中的工具反色，为了锻炼自己的脚本能力，我决定自己写一个脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">imagePath = sys.argv[<span class="number">1</span>]</div><div class="line">im = Image.open(imagePath)</div><div class="line">im1 = Image.new(<span class="string">'RGB'</span>, (im.size[<span class="number">0</span>], im.size[<span class="number">1</span>]), <span class="string">'#ffffff'</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(im.size[<span class="number">0</span>]):</div><div class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> range(im.size[<span class="number">1</span>]):</div><div class="line">    <span class="keyword">if</span> im.getpixel((i, j)) == (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>):</div><div class="line">      im1.putpixel([i, j], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      im1.putpixel([i, j], (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</div><div class="line">im1.show()</div></pre></td></tr></table></figure>
 
       
       
@@ -368,7 +376,7 @@
         <p><span>本文标题:</span><a href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月01日 - 23时33分</p>
-        <p><span>最后更新:</span>2017年11月01日 - 23时43分</p>
+        <p><span>最后更新:</span>2017年11月04日 - 17时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/01/CTF-MISC-二/" title="CTF-MISC(二)">http://yoursite.com/2017/11/01/CTF-MISC-二/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/01/CTF-MISC-二/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -397,7 +405,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-number">6.</span> <span class="toc-text">0X05-妹子的陌陌</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
