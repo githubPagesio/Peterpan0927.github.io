@@ -21,7 +21,11 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%885.38.00.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.12.46.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.19.58.png">
-<meta property="og:updated_time" content="2017-11-04T14:40:37.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.18.20.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.23.15.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.41.58.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%888.44.13.png">
+<meta property="og:updated_time" content="2017-11-05T13:15:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-MISC(二)">
 <meta name="twitter:description" content="安全领域博大精深，今天我们来继续领略其中的奥妙吧～">
@@ -329,6 +333,23 @@
 <p>三秒就爆出我们所需要的wifi密码，字典写的好，爆破爆的早：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.19.58.png" alt="屏幕快照 2017-11-04 下午9.19.58.png"></p>
 <p>然后就可以直接提交我们的key了，这题是不是特别简单。</p>
+<h2 id="0X07-听首音乐吧"><a href="#0X07-听首音乐吧" class="headerlink" title="0X07-听首音乐吧"></a>0X07-听首音乐吧</h2><p>下载下来是wav格式的音乐，第一时间想到的就是MP3Stego去解决，但是重点是密码是多少呢，压缩包解压之后之后一个音乐，那么首先试试弱密码，不对。那么回头想想，会不会答案藏在音乐中呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">strings stego100.wav | grep &apos;KEY&apos;</div><div class="line">strings stego100.wav | grep &apos;flag&apos;</div></pre></td></tr></table></figure>
+<p>但是依旧一无所获，没办法，听听音乐吧，结果在大概几十秒的时候听到了嘀嗒的声音，猜测可能是摩斯电码，即使凭借我超常的听力记录下来了摩斯code：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">..... -... -.-. ----. ..--- ..... -.... ....- ----. -.-. -... ----- .---- ---.. ---.. ..-. ..... ..--- . -.... .---- --... -.. --... ----- ----. ..--- ----. .---- ----. .---- -.-.</div></pre></td></tr></table></figure>
+<p>接下来就是对它解密了，解密成功之后得到字符串，立马就使用了MP3Stego去decode，这个密码还真长哈，结果发现还是不对，这不可能！再次回到开头，难道是md5？尝试后失败，于是我干脆就直接拿这个提交了，然后就成功了，看来做人有时候不要想太多，脑洞要懂得收放自如才是真理。</p>
+<h2 id="0X08-图穷匕见"><a href="#0X08-图穷匕见" class="headerlink" title="0X08-图穷匕见"></a>0X08-图穷匕见</h2><p>下载图片之后首先使用HexFriend分析其十六进制下的情况，然后就发现了一些异常，中间有着大量的0，然后结尾都是一些字符串，然后我就顺便搜了一下jpg的结束标志FFD9：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.18.20.png" alt="屏幕快照 2017-11-05 下午7.18.20.png"></p>
+<p>这说明后面的都是附加部分，于是我们可以将后面的部分拷贝出来观察一下，发现它的十六进制转换成文本之后同样是十六进制，然后我们在进行一次十六进制转换之后可以发现这时候的文本变成了坐标：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.23.15.png" alt="屏幕快照 2017-11-05 下午7.23.15.png"></p>
+<p>将其中的信息导出我们可以写一个python的脚本去还原，基本可以猜测这是一个二维码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval <span class="keyword">as</span> make_tuple</div><div class="line"></div><div class="line">f = open(<span class="string">'paintpaintpaint'</span>, <span class="string">'r'</span>)</div><div class="line">points = [make_tuple(line) <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</div><div class="line">f.close()</div><div class="line">im = Image.new(<span class="string">'RGB'</span>, (<span class="number">272</span>, <span class="number">272</span>), <span class="string">'#ffffff'</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> points:</div><div class="line">  im.putpixel([i[<span class="number">0</span>], i[<span class="number">1</span>]], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line">im.show()</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.41.58.png" alt="屏幕快照 2017-11-05 下午7.41.58.png">这样就是自己动手丰衣足食了，不然可以练脚本小子的称号都没有的</p>
+<h2 id="0X09-convert"><a href="#0X09-convert" class="headerlink" title="0X09-convert"></a>0X09-convert</h2><p>打开网址后看到全屏的二进制01串，首先要转换成十六进制，然后我们使用HexFriend打开之后看到的是个压缩包文件：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%888.44.13.png" alt="屏幕快照 2017-11-05 下午8.44.13.png"></p>
+<p>然后另存为之后解压看到一张图片。这个时候就应该由浅入深分析了，jpg格式的图片中不可能是LSB隐藏算法，所以就用binwalk扫一下有没有压缩包，Mac上可以打开，说明CRC也没有问题，然后右键看图片的详细信息，发现有base64编码的字符串（windows下），解码之后成功得到flag，下面丢出脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">f=open(<span class="string">'convert.txt'</span>)</div><div class="line">a=f.read()</div><div class="line">i=<span class="number">0</span></div><div class="line">str=<span class="string">''</span></div><div class="line"><span class="keyword">while</span> i &lt;= len(a)<span class="number">-4</span>:</div><div class="line">    h = a[i:i+<span class="number">4</span>]</div><div class="line">    i += <span class="number">4</span></div><div class="line">    h = hex(int(h, <span class="number">2</span>))</div><div class="line">    str += h[<span class="number">-1</span>:]</div><div class="line">print(str)</div></pre></td></tr></table></figure>
+<p>整个解决问题的核心其实就在于脚本的编写了。很多网上的十六进制转换工具是不支持这样转换的。</p>
 
       
       
@@ -386,7 +407,7 @@
         <p><span>本文标题:</span><a href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月01日 - 23时33分</p>
-        <p><span>最后更新:</span>2017年11月04日 - 22时40分</p>
+        <p><span>最后更新:</span>2017年11月05日 - 21时15分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/01/CTF-MISC-二/" title="CTF-MISC(二)">http://yoursite.com/2017/11/01/CTF-MISC-二/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/01/CTF-MISC-二/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -424,7 +445,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-number">6.</span> <span class="toc-text">0X05-妹子的陌陌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X06-破解wifi密码"><span class="toc-number">7.</span> <span class="toc-text">0X06-破解wifi密码</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-number">6.</span> <span class="toc-text">0X05-妹子的陌陌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X06-破解wifi密码"><span class="toc-number">7.</span> <span class="toc-text">0X06-破解wifi密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X07-听首音乐吧"><span class="toc-number">8.</span> <span class="toc-text">0X07-听首音乐吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X08-图穷匕见"><span class="toc-number">9.</span> <span class="toc-text">0X08-图穷匕见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X09-convert"><span class="toc-number">10.</span> <span class="toc-text">0X09-convert</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
