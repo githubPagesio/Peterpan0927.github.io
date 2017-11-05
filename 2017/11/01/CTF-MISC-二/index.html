@@ -25,7 +25,8 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.23.15.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.41.58.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%888.44.13.png">
-<meta property="og:updated_time" content="2017-11-05T13:15:11.000Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%8811.44.48.png">
+<meta property="og:updated_time" content="2017-11-05T15:50:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-MISC(二)">
 <meta name="twitter:description" content="安全领域博大精深，今天我们来继续领略其中的奥妙吧～">
@@ -350,6 +351,9 @@
 <p>然后另存为之后解压看到一张图片。这个时候就应该由浅入深分析了，jpg格式的图片中不可能是LSB隐藏算法，所以就用binwalk扫一下有没有压缩包，Mac上可以打开，说明CRC也没有问题，然后右键看图片的详细信息，发现有base64编码的字符串（windows下），解码之后成功得到flag，下面丢出脚本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">f=open(<span class="string">'convert.txt'</span>)</div><div class="line">a=f.read()</div><div class="line">i=<span class="number">0</span></div><div class="line">str=<span class="string">''</span></div><div class="line"><span class="keyword">while</span> i &lt;= len(a)<span class="number">-4</span>:</div><div class="line">    h = a[i:i+<span class="number">4</span>]</div><div class="line">    i += <span class="number">4</span></div><div class="line">    h = hex(int(h, <span class="number">2</span>))</div><div class="line">    str += h[<span class="number">-1</span>:]</div><div class="line">print(str)</div></pre></td></tr></table></figure>
 <p>整个解决问题的核心其实就在于脚本的编写了。很多网上的十六进制转换工具是不支持这样转换的。</p>
+<h2 id="0X0A-细心的大象"><a href="#0X0A-细心的大象" class="headerlink" title="0X0A-细心的大象"></a>0X0A-细心的大象</h2><p>通过网址下载图片，通过binwalk发现了其中的隐藏文件，直接提取出来即可，其中就是一个大象的图片和一个加密的的压缩包，进行各种排查之后发现没有什么问题，所以考虑一下是不是系统的问题，然后丢到了虚拟机中发现：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%8811.44.48.png" alt="屏幕快照 2017-11-05 下午11.44.48.png"></p>
+<p>解码字符串得到密码，通过密码解开rar压缩包，发现和之前一题的图片蕾丝，windows上可以显示，Mac/Linux下不行，所以还是修改一下高度即可。</p>
 
       
       
@@ -407,7 +411,7 @@
         <p><span>本文标题:</span><a href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月01日 - 23时33分</p>
-        <p><span>最后更新:</span>2017年11月05日 - 21时15分</p>
+        <p><span>最后更新:</span>2017年11月05日 - 23时50分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/01/CTF-MISC-二/" title="CTF-MISC(二)">http://yoursite.com/2017/11/01/CTF-MISC-二/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/01/CTF-MISC-二/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -445,7 +449,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-number">6.</span> <span class="toc-text">0X05-妹子的陌陌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X06-破解wifi密码"><span class="toc-number">7.</span> <span class="toc-text">0X06-破解wifi密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X07-听首音乐吧"><span class="toc-number">8.</span> <span class="toc-text">0X07-听首音乐吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X08-图穷匕见"><span class="toc-number">9.</span> <span class="toc-text">0X08-图穷匕见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X09-convert"><span class="toc-number">10.</span> <span class="toc-text">0X09-convert</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-number">1.</span> <span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-number">2.</span> <span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-number">3.</span> <span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-number">4.</span> <span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-number">5.</span> <span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-number">6.</span> <span class="toc-text">0X05-妹子的陌陌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X06-破解wifi密码"><span class="toc-number">7.</span> <span class="toc-text">0X06-破解wifi密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X07-听首音乐吧"><span class="toc-number">8.</span> <span class="toc-text">0X07-听首音乐吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X08-图穷匕见"><span class="toc-number">9.</span> <span class="toc-text">0X08-图穷匕见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X09-convert"><span class="toc-number">10.</span> <span class="toc-text">0X09-convert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X0A-细心的大象"><span class="toc-number">11.</span> <span class="toc-text">0X0A-细心的大象</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
