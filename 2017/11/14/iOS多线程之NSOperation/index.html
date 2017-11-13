@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS多线程之NSOperation | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS多线程之NSOperation">
+<meta property="og:url" content="http://yoursite.com/2017/11/14/iOS多线程之NSOperation/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8A%E5%8D%8811.07.26.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8B%E5%8D%881.41.06.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-14%20%E4%B8%8A%E5%8D%881.07.48.png">
+<meta property="og:updated_time" content="2017-11-13T17:36:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS多线程之NSOperation">
+<meta name="twitter:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/CTF/" style="font-size: 20px;">CTF</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux测试/" style="font-size: 10px;">Linux测试</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Review/" style="font-size: 10px;">Review</a> <a href="/tags/TCP-IP/" style="font-size: 15px;">TCP/IP</a> <a href="/tags/TCP-IP协议/" style="font-size: 10px;">TCP/IP协议</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/iOS多线程/" style="font-size: 15px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/基础框架/" style="font-size: 10px;">基础框架</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/沙盒和app主流框架/" style="font-size: 10px;">沙盒和app主流框架</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络安全/" style="font-size: 10px;">网络安全</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-iOS多线程之NSOperation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/14/iOS多线程之NSOperation/" class="article-date">
+      <time datetime="2017-11-13T17:34:18.000Z" itemprop="datePublished">2017-11-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS多线程之NSOperation
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/NSOperation-多图下载优化/">NSOperation 多图下载优化</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS多线程/">iOS多线程</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。<br>在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优势的。</p>
+<a id="more"></a>
+<h2 id="NSOperation介绍"><a href="#NSOperation介绍" class="headerlink" title="NSOperation介绍"></a>NSOperation介绍</h2><p>和GCD一样，NSOperation也是苹果提供给我们的一套多线程解决方案。实际上也是基于GCD开发的，但是比GCD的可控性和代码可读性更强（相信GCD那种风格的代码新手都不太习惯）。</p>
+<p>NSOperation是一个<strong>抽象基类</strong>，没有什么实际使用的价值，所以我们必须要使用它的子类：</p>
+<ol>
+<li>NSInvocationOperation</li>
+<li>NSBlockOperation</li>
+<li>自定义子类继承NSOperation，实现内部的方法</li>
+</ol>
+<p>下面就来简单的介绍一下NSOperation及其子类的基本使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSOperation * operation = [[NSOperation alloc]init];</div><div class="line">//开始执行</div><div class="line">[operation start];</div><div class="line">//取消执行</div><div class="line">[operation cancel];</div><div class="line">//执行结束后调用的Block</div><div class="line">[operation setCompletionBlock:^&#123;</div><div class="line">    NSLog(@&quot;执行结束&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//NSInvocationOperation和NSthread的操作有点类似，都是通过绑定事件</div><div class="line">//创建</div><div class="line">NSInvocationOperation * invo = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(testNSInvocationOperation) object:nil];</div><div class="line">//启动</div><div class="line">[invo start];</div><div class="line">//但是不会这样使用，都是配合队列使用</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//NSBlockOperation有一点特殊，是可以直接实现多线程的</div><div class="line">NSBlockOperation * blockOperation = [[NSBlockOperation </div><div class="line">blockOperationWithBlock:^&#123;</div><div class="line">   NSLog(@&quot;1在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div><div class="line">[blockOperation addExecutionBlock:^&#123;</div><div class="line">  NSLog(@&quot;2在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div><div class="line">[blockOperation addExecutionBlock:^&#123;</div><div class="line">  NSLog(@&quot;3在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div><div class="line">[blockOperation addExecutionBlock:^&#123;</div><div class="line">  NSLog(@&quot;4在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div><div class="line">[blockOperation addExecutionBlock:^&#123;</div><div class="line">  NSLog(@&quot;5在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div><div class="line">[blockOperation addExecutionBlock:^&#123;</div><div class="line">  NSLog(@&quot;6在第%@个线程&quot;,[NSThread currentThread]);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>首先看看执行之后的结果：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png" alt="屏幕快照 2017-10-06 下午4.55.05.png"></p>
+<p>从结果中我们可以分析NSBlockOperation确实实现了多线程，但是它并非是将所有的block都放到放到了子线程中。</p>
+<p>通过上面的打印记录我们可以发现，它会优先将block放到主线程中执行，若主线程已有待执行的代码，就开辟新的线程，但最大并发数为4（包括主线程在内，真机测试上不同）。如果block数量大于了4，那么剩下的Block就会等待某个线程空闲下来之后被分配到该线程，且依然是优先分配到主线程。</p>
+<h2 id="NSOperation中的队列"><a href="#NSOperation中的队列" class="headerlink" title="NSOperation中的队列"></a>NSOperation中的队列</h2><p>在GCD中我们就学过有串行队列和并发队列，并且有主队列和全局并发队列。而在NSOperation中就显得简单了许多，只有主队列和非主队列：</p>
+<ol>
+<li>主队列：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[NSOperationQueue mainQueue] //和GCD中的主队列一样</div></pre></td></tr></table></figure>
+<ol>
+<li>非主队列</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[NSOperationQueue alloc] init] //非常特殊（同时具备并发和串行的功能），默认情况下非主队列为并发队列</div></pre></td></tr></table></figure>
+<ol>
+<li>队列操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">//添加操作到队列</div><div class="line">NSInvocationOperation *op1 = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(testNSInvocationOperation) object:nil];</div><div class="line">[queue addOperation:op1];</div></pre></td></tr></table></figure>
+<ol>
+<li>添加任务简化方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//相比于之前在操作中添加任务的繁琐方式，和GCD一样，我们也有简化版</div><div class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">[queue addOperationWithBlock:^&#123;</div><div class="line">    NSLog(@&quot;7-------@&quot;, [NSThread currentThread]);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h2 id="自定义NSOperation"><a href="#自定义NSOperation" class="headerlink" title="自定义NSOperation"></a>自定义NSOperation</h2><p>之前说过NSOperation是一个抽象基类，我们可以通过自定义类继承的方式来实现多线程，但是既然我们已经拥有上面两种实现多线程的方式了，那么为什么我们还需要去使用这个自定义类呢？下面就来看看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//1.有利于代码的隐蔽，做一次封装</div><div class="line">//2.有利于代码的复用性</div><div class="line"></div><div class="line">//在自定义类内部，告知要执行的任务</div><div class="line">- (void)main&#123;</div><div class="line">    NSLog(@&quot;main ---%@&quot;, [NSThread currentThread]);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//这个时候在其他类中如果要使用的话就只需要初始化一下就行了，就不需要把同一份代码到处用</div><div class="line">- (void)customWithQueue&#123;</div><div class="line">    XMGOperation *op1 = [[XMGOperation alloc] init];</div><div class="line">  	XMGOperation *op2 = [[XMGOperation alloc] init];</div><div class="line">  </div><div class="line">  	NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">  	[queue addOperation:op1];</div><div class="line">    [queue addOperation:op2];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么NSOperation还有什么其他的用法呢，不然如何与大名鼎鼎的GCD匹敌呢？下面就说说线程的暂停、恢复，取消和最大并发数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//创建队列，默认是并发队列</div><div class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">//设置最大并发数,限制开线程的数目</div><div class="line">queue.maxConcurrentOperation = 5;</div><div class="line">//同一时间最多有多少个任务可以执行，如果设置为1可以看成是串行执行任务，串行执行任务不等于只开一条线程，只是线程同步。</div><div class="line">//如果这个值大于1就是并发队列，等于0就是不执行任务，等于-1是特殊意义，代表最大值</div><div class="line">queue.maxConcurrentOperationCount = 1;</div><div class="line">//线程有一个是否暂停的属性，设置为YES为暂停，NO即为恢复</div><div class="line">[queue setSuspend:YES];</div><div class="line">//取消操作,取消是无法恢复的，这个方法内部实质上是调用了所有任务的cancel方法</div><div class="line">[queue cancelAllOperations];</div><div class="line"></div><div class="line">//队列中的任务是有状态的：已经执行完毕的 | 正在执行 | 排队等待状态，正在执行状态的任务是无法取消的</div></pre></td></tr></table></figure>
+<p>但是我们有一点需要注意，如果我们把操作封装了一下，放在一个类里面，那么结果就会大不一样，因为暂停的单位是队列中的任务，如果我们将所有的操作都封装在一个类里面，那么总共就只会有一个任务，那就是正在执行中的任务，正在执行的任务是无法取消的，所以暂停和取消也是无效的，但是我们可以在那个封装的类中加一个判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//只要添加了这条语句之后，那么就可以实现封装中的暂停操作了</div><div class="line">if(self.isCancelled) return;</div></pre></td></tr></table></figure>
+<h2 id="操作依赖监听和线程间通信"><a href="#操作依赖监听和线程间通信" class="headerlink" title="操作依赖监听和线程间通信"></a>操作依赖监听和线程间通信</h2><p>在GCD中我们可以通过栅栏函数去实现对于队列中的任务执行顺序的要求，那么在NSOperation中我们是通过操作依赖的方式，这样我们就可以任意调整任务执行的顺序了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//添加操作依赖</div><div class="line">//注意点：不能循环依赖</div><div class="line">[op1 addDependency:op4];</div><div class="line">[op4 addDependency:op3];</div><div class="line">[op3 addDependency:op2];  </div><div class="line"></div><div class="line">//这个强大的一点还在于它可以跨队列依赖</div><div class="line">[queue addOperation:op1];</div><div class="line">[queue addOperation:op2];</div><div class="line">[queue addOperation:op3];</div><div class="line">[queue2 addOperation:op4];</div></pre></td></tr></table></figure>
+<p>那么我们可能有这样的一个需求，需要在任务完成之后发一条消息，类似于GCD中的队列组，队列中的任务完成后会发一个通知，不同的是，这里的监听是针对于任务的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//操作监听</div><div class="line">op3.conpletionBlock = ^&#123;</div><div class="line">  NSLog(@&quot;任务执行完毕&quot;)；  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8A%E5%8D%8811.07.26.png" alt="屏幕快照 2017-11-13 上午11.07.26.png"></p>
+<p>我们可以看到虽然添加了监听，但因为是异步执行的，所以他们并不一定在同一个线程执行，也不一定任务3执行完成后就会接着监听动作，如果我修改了最大并发数为1那么就可以看到任务3执行完就紧跟着监听的结果了。</p>
+<p>然后我们再来看看一个老生常谈的话题，那就是线程间通信，之前的<code>NSThread</code>和<code>GCD</code>中我们都已经讲过，现在看看<code>NSOperation</code>中是如何实现的，这里同样以下载图片为例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">//封装操作</div><div class="line">NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">   NSURL *url = [NSURL URLWithString:@&quot;http://taobao.com/1.jpg&quot;];</div><div class="line">   NSData *data = [NSData dataWithContentsOfURL:url];</div><div class="line">   UIImage *image = [UIImage imageWithData:imageData];</div><div class="line">  </div><div class="line">   //更新UI</div><div class="line">   [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</div><div class="line">      self.imageView.image = image; </div><div class="line">   &#125;];</div><div class="line">&#125;];</div><div class="line">[queue addOperation:download];</div></pre></td></tr></table></figure>
+<p>下面以一个下载合并多张图片的的例子，将前面的知识进行一次综合应用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">- (void)test1&#123;</div><div class="line">    NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">    __block UIImage *image1 = [[UIImage alloc] init];</div><div class="line">    __block UIImage *image2 = [[UIImage alloc] init];</div><div class="line">    //封装操作</div><div class="line">    NSBlockOperation *download1 = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">        NSURL *url = [NSURL URLWithString:@&quot;https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/faedab64034f78f0e7534b1a7b310a55b2191cfa.jpg&quot;];</div><div class="line">        NSData *imageData = [NSData dataWithContentsOfURL:url];</div><div class="line">        image1 = [UIImage imageWithData:imageData];</div><div class="line">        NSLog(@&quot;1------%@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    NSBlockOperation *download2 = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">        NSURL *url = [NSURL URLWithString:@&quot;https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/faedab64034f78f0e7534b1a7b310a55b2191cfa.jpg&quot;];</div><div class="line">        NSData *imageData = [NSData dataWithContentsOfURL:url];</div><div class="line">        image2 = [UIImage imageWithData:imageData];</div><div class="line">        NSLog(@&quot;2-----%@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    NSBlockOperation *combile = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">        //开上下文</div><div class="line">        UIGraphicsBeginImageContext(CGSizeMake(200, 200));</div><div class="line">        [image1 drawInRect:CGRectMake(0, 0, 100, 200)];</div><div class="line">        [image2 drawInRect:CGRectMake(100, 0, 100, 200)];</div><div class="line">        </div><div class="line">        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();</div><div class="line">        //关闭上下文</div><div class="line">        UIGraphicsEndImageContext();</div><div class="line">        //回到主线程</div><div class="line">        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</div><div class="line">            self.imageView.image = image;</div><div class="line">        &#125;];</div><div class="line">        NSLog(@&quot;combile-----%@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    [combile addDependency:download1];</div><div class="line">    [combile addDependency:download2];</div><div class="line">    </div><div class="line">    [queue addOperation:download1];</div><div class="line">    [queue addOperation:download2];</div><div class="line">    [queue addOperation:combile];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行之后效果如图：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8B%E5%8D%881.41.06.png" alt="屏幕快照 2017-11-13 下午1.41.06.png"></p>
+<p>那么多线程在实际应用中到底有什么作用呢？说到这里的话就要提到我们的App有时候需要从网上加载图片，如果我们只是加载一两张图片还好，如果我们在TableView的cell中加载图片（每个cell都有），那么我们就会发现整个App的UI界面会非常的卡顿，简直就跟用了几年的安卓手机一样，这是因为我们把下载图片全部丢到了主线程中，而主线程是刷新UI的，还有一个问题就是图片会重新下载，这个时候我们的多线程就派上了用场。 </p>
+<h2 id="多图下的优化问题"><a href="#多图下的优化问题" class="headerlink" title="多图下的优化问题"></a>多图下的优化问题</h2><p>我们已经下载过一次的图片自然不可能重新去下载，所以我们需要程序的缓存，否则对流量的消耗和程序的流畅性影响都很大，只有将这个和多线程结合在一起才能形成一个完成的App，现在就着手去解决这两个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">//1.UI不流畅----&gt;开子线程下载图片</div><div class="line">//2.图片重复下载----&gt;先把之前下载过的图片保存起来</div><div class="line"></div><div class="line">//创建缓存字典</div><div class="line">@property (nonatomic, strong) NSMutableDictionary *images;</div><div class="line"></div><div class="line">//字典初始化</div><div class="line">- (NSMutableDictionary *)images&#123;</div><div class="line">    if(_images == nil)&#123;</div><div class="line">        _images = [[NSMuatbleDictionary alloc] init];</div><div class="line">    &#125;</div><div class="line">  return _images;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//cell代理方法中的处理</div><div class="line"></div><div class="line">//先去查看内存缓存中该图片是否存在，存在就直接拿来用，否则去检查磁盘缓存</div><div class="line">//如果有磁盘缓存，就保存一份到内存，否则就下载</div><div class="line">UIImage *image = [self.images objectForKey:appM.icon];</div><div class="line">if (image)&#123;</div><div class="line">    cell.imageView.image = image;</div><div class="line">&#125;else&#123;</div><div class="line">  	NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];</div><div class="line">  	NSString *filenName = [appM.icon lastPathComponent];</div><div class="line">  	NSString *fullPath = [caches stringByAppendingPathComponent:fileName];</div><div class="line">  	//检查磁盘缓存</div><div class="line">  	NSData *imageData = [NSData dataWithContentsOfFile:fullPath];</div><div class="line">  	if(imageData)&#123;</div><div class="line">        UIImage *image = [UIImage imageWithData:imageData];</div><div class="line">      	cell.imageView.image = image;</div><div class="line">      	//将图片保存到内存缓存</div><div class="line">      	[self.images setObject:image forKey:appM.icon];</div><div class="line">    &#125;else&#123;</div><div class="line">        NSURL *url = [NSYRL URLWithString:appM.icon];</div><div class="line">  		NSData *imageData = [NSData dataWithContentsOfURL:url];</div><div class="line">  		UIImage *image = [UIImage imageWithData:imageData];</div><div class="line">  		cell.imageView.image = image;</div><div class="line">  		//将图片保存到内存缓存</div><div class="line">  		[self.images setObject:image forKey:appM.icon];</div><div class="line">  		//写数据到沙盒</div><div class="line">  		[imageData writeToFile:fullPath atomically:YES];</div><div class="line">   	 &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 那么缓存的问题到这里已经比较完善的解决了，接下来就是解决UI不流畅的问题，也就是我们需要开一个子线程去下载图片，只需要修改下载的时候即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//创建一个队列的属性并实现懒加载</div><div class="line">@property(nonatomic, strong) NSOperationQueue *queue;</div><div class="line"></div><div class="line">- (NSOperationQueue *)queue&#123;</div><div class="line">    if(_queue == nil)&#123;</div><div class="line">        _queue = [[NSOperationQueue alloc] init];</div><div class="line">      	_queue.maxConcurrentOperationCount = 5;</div><div class="line">    &#125;</div><div class="line">  	return _queue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">    	NSURL *url = [NSYRL URLWithString:appM.icon];</div><div class="line">  		NSData *imageData = [NSData dataWithContentsOfURL:url];</div><div class="line">  		UIImage *image = [UIImage imageWithData:imageData];</div><div class="line">  		//将图片保存到内存缓存</div><div class="line">  		[self.images setObject:image forKey:appM.icon];</div><div class="line">		[[NSOperationQueue mainQueue] addOperationWirhBlock:^&#123;</div><div class="line">            cell.imageView.image = image;</div><div class="line">        &#125;];</div><div class="line">  		//写数据到沙盒</div><div class="line">  		[imageData writeToFile:fullPath atomically:YES];</div><div class="line">	&#125;];</div><div class="line">[self.queue addOperation:download];</div></pre></td></tr></table></figure>
+<p>显然正常来说上面的这份代码应该是没什么问题了，但是我们会发现在网速不太良好的情况下会出现重复下载的情况，原因就是我们在TableView初始化的时候往下滑动再往上滑动，这个时候第一个图片本来处理下载状态还没下好，滑上去之后就会再进行一次判断，然后就会再下载一次了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//我们只需要做一个操作缓存即可，就像之前的图片一样，先定义一个字典</div><div class="line">@property (nonatomic ,strong) NSMutaleDictionary *operations</div><div class="line"></div><div class="line">//判断语句</div><div class="line">NSBlockOperation *download = [self.operations objectForKey:appM.icon];</div><div class="line">if(download)&#123;</div><div class="line">    //如果已经添加操作就什么也不做，等待即可</div><div class="line">&#125;else&#123;</div><div class="line">    NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^&#123;</div><div class="line">    	NSURL *url = [NSURL URLWithString:appM.icon];</div><div class="line">  		NSData *imageData = [NSData dataWithContentsOfURL:url];</div><div class="line">  		UIImage *image = [UIImage imageWithData:imageData];</div><div class="line">      	//容错处理</div><div class="line">      	if(image == nil)&#123;</div><div class="line">            [self.operations removeObjectForKey:appM.icon];</div><div class="line">          	return;</div><div class="line">        &#125;</div><div class="line">      	//将图片保存到内存缓存</div><div class="line">  		[self.images setObject:image forKey:appM.icon];</div><div class="line">		[[NSOperationQueue mainQueue] addOperationWirhBlock:^&#123;</div><div class="line">            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewAnimationLeft];</div><div class="line">        &#125;];</div><div class="line">  		//写数据到沙盒</div><div class="line">  		[imageData writeToFile:fullPath atomically:YES];</div><div class="line">      	</div><div class="line">      	//下载完成后移除下载操作</div><div class="line">      	[self.operations removeObjectForKey:appM.icon];</div><div class="line">	&#125;];</div><div class="line">	[self.queue addOperation:download];    </div><div class="line">	//添加操作到操作缓存中</div><div class="line">	[self.operations setObject:download forKey:appM.icon]; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有一个问题就是图片不会显示，需要我们下滑上滑去刷新一次，这就是因为在cell的subtitle状态下，图片的<code>frame</code>默认是为0的(内存中还没有图片)，就算真实的图片赋值过去，因为<code>frame</code>是0，所以依旧不会显示，解决这个问题我们就只需要手动刷新即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[NSOperationQueue mainQueue] addOperationWirhBlock:^&#123;</div><div class="line">            //cell.imageView.image = image;</div><div class="line">  			[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewAnimationLeft];</div><div class="line">        &#125;];</div></pre></td></tr></table></figure>
+<p>但是这个时候我们又会发现一个新的问题就是数据错乱，这个图片和实际的数据有时候并不搭配，也就是数据错乱，这是因为重用了之前的cell的图片，因为本身的图片还没有下载好：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if(download)&#123;</div><div class="line">    //如果已经添加操作就什么也不做，等待即可</div><div class="line">&#125;else&#123;</div><div class="line">	//这个问题很简单，只需要在下载的时候先清空原有的图片即可，或者设置一个占位图片</div><div class="line">	cell.imageView.image = [UIImage imageNamed:@&quot;占位&quot;];</div><div class="line"> 	//省略中间</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个多图下载的优化还是有很多的问题的，在这里总结一个整个过程的思维导图：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-14%20%E4%B8%8A%E5%8D%881.07.48.png" alt="屏幕快照 2017-11-14 上午1.07.48.png"></p>
+<p>最后补充的一点就是内存占用的问题，当图片过多的时候就会爆出内存警告，我们需要小小的优化一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)didRecieveMemoryWarning&#123;</div><div class="line">    [self.images removeAllObjects];</div><div class="line">  	[self.queue cacelAllObjections];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><ul>
+<li><a href="http://www.jianshu.com/p/0c241a4918bf" target="_blank" rel="external">奔跑的炸鸡</a>  </li>
+<li>小码哥教程(buy it by yourself)</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/11/14/iOS多线程之NSOperation/">iOS多线程之NSOperation</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年11月14日 - 01时34分</p>
+        <p><span>最后更新:</span>2017年11月14日 - 01时36分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/14/iOS多线程之NSOperation/" title="iOS多线程之NSOperation">http://yoursite.com/2017/11/14/iOS多线程之NSOperation/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/14/iOS多线程之NSOperation/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/06/Python-函数式编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python-函数式编程</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSOperation介绍"><span class="toc-number">1.</span> <span class="toc-text">NSOperation介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSOperation中的队列"><span class="toc-number">2.</span> <span class="toc-text">NSOperation中的队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义NSOperation"><span class="toc-number">3.</span> <span class="toc-text">自定义NSOperation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作依赖监听和线程间通信"><span class="toc-number">4.</span> <span class="toc-text">操作依赖监听和线程间通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多图下的优化问题"><span class="toc-number">5.</span> <span class="toc-text">多图下的优化问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-number">5.1.</span> <span class="toc-text">参考博客</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/11/06/Python-函数式编程/" title="下一篇: Python-函数式编程">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/iOS多线程之NSOperation/">iOS多线程之NSOperation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/06/Python-函数式编程/">Python-函数式编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/31/Python-Review/">Python3-Review</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-MISC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/OSI模型初探/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
