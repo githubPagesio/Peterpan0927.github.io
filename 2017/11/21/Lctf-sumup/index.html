@@ -16,9 +16,10 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%8812.21.52.png">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6295550-b1d939d975d3a657.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6295550-3cae04871d34fdac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%889.20.08.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%888.49.07.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%888.50.16.png">
-<meta property="og:updated_time" content="2017-11-23T12:59:45.000Z">
+<meta property="og:updated_time" content="2017-11-23T13:21:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lctf-sumup">
 <meta name="twitter:description" content="经历了lctf之后才了解到自己的密码学是多么的浅薄….还有就是这个攻击技术太NM恶心了，花了一整天学习这个漏洞利用">
@@ -314,7 +315,7 @@
 <h1 id="0X01-Padding-Oracle-Atack"><a href="#0X01-Padding-Oracle-Atack" class="headerlink" title="0X01-Padding Oracle Atack"></a>0X01-Padding Oracle Atack</h1><p>我们可以注意到Ciphertext-N-1用来产生下一块明文，这就是字节翻转攻击发挥作用的地方，如果我们改变Ciphertext-N-1中的一个字节 ，然后和下一个解密后的密文进行一次xor，就可以得到不同的明文，而这个明文是我们可以控制的。利用这点进行伪造令牌环，达到绕过服务端验证的效果。</p>
 <p>CBC比特反转攻击的目的是攻击者通过修改密文来操纵解密后的明文，攻击者会对初始化向量（IV）中的任意比特位进行反转（1变0，0变1），则明文分组（解密后得到的明文分组）中相应的比特也会被反转。比如一个叫admin的用户，登录，经过CBC模式加密后，token为”aaabbbccc999”,现在有一个攻击者，叫john，登录，经过CBC模式加密后，token为cccbbbccc1111,现在john将token改为”ffcbbbccc1111”，发现登录名变成了ohn，所以他知道token第一个位的ff转换成了，经过几轮测试，他发现如果将token改为“7bcbbbccc1111”，则登录名变成了’aohn’，最后他通过发送token为7bdc995465到服务器，发现自己已经变成了admin。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8A%E5%8D%8810.28.02.png" alt="屏幕快照 2017-11-23 上午10.28.02.png"></p>
-<p>所以我们就可以通过改变传输的IV就可以控制密文的解密，通常来说账户名和密码比较短，控制了IV之后就可以控制xor出来的第一段明文了。这里还是以<code>I_am_Bob</code>和<code>aes-128-cbc</code>为例。如果攻击者构造IV为16个0字节，那么显然在解密时padding是不正确的：</p>
+<p>所以我们就可以通过改变传输的IV就可以控制密文的解密，通常来说账户名和密码比较短，控制了IV之后就可以控制xor出来的第一段明文了。这里还是以<code>I_am_Bob</code>和<code>aes-128-cbc</code>为例。如果攻击者构造IV为16个0字节，那么显然在解密时padding是不正确的，应用就会抛出一个错误回显：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%8812.21.52.png" alt="屏幕快照 2017-11-23 下午12.21.52.png"></p>
 <p>正确的padding值如下：</p>
 <blockquote>
@@ -335,6 +336,8 @@
 <p><strong>而获得middle后，还可以通过改变IV，使密文解密为任意明文。</strong>根据异或的性质，有：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">原明文 ^ 原IV = middle</div><div class="line">新明文 ^ 新IV = middle</div><div class="line">原明文 ^ 原IV ^ 新明文 = 新IVq</div></pre></td></tr></table></figure>
 <p>故只要把<strong>原IV</strong>改为计算得到的<strong>新IV</strong>，就可使密文解密为任意明文。</p>
+<p>为了方便理解，下面丢出几个变量之间的层级关系图：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-23%20%E4%B8%8B%E5%8D%889.20.08.png" alt="屏幕快照 2017-11-23 下午9.20.08.png"></p>
 <h1 id="0X02-LCTF实战"><a href="#0X02-LCTF实战" class="headerlink" title="0X02-LCTF实战"></a>0X02-LCTF实战</h1><p>lctf一道simple blog，这一次crf的misc一道都没搞出来显然非常的惭愧，树莓派弯弯绕得太多，但是那个pdf却是吃了想当然的大亏，一直社工去了，这里说一道结合crypto的web题—simple blog:</p>
 <p>首先我们可以通过源码泄漏去分析一下如何进行绕过之类的，我们可以在备份文件中找到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://111.231.111.54/.login.php.swp</div><div class="line">http://111.231.111.54/.admin.php.swp</div></pre></td></tr></table></figure>
@@ -418,7 +421,7 @@
         <p><span>本文标题:</span><a href="/2017/11/21/Lctf-sumup/">Lctf-sumup</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月21日 - 22时38分</p>
-        <p><span>最后更新:</span>2017年11月23日 - 20时59分</p>
+        <p><span>最后更新:</span>2017年11月23日 - 21时21分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/21/Lctf-sumup/" title="Lctf-sumup">http://yoursite.com/2017/11/21/Lctf-sumup/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/21/Lctf-sumup/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
