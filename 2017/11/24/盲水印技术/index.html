@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-28%20%E4%B8%8A%E5%8D%881.02.18.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-30%20%E4%B8%8B%E5%8D%885.13.40.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-30%20%E4%B8%8B%E5%8D%885.15.40.png">
-<meta property="og:updated_time" content="2017-11-30T09:33:54.000Z">
+<meta property="og:updated_time" content="2017-11-30T09:41:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="盲水印技术">
 <meta name="twitter:description" content="我们都知道在网上寻找图片的时候，有时候会有可见的该死水印影响了我们的图片完整性，但是还有有一种我们看不见却真实存在的水印，你知道是什么吗？">
@@ -278,7 +278,11 @@
           
         <p>我们都知道在网上寻找图片的时候，有时候会有可见的该死水印影响了我们的图片完整性，但是还有有一种我们看不见却真实存在的水印，你知道是什么吗？</p>
 <a id="more"></a>
-<h2 id="0X00引言"><a href="#0X00引言" class="headerlink" title="0X00引言"></a>0X00引言</h2><p>在这里先举一个例子来介绍一下吧，之前有个阿里的员工外泄信息被捕获的的报道。这个事情大概也就是在内部使用办公软件截图，使用PS工具修掉截图上可见的水印，然后传播出去，但是阿里通过了图片携带的不可见水印，解读了截图员工的员工编码，于是顺利的找到了这名员工。一时间图片的盲水印技术也到了广泛的关注。为了了解这个技术我建议大家首先去看一下关于各种域之间的转换和诸如傅立叶变换之类的数学基础<a href="http://www.elecfans.com/engineer/blog/20140527344277.html" target="_blank" rel="external">传送门</a></p>
+<h2 id="0X00引言"><a href="#0X00引言" class="headerlink" title="0X00引言"></a>0X00引言</h2><p>在这里先举一个例子来介绍一下吧，之前有个阿里的员工外泄信息被捕获的的报道。这个事情大概也就是在内部使用办公软件截图，使用PS工具修掉截图上可见的水印，然后传播出去，但是阿里通过了图片携带的不可见水印，解读了截图员工的员工编码，于是顺利的找到了这名员工。</p>
+<p>一时间图片的盲水印技术也到了广泛的关注。为了了解这个技术我建议大家首先去看一下关于各种域之间的转换和诸如傅立叶变换之类的数学基础–<a href="http://www.elecfans.com/engineer/blog/20140527344277.html" target="_blank" rel="external">传送门</a>。关于傅立叶变换有一点需要记住的就是任何的周期函数，都可以看作是不同振幅，不同相位的正弦波的叠加。这是一个贯穿了时域和频域的方法，就像某首诗所作：</p>
+<blockquote>
+<p>你眼中看似落叶缤纷变换无常的世界，其实只是躺在上帝怀中早已铺好的乐章</p>
+</blockquote>
 <h2 id="0X01概述"><a href="#0X01概述" class="headerlink" title="0X01概述"></a>0X01概述</h2><p>数字水印技术也就是将一些标识信息，就好比宣示主权一样，直接嵌入数字载体，如图片，音频等。但显然不会影响这个载体的使用，从视觉或者听觉上都处于人可以识别的范畴以外，只有通过特殊的检测器或者阅读器才能读取到，除了我们常见的隐写术之外，这是一种新的信息隐藏技术。</p>
 <p>所以这个时候我们就要提高警惕了，不光是我们看得到的水印，看不到的盲水印才是最致命的威胁，虽然不会让我们觉得难看，但是却关乎到知识产权的问题，虽然这个在天朝看的不太重就是emmm。</p>
 <h2 id="0X02水印技术评判"><a href="#0X02水印技术评判" class="headerlink" title="0X02水印技术评判"></a>0X02水印技术评判</h2><p>既然有这个技术在这里，肯定会有一个好坏、高下之分，那么如何去衡量一个水印的好坏呢？我们可以从两个方面去看一下（隐蔽性和鲁棒性）：</p>
@@ -399,7 +403,7 @@
         <p><span>本文标题:</span><a href="/2017/11/24/盲水印技术/">盲水印技术</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年11月24日 - 13时58分</p>
-        <p><span>最后更新:</span>2017年11月30日 - 17时33分</p>
+        <p><span>最后更新:</span>2017年11月30日 - 17时41分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/24/盲水印技术/" title="盲水印技术">http://yoursite.com/2017/11/24/盲水印技术/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/11/24/盲水印技术/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
