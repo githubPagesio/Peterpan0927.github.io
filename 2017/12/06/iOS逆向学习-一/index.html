@@ -5,25 +5,22 @@
   
   <title>iOS逆向学习(一) | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到逆向的世界到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。
-那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程">
+  <meta name="description" content="物有本末，事有终始，知所先后，则近道矣。逆向工程则是帮助我们去理解编程中的道。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS逆向学习(一)">
 <meta property="og:url" content="http://yoursite.com/2017/12/06/iOS逆向学习-一/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="欢迎来到逆向的世界到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。
-那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程">
+<meta property="og:description" content="物有本末，事有终始，知所先后，则近道矣。逆向工程则是帮助我们去理解编程中的道。">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8811.00.38.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.44.35.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.49.17.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.52.37.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.58.29.png">
-<meta property="og:updated_time" content="2017-12-07T12:40:00.000Z">
+<meta property="og:updated_time" content="2017-12-07T13:01:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向学习(一)">
-<meta name="twitter:description" content="欢迎来到逆向的世界到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。
-那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程">
+<meta name="twitter:description" content="物有本末，事有终始，知所先后，则近道矣。逆向工程则是帮助我们去理解编程中的道。">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png">
   
     <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -280,7 +277,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="欢迎来到逆向的世界"><a href="#欢迎来到逆向的世界" class="headerlink" title="欢迎来到逆向的世界"></a>欢迎来到逆向的世界</h1><p>到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。</p>
+        <p>物有本末，事有终始，知所先后，则近道矣。逆向工程则是帮助我们去理解编程中的道。</p>
+<a id="more"></a>
+<h1 id="欢迎来到逆向的世界"><a href="#欢迎来到逆向的世界" class="headerlink" title="欢迎来到逆向的世界"></a>欢迎来到逆向的世界</h1><p>到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。</p>
 <p>那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程师是为了构建一个安全的应用给普通人去使用，那么逆向工程师就是一杆长矛，专门去刺破那些看似安全的App防护盾。对于微信和WhatsApp这样的IM类软件，交流的数据是核心，而对于银行，支付宝这样的电商类软件，交易的数据和用户的信息是他们的核心内容。这些核心数据都是需要重点保护的，于是开发员们通过反调试，数据加密，代码混淆等各种手段去重重保护自己的App避免被逆向工程师们破解，从而引发各种各样的安全问题影响用户的体验。</p>
 <p>目前的App的防护技术和iOS的逆向技术根本就不在一个平面上。一般的App防护，就像一座城堡，将App的MVC不知在城堡内部，看起来易守难攻，就像下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png" alt="屏幕快照 2017-12-06 下午10.59.01.png"></p>
@@ -444,7 +443,7 @@
         <p><span>本文标题:</span><a href="/2017/12/06/iOS逆向学习-一/">iOS逆向学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
         <p><span>发布时间:</span>2017年12月06日 - 22时39分</p>
-        <p><span>最后更新:</span>2017年12月07日 - 20时40分</p>
+        <p><span>最后更新:</span>2017年12月07日 - 21时01分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/12/06/iOS逆向学习-一/" title="iOS逆向学习(一)">http://yoursite.com/2017/12/06/iOS逆向学习-一/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/06/iOS逆向学习-一/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
