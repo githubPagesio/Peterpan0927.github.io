@@ -241,14 +241,14 @@
       
         <categories>
             
-            <category> CTF </category>
+            <category> 数字水印技术 傅立叶变换 </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> 数字水印技术 傅立叶变换 </tag>
+            <tag> CTF </tag>
             
         </tags>
         
@@ -377,7 +377,7 @@
         
         <tags>
             
-            <tag> lctf Padding Oracle Attack php格式化字符串漏洞 </tag>
+            <tag> CTF </tag>
             
         </tags>
         
@@ -478,7 +478,7 @@
         
         <tags>
             
-            <tag> iOS多线程 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -1021,7 +1021,7 @@
         
         <tags>
             
-            <tag> Review </tag>
+            <tag> Python </tag>
             
         </tags>
         
@@ -2204,7 +2204,7 @@
         
         <tags>
             
-            <tag> 网络安全 </tag>
+            <tag> CTF </tag>
             
         </tags>
         
@@ -2336,7 +2336,7 @@
         
         <tags>
             
-            <tag> iOS多线程 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -2512,7 +2512,7 @@
         
         <tags>
             
-            <tag> iOS多线程 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -3592,7 +3592,7 @@
         
         <tags>
             
-            <tag> 基础框架 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -3945,7 +3945,7 @@
         
         <tags>
             
-            <tag> 沙盒和app主流框架 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -4560,7 +4560,7 @@
         
         <tags>
             
-            <tag> Linux测试 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -4790,7 +4790,7 @@
     
     <entry>
       <title><![CDATA[TCP/IP(一)]]></title>
-      <url>/2017/08/24/OSI%E6%A8%A1%E5%9E%8B%E5%88%9D%E6%8E%A2/</url>
+      <url>/2017/08/24/TCP:IP-%E4%B8%80/</url>
       <content type="html"><![CDATA[<p>日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？<br><a id="more"></a></p>
 <h1 id="TCP-IP-一"><a href="#TCP-IP-一" class="headerlink" title="TCP/IP(一)"></a>TCP/IP(一)</h1><p>Unix只针对大型主机或服务器，而Linux适用于x86的个人计算机</p>
 <p>Linux的内核是运行程序和管理像磁盘和打印机等硬件设备的核心程序，它提供了一个在裸设备和应用程序之间的抽象层,简单来说如同心脏之于人，发动机之于汽车，CPU之于计算机，最后附上一个内核源码的<a href="https://www.kernel.org/" target="_blank" rel="external">下载地址</a>。</p>
@@ -4958,7 +4958,7 @@
         
         <tags>
             
-            <tag> TCP/IP协议 </tag>
+            <tag> TCP/IP </tag>
             
         </tags>
         
@@ -5022,7 +5022,7 @@
         
         <tags>
             
-            <tag> 网络服务器 </tag>
+            <tag> 网络 </tag>
             
         </tags>
         
@@ -5277,7 +5277,7 @@
         
         <tags>
             
-            <tag> shell编程和文本处理 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -5635,7 +5635,7 @@
         
         <tags>
             
-            <tag> 权限管理和I/O重定向、管道 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -5761,7 +5761,7 @@
         
         <tags>
             
-            <tag> Linux上的文件系统 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -6000,7 +6000,7 @@
         
         <tags>
             
-            <tag> Linux的前世今生 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -6121,7 +6121,7 @@
         
         <tags>
             
-            <tag> Linux命令初认识 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -6355,7 +6355,7 @@
         
         <tags>
             
-            <tag> 应用程序启动原理 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -6396,14 +6396,14 @@
       
         <categories>
             
-            <category> iOS </category>
+            <category> iOS 成员变量 </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> 成员变量和属性变量 真私有属性 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -6505,7 +6505,7 @@
         
         <tags>
             
-            <tag> ARC 分类 MRC和ARC转换和兼容 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -6696,14 +6696,14 @@
       
         <categories>
             
-            <category> MRC初步 </category>
+            <category> 内存管理 MRC </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> 内存管理 MRC </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -6929,7 +6929,7 @@
         
         <tags>
             
-            <tag> 类的本质 重写init 点语法 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -6981,7 +6981,7 @@
         
         <tags>
             
-            <tag> Xcode </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -7080,7 +7080,7 @@
         
         <tags>
             
-            <tag> 图片拉伸 通知 虚拟键盘 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -7108,7 +7108,7 @@
         
         <tags>
             
-            <tag> 中文编码解决 </tag>
+            <tag> Python脚本 </tag>
             
         </tags>
         
@@ -7181,7 +7181,7 @@
         
         <tags>
             
-            <tag> 汇编基础 </tag>
+            <tag> 计算机硬件 </tag>
             
         </tags>
         
@@ -7240,7 +7240,7 @@
         
         <tags>
             
-            <tag> 简单微博 MVC实现 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -7291,7 +7291,7 @@
         
         <tags>
             
-            <tag> TableView cell </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -7575,7 +7575,7 @@
         
         <tags>
             
-            <tag> Web安全  前后端基础 </tag>
+            <tag> CTF </tag>
             
         </tags>
         
@@ -7585,7 +7585,7 @@
       <title><![CDATA[iOS-UI学习(四)]]></title>
       <url>/2017/05/23/iOS-UI%E5%AD%A6%E4%B9%A0-%E5%9B%9B/</url>
       <content type="html"><![CDATA[<p>UI初步（四）<br><a id="more"></a></p>
-<h1 id="UI基础Day5"><a href="#UI基础Day5" class="headerlink" title="UI基础Day5"></a>UI基础Day5</h1><h2 id="1-自定义一个coverView"><a href="#1-自定义一个coverView" class="headerlink" title="1.自定义一个coverView"></a>1.自定义一个coverView</h2><blockquote>
+<h2 id="1-自定义一个coverView"><a href="#1-自定义一个coverView" class="headerlink" title="1.自定义一个coverView"></a>1.自定义一个coverView</h2><blockquote>
 <p>首先要创建一个coverView的类</p>
 <p>在这个类当中重写初始化他的方法</p>
 <p>在ViewController里面进行对象的实例化并加入其父控件(注意，最后一定要赋值回去：coverView.model = _model)</p>
@@ -7693,7 +7693,7 @@
         
         <tags>
             
-            <tag> 代理设计的理解 </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -7796,7 +7796,7 @@
         
         <tags>
             
-            <tag> Linux内核 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -7873,7 +7873,7 @@
         
         <tags>
             
-            <tag> 交互式笔记本 </tag>
+            <tag> 爬虫 </tag>
             
         </tags>
         
@@ -7936,7 +7936,7 @@
         
         <tags>
             
-            <tag> 较完善的App </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -8029,7 +8029,7 @@
         
         <tags>
             
-            <tag> iOS UI </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -8177,7 +8177,7 @@
         
         <tags>
             
-            <tag> iOS OC </tag>
+            <tag> iOS开发 </tag>
             
         </tags>
         
@@ -8239,7 +8239,7 @@
         
         <tags>
             
-            <tag> 数据库和HighCharts调用 </tag>
+            <tag> 爬虫 </tag>
             
         </tags>
         
@@ -8374,7 +8374,7 @@
         
         <tags>
             
-            <tag> 基础介绍 正则匹配 </tag>
+            <tag> 爬虫 </tag>
             
         </tags>
         
@@ -8472,7 +8472,7 @@
         
         <tags>
             
-            <tag> 非对称加密算法 </tag>
+            <tag> CTF </tag>
             
         </tags>
         
@@ -8502,7 +8502,7 @@
         
         <tags>
             
-            <tag> 无框架原生爬虫 </tag>
+            <tag> 爬虫 </tag>
             
         </tags>
         
@@ -8607,7 +8607,7 @@
         
         <tags>
             
-            <tag> 樱花下落的速度是每秒五厘米么？ </tag>
+            <tag> 动漫 </tag>
             
         </tags>
         
