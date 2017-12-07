@@ -1,862 +1,824 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Peterpan&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Peterpan's Blog">
-<meta property="og:url" content="http://yoursite.com/page/7/index.html">
-<meta property="og:site_name" content="Peterpan's Blog">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Peterpan's Blog">
-  
-    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/miaopasi.gif">
-  
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
+    <meta charset="utf-8">
     
     
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: true,
-          isPost: false,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+    <title>Peterpan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="undefined">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	false,
+            lv: JSON.parse('{"enable":true,"app_id":null,"app_key":null,"icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":null,"appkey":null,"notify":false,"verify":false,"placeholder":"give me some sugers plz...","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
+
+
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
-            
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
         </a>
-
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:1549346936@qq.com" title="1549346936@qq.com" class="mail">1549346936@qq.com</a>
         </hgroup>
-
         
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
-                        
-                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
-                        
-                            <li><a href="http://konachan.com/">失楽園</a></li>
-                        
-                            <li><a href="/about">世界の音楽</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
-                            
-                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
-                            
-                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
-                            
-                                <a class="fl google" target="_blank" href="#" title="google">google</a>
-                            
-                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
-                            
-                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ARC-分类-MRC和ARC转换和兼容/" style="font-size: 10px;">ARC 分类 MRC和ARC转换和兼容</a> <a href="/tags/CTF/" style="font-size: 20px;">CTF</a> <a href="/tags/Linux上的文件系统/" style="font-size: 10px;">Linux上的文件系统</a> <a href="/tags/Linux内核/" style="font-size: 10px;">Linux内核</a> <a href="/tags/Linux命令初认识/" style="font-size: 10px;">Linux命令初认识</a> <a href="/tags/Linux测试/" style="font-size: 10px;">Linux测试</a> <a href="/tags/Linux的前世今生/" style="font-size: 10px;">Linux的前世今生</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Re/" style="font-size: 10px;">Re</a> <a href="/tags/Review/" style="font-size: 10px;">Review</a> <a href="/tags/TCP-IP/" style="font-size: 15px;">TCP/IP</a> <a href="/tags/TCP-IP协议/" style="font-size: 10px;">TCP/IP协议</a> <a href="/tags/TableView-cell/" style="font-size: 10px;">TableView cell</a> <a href="/tags/Web安全-前后端基础/" style="font-size: 10px;">Web安全  前后端基础</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/hash算法-cache服务器/" style="font-size: 10px;">hash算法 cache服务器</a> <a href="/tags/hexo-github/" style="font-size: 10px;">hexo github</a> <a href="/tags/iOS-OC/" style="font-size: 10px;">iOS OC</a> <a href="/tags/iOS-UI/" style="font-size: 10px;">iOS UI</a> <a href="/tags/iOS多线程/" style="font-size: 15px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/lctf-Padding-Oracle-Attack-php格式化字符串漏洞/" style="font-size: 10px;">lctf Padding Oracle Attack php格式化字符串漏洞</a> <a href="/tags/shell编程和文本处理/" style="font-size: 10px;">shell编程和文本处理</a> <a href="/tags/中文编码解决/" style="font-size: 10px;">中文编码解决</a> <a href="/tags/交互式笔记本/" style="font-size: 10px;">交互式笔记本</a> <a href="/tags/代理设计的理解/" style="font-size: 10px;">代理设计的理解</a> <a href="/tags/内存管理-MRC/" style="font-size: 10px;">内存管理 MRC</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/图片拉伸-通知-虚拟键盘/" style="font-size: 10px;">图片拉伸 通知 虚拟键盘</a> <a href="/tags/基础介绍-正则匹配/" style="font-size: 10px;">基础介绍 正则匹配</a> <a href="/tags/基础框架/" style="font-size: 10px;">基础框架</a> <a href="/tags/应用程序启动原理/" style="font-size: 10px;">应用程序启动原理</a> <a href="/tags/成员变量和属性变量-真私有属性/" style="font-size: 10px;">成员变量和属性变量 真私有属性</a> <a href="/tags/数字水印技术-傅立叶变换/" style="font-size: 10px;">数字水印技术 傅立叶变换</a> <a href="/tags/数据库和HighCharts调用/" style="font-size: 10px;">数据库和HighCharts调用</a> <a href="/tags/无框架原生爬虫/" style="font-size: 10px;">无框架原生爬虫</a> <a href="/tags/权限管理和I-O重定向、管道/" style="font-size: 10px;">权限管理和I/O重定向、管道</a> <a href="/tags/樱花下落的速度是每秒五厘米么？/" style="font-size: 10px;">樱花下落的速度是每秒五厘米么？</a> <a href="/tags/汇编基础/" style="font-size: 10px;">汇编基础</a> <a href="/tags/沙盒和app主流框架/" style="font-size: 10px;">沙盒和app主流框架</a> <a href="/tags/简单微博-MVC实现/" style="font-size: 10px;">简单微博 MVC实现</a> <a href="/tags/类的本质-重写init-点语法/" style="font-size: 10px;">类的本质 重写init 点语法</a> <a href="/tags/网络安全/" style="font-size: 10px;">网络安全</a> <a href="/tags/网络服务器/" style="font-size: 10px;">网络服务器</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/较完善的App/" style="font-size: 10px;">较完善的App</a> <a href="/tags/非对称加密算法/" style="font-size: 10px;">非对称加密算法</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
-            </hgroup>
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
             
-            <nav class="header-menu">
-                <ul>
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                CATEGORIES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-plus-square"></i>
+                CUSTOM
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        
+    <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Peterpan&#39;s Blog</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+    <div class="container fade-scale">
+        <h1 class="title">Peterpan&#39;s Blog</h1>
+        <h5 class="subtitle">
+            
                 
-                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
-                
-                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
-                
-                    <li><a href="http://konachan.com/">失楽園</a></li>
-                
-                    <li><a href="/about">世界の音楽</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
-                    
-                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
-                    
-                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
-                    
-                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
-                    
-                        <a class="google" target="_blank" href="#" title="google">google</a>
-                    
-                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
-                    
-                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                    
-                </div>
-            </nav>
-        </header>                
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+    <div class="container body-wrap">
+        <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-Linux进程"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/22/Linux进程/">Linux进程</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-22 17:29:17" datetime="2017-05-22T09:29:17.000Z"  itemprop="datePublished">2017-05-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/系统调用-内核空间-用户空间/">系统调用 内核空间 用户空间</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/22/Linux进程/" class="leancloud_visitors" data-flag-title="Linux进程" title="Linux进程">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/22/Linux进程/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/22/Linux进程/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>Linux进程<br>
+    
+        <a href="/2017/05/22/Linux进程/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux内核/">Linux内核</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-jupyter笔记本基本使用"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-18 16:27:22" datetime="2017-05-18T08:27:22.000Z"  itemprop="datePublished">2017-05-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ipython-图表化/">Ipython 图表化</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/18/jupyter笔记本基本使用/" class="leancloud_visitors" data-flag-title="jupyter笔记本基本使用" title="jupyter笔记本基本使用">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/18/jupyter笔记本基本使用/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/18/jupyter笔记本基本使用/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>jupyter笔记本使用（爬虫）<br>
+    
+        <a href="/2017/05/18/jupyter笔记本基本使用/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/交互式笔记本/">交互式笔记本</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-iOS-UI学习-三"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-18 15:30:00" datetime="2017-05-18T07:30:00.000Z"  itemprop="datePublished">2017-05-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/KVC字典快速赋值/">KVC字典快速赋值</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/18/iOS-UI学习-三/" class="leancloud_visitors" data-flag-title="iOS-UI学习(三)" title="iOS-UI学习(三)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/18/iOS-UI学习-三/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/18/iOS-UI学习-三/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>UI初步（三）<br>
+    
+        <a href="/2017/05/18/iOS-UI学习-三/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/较完善的App/">较完善的App</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-iOS-UI学习-二"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-12 20:12:01" datetime="2017-05-12T12:12:01.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MVC初步-xib与storyboard/">MVC初步 xib与storyboard</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/12/iOS-UI学习-二/" class="leancloud_visitors" data-flag-title="iOS-UI学习(二)" title="iOS-UI学习(二)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/12/iOS-UI学习-二/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/12/iOS-UI学习-二/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>UI初步（二）<br>
+    
+        <a href="/2017/05/12/iOS-UI学习-二/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-UI/">iOS UI</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-iOS-UI学习"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-12 20:04:34" datetime="2017-05-12T12:04:34.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/UI学习-基础/">UI学习 基础</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/12/iOS-UI学习/" class="leancloud_visitors" data-flag-title="iOS-UI学习" title="iOS-UI学习">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/12/iOS-UI学习/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/12/iOS-UI学习/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>UI初步<br>
+    
+        <a href="/2017/05/12/iOS-UI学习/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-OC/">iOS OC</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-网络爬虫-二"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-12 19:58:21" datetime="2017-05-12T11:58:21.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python-MongoDB-charts/">Python MongoDB charts</a></li></ul>
+
+
+
+        
+	<span id="/2017/05/12/网络爬虫-二/" class="leancloud_visitors" data-flag-title="网络爬虫(二)" title="网络爬虫(二)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/12/网络爬虫-二/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/12/网络爬虫-二/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>学习笔记<br>
+    
+        <a href="/2017/05/12/网络爬虫-二/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库和HighCharts调用/">数据库和HighCharts调用</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-网络爬虫"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/网络爬虫/">网络爬虫</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-12 19:48:24" datetime="2017-05-12T11:48:24.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+
+
+        
+	<span id="/2017/05/12/网络爬虫/" class="leancloud_visitors" data-flag-title="网络爬虫" title="网络爬虫">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/12/网络爬虫/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/12/网络爬虫/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>学习笔记<br>
+    
+        <a href="/2017/05/12/网络爬虫/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础介绍-正则匹配/">基础介绍 正则匹配</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-RSA密钥生成的过程-数学证明"
+  class="article-card article-type-post" itemprop="blogPost">
+    
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-12 19:43:26" datetime="2017-05-12T11:43:26.000Z"  itemprop="datePublished">2017-05-12</time>
+
+        
+
+
+        
+	<span id="/2017/05/12/RSA密钥生成的过程-数学证明/" class="leancloud_visitors" data-flag-title="RSA密钥生成的过程(数学证明)" title="RSA密钥生成的过程(数学证明)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/05/12/RSA密钥生成的过程-数学证明/#comment">
+            <span class="valine-comment-count" data-xid="/2017/05/12/RSA密钥生成的过程-数学证明/"></span>
+        </a>
+    </span>
+
+
+        
+    </div>
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>RSA算法分析<br>
+    
+        <a href="/2017/05/12/RSA密钥生成的过程-数学证明/" class="post-more waves-effect waves-button">
+            more...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/非对称加密算法/">非对称加密算法</a></li></ul>
+
+    </div>
+    
+</article>
+
+            </li>
+        
+        </ul>
+        
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
     </div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-Linux进程" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/22/Linux进程/" class="article-date">
-      <time datetime="2017-05-22T09:29:17.000Z" itemprop="datePublished">2017-05-22</time>
-</a>
+
     </div>
-  
-  <div class="article-inner">
+
+        <footer class="footer">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="top">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/22/Linux进程/">Linux进程</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <p>
+    <span>Links：</span>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Linux进程<br>
-          
-      
-      
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.gitee.com" target="_blank">gitee</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/系统调用-内核空间-用户空间/">系统调用 内核空间 用户空间</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux内核/">Linux内核</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/22/Linux进程/#more">新世界の扉 >></a>
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-jupyter笔记本基本使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/18/jupyter笔记本基本使用/" class="article-date">
-      <time datetime="2017-05-18T08:27:22.000Z" itemprop="datePublished">2017-05-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>jupyter笔记本使用（爬虫）<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Ipython-图表化/">Ipython 图表化</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/交互式笔记本/">交互式笔记本</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/18/jupyter笔记本基本使用/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS-UI学习-三" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/18/iOS-UI学习-三/" class="article-date">
-      <time datetime="2017-05-18T07:30:00.000Z" itemprop="datePublished">2017-05-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>UI初步（三）<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/KVC字典快速赋值/">KVC字典快速赋值</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/较完善的App/">较完善的App</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/18/iOS-UI学习-三/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS-UI学习-二" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/12/iOS-UI学习-二/" class="article-date">
-      <time datetime="2017-05-12T12:12:01.000Z" itemprop="datePublished">2017-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>UI初步（二）<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/MVC初步-xib与storyboard/">MVC初步 xib与storyboard</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-UI/">iOS UI</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/12/iOS-UI学习-二/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS-UI学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/12/iOS-UI学习/" class="article-date">
-      <time datetime="2017-05-12T12:04:34.000Z" itemprop="datePublished">2017-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>UI初步<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/UI学习-基础/">UI学习 基础</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-OC/">iOS OC</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/12/iOS-UI学习/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-网络爬虫-二" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/12/网络爬虫-二/" class="article-date">
-      <time datetime="2017-05-12T11:58:21.000Z" itemprop="datePublished">2017-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>学习笔记<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Python-MongoDB-charts/">Python MongoDB charts</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库和HighCharts调用/">数据库和HighCharts调用</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/12/网络爬虫-二/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-网络爬虫" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/12/网络爬虫/" class="article-date">
-      <time datetime="2017-05-12T11:48:24.000Z" itemprop="datePublished">2017-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/网络爬虫/">网络爬虫</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>学习笔记<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础介绍-正则匹配/">基础介绍 正则匹配</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/12/网络爬虫/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-RSA密钥生成的过程-数学证明" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/12/RSA密钥生成的过程-数学证明/" class="article-date">
-      <time datetime="2017-05-12T11:43:26.000Z" itemprop="datePublished">2017-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>RSA算法分析<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/非对称加密算法/">非对称加密算法</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/05/12/RSA密钥生成的过程-数学证明/#more">新世界の扉 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
-    </nav>
-  
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 Peter pan
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >訪問者の量: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">読書の量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
     </div>
 </footer>
 
-    </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
 
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/page/7/&title=Peterpan's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/page/7/&title=Peterpan's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
 
 
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvElEQVR42u3aQW4DIRAEQP//046UWw7G3bDgdVScLISWwocRM8PjEY/n70hmkpXj+QsGLi7uMvc5HC13fIDx98cGXFzc89xxoMk3zkPb+O94OY+Li3szbn6kMREXF/c/cfMNxutxcXG/hZsEmmS0QW1jroaLi7vAbQumO35vrO/i4uKW3Gc52qRoXFStd8fFxT3CzZsiSQIz12hp0yFcXNzd3HESkpc5kgOs3GRwcXFPctvNiovIwuGjwIqLi7uZO5mEBKWNuQbMm78PFxf3CDf5dP4Aay4g1tcmXFzcbdy82bmeLM11SR7tjQkXF3eZu94EnQt80QOslX4vLi7uAneuCdoeYKV08uebuLi4B7nrmdNcSQUXF/cbuXkykzdL2hlcXNzz3LmANXehqZslr9bg4uJu5ubXmhx3bYKEi4v7KW5bvsxTprnDvAlkuLi4R7htUaMtebRpUt2JxcXFvZTbBpQWMQ6Lc1crXFzcM9w8eLWhsH0EFh0YFxf3IDcvXrTvpi6+yuDi4t6Mm6/Z0XTBxcW9M3f9OddSwQUXF/cgtw0uV+HqsIiLi3uEO1cwbRu0cw87cHFxj3N/ALem/DNNhvilAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
 </script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
 
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
     });
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
-  </div>
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>
