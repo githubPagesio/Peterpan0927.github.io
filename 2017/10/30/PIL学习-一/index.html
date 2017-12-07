@@ -208,7 +208,10 @@
 </blockquote>
 <p>使用给定的变量mode和size生成新的图像。Size是给定的宽/高二元组，这是按照像素数来计算的。对于单通道图像，变量color只给定一个值；对于多通道图像，变量color给定一个元组（每个通道对应一个值）。在版本1.1.4及其之后，用户也可以用颜色的名称，比如给变量color赋值为“red”。如果没有对变量color赋值，图像内容将会被全部赋值为0（图像即为黑色）。如果变量color是空，图像将不会被初始化，即图像的内容全为0。这对向该图像复制或绘制某些内容是有用的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im= Image.new(<span class="string">"RGB"</span>, (<span class="number">128</span>, <span class="number">128</span>), <span class="string">"red"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im.show()</div></pre></td></tr></table></figure>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png" alt="屏幕快照 2017-10-30 下午6.47.31.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png" alt="屏幕快照 2017-10-30 下午6.47.31.png" title="" class="">
+                <p>屏幕快照 2017-10-30 下午6.47.31.png</p>
+            </figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>im= Image.new(<span class="string">"RGB"</span>, (<span class="number">128</span>, <span class="number">128</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>im.show()</div></pre></td></tr></table></figure>
 <p>图像im为128x128大小的黑色图像，因为变量color不赋值的话，图像内容被设置为0，即黑色。</p>
 <h3 id="图像的一些基本操作"><a href="#图像的一些基本操作" class="headerlink" title="图像的一些基本操作"></a>图像的一些基本操作</h3><ol>
@@ -266,7 +269,10 @@
 <p>含义：创建一个可以在给定图像上绘图的对象，图像的内容会被修改</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageDraw, Image</div><div class="line">im = Image.open(<span class="string">"test.jpg"</span>)</div><div class="line">draw = ImageDraw.Draw(im)</div><div class="line">draw.line((<span class="number">0</span>, <span class="number">0</span>)+im.size, fill = <span class="number">128</span>)</div><div class="line">draw.line((<span class="number">0</span>,im01.size[<span class="number">1</span>], im.size[<span class="number">0</span>], <span class="number">0</span>), fill = <span class="number">128</span>)</div><div class="line">im.show()</div><div class="line"><span class="keyword">del</span> draw</div></pre></td></tr></table></figure>
 <p>在图片上绘制了两条灰色的对角线，如下图：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8810.11.14.png" alt="屏幕快照 2017-10-30 下午10.11.14.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8810.11.14.png" alt="屏幕快照 2017-10-30 下午10.11.14.png" title="" class="">
+                <p>屏幕快照 2017-10-30 下午10.11.14.png</p>
+            </figure>
 <h3 id="ImageDraw模块中的方法"><a href="#ImageDraw模块中的方法" class="headerlink" title="ImageDraw模块中的方法"></a>ImageDraw模块中的方法</h3><ol>
 <li>Arc</li>
 </ol>

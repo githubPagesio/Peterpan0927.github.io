@@ -222,7 +222,10 @@
 <p>搞清楚了ASCII、Unicode和UTF-8的关系，我们就可以总结一下现在计算机系统通用的字符编码工作方式：</p>
 <p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。</p>
 <p>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt="屏幕快照 2017-10-31 下午5.11.16.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt="屏幕快照 2017-10-31 下午5.11.16.png" title="" class="">
+                <p>屏幕快照 2017-10-31 下午5.11.16.png</p>
+            </figure>
 <p>那么这个时候可能会有人问为什么在内存中使用Unicode呢，全部使用UTF-8岂不是更好么，这个时候参照知乎上的答案来说应该是内存存储字节流的时候，字符不定长会给算法带来麻烦。比如说我们无法确定第2000个字符从哪里开始，所以会采用Unicode,而在存储的时候，自然是选择不定长的UTF-8了，这里还是扔出一个<a href="https://www.zhihu.com/question/52346583" target="_blank" rel="external">链接</a>。</p>
 <p>还有一点需要注意的就是python3和python2的字符串编码差别还是挺大的，可以自行查阅一番。</p>
 <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
