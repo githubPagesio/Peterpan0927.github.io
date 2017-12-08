@@ -199,10 +199,7 @@
 <li>检查本地的 DNS 服务器配置，得到 DNS Server = 10.10.10.10，发个消息给它，让 DNS 服务器帮助查找。此消息为 UDP 格式，目的 IP=10.10.10.10，小明电脑发现和自己不在一个网段，于是使用上一节提到的不同网段的通信，将 IP 包发给 DNS Server = 10.10.1 […]</li>
 <li>DNS Server （10.10.10.10）在自己的缓存里也没有发现，于是向互联网的上级 DNS Server （8.8.8.8）发送协查请求；DNS Server （8.8.8.8）发现了匹配项：HTTP://www.myorange.com2.2.2.2，于是将协查结果返回给小明公司 DNS 服务器（10.10.10.10），然后再返回到小明电脑（10.1.1.2）DNS 进程。（如果上层服务器也没有找到，就继续向上迭代查找）</li>
 </ol>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt="屏幕快照 2017-10-15 下午3.01.29.png" title="" class="">
-                <p>屏幕快照 2017-10-15 下午3.01.29.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt="屏幕快照 2017-10-15 下午3.01.29.png"></p>
 <p>这个时候，整个DNS解析的过程就完毕了,小明可以将访问服务器的请求打包成http格式之后告诉TCP进程，同时告诉TCP进程的还有该域名的IP地址。</p>
 <h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><h3 id="国际化域名"><a href="#国际化域名" class="headerlink" title="国际化域名"></a>国际化域名</h3><p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
 <h3 id="TTL值"><a href="#TTL值" class="headerlink" title="TTL值"></a>TTL值</h3><p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了,这个值其实并不是固定的，在不同情况下是不同的。</p>
@@ -211,17 +208,11 @@
 <li>购买一个域名，可以使用GoDaddy或者国内一些信得过的，我是因为优惠劵的缘故所以选了腾讯云…并且免费选了大天朝的cn域名，虽然审核很麻烦🐸的说。</li>
 <li>然后在云解析界面将我们的github添加到CNAME中去，将新买的域名指向原来的github域名，主机记录选择@，也就是直接解析主机名,如下图所示：</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt="屏幕快照 2017-08-16 下午2.18.46.png" title="" class="">
-                <p>屏幕快照 2017-08-16 下午2.18.46.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt="屏幕快照 2017-08-16 下午2.18.46.png"></p>
 <ul>
 <li>这个时候还没有结束，只在域名商处修改CNAME之后，输入的域名会被重定向到Github pages的页面，但是由于你这个域名github不知道，所以直接就果断拒绝并且给一你巴掌，上面写着404，所以还是乖乖的把名字告诉他：在<code>你博客的本地目录/source/</code>目录下创建一个CNAME文件，里面写上你买的域名，然后就可以推送了：</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt="屏幕快照 2017-08-16 下午2.27.26.png" title="" class="">
-                <p>屏幕快照 2017-08-16 下午2.27.26.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt="屏幕快照 2017-08-16 下午2.27.26.png"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
 <h4 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h4><ul>
 <li><a href="http://blog.zfan.me/2015/09/03/%E4%B8%BA%E9%83%A8%E7%BD%B2%E5%9C%A8Github%E4%B8%8A%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D/" target="_blank" rel="external">参考博客</a></li>
@@ -234,7 +225,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-08T12:49:10.000Z" itemprop="dateUpdated">2017-12-08 20:49:10</time>
+    Last updated: <time datetime="2017-12-08T12:49:10.000Z" itemprop="dateUpdated">2017-12-08 20:49:10</time>
 </span><br>
 
 

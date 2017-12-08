@@ -190,15 +190,9 @@
 <p>子进程是父进程的<strong>副本</strong>，它将获得父进程数据空间、堆、栈等资源的副本。注意，子进程持有的是上述存储空间的“副本”，这意味着父子进程间<strong>不共享</strong>这些存储空间，<strong>子进程有了独立的地址空间</strong>。</p>
 <p>在该调用结束的时候，在返回点这个相同的位置上，父进程恢复执行，子进程开始执行。fork()系统调用从内核中返回两次：一次回到父进程，另一次回到新产生的子进程。</p>
 <p>创建子进程，fork()函数返回两个数值，若创建成功，子进程中返回0；父进程返回子进程ID。用资源空间图示如下：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/DACF16C2-9CA7-436A-B811-D6F36ACC4F1B.png" alt="DACF16C2-9CA7-436A-B811-D6F36ACC4F1B" title="" class="">
-                <p>DACF16C2-9CA7-436A-B811-D6F36ACC4F1B</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/DACF16C2-9CA7-436A-B811-D6F36ACC4F1B.png" alt="DACF16C2-9CA7-436A-B811-D6F36ACC4F1B"></p>
 <p>代码执行解释：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/82A0E7D9-73C9-4BB0-9BF9-161AD547FD56.png" alt="82A0E7D9-73C9-4BB0-9BF9-161AD547FD56" title="" class="">
-                <p>82A0E7D9-73C9-4BB0-9BF9-161AD547FD56</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/82A0E7D9-73C9-4BB0-9BF9-161AD547FD56.png" alt="82A0E7D9-73C9-4BB0-9BF9-161AD547FD56"></p>
 <p>由操作系统相关知识可知，<strong>进程是系统资源分配的基本单位，</strong>因此子进程与父进程不共享进程资源空间。在执行代码段第8行之前，系统中只有默认的主进程。在执行完代码段第8行后，系统中就有了两个进程，即主进程和由其创建的子进程。所以代码执行在打印的时候只有一个”Before the fork()…”，而有两个”After the fork()…”</p>
 <p>执行了fork()函数后，主进程为父进程生成了一份资源空间的副本。主进程中的pid为子进程的pid(pid&gt;0)，子进程中的pid为0。</p>
 <p>在fork()函数之后父进程与子进程都从下一行执行，即第9行。因为主进程中pid&gt;0，可以执行else if(pid&gt;0)段代码，子进程pid=0，可以执行else if(pid==0)段代码。</p>
@@ -209,19 +203,10 @@
 <p>最终，程序通过exit()系统调用退出执行。这个函数会终结进程并将其占用的资源给释放掉。父进程可以通过wait4()系统调用来查询子进程是否被终结，这其实使得进程拥有了等待特定进程执行完毕的能力。进程退出执行后被设置为僵死状态，直到它的父进程调用wait()或者waitpid()为止。</p>
 <h2 id="2-进程描述符和任务结构"><a href="#2-进程描述符和任务结构" class="headerlink" title="2.进程描述符和任务结构"></a>2.进程描述符和任务结构</h2><h4 id="1-进程描述符"><a href="#1-进程描述符" class="headerlink" title="1.进程描述符"></a>1.进程描述符</h4><p>内核把进程的列表存放在叫做”任务队列”(task list)的双向循环链表中。链表中的每一项都是类型为task_struct，称为进程描述符的结构。进程描述符包含一个进程的所有信息。</p>
 <p>task_struct中包含的数据能够完整的描述一个正在执行的程序：它打开的文件，进程的地址空间，进程的状态，挂起的信号等等</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/48840FF2-338D-4B87-A792-862B476EF114.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/48840FF2-338D-4B87-A792-862B476EF114.png" alt=""></p>
 <p>Linux通过slab分配器分配task_struct结构，这样可以达到对象复用和缓存着色的目的，由于slab分配器动态生成task_struct，所以只需要在栈底（对于向下生长的栈）或者栈顶（对于向上生长的栈）创建一个新的结构struct thread_info</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/132CC7AF-8C03-4506-A99E-B6C5AE0559E6.png" alt="132CC7AF-8C03-4506-A99E-B6C5AE0559E6" title="" class="">
-                <p>132CC7AF-8C03-4506-A99E-B6C5AE0559E6</p>
-            </figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/EBC98897-3BCD-4B27-92C0-889C0CFC9FF1.png" alt="EBC98897-3BCD-4B27-92C0-889C0CFC9FF1" title="" class="">
-                <p>EBC98897-3BCD-4B27-92C0-889C0CFC9FF1</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/132CC7AF-8C03-4506-A99E-B6C5AE0559E6.png" alt="132CC7AF-8C03-4506-A99E-B6C5AE0559E6"></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/EBC98897-3BCD-4B27-92C0-889C0CFC9FF1.png" alt="EBC98897-3BCD-4B27-92C0-889C0CFC9FF1"></p>
 <p>每个任务的thread_info结构在它的内核栈的尾端分配。结构中的task域中存放的是指向task_struct的指针。</p>
 <p>内核通过一个唯一的进程标识值或者PID来标识每个进程。PID是一个数，实际上就是一个int型。为了和老版Unix和Linux兼容，PID的最大值默认设置为32768（short int短整型的最大值），内核把每个PID存放在他们各自的进程描述符中。</p>
 <p>新创建的进程的PID通常是前一个进程的PID+1，PID并非无限向上增长。PID有一个最大值上限，当超过了这个上限后，PID就开始循环使用已闲置的小PID号（循环的起点PID号根据不同操作系统而不同）。</p>
@@ -232,10 +217,7 @@
 <p>通过<code>ps aux</code>可以看到进程的状态。</p>
 <p>O：进程正在处理器运行,这个状态从来没有见过.<br>S：休眠状态（sleeping）<br>R：等待运行（runable）R Running or runnable (on run queue) 进程处于运行或就绪状态<br>I：空闲状态（idle）<br>Z：僵尸状态（zombie）<br>T：跟踪状态（Traced）<br>B：进程正在等待更多的内存页<br>D: 不可中断的深度睡眠，一般由IO引起，同步IO在做读或写操作时，cpu不能做其它事情，只能等待，这时进程处于这种状态，如果程序采用异步IO，这种状态应该就很少见到了</p>
 <p>其中就绪状态表示进程已经分配到除CPU以外的资源，等CPU调度它时就可以马上执行了。运行状态就是正在运行了，获得包括CPU在内的所有资源。等待状态表示因等待某个事件而没有被执行，这时候不耗CPU时间，而这个时间有可能是等待IO、申请不到足够的缓冲区或者在等待信号。下面是一个关系图</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/918777F0-F802-49CD-9B45-5AA56CDBC383.png" alt="918777F0-F802-49CD-9B45-5AA56CDBC383" title="" class="">
-                <p>918777F0-F802-49CD-9B45-5AA56CDBC383</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/918777F0-F802-49CD-9B45-5AA56CDBC383.png" alt="918777F0-F802-49CD-9B45-5AA56CDBC383"></p>
 <p>内核中经常需要设置当前进程的状态。这时最好用set_task_state(task,state)函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set_task_state(task, state);         <span class="comment">/*将任务task的状态设置为state*/</span></div></pre></td></tr></table></figure>
 <p>该函数将指定的进程指定为指定的状态，必要的时候，他会设置内存屏障来强制其他处理器作重新排序（一般只有在对称多处理机制系统下才有这个必要）否则它等价于：</p>
@@ -273,7 +255,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:29:02.000Z" itemprop="dateUpdated">2017-12-07 22:29:02</time>
+    Last updated: <time datetime="2017-12-07T14:29:02.000Z" itemprop="dateUpdated">2017-12-07 22:29:02</time>
 </span><br>
 
 

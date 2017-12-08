@@ -189,10 +189,7 @@
 <h2 id="egrep和扩展正则表达式"><a href="#egrep和扩展正则表达式" class="headerlink" title="egrep和扩展正则表达式"></a>egrep和扩展正则表达式</h2><p>egrep就是使用的扩展正则表达式，他的使用也可以描述成</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -E</div></pre></td></tr></table></figure>
 <p>其中扩展正则表达式和传统的正则表达式有些许的不同</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/C0211EED7800B5EADC37A0F1E75CB7F8.png" alt="C0211EED7800B5EADC37A0F1E75CB7F8.png" title="" class="">
-                <p>C0211EED7800B5EADC37A0F1E75CB7F8.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/C0211EED7800B5EADC37A0F1E75CB7F8.png" alt="C0211EED7800B5EADC37A0F1E75CB7F8.png"></p>
 <p>练习：</p>
 <p>1.显示当前root、centos或user1用户的默认shell和UID</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -E &apos;^(root|centos|user1)\&gt;&apos; /etc/passwd | cut -d: -f1,3,7</div></pre></td></tr></table></figure>
@@ -226,10 +223,7 @@
 <p>“ “:弱引用,其中的变量引用会被替换成变量值</p>
 <p>‘ ‘:强引用,其中的变量引用不会被替换成变量值，而是保持原字符串</p>
 </blockquote>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%884.22.14.png" alt="屏幕快照 2017-08-15 下午4.22.14.png" title="" class="">
-                <p>屏幕快照 2017-08-15 下午4.22.14.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%884.22.14.png" alt="屏幕快照 2017-08-15 下午4.22.14.png"></p>
 <blockquote>
 <p>显示、销毁已定义的所有变量</p>
 </blockquote>
@@ -264,10 +258,7 @@
 <p>$#:传递给脚本的参数的个数</p>
 <p>shift [n]:可以踢掉传递进来的变量，n表示数量，默认为1</p>
 </blockquote>
-<p>示例：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.21.44.png" alt="屏幕快照 2017-08-15 下午7.05.03.png](http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.05.03.png)![屏幕快照 2017-08-15 下午7.21.44.png" title="" class="">
-                <p>屏幕快照 2017-08-15 下午7.05.03.png](http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.05.03.png)![屏幕快照 2017-08-15 下午7.21.44.png</p>
-            </figure></p>
+<p>示例：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.05.03.png" alt="屏幕快照 2017-08-15 下午7.05.03.png"><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.21.44.png" alt="屏幕快照 2017-08-15 下午7.21.44.png"></p>
 <h2 id="bash环境配置"><a href="#bash环境配置" class="headerlink" title="bash环境配置"></a>bash环境配置</h2><h4 id="按生效范围划分，存在两类："><a href="#按生效范围划分，存在两类：" class="headerlink" title="按生效范围划分，存在两类："></a>按生效范围划分，存在两类：</h4><blockquote>
 <p>全局配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; /etc/profile</div><div class="line">&gt; /etc/profile.d/*.sh</div><div class="line">&gt; /etc/bashrc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
@@ -298,40 +289,22 @@
 <p>2.使用source或.命令进程</p>
 <h2 id="bash中的算数运算"><a href="#bash中的算数运算" class="headerlink" title="bash中的算数运算"></a>bash中的算数运算</h2><p>如果忘记了bash中的算术运算符记得使用命令<code>help let</code>哦</p>
 <h3 id="实现算数运算"><a href="#实现算数运算" class="headerlink" title="实现算数运算"></a>实现算数运算</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let var=算数表达式</div><div class="line"></div><div class="line">var=$[算数表达式]    #有返回值，可以直接引用或者打印-&gt;echo $[算数表达式]</div><div class="line"></div><div class="line">var=$((算数表达式))</div><div class="line"></div><div class="line">var=$(expr arg1 arg2...)</div><div class="line"></div><div class="line">#其中乘法符号有些情况需要转义</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%882.50.35.png" alt="屏幕快照 2017-08-17 下午2.50.35.png" title="" class="">
-                <p>屏幕快照 2017-08-17 下午2.50.35.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%882.50.35.png" alt="屏幕快照 2017-08-17 下午2.50.35.png"></p>
 <p>bash中有内建的随机数生成器：$RANDOM</p>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>传入两个文件路径，写一个脚本统计这两个文件中的空白行数目</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#! /bin/bash</div><div class="line"></div><div class="line">spaceline1=$(grep &apos;^[[:space:]]*$&apos; $1 | wc -l)</div><div class="line">spaceline2=$(grep &apos;^[[:space:]]*$&apos; $2 | wc -l)</div><div class="line"></div><div class="line">echo &quot;the sum of spaceline: $[$spaceline1 + $spaceline2] &quot;</div></pre></td></tr></table></figure>
 <p>统计/etc,/var,/usr目录共有多少个一级子目录和文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#统计/etc, /var, /usr目录中共有多少个一级子目录和文件</div><div class="line">etcnum=`ls -A -1 /etc/ |wc -l`</div><div class="line">varnum=`ls -A -1 /var/ |wc -l`</div><div class="line">usernum=`ls -A -1 /usr/ |wc -l`</div><div class="line">let sum=$etcnum+$varnum+$usernum</div><div class="line">echo &quot;/etc, /var, /usr目录中共有多少个一级子目录和文件:$sum&quot;</div></pre></td></tr></table></figure>
-<p><code>个人优化版</code>：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%883.33.24.png" alt="屏幕快照 2017-08-17 下午3.33.24.png" title="" class="">
-                <p>屏幕快照 2017-08-17 下午3.33.24.png</p>
-            </figure></p>
+<p><code>个人优化版</code>：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%883.33.24.png" alt="屏幕快照 2017-08-17 下午3.33.24.png"></p>
 <h2 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h2><p>判断某需求是否满足，需要由测试机制来实现</p>
 <h3 id="测试命令："><a href="#测试命令：" class="headerlink" title="测试命令："></a>测试命令：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test EXPRESSION</div><div class="line">[ EXPRESSION ]</div><div class="line">[[ EXPRESSION ]]</div><div class="line">#EXPRESSION前后必须有空白字符</div></pre></td></tr></table></figure>
-<h3 id="bash的测试类型："><a href="#bash的测试类型：" class="headerlink" title="bash的测试类型："></a>bash的测试类型：</h3><p>数值测试：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/72FA56A8E13D4C952988EE09511A64D7.png" alt="72FA56A8E13D4C952988EE09511A64D7.png" title="" class="">
-                <p>72FA56A8E13D4C952988EE09511A64D7.png</p>
-            </figure></p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%8811.21.10.png" alt="屏幕快照 2017-08-17 下午11.21.10.png" title="" class="">
-                <p>屏幕快照 2017-08-17 下午11.21.10.png</p>
-            </figure>
+<h3 id="bash的测试类型："><a href="#bash的测试类型：" class="headerlink" title="bash的测试类型："></a>bash的测试类型：</h3><p>数值测试：<img src="http://omunhj2f1.bkt.clouddn.com/72FA56A8E13D4C952988EE09511A64D7.png" alt="72FA56A8E13D4C952988EE09511A64D7.png"></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%8811.21.10.png" alt="屏幕快照 2017-08-17 下午11.21.10.png"></p>
 <p>⚠️：做比较的时候<code>-xx</code>前后要有空格</p>
-<p>字符串测试：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/006A2D9C7C1E27BA15D24C9F89AD79AF.jpg" alt="006A2D9C7C1E27BA15D24C9F89AD79AF.jpg" title="" class="">
-                <p>006A2D9C7C1E27BA15D24C9F89AD79AF.jpg</p>
-            </figure></p>
+<p>字符串测试：<img src="http://omunhj2f1.bkt.clouddn.com/006A2D9C7C1E27BA15D24C9F89AD79AF.jpg" alt="006A2D9C7C1E27BA15D24C9F89AD79AF.jpg"></p>
 <p>⚠️：用于字符串比较时用到的操作数都应该使用引号,其中<code>=~</code>表达式一般用于<code>[[]]</code>中，e.g:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">name=Obama</div><div class="line">[[ &quot;$name&quot; =~ ^O.* ]]</div><div class="line">echo $?</div><div class="line">0</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%8811.04.58.png" alt="屏幕快照 2017-08-17 下午11.04.58.png" title="" class="">
-                <p>屏幕快照 2017-08-17 下午11.04.58.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%8811.04.58.png" alt="屏幕快照 2017-08-17 下午11.04.58.png"></p>
 <p>文件测试之存在性测试：</p>
 <table>
 <thead>
@@ -736,10 +709,7 @@
 </tr>
 </tbody>
 </table>
-<p>比如说将rxxt替换为RxxT:<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-28%20%E4%B8%8A%E5%8D%8812.45.30.png" alt="屏幕快照 2017-08-28 上午12.45.30.png" title="" class="">
-                <p>屏幕快照 2017-08-28 上午12.45.30.png</p>
-            </figure></p>
+<p>比如说将rxxt替换为RxxT:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-28%20%E4%B8%8A%E5%8D%8812.45.30.png" alt="屏幕快照 2017-08-28 上午12.45.30.png"></p>
 <p>其中查找替换中的分隔符可以替换为其他字符，例如@，所以如果要将所有的/etc/fstab替换为/var/log：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%s@/etc/fstab@/var/log@g</div></pre></td></tr></table></figure>
 <p>下面还有几个例子可供参考：</p>
@@ -785,7 +755,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:29:48.000Z" itemprop="dateUpdated">2017-12-07 22:29:48</time>
+    Last updated: <time datetime="2017-12-07T14:29:48.000Z" itemprop="dateUpdated">2017-12-07 22:29:48</time>
 </span><br>
 
 

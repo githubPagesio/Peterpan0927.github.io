@@ -195,10 +195,7 @@
 </blockquote>
 <p>e.g-&gt;sheet.find{word:{‘$lt’:5}},表示找到sheet中所有字数比五小的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#找出字数小于等于三的行数并输出其内容</span></div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> sheet_line.find&#123;word:&#123;<span class="string">'$lte'</span>:<span class="number">3</span>&#125;&#125;:</div><div class="line">    print(item[<span class="string">'line'</span>])</div></pre></td></tr></table></figure>
-<h2 id="21-爬取大规模数据的工作流分析"><a href="#21-爬取大规模数据的工作流分析" class="headerlink" title="21.爬取大规模数据的工作流分析"></a>21.爬取大规模数据的工作流分析</h2><figure class="image-box">
-                <img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="21-爬取大规模数据的工作流分析"><a href="#21-爬取大规模数据的工作流分析" class="headerlink" title="21.爬取大规模数据的工作流分析"></a>21.爬取大规模数据的工作流分析</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt=""></p>
 <p>在爬取大规模数据的时候，要分模块的去爬取</p>
 <p>1.构造一个爬取所有网页的爬虫，将爬取到的网页存储到数据库中</p>
 <p>2.再构造一个爬虫从数据中提取网址，爬取单个页面的信息</p>
@@ -232,7 +229,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-08T12:47:47.000Z" itemprop="dateUpdated">2017-12-08 20:47:47</time>
+    Last updated: <time datetime="2017-12-08T12:47:47.000Z" itemprop="dateUpdated">2017-12-08 20:47:47</time>
 </span><br>
 
 

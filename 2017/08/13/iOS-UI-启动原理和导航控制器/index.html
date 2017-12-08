@@ -201,10 +201,7 @@
 <p>applicationIconBadgeNumber:应用头像上的数字</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// ios8以后，在设置数字之前，应用必须注册</div><div class="line">app1.applicationIconBadgeBumber = 10;</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/79342A85460003AF1C1F44E569F8796E.jpg" alt="79342A85460003AF1C1F44E569F8796E.jpg" title="" class="">
-                <p>79342A85460003AF1C1F44E569F8796E.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/79342A85460003AF1C1F44E569F8796E.jpg" alt="79342A85460003AF1C1F44E569F8796E.jpg"></p>
 <blockquote>
 <p>判断手机系统的版本</p>
 </blockquote>
@@ -242,10 +239,7 @@
 <blockquote>
 <p>即将非活跃状态</p>
 <p>应用程序进入后台</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/011084494EB3A0BDFFD530CD149F75ED.jpg" alt="011084494EB3A0BDFFD530CD149F75ED.jpg" title="" class="">
-                <p>011084494EB3A0BDFFD530CD149F75ED.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/011084494EB3A0BDFFD530CD149F75ED.jpg" alt="011084494EB3A0BDFFD530CD149F75ED.jpg"></p>
 </blockquote>
 <h3 id="应用程序启动过程"><a href="#应用程序启动过程" class="headerlink" title="应用程序启动过程"></a>应用程序启动过程</h3><p>1.程序启动先执行main.m中的main函数</p>
 <p>2.在main函数内部根据第三个参数,创建UIApplication对象</p>
@@ -257,10 +251,7 @@
 </blockquote>
 <p>4.有了应用程序和应用代理对象，再创建一个窗口（就是AppDelegate 中的window）作为应用程序的主窗口</p>
 <p>5.应用程序根据配置的信息去加载默认的storyboard文件里面的控制器</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/442199927B054B99C62C2660FF77A51A.jpg" alt="442199927B054B99C62C2660FF77A51A.jpg" title="" class="">
-                <p>442199927B054B99C62C2660FF77A51A.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/442199927B054B99C62C2660FF77A51A.jpg" alt="442199927B054B99C62C2660FF77A51A.jpg"></p>
 <h2 id="加载自定义控制器"><a href="#加载自定义控制器" class="headerlink" title="加载自定义控制器"></a>加载自定义控制器</h2><h3 id="加载自定义控制器-1"><a href="#加载自定义控制器-1" class="headerlink" title="加载自定义控制器"></a>加载自定义控制器</h3><blockquote>
 <p>1.将系统提供的viewController.h/.m和main.storyboard删除</p>
 <p>2.在应用加载完毕方法内实现加载自定义控制器</p>
@@ -296,16 +287,10 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//导航控制器的基本使用</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    //创建窗口</div><div class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    //实例化导航控制器并设置为窗口的根控制器</div><div class="line">    UINavigationController *nav = [[UINavigationController alloc] init];</div><div class="line">    //设置为根控制器</div><div class="line">    self.window.rootViewController = nav;</div><div class="line">    // 创建控制器</div><div class="line">    PzpViewController *redVc = [[PzpViewController alloc] init];</div><div class="line">    </div><div class="line">    Pzp1ViewController *greenVc = [[Pzp1ViewController alloc] init];</div><div class="line">    </div><div class="line">    Pzp2ViewController *blueVc = [[Pzp2ViewController alloc] init];</div><div class="line">    //让控制器显示出来</div><div class="line">    [nav pushViewController:redVc animated:YES];</div><div class="line">    </div><div class="line">    [nav pushViewController:blueVc animated:YES];</div><div class="line">    </div><div class="line">    [nav pushViewController:greenVc animated:YES];</div><div class="line">    </div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line">    </div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>导航控制器的常规用法是创建导航控制器的时候就指定一个根控制器，在控制器内制定一些操作的时候，才进行跳转。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/EEEF715C199C210ADB7928DF29FE8E28.jpg" alt="EEEF715C199C210ADB7928DF29FE8E28.jpg" title="" class="">
-                <p>EEEF715C199C210ADB7928DF29FE8E28.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/EEEF715C199C210ADB7928DF29FE8E28.jpg" alt="EEEF715C199C210ADB7928DF29FE8E28.jpg"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    PzpViewController *redVc = [[PzpViewController alloc] init];</div><div class="line">    </div><div class="line">    UINavigationController *nav = [[UINavigationController alloc]           initWithRootViewController:redVc];</div><div class="line">    </div><div class="line">    self.window.rootViewController = nav;</div><div class="line">    </div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line">    </div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line">//在导航控制器中的根控制器中进栈</div><div class="line">- (IBAction)gotoGreen:(id)sender &#123;</div><div class="line">    Pzp1ViewController *greenViewController = [[Pzp1ViewController alloc] init];</div><div class="line">    [self.navigationController pushViewController:greenViewController animated:YES];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">//在控制器中可以控制出栈</div><div class="line">- (IBAction)back1View&#123;</div><div class="line">  [self.navigationController popViewControllerAnimated:YES];</div><div class="line">&#125;</div><div class="line">- (IBAction)backToRootView&#123;</div><div class="line">  [self.navigationController popToRootViewrollrtAnimated:YES];</div><div class="line">&#125;</div><div class="line">- (IBAction)gotoController	&#123;</div><div class="line">  //从控制器栈的数组中去取</div><div class="line">  UIViewController *greenViewController self.navigationController.viewController[1];</div><div class="line">  </div><div class="line">  [self.navigationController popToViewController:greenViewController animated:YES];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>导航控制器的工作原理</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/D1383975EE218174539E225A16DBE328.jpg" alt="D1383975EE218174539E225A16DBE328.jpg" title="" class="">
-                <p>D1383975EE218174539E225A16DBE328.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/D1383975EE218174539E225A16DBE328.jpg" alt="D1383975EE218174539E225A16DBE328.jpg"></p>
 <p>控制器销毁的顺序：</p>
 <p>如果在第三个控制器之中，然后返回根控制器，销毁的顺序是：Two控制器-&gt;Three控制器</p>
 <p>因为首先断开的是One控制器指向Two控制器的强指针，所以Two控制器首先被回收。</p>
@@ -332,7 +317,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:26:08.000Z" itemprop="dateUpdated">2017-12-07 22:26:08</time>
+    Last updated: <time datetime="2017-12-07T14:26:08.000Z" itemprop="dateUpdated">2017-12-07 22:26:08</time>
 </span><br>
 
 

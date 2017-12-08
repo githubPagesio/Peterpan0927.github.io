@@ -209,10 +209,7 @@
 <p>​    第一个为1，结果必定为1</p>
 <p>​    第一个为0，第二个必须要参与运算</p>
 <p>可以通过命令的执行状态码来举个例子：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png" alt="屏幕快照 2017-07-31 下午3.40.18.png" title="" class="">
-                <p>屏幕快照 2017-07-31 下午3.40.18.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png" alt="屏幕快照 2017-07-31 下午3.40.18.png"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#可以通过下面这种方式来模拟判断命令的输出成功与否</div><div class="line">ls /var &amp;&amp; echo &quot;success&quot; || echo &quot;failed&quot;</div><div class="line">id root &amp;&gt; /dev/null &amp;&amp; echo &quot;exist&quot; || echo &quot;no such user&quot;</div></pre></td></tr></table></figure>
 <h2 id="Linux上的文本处理三剑客"><a href="#Linux上的文本处理三剑客" class="headerlink" title="Linux上的文本处理三剑客"></a>Linux上的文本处理三剑客</h2><p>1.grep:文本过滤（模式：pattern）工具</p>
 <p>​    grep、egrep、fgrep</p>
@@ -312,10 +309,7 @@
 </tr>
 </tbody>
 </table>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-01%20%E4%B8%8B%E5%8D%888.01.32.png" alt="屏幕快照 2017-08-01 下午8.01.32.png" title="" class="">
-                <p>屏幕快照 2017-08-01 下午8.01.32.png</p>
-            </figure> 
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-01%20%E4%B8%8B%E5%8D%888.01.32.png" alt="屏幕快照 2017-08-01 下午8.01.32.png"> </p>
 <p>​    分组：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\(\):将一个或多个字符捆绑在一起，当作一个整体进行处理</div><div class="line">#分组括号中的模式匹配到的内容会被正则表达式引擎记录于内部的变量后，这些变量的命名方式为：\1,\2</div><div class="line"> \1:从左侧起，第一个左括号以及与之匹配右括号之间的模式所匹配到的字符,剩下的依次类推：</div><div class="line"> 	\(ab\+\(xy\)*\):</div><div class="line"> 	\1:ab\+(xy\)*\</div><div class="line"> 	\2:xy</div><div class="line">#后向引用：引用前面的分组括号中的模式所匹配字符（而非模式本身）</div></pre></td></tr></table></figure>
 <p>例题训练：</p>
@@ -336,7 +330,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:29:41.000Z" itemprop="dateUpdated">2017-12-07 22:29:41</time>
+    Last updated: <time datetime="2017-12-07T14:29:41.000Z" itemprop="dateUpdated">2017-12-07 22:29:41</time>
 </span><br>
 
 

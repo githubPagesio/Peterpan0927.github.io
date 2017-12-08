@@ -218,10 +218,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int main()&#123;</div><div class="line">    NSError *err;</div><div class="line">    NSString *file = [[NSString alloc] initWithContentsOfFile:@&quot;/Users/peterpan/Downloads/MARKDOWN_FORMAT_URLS.txt&quot; encoding:NSUTF8StringEncoding error:&amp;err];</div><div class="line">  //如果文件不存在，err中存放的的是错误的信息，如果文件存在，err中就没有数据</div><div class="line">  //如果正确，err中就是null也就是0</div><div class="line">  //如果出现了错误，err中就会被赋值，它就会指向一个错误的对象</div><div class="line">  	if(!err)&#123;</div><div class="line">    NSLog(@&quot;%@&quot;,file);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//函数参数是值传递，那么参数和外界变量之间没有关系</div><div class="line">//函数参数如果是引用传递，函数内和函数外访问的是同一个变量。</div></pre></td></tr></table></figure>
 <p>用一个内存图来方便理解</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png" alt="屏幕快照 2017-06-28 下午4.30.01.png" title="" class="">
-                <p>屏幕快照 2017-06-28 下午4.30.01.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png" alt="屏幕快照 2017-06-28 下午4.30.01.png"></p>
 <p>总结的来说，想从文件中读取数据，需要三个参数：文件的路径、文件的编码格式、错误信息对象的指针（容器，如果出现了错误，在方法中会生成一个错误对象，赋值给该容器，如果没有出现读取错误，那么就正常执行返回读取的数据）</p>
 <blockquote>
 <p><strong>读取URL：</strong></p>
@@ -396,7 +393,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:25:48.000Z" itemprop="dateUpdated">2017-12-07 22:25:48</time>
+    Last updated: <time datetime="2017-12-07T14:25:48.000Z" itemprop="dateUpdated">2017-12-07 22:25:48</time>
 </span><br>
 
 

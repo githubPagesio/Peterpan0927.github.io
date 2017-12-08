@@ -185,26 +185,17 @@
             <p>开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理</p>
 <a id="more"></a>
 <h1 id="iOS第三方和权限问题"><a href="#iOS第三方和权限问题" class="headerlink" title="iOS第三方和权限问题"></a>iOS第三方和权限问题</h1><p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt="屏幕快照 2017-11-04 上午8.32.40.png" title="" class="">
-                <p>屏幕快照 2017-11-04 上午8.32.40.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt="屏幕快照 2017-11-04 上午8.32.40.png"></p>
 <p>这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。</p>
 <h2 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h2><p>CocoaPods是OS X和iOS下的一个第三类库管理工具，通过CocoaPods工具我们可以为项目添加被称为<code>Pods</code>的依赖库（这些类库必须是CocoaPods本身所支持的），并且可以轻松管理其版本。比如说我们会经常使用的SDWebImage之类的框架，都可以使用它来进行管理。</p>
 <p>那么这个工具究竟该如何的去使用呢？下面就来简单的介绍一下，安装的过程就不说了。在Mac上非常的简单。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#首先来搜索一下第三方的库吧</div><div class="line">pod search AFNetworking</div></pre></td></tr></table></figure>
 <p>如果这个时候出现：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.39.21.png" alt="屏幕快照 2017-11-04 上午8.39.21.png" title="" class="">
-                <p>屏幕快照 2017-11-04 上午8.39.21.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.39.21.png" alt="屏幕快照 2017-11-04 上午8.39.21.png"></p>
 <p>这个是因为之前<code>pod search</code>的时候生成了缓存文件search_index.json，这个时候执行命令来删除该文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm ~/Library/Caches/CocoaPods/search_index.json</div></pre></td></tr></table></figure>
 <p>那么我们这个时候在搜索一次吧，出现下面这种情况就是正常的了，我们只是尝试一，退出就好：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.41.55.png" alt="屏幕快照 2017-11-04 上午8.41.55.png" title="" class="">
-                <p>屏幕快照 2017-11-04 上午8.41.55.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.41.55.png" alt="屏幕快照 2017-11-04 上午8.41.55.png"></p>
 <p>如果我们需要在工程中导入第三方的库应该怎么做呢？首先创建一个Podfile吧</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /Users/xxx/xxx/TestProject</div><div class="line">touch Podfile</div></pre></td></tr></table></figure>
 <p>然后我们就可以打开我们的vim去编辑这个Podfile文件了：</p>
@@ -225,10 +216,7 @@
 </ol>
 <p>在Cocoapods安装后，项目文件里都会多一个后缀为.xcworkspace的文件，打开这个文件就相当于打开最初常见的项目。这个文件也就是用来管理项目的，它包含你创建的项目和Cocoapods项目。</p>
 <p>.xcworkspace文件可以是我们在<code>pod install</code>之后生成的新文件也可以是我们手动去创建的，这个文件在我们的项目根目录下，接下来就是使用.xcworkspace去打开我们的文件而不是.xcodeproj了，从中可以看到类似下面的目录结构：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png" alt="屏幕快照 2017-11-04 下午11.18.07.png" title="" class="">
-                <p>屏幕快照 2017-11-04 下午11.18.07.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png" alt="屏幕快照 2017-11-04 下午11.18.07.png"></p>
 <p>其中红色部分就是我们通过pods下载的类库了，以AFNetworking类库为例，可以通过<code>#import AFNetworking.h</code>引入下载后的类库。<br>另外CocoaPods支持搜索命令，例如在终端中输入命令<code>pod search AFNetworking</code>，便可以获得AFNetworking类库的各版本信息，这一点和命令<code>npm search</code>功能相同。</p>
 <ol>
 <li>使用总结</li>
@@ -239,10 +227,7 @@
 <p>账号的添加删除操作都是在Xcode的Preference中进行的，这一部分的操作太简单就不说了。</p>
 <h3 id="bundle-ID配置"><a href="#bundle-ID配置" class="headerlink" title="bundle ID配置"></a>bundle ID配置</h3><p>接下来就是关于配置Xcode项目中的Bundle ID的问题了，bundle ID可以精确的识别单个app，用于在开发过程中提供设备和在操作系统分发app给客户。</p>
 <p>bundle ID必须是一个统一类型标识符(UTI)的字符串，只包含字母数字字符(a -z、a - z、0 - 9)、连字符(-)和点(.)。在开发过程中，我们会有很多地方都会用到它去识别app:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png" alt="屏幕快照 2017-11-05 上午12.48.33.png" title="" class="">
-                <p>屏幕快照 2017-11-05 上午12.48.33.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png" alt="屏幕快照 2017-11-05 上午12.48.33.png"></p>
 <p>具体来说，bundleID的位置和使用如下：</p>
 <ol>
 <li>在Xcode项目,包ID存储在信息属性列表文件(Info.plist)。 这个文件是以后当你构建项目时复制到应用程序的包中。·</li>
@@ -273,10 +258,7 @@
 </ol>
 <h3 id="Xcode项目分配"><a href="#Xcode项目分配" class="headerlink" title="Xcode项目分配"></a>Xcode项目分配</h3><p>每个Xcode项目与一个单独团队关联。如果你注册作为个人开发者,你被看做一个单人团队。团队账户用于存储应用程序需要的证书,标识符,和描述文件。所有的应用程序在设备上运行和使用某些应用程序服务都需要代码签名。Xcode会在需要的时候为你创建这些资产，但是你现在设置团队可以以后的避免警告对话框。</p>
 <p>所有的iOS、watchOS之类的应用程序在设备上启动都需要代码签名，在进行Xcode项目分配的时候，Xcode将会使用你的信息去创建一个团队描述文件。例如Xcode会自动创建你的开发证书和注册一个链接设备或者你的Mac。Xcode使用这些信息来创建一个最终安装在设备上描述文件。如果设备在描述文件中，Xcode在这个设备上运行app。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt="屏幕快照 2017-11-05 上午1.18.36.png" title="" class="">
-                <p>屏幕快照 2017-11-05 上午1.18.36.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt="屏幕快照 2017-11-05 上午1.18.36.png"></p>
 <p>如果代码签名和描述文件都有了，那么在真机运行的时候很快就好了，不然为了解决代码签名的问题可能会报一堆的警告</p>
 <p>还有一个小点需要注意一下的就是还要对文件夹分配权限，有时候从别人U盘中读取的文件由于权限设置的不同会导致有些文件没有可执行权限。</p>
 <p>所以当我们从github上下载代码之后，还需要对团队和bundle ID进行更改，创建了新的描述文件之后我们才能在自己的电脑上去运行这些程序。讲到这里，基本上一些普遍的问题也都包括了，之后遇到别的问题会继续补充。</p>
@@ -293,7 +275,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-11-04T17:36:34.000Z" itemprop="dateUpdated">2017-11-05 01:36:34</time>
+    Last updated: <time datetime="2017-11-04T17:36:34.000Z" itemprop="dateUpdated">2017-11-05 01:36:34</time>
 </span><br>
 
 

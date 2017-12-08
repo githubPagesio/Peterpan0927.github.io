@@ -184,10 +184,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>OC特有语法<br><a id="more"></a></p>
 <h2 id="子类在内存中的存储和方法调用过程"><a href="#子类在内存中的存储和方法调用过程" class="headerlink" title="子类在内存中的存储和方法调用过程"></a>子类在内存中的存储和方法调用过程</h2><p>1.子类对象中有自己的属性和所有父类的属性</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-17%20%E4%B8%8B%E5%8D%8811.23.35.png" alt="屏幕快照 2017-06-17 下午11.23.35.png" title="" class="">
-                <p>屏幕快照 2017-06-17 下午11.23.35.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-17%20%E4%B8%8B%E5%8D%8811.23.35.png" alt="屏幕快照 2017-06-17 下午11.23.35.png"></p>
 <p>2.除去NSObject类之外代码段中的每一个类都有一个isa指针指向它的父类，在继承中，代码段中也是通过这样的指针来调用父类的方法和属性。</p>
 <p>在调用方法的时候，根据isa指针一层一层的往上寻找，一直到NSObject为止，如果NSObject也没有就会报错。</p>
 <hr>
@@ -209,10 +206,7 @@
 </li>
 <li><p>类在被加载到代码段之后，除非程序结束不然不会被回收</p>
 </li>
-<li><p>类存储在代码段中的形式：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-18%20%E4%B8%8B%E5%8D%8812.34.56.png" alt="屏幕快照 2017-06-18 下午12.34.56.png" title="" class="">
-                <p>屏幕快照 2017-06-18 下午12.34.56.png</p>
-            </figure></p>
+<li><p>类存储在代码段中的形式：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-18%20%E4%B8%8B%E5%8D%8812.34.56.png" alt="屏幕快照 2017-06-18 下午12.34.56.png"></p>
 <p>1.先在代码段中创建一个Class对象，Class是Foundation框架中的一个类，</p>
 <p>这个Class对象就是用来存储类信息。</p>
 <p>2.将类的信息存储在这个Class对象当中</p>
@@ -259,10 +253,7 @@
 <li>根据对象的isa指针找到存储类的类对象</li>
 <li>找到这个类对象之后，在这个类对象中去搜寻是否有和传入的SEL数据相匹配的，如果有就执行，没有就再找父类，直到NSObject为止。</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8A%E5%8D%8810.28.46.png" alt="屏幕快照 2017-06-19 上午10.28.46.png" title="" class="">
-                <p>屏幕快照 2017-06-19 上午10.28.46.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8A%E5%8D%8810.28.46.png" alt="屏幕快照 2017-06-19 上午10.28.46.png"></p>
 <ul>
 <li>手动向对象发送SEL消息：</li>
 </ul>
@@ -396,7 +387,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:31:41.000Z" itemprop="dateUpdated">2017-12-07 22:31:41</time>
+    Last updated: <time datetime="2017-12-07T14:31:41.000Z" itemprop="dateUpdated">2017-12-07 22:31:41</time>
 </span><br>
 
 

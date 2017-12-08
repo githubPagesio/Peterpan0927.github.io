@@ -253,10 +253,7 @@
 </ul>
 <p>从IP传过来的IP包，以太网驱动给这数据附加上以太网首部并进行发送处理。以太网首部中包含接收端、发送端MAC地址以及标志以太网类型的以太网数据的协议。根据上述信息系产生的以太网数据包通过物理层发送给接收端，发送处理中的FCS由硬件计算，也是一种校验机制，添加到包的末尾。</p>
 <p>下面用一张分层中包的结构来表示：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png" alt="137E996B0D74B3ACEE5CCA95D40F9F97.png" title="" class="">
-                <p>137E996B0D74B3ACEE5CCA95D40F9F97.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png" alt="137E996B0D74B3ACEE5CCA95D40F9F97.png"></p>
 <p>每个包首部都至少包括两个信息：一个是发送端和接收端地址，另一个是上一层协议的类型。</p>
 <p>其中发送端和接收端的地址在不同层上用不同的标识：</p>
 <p>以太网用MAC地址，IP用IP地址，TCP/UDP用端口号，在应用程序中，比如SMTP用电子邮件地址</p>
@@ -280,10 +277,7 @@
 </ul>
 <p>接收端应用程序会直接接受发送端发送的数据，通过解析数据找到乙的地址，如果接收端主机上没有乙的邮件信箱，那么就会返回发送端一个”无收件地址的报错信息”，如果有邮件未能保存或邮箱已满等问题也会返回异常给发送端，没有异常的话用户乙就可以喝完一杯清晨的咖啡后，舒适的阅读来自甲的邮件了～</p>
 <h3 id="主机的通信"><a href="#主机的通信" class="headerlink" title="主机的通信"></a>主机的通信</h3><h4 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h4><p>首先说一下ping，这是操作系统中的一个小程序，可以用来检测两台主机的连通性，如果ping的通，表示网络可达，ping不同，证明需要排错:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png" alt="屏幕快照 2017-08-31 上午10.09.00.png" title="" class="">
-                <p>屏幕快照 2017-08-31 上午10.09.00.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png" alt="屏幕快照 2017-08-31 上午10.09.00.png"></p>
 <p>那么这个icmp报文是如何生成的呢？那么首先还要来说一下icmp</p>
 <h4 id="icmp"><a href="#icmp" class="headerlink" title="icmp"></a>icmp</h4><p>icmp是一个网络控制协议，当网络发生一些或大或小的问题，通过该协议可以告知通信的发起方，比如，当一个IP包太大，比如1500字节，到达一个路由器的接口，接口最大传输单元MTU=1476字节，由于IP包1500&gt;MTU1476，这个IP包必须分成两片才可以从接口发送出去，问题来了，如果IP包里有一个标志位DF=1，意思就是说这个IP包不能进行分片，要么丢弃要么接受，那路由器只有无奈地丢弃这个IP包，如果没有消息告知这个IP发起者，会发生什么？IP包都被默默丢弃了，而IP包发起方并不知道，还以为数据已经到达了目的地，其实都被丢了，这就是流量黑洞，所以需要一种消息机制告知IP包的发起者，这个消息就是用ICMP来发送的，那发送什么样的消息呢？</p>
 <p>ICMP协议里有type字段，还有code字段，发送type=3，code=4，MTU=1476的消息就可以了，当这个ICMP消息到达IP包的发起者，发起者知道原来是IP太大了，那最大可以发送多大的呢？消息里有，那就MTU=1476，于是IP包的发起方只要发送小于等于1476字节的就可以了。</p>
@@ -309,10 +303,7 @@
 <h3 id="SNS通信（补充）"><a href="#SNS通信（补充）" class="headerlink" title="SNS通信（补充）"></a>SNS通信（补充）</h3><p>SNS的中文叫做社交网络，是一种即使共享，发布消息给圈内特定联系人的一种服务，现在就来分析一下移动端发送或者接受SNS消息的过程：</p>
 <p>平板电脑、手机等进行分组数据的通信，在打开手机的那一刻，就会被通信运营商设定具体的IP地址。</p>
 <p>启动移动电话中的应用程序，会连接指定的服务器，通过一系列的验证，返回指定的信息，由手机终端显示具体内容。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/39ECBBCFAB9F236DE0E6B1792CC26AA3.png" alt="39ECBBCFAB9F236DE0E6B1792CC26AA3.png" title="" class="">
-                <p>39ECBBCFAB9F236DE0E6B1792CC26AA3.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/39ECBBCFAB9F236DE0E6B1792CC26AA3.png" alt="39ECBBCFAB9F236DE0E6B1792CC26AA3.png"></p>
 
         </div>
         
@@ -321,7 +312,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-07T14:32:41.000Z" itemprop="dateUpdated">2017-12-07 22:32:41</time>
+    Last updated: <time datetime="2017-12-07T14:32:41.000Z" itemprop="dateUpdated">2017-12-07 22:32:41</time>
 </span><br>
 
 
