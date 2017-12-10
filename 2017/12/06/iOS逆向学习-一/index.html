@@ -187,9 +187,15 @@
 <h1 id="欢迎来到逆向的世界"><a href="#欢迎来到逆向的世界" class="headerlink" title="欢迎来到逆向的世界"></a>欢迎来到逆向的世界</h1><p>到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。</p>
 <p>那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程师是为了构建一个安全的应用给普通人去使用，那么逆向工程师就是一杆长矛，专门去刺破那些看似安全的App防护盾。对于微信和WhatsApp这样的IM类软件，交流的数据是核心，而对于银行，支付宝这样的电商类软件，交易的数据和用户的信息是他们的核心内容。这些核心数据都是需要重点保护的，于是开发员们通过反调试，数据加密，代码混淆等各种手段去重重保护自己的App避免被逆向工程师们破解，从而引发各种各样的安全问题影响用户的体验。</p>
 <p>目前的App的防护技术和iOS的逆向技术根本就不在一个平面上。一般的App防护，就像一座城堡，将App的MVC不知在城堡内部，看起来易守难攻，就像下图：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png" alt="屏幕快照 2017-12-06 下午10.59.01.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png" alt="屏幕快照 2017-12-06 下午10.59.01.png" title="" class="">
+                <p>屏幕快照 2017-12-06 下午10.59.01.png</p>
+            </figure>
 <p>但是作为一个逆向工程师，站在空中俯瞰整个城堡的时候，这个时候，所有的OC函数定义，所有的参数和逻辑都暴露在我们的面前，我们所需要做的就是在城堡中找到那个人，城堡的防护其实对于我们来说已经没有任何的意义：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8811.00.38.png" alt="屏幕快照 2017-12-06 下午11.00.38.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8811.00.38.png" alt="屏幕快照 2017-12-06 下午11.00.38.png" title="" class="">
+                <p>屏幕快照 2017-12-06 下午11.00.38.png</p>
+            </figure>
 <p>通过iOS逆向工程技术，我们可以在不破坏城墙的情况下，在任意的高维度地点进入低维度的城堡，巧取而不豪夺，通过监视甚至改变整个App的运行逻辑，从而获取核心信息，了解软件的设计原理。其实简要概括而言，逆向主要就是两个作用了：</p>
 <ol>
 <li>分析目标程序，拿到关键信息，也就是安全类</li>
@@ -204,19 +210,31 @@
 <p>反汇编工具</p>
 </blockquote>
 <p>从UI层面切入代码层面之后，就要用到反汇编工具去梳理代码了。反汇编工具把二进制文件作为输入，经过处理后再输出汇编代码，现在的工具主要是<code>IDA</code>和<code>Hopper</code>，只不过<code>Hopper</code>主要针对的就是苹果系的操作系统，整个逆向工程中最具挑战也是最有意思的部分就是阅读生成的汇编代码了：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.44.35.png" alt="IDA.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.44.35.png" alt="IDA.png" title="" class="">
+                <p>IDA.png</p>
+            </figure>
 <blockquote>
 <p>调试工具</p>
 </blockquote>
 <p>作为一个开发人员平时所用到的调试工具应该就是Xcode了。其实本人也是最近在项目中才初窥断点调试的门径。但是在iOS逆向工程中，用到的断点调试工具主要是LLDB：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.49.17.png" alt="屏幕快照 2017-12-07 下午1.49.17.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.49.17.png" alt="屏幕快照 2017-12-07 下午1.49.17.png" title="" class="">
+                <p>屏幕快照 2017-12-07 下午1.49.17.png</p>
+            </figure>
 <blockquote>
 <p>开发工具</p>
 </blockquote>
 <p>在分析完整个App之后，我们就可以开始使用开发工具去写程序了。开发工程师在<code>App store</code>的战场上惯用Xcode，但是转移到越狱iOS之后，除了基于Xcode的<code>iOSOpenDev</code>，还有偏命令行的<code>Theos</code>：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.52.37.png" alt="屏幕快照 2017-12-07 下午1.52.37.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.52.37.png" alt="屏幕快照 2017-12-07 下午1.52.37.png" title="" class="">
+                <p>屏幕快照 2017-12-07 下午1.52.37.png</p>
+            </figure>
 <h1 id="越狱的平台"><a href="#越狱的平台" class="headerlink" title="越狱的平台"></a>越狱的平台</h1><p>iOS的系统对于大部分来说都是一个封闭的黑盒子，就算有盘古、太极这种越狱团队的存在，大部分人还是会选择安全的生存在墙内，这样就可以免受系统崩溃的困扰了，但是身为调查兵团的一员显然是无法满足的，向着自由进发吧！：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.58.29.png" alt="屏幕快照 2017-12-07 下午1.58.29.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.58.29.png" alt="屏幕快照 2017-12-07 下午1.58.29.png" title="" class="">
+                <p>屏幕快照 2017-12-07 下午1.58.29.png</p>
+            </figure>
 <h3 id="iOS系统结构"><a href="#iOS系统结构" class="headerlink" title="iOS系统结构"></a>iOS系统结构</h3><ol>
 <li>对于没有越狱的手机，苹果开发给第三方直接访问iOS的文件系统的接口十分的优先，因此，纯粹的App开发者可能会对鱼iOS的系统结构一无所知</li>
 <li>在越狱之后，我们可以访问iOS全文件系统，这是我们开展iOS逆向工程的首要前提。</li>

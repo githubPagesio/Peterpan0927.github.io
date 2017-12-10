@@ -198,7 +198,10 @@
 <li>信息隐藏技术的原理和应用</li>
 </ol>
 <p>下面是一张信息隐藏技术的原理图：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png" alt="屏幕快照 2017-10-24 下午4.15.35.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png" alt="屏幕快照 2017-10-24 下午4.15.35.png" title="" class="">
+                <p>屏幕快照 2017-10-24 下午4.15.35.png</p>
+            </figure>
 <p>由上图可知，在密钥的控制下，通过嵌入算法将秘密信息隐藏在公开信息中，掩蔽宿主则通过通信信道进行传递，接收方的检测器利用密钥从掩蔽宿主中再恢复秘密信息。</p>
 <p>信息隐藏技术的特点有五点：</p>
 <ol>
@@ -210,37 +213,70 @@
 </ol>
 <p>上述这些特点，会随着信息隐藏目的和应用而有着不同的侧重，接下来要说的是信息隐藏技术中的一部分—隐写术</p>
 <p>隐写术可以使用图片作为载体，这也是常用的隐写方式，还有一些隐写的方式是通过word或者pdf的方式进行隐藏、还有HTML问津啊、windows的交换数据流甚至还有VMware的镜像中。</p>
-<h2 id="0x00-女神"><a href="#0x00-女神" class="headerlink" title="0x00-女神"></a>0x00-女神</h2><p>现在有一张图片，如果从其中找到隐藏的信息呢？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png" alt="屏幕快照 2017-09-17 上午10.50.08.png"></p>
+<h2 id="0x00-女神"><a href="#0x00-女神" class="headerlink" title="0x00-女神"></a>0x00-女神</h2><p>现在有一张图片，如果从其中找到隐藏的信息呢？<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png" alt="屏幕快照 2017-09-17 上午10.50.08.png" title="" class="">
+                <p>屏幕快照 2017-09-17 上午10.50.08.png</p>
+            </figure></p>
 <p>首先我们可以使用notepad++来打开这个图像，然后我们意外的发现：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png" alt="屏幕快照 2017-09-17 上午10.51.00.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png" alt="屏幕快照 2017-09-17 上午10.51.00.png" title="" class="">
+                <p>屏幕快照 2017-09-17 上午10.51.00.png</p>
+            </figure>
 <p>其中似乎包含着一个txt文件，那么想一想是不是可以将图像转换成压缩包，再解压缩就可以看到这个txt了呢</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png" alt="屏幕快照 2017-09-17 上午10.52.51.png">想到就去做，果然不出我们所料，找到了这个隐藏信息</p>
-<p>找到了隐藏的信息之后，我们发现这是一个md5加密的信息，再进行反向解密即可。</p>
-<p>更简单的方式就是先使用binwalk进行一次图片的分析：binwalk是kali自带的图片分析和提取工具：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.52.54.png" alt="屏幕快照 2017-09-17 下午4.52.54.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png" alt="屏幕快照 2017-09-17 上午10.52.51.png" title="" class="">
+                <p>屏幕快照 2017-09-17 上午10.52.51.png</p>
+            </figure>想到就去做，果然不出我们所料，找到了这个隐藏信息<br><br>找到了隐藏的信息之后，我们发现这是一个md5加密的信息，再进行反向解密即可。<br><br>更简单的方式就是先使用binwalk进行一次图片的分析：binwalk是kali自带的图片分析和提取工具：<br><br><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.52.54.png" alt="屏幕快照 2017-09-17 下午4.52.54.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午4.52.54.png</p>
+            </figure>
 <p>显然图片中隐藏着一个压缩包，<code>binwalk -e sim.jpg</code>是提取其中的压缩包，也可以使用foremost来提取。</p>
 <h2 id="0x01-愤怒的小鸟"><a href="#0x01-愤怒的小鸟" class="headerlink" title="0x01-愤怒的小鸟"></a>0x01-愤怒的小鸟</h2><h4 id="LSB介绍"><a href="#LSB介绍" class="headerlink" title="LSB介绍"></a>LSB介绍</h4><p>这里我们会需要用到的知识是信息隐藏算法之LSB算法,LSB算法也就是最低有效位</p>
 <p>在讲算法之前，我们先了解两个概念：<br>1.bmp图片是无损图片，每个像素点都用三个0-255的值来表示red，green，blue。<br>（注意：bmp图片的前14比特是头信息，最好不要用于该算法）。<br>而JPG图片是经过了DCT变换的，不能使用该算法。</p>
 <p>2.这里为了算法简单起见，我们使用灰度图像：每个像素点用0-255的值来表示黑白颜色深度。</p>
 <p>3.二值图像：每个像素点用0代表黑色，1代表白色<br>现在有一张宿主图片，我们要在宿主图片里面嵌入要隐藏的图片（当然可以是其它字符串），算法的思想是这样的：<br>1.将宿主图像变成灰度图像，将要隐藏的图像变成二值图像。<br>2.利用Matlab的bitget和bitset函数获得宿主图像中每个像素点的最低比特位（每个像素点总共有8位，2^8 = 256）将最低比特位与二值图像的位进行异或。如果结果为0，则不变；如果结果为1,如果设置宿主图像的最低比特位为1，则变成0；最低比特位是0，则变成1。<br>⚠️：这里必须保证宿主图片的大小必须大于要隐藏图片的大小。<br>3.因为改变最低比特位对0-255的像素点来说只改变 +1 或 -1的大小，对于整个像素点的变化几乎很小看不到。所以可以用该算法来做信息隐藏。</p>
 <h4 id="开始实战"><a href="#开始实战" class="headerlink" title="开始实战"></a>开始实战</h4><p>了解到这些知识之后，我们就来看一张图片吧：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.07.24.png" alt="屏幕快照 2017-09-17 下午12.07.24.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.07.24.png" alt="屏幕快照 2017-09-17 下午12.07.24.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午12.07.24.png</p>
+            </figure>
 <p>这张图片看起来平平无奇，就算使用notepad++打开的时候也没有发现什么关键的信息，但是我们可以继续想想，会不会有图片隐藏在这个图片中呢，我们使用工具StegSolve来打开这张图片，通过上面的箭头切换逐渐寻找其隐藏图像，终于被我们找到了！：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.11.37.png" alt="屏幕快照 2017-09-17 下午12.11.37.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.11.37.png" alt="屏幕快照 2017-09-17 下午12.11.37.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午12.11.37.png</p>
+            </figure>
 <h2 id="0x03-缺失的文件头"><a href="#0x03-缺失的文件头" class="headerlink" title="0x03-缺失的文件头"></a>0x03-缺失的文件头</h2><p>当我们下载了一个图片，但是无法打开的时候，这个时候该怎么办呢？看起来就是黑呼呼的一团…</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.03.27.png" alt="屏幕快照 2017-09-17 下午1.03.27.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.03.27.png" alt="屏幕快照 2017-09-17 下午1.03.27.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午1.03.27.png</p>
+            </figure>
 <p>我们猜想可能是因为缺少了对应的头部，我们将这个图片的扩展名去掉了之后,使用sublime打开，就是一串十六进制，一看果然发现了缺少了对应的png文件头部,加上之后如下所示:</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png" alt="屏幕快照 2017-09-17 下午1.06.02.png"></p>
-<p>接下来加上对应的后缀名之后，这道题目就AC了！！！:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png" alt="屏幕快照 2017-09-17 下午1.07.10.png"> </p>
-<h2 id="0x04-快刷新"><a href="#0x04-快刷新" class="headerlink" title="0x04-快刷新"></a>0x04-快刷新</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.21.40.png" alt="屏幕快照 2017-10-18 下午11.21.40.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png" alt="屏幕快照 2017-09-17 下午1.06.02.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午1.06.02.png</p>
+            </figure>
+<p>接下来加上对应的后缀名之后，这道题目就AC了！！！:<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png" alt="屏幕快照 2017-09-17 下午1.07.10.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午1.07.10.png</p>
+            </figure> </p>
+<h2 id="0x04-快刷新"><a href="#0x04-快刷新" class="headerlink" title="0x04-快刷新"></a>0x04-快刷新</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.21.40.png" alt="屏幕快照 2017-10-18 下午11.21.40.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午11.21.40.png</p>
+            </figure>
 <p>一开始试着使用StegSolve去寻找是不是LSB算法隐藏了什么东西，但是失败了。之后想到是不是有base64或者md5加密隐藏在图片中，但是还是没有找到，接下来可以再kali中使用binwalk来进行测试一下，没有后门，猜测可能是F5隐写：</p>
 <p>从github上当下一份测试工具，开始进行测试：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/matthewgao/F5-steganography</div></pre></td></tr></table></figure>
 <p>然后cd到该目录下执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#密码123456是根据图片的名字猜测的，不然就只能猜测是弱密码，写脚本爆破</div><div class="line">java Extract ~/Desktop/123456.jpg -p 123456</div></pre></td></tr></table></figure>
 <p>解密之后就可以在output.txt中查看输出的flag了</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png" alt="屏幕快照 2017-09-17 下午4.41.52.png"></p>
-<h2 id="0x05-最低位的亲吻"><a href="#0x05-最低位的亲吻" class="headerlink" title="0x05-最低位的亲吻"></a>0x05-最低位的亲吻</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%889.46.07.png" alt="屏幕快照 2017-10-18 下午9.46.07.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png" alt="屏幕快照 2017-09-17 下午4.41.52.png" title="" class="">
+                <p>屏幕快照 2017-09-17 下午4.41.52.png</p>
+            </figure>
+<h2 id="0x05-最低位的亲吻"><a href="#0x05-最低位的亲吻" class="headerlink" title="0x05-最低位的亲吻"></a>0x05-最低位的亲吻</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%889.46.07.png" alt="屏幕快照 2017-10-18 下午9.46.07.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午9.46.07.png</p>
+            </figure>
 <p>从题干中我们就可以理解到这应该是使用的LSB算法（最低位隐藏了信息），那么我们可以使用stegsolve去看看能不能发现其中隐藏的图片信息，但是发现只能隐约的看到一个二维码的一角，如果只是简单的获取最后一位然后画图，没有理由找不到啊，后来发现，这个是bmp的八位灰度图，可能是StegSolve在解析的时候存在问题？</p>
 <p>但后来经过查阅之后发现了在LSB算法来实现隐写的过程中，隐写的载体是png格式，jpg和bmp都是不行的：</p>
 <ul>
@@ -249,33 +285,63 @@
 <li>bmp图片是没有进行压缩的，所以bmp图片特别大的</li>
 </ul>
 <p>在导出为png格式之后找到了隐藏的二维码，拿到flag值(注意不要直接修改后缀，这样文件头依然没有改变)</p>
-<p>直接的修改文件后缀的后果：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.07.41.png" alt="屏幕快照 2017-10-18 下午10.07.41.png"></p>
-<p>重新导出为png之后的头部：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.08.15.png" alt="屏幕快照 2017-10-18 下午10.08.15.png"></p>
+<p>直接的修改文件后缀的后果：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.07.41.png" alt="屏幕快照 2017-10-18 下午10.07.41.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午10.07.41.png</p>
+            </figure></p>
+<p>重新导出为png之后的头部：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.08.15.png" alt="屏幕快照 2017-10-18 下午10.08.15.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午10.08.15.png</p>
+            </figure></p>
 <p>同时也可以使用编程的方式去解决，大神从来只使用自己的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">import</span> Image</div><div class="line">path = <span class="string">'01.bmp'</span></div><div class="line">img = Image.open(path)</div><div class="line">pix = img.load()</div><div class="line">str1 = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">550</span>):</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">737</span>):</div><div class="line">        <span class="keyword">if</span> pix[i,j]%<span class="number">2</span>==<span class="number">0</span>:</div><div class="line">            str1+=<span class="string">'0'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            str1+=<span class="string">'1'</span></div><div class="line">img1 = Image.new(<span class="string">"RGB"</span>,(<span class="number">550</span>, <span class="number">737</span>))</div><div class="line">k=<span class="number">0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">550</span>):</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">737</span>):</div><div class="line">        <span class="keyword">if</span> str1[k]==<span class="string">'1'</span>:</div><div class="line">            img1.putpixel([i,j],(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            img1.putpixel([i,j],(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">        k+=<span class="number">1</span></div><div class="line">img1.show()</div></pre></td></tr></table></figure>
 <p>这里仅介绍了其中几例，CTF常见的隐写方式可以<a href="http://zjw.dropsec.xyz/uncategorized/2016/08/18/CTF%E4%B8%AD%E5%B8%B8%E8%A7%81%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99.html" target="_blank" rel="external">参考博客</a></p>
-<h2 id="0x06-低调的男神"><a href="#0x06-低调的男神" class="headerlink" title="0x06-低调的男神"></a>0x06-低调的男神</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.08.36.png" alt="屏幕快照 2017-10-18 下午11.08.36.png"></p>
+<h2 id="0x06-低调的男神"><a href="#0x06-低调的男神" class="headerlink" title="0x06-低调的男神"></a>0x06-低调的男神</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.08.36.png" alt="屏幕快照 2017-10-18 下午11.08.36.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午11.08.36.png</p>
+            </figure>
 <p>这道题已经告诉了我们要使用stegsolve工具去处理这两张图片，首先查看了两张图片，并没有什么奇特的地方，后来想到stegsolve还有一个神奇的功能就是合并两种图片，合并之后移动到SUB发现一个类似二维码的图片：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.10.58.png" alt="屏幕快照 2017-10-18 下午11.10.58.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.10.58.png" alt="屏幕快照 2017-10-18 下午11.10.58.png" title="" class="">
+                <p>屏幕快照 2017-10-18 下午11.10.58.png</p>
+            </figure>
 <p>扫一扫发现根本就没什么反应，和正常的二维码有一些区别，可以反色试一试，（在windows上自带的画图可以解决，Mac上可以使用预览中的调整颜色）</p>
 <p>打开反色之后的图片我们可以在红，蓝，绿三个plane找到三个二维码，信息分别是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DES</div><div class="line">6XaMMbM7</div><div class="line">U2FsdGVkX18IBEATgMBe8NqjIqp65CxRjjMxXIIUxIjBnAODJQRkSLQ/+lHBsjpv1BwwEawMo1c=</div></pre></td></tr></table></figure>
 <p>显然这告诉了你这是一个DES算法，密钥是第二个，加密过后的是第三个，解密之后就可以拿到flag值了。找一个可以解密DES的网站解密就可以得到答案了~Ps：如果解密不了，可以换个网站试试，毕竟Des加密时候的填充、编码方式都会影响结果（实测这个网站可以：<a href="http://encode.chahuo.com）" target="_blank" rel="external">http://encode.chahuo.com）</a></p>
 <h2 id="ox07-大雄与多啦"><a href="#ox07-大雄与多啦" class="headerlink" title="ox07-大雄与多啦"></a>ox07-大雄与多啦</h2><p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%888.30.48.png" alt="屏幕快照 2017-10-19 上午8.30.48.png"></p>
-<p>大雄和多啦A梦是很多人童年的记忆，那么面对这张图，会找到什么样的信息呢，下载之后首先使用binwalk扫一遍，发现有压缩包，提取之后有一个97FA.rar的压缩包，解压的时候发现需要密码，那么密码是什么呢，一般来说我们会在图片的结尾找到一个一句话木马：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%8810.09.19.png" alt="屏幕快照 2017-10-19 上午10.09.19.png"></p>
+<p>大雄和多啦A梦是很多人童年的记忆，那么面对这张图，会找到什么样的信息呢，下载之后首先使用binwalk扫一遍，发现有压缩包，提取之后有一个97FA.rar的压缩包，解压的时候发现需要密码，那么密码是什么呢，一般来说我们会在图片的结尾找到一个一句话木马：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%8810.09.19.png" alt="屏幕快照 2017-10-19 上午10.09.19.png" title="" class="">
+                <p>屏幕快照 2017-10-19 上午10.09.19.png</p>
+            </figure></p>
 <p>提交之后发现密码不对，结合图片的名称可能是需要base64编码，然后又试了试，果然成功了，拿到了一个flag.txt的文件，其中就是我们所需要的flag值</p>
-<h2 id="0x08-小苹果"><a href="#0x08-小苹果" class="headerlink" title="0x08-小苹果"></a>0x08-小苹果</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.26.58.png" alt="屏幕快照 2017-10-19 下午7.26.58.png"></p>
+<h2 id="0x08-小苹果"><a href="#0x08-小苹果" class="headerlink" title="0x08-小苹果"></a>0x08-小苹果</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.26.58.png" alt="屏幕快照 2017-10-19 下午7.26.58.png" title="" class="">
+                <p>屏幕快照 2017-10-19 下午7.26.58.png</p>
+            </figure>
 <p>这一题的通过率稍微要少一点了，点开图片是一个中国结，中间是一个二维码的样式，直接扫码之后得到了一串Unicode编码的字符串，通过工具解密之后得到了一串中文？？？：羊由大井夫大人王中工</p>
 <p>后来经过查阅之后才知道原来是当铺密码，这是一种将中文和数字转换的密码，汉字有多少个笔画出头就转换成数字几</p>
-<p>了解到了之后自然秒解密：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.33.44.png" alt="屏幕快照 2017-10-19 下午7.33.44.png"></p>
+<p>了解到了之后自然秒解密：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.33.44.png" alt="屏幕快照 2017-10-19 下午7.33.44.png" title="" class="">
+                <p>屏幕快照 2017-10-19 下午7.33.44.png</p>
+            </figure></p>
 <p>那么我就开心的直接提交了，发现不对，修改格式依旧不对，这个时候在CTF中有一个很重要的事就是当一条路走不通的时候就要从头寻找有没有遗漏的线索，用binwalk扫了一下这张图片之后里面是含有压缩包的。 </p>
 <p>打开之后是小苹果的音乐在那里洗脑循环，那么看来应该是使用MP3Stego了，刚才的数字就是密码。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%8810.24.12.png" alt="屏幕快照 2017-10-19 下午10.24.12.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%8810.24.12.png" alt="屏幕快照 2017-10-19 下午10.24.12.png" title="" class="">
+                <p>屏幕快照 2017-10-19 下午10.24.12.png</p>
+            </figure>
 <p>最后得到了一串很像base64的，使用python的库转换之后直接提交，拿到flag值。(这个题居然只有十分，给太低了点)</p>
-<h2 id="0x09-我就是flag"><a href="#0x09-我就是flag" class="headerlink" title="0x09-我就是flag"></a>0x09-我就是flag</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.08.25.png" alt="屏幕快照 2017-10-25 上午12.08.25.png"></p>
+<h2 id="0x09-我就是flag"><a href="#0x09-我就是flag" class="headerlink" title="0x09-我就是flag"></a>0x09-我就是flag</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.08.25.png" alt="屏幕快照 2017-10-25 上午12.08.25.png" title="" class="">
+                <p>屏幕快照 2017-10-25 上午12.08.25.png</p>
+            </figure>
 <p>这道题的难度从通过率就可见一斑，涉及到了AES算法，其中有很多的地方都非常的坑。首先看到这是一个被损坏的bmp图像，所以应该是缺失了文件头，但是在网上搜索的文件头放到这里大部分都是不能使用的，后来参考了p神的writeup得到bmp图像的头文件到底是如何去标识的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#得到bmp的头文件</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getBMPheader</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">#bmp是LITTLE-ENDIAN（小字节序、低字节序）</span></div><div class="line">	bfType=<span class="string">'424d'</span> <span class="comment">#文件类型</span></div><div class="line">	bfSize=<span class="string">'360c 3000'</span> <span class="comment">#文件大小，本题3148800+54</span></div><div class="line">	bfReserved1=<span class="string">'0000'</span> <span class="comment">#保留，为0</span></div><div class="line">	bfReserved2=<span class="string">'0000'</span> <span class="comment">#保留，为0</span></div><div class="line">	bfOffBits=<span class="string">'3600 0000'</span> <span class="comment">#数据离文件头偏离量</span></div><div class="line">	biSize=<span class="string">'2800 0000'</span> <span class="comment">#位图信息头的大小</span></div><div class="line">	biWidth=<span class="string">'5605 0000'</span> <span class="comment">#宽度，本题1366</span></div><div class="line">	biHeight=<span class="string">'0003 0000'</span> <span class="comment">#高度，本题768</span></div><div class="line">	biPlanes=<span class="string">'0100'</span> <span class="comment">#颜色平面数，为1</span></div><div class="line">	biBitCount=<span class="string">'1800'</span> <span class="comment">#比特数/像素，本题24位</span></div><div class="line">	biCompression=<span class="string">'0000 0000'</span> <span class="comment">#压缩类型，0为不压缩</span></div><div class="line">	biSizeImage=<span class="string">'0000 0000'</span> <span class="comment">#图像的大小，本题多少无所谓</span></div><div class="line">	biXPelsPerMeter=<span class="string">'0000 0000'</span> <span class="comment">#水平分辨率，缺省</span></div><div class="line">	biYPelsPerMeter=<span class="string">'0000 0000'</span> <span class="comment">#垂直分辨率，缺省</span></div><div class="line">	biClrUsed=<span class="string">'0000 0000'</span> <span class="comment">#使用的颜色索引数，本题多少无所谓</span></div><div class="line">	biClrImportant=<span class="string">'0000 0000'</span> <span class="comment">#重要的颜色索引数，本题多少无所谓</span></div><div class="line">	bmp_header=bfType+bfSize+bfReserved1+bfReserved2+bfOffBits</div><div class="line">	bmp_header+=biSize+biWidth+biHeight+biPlanes+biBitCount+biCompression+biSizeImage</div><div class="line">	bmp_header+=biXPelsPerMeter+biYPelsPerMeter+biClrUsed+biClrImportant</div><div class="line">	bmp_header=bmp_header.replace(<span class="string">' '</span>,<span class="string">''</span>)</div><div class="line">	<span class="keyword">return</span> bmp_header</div></pre></td></tr></table></figure>
-<p>加上头部信息之后发现得到了这样子的图片：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.17.09.png" alt="屏幕快照 2017-10-25 上午12.17.09.png"></p>
+<p>加上头部信息之后发现得到了这样子的图片：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.17.09.png" alt="屏幕快照 2017-10-25 上午12.17.09.png" title="" class="">
+                <p>屏幕快照 2017-10-25 上午12.17.09.png</p>
+            </figure></p>
 <p>使用stegsolve查看之后一无所获，结合题干中的我就是flag，并且文件名刚好是16位，可以推断是AES加密，然后手写一个python的脚本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">    ciphertext=open(<span class="string">'../Desktop/bestwing12345678.bmp'</span>,<span class="string">'rb'</span>).read() <span class="comment">#记得有'b'</span></div><div class="line">    key=<span class="string">'bestwing12345678'</span></div><div class="line">    obj=AES.new(key,AES.MODE_ECB)</div><div class="line">    message=obj.decrypt(ciphertext)</div><div class="line">    fsave=open(<span class="string">'out.bmp'</span>,<span class="string">'wb'</span>)</div><div class="line">    fsave.write(message)</div><div class="line">    fsave.close()</div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">	foo()</div><div class="line">	<span class="keyword">print</span> (<span class="string">'ok'</span>)</div></pre></td></tr></table></figure>
 <p>然后得到了一张图片，上面有着清晰的二维码，扫描之后终于得到了flag（注意，其中包含着许多的版本问题和加密和解密问题，需要读者自行解决）。</p>
@@ -284,7 +350,10 @@
 <p><strong>HttP://pcat.cnbloGs.cOM?Hh</strong></p>
 </blockquote>
 <p>首先我们使用了三板斧—（stegsolve、binwalk、foremost）一无所获之后决定使用stegdetect去检测其隐写算法：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png" alt="屏幕快照 2017-10-25 下午11.02.31.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png" alt="屏幕快照 2017-10-25 下午11.02.31.png" title="" class="">
+                <p>屏幕快照 2017-10-25 下午11.02.31.png</p>
+            </figure>
 <p>一开始没有任何的反应，就奇了怪了…后来修改了敏感度之后才发现原来是jphide,那就是用对应的工具吧</p>
 <p>到那时我们首先需要的是这个图片的密码，根据推测，密码的来源应该就藏在大小不一的地址上了：</p>
 <p>将识别结果中的特殊字符去掉，可以得到HttPpcatcnbloGscOMHh，刚好20个字符，使用了2种字体（大写和小写），可以推断是培根加密</p>
@@ -294,15 +363,27 @@
 <p>bloGs→AAABA→c</p>
 <p>cOMHh→ABBBA→p</p>
 <p>得到密码之后，选择seek，输入并确认密码，然后选择输出文件保存的路径即可：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png" alt="屏幕快照 2017-10-25 下午11.08.53.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png" alt="屏幕快照 2017-10-25 下午11.08.53.png" title="" class="">
+                <p>屏幕快照 2017-10-25 下午11.08.53.png</p>
+            </figure>
 <h2 id="0x0B-word隐写"><a href="#0x0B-word隐写" class="headerlink" title="0x0B-word隐写"></a>0x0B-word隐写</h2><p>写了这么多实例之后，再写那些三板斧解决的，或者在这之上加上一点密码学的题目的writeup已经没有什么意义了，所以现在可以去拓展一下知识的广度，这个例子就来说一下word的隐写：</p>
 <p>从题目中下载了一个word文件，其中什么都没有，一开始以为是格式问题（本人不太了解word），于是使用了winhex/hexfriend寻找看看有没有什么有用的信息；</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png" alt="屏幕快照 2017-10-26 上午12.22.08.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png" alt="屏幕快照 2017-10-26 上午12.22.08.png" title="" class="">
+                <p>屏幕快照 2017-10-26 上午12.22.08.png</p>
+            </figure>
 <p>然后就直接拿到了flag值，看起来轻松便捷，但其实还有一种做法就是打开这个word文档，然后在选项中选择打印隐藏文件，然后打印预览，那么flag值同样会跃然眼前。</p>
-<h2 id="0x0C-Dark-star"><a href="#0x0C-Dark-star" class="headerlink" title="0x0C-Dark star"></a>0x0C-Dark star</h2><h4 id=""><a href="#" class="headerlink" title=""></a><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png" alt="屏幕快照 2017-10-28 下午3.54.46.png"></h4><p>下载了一个虚拟的磁盘映像文件，网上说什么要使用winRAR或者其他的去解压，我一想，太麻烦了，并不想再去鼓捣这玩意，于是乎直接用<code>binwalk</code>先扫了一扫，发现其中有很多的jpg文件还有一个png（png是无损压缩的，所以我就直接提取了），果断使用<code>foremost</code>,然后从output中找到了我们所需要的flag值。</p>
+<h2 id="0x0C-Dark-star"><a href="#0x0C-Dark-star" class="headerlink" title="0x0C-Dark star"></a>0x0C-Dark star</h2><h4 id=""><a href="#" class="headerlink" title=""></a><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png" alt="屏幕快照 2017-10-28 下午3.54.46.png" title="" class="">
+                <p>屏幕快照 2017-10-28 下午3.54.46.png</p>
+            </figure></h4><p>下载了一个虚拟的磁盘映像文件，网上说什么要使用winRAR或者其他的去解压，我一想，太麻烦了，并不想再去鼓捣这玩意，于是乎直接用<code>binwalk</code>先扫了一扫，发现其中有很多的jpg文件还有一个png（png是无损压缩的，所以我就直接提取了），果断使用<code>foremost</code>,然后从output中找到了我们所需要的flag值。</p>
 <p>思考：永远不要被传统的思路所束缚住，不要被后缀名所迷惑，从十六进制窥得真假。</p>
 <h2 id="0x13烦人DE皮卡丘"><a href="#0x13烦人DE皮卡丘" class="headerlink" title="0x13烦人DE皮卡丘"></a>0x13烦人DE皮卡丘</h2><p>如果说你觉得上面的题目过于简单不够刺激，那么我们就来试试一道刺激的题目吧，下载下来是一张皮卡丘的图片；</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%881.54.23.png" alt="屏幕快照 2017-10-29 下午1.54.23.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%881.54.23.png" alt="屏幕快照 2017-10-29 下午1.54.23.png" title="" class="">
+                <p>屏幕快照 2017-10-29 下午1.54.23.png</p>
+            </figure>
 <p>首先要介绍一下所需要知道的知识，在杂项的可启动磁盘中我们了解到了png图片中第一个数据块叫做IHDR及其组成，那么png格式的图片中有没有其他的数据块呢，答案是肯定的，可以参考一下这个表：</p>
 <table>
 <thead>
@@ -460,7 +541,10 @@
 <p>今天要说的就是IDAT数据块，具体的png文件格式分析可以参考<a href="https://zhuanlan.zhihu.com/p/23890809" target="_blank" rel="external">知乎</a>，其中还讲了如何在不影响PNG文件的正常浏览下将payload以辅助数据块tEXt的格式插入到PNG文件中。</p>
 <p>IDAT数据块是用于存储图像像素数据，在数据流中可包含多个连续的图像数据块，采用L277的派生算法进行压缩的，我们可以使用zlib去解压缩。虽然这道题使用了LSB算法，但是单纯简单的使用binwalk和stegsolve可是完全无法做出来的。</p>
 <p>首先我们使用stdsolve打开这张图片，提取其中的最低位试试看，在BIt Plane Order选中RGB：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.05.36.png" alt="屏幕快照 2017-10-29 下午2.05.36.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.05.36.png" alt="屏幕快照 2017-10-29 下午2.05.36.png" title="" class="">
+                <p>屏幕快照 2017-10-29 下午2.05.36.png</p>
+            </figure>
 <p>由此我们可以大概判断一下这个是lsb加密，从github上当下一份工具之后进行解密，命令如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#123456指的是密码，这里是根据提示中的弱密码进行猜测，当然也可以写脚本去进行爆破</span></div><div class="line">python lsb.py extract <span class="number">1.</span>png <span class="number">1.</span>txt <span class="number">123456</span></div></pre></td></tr></table></figure>
 <p>最后打开1.txt就可以得到flag了，关于png文件中的LSB隐写还可以参考<a href="https://mp.weixin.qq.com/s?__biz=MzAxNTk5ODcxOQ==&amp;mid=2247484167&amp;idx=2&amp;sn=ae344c2f876b8003c5769fb0960d0bc9&amp;scene=0#wechat_redirect" target="_blank" rel="external">博客</a></p>
@@ -598,7 +682,10 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息隐藏概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息隐藏概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x00-女神"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">0x00-女神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x01-愤怒的小鸟"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">0x01-愤怒的小鸟</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#LSB介绍"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">LSB介绍</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开始实战"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">开始实战</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x03-缺失的文件头"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">0x03-缺失的文件头</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x04-快刷新"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">0x04-快刷新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x05-最低位的亲吻"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">0x05-最低位的亲吻</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x06-低调的男神"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">0x06-低调的男神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ox07-大雄与多啦"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">ox07-大雄与多啦</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x08-小苹果"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">0x08-小苹果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x09-我就是flag"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">0x09-我就是flag</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0A-黑与白"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">0x0A-黑与白</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0B-word隐写"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">0x0B-word隐写</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0C-Dark-star"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">0x0C-Dark star</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#"><span class="post-toc-number">1.12.0.1.</span> <span class="post-toc-text"></span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x13烦人DE皮卡丘"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">0x13烦人DE皮卡丘</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息隐藏概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息隐藏概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x00-女神"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">0x00-女神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x01-愤怒的小鸟"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">0x01-愤怒的小鸟</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#LSB介绍"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">LSB介绍</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开始实战"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">开始实战</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x03-缺失的文件头"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">0x03-缺失的文件头</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x04-快刷新"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">0x04-快刷新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x05-最低位的亲吻"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">0x05-最低位的亲吻</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x06-低调的男神"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">0x06-低调的男神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ox07-大雄与多啦"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">ox07-大雄与多啦</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x08-小苹果"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">0x08-小苹果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x09-我就是flag"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">0x09-我就是flag</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0A-黑与白"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">0x0A-黑与白</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0B-word隐写"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">0x0B-word隐写</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0C-Dark-star"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">0x0C-Dark star</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#"><span class="post-toc-number">1.12.0.1.</span> <span class="post-toc-text">
+                
+                屏幕快照 2017-10-28 下午3.54.46.png
+            </span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x13烦人DE皮卡丘"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">0x13烦人DE皮卡丘</span></a></li></ol></li></ol>
         </nav>
     </aside>
     

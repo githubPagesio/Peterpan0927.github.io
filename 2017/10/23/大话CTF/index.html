@@ -271,17 +271,29 @@
 </ol>
 <h3 id="几种隐写的方法介绍"><a href="#几种隐写的方法介绍" class="headerlink" title="几种隐写的方法介绍"></a>几种隐写的方法介绍</h3><ol>
 <li>EOI：这是利用处理器的一个漏洞，因为处理器当处理到文件结束标识的时候便不会再继续往下处理了，这之后就可以进行隐写，比如说jpg格式的文件结束标识是FF D9，然而如果其中隐写了压缩包，我们就可以通过winhex之类的工具轻易的看到，这也是一种常用的隐写方式。</li>
-<li>LSB算法：利用最低有效位 ，来隐藏我们的有效信息<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.42.11.png" alt="屏幕快照 2017-10-19 下午3.42.11.png"></li>
+<li>LSB算法：利用最低有效位 ，来隐藏我们的有效信息<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.42.11.png" alt="屏幕快照 2017-10-19 下午3.42.11.png" title="" class="">
+                <p>屏幕快照 2017-10-19 下午3.42.11.png</p>
+            </figure></li>
 </ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.44.10.png" alt="屏幕快照 2017-10-19 下午3.44.10.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.44.10.png" alt="屏幕快照 2017-10-19 下午3.44.10.png" title="" class="">
+                <p>屏幕快照 2017-10-19 下午3.44.10.png</p>
+            </figure>
 <ol>
 <li>还有一些比如F5隐写之类的就并不是特别的常见了，其实隐写一般都会配合着密码学一起</li>
 </ol>
 <p>看起来隐写术是个非常有趣的智力游戏，涉及密码学、文件格式、编程能力等的综合运用，目前我也仅在入门阶段，上述内容是个极简略极浅显的总结，适用于初学者快速入门，很多内容比如编程解法、Photoshop 解法、视频隐写等均未涉及。</p>
 <hr>
-<h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.23.41.png" alt="屏幕快照 2017-10-20 上午9.23.41.png"></p>
+<h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.23.41.png" alt="屏幕快照 2017-10-20 上午9.23.41.png" title="" class="">
+                <p>屏幕快照 2017-10-20 上午9.23.41.png</p>
+            </figure>
 <p>上图应该比较清晰的表现了在密码学中的所有加密方式及其分类，可以根据这些点在网上自行查找，其中公钥加密和数字签名我们应该都比较熟悉了，在之前的ssh和中间人攻击都会了解的比较多，其中涉及到的就是非对称加密算法—RSA。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.41.01.png" alt="屏幕快照 2017-10-20 上午9.41.01.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.41.01.png" alt="屏幕快照 2017-10-20 上午9.41.01.png" title="" class="">
+                <p>屏幕快照 2017-10-20 上午9.41.01.png</p>
+            </figure>
 <p>学过网络的朋友都知道计算机之间的通信需要网络协议，同样的我们使用密码学的一些功能时，也会遵从不同的协议，我们平时用的比较多的应该就是密钥分发（ssh的id_rsa）和身份验证（登陆或者其他…）</p>
 <h3 id="密码分类"><a href="#密码分类" class="headerlink" title="密码分类"></a>密码分类</h3><p>一般来说密码学的分类都会按照古典密码和传统密码去分类，但在这里是通过其方式来分类。</p>
 <ul>
@@ -298,7 +310,10 @@
 </ul>
 <hr>
 <h2 id="题外话—永恒之蓝"><a href="#题外话—永恒之蓝" class="headerlink" title="题外话—永恒之蓝"></a>题外话—永恒之蓝</h2><p>永恒之蓝在前段之间非常的火，可能说勒索病毒大家会更加熟悉一点，准确来说WannaCry勒索病毒是在永恒之蓝（永恒之蓝是NSA泄漏的一个Windows SMB远程漏洞利用工具）的基础上开发的蠕虫病毒，它可以自我复制传播。该蠕虫病毒先扫描网络上存在SMB漏洞的Windows机器，然后上传勒索软件到该Windows系统，锁定用户的数据并进行勒索，是一个典型的蠕虫和勒索软件的结合体。所以那段时间我们可以看到：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-21%20%E4%B8%8B%E5%8D%884.25.39.png" alt="屏幕快照 2017-10-21 下午4.25.39.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-21%20%E4%B8%8B%E5%8D%884.25.39.png" alt="屏幕快照 2017-10-21 下午4.25.39.png" title="" class="">
+                <p>屏幕快照 2017-10-21 下午4.25.39.png</p>
+            </figure>
 <p>可以说是影响非常的大,但是WannaCry病毒却拥有着一个致命的缺陷，那就是病毒的作者无法明确认定哪些受害者支付了赎金，因此很难给相应的解密密钥，所以用户支付了赎金之后，电脑中的文件也是恢复不了的。</p>
 
         </div>

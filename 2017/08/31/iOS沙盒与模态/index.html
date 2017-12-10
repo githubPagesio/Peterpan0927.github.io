@@ -235,19 +235,31 @@
 <p>那么如果要给它加上诸如联系人、空间之类的标题图片要怎么做呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pVc.tabBarItem.title = @&quot;Peterpan&quot;;</div><div class="line">pVc.tabBarItem.image = [UIImage imageNamed:@&quot;peterpan&quot;];</div></pre></td></tr></table></figure>
 <p>然后就会形成下面这样的效果(不要吐槽我的画质，开心就好～)</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png" alt="屏幕快照 2017-08-29 下午11.23.23.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png" alt="屏幕快照 2017-08-29 下午11.23.23.png" title="" class="">
+                <p>屏幕快照 2017-08-29 下午11.23.23.png</p>
+            </figure>
 <p>这个时候发现图片居然是蓝色的？？？这是因为high_lighted状态系统默认会渲染成蓝色，如果要修改的话可以这样写代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//修改图片的渲染模式</div><div class="line">selectImage = [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">pVc.tabBarItem.selectedImage = selectImage;</div></pre></td></tr></table></figure>
 <h3 id="通过Storyboard加载tabBarController"><a href="#通过Storyboard加载tabBarController" class="headerlink" title="通过Storyboard加载tabBarController"></a>通过Storyboard加载tabBarController</h3><p>如果是从控件栏中拖入一个tabBarController，会一次性附加两个控制器，同时别忘了给tabBarController加上箭头，因为storyboard默认加载箭头指向的控制器。同时在附加控制器连线的时候，不同于导航控制器的show，而是点击之前的一条连线，有一个viewControllers，将之连到要加入的控制器即可。</p>
 <p>接下来说一下UITabBarButton中的一些属性，可以参考导航控制器的。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg" alt="891D21A5B819BE4CF04B2C9C607C0950.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg" alt="891D21A5B819BE4CF04B2C9C607C0950.jpg" title="" class="">
+                <p>891D21A5B819BE4CF04B2C9C607C0950.jpg</p>
+            </figure>
 <p>这个地方要说一点，就是和导航控制器不同的是，tabBarController的子控制器在进行切换的时候<code>不会被销毁</code>，导航控制器在切换子控制器的时候会将该子控制器上面的控制器弹出并销毁。</p>
-<h3 id="App主流框架结构"><a href="#App主流框架结构" class="headerlink" title="App主流框架结构"></a>App主流框架结构</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt="FCEFA1AAE0F65D78D5706A12306E39A6.jpg"></p>
+<h3 id="App主流框架结构"><a href="#App主流框架结构" class="headerlink" title="App主流框架结构"></a>App主流框架结构</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt="FCEFA1AAE0F65D78D5706A12306E39A6.jpg" title="" class="">
+                <p>FCEFA1AAE0F65D78D5706A12306E39A6.jpg</p>
+            </figure>
 <p>主流框架就是通过tabBarController配合导航控制器来使用，qq也是这样做的</p>
 <p>首先加载一个tabBarController，然后根据用户的点击选择跳转不同的导航控制器，导航控制器中再分别设置视图控制器等，如果动态那一栏可以使用静态单元格。</p>
 <p>其中有一些逻辑是需要我们注意的：</p>
 <p>1.在我们通过底部的按钮加载导航控制器之后，导航控制器内push的时候，tabBar需要隐藏，点击需要隐藏的控制器，右侧栏的layout那里有一个选项，勾选即可：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg" alt="30299C863BC1649EE7158C41B0B2E559.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg" alt="30299C863BC1649EE7158C41B0B2E559.jpg" title="" class="">
+                <p>30299C863BC1649EE7158C41B0B2E559.jpg</p>
+            </figure>
 <p>2.如果是静态单元格的话，可以直接选中tableViewCell来进行拖线的方式进行跳转</p>
 <h3 id="模态出控制器"><a href="#模态出控制器" class="headerlink" title="模态出控制器"></a>模态出控制器</h3><p>模态也是一种切换控制器显示的方法（之前是通过push和pop），任何控制器都可以通过模态来显示。</p>
 <p>模态的默认效果是新控制器从屏幕底下往上钻，直到覆盖原来的控制器为止</p>

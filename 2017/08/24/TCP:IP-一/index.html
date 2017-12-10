@@ -187,10 +187,19 @@
 <p>Linux的内核是运行程序和管理像磁盘和打印机等硬件设备的核心程序，它提供了一个在裸设备和应用程序之间的抽象层,简单来说如同心脏之于人，发动机之于汽车，CPU之于计算机，最后附上一个内核源码的<a href="https://www.kernel.org/" target="_blank" rel="external">下载地址</a>。</p>
 <p>Linux在服务器领域的应用是其重要分支，其免费，稳定，高效等特点得到了很好的体验。</p>
 <h2 id="TCP-IP的意义"><a href="#TCP-IP的意义" class="headerlink" title="TCP/IP的意义"></a>TCP/IP的意义</h2><p>不同硬件，操作系统之间的通信都需要一种规则，我们把这种规则称作协议，而其中的TCP/IP协议则是互联网相关的各类协议族的总称。</p>
-<h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/osi1-5.png" alt="osi1-5.png"></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/osi4-1.png" alt="osi4-1.png"></p>
+<h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/osi1-5.png" alt="osi1-5.png" title="" class="">
+                <p>osi1-5.png</p>
+            </figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/osi4-1.png" alt="osi4-1.png" title="" class="">
+                <p>osi4-1.png</p>
+            </figure>
 <p>因为计算机不像人一样拥有随机应变的能力，所以我们需要应对各种异常情况并进行处理，其中OSI模型对通信中的必要功能进行了很好的归纳，但是由于没有对协议和接口进行详细的定义，对于学习协议只能起一个引导作用。</p>
-<h2 id="OSI参考模型通信处理举例"><a href="#OSI参考模型通信处理举例" class="headerlink" title="OSI参考模型通信处理举例"></a>OSI参考模型通信处理举例</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/osi%E6%A8%A1%E5%9E%8B%E5%8F%82%E8%80%83%E4%B8%BE%E4%BE%8B.png" alt="osi模型参考举例.png"></p>
+<h2 id="OSI参考模型通信处理举例"><a href="#OSI参考模型通信处理举例" class="headerlink" title="OSI参考模型通信处理举例"></a>OSI参考模型通信处理举例</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/osi%E6%A8%A1%E5%9E%8B%E5%8F%82%E8%80%83%E4%B8%BE%E4%BE%8B.png" alt="osi模型参考举例.png" title="" class="">
+                <p>osi模型参考举例.png</p>
+            </figure>
 <p>为了方便理解，我们举一个例子，如上图所示，A向B发一个邮件问好：</p>
 <ul>
 <li>应用层</li>
@@ -217,7 +226,10 @@
 <li>数据链路层</li>
 </ul>
 <p>数据链路层的作用是在通过传输介质互联的设备之间进行数据处理，和上层的关系可以用一张图来表示：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/697D6930A9BFC709E63475EDB8C2AB4E.png" alt="697D6930A9BFC709E63475EDB8C2AB4E.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/697D6930A9BFC709E63475EDB8C2AB4E.png" alt="697D6930A9BFC709E63475EDB8C2AB4E.png" title="" class="">
+                <p>697D6930A9BFC709E63475EDB8C2AB4E.png</p>
+            </figure>
 <p>相互连接的设备之间使用地址实现传输。这种地址被称为MAC地址。</p>
 <ul>
 <li>物理层</li>
@@ -241,7 +253,10 @@
 </ul>
 <p>聪明的人类想到了一个方法来解决这个问题～：将连接到通信电路的计算机所要发送的数据分成多个数据包，按照一定的顺序排列之后再发送，因为在包的首部写入发送端和接收端的地址，所以可以唯一确认。</p>
 <p>发送端计算机将数据分组发送给路由器，路由器接收到数据以后会按照顺序缓存到相应的队列中，再以先进先出的原则发送出去。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/22E392D96C18B8E857BDC0D431FCC14C.png" alt="22E392D96C18B8E857BDC0D431FCC14C.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/22E392D96C18B8E857BDC0D431FCC14C.png" alt="22E392D96C18B8E857BDC0D431FCC14C.png" title="" class="">
+                <p>22E392D96C18B8E857BDC0D431FCC14C.png</p>
+            </figure>
 <h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><h3 id="地址的唯一性"><a href="#地址的唯一性" class="headerlink" title="地址的唯一性"></a>地址的唯一性</h3><p>如果要让地址在通信中发挥作用，通信的主体也就是是信息收发端必须是唯一的表示一个对象。同一个</p>
 <p>通信网络中不能有两个地址相同的通信主体存在,这也就是地址的唯一性。</p>
 <p>这里可能会有一个疑问，对于单播还比较好理解，在多播、广播中是怎么保证地址的唯一行的呢？</p>
@@ -260,11 +275,17 @@
 </ul>
 <p>在领取教材的时候，主任说七班任意来一位同学拿名册，任意一位同学就是这次任播的目标地址</p>
 <h3 id="地址的层次性"><a href="#地址的层次性" class="headerlink" title="地址的层次性"></a>地址的层次性</h3><p>当地址不是很多的时候，有唯一地址就可以确定通信主体，但是在当今庞大的互联网中，地址除了具有唯一性还需要具有层次性。其实在电话号码中就已经有这种设定了，电话号码包括国家区号和国内区号，这样就可以更加快速的定位；</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/8728D70860794E71410D42FE4A2709F4.png" alt="8728D70860794E71410D42FE4A2709F4.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/8728D70860794E71410D42FE4A2709F4.png" alt="8728D70860794E71410D42FE4A2709F4.png" title="" class="">
+                <p>8728D70860794E71410D42FE4A2709F4.png</p>
+            </figure>
 <p>MAC地址和IP地址在标识一个通信主体时虽然都具有唯一性，但只有IP地址具有层次性。</p>
 <p>MAC地址由设备的制造厂商对每块网卡进行分别的指定，而IP地址通过网络号和主机号两部分组成。主机号不同，网络号相同，说明他们处于同一个网段。另一方面，网络号相同的主机在提供商类型，地域分布上都比较集中。这也是为什么说IP地址具有层次性。</p>
 <p>网络传输中，每个节点会根据分组数据的地址信息，来判断报文应该从哪个网卡发出去。为此，各个地址都会参考一个发出接口列表。这一点上MAC寻址和IP寻址是一样的。只不过MAC寻址所参考的这个表叫做地址转发表，而IP寻址中所参考的叫做路由控制表。一个记录的是实际的MAC地址，一个是集中后的网络号。比如下面这个例子：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/280123794EEFF716EF4A094084DE7FB5.png" alt="280123794EEFF716EF4A094084DE7FB5.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/280123794EEFF716EF4A094084DE7FB5.png" alt="280123794EEFF716EF4A094084DE7FB5.png" title="" class="">
+                <p>280123794EEFF716EF4A094084DE7FB5.png</p>
+            </figure>
 <h2 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h2><table>
 <thead>
 <tr>
@@ -302,13 +323,19 @@
 <p>这里中继器和交换机方面的知识之前已经提过，就不多赘述，那么来说说网关吧</p>
 <p>网关是负责将OSI模型中从传输层到应用层的数据进行转换和转发的设备。它和4～7层交换机一样都是处理传输层以上的数据，网关不仅转发数据还会对数据进行转换，它通常会使用一个表示层或者应用层网关，在两个不能直接进行通信的协议之间进行翻译，最终实现两者之间的通信。</p>
 <p>就好比说手机的邮件有时会和互联网的邮件不兼容，这是由于它们在表示层和应用层之间的电子应用协议互不相同所导致。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/33D1998EBE60340EE0E2CB4067AC6F57.png" alt="33D1998EBE60340EE0E2CB4067AC6F57.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/33D1998EBE60340EE0E2CB4067AC6F57.png" alt="33D1998EBE60340EE0E2CB4067AC6F57.png" title="" class="">
+                <p>33D1998EBE60340EE0E2CB4067AC6F57.png</p>
+            </figure>
 <p>其中代理服务器也算是网关，被称作应用网关，在我大天朝也是应用广泛，应用方面自行体会～</p>
 <h3 id="互联网通信"><a href="#互联网通信" class="headerlink" title="互联网通信"></a>互联网通信</h3><p>人们在家或公司一般都会使用互联网接入服务，汇集到无限局域网路由器和最近交换机的通信会被连接到所谓的”接入层”，甚至通过边缘网络或主干网实现与目标地址进行通信。</p>
 <p>如果是移动通信，手机一开机，就会自动和距离最近的基站发生无线通信。基站设有特定的手机基站天线，本身相当于网络的接入层。</p>
 <p>基站收集的通信请求被汇集到控制中心（“边缘网络”），之后再被接入到主干网。</p>
 <p>如果是从一个信息发布者的角度来看的话，对于那些巨大的访问量，会采用数据中心的模式，也就是托管主机服务，集合多个存储一起，通过连接高速网络减少网络延迟来提高响应的速度。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/F541EB6888B188542B78B59340633E86.png" alt="F541EB6888B188542B78B59340633E86.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/F541EB6888B188542B78B59340633E86.png" alt="F541EB6888B188542B78B59340633E86.png" title="" class="">
+                <p>F541EB6888B188542B78B59340633E86.png</p>
+            </figure>
 <p>数据中心由大型服务器、存储和计算机网络构成，有些大型数据中心会直接连接主干网，就算小规模的议案也会连接到边缘网络。</p>
 <p>数据中心的内部分布着三层交换机和高速路由器。</p>
 

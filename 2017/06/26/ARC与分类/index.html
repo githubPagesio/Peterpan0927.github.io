@@ -220,15 +220,24 @@
 <p>在ARC的机制下，@property的参数就不能使用retain了，因为retain代表的是MRC模式下标准的内存管理代码。我们在ARC机制下setter方法，直接赋值即可，在这个机制下，当一个类的属性是OC对象的时候，我们关注的重点是应该声明的是强类型还是弱类型。 </p>
 <p>在ARC机制下，如果属性的类型是OC对象类型的，使用strong</p>
 <p>如果属性的类型不是OC对象类型的，使用assign，只有指针才有强弱之分。</p>
-<h2 id="ARC机制下的循环引用"><a href="#ARC机制下的循环引用" class="headerlink" title="ARC机制下的循环引用"></a>ARC机制下的循环引用</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%881.50.46.png" alt="屏幕快照 2017-06-25 下午1.50.46.png"></p>
+<h2 id="ARC机制下的循环引用"><a href="#ARC机制下的循环引用" class="headerlink" title="ARC机制下的循环引用"></a>ARC机制下的循环引用</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%881.50.46.png" alt="屏幕快照 2017-06-25 下午1.50.46.png" title="" class="">
+                <p>屏幕快照 2017-06-25 下午1.50.46.png</p>
+            </figure>
 <p>当if语句执行完的时候，指针被释放，但是两个对象之间存在着互相的强指针引用，导致无法释放而内存泄漏。</p>
 <p>这个时候只需要把book的那个owner的属性参数改成weak即可。</p>
 <p>所以在ARC机制下，两个对象相互引用的时候如果两方都使用strong，就会导致循环引用</p>
 <h2 id="MRC和ARC兼容与转换"><a href="#MRC和ARC兼容与转换" class="headerlink" title="MRC和ARC兼容与转换"></a>MRC和ARC兼容与转换</h2><p>程序使用的是ARC开发的，但是其中某些类使用的是MRC</p>
 <p>使用命令<code>fno-objc-arc</code></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%882.05.27.png" alt="屏幕快照 2017-06-25 下午2.05.27.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%882.05.27.png" alt="屏幕快照 2017-06-25 下午2.05.27.png" title="" class="">
+                <p>屏幕快照 2017-06-25 下午2.05.27.png</p>
+            </figure>
 <p>MRC可以转换成ARC，但是不能转换回去了，所以在进行转换之前要进行备份</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%884.18.53.png" alt="屏幕快照 2017-06-25 下午4.18.53.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%884.18.53.png" alt="屏幕快照 2017-06-25 下午4.18.53.png" title="" class="">
+                <p>屏幕快照 2017-06-25 下午4.18.53.png</p>
+            </figure>
 <h2 id="分类的基本使用"><a href="#分类的基本使用" class="headerlink" title="分类的基本使用"></a>分类的基本使用</h2><p>比如写一个学生类的时候，类中有很多的方法，吃喝拉撒玩等等，如果写在同一个类模块中虽然是可以，但是会显得很臃肿，后期难以维护。</p>
 <p>分类就是把一个类分成多个模块，添加分类之后，会生成.h和.m的模块</p>
 <p>1.模块的文件名+分类名.h</p>

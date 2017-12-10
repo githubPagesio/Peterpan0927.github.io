@@ -224,7 +224,10 @@
 <p>系统自动的在合适的地方发送retain、release方法</p>
 <p>学习MRC的理由：面试必考、早期的APP开发使用的MRC技术、MRC更加精确一些、ARC是基于MRC的</p>
 <p>因为从Xcode7开始就默认使用ARC进行开发，所以在进行MRC开发的时候就要把ARC模式关闭</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%882.14.59.png" alt="屏幕快照 2017-06-21 下午2.14.59.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%882.14.59.png" alt="屏幕快照 2017-06-21 下午2.14.59.png" title="" class="">
+                <p>屏幕快照 2017-06-21 下午2.14.59.png</p>
+            </figure>
 <p>重写dealloc的规范：</p>
 <p>必须要调用父类的dealloc方法，并且放到最后一句代码。</p>
 <h2 id="内存管理原则"><a href="#内存管理原则" class="headerlink" title="内存管理原则"></a>内存管理原则</h2><p>1.内存管理之中的重点就是掌握好给对象发送retain和release方法的时机</p>
@@ -254,8 +257,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">//将p1对象的引用计数器减一，对象被释放</div><div class="line">[p1 release];</div><div class="line">//虽然对象被释放，如果内存没有被分配出去，数据还在</div><div class="line">p1.age = 10;</div><div class="line">//仍然可以执行方法</div><div class="line">[p1 sayHi];</div></pre></td></tr></table></figure>
 <p>一个已经被释放的对象，但是占用的空间还没有分配给别人，这样的对象叫做僵尸对象。</p>
 <p>我们认为只要成为了僵尸对象，就不应该被允许访问，所以我们可以开启这样的一个机制</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.55.52.png" alt="屏幕快照 2017-06-21 下午3.55.52.png"></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.56.54.png" alt="屏幕快照 2017-06-21 下午3.56.54.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.55.52.png" alt="屏幕快照 2017-06-21 下午3.55.52.png" title="" class="">
+                <p>屏幕快照 2017-06-21 下午3.55.52.png</p>
+            </figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-21%20%E4%B8%8B%E5%8D%883.56.54.png" alt="屏幕快照 2017-06-21 下午3.56.54.png" title="" class="">
+                <p>屏幕快照 2017-06-21 下午3.56.54.png</p>
+            </figure>
 <p>那么，我们为什么不默认的打开僵尸对象检测呢？</p>
 <p>一旦打开僵尸对象检测，那么每访问一个对象的时候，都会先检查这个对象是否是僵尸对象，这样很消耗性能。</p>
 <p>使用野指针访问僵尸对象会报错，所以只需要在一个指针称为野指针的时候，将这个指针的值设置为nil。</p>
@@ -279,7 +288,10 @@
 <p>当一个属性是1个OC对象的时候，setter方法的写法：</p>
 <p>将传进来的对象赋值给当前对象的属性，代表传入的对象多了一个人使用，所以我们应该先为传入的对象发送一条retain消息。</p>
 <p>当一个对象销毁的时候。代表属性指向的对象少一个人使用，就应该在dealloc中release掉。</p>
-<h2 id="setter方法内存管理（二）"><a href="#setter方法内存管理（二）" class="headerlink" title="setter方法内存管理（二）"></a>setter方法内存管理（二）</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8811.50.55.png" alt=""></p>
+<h2 id="setter方法内存管理（二）"><a href="#setter方法内存管理（二）" class="headerlink" title="setter方法内存管理（二）"></a>setter方法内存管理（二）</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8A%E5%8D%8811.50.55.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>如上图所示的情况也会造成内存的泄漏，因为重新将benz赋值给人的car属性之后，人对象被release掉之后，dealloc中只是让benz的引用计数减一，释放掉了benz对象，但是bmw还有一个计数，所以没有被释放，从而造成内存泄漏。</p>
 <p>所以在Person对象的setCar方法中我们需要重新思考:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)setCar&#123;</div><div class="line">  [_car release];</div><div class="line">  _car = [car retain];</div><div class="line">  //当我们将传入的对象复制给car属性的时候</div><div class="line">  //代表1:_car属性原本指向的对象少一个人使用</div><div class="line">  //代表2:传入的对象多一个人使用</div><div class="line">  //所以我们要把_car属性原本指向的对象先release</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -342,7 +354,10 @@
 <li>import是将指定文件的内容拷贝到写指令的地方</li>
 <li>@class并不会拷贝任何内容，只是告诉编译器这是一个类</li>
 </ul>
-<h2 id="循环retain"><a href="#循环retain" class="headerlink" title="循环retain"></a>循环retain</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8B%E5%8D%884.55.31.png" alt="屏幕快照 2017-06-22 下午4.55.31.png"></p>
+<h2 id="循环retain"><a href="#循环retain" class="headerlink" title="循环retain"></a>循环retain</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-22%20%E4%B8%8B%E5%8D%884.55.31.png" alt="屏幕快照 2017-06-22 下午4.55.31.png" title="" class="">
+                <p>屏幕快照 2017-06-22 下午4.55.31.png</p>
+            </figure>
 <p>出现这种情况的时候，因为两个对象循环引用，A对象的属性是B对象，B对象的属性是A属性，所以两个都无法触发dealloc方法，所以会导致内存泄漏。</p>
 <p>解决的方案就是一端使用retain，另一段使用assign即可，使用assign的一段在dealloc方法中就不需要release了。</p>
 

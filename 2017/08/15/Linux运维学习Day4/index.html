@@ -195,7 +195,10 @@
 <p>这个时候要使用选项<code>-r</code></p>
 <p>1.如果目标不存在，创建指定的目录，复制SRC目录中所有的文件至DEST中</p>
 <p>2.如果目标存在，if是文件，直接报错，if是目录，直接将SRC目录中的文件复制过去</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/B9F4B48A32282207CA2513049D5FE217.jpg" alt="B9F4B48A32282207CA2513049D5FE217.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/B9F4B48A32282207CA2513049D5FE217.jpg" alt="B9F4B48A32282207CA2513049D5FE217.jpg" title="" class="">
+                <p>B9F4B48A32282207CA2513049D5FE217.jpg</p>
+            </figure>
 <p>其中<code>--preserve选项太长了</code>，可以写为<code>-p</code>,<code>-v</code>选项用来显示过程，不必多说</p>
 <h3 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h3><p><strong>mv SRC DEST</strong></p>
 <p>1.如果目标文件不存在，就创建一个同名文件，然后将src中的数据复制过去，并删除src的源文件</p>
@@ -232,7 +235,10 @@
 <p>4.[^]:匹配指定范围外的任意单个字符</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls a[^0-9a-z]b</div></pre></td></tr></table></figure>
 <p><strong>专用字符集合</strong>：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/67FB1FAF1A65123443B519A7321790B3.jpg" alt="67FB1FAF1A65123443B519A7321790B3.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/67FB1FAF1A65123443B519A7321790B3.jpg" alt="67FB1FAF1A65123443B519A7321790B3.jpg" title="" class="">
+                <p>67FB1FAF1A65123443B519A7321790B3.jpg</p>
+            </figure>
 <h3 id="bash的I-O重定向和管道"><a href="#bash的I-O重定向和管道" class="headerlink" title="bash的I/O重定向和管道"></a>bash的I/O重定向和管道</h3><p>打开的文件都有一个fd:file descriptor（文件描述符）</p>
 <p>标准输入：keyboard，0</p>
 <p>标准输出：monitor(显示器)，1</p>
@@ -252,7 +258,10 @@
 <blockquote>
 <p>tr [OPTIONS…]… SET1 [SET2]        转换或删除字符</p>
 </blockquote>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.48.35.png" alt="屏幕快照 2017-07-23 下午3.48.35.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.48.35.png" alt="屏幕快照 2017-07-23 下午3.48.35.png" title="" class="">
+                <p>屏幕快照 2017-07-23 下午3.48.35.png</p>
+            </figure>
 <p>如上图所示的例子，将输入的小写字母全部转换为大写字母输出</p>
 <p>如果要删除字符可以使用修饰符<code>-d</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#删除所有的大写&apos;U&apos;</div><div class="line">tr -d &apos;U&apos;</div></pre></td></tr></table></figure>
@@ -260,29 +269,53 @@
 <p>HERE Document    ‘&lt;&lt;’</p>
 </blockquote>
 <p>当遇到’&lt;&lt;’后面的字符或字符串时停止输入，举个例子：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.57.38.png" alt="屏幕快照 2017-07-23 下午3.57.38.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.57.38.png" alt="屏幕快照 2017-07-23 下午3.57.38.png" title="" class="">
+                <p>屏幕快照 2017-07-23 下午3.57.38.png</p>
+            </figure>
 <p>当然我们也可以对输出在做一次重定向,用于保存我们键入的文档：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.59.21.png" alt="屏幕快照 2017-07-23 下午3.59.21.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-23%20%E4%B8%8B%E5%8D%883.59.21.png" alt="屏幕快照 2017-07-23 下午3.59.21.png" title="" class="">
+                <p>屏幕快照 2017-07-23 下午3.59.21.png</p>
+            </figure>
 <h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>第一个命令的输出作为第二个命令的输入….依次类推</p>
 <p>command1 | command2 | command3 |…</p>
 <p>最后一个命令会在当前shell的子shell进程中执行</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.07.06.png" alt="屏幕快照 2017-07-25 下午1.07.06.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.07.06.png" alt="屏幕快照 2017-07-25 下午1.07.06.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午1.07.06.png</p>
+            </figure>
 <p>如上图所示就是利用管道使配置文件在转换大小写的同时分屏显示</p>
 <p> tee命令：</p>
 <p>tee命令可以将显示在屏幕上的信息也保存一份在文件中，通常在管道中使用（注意，tee是覆盖输出的）</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.29.19.png" alt="屏幕快照 2017-07-25 下午1.29.19.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.29.19.png" alt="屏幕快照 2017-07-25 下午1.29.19.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午1.29.19.png</p>
+            </figure>
 <p>练习测试：</p>
 <p>1.将/etc/passwd文件中的前五行转换为大写保存至/tmp/passwd.out</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.33.01.png" alt="屏幕快照 2017-07-25 下午1.33.01.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.33.01.png" alt="屏幕快照 2017-07-25 下午1.33.01.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午1.33.01.png</p>
+            </figure>
 <p>2.将登陆至当前系统上的用户信息的后三位的信息转换为大写后保存至/tmp/who.out文件中</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.35.08.png" alt="屏幕快照 2017-07-25 下午1.35.08.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.35.08.png" alt="屏幕快照 2017-07-25 下午1.35.08.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午1.35.08.png</p>
+            </figure>
 <h3 id="文件处理工具"><a href="#文件处理工具" class="headerlink" title="文件处理工具"></a>文件处理工具</h3><p>接下来再来说一下一些文件处理的工具：</p>
 <p>1.<code>wc</code>命令，常用选项：<code>-l</code>,<code>-w</code>,<code>-c</code></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.55.35.png" alt="屏幕快照 2017-07-25 下午1.55.35.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%881.55.35.png" alt="屏幕快照 2017-07-25 下午1.55.35.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午1.55.35.png</p>
+            </figure>
 <p>2.<code>cut</code>命令，将文件切割成段来显示，并使用修饰符来达到我们的目的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#-d修饰符表示以什么作为分隔,-f表示显示文件的第几段</div><div class="line">cut -d : -f 1,2 /etc/passwd</div></pre></td></tr></table></figure>
 <p>还有一个修饰符可以自定的替换分隔符：<code>--output-delimiter</code></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%882.12.09.png" alt="屏幕快照 2017-07-25 下午2.12.09.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-25%20%E4%B8%8B%E5%8D%882.12.09.png" alt="屏幕快照 2017-07-25 下午2.12.09.png" title="" class="">
+                <p>屏幕快照 2017-07-25 下午2.12.09.png</p>
+            </figure>
 <p>3.<code>sort</code>命令，对文本排序</p>
 <blockquote>
 <p>-f:忽略大小写</p>
@@ -322,7 +355,10 @@
 </blockquote>
 <h4 id="Linux的安全上下文"><a href="#Linux的安全上下文" class="headerlink" title="Linux的安全上下文"></a>Linux的安全上下文</h4><p>运行中的程序：进程（process）以进程发起者的身份去执行</p>
 <p>进程所能够访问的所有资源的权限取决于进程发起者的身份</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/9AE0B66687A4F6228B1234C0E7FF34F1.jpg" alt="9AE0B66687A4F6228B1234C0E7FF34F1.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/9AE0B66687A4F6228B1234C0E7FF34F1.jpg" alt="9AE0B66687A4F6228B1234C0E7FF34F1.jpg" title="" class="">
+                <p>9AE0B66687A4F6228B1234C0E7FF34F1.jpg</p>
+            </figure>
 <p>/etc/passwd:</p>
 <p>​name : passwd : UID: GID: GESOS : directory : shell </p>
 <p>/etc/group:</p>
@@ -434,7 +470,10 @@
 <h4 id="给用户-组添加密码"><a href="#给用户-组添加密码" class="headerlink" title="给用户/组添加密码"></a>给用户/组添加密码</h4><p>passwd  username</p>
 <p>修改指定用户的密码，仅限root权限，如果仅仅是passwd，就是修改当前用户的密码，当前用户就可以修改</p>
 <p>因为passwd命令是修改/etc/shadow文件，所以可以修改在这个文件中参数，如修改密码的时间等</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/6973EC7222C204B5D6414903CE6AF26E.jpg" alt="6973EC7222C204B5D6414903CE6AF26E.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/6973EC7222C204B5D6414903CE6AF26E.jpg" alt="6973EC7222C204B5D6414903CE6AF26E.jpg" title="" class="">
+                <p>6973EC7222C204B5D6414903CE6AF26E.jpg</p>
+            </figure>
 <p>gpasswd</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gpasswd -a user mygrp #将user添加至指定用户组</div><div class="line">gpasswd -d user mygrp #将用户从指定组中删除,如果该组为这个用户的基本组无法删除</div><div class="line">gpasswd -A user1,user2 mygrp  #设置有管理权限的用户列表</div></pre></td></tr></table></figure>
 <p>newgrp</p>
@@ -444,13 +483,25 @@
 <p>groupdel  group</p>
 <h4 id="验证本地认证信息的正确性"><a href="#验证本地认证信息的正确性" class="headerlink" title="验证本地认证信息的正确性"></a>验证本地认证信息的正确性</h4><p><strong>pwck</strong> 命令通过检查全部用户的定义来验证用户数据库文件中密码信息的正确性。<strong>pwck</strong> 命令内部调用带有 <strong>-n</strong> 和 <strong>ALL</strong> 选项的 <strong>pwdck</strong>命令。</p>
 <h4 id="修改用户密码过期信息"><a href="#修改用户密码过期信息" class="headerlink" title="修改用户密码过期信息"></a>修改用户密码过期信息</h4><p>chage命令：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/1E40EA4891F54EE870F89ECEC563EEB3.jpg" alt="1E40EA4891F54EE870F89ECEC563EEB3.jpg"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/1E40EA4891F54EE870F89ECEC563EEB3.jpg" alt="1E40EA4891F54EE870F89ECEC563EEB3.jpg" title="" class="">
+                <p>1E40EA4891F54EE870F89ECEC563EEB3.jpg</p>
+            </figure>
 <h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><p>chfn:修改指纹信息</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.15.png" alt="屏幕快照 2017-07-26 下午2.46.15.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.15.png" alt="屏幕快照 2017-07-26 下午2.46.15.png" title="" class="">
+                <p>屏幕快照 2017-07-26 下午2.46.15.png</p>
+            </figure>
 <p>chsh:修改shell，如果不需要交互式可以加上选项<code>-s</code>和新shell的路径</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.48.png" alt="屏幕快照 2017-07-26 下午2.46.48.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.46.48.png" alt="屏幕快照 2017-07-26 下午2.46.48.png" title="" class="">
+                <p>屏幕快照 2017-07-26 下午2.46.48.png</p>
+            </figure>
 <p>finger:查看指纹信息</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.41.14.png" alt="屏幕快照 2017-07-26 下午2.41.14.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-26%20%E4%B8%8B%E5%8D%882.41.14.png" alt="屏幕快照 2017-07-26 下午2.41.14.png" title="" class="">
+                <p>屏幕快照 2017-07-26 下午2.41.14.png</p>
+            </figure>
 <h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>文件的权限管理主要针对三类对象进行定义：</p>
 <p>owner、group、other</p>
 <p>每个文件针对每类访问者都定义了三种权限：r,w,x</p>
