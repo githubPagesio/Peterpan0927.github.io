@@ -1,497 +1,579 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    
-    <title>七牛图片自动上传 | Peterpan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="Python脚本">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":null,"app_key":null,"icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":null,"appkey":null,"notify":false,"verify":false,"placeholder":"give me some sugers plz...","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+  <meta charset="utf-8">
+  
+  <title>七牛图片自动上传 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="qiniu4blog自动上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛图片自动上传">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/七牛图片自动上传/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="qiniu4blog自动上传">
+<meta property="og:updated_time" content="2017-12-09T14:13:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七牛图片自动上传">
+<meta name="twitter:description" content="qiniu4blog自动上传">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 </head>
-
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
         </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:1549346936@qq.com" title="1549346936@qq.com" class="mail">1549346936@qq.com</a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
         </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>七牛图片自动上传</span>
-            
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/CTF/" style="font-size: 18px;">CTF</a> <a href="/tags/Linux/" style="font-size: 16px;">Linux</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Re/" style="font-size: 10px;">Re</a> <a href="/tags/TCP-IP/" style="font-size: 14px;">TCP/IP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/动漫-影视/" style="font-size: 12px;">动漫/影视</a> <a href="/tags/服务器端/" style="font-size: 10px;">服务器端</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/计算机硬件/" style="font-size: 10px;">计算机硬件</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
         </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">七牛图片自动上传</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-06-15T01:38:36.000Z" itemprop="datePublished" class="page-time">
-  2017-06-15
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/输出markdown格式的图片链接/">输出markdown格式的图片链接</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+    </header>                
 </div>
-
-
-<div class="container body-wrap">
-    <article id="post-七牛图片自动上传"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">七牛图片自动上传</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-06-15 09:38:36" datetime="2017-06-15T01:38:36.000Z"  itemprop="datePublished">2017-06-15</time>
-
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/输出markdown格式的图片链接/">输出markdown格式的图片链接</a></li></ul>
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-七牛图片自动上传" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/15/七牛图片自动上传/" class="article-date">
+      <time datetime="2017-06-15T01:38:36.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      七牛图片自动上传
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/输出markdown格式的图片链接/">输出markdown格式的图片链接</a>
+    </div>
 
 
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
 
-            
-	<span id="/2017/06/15/七牛图片自动上传/" class="leancloud_visitors" data-flag-title="七牛图片自动上传" title="七牛图片自动上传">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/06/15/七牛图片自动上传/#comment">
-            <span class="valine-comment-count" data-xid="/2017/06/15/七牛图片自动上传/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>qiniu4blog自动上传<br><a id="more"></a></p>
-<h2 id="源码部分"><a href="#源码部分" class="headerlink" title="源码部分"></a>源码部分</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> os, time, sys, ConfigParser, platform, urllib, qiniu, pyperclip, signal, threading</div><div class="line"><span class="keyword">from</span> mimetypes <span class="keyword">import</span> MimeTypes</div><div class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> expanduser</div><div class="line"><span class="keyword">from</span> watchdog.observers <span class="keyword">import</span> Observer</div><div class="line"><span class="keyword">from</span> watchdog.events <span class="keyword">import</span> PatternMatchingEventHandler</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 使用watchdog 监控文件夹中的图像</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span><span class="params">(PatternMatchingEventHandler)</span>:</span></div><div class="line">    patterns = [<span class="string">"*.jpeg"</span>, <span class="string">"*.jpg"</span>, <span class="string">"*.png"</span>, <span class="string">"*.bmp"</span>, <span class="string">"*.gif"</span>,<span class="string">"*.tiff"</span>]</div><div class="line">    ignore_directories = <span class="keyword">True</span></div><div class="line">    case_sensitive = <span class="keyword">False</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(self, event)</span>:</span></div><div class="line">        <span class="keyword">if</span> event.event_type == <span class="string">'created'</span><span class="keyword">or</span> event.event_type == <span class="string">'modified'</span>: <span class="comment">#如果是新增文件或修改的文件</span></div><div class="line">            myThread(event.src_path, <span class="number">1</span>).start() <span class="comment"># 开启线程</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_modified</span><span class="params">(self, event)</span>:</span></div><div class="line">        self.process(event)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_created</span><span class="params">(self, event)</span>:</span></div><div class="line">        self.process(event)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 使用多线程上传</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">myThread</span><span class="params">(threading.Thread)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, filePath, mode)</span>:</span> <span class="comment">#filePath 文件路径 和 上传模式</span></div><div class="line">        threading.Thread.__init__(self)</div><div class="line">        self.filePath = filePath</div><div class="line">        self.mode = mode</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></div><div class="line">        threadLock.acquire()</div><div class="line">        job(self.filePath, self.mode)</div><div class="line">        threadLock.release()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传图像、复制到粘贴板、写到文件</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">job</span><span class="params">(file, mode)</span>:</span></div><div class="line">    <span class="keyword">if</span> mode == <span class="number">1</span>:</div><div class="line">        url = upload_with_full_Path(file)</div><div class="line">    <span class="keyword">if</span> mode == <span class="number">2</span>:</div><div class="line">        url = upload_with_full_Path_cmd(file)</div><div class="line">    pyperclip.copy(url)</div><div class="line">    pyperclip.paste()</div><div class="line">    <span class="keyword">print</span> url</div><div class="line">    <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">        image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">        f.write(image + <span class="string">'\n'</span>)</div><div class="line"></div><div class="line"><span class="comment">#-----------------配置--------------------</span></div><div class="line">homedir = expanduser(<span class="string">"~"</span>)  <span class="comment"># 获取用户主目录</span></div><div class="line">config = ConfigParser.RawConfigParser()</div><div class="line">config.read(homedir + <span class="string">'/qiniu.cfg'</span>)  <span class="comment"># 读取配置文件</span></div><div class="line">mime = MimeTypes()</div><div class="line">threadLock = threading.Lock()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 优雅退出</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exit_gracefully</span><span class="params">(signum, frame)</span>:</span></div><div class="line">    signal.signal(signal.SIGINT, original_sigint)</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">if</span> raw_input(<span class="string">"\nReally quit? (y/n)&gt; "</span>).lower().startswith(<span class="string">'y'</span>):</div><div class="line">            sys.exit(<span class="number">1</span>)</div><div class="line">    <span class="keyword">except</span> KeyboardInterrupt:</div><div class="line">        print(<span class="string">"Ok ok, quitting"</span>)</div><div class="line">        sys.exit(<span class="number">1</span>)</div><div class="line">    signal.signal(signal.SIGINT, exit_gracefully)</div><div class="line"></div><div class="line">original_sigint = signal.getsignal(signal.SIGINT)</div><div class="line">signal.signal(signal.SIGINT, exit_gracefully)</div><div class="line"></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    bucket = config.get(<span class="string">'config'</span>, <span class="string">'bucket'</span>)  <span class="comment"># 设置  bucket</span></div><div class="line">    accessKey = config.get(<span class="string">'config'</span>, <span class="string">'accessKey'</span>)  <span class="comment"># 设置  accessKey</span></div><div class="line">    secretKey = config.get(<span class="string">'config'</span>, <span class="string">'secretKey'</span>)  <span class="comment"># 设置  secretKey</span></div><div class="line">    path_to_watch = config.get(<span class="string">'config'</span>, <span class="string">'path_to_watch'</span>)  <span class="comment"># 设置   监控文件夹</span></div><div class="line">    enable = config.get(<span class="string">'custom_url'</span>, <span class="string">'enable'</span>)  <span class="comment"># 设置自定义使能 custom_url</span></div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'false'</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'custom_url not set'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        addr = config.get(<span class="string">'custom_url'</span>, <span class="string">'addr'</span>)</div><div class="line"><span class="keyword">except</span> ConfigParser.NoSectionError, err:</div><div class="line">    <span class="keyword">print</span> <span class="string">'Error Config File:'</span>, err</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 设置编码</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">setCodeingByOS</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="string">'cygwin'</span> <span class="keyword">in</span> platform.system().lower():</div><div class="line">        <span class="keyword">return</span> <span class="string">'GBK'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'nt'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'GBK'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'mac'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Darwin'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'utf-8'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'posix'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Linux'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'utf-8'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 处理七牛返回结果</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseRet</span><span class="params">(retData, respInfo)</span>:</span></div><div class="line">    <span class="keyword">if</span> retData != <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> retData.items():</div><div class="line">            <span class="keyword">if</span> k[:<span class="number">2</span>] == <span class="string">"x:"</span>:</div><div class="line">                print(k + <span class="string">":"</span> + v)</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> retData.items():</div><div class="line">            <span class="keyword">if</span> k[:<span class="number">2</span>] == <span class="string">"x:"</span> <span class="keyword">or</span> k == <span class="string">"hash"</span> <span class="keyword">or</span> k == <span class="string">"key"</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                print(k + <span class="string">":"</span> + str(v))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(<span class="string">"Upload file failed!"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_without_key</span><span class="params">(bucket, filePath, uploadname)</span>:</span></div><div class="line">    auth = qiniu.Auth(accessKey, secretKey)</div><div class="line">    upToken = auth.upload_token(bucket, key=<span class="keyword">None</span>)</div><div class="line">    key = uploadname</div><div class="line">    retData, respInfo = qiniu.put_file(upToken, key, filePath, mime_type=mime.guess_type(filePath)[<span class="number">0</span>])</div><div class="line">    parseRet(retData, respInfo)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 2</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_with_full_Path</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">if</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        fileName = <span class="string">"/"</span>.join(<span class="string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="number">1</span>:].split(<span class="string">"\\"</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        fileName = <span class="string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="number">1</span>:]</div><div class="line">    upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))</div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'true'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'!['</span>+fileName+<span class="string">']('</span>+addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))+<span class="string">')'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'http://'</span> + bucket + <span class="string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 3</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_with_full_Path_cmd</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">if</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        fileName = os.path.basename(<span class="string">"/"</span>.join((filePath.split(<span class="string">"\\"</span>))))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">       fileName = os.path.basename(filePath)</div><div class="line">    upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))</div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'true'</span>:</div><div class="line">        <span class="keyword">return</span> addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'http://'</span> + bucket + <span class="string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"><span class="comment">#-----------------window platform---------------start</span></div><div class="line"><span class="comment"># window下的监控文件夹变动方式-获取所有文件路径</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_filepaths</span><span class="params">(directory)</span>:</span></div><div class="line">    file_paths = []  <span class="comment"># List which will store all of the full filepaths.</span></div><div class="line">    <span class="keyword">for</span> root, directories, files <span class="keyword">in</span> os.walk(directory):</div><div class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">            <span class="comment"># Join the two strings in order to form the full filepath.</span></div><div class="line">            filepath = os.path.join(root, filename)</div><div class="line">            file_paths.append(filepath)  <span class="comment"># Add it to the list.</span></div><div class="line">    <span class="keyword">return</span> file_paths  <span class="comment"># Self-explanatory.</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_clipboard</span><span class="params">(url_list)</span>:</span></div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">        pyperclip.copy(url)</div><div class="line">        spam = pyperclip.paste()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_filename</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> url.split(<span class="string">"/"</span>)[<span class="number">-1</span>:][<span class="number">0</span>].split(<span class="string">'.'</span>)[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">window_main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> len(sys.argv) &gt; <span class="number">1</span>:</div><div class="line">        url_list = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">            url_list.append(upload_with_full_Path_cmd(i))</div><div class="line">        <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">            <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                f.write(image)</div><div class="line">        <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">        set_clipboard(url_list)</div><div class="line">        sys.exit(<span class="number">-1</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">"running ... ... \nPress Ctr+C to Stop"</span></div><div class="line">    before = get_filepaths(path_to_watch)</div><div class="line">    <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        after = get_filepaths(path_to_watch)</div><div class="line">        added = [f <span class="keyword">for</span> f <span class="keyword">in</span> after <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> before]</div><div class="line">        removed = [f <span class="keyword">for</span> f <span class="keyword">in</span> before <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> after]</div><div class="line">        <span class="keyword">if</span> added:</div><div class="line">            url_list = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> added:</div><div class="line">                url_list.append(upload_with_full_Path(i))</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                    image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                    <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                    f.write(image)</div><div class="line">            <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">            set_clipboard(url_list)</div><div class="line">        <span class="keyword">if</span> removed:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        before = after</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">unix_main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> len(sys.argv) &gt; <span class="number">1</span>:</div><div class="line">        url_list = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">            url_list.append(upload_with_full_Path_cmd(i))</div><div class="line">            fileFullName = os.path.basename(<span class="string">"/"</span>.join((i.split(<span class="string">"\\"</span>))))</div><div class="line">            fileName = os.path.splitext(fileFullName)[<span class="number">0</span>]</div><div class="line">            myThread(i, <span class="number">2</span>).start()</div><div class="line">        <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">            <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                image = <span class="string">'!['</span>+fileName+<span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                <span class="keyword">print</span> <span class="string">'Url:'</span>+image, <span class="string">'\nFileName:'</span>+fileFullName</div><div class="line">                f.write(image)</div><div class="line">  set_clipboard(url_list)</div><div class="line">        sys.exit(<span class="number">-1</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">"running ... ... \nPress Ctr+C to Stop"</span></div><div class="line">    observer = Observer()</div><div class="line">    observer.schedule(MyHandler(), path=path_to_watch <span class="keyword">if</span> path_to_watch <span class="keyword">else</span> <span class="string">'.'</span>, recursive=<span class="keyword">True</span>)</div><div class="line">    observer.start()</div><div class="line">    before = get_filepaths(path_to_watch)</div><div class="line">    <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        after = get_filepaths(path_to_watch)</div><div class="line">        added = [f <span class="keyword">for</span> f <span class="keyword">in</span> after <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> before]</div><div class="line">        removed = [f <span class="keyword">for</span> f <span class="keyword">in</span> before <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> after]</div><div class="line">        <span class="keyword">if</span> added:</div><div class="line">            url_list = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> added:</div><div class="line">                url_list.append(upload_with_full_Path(i))</div><div class="line">              fileFullName = os.path.basename(<span class="string">"/"</span>.join((i.split(<span class="string">"\\"</span>))))</div><div class="line">                fileName = os.path.splitext(fileFullName)[<span class="number">0</span>]</div><div class="line">      <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                    image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                    <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                    f.write(image)</div><div class="line">            <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">            set_clipboard(url_list)</div><div class="line">        <span class="keyword">if</span> removed:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        before = after</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            time.sleep(<span class="number">0.1</span>)</div><div class="line">    <span class="keyword">except</span> KeyboardInterrupt:</div><div class="line">        observer.stop()</div><div class="line">        observer.join()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> os.name == <span class="string">'nt'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        window_main()  <span class="comment">#window 下执行</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        unix_main()   <span class="comment">#mac 下执行</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
-<h2 id="修改python2的默认编码"><a href="#修改python2的默认编码" class="headerlink" title="修改python2的默认编码"></a>修改python2的默认编码</h2><p>python2的默认编码是ascii,当程序中出现非ascii编码时，python的处理常常会报这样的错:</p>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>qiniu4blog自动上传</p>
+<a id="more"></a>
+<h2 id="源码部分"><a class="markdownIt-Anchor" href="#源码部分"></a> 源码部分</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> os, time, sys, ConfigParser, platform, urllib, qiniu, pyperclip, signal, threading</div><div class="line"><span class="keyword">from</span> mimetypes <span class="keyword">import</span> MimeTypes</div><div class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> expanduser</div><div class="line"><span class="keyword">from</span> watchdog.observers <span class="keyword">import</span> Observer</div><div class="line"><span class="keyword">from</span> watchdog.events <span class="keyword">import</span> PatternMatchingEventHandler</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 使用watchdog 监控文件夹中的图像</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span><span class="params">(PatternMatchingEventHandler)</span>:</span></div><div class="line">    patterns = [<span class="string">"*.jpeg"</span>, <span class="string">"*.jpg"</span>, <span class="string">"*.png"</span>, <span class="string">"*.bmp"</span>, <span class="string">"*.gif"</span>,<span class="string">"*.tiff"</span>]</div><div class="line">    ignore_directories = <span class="keyword">True</span></div><div class="line">    case_sensitive = <span class="keyword">False</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(self, event)</span>:</span></div><div class="line">        <span class="keyword">if</span> event.event_type == <span class="string">'created'</span><span class="keyword">or</span> event.event_type == <span class="string">'modified'</span>: <span class="comment">#如果是新增文件或修改的文件</span></div><div class="line">            myThread(event.src_path, <span class="number">1</span>).start() <span class="comment"># 开启线程</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_modified</span><span class="params">(self, event)</span>:</span></div><div class="line">        self.process(event)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_created</span><span class="params">(self, event)</span>:</span></div><div class="line">        self.process(event)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 使用多线程上传</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">myThread</span><span class="params">(threading.Thread)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, filePath, mode)</span>:</span> <span class="comment">#filePath 文件路径 和 上传模式</span></div><div class="line">        threading.Thread.__init__(self)</div><div class="line">        self.filePath = filePath</div><div class="line">        self.mode = mode</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></div><div class="line">        threadLock.acquire()</div><div class="line">        job(self.filePath, self.mode)</div><div class="line">        threadLock.release()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传图像、复制到粘贴板、写到文件</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">job</span><span class="params">(file, mode)</span>:</span></div><div class="line">    <span class="keyword">if</span> mode == <span class="number">1</span>:</div><div class="line">        url = upload_with_full_Path(file)</div><div class="line">    <span class="keyword">if</span> mode == <span class="number">2</span>:</div><div class="line">        url = upload_with_full_Path_cmd(file)</div><div class="line">    pyperclip.copy(url)</div><div class="line">    pyperclip.paste()</div><div class="line">    <span class="keyword">print</span> url</div><div class="line">    <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">        image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">        f.write(image + <span class="string">'\n'</span>)</div><div class="line"></div><div class="line"><span class="comment">#-----------------配置--------------------</span></div><div class="line">homedir = expanduser(<span class="string">"~"</span>)  <span class="comment"># 获取用户主目录</span></div><div class="line">config = ConfigParser.RawConfigParser()</div><div class="line">config.read(homedir + <span class="string">'/qiniu.cfg'</span>)  <span class="comment"># 读取配置文件</span></div><div class="line">mime = MimeTypes()</div><div class="line">threadLock = threading.Lock()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 优雅退出</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exit_gracefully</span><span class="params">(signum, frame)</span>:</span></div><div class="line">    signal.signal(signal.SIGINT, original_sigint)</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">if</span> raw_input(<span class="string">"\nReally quit? (y/n)&gt; "</span>).lower().startswith(<span class="string">'y'</span>):</div><div class="line">            sys.exit(<span class="number">1</span>)</div><div class="line">    <span class="keyword">except</span> KeyboardInterrupt:</div><div class="line">        print(<span class="string">"Ok ok, quitting"</span>)</div><div class="line">        sys.exit(<span class="number">1</span>)</div><div class="line">    signal.signal(signal.SIGINT, exit_gracefully)</div><div class="line"></div><div class="line">original_sigint = signal.getsignal(signal.SIGINT)</div><div class="line">signal.signal(signal.SIGINT, exit_gracefully)</div><div class="line"></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    bucket = config.get(<span class="string">'config'</span>, <span class="string">'bucket'</span>)  <span class="comment"># 设置  bucket</span></div><div class="line">    accessKey = config.get(<span class="string">'config'</span>, <span class="string">'accessKey'</span>)  <span class="comment"># 设置  accessKey</span></div><div class="line">    secretKey = config.get(<span class="string">'config'</span>, <span class="string">'secretKey'</span>)  <span class="comment"># 设置  secretKey</span></div><div class="line">    path_to_watch = config.get(<span class="string">'config'</span>, <span class="string">'path_to_watch'</span>)  <span class="comment"># 设置   监控文件夹</span></div><div class="line">    enable = config.get(<span class="string">'custom_url'</span>, <span class="string">'enable'</span>)  <span class="comment"># 设置自定义使能 custom_url</span></div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'false'</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'custom_url not set'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        addr = config.get(<span class="string">'custom_url'</span>, <span class="string">'addr'</span>)</div><div class="line"><span class="keyword">except</span> ConfigParser.NoSectionError, err:</div><div class="line">    <span class="keyword">print</span> <span class="string">'Error Config File:'</span>, err</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 设置编码</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">setCodeingByOS</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="string">'cygwin'</span> <span class="keyword">in</span> platform.system().lower():</div><div class="line">        <span class="keyword">return</span> <span class="string">'GBK'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'nt'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'GBK'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'mac'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Darwin'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'utf-8'</span></div><div class="line">    <span class="keyword">elif</span> os.name == <span class="string">'posix'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Linux'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'utf-8'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 处理七牛返回结果</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseRet</span><span class="params">(retData, respInfo)</span>:</span></div><div class="line">    <span class="keyword">if</span> retData != <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> retData.items():</div><div class="line">            <span class="keyword">if</span> k[:<span class="number">2</span>] == <span class="string">"x:"</span>:</div><div class="line">                print(k + <span class="string">":"</span> + v)</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> retData.items():</div><div class="line">            <span class="keyword">if</span> k[:<span class="number">2</span>] == <span class="string">"x:"</span> <span class="keyword">or</span> k == <span class="string">"hash"</span> <span class="keyword">or</span> k == <span class="string">"key"</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                print(k + <span class="string">":"</span> + str(v))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(<span class="string">"Upload file failed!"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_without_key</span><span class="params">(bucket, filePath, uploadname)</span>:</span></div><div class="line">    auth = qiniu.Auth(accessKey, secretKey)</div><div class="line">    upToken = auth.upload_token(bucket, key=<span class="keyword">None</span>)</div><div class="line">    key = uploadname</div><div class="line">    retData, respInfo = qiniu.put_file(upToken, key, filePath, mime_type=mime.guess_type(filePath)[<span class="number">0</span>])</div><div class="line">    parseRet(retData, respInfo)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 2</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_with_full_Path</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">if</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        fileName = <span class="string">"/"</span>.join(<span class="string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="number">1</span>:].split(<span class="string">"\\"</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        fileName = <span class="string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="number">1</span>:]</div><div class="line">    upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))</div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'true'</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'!['</span>+fileName+<span class="string">']('</span>+addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))+<span class="string">')'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'http://'</span> + bucket + <span class="string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 上传文件方式 3</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_with_full_Path_cmd</span><span class="params">(filePath)</span>:</span></div><div class="line">    <span class="keyword">if</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        fileName = os.path.basename(<span class="string">"/"</span>.join((filePath.split(<span class="string">"\\"</span>))))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">       fileName = os.path.basename(filePath)</div><div class="line">    upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))</div><div class="line">    <span class="keyword">if</span> enable == <span class="string">'true'</span>:</div><div class="line">        <span class="keyword">return</span> addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">'http://'</span> + bucket + <span class="string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"><span class="comment">#-----------------window platform---------------start</span></div><div class="line"><span class="comment"># window下的监控文件夹变动方式-获取所有文件路径</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_filepaths</span><span class="params">(directory)</span>:</span></div><div class="line">    file_paths = []  <span class="comment"># List which will store all of the full filepaths.</span></div><div class="line">    <span class="keyword">for</span> root, directories, files <span class="keyword">in</span> os.walk(directory):</div><div class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> files:</div><div class="line">            <span class="comment"># Join the two strings in order to form the full filepath.</span></div><div class="line">            filepath = os.path.join(root, filename)</div><div class="line">            file_paths.append(filepath)  <span class="comment"># Add it to the list.</span></div><div class="line">    <span class="keyword">return</span> file_paths  <span class="comment"># Self-explanatory.</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_clipboard</span><span class="params">(url_list)</span>:</span></div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">        pyperclip.copy(url)</div><div class="line">        spam = pyperclip.paste()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_filename</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> url.split(<span class="string">"/"</span>)[<span class="number">-1</span>:][<span class="number">0</span>].split(<span class="string">'.'</span>)[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">window_main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> len(sys.argv) &gt; <span class="number">1</span>:</div><div class="line">        url_list = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">            url_list.append(upload_with_full_Path_cmd(i))</div><div class="line">        <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">            <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                f.write(image)</div><div class="line">        <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">        set_clipboard(url_list)</div><div class="line">        sys.exit(<span class="number">-1</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">"running ... ... \nPress Ctr+C to Stop"</span></div><div class="line">    before = get_filepaths(path_to_watch)</div><div class="line">    <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        after = get_filepaths(path_to_watch)</div><div class="line">        added = [f <span class="keyword">for</span> f <span class="keyword">in</span> after <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> before]</div><div class="line">        removed = [f <span class="keyword">for</span> f <span class="keyword">in</span> before <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> after]</div><div class="line">        <span class="keyword">if</span> added:</div><div class="line">            url_list = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> added:</div><div class="line">                url_list.append(upload_with_full_Path(i))</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                    image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                    <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                    f.write(image)</div><div class="line">            <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">            set_clipboard(url_list)</div><div class="line">        <span class="keyword">if</span> removed:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        before = after</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">unix_main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> len(sys.argv) &gt; <span class="number">1</span>:</div><div class="line">        url_list = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">1</span>:]:</div><div class="line">            url_list.append(upload_with_full_Path_cmd(i))</div><div class="line">            fileFullName = os.path.basename(<span class="string">"/"</span>.join((i.split(<span class="string">"\\"</span>))))</div><div class="line">            fileName = os.path.splitext(fileFullName)[<span class="number">0</span>]</div><div class="line">            myThread(i, <span class="number">2</span>).start()</div><div class="line">        <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">            <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                image = <span class="string">'!['</span>+fileName+<span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                <span class="keyword">print</span> <span class="string">'Url:'</span>+image, <span class="string">'\nFileName:'</span>+fileFullName</div><div class="line">                f.write(image)</div><div class="line">  set_clipboard(url_list)</div><div class="line">        sys.exit(<span class="number">-1</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">"running ... ... \nPress Ctr+C to Stop"</span></div><div class="line">    observer = Observer()</div><div class="line">    observer.schedule(MyHandler(), path=path_to_watch <span class="keyword">if</span> path_to_watch <span class="keyword">else</span> <span class="string">'.'</span>, recursive=<span class="keyword">True</span>)</div><div class="line">    observer.start()</div><div class="line">    before = get_filepaths(path_to_watch)</div><div class="line">    <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        after = get_filepaths(path_to_watch)</div><div class="line">        added = [f <span class="keyword">for</span> f <span class="keyword">in</span> after <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> before]</div><div class="line">        removed = [f <span class="keyword">for</span> f <span class="keyword">in</span> before <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">in</span> after]</div><div class="line">        <span class="keyword">if</span> added:</div><div class="line">            url_list = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> added:</div><div class="line">                url_list.append(upload_with_full_Path(i))</div><div class="line">              fileFullName = os.path.basename(<span class="string">"/"</span>.join((i.split(<span class="string">"\\"</span>))))</div><div class="line">                fileName = os.path.splitext(fileFullName)[<span class="number">0</span>]</div><div class="line">      <span class="keyword">with</span> open(<span class="string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">                <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</div><div class="line">                    image = <span class="string">'!['</span> + url + <span class="string">']'</span> + <span class="string">'('</span> + url + <span class="string">')'</span> + <span class="string">'\n'</span></div><div class="line">                    <span class="keyword">print</span> url, <span class="string">'\n'</span></div><div class="line">                    f.write(image)</div><div class="line">            <span class="keyword">print</span> <span class="string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span></div><div class="line">            set_clipboard(url_list)</div><div class="line">        <span class="keyword">if</span> removed:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        before = after</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            time.sleep(<span class="number">0.1</span>)</div><div class="line">    <span class="keyword">except</span> KeyboardInterrupt:</div><div class="line">        observer.stop()</div><div class="line">        observer.join()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">if</span> os.name == <span class="string">'nt'</span> <span class="keyword">or</span> platform.system() == <span class="string">'Windows'</span>:</div><div class="line">        window_main()  <span class="comment">#window 下执行</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        unix_main()   <span class="comment">#mac 下执行</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
+<h2 id="修改python2的默认编码"><a class="markdownIt-Anchor" href="#修改python2的默认编码"></a> 修改python2的默认编码</h2>
+<p>python2的默认编码是ascii,当程序中出现非ascii编码时，python的处理常常会报这样的错:</p>
 <p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0x?? in position 1: ordinal not in range(128)</p>
 <p>python没办法处理非ascii编码的，此时需要自己设置将python的默认编码，一般设置为utf8的编码格式。</p>
-<p>解决方案：在路径<code>/Library/Python/2.7/site-packages</code>下新建一个sitecustomize.py，内容为：</p>
+<p>解决方案：在路径<code>/Library/Python/2.7/site-packages</code><a href="http://xn--sitecustomize-9z0u6ewtg47usiza.py" target="_blank" rel="external">下新建一个sitecustomize.py</a>，内容为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># encoding=utf8  </span></div><div class="line"><span class="keyword">import</span> sys  </div><div class="line">  </div><div class="line">reload(sys)  </div><div class="line">sys.setdefaultencoding(<span class="string">'utf8'</span>)</div></pre></td></tr></table></figure>
 <p>这个时候重启python解释器，执行sys.getdefaultencoding()，会发现此时的默认编码已经转换成utf-8了，多次重启之后，效果相同，这是因为系统在python启动的时候，自行调用该文件，设置系统的默认编码，而不需要每次都手动的加上解决代码，属于一劳永逸的解决方法。</p>
 
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
         </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-12-07T14:24:26.000Z" itemprop="dateUpdated">2017-12-07 22:24:26</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/06/15/七牛图片自动上传/" target="_blank" rel="external">http://yoursite.com/2017/06/15/七牛图片自动上传/</a>
-        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python脚本/">Python脚本</a></li></ul>
-
-            <div class="page-share-wrap">
     
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/15/七牛图片自动上传/&title=《七牛图片自动上传》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/15/七牛图片自动上传/&title=《七牛图片自动上传》 — Peterpan's Blog&source=qiniu4blog自动上传" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年06月15日 - 09时38分</p>
+        <p><span>最后更新:</span>2017年12月09日 - 22时13分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/15/七牛图片自动上传/" title="七牛图片自动上传">http://yoursite.com/2017/06/15/七牛图片自动上传/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/15/七牛图片自动上传/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
+<nav id="article-nav">
+  
+    <a href="/2017/06/15/iOS-UI基础-七/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS-UI基础(七)
+        
+      </div>
     </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/06/15/iOS-UI基础-七/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">iOS-UI基础(七)</h4>
-      </a>
-    </div>
   
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/06/14/CPU对于内存的读写/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">CPU对于内存的读写</h4>
-      </a>
-    </div>
+    <a href="/2017/06/14/CPU对于内存的读写/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CPU对于内存的读写</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
-
+  
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码部分"><span class="toc-number">1.</span> <span class="toc-text"> 源码部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改python2的默认编码"><span class="toc-number">2.</span> <span class="toc-text"> 修改python2的默认编码</span></a></li></ol>
 </div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
 
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#源码部分"><span class="post-toc-number">1.</span> <span class="post-toc-text">源码部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改python2的默认编码"><span class="post-toc-number">2.</span> <span class="post-toc-text">修改python2的默认编码</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/15/七牛图片自动上传/&title=《七牛图片自动上传》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/15/七牛图片自动上传/&title=《七牛图片自动上传》 — Peterpan's Blog&source=qiniu4blog自动上传" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQW7DMAwF0dz/0i6QbWJ5PukGMDVaBUYi66kAK5F8vfA43mP9/PgYn99cPz/7zm1DhgwZj2Ucy7FmrOdZA9LfXlBlyJCxAYMEU864KyqStcmQIUPG2RJ5cCTvSrdPhgwZMsh05PBHwij/lQwZMmSQ4xp5Qo6J6dHw5ru4DBkyHshICwO//PyP9Q0ZMmQ8hHG0x73BtLYqGTJkzGbwhH6tVFm7+vLZ4rqEDBkyHshIE/38QosSZI2i6ZdQK0OGjA0YPNjVypNpUi8IxzJkyBjNSEPb2dLXsDTU8m2VIUPGngySJuMA8jkN+qerkiFDxmhGrWBJeLU7ZlpUkCFDxmxGGih5Yxbfxc42yZAhYwfGvUmxWgANjnrpfwwZMmQMZaSNEfcm91MGwsiQIePhDP6yFx5knrSx42IlMmTI2IBRK0nWwmWtLHqxNTJkyNiA0Wn/4gmyNIjH11QZMmQMZfDFdTaidnAkx8ovs8mQIWM04/fNFukVt1jlkCFDxghGenQjxUiyczwBh/4CMmTI2IBRawjjEf2u1orTo6EMGTJGM2qhtt/CFXd/8NXKkCFjEOMIBy86dq646WwyZMiYzehH6LgxolEkqJUuZMiQMYNRC7K1TFfnAHqxETJkyNiA0WmA6C+339ghQ4YMGWRxJHCn2xRsjQwZMmQ0LqhkQeRdQS+bDBkyhjLIJbaf6O+k1YK2MBkyZIxjpIWB9JjIt4yH2iJJhgwZz2P8AfNg5POgrFO2AAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
         }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
         }
-    });
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
 </script>
 
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/06/15/iOS-UI基础-七/" title="上一篇: iOS-UI基础(七)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/06/14/CPU对于内存的读写/" title="下一篇: CPU对于内存的读写">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/iOS网络部分-一/">iOS网络部分(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/iOS逆向学习-一/">iOS逆向学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/24/盲水印技术/">盲水印技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/Lctf-sumup/">Lctf-sumup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/iOS多线程之NSOperation/">iOS多线程之NSOperation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/06/Python-函数式编程/">Python-函数式编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/31/Python-Review/">Python3-Review</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-MISC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/TCP:IP-一/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
     <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
         });
-    })();
+    });
 </script>
 
 
-    
+  </div>
 </body>
 </html>

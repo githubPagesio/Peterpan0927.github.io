@@ -1,188 +1,299 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    
-    <title>CTF-密码学 | Peterpan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="CTF">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":null,"app_key":null,"icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":null,"appkey":null,"notify":false,"verify":false,"placeholder":"give me some sugers plz...","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+  <meta charset="utf-8">
+  
+  <title>CTF-密码学 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF-密码学">
+<meta property="og:url" content="http://yoursite.com/2017/10/28/CTF-密码学/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.58.05.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.16.12.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.18.05.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.37.27.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.40.36.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.24.21.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.30.22.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.49.30.png">
+<meta property="og:updated_time" content="2017-11-06T09:55:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF-密码学">
+<meta name="twitter:description" content="由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 </head>
-
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
         </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:1549346936@qq.com" title="1549346936@qq.com" class="mail">1549346936@qq.com</a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
         </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>CTF-密码学</span>
-            
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/CTF/" style="font-size: 18px;">CTF</a> <a href="/tags/Linux/" style="font-size: 16px;">Linux</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Re/" style="font-size: 10px;">Re</a> <a href="/tags/TCP-IP/" style="font-size: 14px;">TCP/IP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/动漫-影视/" style="font-size: 12px;">动漫/影视</a> <a href="/tags/服务器端/" style="font-size: 10px;">服务器端</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/计算机硬件/" style="font-size: 10px;">计算机硬件</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
         </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">CTF-密码学</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-10-27T17:13:47.000Z" itemprop="datePublished" class="page-time">
-  2017-10-28
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+    </header>                
 </div>
-
-
-<div class="container body-wrap">
-    <article id="post-CTF-密码学"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">CTF-密码学</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-10-28 01:13:47" datetime="2017-10-27T17:13:47.000Z"  itemprop="datePublished">2017-10-28</time>
-
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a></li></ul>
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-CTF-密码学" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/28/CTF-密码学/" class="article-date">
+      <time datetime="2017-10-27T17:13:47.000Z" itemprop="datePublished">2017-10-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CTF-密码学
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a>
+    </div>
 
 
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+    </div>
 
-            
-	<span id="/2017/10/28/CTF-密码学/" class="leancloud_visitors" data-flag-title="CTF-密码学" title="CTF-密码学">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/10/28/CTF-密码学/#comment">
-            <span class="valine-comment-count" data-xid="/2017/10/28/CTF-密码学/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
 <a id="more"></a>
 <h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><h3 id="古典密码的璀璨"><a href="#古典密码的璀璨" class="headerlink" title="古典密码的璀璨"></a>古典密码的璀璨</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt="屏幕快照 2017-10-27 下午1.10.06.png"></p>
 <p>看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：</p>
@@ -281,307 +392,298 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.49.30.png" alt="屏幕快照 2017-11-06 下午5.49.30.png"></p>
 <p>原来这两个是两种计算机编程语言的语法，这种语言被统称为esolang，旨在尝试各种奇怪的想法，难以编程，一般不会做为实际使用，所以这里只需要去搜索对应的网站进行解密即可。这里丢个<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="external">传送门</a></p>
 
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
         </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-11-06T09:55:01.000Z" itemprop="dateUpdated">2017-11-06 17:55:01</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/10/28/CTF-密码学/" target="_blank" rel="external">http://yoursite.com/2017/10/28/CTF-密码学/</a>
-        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
-
-            <div class="page-share-wrap">
     
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&source=由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/10/28/CTF-密码学/">CTF-密码学</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年10月28日 - 01时13分</p>
+        <p><span>最后更新:</span>2017年11月06日 - 17时55分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/28/CTF-密码学/" title="CTF-密码学">http://yoursite.com/2017/10/28/CTF-密码学/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/10/28/CTF-密码学/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
+<nav id="article-nav">
+  
+    <a href="/2017/10/29/PNG在隐写中的应用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          PNG在隐写中的应用
+        
+      </div>
     </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/10/29/PNG在隐写中的应用/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">PNG在隐写中的应用</h4>
-      </a>
-    </div>
   
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/10/23/大话CTF/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">大话CTF</h4>
-      </a>
-    </div>
+    <a href="/2017/10/23/大话CTF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">大话CTF</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
-
+  
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-number">1.</span> <span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码的璀璨"><span class="toc-number">1.1.</span> <span class="toc-text">古典密码的璀璨</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#近代密码的发展"><span class="toc-number">1.1.1.</span> <span class="toc-text">近代密码的发展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-number">1.2.</span> <span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-number">1.3.</span> <span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-number">2.</span> <span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-number">2.1.</span> <span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-number">2.2.</span> <span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-number">2.3.</span> <span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-number">2.4.</span> <span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-number">2.5.</span> <span class="toc-text">他的情书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#凯撒和某某加密"><span class="toc-number">2.6.</span> <span class="toc-text">凯撒和某某加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zip伪加密"><span class="toc-number">2.7.</span> <span class="toc-text">zip伪加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件数据区："><span class="toc-number">2.7.1.</span> <span class="toc-text">压缩源文件数据区：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件目录区："><span class="toc-number">2.7.2.</span> <span class="toc-text">压缩源文件目录区：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件目录结束标志："><span class="toc-number">2.7.3.</span> <span class="toc-text">压缩源文件目录结束标志：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ook-和Brainfuck"><span class="toc-number">2.8.</span> <span class="toc-text">Ook!和Brainfuck</span></a></li></ol></li></ol>
 </div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
 
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密码学概述与发展历程"><span class="post-toc-number">1.</span> <span class="post-toc-text">密码学概述与发展历程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#古典密码的璀璨"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">古典密码的璀璨</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#近代密码的发展"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">近代密码的发展</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#出现公钥密码学"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">出现公钥密码学</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#密码学基本概念"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">密码学基本概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#古典密码的发展"><span class="post-toc-number">2.</span> <span class="post-toc-text">古典密码的发展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#困在栅栏里的凯撒"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">困在栅栏里的凯撒</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传统知识加古典密码"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">传统知识加古典密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#古典密码"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">古典密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#杯酒人生"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">杯酒人生</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#他的情书"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">他的情书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#凯撒和某某加密"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">凯撒和某某加密</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#zip伪加密"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">zip伪加密</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件数据区："><span class="post-toc-number">2.7.1.</span> <span class="post-toc-text">压缩源文件数据区：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件目录区："><span class="post-toc-number">2.7.2.</span> <span class="post-toc-text">压缩源文件目录区：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件目录结束标志："><span class="post-toc-number">2.7.3.</span> <span class="post-toc-text">压缩源文件目录结束标志：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ook-和Brainfuck"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">Ook!和Brainfuck</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&source=由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACQUlEQVR42u3a207DMBBF0f7/TweJJ6Rid59xgvB4+6miIfEK0jAXv154Xd9r9POf375/fl/zp8yvWVoyZMjYlnFN13y7hEe2RZ774Z4yZMg4gDEPsnzT83uO7pzeR4YMGTLSh62H4HnAlSFDhowagySXJK0c3U2GDBkyakVs2hojzTge3G+rxWXIkLEhIx0M/OXnB+cbMmTI2IRxhYsE07QcTYPsL/eXIUNGa0at1ZUeyCAJJX9WkOHKkCGjKYM312pX8mviFypDhoxjGOnxrPUXlI48hzwZMmS0ZqQteL65dFTJh6NLUw4ZMmRsxQiOMuBBZrqVdEQ6bLTJkCGjKYM3+mvHtnjylzbv4qabDBkyWjDQ13jrteSPtO0QVYYMGU0ZtUNa6TCSN/15WStDhowTGLzRz1PJdHhQC9kyZMg4gZEWmenBCD4W5feP/w4yZMhoweCtNN70XymP+QhhOMKUIUPGMYw0caxdc5VWXEnLkCGjEaPWVkvTQZ78ofacDBkyWjPSVn5agqbDgJXXJ0OGjK6Mu9I+TlopfYuDARkyZDRikPQuTeDSsSgP9zJkyDiHwdtqtUKUB27+u6j1JkOGjEaMpXb8clLIE0fUaJMhQ0ZTRpqizbdy18EvfuAjhsmQIWNbBj+MdVdQXkk3i/89ZMiQ0YLBC9daSscPYRQbcDJkyJCB0z7egEsD8YcYK0OGDBlhgZo241L24wFXhgwZ/5KRFrHrY8i7hgcyZMg4gfHEYKA2bqwNEmTIkNGa8QWj1Y50NzdpiwAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
         }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
         }
-    });
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
 </script>
 
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/10/29/PNG在隐写中的应用/" title="上一篇: PNG在隐写中的应用">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/10/23/大话CTF/" title="下一篇: 大话CTF">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/iOS网络部分-一/">iOS网络部分(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/iOS逆向学习-一/">iOS逆向学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/24/盲水印技术/">盲水印技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/Lctf-sumup/">Lctf-sumup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/iOS多线程之NSOperation/">iOS多线程之NSOperation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/06/Python-函数式编程/">Python-函数式编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/31/Python-Review/">Python3-Review</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-MISC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/TCP:IP-一/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
     <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
         });
-    })();
+    });
 </script>
 
 
-    
+  </div>
 </body>
 </html>

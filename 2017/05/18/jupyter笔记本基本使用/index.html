@@ -1,535 +1,621 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    
-    <title>jupyter笔记本基本使用 | Peterpan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="爬虫">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":null,"app_key":null,"icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":null,"appkey":null,"notify":false,"verify":false,"placeholder":"give me some sugers plz...","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+  <meta charset="utf-8">
+  
+  <title>jupyter笔记本基本使用 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="jupyter笔记本使用（爬虫）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jupyter笔记本基本使用">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/jupyter笔记本基本使用/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="jupyter笔记本使用（爬虫）">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/252E2171-55DD-407C-82B7-A9BAA6F7E82D.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/C4DFB493-E981-4C81-BEA9-DE3F088943A2.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/9361A126-4FA8-42FF-8811-A3B6D70ABAFE.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%881.28.24.png">
+<meta property="og:updated_time" content="2017-12-09T14:14:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jupyter笔记本基本使用">
+<meta name="twitter:description" content="jupyter笔记本使用（爬虫）">
+<meta name="twitter:image" content="http://omg5mjb8v.bkt.clouddn.com/252E2171-55DD-407C-82B7-A9BAA6F7E82D.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/miaopasi.gif">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 </head>
-
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+            
         </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:1549346936@qq.com" title="1549346936@qq.com" class="mail">1549346936@qq.com</a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Peter pan</a></h1>
         </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>jupyter笔记本基本使用</span>
-            
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                        
+                            <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                        
+                            <li><a href="http://konachan.com/">失楽園</a></li>
+                        
+                            <li><a href="/about">世界の音楽</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/CTF/" style="font-size: 18px;">CTF</a> <a href="/tags/Linux/" style="font-size: 16px;">Linux</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Re/" style="font-size: 10px;">Re</a> <a href="/tags/TCP-IP/" style="font-size: 14px;">TCP/IP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/动漫-影视/" style="font-size: 12px;">动漫/影视</a> <a href="/tags/服务器端/" style="font-size: 10px;">服务器端</a> <a href="/tags/网络硬件/" style="font-size: 10px;">网络硬件</a> <a href="/tags/计算机硬件/" style="font-size: 10px;">计算机硬件</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imbajin.com">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">二次元、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
         </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">jupyter笔记本基本使用</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-05-18T08:27:22.000Z" itemprop="datePublished" class="page-time">
-  2017-05-18
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ipython-图表化/">Ipython 图表化</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+    </header>                
 </div>
-
-
-<div class="container body-wrap">
-    <article id="post-jupyter笔记本基本使用"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">jupyter笔记本基本使用</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-05-18 16:27:22" datetime="2017-05-18T08:27:22.000Z"  itemprop="datePublished">2017-05-18</time>
-
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Peter pan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/miaopasi.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Peter pan</a></h1>
+            </hgroup>
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ipython-图表化/">Ipython 图表化</a></li></ul>
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://hackcode.ishoulu.com/scp/">運命の門の石</a></li>
+                
+                    <li><a href="https://github.com/Peterpan0927">作ショーケース</a></li>
+                
+                    <li><a href="http://konachan.com/">失楽園</a></li>
+                
+                    <li><a href="/about">世界の音楽</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="https://mail.qq.com/cgi-bin/frame_html?sid=_oJT_9NAAluUNmoy&r=19ceffb7525880fec0778e401ab5a0c5" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Peterpan0927" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=http%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DXJx2tZ7NciddPrWFwVpBgDI3XPGsiz4nrRDKFMkcfWu%26wd%3D%26eqid%3Dc1afc8ed00048e800000000358cf9830&ua=php-sso_sdk_client-0.6.23&_rand=1489999922.7477" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-jupyter笔记本基本使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/18/jupyter笔记本基本使用/" class="article-date">
+      <time datetime="2017-05-18T08:27:22.000Z" itemprop="datePublished">2017-05-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jupyter笔记本基本使用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Ipython-图表化/">Ipython 图表化</a>
+    </div>
 
 
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+    </div>
 
-            
-	<span id="/2017/05/18/jupyter笔记本基本使用/" class="leancloud_visitors" data-flag-title="jupyter笔记本基本使用" title="jupyter笔记本基本使用">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/05/18/jupyter笔记本基本使用/#comment">
-            <span class="valine-comment-count" data-xid="/2017/05/18/jupyter笔记本基本使用/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>jupyter笔记本使用（爬虫）<br><a id="more"></a></p>
-<h1 id="jupyter笔记本使用"><a href="#jupyter笔记本使用" class="headerlink" title="jupyter笔记本使用"></a>jupyter笔记本使用</h1><h2 id="1-在交互式笔记本中进行数据查找"><a href="#1-在交互式笔记本中进行数据查找" class="headerlink" title="1.在交互式笔记本中进行数据查找"></a>1.在交互式笔记本中进行数据查找</h2><blockquote>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>jupyter笔记本使用（爬虫）</p>
+<a id="more"></a>
+<h1 id="jupyter笔记本使用"><a class="markdownIt-Anchor" href="#jupyter笔记本使用"></a> jupyter笔记本使用</h1>
+<h2 id="1在交互式笔记本中进行数据查找"><a class="markdownIt-Anchor" href="#1在交互式笔记本中进行数据查找"></a> 1.在交互式笔记本中进行数据查找</h2>
+<blockquote>
 <p>导入模块和数据库</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">import</span> pymongo</div><div class="line">&gt; client = pymongo.MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)</div><div class="line">&gt; ganji = client[<span class="string">'ganji'</span>]</div><div class="line">&gt; item_info = ganji[<span class="string">'item_info'</span>]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
 <blockquote>
 <p>对数据库进行查询</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">for</span> i <span class="keyword">in</span> item_info.find().limit(<span class="number">300</span>):</div><div class="line">&gt; 	print(i[<span class="string">'area'</span>])</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
 <blockquote>
 <p>将area为None的地区替换为不明,去掉标点符号</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="comment">#先导入一个新模块</span></div><div class="line">&gt; <span class="keyword">from</span> string <span class="keyword">import</span> punctuation</div><div class="line">&gt; <span class="comment">#索引的代码优化</span></div><div class="line">&gt; <span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">&gt;     <span class="keyword">if</span> i[<span class="string">'area'</span>]:</div><div class="line">&gt;         area = [i <span class="keyword">for</span> i <span class="keyword">in</span> i[<span class="string">'area'</span>] <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> punctuation]</div><div class="line">&gt;     <span class="keyword">else</span>:</div><div class="line">&gt;         area = [<span class="string">'不明'</span>]</div><div class="line">&gt;     print(area)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
 <blockquote>
 <p>使用find函数进行精确的查找：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">import</span> pymongo</div><div class="line">&gt; client = pymongo.MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)</div><div class="line">&gt; ganji = client[<span class="string">'ganji'</span>]</div><div class="line">&gt; item_info = ganji[<span class="string">'item_info'</span>]</div><div class="line">&gt; <span class="comment">#第一个大括号内填写查找的条件，条件为空则是全部的数据，后面一个大括号内填写显示的条件，value为0表示不显示,$slice进行分片，返回可被分片数据中的第一个。</span></div><div class="line">&gt; <span class="comment">#注意，如果在属性的查找中加入具体的操作符，就会显示其他的属性，这是mongodb的特殊显示方式。</span></div><div class="line">&gt; <span class="keyword">for</span> i <span class="keyword">in</span> item_info.find(&#123;&#125;,&#123;<span class="string">'area'</span>:&#123;<span class="string">'$slice:1'</span>&#125;,<span class="string">'_id'</span>:<span class="number">0</span>,<span class="string">'price'</span>:<span class="number">0</span>&#125;)</div><div class="line">&gt; <span class="comment">#$in操作符表示只要包含两个中的一个即可</span></div><div class="line">&gt; <span class="keyword">for</span> i <span class="keyword">in</span> item_info.find(&#123;<span class="string">'pub_date'</span>:&#123;<span class="string">'$in'</span>:[<span class="number">2016</span>,<span class="number">2017</span>]&#125;&#125;,&#123;<span class="string">'area'</span>:&#123;<span class="string">'$slice:1'</span>&#125;,<span class="string">'_id'</span>:<span class="number">0</span>,<span class="string">'price'</span>:<span class="number">0</span>&#125;)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
+<blockquote></blockquote>
+<h2 id="2数据更新"><a class="markdownIt-Anchor" href="#2数据更新"></a> 2.数据更新</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将area为None的替换为不明</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">    <span class="keyword">if</span> i[<span class="string">'area'</span>]:</div><div class="line">        area = [i <span class="keyword">for</span> i <span class="keyword">in</span> i[<span class="string">'area'</span>] <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> punctuation]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        area = [<span class="string">'不明'</span>]</div><div class="line">    item_info.update_one(&#123;<span class="string">'_id'</span>:i[<span class="string">'_id'</span>]&#125;, &#123;<span class="string">'$set'</span>:&#123;<span class="string">'area'</span>:area&#125;&#125;)</div></pre></td></tr></table></figure>
+<h2 id="3利用图表来进行数据的展示"><a class="markdownIt-Anchor" href="#3利用图表来进行数据的展示"></a> 3.利用图表来进行数据的展示</h2>
 <blockquote>
-</blockquote>
-<h2 id="2-数据更新"><a href="#2-数据更新" class="headerlink" title="2.数据更新"></a>2.数据更新</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将area为None的替换为不明</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">    <span class="keyword">if</span> i[<span class="string">'area'</span>]:</div><div class="line">        area = [i <span class="keyword">for</span> i <span class="keyword">in</span> i[<span class="string">'area'</span>] <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> punctuation]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        area = [<span class="string">'不明'</span>]</div><div class="line">    item_info.update_one(&#123;<span class="string">'_id'</span>:i[<span class="string">'_id'</span>]&#125;, &#123;<span class="string">'$set'</span>:&#123;<span class="string">'area'</span>:area&#125;&#125;)</div></pre></td></tr></table></figure>
-<h2 id="3-利用图表来进行数据的展示"><a href="#3-利用图表来进行数据的展示" class="headerlink" title="3.利用图表来进行数据的展示"></a>3.利用图表来进行数据的展示</h2><blockquote>
 <p>环境准备：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; pip3 install charts</div><div class="line">&gt; #由于版本问题，pip3获取的是对于python2.*版本兼容的模块包，所以我们需要cd到charts的目录下面进行版本更新，不然会疯狂的报错</div><div class="line">&gt; 2to3 -w *.py</div><div class="line">&gt; #这个命令是使本目录下所有的py文件更新到3.*版本</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
 <blockquote>
 <p>代码部分，<a href="http://www.cnblogs.com/tqsummer/archive/2010/12/27/1917927.html" target="_blank" rel="external">yield参考</a>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="comment">#统计地区的名字,set用于列表去重</span></div><div class="line">&gt; area_list = []</div><div class="line">&gt; <span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">&gt;     area_list.append(i[<span class="string">'area'</span>][<span class="number">0</span>])</div><div class="line">&gt; area_index = list(set(area_list))</div><div class="line">&gt; <span class="comment">#计算出现的次数</span></div><div class="line">&gt; post_times = []</div><div class="line">&gt; <span class="keyword">for</span> index <span class="keyword">in</span> area_index:</div><div class="line">&gt;     post_times.append(area_list.count(index))</div><div class="line">&gt; <span class="comment">#将数据格式转换成可视化图表模式的代码</span></div><div class="line">&gt; <span class="function"><span class="keyword">def</span> <span class="title">data_gen</span><span class="params">(types)</span>:</span></div><div class="line">&gt;     length = <span class="number">0</span></div><div class="line">&gt;     <span class="keyword">if</span> length &lt;= len(area_index):</div><div class="line">&gt;     	<span class="keyword">for</span> area,times <span class="keyword">in</span> zip(area_index,post_times):</div><div class="line">&gt;         	data = &#123;</div><div class="line">&gt;           	<span class="string">'name'</span> : area,</div><div class="line">&gt;           	<span class="string">'data'</span> : [times],</div><div class="line">&gt;           	<span class="string">'type'</span> : types</div><div class="line">&gt;         	&#125;</div><div class="line">&gt;         	<span class="keyword">yield</span> data</div><div class="line">&gt;         	length += <span class="number">1</span></div><div class="line">&gt; <span class="comment">#最后生成图表</span></div><div class="line">&gt; series = [data <span class="keyword">for</span> data <span class="keyword">in</span> data_gen(<span class="string">'column'</span>)]</div><div class="line">&gt; charts.plot(series, show=<span class="string">'inline'</span>, options=dict(title=dict(text=<span class="string">'七日内二手物品销售统计'</span>)))</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
 <blockquote>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/252E2171-55DD-407C-82B7-A9BAA6F7E82D.png" alt=""></p>
 </blockquote>
-<h2 id="4-进行数据的格式修改并更新"><a href="#4-进行数据的格式修改并更新" class="headerlink" title="4.进行数据的格式修改并更新"></a>4.进行数据的格式修改并更新</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#e.g:将‘-’替换为‘.‘</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">    frags = i[pub_date].split(<span class="string">'-'</span>)</div><div class="line">    <span class="keyword">if</span> len(frags) == <span class="number">1</span>:</div><div class="line">        date = frags</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        date = &#123;&#125;.&#123;&#125;.&#123;&#125;.format(frags[<span class="number">1</span>],frags[<span class="number">2</span>],frags[<span class="number">3</span>])</div><div class="line">    item_info.update(&#123;<span class="string">'_id'</span>:i[<span class="string">'_id'</span>]&#125;,&#123;<span class="string">'$set'</span>:&#123;<span class="string">'pub_date'</span>:date&#125;&#125;)<span class="number">5.</span>date函数的使用</div></pre></td></tr></table></figure>
-<h2 id="5-使用date函数制作图表datetime模块"><a href="#5-使用date函数制作图表datetime模块" class="headerlink" title="5.使用date函数制作图表datetime模块"></a>5.使用date函数制作图表<a href="https://my.oschina.net/whp/blog/130710" target="_blank" rel="external">datetime模块</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#打印一段时间内的连续日期样例</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_dates</span><span class="params">(date1,date2)</span>:</span></div><div class="line">    the_date = date(int(date1.split(<span class="string">'.'</span>)[<span class="number">0</span>]),int(date1.split(<span class="string">'.'</span>)[<span class="number">1</span>]),int(date1.split(<span class="string">'.'</span>)[<span class="number">2</span>]))</div><div class="line">    end_date = date(int(date2.split(<span class="string">'.'</span>)[<span class="number">0</span>]),int(date2.split(<span class="string">'.'</span>)[<span class="number">1</span>]),int(date2.split(<span class="string">'.'</span>)[<span class="number">2</span>]))</div><div class="line">    days = timedelta(days=<span class="number">1</span>)</div><div class="line">    <span class="keyword">while</span> the_date &lt;= end_date:</div><div class="line">            <span class="keyword">yield</span> the_date.strftime(<span class="string">'%Y-%m-%d'</span>)</div><div class="line">            the_date = the_date + days</div></pre></td></tr></table></figure>
+<h2 id="4进行数据的格式修改并更新"><a class="markdownIt-Anchor" href="#4进行数据的格式修改并更新"></a> 4.进行数据的格式修改并更新</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#e.g:将‘-’替换为‘.‘</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> item_info.find():</div><div class="line">    frags = i[pub_date].split(<span class="string">'-'</span>)</div><div class="line">    <span class="keyword">if</span> len(frags) == <span class="number">1</span>:</div><div class="line">        date = frags</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        date = &#123;&#125;.&#123;&#125;.&#123;&#125;.format(frags[<span class="number">1</span>],frags[<span class="number">2</span>],frags[<span class="number">3</span>])</div><div class="line">    item_info.update(&#123;<span class="string">'_id'</span>:i[<span class="string">'_id'</span>]&#125;,&#123;<span class="string">'$set'</span>:&#123;<span class="string">'pub_date'</span>:date&#125;&#125;)<span class="number">5.</span>date函数的使用</div></pre></td></tr></table></figure>
+<h2 id="5使用date函数制作图表datetime模块"><a class="markdownIt-Anchor" href="#5使用date函数制作图表datetime模块"></a> 5.使用date函数制作图表<a href="https://my.oschina.net/whp/blog/130710" target="_blank" rel="external">datetime模块</a></h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#打印一段时间内的连续日期样例</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_dates</span><span class="params">(date1,date2)</span>:</span></div><div class="line">    the_date = date(int(date1.split(<span class="string">'.'</span>)[<span class="number">0</span>]),int(date1.split(<span class="string">'.'</span>)[<span class="number">1</span>]),int(date1.split(<span class="string">'.'</span>)[<span class="number">2</span>]))</div><div class="line">    end_date = date(int(date2.split(<span class="string">'.'</span>)[<span class="number">0</span>]),int(date2.split(<span class="string">'.'</span>)[<span class="number">1</span>]),int(date2.split(<span class="string">'.'</span>)[<span class="number">2</span>]))</div><div class="line">    days = timedelta(days=<span class="number">1</span>)</div><div class="line">    <span class="keyword">while</span> the_date &lt;= end_date:</div><div class="line">            <span class="keyword">yield</span> the_date.strftime(<span class="string">'%Y-%m-%d'</span>)</div><div class="line">            the_date = the_date + days</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#制作图表部分的代码</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data_within</span><span class="params">(date1,date2,areas)</span>:</span></div><div class="line">    <span class="keyword">for</span> area <span class="keyword">in</span> areas:</div><div class="line">        area_day_posts = []</div><div class="line">        <span class="keyword">for</span> day <span class="keyword">in</span> get_all_dates(date1,date2):</div><div class="line">            a = list(item_info.find(&#123;<span class="string">'pub_date'</span>:date,<span class="string">'area'</span>:area&#125;))</div><div class="line">            each_posts = len(a)</div><div class="line">            area_day_posts.append(each_posts)</div><div class="line">        data = &#123;</div><div class="line">            <span class="string">'name'</span> : area,</div><div class="line">            <span class="string">'data'</span> : area_day_posts,</div><div class="line">            <span class="string">'type'</span> : <span class="string">'lines'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">yield</span> data</div></pre></td></tr></table></figure>
-<h2 id="6-使用聚合管道高效查找数据MongoDB聚合管道"><a href="#6-使用聚合管道高效查找数据MongoDB聚合管道" class="headerlink" title="6.使用聚合管道高效查找数据MongoDB聚合管道"></a>6.使用聚合管道高效查找数据<a href="http://blog.csdn.net/zhangzhebjut/article/details/16848045" target="_blank" rel="external">MongoDB聚合管道</a></h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/C4DFB493-E981-4C81-BEA9-DE3F088943A2.png" alt="常用的几种"></p>
+<h2 id="6使用聚合管道高效查找数据mongodb聚合管道"><a class="markdownIt-Anchor" href="#6使用聚合管道高效查找数据mongodb聚合管道"></a> 6.使用聚合管道高效查找数据<a href="http://blog.csdn.net/zhangzhebjut/article/details/16848045" target="_blank" rel="external">MongoDB聚合管道</a></h2>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/C4DFB493-E981-4C81-BEA9-DE3F088943A2.png" alt="常用的几种"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#操作符的含义可以参考上面的链接,注意$group的操作是在内存中进行的，所以不能用它来对大量个数的文档来进行分组</span></div><div class="line">pipeline = [</div><div class="line">  &#123;<span class="string">'$match'</span>:&#123;<span class="string">'$and'</span>:[&#123;<span class="string">'pub_date'</span>:<span class="string">'2015.4.12'</span>&#125;,&#123;<span class="string">'time'</span>:<span class="number">3</span>&#125;]&#125;&#125;,</div><div class="line">  &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$price'</span>,<span class="string">'counts'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</div><div class="line">  &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'counts'</span>:<span class="number">-1</span>&#125;&#125;,</div><div class="line">  &#123;<span class="string">'$limit'</span>:<span class="number">3</span>&#125;</div><div class="line">]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> item_info.aggregate(pipeline):</div><div class="line">    print(i)</div><div class="line"><span class="comment">#$slice如果只有一个参数，代表返回几个元素，如果有两个参数，第一个参数代表跳过几个元素，第二个参数代表返回几个元素。</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_gen</span><span class="params">(data, time)</span>:</span></div><div class="line">    pipeline = [</div><div class="line">  	&#123;<span class="string">'$match'</span>:&#123;<span class="string">'$and'</span>:[&#123;<span class="string">'pub_date'</span>:<span class="string">'2015.4.12'</span>&#125;,&#123;<span class="string">'time'</span>:<span class="number">3</span>&#125;]&#125;&#125;,</div><div class="line">  	&#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:&#123;<span class="string">'$slice'</span>:[<span class="string">'$cates'</span>:<span class="number">2</span>,<span class="number">1</span>]&#125;,<span class="string">'counts'</span>:		&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</div><div class="line">  	&#123;<span class="string">'sort'</span>:&#123;<span class="string">'counts'</span>:<span class="number">-1</span>&#125;&#125;</div><div class="line">	]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> item_info.aggregate(pipeline):</div><div class="line">    	<span class="keyword">yield</span> [i[<span class="string">'_id'</span>][<span class="number">0</span>], i[<span class="string">'counts'</span>]]</div><div class="line"><span class="comment">#制作饼图</span></div><div class="line">options = &#123;</div><div class="line">  <span class="string">'chart'</span> : &#123;<span class="string">'zoomType'</span>:<span class="string">'xy'</span>&#125;,</div><div class="line">  <span class="string">'title'</span> : &#123;<span class="string">'text'</span>:<span class="string">'发帖量统计'</span>&#125;,</div><div class="line">  <span class="string">'subtitle'</span> : &#123;<span class="string">'text'</span>:<span class="string">'可视化统计图表'</span>&#125;</div><div class="line">&#125;</div><div class="line">series = [&#123;</div><div class="line">  	<span class="string">'type'</span>:<span class="string">'pie'</span></div><div class="line">    <span class="string">'name'</span>:<span class="string">'pipe charts'</span>,</div><div class="line">    <span class="string">'date'</span>:[i <span class="keyword">for</span> i <span class="keyword">in</span> date_gen(<span class="string">'2016.01.10, 1'</span>)]</div><div class="line">    &#125;]</div><div class="line">charts.plot(series, options=options, show=<span class="string">'inline'</span>)</div></pre></td></tr></table></figure>
-<h2 id="7-任务代码"><a href="#7-任务代码" class="headerlink" title="7.任务代码"></a>7.任务代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> charts</div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"></div><div class="line">client = pymongo.MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)</div><div class="line">ceshi = client[<span class="string">'ceshi'</span>]</div><div class="line">item_info = ceshi[<span class="string">'item_infoS'</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_gen</span><span class="params">(date1,date2,area,limit)</span>:</span></div><div class="line">    pipeline1 = [</div><div class="line">    &#123;<span class="string">'$match'</span>:&#123;<span class="string">'$and'</span>:[&#123;<span class="string">'pub_date'</span>:&#123;<span class="string">'$gte'</span>:date1,<span class="string">'$lte'</span>:date2&#125;&#125;,&#123;<span class="string">'area'</span>:&#123;<span class="string">'$all'</span>:area&#125;&#125;]&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:&#123;<span class="string">'$slice'</span>:[<span class="string">'$cates'</span>,<span class="number">2</span>,<span class="number">1</span>]&#125;,<span class="string">'counts'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$limit'</span>:limit&#125;,</div><div class="line">    &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'counts'</span>:<span class="number">-1</span>&#125;&#125;</div><div class="line">]</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> item_info.aggregate(pipeline1):</div><div class="line">        data = &#123;</div><div class="line">            <span class="string">'name'</span>: i[<span class="string">'_id'</span>][<span class="number">0</span>],</div><div class="line">            <span class="string">'data'</span>: [i[<span class="string">'counts'</span>]],</div><div class="line">            <span class="string">'type'</span>: <span class="string">'column'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">yield</span> data</div><div class="line">series = [i <span class="keyword">for</span> i <span class="keyword">in</span> data_gen(<span class="string">'2015.12.25'</span>,<span class="string">'2015.12.27'</span>,[<span class="string">'朝阳'</span>],<span class="number">5</span>)]</div><div class="line">options = &#123;</div><div class="line">    <span class="string">'chart'</span>   : &#123;<span class="string">'zoomType'</span>:<span class="string">'xy'</span>&#125;,</div><div class="line">    <span class="string">'title'</span>   : &#123;<span class="string">'text'</span>: <span class="string">'发帖数量最大的类目'</span>&#125;,</div><div class="line">    <span class="string">'subtitle'</span>: &#123;<span class="string">'text'</span>: <span class="string">'数据图表'</span>&#125;,</div><div class="line">    <span class="string">'yAxis'</span>   : &#123;<span class="string">'title'</span>: &#123;<span class="string">'text'</span>: <span class="string">'数量'</span>&#125;&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">charts.plot(series,options=options,show=<span class="string">'inline'</span>)</div></pre></td></tr></table></figure>
+<h2 id="7任务代码"><a class="markdownIt-Anchor" href="#7任务代码"></a> 7.任务代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> charts</div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"></div><div class="line">client = pymongo.MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)</div><div class="line">ceshi = client[<span class="string">'ceshi'</span>]</div><div class="line">item_info = ceshi[<span class="string">'item_infoS'</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_gen</span><span class="params">(date1,date2,area,limit)</span>:</span></div><div class="line">    pipeline1 = [</div><div class="line">    &#123;<span class="string">'$match'</span>:&#123;<span class="string">'$and'</span>:[&#123;<span class="string">'pub_date'</span>:&#123;<span class="string">'$gte'</span>:date1,<span class="string">'$lte'</span>:date2&#125;&#125;,&#123;<span class="string">'area'</span>:&#123;<span class="string">'$all'</span>:area&#125;&#125;]&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:&#123;<span class="string">'$slice'</span>:[<span class="string">'$cates'</span>,<span class="number">2</span>,<span class="number">1</span>]&#125;,<span class="string">'counts'</span>:&#123;<span class="string">'$sum'</span>:<span class="number">1</span>&#125;&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$limit'</span>:limit&#125;,</div><div class="line">    &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'counts'</span>:<span class="number">-1</span>&#125;&#125;</div><div class="line">]</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> item_info.aggregate(pipeline1):</div><div class="line">        data = &#123;</div><div class="line">            <span class="string">'name'</span>: i[<span class="string">'_id'</span>][<span class="number">0</span>],</div><div class="line">            <span class="string">'data'</span>: [i[<span class="string">'counts'</span>]],</div><div class="line">            <span class="string">'type'</span>: <span class="string">'column'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">yield</span> data</div><div class="line">series = [i <span class="keyword">for</span> i <span class="keyword">in</span> data_gen(<span class="string">'2015.12.25'</span>,<span class="string">'2015.12.27'</span>,[<span class="string">'朝阳'</span>],<span class="number">5</span>)]</div><div class="line">options = &#123;</div><div class="line">    <span class="string">'chart'</span>   : &#123;<span class="string">'zoomType'</span>:<span class="string">'xy'</span>&#125;,</div><div class="line">    <span class="string">'title'</span>   : &#123;<span class="string">'text'</span>: <span class="string">'发帖数量最大的类目'</span>&#125;,</div><div class="line">    <span class="string">'subtitle'</span>: &#123;<span class="string">'text'</span>: <span class="string">'数据图表'</span>&#125;,</div><div class="line">    <span class="string">'yAxis'</span>   : &#123;<span class="string">'title'</span>: &#123;<span class="string">'text'</span>: <span class="string">'数量'</span>&#125;&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">charts.plot(series,options=options,show=<span class="string">'inline'</span>)</div></pre></td></tr></table></figure>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/9361A126-4FA8-42FF-8811-A3B6D70ABAFE.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#另一种charts的调用方式</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_gen2</span><span class="params">(date1,date2,cates)</span>:</span></div><div class="line">    pipeline = [</div><div class="line">    &#123;<span class="string">'$match'</span>:&#123;<span class="string">'$and'</span>:[&#123;<span class="string">'pub_date'</span>:&#123;<span class="string">'$gte'</span>:date1,<span class="string">'$lte'</span>:date2&#125;&#125;,</div><div class="line">                       &#123;<span class="string">'cates'</span>:&#123;<span class="string">'$all'</span>:cates&#125;&#125;,</div><div class="line">                       &#123;<span class="string">'look'</span>:&#123;<span class="string">'$nin'</span>:[<span class="string">'-'</span>]&#125;&#125;</div><div class="line">                      ]&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$group'</span>:&#123;<span class="string">'_id'</span>:<span class="string">'$look'</span>,<span class="string">'avg_price'</span>:&#123;<span class="string">'$avg'</span>:<span class="string">'$price'</span>&#125;&#125;&#125;,</div><div class="line">    &#123;<span class="string">'$sort'</span>:&#123;<span class="string">'avg_price'</span>:<span class="number">1</span>&#125;&#125;</div><div class="line">]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> item_info.aggregate(pipeline):</div><div class="line">        <span class="keyword">yield</span> i[<span class="string">'avg_price'</span>]</div><div class="line">data = [i <span class="keyword">for</span> i <span class="keyword">in</span> data_gen2(<span class="string">'2015.12.24'</span>,<span class="string">'2016.01.10'</span>,[<span class="string">'北京二手手机'</span>])]</div><div class="line">options = &#123;</div><div class="line">    <span class="string">'title'</span>: &#123;<span class="string">'text'</span>: <span class="string">'新旧-价格'</span>&#125;,</div><div class="line">    <span class="string">'xAxis'</span>   : &#123;<span class="string">'categories'</span>: [<span class="string">'报废机/尸体'</span>,<span class="string">'7成新及以下'</span>,<span class="string">'8成新'</span>,<span class="string">'9成新'</span>,<span class="string">'95成新'</span>,<span class="string">'99成新'</span>, <span class="string">'全新'</span>]&#125;,</div><div class="line">    <span class="string">'yAxis'</span>   : &#123;<span class="string">'title'</span>: &#123;<span class="string">'text'</span>: <span class="string">'价格'</span>&#125;&#125;,</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">charts.plot(data,show=<span class="string">'inline'</span>, options=options)</div></pre></td></tr></table></figure>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%881.28.24.png" alt=""></p>
 
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">点击下方的图片，扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/123.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/wc.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
         </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2017-12-07T14:28:51.000Z" itemprop="dateUpdated">2017-12-07 22:28:51</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/05/18/jupyter笔记本基本使用/" target="_blank" rel="external">http://yoursite.com/2017/05/18/jupyter笔记本基本使用/</a>
-        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
     </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-
-            <div class="page-share-wrap">
     
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/05/18/jupyter笔记本基本使用/&title=《jupyter笔记本基本使用》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/05/18/jupyter笔记本基本使用/&title=《jupyter笔记本基本使用》 — Peterpan's Blog&source=jupyter笔记本使用（爬虫）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Peter pan 的个人博客">Peter pan</a></p>
+        <p><span>发布时间:</span>2017年05月18日 - 16时27分</p>
+        <p><span>最后更新:</span>2017年12月09日 - 22时14分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/18/jupyter笔记本基本使用/" title="jupyter笔记本基本使用">http://yoursite.com/2017/05/18/jupyter笔记本基本使用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/05/18/jupyter笔记本基本使用/　　作者: Peter pan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
+<nav id="article-nav">
+  
+    <a href="/2017/05/22/Linux进程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux进程
+        
+      </div>
     </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
   
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/05/22/Linux进程/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Linux进程</h4>
-      </a>
-    </div>
   
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/05/18/iOS-UI学习-三/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">iOS-UI学习(三)</h4>
-      </a>
-    </div>
+    <a href="/2017/05/18/iOS-UI学习-三/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS-UI学习(三)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
-
+  
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jupyter笔记本使用"><span class="toc-number">1.</span> <span class="toc-text"> jupyter笔记本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1在交互式笔记本中进行数据查找"><span class="toc-number">1.1.</span> <span class="toc-text"> 1.在交互式笔记本中进行数据查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2数据更新"><span class="toc-number">1.2.</span> <span class="toc-text"> 2.数据更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3利用图表来进行数据的展示"><span class="toc-number">1.3.</span> <span class="toc-text"> 3.利用图表来进行数据的展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4进行数据的格式修改并更新"><span class="toc-number">1.4.</span> <span class="toc-text"> 4.进行数据的格式修改并更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5使用date函数制作图表datetime模块"><span class="toc-number">1.5.</span> <span class="toc-text"> 5.使用date函数制作图表datetime模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6使用聚合管道高效查找数据mongodb聚合管道"><span class="toc-number">1.6.</span> <span class="toc-text"> 6.使用聚合管道高效查找数据MongoDB聚合管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7任务代码"><span class="toc-number">1.7.</span> <span class="toc-text"> 7.任务代码</span></a></li></ol></li></ol>
 </div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
 
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#jupyter笔记本使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">jupyter笔记本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-在交互式笔记本中进行数据查找"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.在交互式笔记本中进行数据查找</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-数据更新"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.数据更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-利用图表来进行数据的展示"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.利用图表来进行数据的展示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-进行数据的格式修改并更新"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4.进行数据的格式修改并更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-使用date函数制作图表datetime模块"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5.使用date函数制作图表datetime模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-使用聚合管道高效查找数据MongoDB聚合管道"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6.使用聚合管道高效查找数据MongoDB聚合管道</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-任务代码"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7.任务代码</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/05/18/jupyter笔记本基本使用/&title=《jupyter笔记本基本使用》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/05/18/jupyter笔记本基本使用/&title=《jupyter笔记本基本使用》 — Peterpan's Blog&source=jupyter笔记本使用（爬虫）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3ay27DMAxE0fz/TytAd0UieYakAoi6WhWua/l4wYqP10te42/NrozJmv328znre8oWDBgwjmWM5fq8R3+5Ndi9/4EKAwaMCxjrILveOPac2L7T6zBgwIBRGljdsA4DBgwYOxhuMryGwYABA4aexOoJrX7/7E025uIwYMA4kOE2Bn7588b+BgwYMA5hjMRaP229S373f0+DAQNGa4bSMnRT0Nir6wdEKReHAQNGI4YbIt3Bix1FuocsHAYMGE0ZwT/elvq6HwIGDBi9GcrRMHPIyw+fGffDgAGjNUM5LLphVwmp+pHRbmHCgAGjHUMZrciU5zJjGfonhgEDRm9G1TyDmxhnSnKpsTAYMGAcxdADnHG6FAKxDpaaEDBgwGjN0Ath+sFOL4rFjphS1RAGDBiNGHqSmS+0xY59xlwbDBgwWjPyKWV+wEIP69J/DBgwYDRixJLGzDaZNoPd5YABA0YLRuzwpx8N9RGKWLHvSxILAwaMpozY4IWerFYdJY16IQwYMBoxYsUydxu3Gek2HmDAgNGboQdEN/mMFdSCzU4YMGC0ZuijWu5rZQKxPigGAwaMGxjDXO5X0fGxFoUUv2HAgHE4Y1+53y3hxQp5MGDAuIeRD7LKFfeT2c+EAQPGBYx86V8vw1XxHvqxMGDAuJ5RVWiL7VgWcGHAgNGOkRmk0NucwaAMAwaMCxhumqrX8H7TNoABA0ZvhhuUM6GzqhVa0N+AAQPGGYw3CeCEmuCeyVEAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
         }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
         }
-    });
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
 </script>
 
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'peterpan980927'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/05/22/Linux进程/" title="上一篇: Linux进程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/05/18/iOS-UI学习-三/" title="下一篇: iOS-UI学习(三)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/iOS网络部分-一/">iOS网络部分(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/iOS逆向学习-一/">iOS逆向学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/24/盲水印技术/">盲水印技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/Lctf-sumup/">Lctf-sumup</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/14/iOS多线程之NSOperation/">iOS多线程之NSOperation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/06/Python-函数式编程/">Python-函数式编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/iOS第三方和权限问题/">iOS第三方和权限问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/CTF-MISC-二/">CTF-MISC(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/31/Python-Review/">Python3-Review</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/PIL学习-一/">PIL学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/30/CTF-图像学基础/">CTF-图像学基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/29/PNG在隐写中的应用/">PNG在隐写中的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/CTF-密码学/">CTF-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/大话CTF/">大话CTF</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/TCP-IP-四/">TCP/IP(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/07/GFW-中间人攻击/">GFW&中间人攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/iOS多线程之GCD/">iOS多线程之GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/29/iOS多线程/">iOS多线程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/25/CTF-SQL注入/">CTF-SQL注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/18/CTF-安全杂项/">CTF-MISC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/CTF-隐写术/">CTF-信息隐藏技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/14/Foundation框架/">Foundation框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/TCP-IP-三/">TCP/IP(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/31/iOS沙盒与模态/">iOS沙盒与模态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/Linux运维学习Day6/">Linux运维学习Day6</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/27/TCP-IP-二/">TCP/IP(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/地狱少女/">地獄少女</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/24/TCP:IP-一/">TCP/IP(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/DNS相关/">DNS相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/计算机网络硬件/">计算机网络硬件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day5/">Linux运维学习Day5</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day4/">Linux运维学习Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day3/">Linux运维学习Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day2/">Linux运维学习Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/Linux运维学习Day1/">Linux运维学习Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/缓存服务器和一致性哈希/">缓存服务器和一致性哈希</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/iOS-UI-启动原理和导航控制器/">iOS-UI 启动原理和导航控制器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/iOS成员变量和属性的关系/">iOS成员变量和属性的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/ARC与分类/">ARC与分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/24/内存管理/">内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/21/OC特有语法/">OC特有语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Xcode基本调试/">Xcode基本调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/iOS-UI基础-七/">iOS-UI基础(七)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/七牛图片自动上传/">七牛图片自动上传</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/CPU对于内存的读写/">CPU对于内存的读写</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/iOS-UI学习-六/">iOS-UI学习(六)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/iOS-UI学习-五/">iOS-UI学习(五)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/Web基础/">Web基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/23/iOS-UI学习-四/">iOS-UI学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/22/Linux进程/">Linux进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/jupyter笔记本基本使用/">jupyter笔记本基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/18/iOS-UI学习-三/">iOS-UI学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习-二/">iOS-UI学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/iOS-UI学习/">iOS-UI学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫-二/">网络爬虫(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/网络爬虫/">网络爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/RSA密钥生成的过程-数学证明/">RSA密钥生成的过程(数学证明)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/土家购农村电商爬虫代码示例/">土家购农村电商爬虫代码示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/多终端同步hexo博客/">多终端同步hexo博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/hello-world/">页面教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/秒速五厘米/">秒速五厘米</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
     <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Peter pan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >訪問者の量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">読書の量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
         });
-    })();
+    });
 </script>
 
 
-    
+  </div>
 </body>
 </html>
