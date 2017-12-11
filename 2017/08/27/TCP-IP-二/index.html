@@ -182,9 +182,14 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？<br><a id="more"></a></p>
-<h1 id="TCP-IP-二"><a href="#TCP-IP-二" class="headerlink" title="TCP/IP(二)"></a>TCP/IP(二)</h1><h2 id="协议分层模型"><a href="#协议分层模型" class="headerlink" title="协议分层模型"></a>协议分层模型</h2><h3 id="硬件、网络接口层"><a href="#硬件、网络接口层" class="headerlink" title="硬件、网络接口层"></a>硬件、网络接口层</h3><p>这一层主要是在硬件、设备驱动程序和网络接口层面上，在硬件方面TCP/IP没有一个既定的指标，至于网络接口层可以当作让NIC起作用的驱动程序。驱动程序是操作系统和硬件之间的桥梁，当我们添加硬件设备的时候，</p>
-<h3 id="互联网层（网络层）"><a href="#互联网层（网络层）" class="headerlink" title="互联网层（网络层）"></a>互联网层（网络层）</h3><ul>
+            <p>当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？</p>
+<a id="more"></a>
+<h1 id="tcpip二"><a class="markdownIt-Anchor" href="#tcpip二"></a> TCP/IP(二)</h1>
+<h2 id="协议分层模型"><a class="markdownIt-Anchor" href="#协议分层模型"></a> 协议分层模型</h2>
+<h3 id="硬件-网络接口层"><a class="markdownIt-Anchor" href="#硬件-网络接口层"></a> 硬件、网络接口层</h3>
+<p>这一层主要是在硬件、设备驱动程序和网络接口层面上，在硬件方面TCP/IP没有一个既定的指标，至于网络接口层可以当作让NIC起作用的驱动程序。驱动程序是操作系统和硬件之间的桥梁，当我们添加硬件设备的时候，</p>
+<h3 id="互联网层网络层"><a class="markdownIt-Anchor" href="#互联网层网络层"></a> 互联网层（网络层）</h3>
+<ul>
 <li>IP</li>
 </ul>
 <p>IP是跨越网络传送数据包，使整个互联网都能收到数据的协议。IP协议使数据可以发送到地球的另一端，这期间以IP地址作为主机的标识。</p>
@@ -198,7 +203,8 @@
 <li>ARP</li>
 </ul>
 <p>从分组数据包中的IP地址中解析出物理地址的一种协议。</p>
-<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>传输层可以让应用之间进行通信，识别这些应用程序的是端口号。</p>
+<h3 id="传输层"><a class="markdownIt-Anchor" href="#传输层"></a> 传输层</h3>
+<p>传输层可以让应用之间进行通信，识别这些应用程序的是端口号。</p>
 <ul>
 <li>TCP</li>
 </ul>
@@ -208,7 +214,8 @@
 <li>UDP</li>
 </ul>
 <p>UDP是一种面向无连接的传输协议。如果要检测是否收到数据包或者是否连接到网络，要在应用程序中实现，UDP常用于分组数据较少或多播、广播通信及视频通信等。</p>
-<h3 id="应用层及以上"><a href="#应用层及以上" class="headerlink" title="应用层及以上"></a>应用层及以上</h3><p>我们会发现TCP/IP分层中，应用层及以上的功能都集中到了应用程序中去实现。</p>
+<h3 id="应用层及以上"><a class="markdownIt-Anchor" href="#应用层及以上"></a> 应用层及以上</h3>
+<p>我们会发现TCP/IP分层中，应用层及以上的功能都集中到了应用程序中去实现。</p>
 <ul>
 <li>WWW</li>
 </ul>
@@ -232,8 +239,10 @@
 </ul>
 <p>在TCP/IP中进行网络管理的时候，采用SNMP协议。使用SNMP管理的主机、网桥、路由器等称作SNMP代理。SNMP是管理器和代理之间所用到的协议。</p>
 <p>在SNMP的管理端，保存着网络接口信息、通信数据量、异常数据量、温度信息等。这些信息通过MIB访问。SNMP是应用层协议，MIB属于表示层协议。</p>
-<h2 id="TCP-IP通信示例"><a href="#TCP-IP通信示例" class="headerlink" title="TCP/IP通信示例"></a>TCP/IP通信示例</h2><p>同样是之前那个甲向乙发送邮件说早上好的例子，这一次不是从OSI模型层数上来进行分析：</p>
-<h4 id="发送处理"><a href="#发送处理" class="headerlink" title="发送处理"></a>发送处理</h4><ul>
+<h2 id="tcpip通信示例"><a class="markdownIt-Anchor" href="#tcpip通信示例"></a> TCP/IP通信示例</h2>
+<p>同样是之前那个甲向乙发送邮件说早上好的例子，这一次不是从OSI模型层数上来进行分析：</p>
+<h4 id="发送处理"><a class="markdownIt-Anchor" href="#发送处理"></a> 发送处理</h4>
+<ul>
 <li>应用程序处理</li>
 </ul>
 <p>在点击发送邮件之后，应用程序首先会进行编码的处理，比如日文邮件用ISO-2022-JP或者UTF-8进行编码。编码转换后，邮件不会立即被发出去，因为有的软件有一次行发送多个邮件的功能。像这种何时建立通信连接发送数据的功能，属于会话层。</p>
@@ -261,7 +270,8 @@
 <p>其中发送端和接收端的地址在不同层上用不同的标识：</p>
 <p>以太网用MAC地址，IP用IP地址，TCP/UDP用端口号，在应用程序中，比如SMTP用电子邮件地址</p>
 <p>此外，每个分层的包首部还包含一个标识位，用来标识上一层协议的种类信息。</p>
-<h4 id="接受处理"><a href="#接受处理" class="headerlink" title="接受处理"></a>接受处理</h4><ul>
+<h4 id="接受处理"><a class="markdownIt-Anchor" href="#接受处理"></a> 接受处理</h4>
+<ul>
 <li>网络接口</li>
 </ul>
 <p>主机收到数据包之后，首先从以太网包首部找到MAC地址判断是否位发送自己的，否则丢掉。</p>
@@ -273,27 +283,31 @@
 <ul>
 <li>TCP模块的处理</li>
 </ul>
-<p>首先计算一下校验和，判断数据是否损坏，再检查是否是按序号发送数据包，最后检查端口号，确定具体程序。数据接收完毕后，会发送一个”确认回执”给发送端。如果这个回执信息没有到达发送端，那么发送端会认为接收端没有收到数据而一直反复发送。</p>
+<p>首先计算一下校验和，判断数据是否损坏，再检查是否是按序号发送数据包，最后检查端口号，确定具体程序。数据接收完毕后，会发送一个&quot;确认回执&quot;给发送端。如果这个回执信息没有到达发送端，那么发送端会认为接收端没有收到数据而一直反复发送。</p>
 <p>数据被接受后，会传给由端口号识别的应用程序</p>
 <ul>
 <li>应用程序的处理</li>
 </ul>
-<p>接收端应用程序会直接接受发送端发送的数据，通过解析数据找到乙的地址，如果接收端主机上没有乙的邮件信箱，那么就会返回发送端一个”无收件地址的报错信息”，如果有邮件未能保存或邮箱已满等问题也会返回异常给发送端，没有异常的话用户乙就可以喝完一杯清晨的咖啡后，舒适的阅读来自甲的邮件了～</p>
-<h3 id="主机的通信"><a href="#主机的通信" class="headerlink" title="主机的通信"></a>主机的通信</h3><h4 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h4><p>首先说一下ping，这是操作系统中的一个小程序，可以用来检测两台主机的连通性，如果ping的通，表示网络可达，ping不同，证明需要排错:</p>
+<p>接收端应用程序会直接接受发送端发送的数据，通过解析数据找到乙的地址，如果接收端主机上没有乙的邮件信箱，那么就会返回发送端一个&quot;无收件地址的报错信息&quot;，如果有邮件未能保存或邮箱已满等问题也会返回异常给发送端，没有异常的话用户乙就可以喝完一杯清晨的咖啡后，舒适的阅读来自甲的邮件了～</p>
+<h3 id="主机的通信"><a class="markdownIt-Anchor" href="#主机的通信"></a> 主机的通信</h3>
+<h4 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> ping</h4>
+<p>首先说一下ping，这是操作系统中的一个小程序，可以用来检测两台主机的连通性，如果ping的通，表示网络可达，ping不同，证明需要排错:</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png" alt="屏幕快照 2017-08-31 上午10.09.00.png" title="" class="">
                 <p>屏幕快照 2017-08-31 上午10.09.00.png</p>
             </figure>
 <p>那么这个icmp报文是如何生成的呢？那么首先还要来说一下icmp</p>
-<h4 id="icmp"><a href="#icmp" class="headerlink" title="icmp"></a>icmp</h4><p>icmp是一个网络控制协议，当网络发生一些或大或小的问题，通过该协议可以告知通信的发起方，比如，当一个IP包太大，比如1500字节，到达一个路由器的接口，接口最大传输单元MTU=1476字节，由于IP包1500&gt;MTU1476，这个IP包必须分成两片才可以从接口发送出去，问题来了，如果IP包里有一个标志位DF=1，意思就是说这个IP包不能进行分片，要么丢弃要么接受，那路由器只有无奈地丢弃这个IP包，如果没有消息告知这个IP发起者，会发生什么？IP包都被默默丢弃了，而IP包发起方并不知道，还以为数据已经到达了目的地，其实都被丢了，这就是流量黑洞，所以需要一种消息机制告知IP包的发起者，这个消息就是用ICMP来发送的，那发送什么样的消息呢？</p>
+<h4 id="icmp"><a class="markdownIt-Anchor" href="#icmp"></a> icmp</h4>
+<p>icmp是一个网络控制协议，当网络发生一些或大或小的问题，通过该协议可以告知通信的发起方，比如，当一个IP包太大，比如1500字节，到达一个路由器的接口，接口最大传输单元MTU=1476字节，由于IP包1500&gt;MTU1476，这个IP包必须分成两片才可以从接口发送出去，问题来了，如果IP包里有一个标志位DF=1，意思就是说这个IP包不能进行分片，要么丢弃要么接受，那路由器只有无奈地丢弃这个IP包，如果没有消息告知这个IP发起者，会发生什么？IP包都被默默丢弃了，而IP包发起方并不知道，还以为数据已经到达了目的地，其实都被丢了，这就是流量黑洞，所以需要一种消息机制告知IP包的发起者，这个消息就是用ICMP来发送的，那发送什么样的消息呢？</p>
 <p>ICMP协议里有type字段，还有code字段，发送type=3，code=4，MTU=1476的消息就可以了，当这个ICMP消息到达IP包的发起者，发起者知道原来是IP太大了，那最大可以发送多大的呢？消息里有，那就MTU=1476，于是IP包的发起方只要发送小于等于1476字节的就可以了。</p>
-<h4 id="发送过程"><a href="#发送过程" class="headerlink" title="发送过程"></a>发送过程</h4><p>在键盘上输入ping baidu.com这个命令之后，发生了什么事情呢：</p>
+<h4 id="发送过程"><a class="markdownIt-Anchor" href="#发送过程"></a> 发送过程</h4>
+<p>在键盘上输入ping baidu.com这个命令之后，发生了什么事情呢：</p>
 <p>1、主机查找本地系统Hosts文件的DNS缓存，如果存在该域名对应的IP，则获取IP，跳转到第8步；如果不存在，则继续。</p>
 <p>2、主机向本网络路由器发起请求，查找路由DNS缓存，如果存在该域名对于的IP，则获取IP，跳转到第8步；如果不存在，则继续。</p>
 <p>3、路由器向本地ISP（互联网提供商）的DNS服务器发起请求，查找DNS服务器的缓存，如果存在该域名对应的IP，则跳转到第7步；如果不存在，则继续。</p>
 <p>4、本地DNS服务器向根域名服务器发起请求，根域名服务器告诉本地服务器，下一次应查询的顶级域名服务器dns.com的IP地址。</p>
 <p>5、本地域名服务器向顶级域名服务器dns.com进行查询，顶级域名服务器dns.com告诉本地域名服务器，下一步应查询的权限服务器dns.abc.com的IP地址。</p>
-<p>6、本地域名服务器向权限域名服务器dns.abc.com进行查询，权限域名服务器dns.abc.com告诉本地域名服务器，所查询的主机的IP地址。 </p>
+<p>6、本地域名服务器向权限域名服务器dns.abc.com进行查询，权限域名服务器dns.abc.com告诉本地域名服务器，所查询的主机的IP地址。</p>
 <p>7、本地域名服务器最后把查询结果——该域名对应的IP地址告诉给主机。</p>
 <p>8、至此，主机知道了该域名的IP地址。</p>
 <p>9、主机通过子网掩码判断该IP地址是本网段还是跨网段，由于本网段比较简单，我们以跨网段进行讲解。</p>
@@ -306,7 +320,8 @@
 <p>16、直到最后一个路由根据ARP协议，找到了主机想要访问的IP地址对应的主机的MAC地址，然后将ICMP报文封装成MAC帧发送给该域名主机。</p>
 <p>17、由于ARP协议具有相互学习性，域名主机接收到主机发送的ICMP回送请求报文之后，将向本网络路由发送ICMP回送回答报文，该路由又会转发下去…</p>
 <p>18、当主机收到域名主机发送的ICMP回送回答报文之后，这样就表明该主机到域名主机是连通可达的。</p>
-<h3 id="SNS通信（补充）"><a href="#SNS通信（补充）" class="headerlink" title="SNS通信（补充）"></a>SNS通信（补充）</h3><p>SNS的中文叫做社交网络，是一种即使共享，发布消息给圈内特定联系人的一种服务，现在就来分析一下移动端发送或者接受SNS消息的过程：</p>
+<h3 id="sns通信补充"><a class="markdownIt-Anchor" href="#sns通信补充"></a> SNS通信（补充）</h3>
+<p>SNS的中文叫做社交网络，是一种即使共享，发布消息给圈内特定联系人的一种服务，现在就来分析一下移动端发送或者接受SNS消息的过程：</p>
 <p>平板电脑、手机等进行分组数据的通信，在打开手机的那一刻，就会被通信运营商设定具体的IP地址。</p>
 <p>启动移动电话中的应用程序，会连接指定的服务器，通过一系列的验证，返回指定的信息，由手机终端显示具体内容。</p>
 <figure class="image-box">
@@ -447,7 +462,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP-IP-二"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP/IP(二)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#协议分层模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">协议分层模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件、网络接口层"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">硬件、网络接口层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#互联网层（网络层）"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">互联网层（网络层）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传输层"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">传输层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用层及以上"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">应用层及以上</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP-IP通信示例"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">TCP/IP通信示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送处理"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">发送处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#接受处理"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">接受处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主机的通信"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">主机的通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ping"><span class="post-toc-number">1.2.1.1.</span> <span class="post-toc-text">ping</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#icmp"><span class="post-toc-number">1.2.1.2.</span> <span class="post-toc-text">icmp</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送过程"><span class="post-toc-number">1.2.1.3.</span> <span class="post-toc-text">发送过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SNS通信（补充）"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">SNS通信（补充）</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tcpip二"><span class="post-toc-number">1.</span> <span class="post-toc-text"> TCP/IP(二)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#协议分层模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 协议分层模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件-网络接口层"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"> 硬件、网络接口层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#互联网层网络层"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"> 互联网层（网络层）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传输层"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text"> 传输层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用层及以上"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text"> 应用层及以上</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tcpip通信示例"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> TCP/IP通信示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送处理"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text"> 发送处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#接受处理"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text"> 接受处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主机的通信"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"> 主机的通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ping"><span class="post-toc-number">1.2.1.1.</span> <span class="post-toc-text"> ping</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#icmp"><span class="post-toc-number">1.2.1.2.</span> <span class="post-toc-text"> icmp</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送过程"><span class="post-toc-number">1.2.1.3.</span> <span class="post-toc-text"> 发送过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sns通信补充"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text"> SNS通信（补充）</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
