@@ -7,8 +7,7 @@
       <url>/2017/12/11/iOS%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0-%E4%BA%8C/</url>
       <content type="html"><![CDATA[<p>iOS逆向工程中使用的一系列工具功能不同，主要是作为开发和调试的工作，这一次主要是介绍两种：<code>class-dump</code>和<code>Theos</code>，那么这这个工具是干什么的呢？</p>
 <a id="more"></a>
-<h1 id="class-dump"><a class="markdownIt-Anchor" href="#class-dump"></a> class-dump</h1>
-<p>这个工具从名字中我们大概也能猜出来这是一个去dump目标对象的class信息的工具。它利用的是OC的<code>runtime</code>特性，将存储于Mach-O文件中的头文件信息（@interface和@protocol信息）提取出来，并生成的对应的.h文件。官方的介绍其实是这样说的：</p>
+<h1 id="class-dump"><a href="#class-dump" class="headerlink" title="class-dump"></a>class-dump</h1><p>这个工具从名字中我们大概也能猜出来这是一个去dump目标对象的class信息的工具。它利用的是OC的<code>runtime</code>特性，将存储于Mach-O文件中的头文件信息（@interface和@protocol信息）提取出来，并生成的对应的.h文件。官方的介绍其实是这样说的：</p>
 <blockquote>
 <p>This is a command-line utility for examining the Objective-C runtime information stored in Mach-O files. It generates declarations for the classes, categories and protocols. This is the same information provided by using ‘otool -ov’, but presented as normal Objective-C declarations, so it is much more compact and readable</p>
 </blockquote>
@@ -24,8 +23,7 @@
                 <p>屏幕快照 2017-12-11 下午8.07.13.png</p>
             </figure>
 <p>但是到这种程度还远远没有结束，因为现在App工程越来越庞大，而且引用了很多的第三方代码，所以我们使用class-dump的时候就会dump出成百上千个头文件，其实对于工程师的水平也是一种考验。之所以选择的是这个App是因为从App Store上下载的App都是经过加密的，直接使用class-dump就会失效，就像一个硬硬的核桃里面包着果肉，我们用镊子是不可能夹的出来的，首先干嘛？对了，锤子砸开它，在逆向工程中俗称砸壳，这个之后再介绍，下面说一下另一个工具。</p>
-<h1 id="theos"><a class="markdownIt-Anchor" href="#theos"></a> Theos</h1>
-<p>这是一个越狱开发工具包。它与其他的越狱开发工具相比，最大的特点就是简单:不管是下载安装还是Logos的语法还是编译发布都比较省事，既然比较起来就要提到另一个也就是整合在Xcode中的iOSOpenDev，作为一个经常使用Xcode的iOS工程师，本来我是打算使用这种工具的，但是逆向工程接触底层的知识比较多，很多东西无法自动化，工具太智能反而会坏了自己的根基，所以按照作者推荐选择了整合度不算太高的Theos。</p>
+<h1 id="Theos"><a href="#Theos" class="headerlink" title="Theos"></a>Theos</h1><p>这是一个越狱开发工具包。它与其他的越狱开发工具相比，最大的特点就是简单:不管是下载安装还是Logos的语法还是编译发布都比较省事，既然比较起来就要提到另一个也就是整合在Xcode中的iOSOpenDev，作为一个经常使用Xcode的iOS工程师，本来我是打算使用这种工具的，但是逆向工程接触底层的知识比较多，很多东西无法自动化，工具太智能反而会坏了自己的根基，所以按照作者推荐选择了整合度不算太高的Theos。</p>
 <p>工具安装的废话就不说了，但是一步一步的每个模块安装还是比较浪费时间的，所以我找到了一个在github上写了一个自动化配置脚本的友人，这里分享一个<a href="https://github.com/DaSens/Theos-Script" target="_blank" rel="external">链接</a>，同时也分享一个<a href="https://pan.baidu.com/s/1kTvex0r" target="_blank" rel="external">iOSOpenDev</a>的，来自一个具有开源精神的朋友。</p>
 <p>等到配置完成之后就可以开始创建工程了，启动NIC:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/theos/nic.pl</div></pre></td></tr></table></figure>
@@ -49,8 +47,7 @@
                 <img src="http://omunhj2f1.bkt.clouddn.com/IMG_0056.PNG" alt="IMG_0056.PNG" title="" class="">
                 <p>IMG_0056.PNG</p>
             </figure>
-<h1 id="好玩的功能发掘"><a class="markdownIt-Anchor" href="#好玩的功能发掘"></a> 好玩的功能发掘</h1>
-<p>那么进入终端之后还可以做哪些好玩的事情呢，我今天尝试了一下，发现<code>open</code>这个命令其实非常的有意思，首先我们要安装<code>open</code>这个命令，然后通过<code>Erica Utilities</code>得到<code>plutil</code>，接下来我们就可以将手机交给别人玩了，接下来我们就悄悄的溜进终端，进行我们的秘密行动：</p>
+<h1 id="好玩的功能发掘"><a href="#好玩的功能发掘" class="headerlink" title="好玩的功能发掘"></a>好玩的功能发掘</h1><p>那么进入终端之后还可以做哪些好玩的事情呢，我今天尝试了一下，发现<code>open</code>这个命令其实非常的有意思，首先我们要安装<code>open</code>这个命令，然后通过<code>Erica Utilities</code>得到<code>plutil</code>，接下来我们就可以将手机交给别人玩了，接下来我们就悄悄的溜进终端，进行我们的秘密行动：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#首先我们可以通过命令查看当前的进程</div><div class="line">ps -A</div></pre></td></tr></table></figure>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-11%20%E4%B8%8B%E5%8D%8811.38.13.png" alt="屏幕快照 2017-12-11 下午11.38.13.png" title="" class="">
@@ -63,6 +60,19 @@
 <p>这个时候小伙伴已经不知所措，接下来我们要做一件更坏的事情，那就是杀掉他之前的微博进程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#杀掉对应的进程的PID</div><div class="line">kill 6957</div></pre></td></tr></table></figure>
 <p>那么这个时候小伙伴应该是一头雾水，感觉还是挺好玩的，如果有进一步的操作技巧应该会更有意思。</p>
+<p>在这之后觉得似乎还是不过瘾，决定发掘一些更有意思的功能，于是我就想到了通过手机来控制电脑进行拍照，也就是说我可以站在一个旁观者的角度去悄悄的记录一些东西，所以我就写了一个shell脚本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#! /bin/zsh</div><div class="line"></div><div class="line">function rand()&#123;</div><div class="line">  min=$1</div><div class="line">  max=$(($2-$min+1))</div><div class="line">  num=$(($RANDOM+1000000000))</div><div class="line">  echo $(($num%$max+$min))</div><div class="line">&#125;</div><div class="line"></div><div class="line">name=0</div><div class="line">open -a FaceTime</div><div class="line"></div><div class="line">for i in $(seq 1 3)</div><div class="line">do</div><div class="line">name=$(rand 400000 500000)</div><div class="line">echo $name</div><div class="line">imagesnap snaphoto$name.png</div><div class="line">done</div><div class="line"></div><div class="line">a=$(ps -A | egrep &apos;/Applications/FaceTime.app/Contents/MacOS/FaceTime\&gt;&apos; | cut -d &apos; &apos; -f1 | sed -n &apos;1p;1q&apos;)</div><div class="line">kill $a</div><div class="line">scp ~/shellScript/snaphoto$name.png root@192.168.1.129:/var/mobile/Media/DCIM/100APPLE/</div><div class="line">ps -fe | grep scp | grep -v grep</div><div class="line">isDone=`echo $?`</div><div class="line">if [ &quot;$isDone&quot; -ne &quot;0&quot; ];</div><div class="line">then</div><div class="line">  echo yes</div><div class="line">  rm ~/shellScript/snaphoto$name.png</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>这里就是通过调用facetime去进行拍照并且将照片即时上传到手机并且kill掉电脑上的facetime进程并且删除本地照片，经过测试的结果发现整个过程大概只需要几秒：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-13%20%E4%B8%8B%E5%8D%8810.12.05.png" alt="屏幕快照 2017-12-13 下午10.12.05.png" title="" class="">
+                <p>屏幕快照 2017-12-13 下午10.12.05.png</p>
+            </figure>
+<p>这个时候从我们的iphone上进行操作的话就只需要ssh连接到电脑上并执行这个脚本即可：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/IMG_0062.PNG" alt="IMG_0062.PNG" title="" class="">
+                <p>IMG_0062.PNG</p>
+            </figure>
+<p>然后我们就可以通过iFile在相关目录下看到上传的照片了，但是由于每次照相的时候都会先开启一次FaceTime，这样其实不太好，所以还是要优化一下，另外一个问题就是在电脑锁屏的时候，拍摄出来的照片会不完整，整体亮度会特别低，导致看不清楚，会在之后的版本中优化，同时准备通过传感器来完成识别功能从而达到监测的效果，后期应该会选择云服务器作为资源存储:)</p>
 ]]></content>
       
         <categories>
@@ -81,26 +91,22 @@
     </entry>
     
     <entry>
-      <title><![CDATA[诸葛丞相]]></title>
+      <title><![CDATA[孔明的光环]]></title>
       <url>/2017/12/10/%E4%B8%9E%E7%9B%B8/</url>
-      <content type="html"><![CDATA[<p>在信息高速发展的年代，我们对于以前的历史人物认知似乎由剧本的价值导向和演员的演技的决定了，譬如前段时间的大军师司马懿，这种以个人为导向的观念毫无疑问会导致我们对真正的历史的认知产生偏差，所以我决定去真正的了解一些历史的人物</p>
+      <content type="html"><![CDATA[<p>在信息高速发展的年代，我们对于以前的历史人物认知似乎由剧本的价值导向和演员的演技的决定了，譬如前段时间的大军师司马懿，这种以个人为导向的观念毫无疑问会导致我们对真正的历史的认知产生偏差,凭着对与诸葛亮这个历史人物的喜爱，所以我决定对于他在历史上的一些光环一探究竟。</p>
 <a id="more"></a>
-<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0X00前言</h1>
-<p>说来有趣，对于历史重生兴趣的苗头竟是因为b站，其中的一些古风填词让我突然对诸葛丞相的一些生平起了些兴趣，小时候对于他的记忆仅仅停留在三国演义中那个似乎无所不能，从出山到西去都鲜有败绩的伟人，为后世君主百姓所推崇赞美，直到看到了诸葛亮和王朗关于大天下和小天下所展开的一场辩论—<a href="https://www.bilibili.com/video/av3037947/" target="_blank" rel="external">此物天下绝响</a>。</p>
+<h1 id="0X00前言"><a href="#0X00前言" class="headerlink" title="0X00前言"></a>0X00前言</h1><p>说来有趣，对于历史重生兴趣的苗头竟是因为b站，其中的一些古风填词让我突然对诸葛丞相的一些生平起了些兴趣，小时候对于他的记忆仅仅停留在三国演义中那个似乎无所不能，从出山到西去都鲜有败绩的伟人，为后世君主百姓所推崇赞美，直到看到了诸葛亮和王朗关于大天下和小天下所展开的一场辩论—<a href="https://www.bilibili.com/video/av3037947/" target="_blank" rel="external">此物天下绝响</a>。</p>
 <p>演艺中的故事多多少少会有些虚假的成分在其中，于是我根据几个点谈一谈我对丞相的看法，如果有不同的观点还请文明用语，饭后闲谈耳，不必太认真。</p>
-<h2 id="0x01阵营的选择"><a class="markdownIt-Anchor" href="#0x01阵营的选择"></a> 0X01阵营的选择</h2>
-<p>东汉末年朝政极度腐败，阶级矛盾严重，农民被剥刻到极点，发起了大规模的起义，而统治阶级的内部斗争也非常激烈，直到汉灵帝驾崩，矛盾开始爆发，于是才有了后世所流传的三国演义。</p>
+<h2 id="0X01阵营的选择"><a href="#0X01阵营的选择" class="headerlink" title="0X01阵营的选择"></a>0X01阵营的选择</h2><p>东汉末年朝政极度腐败，阶级矛盾严重，农民被剥刻到极点，发起了大规模的起义，而统治阶级的内部斗争也非常激烈，直到汉灵帝驾崩，矛盾开始爆发，于是才有了后世所流传的三国演义。</p>
 <p>整个三国时期我大致分为几个阶段—<code>黄巾之乱</code>、<code>诸侯伐董</code>、<code>群雄混战</code>、<code>三国鼎立</code>、<code>三家归晋</code>。在群雄混战时期，曹操自官渡之战之后已经奠定了北方霸主的威名，那么诸葛亮在当时为什么会选择还是寄人篱下的刘备而不是已经统一北方威震天下的曹操或者其他的霸主？这个问题千百年来都有人争论不休，我就暂且谈谈我的观点：</p>
 <p>诸葛亮虽然在出师表中自称躬耕于南阳，本是布衣。但如果大家都真的认为他是个没什么背景的农民那就大错特错了。诸葛亮虽然隐居隆中，但他和荆州的上层人物关系密切，他的岳父黄承彦乃是刘表的连襟蔡瑁的妹夫。而刘表的原配夫人，也就是刘琦的生母过世后，刘表就迎娶了黄承彦老婆的妹妹。此外，诸葛亮的二姐嫁给了荆州名士庞德公的儿子，卧龙凤雏之名正是出自他口，而且诸葛瑾还在东吴做官，凭借和孙吴以及荆州名士的关系，加上他本身的才华，若是出仕必定早就会有一番作为，可他并没有，证明刘表和孙吴都不是他的志向所在。</p>
 <p>他选择了当时几乎除了几乎一无所有的刘备，如果仅仅将这归结到个人魅力的原因上去，显然是不合适的，君择臣，臣亦择君。从诸葛亮在刘氏集团实施的治国理念可以看出诸葛亮所秉持的观念是和刘备最符合的。诸葛亮出山时北方基本已经大一统，曹操是典型的霸权主义者，曾经屠城徐州亦可见一斑，而且整个曹魏集团当时重用的是归顺的士族和有才华的平民，手下良将谋士如云，已成气候。孙权占据东吴，依靠三世基业，采取的是不对立方针，如此志向，和诸葛亮的匡扶汉室就算不是背道而驰，也不是良主。如果比较之下，治国理念和诸葛亮相合，又可以大权在握的人仅刘备耳。</p>
-<h1 id="0x02君可自取"><a class="markdownIt-Anchor" href="#0x02君可自取"></a> 0X02君可自取？</h1>
-<p>“三顾频烦天下计，两朝开济老臣心”，千百年来，&quot;鞠躬尽瘁，死而后已&quot;已成为丞相妇孺皆知的品质。在后三国时期，诸葛亮和司马懿同为托孤大臣，而司马懿却选择了篡位。曹操其实曾和曹丕说过司马懿此人有狼顾之相，不得不防。但是直到曹操死前，司马懿也没有露出他的狐狸尾巴，最后窃取到了三家胜利的果实。</p>
-<p>还记得刘备托孤时曾对诸葛亮说出了&quot;君可自取&quot;这样的话，于是就有一种阴谋论说诸葛亮其实也有篡位之心，但是最起码要等到平定之后。从出师表中我们可以看到诸葛亮北伐中原的时候是正值益州疲弊，所以一定要打着兴复汉室，打着刘氏皇族的旗号，这样才是名正言顺，奉诰讨贼。</p>
+<h1 id="0X02君可自取？"><a href="#0X02君可自取？" class="headerlink" title="0X02君可自取？"></a>0X02君可自取？</h1><p>“三顾频烦天下计，两朝开济老臣心”，千百年来，”鞠躬尽瘁，死而后已”已成为丞相妇孺皆知的品质。在后三国时期，诸葛亮和司马懿同为托孤大臣，而司马懿却选择了篡位。曹操其实曾和曹丕说过司马懿此人有狼顾之相，不得不防。但是直到曹操死前，司马懿也没有露出他的狐狸尾巴，最后窃取到了三家胜利的果实。</p>
+<p>还记得刘备托孤时曾对诸葛亮说出了”君可自取”这样的话，于是就有一种阴谋论说诸葛亮其实也有篡位之心，但是最起码要等到平定之后。从出师表中我们可以看到诸葛亮北伐中原的时候是正值益州疲弊，所以一定要打着兴复汉室，打着刘氏皇族的旗号，这样才是名正言顺，奉诰讨贼。</p>
 <p>那么诸葛亮到底有没有这个心呢，在我看来应该是没有的，就算有的话也会在刘备托孤之后烟消云散，至少在看到大一统的曙光之前不可能再有。刘备临终前的那一句<code>君可自取</code>，是因为他知道诸葛亮不可能取，诸葛亮几十年君臣，同样知道刘备不可能给。刘备在死之前就已经通过联姻这种关系为刘禅打造了一个庞大的利益集团，如果诸葛亮要反，无疑就会涉及到利益重分配的问题，显然当时的蜀汉已经经不起这样的折腾了。更何况刘备还跟赵云交代过，如果军事方面也不稳定的话，简直就是给曹魏集团送人头了。</p>
 <p>同时我们也可以了解到，当时托孤的场景是除了诸葛亮还有李严，如果说诸葛亮是荆州派系的利益集团代表，那么李严无疑就是代表着益州派系了。刘备此举未必没有互相节制之意。如果再稍微揣测一下，既然刘备知道诸葛亮不可能反，那么这句话其实也有可能是说过刘禅那一派的人听的，为的是为诸葛亮扫清之后做一个权臣的障碍。</p>
 <p>所以综上所述这种论调应该是不成立的，特别是丞相在后三国时期为蜀汉鞠躬尽瘁，最后病死五丈原。那句<code>悠悠苍天，何薄于我</code>(原版是悠悠苍天，曷其有极)更是深深打动了我(虽然也有电视剧演绎的十分经典的原因)，也无怪后世对其有如此高的评价!</p>
-<h1 id="0x03待补充"><a class="markdownIt-Anchor" href="#0x03待补充"></a> 0X03待补充</h1>
-<p>因为知识的储备还没有达到可以继续侃大山的地步，所以还是先回去学习，免得说出一些无知话语贻笑大方，反而不美</p>
+<h1 id="0X03待补充"><a href="#0X03待补充" class="headerlink" title="0X03待补充"></a>0X03待补充</h1><p>因为知识的储备还没有达到可以继续侃大山的地步，所以还是先回去学习，免得说出一些无知话语贻笑大方，反而不美</p>
 ]]></content>
       
         <categories>
