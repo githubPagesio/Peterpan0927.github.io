@@ -8798,9 +8798,9 @@ Library下默认有两个文件夹，Caches文件夹和tmp文件夹</p>
     </entry>
     
     <entry>
-      <title><![CDATA[Linux进程]]></title>
+      <title><![CDATA[Linux进程管理]]></title>
       <url>/2017/05/22/Linux%E8%BF%9B%E7%A8%8B/</url>
-      <content type="html"><![CDATA[<p>Linux进程</p>
+      <content type="html"><![CDATA[<p>Linux进程的是如何一步步被常见出来的，他的底层结构到底是什么？他又是如何消亡在内存之中的，今天我们就来揭开这些谜团</p>
 <a id="more"></a>
 <h1 id="linux进程"><a class="markdownIt-Anchor" href="#linux进程"></a> Linux进程</h1>
 <p>进程是Unix操作系统抽象概念中最基本的一种，因此进程管理就是所有操作系统的心脏所在，Linux也不意外</p>
@@ -8809,8 +8809,8 @@ Library下默认有两个文件夹，Caches文件夹和tmp文件夹</p>
 <h2 id="线程"><a class="markdownIt-Anchor" href="#线程"></a> 线程：</h2>
 <p>执行线程，简称线程，是在进程中的活动对象。每个线程都有一个独立的程序计数器，进程栈和一组进程寄存器。内核调度的对象是线程而不是进程。传统的Unix系统中，一个进程只包含一个线程，现在的系统中包含多个线程的多线程程序司空见惯，而Linux中线程的实现比较特别，它对进程和线程并不特别区分，线程只不过是一种特殊的进程。</p>
 <h2 id="1进程的创建"><a class="markdownIt-Anchor" href="#1进程的创建"></a> 1.进程的创建</h2>
-<p>在Linux系统中通常是通过<a href="http://blog.csdn.net/jason314/article/details/5640969" target="_blank" rel="external">fork()</a>系统调用复制一个现有的进程来创造一个全新的进程(现代Linux内核中，fork()实际上是有clone系统调用实现的)。调用fork()的进程被称作父进程，产生的进程称作子进程。</p>
-<p>子进程是父进程的<strong>副本</strong>，它将获得父进程数据空间、堆、栈等资源的副本。注意，子进程持有的是上述存储空间的“副本”，这意味着父子进程间<strong>不共享</strong>这些存储空间，<strong>子进程有了独立的地址空间</strong>。</p>
+<p>在Linux系统中通常是通过<a href="http://blog.csdn.net/jason314/article/details/5640969" target="_blank" rel="external">fork()</a>系统调用复制一个现有的进程来创造一个全新的进程(现代Linux内核中，fork()实际上是有clone系统调用实现的，然后clone系统调用再去调用do_fork()。调用fork()的进程被称作父进程，产生的进程称作子进程。</p>
+<p>子进程是父进程的<strong>副本</strong>，它将获得父进程数据空间、堆、栈等资源的副本。注意，子进程持有的是上述存储空间的<code>副本</code>，这意味着父子进程间<strong>不共享</strong>这些存储空间，<strong>子进程有了独立的地址空间</strong>。但是子进程并不是在<code>fork()</code>的时候就把父进程所有的资源都拷贝了一份而是采用一种叫做<code>写时拷贝</code>的技术，也就是说只有需要写入的时候，数据才会被复制，换而言之，资源复制只会在需要写入的时候进行，在这之前，只是以只读方式共享。这种技术使得地址空间上的页的拷贝被推迟到实际写入的时候进行，在页根本不会被写入的情况下他们就无需复制了。这种优化可以避免拷贝大量根本就不会被使用的数据，不需要复制的时候<code>fork()</code>的实际开销就是复制父进程的也表以及给子进程创建唯一的进程描述符。</p>
 <p>在该调用结束的时候，在返回点这个相同的位置上，父进程恢复执行，子进程开始执行。fork()系统调用从内核中返回两次：一次回到父进程，另一次回到新产生的子进程。</p>
 <p>创建子进程，fork()函数返回两个数值，若创建成功，子进程中返回0；父进程返回子进程ID。用资源空间图示如下：</p>
 <figure class="image-box">
@@ -8903,6 +8903,30 @@ D: 不可中断的深度睡眠，一般由IO引起，同步IO在做读或写操�
 <p>实际上，你可以通过这种继承体系从系统的任何一个进程出发查找到任意指定的其他进程。但大多数时候，只需要通过简单的重复方式就可以遍历系统中的所有进程。这非常容易做到，因为任务队列本来就是一个双向的循环链表。对于给定的进程，获取链表的下一个进程：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">list_entry(task-&gt;tasks.next, <span class="keyword">struct</span> task_struct, tasks)</div><div class="line"><span class="comment">//获取前一个进程的方法与之相同</span></div><div class="line">list_entry(task-&gt;tasks.prev, <span class="keyword">struct</span> task_struct, tasks)</div></pre></td></tr></table></figure>
 <p>注意⚠️：在一个拥有大量进程的系统中通过重复来遍历所有进程的代价很大，所以没有必要的话不要这样做。</p>
+<h2 id="进程终结"><a class="markdownIt-Anchor" href="#进程终结"></a> 进程终结</h2>
+<p>不管是什么都不是永恒的，总会走向消亡，进程也是，当一个进程消亡的时候，内核必须释放它所占有资源并将这个消息告知它的父进程，一般来说。进程的析构是自身引起的。他发生在进程调用<code>exit()</code>系统调用的时候，既可能显式调用，也可能隐式的从某个程序的主函数返回。当进程接收到它既不能处理也不能忽略的信号或者异常的时候，他还可能被动的终结。那么不管进程是怎么终结的，该任务都要靠<code>do_exit()</code>来完成，接下来就是他要做的事情：</p>
+<ol>
+<li>将<code>task_struct</code>中的标志成员设置为<code>PF_EXITING</code></li>
+<li>调用<code>del_timer_sync()</code>删除任一内核定时器。根据返回的结果，它确保没有定时器在排队，也没有定时器处理程序在运行</li>
+<li>如果BSD的进程记账功能是开启的，<code>do_exit()</code>调用<code>acct_update_integrals</code>来输出记账信息。</li>
+<li>然后调用<code>exit_mm()</code>函数释放进程占用的<code>mm_struct</code>，如果没有别的进程在占用，就彻底释放掉</li>
+<li>接下来调用<code>sem_exit()</code>函数。如果进程排队等号IPC信号，它则离开队列</li>
+<li>调用<code>exit_files()</code>和<code>exit_fs()</code>，以分别递减文件描述符、文件系统数据的阴影技术。如果其中某个引用计数的数值降为0，同样也释放掉对应的资源</li>
+<li>接着将<code>task_struct</code>中的<code>exit_code</code>成员中的任务退出码置为由<code>exit()</code>提供的退出代码，或者完成任何由内核机制规定的退出动作。退出代码存放在这里留作给父进程作为检索</li>
+<li>调用<code>exit_notify()</code>向父进程发出信号，给这个将死进程的子进程找个下家，也就是养父，并将进程状态设置为<code>EXIT_ZOMBIE</code>(也是保存在task_struct中的一个属性)</li>
+<li><code>do_exit()</code>调用<code>schedule()</code>切换到新进程，因为僵尸状态的进程已经不会再参与调度了，所以这也是进程所执行的生命中最后一段代码，<code>do_exit()</code>不会返回了。</li>
+</ol>
+<p>到现在为止，和这个即将被终结的进程相关的资源都被释放掉了，或者对应的引用计数减1，进程已经不可运行并且处于退出状态。它所剩下的就只有内核栈，<code>task_struct</code>、<code>thread_info</code>这些东西了。此时进程的唯一存在目的就是向它的父进程提供信息。父进程检索到信息之后，告诉内核那都是无关的信息，然后剩下的那点东西也会被释放，归还给系统。但是这里还没有结束，还记得我们之间创建进程的时候会给它分配一个唯一的进程描述符，也就是我们通常说的pid号，这个显然也是应该在进程被结束之后被终结掉，那么这个的回收的过程就参考下面这张图：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/FA58DA92EDFC72A2FD6631E16EBE4D7A.png" alt="FA58DA92EDFC72A2FD6631E16EBE4D7A.png" title="" class="">
+                <p>FA58DA92EDFC72A2FD6631E16EBE4D7A.png</p>
+            </figure>
+<h4 id="子进程的分配"><a class="markdownIt-Anchor" href="#子进程的分配"></a> 子进程的分配</h4>
+<p>前面已经说过当一个进程终结的时候还有一个操作就是将它的子进程分给其他的进程，不然这些成为孤儿的紫禁城就会在退出的时候永远的处于僵死态，因为这个时候并没有一个父进程去向内核告知说这个子进程剩下的内存已经可以回收掉了，这样就会白白消耗内存。那么是如何去寻找爸爸的呢？解决方法就是给子进程在当前的线程组找一个线程作为父亲，如果不行的话，就只能让<code>init</code>进程作为他们的父进程了，在<code>do_exit()</code>中会调用<code>exit_notify()</code>方法，该函数会调用<code>forget_original_parent()</code>，之后就会调用爸爸去哪了的代码了，那么请看看这段爸爸去哪的代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">struct</span> task_struct *<span class="title">find_new_reaper</span><span class="params">(<span class="keyword">struct</span> task_struct *father)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> pid_namespace *pid_ns = task_active_pid_ns(father);</div><div class="line">  <span class="keyword">struct</span> task_struct *thread;</div><div class="line">  </div><div class="line">  thread = father;</div><div class="line">  while_each_thread(father, thread)&#123;</div><div class="line">    <span class="keyword">if</span>(thread-&gt;flag &amp; PF_EXITING)</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    <span class="keyword">if</span>(unlikely(pid_ns-&gt;child_paper == father))</div><div class="line">      pid_ns-&gt;child_paper = thread;</div><div class="line">    <span class="keyword">return</span> thread;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span>(unlikely(pid_ns-&gt;child_paper == father))&#123;</div><div class="line">    write_unlock_irq(&amp;tasklist_lock);</div><div class="line">    <span class="keyword">if</span>(unlikely(pid_ns == &amp;init_pid_ns))</div><div class="line">      panic(<span class="string">"Attempted to kill init"</span>);</div><div class="line">    zap_pid_ns_processes(pid_ns);</div><div class="line">    write_lock_irq(&amp;tasklist_lock);</div><div class="line">    pid_ns-&gt;child_paper = init_pid_ns.child_paper;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> pid_ns-&gt;child_paper;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码试图找到当前进程所在的线程组中的其他进程，但是如果没有找到的话，就只能找<code>init</code>进程来接盘了，找到父亲之后，接下来要干什么呢？就是登记一下户口，也就是设置新的父进程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">reaper = find_new_paper(father);</div><div class="line">list_for_each_entry_safe(p, n, &amp;father-&gt;children, sibling)&#123;</div><div class="line">  p-&gt;real_parent = reaper;</div><div class="line">  <span class="keyword">if</span>(p-&gt;parent == father)&#123;</div><div class="line">    BUG_ON(p-&gt;ptrace);</div><div class="line">    p-&gt;parent = p-&gt;real_parent;</div><div class="line">  &#125;</div><div class="line">  reparent_thread(p, father);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来还要为<code>ptraced</code>的子进程去寻找父亲，那么这里就会有一个疑问，为什么我们会需要这个<code>ptraced</code>调试进程呢？这里是因为在以往的时候，我们每次终结掉一个进程，都要去遍历整个链表去寻找这个被终结进程的儿子们，但是这里只需要两个链表，就是子进程链表和<code>ptrace</code>的子进程链表，这个时候我们再需要找这些儿子的时候直接通过被追踪进程的兄弟进程就行了(pre&amp;next)，然后根据它的属性再去修改这些儿子的父亲就会减轻遍历带来的消耗了，这也是一个比较优秀的设计。</p>
 ]]></content>
       
         <categories>
