@@ -184,12 +184,9 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>这里我们会学习更方便的扩展正则表达式并更加深入的理解配置文件的加载流程</p>
 <a id="more"></a>
-<h1 id="linux运维学习day6"><a class="markdownIt-Anchor" href="#linux运维学习day6"></a> Linux运维学习Day6</h1>
-<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
-<p>我们在学习的时候除了在本机上使用虚拟机的时候,也可以通过购买虚拟服务器（VPS），比较著名的有Linode…这些我们通过ssh访问并使用的服务器其实是在同一个服务器上的虚拟机。</p>
+<h1 id="Linux运维学习Day6"><a href="#Linux运维学习Day6" class="headerlink" title="Linux运维学习Day6"></a>Linux运维学习Day6</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>我们在学习的时候除了在本机上使用虚拟机的时候,也可以通过购买虚拟服务器（VPS），比较著名的有Linode…这些我们通过ssh访问并使用的服务器其实是在同一个服务器上的虚拟机。</p>
 <p>这些服务器有多个处理器，每个处理器是多核的，就可以分出多个虚拟机去售卖，但是如果同一个服务器的所有购买者同时上线，祈祷不要出现这种情况吧，会比较卡，如果因为他人的I/O操作导致自己的进程响应缓慢，换个服务器吧骚年～。</p>
-<h2 id="egrep和扩展正则表达式"><a class="markdownIt-Anchor" href="#egrep和扩展正则表达式"></a> egrep和扩展正则表达式</h2>
-<p>egrep就是使用的扩展正则表达式，他的使用也可以描述成</p>
+<h2 id="egrep和扩展正则表达式"><a href="#egrep和扩展正则表达式" class="headerlink" title="egrep和扩展正则表达式"></a>egrep和扩展正则表达式</h2><p>egrep就是使用的扩展正则表达式，他的使用也可以描述成</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -E</div></pre></td></tr></table></figure>
 <p>其中扩展正则表达式和传统的正则表达式有些许的不同</p>
 <figure class="image-box">
@@ -207,8 +204,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifconfig | grep -E -o &quot;\&lt;([1-9]|[1-9][0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\&gt;&quot;</div></pre></td></tr></table></figure>
 <p>5.找出ifconfig命令结果中的ip地址</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifconfig | grep -E -o &quot;(\&lt;([1-9]|[1-9][0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\&gt;\.)(\&lt;([0-9]|[1-9][0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\&gt;\.)&#123;2&#125;\&lt;([0-9]|[1-9][0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\&gt;&quot;</div></pre></td></tr></table></figure>
-<h2 id="bash的基础特性"><a class="markdownIt-Anchor" href="#bash的基础特性"></a> bash的基础特性</h2>
-<p>bash中变量的种类：</p>
+<h2 id="bash的基础特性"><a href="#bash的基础特性" class="headerlink" title="bash的基础特性"></a>bash的基础特性</h2><p>bash中变量的种类：</p>
 <ul>
 <li>本地变量：生效范围为当前shell进程，对当前shell之外的其它shell进程都无效</li>
 <li>环境变量：生效范围为当前shell进程及其子进程</li>
@@ -217,20 +213,18 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#! /bin/bash</div><div class="line">echo $1</div><div class="line">echo $2</div><div class="line">#执行这个shell脚本之后会根据传入的参数进行输出</div></pre></td></tr></table></figure>
 <ul>
-<li>特殊变量：0、?、#、@、$*</li>
+<li>特殊变量：$0、$?、$#、$@、$*</li>
 </ul>
 <p>1.本地变量：</p>
 <blockquote>
-<p>变量赋值：name=‘value’</p>
+<p>变量赋值：name=’value’</p>
 <p>可以使用引用：</p>
-<p>1.可以直接是字符串：name=“value”</p>
-<p>2.变量引用：name=&quot;$value&quot;</p>
+<p>1.可以直接是字符串：name=”value”</p>
+<p>2.变量引用：name=”$value”</p>
 <p>3.命令引用：name=$(COMMAND)</p>
-</blockquote>
-<blockquote>
-<p>变量引用：name、{name}，后者在有混淆时将变量与混淆字符分隔开</p>
-<p>&quot; &quot;:弱引用,其中的变量引用会被替换成变量值</p>
-<p>’ ':强引用,其中的变量引用不会被替换成变量值，而是保持原字符串</p>
+<p>变量引用：$name、${name}，后者在有混淆时将变量与混淆字符分隔开</p>
+<p>“ “:弱引用,其中的变量引用会被替换成变量值</p>
+<p>‘ ‘:强引用,其中的变量引用不会被替换成变量值，而是保持原字符串</p>
 </blockquote>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%884.22.14.png" alt="屏幕快照 2017-08-15 下午4.22.14.png" title="" class="">
@@ -264,47 +258,29 @@
 <p>在脚本代码中调用通过命令行传递给脚本的参数：</p>
 <blockquote>
 <p>$1、$2…:对应调用第1，第2等参数</p>
-</blockquote>
-<blockquote>
 <p>$0:命令本身</p>
-</blockquote>
-<blockquote>
 <p>$*:传递给脚本的所有参数，所有参数当成一个字符串</p>
-</blockquote>
-<blockquote>
 <p>$@:传递给脚本的所有参数，每个参数当成单独的字符串</p>
-</blockquote>
-<blockquote>
 <p>$#:传递给脚本的参数的个数</p>
-</blockquote>
-<blockquote>
 <p>shift [n]:可以踢掉传递进来的变量，n表示数量，默认为1</p>
 </blockquote>
 <p>示例：<figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.21.44.png" alt="屏幕快照 2017-08-15 下午7.05.03.png](http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.05.03.png)![屏幕快照 2017-08-15 下午7.21.44.png" title="" class="">
                 <p>屏幕快照 2017-08-15 下午7.05.03.png](http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.05.03.png)![屏幕快照 2017-08-15 下午7.21.44.png</p>
             </figure></p>
-<h2 id="bash环境配置"><a class="markdownIt-Anchor" href="#bash环境配置"></a> bash环境配置</h2>
-<h4 id="按生效范围划分存在两类"><a class="markdownIt-Anchor" href="#按生效范围划分存在两类"></a> 按生效范围划分，存在两类：</h4>
-<blockquote>
+<h2 id="bash环境配置"><a href="#bash环境配置" class="headerlink" title="bash环境配置"></a>bash环境配置</h2><h4 id="按生效范围划分，存在两类："><a href="#按生效范围划分，存在两类：" class="headerlink" title="按生效范围划分，存在两类："></a>按生效范围划分，存在两类：</h4><blockquote>
 <p>全局配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; /etc/profile</div><div class="line">&gt; /etc/profile.d/*.sh</div><div class="line">&gt; /etc/bashrc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
 <p>个人配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; #个人用户读取</div><div class="line">&gt; ~/.bash_profile</div><div class="line">&gt; ~/.bashrc</div><div class="line">&gt;</div></pre></td></tr></table></figure>
 </blockquote>
-<h4 id="按功能划分存在两类但是界限不明确可能会都用到"><a class="markdownIt-Anchor" href="#按功能划分存在两类但是界限不明确可能会都用到"></a> 按功能划分，存在两类，但是界限不明确，可能会都用到</h4>
-<blockquote>
+<h4 id="按功能划分，存在两类，但是界限不明确，可能会都用到"><a href="#按功能划分，存在两类，但是界限不明确，可能会都用到" class="headerlink" title="按功能划分，存在两类，但是界限不明确，可能会都用到"></a>按功能划分，存在两类，但是界限不明确，可能会都用到</h4><blockquote>
 <p>profile类：为交互式登陆shell提供配置</p>
 </blockquote>
-<h5 id="作用定义环境变量-运行命令和脚本"><a class="markdownIt-Anchor" href="#作用定义环境变量-运行命令和脚本"></a> 作用：定义环境变量、运行命令和脚本</h5>
-<blockquote>
+<h5 id="作用：定义环境变量、运行命令和脚本"><a href="#作用：定义环境变量、运行命令和脚本" class="headerlink" title="作用：定义环境变量、运行命令和脚本"></a>作用：定义环境变量、运行命令和脚本</h5><blockquote>
 <p>bashrc类：为非交互式登陆的shell提供配置</p>
 </blockquote>
-<h4 id="作用定义变量别名-定义本地变量"><a class="markdownIt-Anchor" href="#作用定义变量别名-定义本地变量"></a> 作用：定义变量别名、定义本地变量</h4>
-<h4 id="shell登录"><a class="markdownIt-Anchor" href="#shell登录"></a> shell登录</h4>
-<blockquote>
+<h4 id="作用：定义变量别名、定义本地变量"><a href="#作用：定义变量别名、定义本地变量" class="headerlink" title="作用：定义变量别名、定义本地变量"></a>作用：定义变量别名、定义本地变量</h4><h4 id="shell登录"><a href="#shell登录" class="headerlink" title="shell登录"></a>shell登录</h4><blockquote>
 <p>交互式登陆：</p>
 </blockquote>
 <p>1.直接通过终端输入账号密码登录</p>
@@ -313,24 +289,21 @@
 <blockquote>
 <p>非交互式登陆</p>
 </blockquote>
-<p><a href="http://1.su" target="_blank" rel="external">1.su</a> UserName</p>
+<p>1.su UserName</p>
 <p>2.图形界面打开的终端</p>
 <p>3.执行脚本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#读取次序</div><div class="line">~/.bashrc-&gt;/etc/bashrc-&gt;/etc/profile.d/*.sh</div></pre></td></tr></table></figure>
 <p>编辑配置文件定义的新配置的生效方式：</p>
 <p>1.重新启动shell进程</p>
 <p>2.使用source或.命令进程</p>
-<h2 id="bash中的算数运算"><a class="markdownIt-Anchor" href="#bash中的算数运算"></a> bash中的算数运算</h2>
-<p>如果忘记了bash中的算术运算符记得使用命令<code>help let</code>哦</p>
-<h3 id="实现算数运算"><a class="markdownIt-Anchor" href="#实现算数运算"></a> 实现算数运算</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let var=算数表达式</div><div class="line"></div><div class="line">var=$[算数表达式]    #有返回值，可以直接引用或者打印-&gt;echo $[算数表达式]</div><div class="line"></div><div class="line">var=$((算数表达式))</div><div class="line"></div><div class="line">var=$(expr arg1 arg2...)</div><div class="line"></div><div class="line">#其中乘法符号有些情况需要转义</div></pre></td></tr></table></figure>
+<h2 id="bash中的算数运算"><a href="#bash中的算数运算" class="headerlink" title="bash中的算数运算"></a>bash中的算数运算</h2><p>如果忘记了bash中的算术运算符记得使用命令<code>help let</code>哦</p>
+<h3 id="实现算数运算"><a href="#实现算数运算" class="headerlink" title="实现算数运算"></a>实现算数运算</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let var=算数表达式</div><div class="line"></div><div class="line">var=$[算数表达式]    #有返回值，可以直接引用或者打印-&gt;echo $[算数表达式]</div><div class="line"></div><div class="line">var=$((算数表达式))</div><div class="line"></div><div class="line">var=$(expr arg1 arg2...)</div><div class="line"></div><div class="line">#其中乘法符号有些情况需要转义</div></pre></td></tr></table></figure>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%882.50.35.png" alt="屏幕快照 2017-08-17 下午2.50.35.png" title="" class="">
                 <p>屏幕快照 2017-08-17 下午2.50.35.png</p>
             </figure>
 <p>bash中有内建的随机数生成器：$RANDOM</p>
-<h2 id="练习"><a class="markdownIt-Anchor" href="#练习"></a> 练习</h2>
-<p>传入两个文件路径，写一个脚本统计这两个文件中的空白行数目</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>传入两个文件路径，写一个脚本统计这两个文件中的空白行数目</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#! /bin/bash</div><div class="line"></div><div class="line">spaceline1=$(grep &apos;^[[:space:]]*$&apos; $1 | wc -l)</div><div class="line">spaceline2=$(grep &apos;^[[:space:]]*$&apos; $2 | wc -l)</div><div class="line"></div><div class="line">echo &quot;the sum of spaceline: $[$spaceline1 + $spaceline2] &quot;</div></pre></td></tr></table></figure>
 <p>统计/etc,/var,/usr目录共有多少个一级子目录和文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#统计/etc, /var, /usr目录中共有多少个一级子目录和文件</div><div class="line">etcnum=`ls -A -1 /etc/ |wc -l`</div><div class="line">varnum=`ls -A -1 /var/ |wc -l`</div><div class="line">usernum=`ls -A -1 /usr/ |wc -l`</div><div class="line">let sum=$etcnum+$varnum+$usernum</div><div class="line">echo &quot;/etc, /var, /usr目录中共有多少个一级子目录和文件:$sum&quot;</div></pre></td></tr></table></figure>
@@ -338,12 +311,9 @@
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%883.33.24.png" alt="屏幕快照 2017-08-17 下午3.33.24.png" title="" class="">
                 <p>屏幕快照 2017-08-17 下午3.33.24.png</p>
             </figure></p>
-<h2 id="条件测试"><a class="markdownIt-Anchor" href="#条件测试"></a> 条件测试</h2>
-<p>判断某需求是否满足，需要由测试机制来实现</p>
-<h3 id="测试命令"><a class="markdownIt-Anchor" href="#测试命令"></a> 测试命令：</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test EXPRESSION</div><div class="line">[ EXPRESSION ]</div><div class="line">[[ EXPRESSION ]]</div><div class="line">#EXPRESSION前后必须有空白字符</div></pre></td></tr></table></figure>
-<h3 id="bash的测试类型"><a class="markdownIt-Anchor" href="#bash的测试类型"></a> bash的测试类型：</h3>
-<p>数值测试：<figure class="image-box">
+<h2 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h2><p>判断某需求是否满足，需要由测试机制来实现</p>
+<h3 id="测试命令："><a href="#测试命令：" class="headerlink" title="测试命令："></a>测试命令：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test EXPRESSION</div><div class="line">[ EXPRESSION ]</div><div class="line">[[ EXPRESSION ]]</div><div class="line">#EXPRESSION前后必须有空白字符</div></pre></td></tr></table></figure>
+<h3 id="bash的测试类型："><a href="#bash的测试类型：" class="headerlink" title="bash的测试类型："></a>bash的测试类型：</h3><p>数值测试：<figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/72FA56A8E13D4C952988EE09511A64D7.png" alt="72FA56A8E13D4C952988EE09511A64D7.png" title="" class="">
                 <p>72FA56A8E13D4C952988EE09511A64D7.png</p>
             </figure></p>
@@ -394,25 +364,20 @@
 </tbody>
 </table>
 <p>除此之外还有文件权限测试，文件大小测试还有双目测试,这些可以在<code>help test</code>中看到</p>
-<h4 id="同时测试语句可以组合使用"><a class="markdownIt-Anchor" href="#同时测试语句可以组合使用"></a> 同时测试语句可以组合使用：</h4>
-<p>1.COMMAND1 &amp;&amp; COMMAND2</p>
-<p>COMMAND1 || COMMAND2</p>
+<h4 id="同时测试语句可以组合使用："><a href="#同时测试语句可以组合使用：" class="headerlink" title="同时测试语句可以组合使用："></a>同时测试语句可以组合使用：</h4><p>1.COMMAND1 &amp;&amp; COMMAND2</p>
+<p>  COMMAND1 || COMMAND2</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ -e FILE ] &amp;&amp; [ -r FILE ]</div></pre></td></tr></table></figure>
 <p>2.COMMAND1 -a COMMAND2</p>
-<p>COMMAND1 -o COMMAND2</p>
+<p>   COMMAND1 -o COMMAND2</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ -z &quot;$hostname&quot; -o &quot;$hostname&quot;==&quot;localhost.localdomain&quot; ] &amp;&amp; hostname hello</div></pre></td></tr></table></figure>
 <p>注意：在管理员用户下使用权限的测试语句结果会很<strong>诡异</strong></p>
-<h3 id="bash自定义退出状态码"><a class="markdownIt-Anchor" href="#bash自定义退出状态码"></a> bash自定义退出状态码</h3>
-<p>exit [n] : 自定义状态码</p>
+<h3 id="bash自定义退出状态码"><a href="#bash自定义退出状态码" class="headerlink" title="bash自定义退出状态码"></a>bash自定义退出状态码</h3><p>exit [n] : 自定义状态码</p>
 <p>⚠️：脚本中一旦遇到exit命令，脚本会立即终止，终止推出状态取决于exit命令后面的数字，如果没有给，整个脚本的退出状态取决于脚本中执行的最后一条命令的状态码，这个值会被返回给脚本的父进程，根据其做下一步的处理。</p>
-<h3 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h3>
-<p>写一个脚本，接收文件路径为参数，如果参数个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数不小于1，则显示第一个参数所指向的文件</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>写一个脚本，接收文件路径为参数，如果参数个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数不小于1，则显示第一个参数所指向的文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#! /bin/bash</div><div class="line"></div><div class="line">count=$#</div><div class="line"></div><div class="line">[ $count -lt 1 ] &amp;&amp; echo &quot;至少应该给一个参数&quot; &amp;&amp; exit 1</div><div class="line"></div><div class="line">FILE1=$[grep &apos;^$&apos; $1 | wc -l]</div><div class="line"></div><div class="line">echo &quot;$1空白行数为$FILE1行&quot;</div></pre></td></tr></table></figure>
-<h3 id="vim常用操作"><a class="markdownIt-Anchor" href="#vim常用操作"></a> vim常用操作</h3>
-<p><strong>Vim</strong> 的学习曲线是非常陡的，一开始学习的时候，面对很多的操作命令要去记住，常常望而却步。</p>
+<h3 id="vim常用操作"><a href="#vim常用操作" class="headerlink" title="vim常用操作"></a>vim常用操作</h3><p><strong>Vim</strong> 的学习曲线是非常陡的，一开始学习的时候，面对很多的操作命令要去记住，常常望而却步。</p>
 <p>其实，只要记住一些常用的命令，加之在工作中坚持使用 <strong>Vim</strong> 进行编辑，很快就能得心应手了。</p>
-<h4 id="光标移动cursor-movement"><a class="markdownIt-Anchor" href="#光标移动cursor-movement"></a> 光标移动(Cursor Movement)</h4>
-<table>
+<h4 id="光标移动-Cursor-Movement"><a href="#光标移动-Cursor-Movement" class="headerlink" title="光标移动(Cursor Movement)"></a>光标移动(Cursor Movement)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -462,8 +427,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="插入模式insert-mode"><a class="markdownIt-Anchor" href="#插入模式insert-mode"></a> 插入模式(Insert Mode)</h4>
-<table>
+<h4 id="插入模式-Insert-Mode"><a href="#插入模式-Insert-Mode" class="headerlink" title="插入模式(Insert Mode)"></a>插入模式(Insert Mode)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -497,8 +461,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="编辑editing"><a class="markdownIt-Anchor" href="#编辑editing"></a> 编辑(Editing)</h4>
-<table>
+<h4 id="编辑-Editing"><a href="#编辑-Editing" class="headerlink" title="编辑(Editing)"></a>编辑(Editing)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -548,8 +511,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="关闭exiting"><a class="markdownIt-Anchor" href="#关闭exiting"></a> 关闭(Exiting)</h4>
-<table>
+<h4 id="关闭-Exiting"><a href="#关闭-Exiting" class="headerlink" title="关闭(Exiting)"></a>关闭(Exiting)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -575,8 +537,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="搜索search"><a class="markdownIt-Anchor" href="#搜索search"></a> 搜索(Search)</h4>
-<table>
+<h4 id="搜索-Search"><a href="#搜索-Search" class="headerlink" title="搜索(Search)"></a>搜索(Search)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -602,8 +563,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="视觉模式visual-mode"><a class="markdownIt-Anchor" href="#视觉模式visual-mode"></a> 视觉模式(Visual Mode)</h4>
-<table>
+<h4 id="视觉模式-Visual-Mode"><a href="#视觉模式-Visual-Mode" class="headerlink" title="视觉模式(Visual Mode)"></a>视觉模式(Visual Mode)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -621,8 +581,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="剪切和复制cut-and-paste"><a class="markdownIt-Anchor" href="#剪切和复制cut-and-paste"></a> 剪切和复制(Cut and Paste)</h4>
-<table>
+<h4 id="剪切和复制-Cut-and-Paste"><a href="#剪切和复制-Cut-and-Paste" class="headerlink" title="剪切和复制(Cut and Paste)"></a>剪切和复制(Cut and Paste)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -664,8 +623,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="窗口操作"><a class="markdownIt-Anchor" href="#窗口操作"></a> 窗口操作</h4>
-<table>
+<h4 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -699,8 +657,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="地址定界"><a class="markdownIt-Anchor" href="#地址定界"></a> 地址定界</h4>
-<table>
+<h4 id="地址定界"><a href="#地址定界" class="headerlink" title="地址定界"></a>地址定界</h4><table>
 <thead>
 <tr>
 <th style="text-align:center">:start_pos, end_pos</th>
@@ -761,8 +718,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="查找并替换"><a class="markdownIt-Anchor" href="#查找并替换"></a> 查找并替换</h4>
-<p>s:在末行模式下完成查找替换工作</p>
+<h4 id="查找并替换"><a href="#查找并替换" class="headerlink" title="查找并替换"></a>查找并替换</h4><p>s:在末行模式下完成查找替换工作</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s/要查找的内容/替换为的内容/修饰符</div></pre></td></tr></table></figure>
 <p>要查找的内容可以使用模式。替换的内容不能使用模式，但可以使用\1、\2、…等后向引用符，还可以使用<code>&amp;</code>引用前面查到到的整个内容</p>
 <p>修饰符：</p>
@@ -788,8 +744,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%s@/etc/fstab@/var/log@g</div></pre></td></tr></table></figure>
 <p>下面还有几个例子可供参考：</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#<span class="number">1</span>.删除/etc/grub.d行首前面的空格</div><div class="line">%s/^[[:space:]]\+//g</div><div class="line">#<span class="number">2</span>.为以空白字符开头的行前面添加一个#</div><div class="line">%s/^[[:space:]]\+/#&amp;//g</div></pre></td></tr></table></figure>
-<h4 id="多文件模式"><a class="markdownIt-Anchor" href="#多文件模式"></a> 多文件模式</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim file1 file2 ...</div></pre></td></tr></table></figure>
+<h4 id="多文件模式"><a href="#多文件模式" class="headerlink" title="多文件模式"></a>多文件模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim file1 file2 ...</div></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -830,7 +785,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2017-12-07T14:29:48.000Z" itemprop="dateUpdated">2017-12-07 22:29:48</time>
+    最后更新时间：<time datetime="2017-12-07T14:29:48.000Z" itemprop="dateUpdated">2017-12-07 22:29:48</time>
 </span><br>
 
 
@@ -956,7 +911,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#linux运维学习day6"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Linux运维学习Day6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#egrep和扩展正则表达式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> egrep和扩展正则表达式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash的基础特性"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> bash的基础特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash环境配置"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> bash环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#按生效范围划分存在两类"><span class="post-toc-number">1.4.0.1.</span> <span class="post-toc-text"> 按生效范围划分，存在两类：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#按功能划分存在两类但是界限不明确可能会都用到"><span class="post-toc-number">1.4.0.2.</span> <span class="post-toc-text"> 按功能划分，存在两类，但是界限不明确，可能会都用到</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#作用定义环境变量-运行命令和脚本"><span class="post-toc-number">1.4.0.2.1.</span> <span class="post-toc-text"> 作用：定义环境变量、运行命令和脚本</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#作用定义变量别名-定义本地变量"><span class="post-toc-number">1.4.0.3.</span> <span class="post-toc-text"> 作用：定义变量别名、定义本地变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#shell登录"><span class="post-toc-number">1.4.0.4.</span> <span class="post-toc-text"> shell登录</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash中的算数运算"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"> bash中的算数运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现算数运算"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text"> 实现算数运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#练习"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"> 练习</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#条件测试"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"> 条件测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试命令"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text"> 测试命令：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bash的测试类型"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text"> bash的测试类型：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#同时测试语句可以组合使用"><span class="post-toc-number">1.7.2.1.</span> <span class="post-toc-text"> 同时测试语句可以组合使用：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bash自定义退出状态码"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text"> bash自定义退出状态码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#例子"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text"> 例子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vim常用操作"><span class="post-toc-number">1.7.5.</span> <span class="post-toc-text"> vim常用操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#光标移动cursor-movement"><span class="post-toc-number">1.7.5.1.</span> <span class="post-toc-text"> 光标移动(Cursor Movement)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#插入模式insert-mode"><span class="post-toc-number">1.7.5.2.</span> <span class="post-toc-text"> 插入模式(Insert Mode)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编辑editing"><span class="post-toc-number">1.7.5.3.</span> <span class="post-toc-text"> 编辑(Editing)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关闭exiting"><span class="post-toc-number">1.7.5.4.</span> <span class="post-toc-text"> 关闭(Exiting)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#搜索search"><span class="post-toc-number">1.7.5.5.</span> <span class="post-toc-text"> 搜索(Search)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#视觉模式visual-mode"><span class="post-toc-number">1.7.5.6.</span> <span class="post-toc-text"> 视觉模式(Visual Mode)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#剪切和复制cut-and-paste"><span class="post-toc-number">1.7.5.7.</span> <span class="post-toc-text"> 剪切和复制(Cut and Paste)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#窗口操作"><span class="post-toc-number">1.7.5.8.</span> <span class="post-toc-text"> 窗口操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#地址定界"><span class="post-toc-number">1.7.5.9.</span> <span class="post-toc-text"> 地址定界</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查找并替换"><span class="post-toc-number">1.7.5.10.</span> <span class="post-toc-text"> 查找并替换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多文件模式"><span class="post-toc-number">1.7.5.11.</span> <span class="post-toc-text"> 多文件模式</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux运维学习Day6"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux运维学习Day6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#egrep和扩展正则表达式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">egrep和扩展正则表达式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash的基础特性"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">bash的基础特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash环境配置"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">bash环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#按生效范围划分，存在两类："><span class="post-toc-number">1.4.0.1.</span> <span class="post-toc-text">按生效范围划分，存在两类：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#按功能划分，存在两类，但是界限不明确，可能会都用到"><span class="post-toc-number">1.4.0.2.</span> <span class="post-toc-text">按功能划分，存在两类，但是界限不明确，可能会都用到</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#作用：定义环境变量、运行命令和脚本"><span class="post-toc-number">1.4.0.2.1.</span> <span class="post-toc-text">作用：定义环境变量、运行命令和脚本</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#作用：定义变量别名、定义本地变量"><span class="post-toc-number">1.4.0.3.</span> <span class="post-toc-text">作用：定义变量别名、定义本地变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#shell登录"><span class="post-toc-number">1.4.0.4.</span> <span class="post-toc-text">shell登录</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash中的算数运算"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">bash中的算数运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现算数运算"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">实现算数运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#练习"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">练习</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#条件测试"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">条件测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试命令："><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">测试命令：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bash的测试类型："><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">bash的测试类型：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#同时测试语句可以组合使用："><span class="post-toc-number">1.7.2.1.</span> <span class="post-toc-text">同时测试语句可以组合使用：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bash自定义退出状态码"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">bash自定义退出状态码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#例子"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">例子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vim常用操作"><span class="post-toc-number">1.7.5.</span> <span class="post-toc-text">vim常用操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#光标移动-Cursor-Movement"><span class="post-toc-number">1.7.5.1.</span> <span class="post-toc-text">光标移动(Cursor Movement)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#插入模式-Insert-Mode"><span class="post-toc-number">1.7.5.2.</span> <span class="post-toc-text">插入模式(Insert Mode)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编辑-Editing"><span class="post-toc-number">1.7.5.3.</span> <span class="post-toc-text">编辑(Editing)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关闭-Exiting"><span class="post-toc-number">1.7.5.4.</span> <span class="post-toc-text">关闭(Exiting)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#搜索-Search"><span class="post-toc-number">1.7.5.5.</span> <span class="post-toc-text">搜索(Search)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#视觉模式-Visual-Mode"><span class="post-toc-number">1.7.5.6.</span> <span class="post-toc-text">视觉模式(Visual Mode)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#剪切和复制-Cut-and-Paste"><span class="post-toc-number">1.7.5.7.</span> <span class="post-toc-text">剪切和复制(Cut and Paste)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#窗口操作"><span class="post-toc-number">1.7.5.8.</span> <span class="post-toc-text">窗口操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#地址定界"><span class="post-toc-number">1.7.5.9.</span> <span class="post-toc-text">地址定界</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查找并替换"><span class="post-toc-number">1.7.5.10.</span> <span class="post-toc-text">查找并替换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多文件模式"><span class="post-toc-number">1.7.5.11.</span> <span class="post-toc-text">多文件模式</span></a></li></ol></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
