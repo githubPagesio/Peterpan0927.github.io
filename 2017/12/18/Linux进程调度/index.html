@@ -184,7 +184,8 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>关于进程的管理我们之前有一篇博客就已经说过，这次我们来说一下进程是如何进行调度的，这是确保进程能有效工作的一个内核子系统，让系统资源得到最大限度地发挥，同时这也是我们使用多线程并发执行的基础</p>
 <a id="more"></a>
-<h1 id="多任务"><a href="#多任务" class="headerlink" title="多任务"></a>多任务</h1><p>平时我们在工作的时候都会产生有多个进程在进行的幻觉，比如说我们同时开启好几个游戏，还可以和别人聊天，如果是在多处理器的机器上，这些进程是可能会真是的同时、并发运行的。</p>
+<h1 id="多任务"><a class="markdownIt-Anchor" href="#多任务"></a> 多任务</h1>
+<p>平时我们在工作的时候都会产生有多个进程在进行的幻觉，比如说我们同时开启好几个游戏，还可以和别人聊天，如果是在多处理器的机器上，这些进程是可能会真是的同时、并发运行的。</p>
 <p>但是无论是在单处理器还是在多处理器的情况下，多任务操作系统都能使多个进程处于阻塞或者休眠状态，也就是说只有实际运行的时候才会投入运行，这个其实可以和我们操作系统中的<code>fork()</code>系统调用的写时拷贝机制类比一下。其他的时间，这些进程通过内核来阻塞自己，直到某一事件将它唤醒(触发事件生效)，这个在Linux系统中用<code>ps</code>命令就可以直观的看到:</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-18%20%E4%B8%8B%E5%8D%886.06.14.png" alt="屏幕快照 2017-12-18 下午6.06.14.png" title="" class="">
@@ -192,11 +193,16 @@
             </figure>
 <p>大部分的进程都是处于<code>S</code>态，也就是<code>TASK_INTERUPTABLE</code>状态，只有一个处于<code>R+</code>态，也就是处于前台线程组，并且正在运行中(这也是因为我的云服务器是单核的)，这也验证了我们上面所说。</p>
 <p>多任务操作系统其实可以分为两类：非抢占式多任务和抢占式多任务，这里主要就是说一下抢占式，因为非抢占式任务下除非进程自己主动停止运行，不然就会一直执行，这显然是一种非常不合理的机制，只需要一个一只占用的悬挂进程就会让整个系统崩溃掉了。而抢占式则是由调度程序来决定什么时候停止一个进程，抢占的意思就是说调度强制挂起一个进程，进程在被抢占之前能够运行的时间都是预先设置好的，这就是时间片的概念，这就相当于把之前的进程的各自为营变成调度进程来集权控制，也是基于安全中的最小信任原则，但是Linux并不是通过这种时间片的方式来达到公平的调度。</p>
-<h1 id="调度策略"><a href="#调度策略" class="headerlink" title="调度策略"></a>调度策略</h1><p>Linux采用的是一种叫做CFS的算法来作为调度算法，全称翻译过来就是<code>完全公平调度算法</code>，这个算法倒是没有研究过，但是如果对这个算法的实现感兴趣的话可以参考这个<a href="https://www.cnblogs.com/tianguiyu/articles/6091378.html" target="_blank" rel="external">CFS的实现</a>。</p>
-<h2 id="进程类型"><a href="#进程类型" class="headerlink" title="进程类型"></a>进程类型</h2><p>进程可以被分为<code>I/O</code>消耗和处理器消耗类型，前者的意思也就是说进程的部分时间是用来提交<code>I/O</code>请求或者是等待<code>I/O</code>请求。因此，这样的进程经常处于可运行状态，但是通常的都是一瞬间，因为在等待<code>I/O</code>的时候都会处于阻塞状态(等待键盘吗，或者网络I/O)，这种情况在GUI中屡见不鲜。即便它们不会对硬盘读写，也会长时间等待用户交互操作。</p>
+<h1 id="调度策略"><a class="markdownIt-Anchor" href="#调度策略"></a> 调度策略</h1>
+<p>Linux中的普通进程采用的是一种叫做CFS的算法来作为调度算法，全称翻译过来就是<code>完全公平调度算法</code>，这个算法倒是没有研究过，但是如果对这个算法的实现感兴趣的话可以参考这个<a href="https://www.cnblogs.com/tianguiyu/articles/6091378.html" target="_blank" rel="external">CFS的实现</a>，对于实时进程而言，通常采用FIFO或者Round Robin的调度策略。在Linux中的进程和线程调度看作是一个，因此进程的调度也包括了线程调度的过程。</p>
+<p>对于实时进程来说，调度其实比较简单，因为优先级比较高，低优先级是不可能抢占高优先级的进程，使用FIFO这种调度就足矣，但是对于普通的进程来说不能只看优先级，必须公平的占有CPU，不然就会出现进程饥荒，导致整个操作系统用起来都会觉得十分的卡顿，linux总是在寻求一种最接近完美的调度策略来公平调度普通的进程</p>
+<h2 id="进程类型"><a class="markdownIt-Anchor" href="#进程类型"></a> 进程类型</h2>
+<p>进程可以被分为<code>I/O</code>消耗和处理器消耗类型（批处理进程），前者的意思也就是说进程的部分时间是用来提交<code>I/O</code>请求或者是等待<code>I/O</code>请求。因此，这样的进程经常处于可运行状态，但是通常的都是一瞬间，因为在等待<code>I/O</code>的时候都会处于阻塞状态(等待键盘吗，或者网络I/O)，这种情况在GUI中屡见不鲜。即便它们不会对硬盘读写，也会长时间等待用户交互操作。</p>
 <p>相反的是处理器消耗类型的进程将大部分的时间用于执行代码，除非它们被抢占，不然就不会不停的运行。所以对于这种类型的进程，调度进程就会尽量减少对它的调度，而是尽量延长他的运行时间，但是我们需要注意的就是这两者之间的区分其实并不绝对，有的进程会同时拥有两种特性，例如X Window。</p>
-<p>所以这也是Linux的聪明之处，被平等对待显然不是明智之举，所以我们需要通过算法来在矛盾之中寻求平衡(响应时间和高吞吐量)，在Unix/Linux中，都是会更倾向于优先调度<code>I/O</code>消耗的进程。</p>
-<h2 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h2><p>之前说过我们的系统有着一套算法来对进程进行调度，调度算法中最基本的一类就是通过优先级的调度，这是根据进程的价值和其对处理器的时间需求对进程来分级的一种想法。</p>
+<p>所以这也是Linux的聪明之处，在资源有限的情况下平等对待显然不是明智之举，所以我们需要通过算法来在矛盾之中寻求平衡(响应时间和高吞吐量)，在Unix/Linux中，都是会更倾向于优先调度<code>I/O</code>消耗的进程。</p>
+<p>上面的两种进程都被统一的划分为非实时进程，至于实时进程是因为很强的调度需要，绝对不会被低优先级的进程阻塞，并且响应时间要尽量的段比如说视频音频应用，或者机器人控制传感器等。</p>
+<h2 id="进程优先级"><a class="markdownIt-Anchor" href="#进程优先级"></a> 进程优先级</h2>
+<p>之前说过我们的系统有着一套算法来对进程进行调度，调度算法中最基本的一类就是通过优先级的调度，这是根据进程的价值和其对处理器的时间需求对进程来分级的一种想法。</p>
 <p>Linux中采用了两种不同的优先级范围。第一种是用<code>nice</code>值,范围从-20~+19，默认是0，这个是越小意为着优先级越高。nice值是所有Unix系统中的标准化概念，我们可以通过命令来看看，NI那一条就是代表着<code>nice</code>值：</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-18%20%E4%B8%8B%E5%8D%886.48.32.png" alt="屏幕快照 2017-12-18 下午6.48.32.png" title="" class="">
@@ -208,7 +214,8 @@
                 <p>屏幕快照 2017-12-18 下午6.52.22.png</p>
             </figure>
 <p>如果进程列表显示的是<code>-</code>，那么说明他不是实时进程。</p>
-<h2 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h2><p>时间片是一个数值，这个值表示的是进程在被抢占之前所能运行的时间。调度的策略必须规定一个默认的时间片,首先，Linux中的CFS调度器并没有直接的分配这种时间片，而是通过将处理器按比例划分，而且这个比例还会进一步受到<code>nice</code>值的影响，所以其实一个进程是否会被抢占会受到多种因素的影响。</p>
+<h2 id="时间片"><a class="markdownIt-Anchor" href="#时间片"></a> 时间片</h2>
+<p>时间片是一个数值，这个值表示的是进程在被抢占之前所能运行的时间。调度的策略必须规定一个默认的时间片,首先，Linux中的CFS调度器并没有直接的分配这种时间片，而是通过将处理器按比例划分，而且这个比例还会进一步受到<code>nice</code>值的影响，所以其实一个进程是否会被抢占会受到多种因素的影响。</p>
 <p>打一个比方，现在有一个文字编辑器，还有一个视频的解码器，显然前者是I/O消耗型的，因为它大部分的时间都在等待用户的输入，也就是等待被唤醒的状态(CPU进行进程切换的速度非常快，手速再快也是赶不上了的)。这种情况下要求的是响应的即时性，而视频的解码是属于处理器消耗型的，这个对于时间的要求显然没有那样的严格，所以就算这两者都是实时进程，而且它们的<code>nice</code>值是相同的，理论上来说它们优先级一样，谁也不会抢占谁的，平分处理器的资源。</p>
 <p>但是文本编辑显然用不到50%的处理器资源，所以这个时候相应的CFS调度器总会毫不犹豫的让文本编辑器需要运行的时候去抢占当前的进程，而视频编码则是在剩下的时间进行处理。</p>
 <p>之前就说过我们的CFS调度器不是简单的通过时间片的大小去分配每个进程的占有时间，CFS采用的是对时间片分配方式的根本性的重新设计，相当于是从算数加权变成了几何加权。下面举个例子吧:</p>
@@ -221,22 +228,163 @@
 </ul>
 <p>如果这个时候的目标延迟是20ms，这个时候有两个进程，<code>nice</code>值分别为0,5，假设这个时候分配到的时间是15ms和5ms，那么对于<code>nice</code>值是10和15来说的，同样是15ms和5ms。这里就是根据<code>nice</code>值来计算权重了。</p>
 <p>这样子在多进程的环境下，就降低了延迟带来的不公平。</p>
-<h2 id="时钟节拍"><a href="#时钟节拍" class="headerlink" title="时钟节拍"></a>时钟节拍</h2><p>任何操作系统都需要提供一个时钟节拍，以供系统处理诸如延时，超时之类的操作，时钟节拍是特定的周期性中断，这个中断可以看作是系统的心跳，中断之间的时间间隔取决于不同的应用。时钟的节拍中断可以使得内核将任务延迟若干个时钟节拍。那么这个玩意的意义何在呢？就是实现延时和超时的控制，下面看一张图来描述时钟节拍的中断:</p>
+<h2 id="时钟节拍"><a class="markdownIt-Anchor" href="#时钟节拍"></a> 时钟节拍</h2>
+<p>任何操作系统都需要提供一个时钟节拍，以供系统处理诸如延时，超时之类的操作，时钟节拍是特定的周期性中断，这个中断可以看作是系统的心跳，中断之间的时间间隔取决于不同的应用。时钟的节拍中断可以使得内核将任务延迟若干个时钟节拍。那么这个玩意的意义何在呢？就是实现延时和超时的控制，下面看一张图来描述时钟节拍的中断:</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-18%20%E4%B8%8B%E5%8D%8811.18.48.png" alt="屏幕快照 2017-12-18 下午11.18.48.png" title="" class="">
                 <p>屏幕快照 2017-12-18 下午11.18.48.png</p>
             </figure>
 <p>这个时候由于时钟节拍发生，进程从运行到阻塞态，然后就给其他的进程有了执行的机会，直到下一次轮询到它(时钟节拍)，然后载恢复运行态，抢占进程。</p>
-<h1 id="调度实现"><a href="#调度实现" class="headerlink" title="调度实现"></a>调度实现</h1><p>那么大概了解到了Linux中的进程调度和CFS调度器之后，就要看看这个到底是如何得以实现的了，相关的代码可以直接去参考API，博客下方有直通车，这里我们主要关注的是四个部分：</p>
+<h1 id="调度器"><a class="markdownIt-Anchor" href="#调度器"></a> 调度器</h1>
+<p>通常而言我们有两种方式去激活调度，一种就是当前进程主动进入睡眠或者其他原因放弃CPU，另一种就是通过周期性的中断来时不时的进行检测，比如说上面提到的时钟节拍。当前linux的调度程序有两个调度器组成：<code>主调度器</code>和<code>周期性调度器</code>，每个调度器中所包含的内容就是调度框架和调度类。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-19%20%E4%B8%8B%E5%8D%882.50.52.png" alt="屏幕快照 2017-12-19 下午2.50.52.png" title="" class="">
+                <p>屏幕快照 2017-12-19 下午2.50.52.png</p>
+            </figure>
+<p>目前linux内核中实现了下面几种调度策略也就是调度算法：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>所在调度器类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCHED_NORMAL</td>
+<td>（也叫SCHED_OTHER）用于普通进程，通过CFS调度器实现。SCHED_BATCH用于非交互的处理器消耗型进程。SCHED_IDLE是在系统负载很低时使用</td>
+<td>CFS</td>
+</tr>
+<tr>
+<td>SCHED_BATCH</td>
+<td>SCHED_NORMAL普通进程策略的分化版本。采用分时策略，根据动态优先级(可用nice()API设置），分配CPU运算资源。注意：这类进程比上述两类实时进程优先级低，换言之，在有实时进程存在时，实时进程优先调度。但针对吞吐量优化, 除了不能抢占外与常规任务一样，允许任务运行更长时间，更好地使用高速缓存，适合于成批处理的工作</td>
+<td>CFS</td>
+</tr>
+<tr>
+<td>SCHED_IDLE</td>
+<td>优先级最低，在系统空闲时才跑这类进程(如利用闲散计算机资源跑地外文明搜索，蛋白质结构分析等任务，是此调度策略的适用者）</td>
+<td>CFS-IDLE</td>
+</tr>
+<tr>
+<td>SCHED_FIFO</td>
+<td>先入先出调度算法（实时调度策略），相同优先级的任务先到先服务，高优先级的任务可以抢占低优先级的任务</td>
+<td>RT</td>
+</tr>
+<tr>
+<td>SCHED_RR</td>
+<td>轮流调度算法（实时调度策略），后者提供 Roound-Robin 语义，采用时间片，相同优先级的任务当用完时间片会被放到队列尾部，以保证公平性，同样，高优先级的任务可以抢占低优先级的任务。不同要求的实时任务可以根据需要用sched_setscheduler() API设置策略</td>
+<td>RT</td>
+</tr>
+<tr>
+<td>SCHED_DEADLINE</td>
+<td>新支持的实时进程调度策略，针对突发型计算，且对延迟和完成时间高度敏感的任务适用。基于Earliest Deadline First (EDF) 调度算法</td>
+<td>DL</td>
+</tr>
+</tbody>
+</table>
+<p>而根据调度策略的不同实现了5个调度器类，一个调度器类可以用一种或者多种调度策略去调度某一类进程，也可以用于特殊情况或调度特殊功能的进程：</p>
+<table>
+<thead>
+<tr>
+<th>调度器类</th>
+<th>描述</th>
+<th>对应调度策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stop_sched_class</td>
+<td>优先级最高的线程，会中断所有其他线程，且不会被其他任务打断作用1.发生在cpu_stop_cpu_callback 进行cpu之间任务migration2.HOTPLUG_CPU的情况下关闭任务</td>
+<td>无, 不需要调度普通进程</td>
+</tr>
+<tr>
+<td>dl_sched_class</td>
+<td>采用EDF最早截至时间优先算法调度实时进程</td>
+<td>SCHED_DEADLINE</td>
+</tr>
+<tr>
+<td>rt_sched_class</td>
+<td>采用提供 Roound-Robin算法或者FIFO算法调度实时进程具体调度策略由进程的task_struct-&gt;policy指定</td>
+<td>SCHED_FIFO, SCHED_RR</td>
+</tr>
+<tr>
+<td>fair_sched_class</td>
+<td>采用CFS算法调度普通的非实时进程</td>
+<td>SCHED_NORMAL, SCHED_BATCH</td>
+</tr>
+<tr>
+<td>idle_sched_class</td>
+<td>采用CFS算法调度idle进程, 每个cup的第一个pid=0线程：swapper，是一个静态线程。调度类属于：idel_sched_class，所以在ps里面是看不到的。一般运行在开机过程和cpu异常的时候做dump</td>
+<td>SCHED_IDLE</td>
+</tr>
+</tbody>
+</table>
+<p>其所属进程的优先级顺序为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stop_sched_class -&gt; dl_sched_class -&gt; rt_sched_class -&gt; fair_sched_class -&gt; idle_sched_class</div></pre></td></tr></table></figure>
+<h2 id="调度实体"><a class="markdownIt-Anchor" href="#调度实体"></a> 调度实体</h2>
+<p>调度器不限于调度进程，还可以实现组的调度。在实际中，首先按所有者分组分配，然后在组内进行二次分配。这个时候调度器直接调度的对象就不再是进程，而是一个可调度实体，我们用一个数据结构去描述这个调度实体，也就是<code>sched_entity</code>，它就代表了一个调度对象，可以是一个进程，也可以是一个进程组。</p>
+<p>linux中针对当前可调度的实时和非实时进程, 定义了类型为seched_entity的3个调度实体</p>
+<table>
+<thead>
+<tr>
+<th>调度实体</th>
+<th>名称</th>
+<th>描述</th>
+<th>对应调度器类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sched_dl_entity</td>
+<td>DEADLINE调度实体</td>
+<td>采用EDF算法调度的实时调度实体</td>
+<td>dl_sched_class</td>
+</tr>
+<tr>
+<td>sched_rt_entity</td>
+<td>RT调度实体</td>
+<td>采用Roound-Robin或者FIFO算法调度的实时调度实体</td>
+<td>rt_sched_class</td>
+</tr>
+<tr>
+<td>sched_entity</td>
+<td>CFS调度实体</td>
+<td>采用CFS算法调度的普通非实时进程的调度实体</td>
+<td>fair_sched_class</td>
+</tr>
+</tbody>
+</table>
+<h2 id="就绪队列"><a class="markdownIt-Anchor" href="#就绪队列"></a> 就绪队列</h2>
+<p>另外对于调度框架和调度器类，都有着它们自己管理的运行队列，调度框架只识别<code>rq</code>(run queue)，对于cfs调度器类它只识别<code>cfs_rq</code>（内部使用红黑树组织调度实体），实时rt的运行队列则为rt_rq（内部使用优先级bitmap+双向链表组织调度实体）, 此外内核对新增的dl实时调度策略也提供了运行队列dl_rq。</p>
+<p>在早期的时候，这个就绪队列是全局的，但是出现了多核之后，这种方式显然不能满足对于性能的需求，于是就变成了一个CPU一个就绪队列，也就不需要再使用大内核锁这种玩意了。</p>
+<p>进程并不是直接由就绪队列进行管理的，在就绪队列中嵌入了特定调度类的子就绪队列：</p>
+<ol>
+<li>cfs的调度队列是<code>struct cfs_rq</code></li>
+<li>实时调度类的就绪队列是<code>struct rt_rq</code></li>
+<li>deadline调度类的就绪队列<code>struct dl_rq</code></li>
+</ol>
+<p>每个CPU都有着自己的这种就绪队列结构，其包括一个实时进程队列和一个根CFS运行队列，在调度时，调度器首先会先去实时进程队列找是否有实时进程需要运行，如果没有才会去CFS运行队列找是否有进行需要运行，这就是为什么常说的实时进程优先级比普通进程高，不仅仅体现在prio优先级上，还体现在调度器的设计上，至于dl运行队列，我暂时还不知道有什么用处，其优先级比实时进程还高，但是创建进程时如果创建的是dl进程创建会错误(具体见sys_fork)，这样以来我们整个的过程就会变得清晰明了起来了，下面是一个从一个进程到就绪队列的属性关系图：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-19%20%E4%B8%8B%E5%8D%882.51.43.png" alt="屏幕快照 2017-12-19 下午2.51.43.png" title="" class="">
+                <p>屏幕快照 2017-12-19 下午2.51.43.png</p>
+            </figure>
+<h1 id="调度实现"><a class="markdownIt-Anchor" href="#调度实现"></a> 调度实现</h1>
+<p>那么大概了解到了Linux中的进程调度和CFS调度器之后，就要看看这个到底是如何得以实现的了，这里就直说CFS调度器类的实现，因为在我们的操作系统中大部分的进程都是普通进程，相关的代码可以直接去参考API，博客下方有直通车，这里我们主要关注的是四个部分：</p>
 <ul>
 <li>时间记账</li>
 <li>进程选择</li>
 <li>调度器的入口</li>
 <li>睡眠和唤醒</li>
 </ul>
-<h2 id="时间记账"><a href="#时间记账" class="headerlink" title="时间记账"></a>时间记账</h2><p>那么我们都知道时间片的机制是通过计算每个进程它的时间片消耗，那么这个的具体实现依赖的就是时钟节拍，每过一个时钟节拍，时间片就会被减少一个节拍周期。当一个进程的时间片减少到0的时候，就会被另一个持有时间片剩余的进程给抢占，所以将这个描述为是在给时间记账是再合适不过了。</p>
-<h1 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h1><ul>
+<h2 id="时间记账"><a class="markdownIt-Anchor" href="#时间记账"></a> 时间记账</h2>
+<p>那么我们都知道时间片的机制是通过计算每个进程它的时间片消耗，那么这个的具体实现依赖的就是时钟节拍，每过一个时钟节拍，时间片就会被减少一个节拍周期。当一个进程的时间片减少到0的时候，就会被另一个持有时间片剩余的进程给抢占，所以将这个描述为是在给时间记账是再合适不过了。</p>
+<h2 id="虚拟实时"><a class="markdownIt-Anchor" href="#虚拟实时"></a> 虚拟实时</h2>
+<p>调度器的实体结构可以参考上面的那张图，也就是<code>sched_entity</code>，这是作为一个成员变量嵌入在进程描述符之中，我们会发现这个实体结构中还有一个属性是<code>vruntime</code>，这个就是我们通过所有可运行进程总数加权算出来的虚拟时间。</p>
+<h1 id="参考网站"><a class="markdownIt-Anchor" href="#参考网站"></a> 参考网站</h1>
+<ul>
 <li><a href="http://elixir.free-electrons.com/" target="_blank" rel="external">linux内核api查询</a></li>
+<li><a href="http://blog.csdn.net/gatieme/article/details/51702662" target="_blank" rel="external">Linux进程调度器设计</a></li>
 </ul>
 
         </div>
@@ -246,7 +394,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-18T15:26:31.000Z" itemprop="dateUpdated">2017-12-18 23:26:31</time>
+    Last updated: <time datetime="2017-12-19T07:42:05.000Z" itemprop="dateUpdated">2017-12-19 15:42:05</time>
 </span><br>
 
 
@@ -365,7 +513,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多任务"><span class="post-toc-number">1.</span> <span class="post-toc-text">多任务</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度策略"><span class="post-toc-number">2.</span> <span class="post-toc-text">调度策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">进程类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程优先级"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">进程优先级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间片"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">时间片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时钟节拍"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">时钟节拍</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">调度实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间记账"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">时间记账</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考网站"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考网站</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多任务"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 多任务</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度策略"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 调度策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> 进程类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程优先级"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> 进程优先级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间片"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"> 时间片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时钟节拍"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"> 时钟节拍</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度器"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 调度器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调度实体"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"> 调度实体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#就绪队列"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"> 就绪队列</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调度实现"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 调度实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时间记账"><span class="post-toc-number">4.1.</span> <span class="post-toc-text"> 时间记账</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#虚拟实时"><span class="post-toc-number">4.2.</span> <span class="post-toc-text"> 虚拟实时</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考网站"><span class="post-toc-number">5.</span> <span class="post-toc-text"> 参考网站</span></a></li></ol>
         </nav>
     </aside>
     
