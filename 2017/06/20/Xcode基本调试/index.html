@@ -184,8 +184,10 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>Xcode基本调试<br><a id="more"></a></p>
-<h1 id="Xcode基本调试法"><a href="#Xcode基本调试法" class="headerlink" title="Xcode基本调试法"></a>Xcode基本调试法</h1><p><strong>1. 运行时设置断点</strong></p>
+            <p>Xcode基本调试</p>
+<a id="more"></a>
+<h1 id="xcode基本调试法"><a class="markdownIt-Anchor" href="#xcode基本调试法"></a> Xcode基本调试法</h1>
+<p><strong>1. 运行时设置断点</strong></p>
 <p>在XCode中需要观察的变量所在的代码处添加断点，可以让程序运行到这里暂停。这时鼠标悬停在变量名处，XCode会显示出该变量的信息。</p>
 <p>断点的类型分为异常断点（Exception Breakpoint）和符号断点（Symbolic Breakpoint）等，在XCode断点浏览器（Breakpoints Navigator）的左下方可以添加这些断点。</p>
 <p>符号断点中的符号可以指方法名称或函数名称。符号断点可以中断某个函数的调用。用户还可以添加执行断点的条件。</p>
@@ -214,7 +216,7 @@
 <p>help 命令：如果忘记某条命令的语法了，用来获取帮助信息。</p>
 <p>需要注意的是，上述这些都是GDB的调试命令，在LLDB中会有所差异。随着Xcode 5的发布，LLDB调试器已经取代了GDB，成为了Xcode工程中默认的调试器。</p>
 <p>这里需要强调的一个技巧是，通过使用expr 表达式可实现在运行时修改变量的值。<a href="http://m.blog.csdn.net/blog/freeWayWalker/45623433#fn:3" target="_blank" rel="external">2</a></p>
-<p>expr username = @”username”expr password = @”badpassword”</p>
+<p>expr username = @&quot;username&quot;expr password = @“badpassword”</p>
 <p>通过上面的代码段，变量username和password分别被重新赋值。</p>
 
         </div>
@@ -350,7 +352,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Xcode基本调试法"><span class="post-toc-number">1.</span> <span class="post-toc-text">Xcode基本调试法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#xcode基本调试法"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Xcode基本调试法</span></a></li></ol>
         </nav>
     </aside>
     
