@@ -186,26 +186,21 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Java是一门很悠久的语言了，虽然一直被黑，说它老气，庞大，臃肿，但是这种盲目的否认会忽视掉Java的很多优点，甚至许多的Python的程序员也加入了鄙视Java的队伍中，虽然气势上占据着上风，但是显然Python作为一个编程语言是完全无法和Java抗衡的。</p>
 <a id="more"></a>
-<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>学习一门语言之前必定要有所了解，盲目跟风的人虽不知几何，但终有成就者甚少，其实就算Java中有很多的不好，其实许多的脚本程序员是没有资格去评判的，属于盲目的鄙视范畴。也许这种仇恨感是来自于长期的教学或者废话连篇的设计模式吧。其实Java已经可以解决大部分的问题，除非有着非常强大的性能需求和资源需求。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>学习一门语言之前必定要有所了解，盲目跟风的人虽不知几何，但终有成就者甚少，其实就算Java中有很多的不好，其实许多的脚本程序员是没有资格去评判的，属于盲目的鄙视范畴。也许这种仇恨感是来自于长期的教学或者废话连篇的设计模式吧。其实Java已经可以解决大部分的问题，除非有着非常强大的性能需求和资源需求。</p>
 <p>所以有些黑Java其实是有些不着边际的，但是没办法，现在的人们就是喜欢人云亦云，看到大多数的人站在一起抵制一个对象的时候，就会不自觉地加入进去，仿佛获得了巨大的快感，在我看来，相较于Java，<code>JavaScript</code>这种东西不是会更加吸引仇恨么，虽然他们的社区更新换代的非常快，但是其实并没有什么根本性的改变，甚至还有越来越火的趋势，真是让鸡摸不着头脑:p</p>
-<h1 id="java的基础特性"><a class="markdownIt-Anchor" href="#java的基础特性"></a> Java的基础特性</h1>
-<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
-<p>java的程序都是定义在类中，而类的形式其实就是一个字节码文件最终体现，java是一个强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间，在java中数据类型主要可以分为基本数据类型和引用数据类型，引用中存放的是指向真实数据的地址，类、接口、数组就属于引用数据类型。</p>
+<h1 id="Java的基础特性"><a href="#Java的基础特性" class="headerlink" title="Java的基础特性"></a>Java的基础特性</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p> java的程序都是定义在类中，而类的形式其实就是一个字节码文件最终体现，java是一个强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间，在java中数据类型主要可以分为基本数据类型和引用数据类型，引用中存放的是指向真实数据的地址，类、接口、数组就属于引用数据类型。</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/969969978B91E6105DD88EAFCA1FDC3D.png" alt="969969978B91E6105DD88EAFCA1FDC3D.png" title="" class="">
                 <p>969969978B91E6105DD88EAFCA1FDC3D.png</p>
             </figure>
-<h2 id="强转和溢出"><a class="markdownIt-Anchor" href="#强转和溢出"></a> 强转和溢出</h2>
-<p>我们发现java中有一个不是在C/C++中出现过的基础类型<code>byte</code>，这个作为整型也就是说只能存储一个字节的整数，有符号整数最大只能到128，所以我们要注意不要超过数据类型的上限，下面演示一段基础的语法：</p>
+<h2 id="强转和溢出"><a href="#强转和溢出" class="headerlink" title="强转和溢出"></a>强转和溢出</h2><p>我们发现java中有一个不是在C/C++中出现过的基础类型<code>byte</code>，这个作为整型也就是说只能存储一个字节的整数，有符号整数最大只能到128，所以我们要注意不要超过数据类型的上限，下面演示一段基础的语法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">add</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    <span class="keyword">byte</span> b = <span class="number">3</span>;</div><div class="line">    b = (<span class="keyword">byte</span>)(b+<span class="number">126</span>);</div><div class="line">    System.out.println(b);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们就会发现输出的结果是-127，这个倒是没什么，因为溢出了，但我发现一个问题，就是如果执行：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b = b + <span class="number">3</span></div></pre></td></tr></table></figure>
 <p>的时候就会报错，一开始的时候并没有明白它到底是什么意思：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[peterpan@panzhenpengdeMacBook-Air java ]$ javac add.java</div><div class="line">add.java:5: 错误: 不兼容的类型: 从int转换到byte可能会有损失</div><div class="line">    b = b + b;</div><div class="line">          ^</div><div class="line">1 个错误</div></pre></td></tr></table></figure>
 <p>想了一想之后这应该是java语言的一个特性，在进行加法运算的时候，会把操作数隐式的转换为int类型，所以最后赋值的时候会说转换导致精度丢失。</p>
-<h2 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h2>
-<p>学过C/C<ins>之后再学java总会纠结指针这个东西到底有没有呢，准确来说，应该是不能算是有的，虽然java中也有引用，但是其实和C</ins>中的引用完全是两码事，首先说一下C++中的引用，它是同一块内存的不同名字，而java中的引用是指向了一个对象，而且这个引用本身也会占用内存，这样一来的话，与其说这个是引用，倒不如说比较像指针，但不同的是，这个引用无法指向一个基本变量，而且我们无法获取引用存的地址，我们同样也无法删除，所以说在java中的引用可以看作是一个阉割版本的指针。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>学过C/C++之后再学java总会纠结指针这个东西到底有没有呢，准确来说，应该是不能算是有的，虽然java中也有引用，但是其实和C++中的引用完全是两码事，首先说一下C++中的引用，它是同一块内存的不同名字，而java中的引用是指向了一个对象，而且这个引用本身也会占用内存，这样一来的话，与其说这个是引用，倒不如说比较像指针，但不同的是，这个引用无法指向一个基本变量，而且我们无法获取引用存的地址，我们同样也无法删除，所以说在java中的引用可以看作是一个阉割版本的指针。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object *a = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
 <p>在C++中，动态分配了内存空间之后将地址返回给指针变量</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object a = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
@@ -288,7 +283,14 @@
         
     </div>
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/31/2017年度总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">2017年度总结</h4>
+      </a>
+    </div>
   
 
   
@@ -337,7 +339,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#java的基础特性"><span class="post-toc-number">2.</span> <span class="post-toc-text"> Java的基础特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> 数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强转和溢出"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> 强转和溢出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"> 引用</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java的基础特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java的基础特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强转和溢出"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">强转和溢出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">引用</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
