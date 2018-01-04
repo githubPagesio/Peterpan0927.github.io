@@ -205,6 +205,16 @@
 <p>在C++中，动态分配了内存空间之后将地址返回给指针变量</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object a = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
 <p>相较之下，也许我们可以叫它对象变量？反正不管怎么说，说java中有指针这种说法严格意义上来说是不准确的，所以我们还是保持着引用这种说法吧。</p>
+<h1 id="面向对象编程和类"><a href="#面向对象编程和类" class="headerlink" title="面向对象编程和类"></a>面向对象编程和类</h1><p>在接触了面向对象、函数、过程三种编程范式之后，对于OOP也有了一些具体的理解，在看了严千钧老师的编程导论之后，体会也更加具体形象。那么究竟我们在面向对象的过程中，什么是类，什么是对象，什么是抽象和具体，首先我们从哲学的领域作为入口来探讨一下这个问题。</p>
+<h2 id="从具体到抽象"><a href="#从具体到抽象" class="headerlink" title="从具体到抽象"></a>从具体到抽象</h2><p>古希腊的哲学家们把具有主观意识的自我称为主体(subject)，而被主体所观察和研究的一个个客观的物体称为对象或者客体。所以对象这个词其实具有很浓郁的哲学味道，在我们的日常生活中的一个朋友，一辆奔驰，一栋房子，这些我们通过视觉和触觉感受到的都是一个个具体的object，我们所生存的世界就是由对象所组成的。</p>
+<p>在我们变成的时候，抽象这个概念我们会经常碰到，一个抽象类，抽象数据类型。其实在我们的生活中，也有这种概念，比如说我们通过一个个具体的对象提炼出了人、车这样的概念，甚至于我们可以抽象出生活中完全没有的对应物———圆，几何中的圆在现实生活中没有一个对象可以完全的满足，我们使用的圆规同样也不能。</p>
+<p>客体和概念之间的关系使得早期的哲学家们十分的困惑。亚里士多德就曾经说过<code>事物总是个别存在的</code>，比如说我们对于人的概念指存在于想象中，真实的世界中没有人，只有这个高大的黑人John，那么会功夫的中国人Lee。因此抽象是无法作为单独的存在物的，抽象只能通过具体/个别从而存在。</p>
+<h2 id="颠倒的世界"><a href="#颠倒的世界" class="headerlink" title="颠倒的世界"></a>颠倒的世界</h2><p>在我们讨论面向对象技术的时候，其实和现实世界是相反的，我们遵循的是柏拉图的唯心论，在柏拉图的理解中，人、狗、计算机等具体事物理念、几何知识中的圆、运动是较为高级的理念，世界是由<code>理念世界</code>和<code>现象世界</code>组成的。理念的世界是真实的，脱离个别事物而独立存在的东西，而人类感官所感受到的现象世界只是理念世界的微弱影子。</p>
+<p>暂且不论这师徒两个在哲学领域的探讨，但只在软件领域上来说，柏拉图的理念论其实正好适用于软件的解域，因而可以将该观点改造成面向对象的基石性原理</p>
+<blockquote>
+<p>柏拉图法则：类的世界独立存在，对象的世界由类创建而来</p>
+</blockquote>
+<p>类先于对象存在，类可以独立存在，也就是说我们如果有一个Dog.class，它是可以静态的存在于硬盘上，而不需要关心外部的世界中到底有没有可以活动的狗。</p>
 
         </div>
         
@@ -213,7 +223,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2017-12-30T07:45:09.000Z" itemprop="dateUpdated">2017-12-30 15:45:09</time>
+    Last updated: <time datetime="2018-01-03T07:58:30.000Z" itemprop="dateUpdated">2018-01-03 15:58:30</time>
 </span><br>
 
 
@@ -339,7 +349,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java的基础特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java的基础特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强转和溢出"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">强转和溢出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">引用</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java的基础特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java的基础特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强转和溢出"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">强转和溢出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">引用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#面向对象编程和类"><span class="post-toc-number">3.</span> <span class="post-toc-text">面向对象编程和类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从具体到抽象"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">从具体到抽象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#颠倒的世界"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">颠倒的世界</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
