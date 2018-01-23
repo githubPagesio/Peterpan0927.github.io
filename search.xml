@@ -3,22 +3,137 @@
   
     
     <entry>
+      <title><![CDATA[ARM汇编上手]]></title>
+      <url>/2018/01/23/ARM%E6%B1%87%E7%BC%96%E4%B8%8A%E6%89%8B-%E4%B8%80/</url>
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt=""></p>
+<p>今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。</p>
+<a id="more"></a>
+<h1 id="CISC和RISC"><a href="#CISC和RISC" class="headerlink" title="CISC和RISC"></a>CISC和RISC</h1><p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
+<h3 id="load-store体系结构"><a href="#load-store体系结构" class="headerlink" title="load-store体系结构"></a>load-store体系结构</h3><p>RISC使用的是load-store结构。load-store结构的本质，在于RISC技术的CPU只处理（指逻辑，算术运算处理）寄存器中的数据。相反，X86却能够直接处理存储器中的数据。</p>
+<p>RISC体系架构的CPU，存储器和寄存器之间的数据交互，由专门的load和store指令负责。存储器是指内存或者Flash（NOR Flash）等可以被CPU直接寻址的存储单元。CPU要将某个地址的数据放入寄存器中，只能够使用load指令；要将寄存器中的值存放到存储器中，只能够使用store指令。</p>
+<p>CISC体系架构的CPU对存储器数据操作则要复杂得多。在X86下，数据的传送都是使用MOV指令。MOV指令既负责寄存器和寄存器之间数据的交互，又负责寄存器和存储器之间的数据交互。X86能够直接处理存储器中的数据，而这一点在RISC体系的CPU中是无法做到的。</p>
+<p>将存储器单元0x00000020中的数加上8，结果存放到该存储单元中。假设存储单元的地址0x00000020已经存放在寄存器reg中，即reg=0x00000020，下文中，(reg)表示reg地址处的值，即存储单元中的值。下面我们看看在X86下和ARM/MIPS下分别是如何操作的。</p>
+<p>X86能够直接处理存储器中的数据， 所以X86直接寻址到存储器地址，将存储器中的值和立即数相加，结果存放到存储器单元中。整个过程使用下面一条指令就可以完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add (reg) 0x08		;直接将存储器单元(reg)中的值加0x08，结果仍然存放在该存储器单元中</div></pre></td></tr></table></figure>
+<p>ARM/MIPS只能够处理寄存器中的数据，所以需要将该存储器中的值用load命令加载到寄存器中，然后对寄存器中的值进行算术运算，最后使用store命令将运算结果送回存储单元中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ld reg2 (reg)		;将存储器单元(reg)中的值加载到寄存器reg2中 </div><div class="line">add reg2 0x08		;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 </div><div class="line">store (reg) reg2	;将寄存器reg2中的值放回存储器单元(reg)中</div></pre></td></tr></table></figure>
+<p>硬币有两面，精简指令集也有它的优势和劣势。其中一个重要的优势是指令可以被更快的执行（RISC处理器通过引入流水线机制，减少每个指令的占用的CPU的时钟周期来缩短执行时间）。它的劣势也很明显，较少的指令增加了软件（事实上是编译器）的复杂性。另一个重要的事实是，ARM具有两种运行模式（可以类比x86的实模式和保护模式），ARM模式和Thumb模式。</p>
+<h1 id="初识ARM"><a href="#初识ARM" class="headerlink" title="初识ARM"></a>初识ARM</h1><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ldr =加载字</div><div class="line">ldr h =加载无符号半字</div><div class="line">ldr sh =加载有符号半字</div><div class="line">ldr b =加载无符号字节</div><div class="line">ldr sb =加载有符号字节</div><div class="line"></div><div class="line">str =存储字符</div><div class="line">str h =存储无符号半字符</div><div class="line">str sh =存储有符号半字符</div><div class="line">str b =存储未签名的字节</div><div class="line">str sb =存储已签名的字节</div></pre></td></tr></table></figure>
+<h3 id="大端和小端"><a href="#大端和小端" class="headerlink" title="大端和小端"></a>大端和小端</h3><p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8811.53.47.png" alt="屏幕快照 2018-01-23 下午11.53.47.png" title="" class="">
+                <p>屏幕快照 2018-01-23 下午11.53.47.png</p>
+            </figure>
+<p>以ARMv6为例，指令是固定的小端，数据的访问可以是由程序状态寄存器（CPSR）的第九位来控制的小端或大端。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%888.40.27.png" alt="屏幕快照 2018-01-23 下午8.40.27.png" title="" class="">
+                <p>屏幕快照 2018-01-23 下午8.40.27.png</p>
+            </figure>
+<h3 id="ARM中的寄存器"><a href="#ARM中的寄存器" class="headerlink" title="ARM中的寄存器"></a>ARM中的寄存器</h3><p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
+<table>
+<thead>
+<tr>
+<th>ARM</th>
+<th>Description</th>
+<th>x86</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R0</td>
+<td>General Purpose</td>
+<td>EAX</td>
+</tr>
+<tr>
+<td>R1-R5</td>
+<td>General Purpose</td>
+<td>EBX, ECX, EDX, ESI, EDI</td>
+</tr>
+<tr>
+<td>R6-R10</td>
+<td>General Purpose</td>
+<td>–</td>
+</tr>
+<tr>
+<td>R11 (FP)</td>
+<td>Frame Pointer</td>
+<td>EBP</td>
+</tr>
+<tr>
+<td>R12</td>
+<td>Intra Procedural Call</td>
+<td>–</td>
+</tr>
+<tr>
+<td>R13 (SP)</td>
+<td>Stack Pointer</td>
+<td>ESP</td>
+</tr>
+<tr>
+<td>R14 (LR)</td>
+<td>Link Register</td>
+<td>–</td>
+</tr>
+<tr>
+<td>R15 (PC)</td>
+<td>&lt;- Program Counter / Instruction Pointer -&gt;</td>
+<td>EIP</td>
+</tr>
+<tr>
+<td>CPSR</td>
+<td>Current Program State Register/Flags</td>
+<td>EFLAGS</td>
+</tr>
+</tbody>
+</table>
+<p>通过对照在x86中的寄存器我们就能知道在ARM中这些寄存器的用途了，其中主要说一下R14，R15:</p>
+<p><strong>R14：LR</strong>（链接寄存器）。当进行函数调用时，链接寄存器将通过引用下一条指令的内存地址进行更新。这样做可以使程序在“子”功能结束后返回到启动“子”功能调用的“父”功能。</p>
+<p><strong>R15：PC</strong>（程序计数器）。程序计数器自动递增执行指令的大小。这个大小在ARM状态下总是4个字节，在THUMB模式下总是2个字节。当执行分支指令时，PC保存目标地址。在执行期间，ARM状态下PC存储当前指令的地址加上8个字节（两个ARM指令），Thumb状态下是当前指令加上4个字节（两个Thumb指令）。这和x86上的PC总是会指向下一条被执行的语句不同</p>
+<p>首先来看看下面这个例子，主函数中大概是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">main:</div><div class="line">	mov r0, pc</div><div class="line"> 	mov r1, #2</div><div class="line"> 	add r2, r1, r1</div><div class="line"> 	bkpt</div></pre></td></tr></table></figure>
+<p>我们首先在主函数入口处打一个断点，然后查看一下寄存器的信息，发现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">(gdb) break main</div><div class="line">Breakpoint 8 at 0x10408: file hello.s, line 27.</div><div class="line">(gdb) r</div><div class="line">The program being debugged has been started already.</div><div class="line">Start it from the beginning? (y or n) y</div><div class="line">Starting program: /home/pi/hello</div><div class="line"></div><div class="line">Breakpoint 8, main () at hello.s:27</div><div class="line">27		mov r0, pc</div><div class="line">(gdb) info registers</div><div class="line">r0             0x1	1</div><div class="line">r1             0x7efff344	2130703172</div><div class="line">r2             0x7efff34c	2130703180</div><div class="line">r3             0x10408	66568</div><div class="line">r4             0x1041c	66588</div><div class="line">r5             0x0	0</div><div class="line">r6             0x102e0	66272</div><div class="line">r7             0x0	0</div><div class="line">r8             0x0	0</div><div class="line">r9             0x0	0</div><div class="line">r10            0x76fff000	1996484608</div><div class="line">r11            0x0	0</div><div class="line">r12            0x7efff270	2130702960</div><div class="line">sp             0x7efff1f0	0x7efff1f0</div><div class="line">lr             0x76e7a678	1994892920</div><div class="line">pc             0x10408	0x10408 &lt;main&gt;</div><div class="line">cpsr           0x60000010	1610612752</div></pre></td></tr></table></figure>
+<p>然后执行下一条之后我们再看看寄存器中的值，r0中是多少，是0x10408么？让我们拭目以待</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">(gdb) next</div><div class="line"></div><div class="line">Breakpoint 7, main () at hello.s:28</div><div class="line">28	 	mov r1, #2</div><div class="line">(gdb) info registers</div><div class="line">r0             0x10410	66576</div><div class="line">r1             0x7efff344	2130703172</div><div class="line">r2             0x7efff34c	2130703180</div><div class="line">r3             0x10408	66568</div><div class="line">r4             0x1041c	66588</div><div class="line">r5             0x0	0</div><div class="line">r6             0x102e0	66272</div><div class="line">r7             0x0	0</div><div class="line">r8             0x0	0</div><div class="line">r9             0x0	0</div><div class="line">r10            0x76fff000	1996484608</div><div class="line">r11            0x0	0</div><div class="line">r12            0x7efff270	2130702960</div><div class="line">sp             0x7efff1f0	0x7efff1f0</div><div class="line">lr             0x76e7a678	1994892920</div><div class="line">pc             0x1040c	0x1040c &lt;main+4&gt;</div><div class="line">cpsr           0x60000010	1610612752</div></pre></td></tr></table></figure>
+<p>我们发现r0寄存器中的值是main函数入口的地址+8，在我们直接观察pc的时候，它指向的是下一条指令的地址，但是在调试的时候，我们发现是pc中的值+8，那么为什么会有这样的结果呢，这个涉及到CPU流水线的问题，我们放在之后再讨论。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>看雪安全论坛</li>
+<li><a href="https://azeria-labs.com" target="_blank" rel="external">外国友人博客</a></li>
+<li><a href="https://www.anquanke.com/post/id/86536" target="_blank" rel="external">gdb使用方式</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 汇编语言 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 汇编 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[SSR原理和搭建翻墙服务器]]></title>
       <url>/2018/01/21/SSR%E5%8E%9F%E7%90%86%E5%92%8C%E6%90%AD%E5%BB%BA%E7%BF%BB%E5%A2%99%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-      <content type="html"><![CDATA[<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.17.00.png" alt="">
-<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.18.06.png" alt="">
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.17.00.png" alt=""></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.18.06.png" alt=""></p>
 <p>终于考完试了，为了防止之前的搭建教程被墙了，也是巩固一下网络知识，重新整理一篇关于利用SSR翻墙的博客</p>
 <a id="more"></a>
-<h1 id="ss"><a class="markdownIt-Anchor" href="#ss"></a> SS</h1>
-<h2 id="ss的简单介绍"><a class="markdownIt-Anchor" href="#ss的简单介绍"></a> SS的简单介绍</h2>
-<p>SSR是原版基础上衍生出来的第三方版本，兼容原版协议，比原版多了一些伪装功能（协议和混淆）。要了解SSR，首先看看SS是什么，SS的全称是Shadowsocks，是一位在知乎网站工作的大神开发的一套针对DPI（深度包检测）系统弱点开发的一套网络加密工具。简单理解的话，Shadowsocks是将以前通过SSH创建的Socks5协议拆开成Server端和client端。它通过抹除网络数据通讯的特征，让监测系统无法下手。但是这种方法也不是绝对无法下手的，就好比说，你在一个鱼缸中找到一条鱼很容易，但是如果把这条鱼丢到海里再让你来找，那么就变的很困难了。而SS也正是通过这样将自己的通讯模式变的毫无特征，那么拦截系统在拦截的时候，就需要对每一个水滴进行检测，也就是说在目前各个国家的运算力是无法达到的。</p>
+<h1 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h1><h2 id="SS的简单介绍"><a href="#SS的简单介绍" class="headerlink" title="SS的简单介绍"></a>SS的简单介绍</h2><p>SSR是原版基础上衍生出来的第三方版本，兼容原版协议，比原版多了一些伪装功能（协议和混淆）。要了解SSR，首先看看SS是什么，SS的全称是Shadowsocks，是一位在知乎网站工作的大神开发的一套针对DPI（深度包检测）系统弱点开发的一套网络加密工具。简单理解的话，Shadowsocks是将以前通过SSH创建的Socks5协议拆开成Server端和client端。它通过抹除网络数据通讯的特征，让监测系统无法下手。但是这种方法也不是绝对无法下手的，就好比说，你在一个鱼缸中找到一条鱼很容易，但是如果把这条鱼丢到海里再让你来找，那么就变的很困难了。而SS也正是通过这样将自己的通讯模式变的毫无特征，那么拦截系统在拦截的时候，就需要对每一个水滴进行检测，也就是说在目前各个国家的运算力是无法达到的。</p>
 <p>那么SS是如何做到这样的功能呢？首先看看之前的VPN等。在这之前的VPN之类的都有一个致命的缺陷就是它们虽然通过了无法破解的RSA加密算法来对数据进行加密，但是在交换密钥建立起隧道之前还是在进行明文传输：</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%882.40.24.png" alt="屏幕快照 2018-01-21 下午2.40.24.png" title="" class="">
                 <p>屏幕快照 2018-01-21 下午2.40.24.png</p>
             </figure>
 <p>那么窃听者正是利用了这一点来进行封锁，因为在交换密钥的这一过程中就可能会被暴力破解(目前GFW已经做到了暴力破解MPPE加密的能力)，那么也就是说你接下来所进行的加密完全没有任何的意义了，如果窃听者想要破坏你的通信，可以直接将你的线路掐掉，或者你们在交换密钥的时候约定好说四川话，窃听者在前面插播两句上海话，对端就会立刻终止加密传输，连接就会断开，从2016春，几乎所有的VPN协议以及网络加密传输协议，均可用不同的方式被破坏，导致整个通讯出现中断。</p>
-<p>那么SS所做的一点就是提前规定好加密方式，换而言之，也就是提前双方商量好，我们要说武汉话，	这样就只有通信双方的人才会听得懂，网络上的语言是无限的，所以只要提前规定好，SS就是如此的神奇，但是还是会有办法的，就是SS的作者被请去喝茶删代码了，但是github上down下来的人不止一份，本着开源的精神分享了出来。下面是原理图</p>
+<p>那么SS所做的一点就是提前规定好加密方式，换而言之，也就是提前双方商量好，我们要说武汉话，    这样就只有通信双方的人才会听得懂，网络上的语言是无限的，所以只要提前规定好，SS就是如此的神奇，但是还是会有办法的，就是SS的作者被请去喝茶删代码了，但是github上down下来的人不止一份，本着开源的精神分享了出来。下面是原理图</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%883.14.11.png" alt="屏幕快照 2018-01-21 下午3.14.11.png" title="" class="">
                 <p>屏幕快照 2018-01-21 下午3.14.11.png</p>
@@ -29,11 +144,9 @@
 <li>SS-Server将收到的加密数据进行解密，还原初始请求，再发送到用户需要访问的服务网站，获取响应原路再返回SS-04，返回途中依然使用了加密，使得流量是普通TCP包，并成功穿过GFW防火墙。</li>
 </ol>
 <p>Shadowsocks的优点在于它解决了GFW通过分析<a href="https://tumutanzi.com/archives/11973" target="_blank" rel="external">流量特征</a>从而干扰的问题。之前在<a href="http://peterpan980927.cn/2017/10/07/GFW-%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/" target="_blank" rel="external">GFW和中间人攻击</a>的博客中说过对于VPN的流量特征进行检测方法。</p>
-<h2 id="ss的性能"><a class="markdownIt-Anchor" href="#ss的性能"></a> SS的性能</h2>
-<p>关于SS的性能方面也需要简单的说一下，因为网上的SS实现有很多不同的版本，python啊，php之类的，通常我们在路由中使用的是C的，因为所谓的智能路由，事实上是一个低配版的电脑，普通的i3 CPU大约每秒可以进行70Mbits左右的数据，而这个低配版智能进行5Mbits，所以在上面跑所谓的脚本语言是很吃力的，如果我们需要很快的速度，加密模式和语言都是我们需要考虑的因素。</p>
+<h2 id="SS的性能"><a href="#SS的性能" class="headerlink" title="SS的性能"></a>SS的性能</h2><p>关于SS的性能方面也需要简单的说一下，因为网上的SS实现有很多不同的版本，python啊，php之类的，通常我们在路由中使用的是C的，因为所谓的智能路由，事实上是一个低配版的电脑，普通的i3 CPU大约每秒可以进行70Mbits左右的数据，而这个低配版智能进行5Mbits，所以在上面跑所谓的脚本语言是很吃力的，如果我们需要很快的速度，加密模式和语言都是我们需要考虑的因素。</p>
 <p>如果说只是在自己的PC机上面跑一跑，那么就不需要那么麻烦了，python也是可以的，如果移殖到路由上的话，内存大小和CPU性能都会是我们所需要考虑的因素，我们平时在电脑和手机上跑的流畅的应用移植到路由上都需要我们重新考虑</p>
-<h1 id="搭建过程"><a class="markdownIt-Anchor" href="#搭建过程"></a> 搭建过程</h1>
-<p>首先你需要一台VPS，VPS的提供商我们可以选择Digital Ocean，因为之前推出的一个github学生特权(给github写英文邮件，如果你感动了它，就给你咯)，充值5¥送50¥。大概够我们使用约一年的时间，在之后也就是一个月折合34人民币，如果汇率一直没有发生变化的话，其实也不算贵。</p>
+<h1 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h1><p>首先你需要一台VPS，VPS的提供商我们可以选择Digital Ocean，因为之前推出的一个github学生特权(给github写英文邮件，如果你感动了它，就给你咯)，充值5¥送50¥。大概够我们使用约一年的时间，在之后也就是一个月折合34人民币，如果汇率一直没有发生变化的话，其实也不算贵。</p>
 <p>然后就是创建VPS的过程了：</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%883.22.24.png" alt="屏幕快照 2018-01-21 下午3.22.24.png" title="" class="">
@@ -64,18 +177,18 @@
 <p>MAC SSR客户端 <a href="https://github.com/shadowsocksr-backup/ShadowsocksX-NG/releases" target="_blank" rel="external">下载地址</a> <a href="https://nofile.io/f/jgMWFwCBonU#ab0d3c3b6ac54482" target="_blank" rel="external">备用下载地址</a></p>
 <p>Linux客户端一键安装配置 <a href="https://github.com/the0demiurge/CharlesScripts/blob/master/charles/bin/ssr" target="_blank" rel="external">使用脚本</a> (使用方法见注释) 或者采用图形界面的<a href="https://github.com/erguotou520/electron-ssr/releases" target="_blank" rel="external">linux ssr客户端</a></p>
 <p>安卓 SSR客户端 <a href="https://github.com/shadowsocksr-backup/shadowsocksr-android/releases" target="_blank" rel="external">下载地址</a> <a href="https://nofile.io/f/rvTJoj0h5GC/shadowsocksr-release.apk" target="_blank" rel="external">备用下载地址</a></p>
-<h2 id="有趣的事情"><a class="markdownIt-Anchor" href="#有趣的事情"></a> 有趣的事情</h2>
-<p>今天在查看我的服务器的时候，莫名的发现了一个奇怪的IP(我家的出口IP我还是记得很清楚的)，于是乎我就查了查，发现是一个来自江西的联通IP，我一想这还了得，这小子想干什么，我的服务器还是做了一些防护的，目前版本也没什么漏洞新发布出来，怎么就用上了我的SSR呢？难道是瞎猫碰上死耗子，不行，于是我就修改了所有的参数，一看，还在！！！</p>
+<h2 id="有趣的事情"><a href="#有趣的事情" class="headerlink" title="有趣的事情"></a>有趣的事情</h2><p>今天在查看我的服务器的时候，莫名的发现了一个奇怪的IP(我家的出口IP我还是记得很清楚的)，于是乎我就查了查，发现是一个来自江西的联通IP，我一想这还了得，这小子想干什么，我的服务器还是做了一些防护的，目前版本也没什么漏洞新发布出来，怎么就用上了我的SSR呢？难道是瞎猫碰上死耗子，不行，于是我就修改了所有的参数，一看，还在！！！</p>
 <p>那可能是真的在我服务器上留后门了，我干脆重装了一次，然后升级内核，浏览了论坛，好像也没什么发生啊，重新部署之后发现这家伙还在，这尼玛我就很无奈了啊，然后把自己的客户端关了，就不见了，我一想，难道是IP根本就是错的，于是在提点下知乎搜索了一番联通和IP的故事，然后发现了：</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.01.50.png" alt="屏幕快照 2018-01-21 下午5.01.50.png" title="" class="">
                 <p>屏幕快照 2018-01-21 下午5.01.50.png</p>
             </figure>
 <p>好吧，就怪我妈搞得这个长宽吧，还让我虚惊一场…</p>
-<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
-<ul>
+<p>长宽租用基础运营商的带宽出口，然后他自己又没有这么多IP地址，于是只能在出口出做NAT，根据目标IP不同有不同的路由方向，所以访问不同的网站是通过不同的出口出去的。这样如果你访问的几个显示IP地址的网站正好不是一个出口，就会发现有多个IP。<br>甚至有些网站直接在长宽内网里有服务器，那么也有可能会显示你获取到的内网地址。</p>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
 <li><a href="https://github.com/getlantern/forum/issues/5620" target="_blank" rel="external">GitHub上的issue</a></li>
 <li><a href="https://program-think.blogspot.com" target="_blank" rel="external">编程随想的博客</a></li>
+<li><a href="https://www.zhihu.com/question/29428996/answer/44492283" target="_blank" rel="external">知乎作者</a></li>
 </ul>
 ]]></content>
       
@@ -97,38 +210,31 @@
     <entry>
       <title><![CDATA[2017年度总结]]></title>
       <url>/2017/12/31/2017%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</url>
-      <content type="html"><![CDATA[<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-04%20%E4%B8%8B%E5%8D%883.28.42.png" alt="">
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-04%20%E4%B8%8B%E5%8D%883.28.42.png" alt=""></p>
 <a id="more"></a>
-<h1 id="生活"><a class="markdownIt-Anchor" href="#生活"></a> 生活</h1>
-<p>从生活的半年多的寝室直接搬了出来，夏天的时候睡在实验室，最近一个月比较冷于是在外面租了个房子，时间上感觉是过的挺快的，今年四月份加入实验室，现在已经八个多月了，如果要说为什么要从寝室搬出来睡在充满大妈恶意和老师的排斥的楼道，我也说不清楚，也许是一种氛围的原因吧，在实验室的时候和机器交流的时候反而会更加自在一些，技术上也得到了飞速的提升。</p>
+<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><p>从生活的半年多的寝室直接搬了出来，夏天的时候睡在实验室，最近一个月比较冷于是在外面租了个房子，时间上感觉是过的挺快的，今年四月份加入实验室，现在已经八个多月了，如果要说为什么要从寝室搬出来睡在充满大妈恶意和老师的排斥的楼道，我也说不清楚，也许是一种氛围的原因吧，在实验室的时候和机器交流的时候反而会更加自在一些，技术上也得到了飞速的提升。</p>
 <p>但是一旦来到了考试周学习的进度基本上就会停滞不前不前了，可能这也是为什么天朝的CS本科生毕业之后技术都跟💩一样的原因之一吧。</p>
-<h1 id="从算法到技术"><a class="markdownIt-Anchor" href="#从算法到技术"></a> 从算法到技术</h1>
-<h2 id="初学算法"><a class="markdownIt-Anchor" href="#初学算法"></a> 初学算法</h2>
-<p>要说为什么会发生这样的转变，一个原因应该就是班助给我推荐了陈浩元学长，在寒假的时候刷了一下ACM的算法题，这也是我对于计算机入门的开始，大一上学期的时候玩玩闹闹也没有学到什么东西。后来开学又刷了一个月去新生赛玩了一下，虽然只拿了一个第六名，但是对于之前从来没有参加过这类比赛的我也算是一个小小的鼓励了吧。</p>
+<h1 id="从算法到技术"><a href="#从算法到技术" class="headerlink" title="从算法到技术"></a>从算法到技术</h1><h2 id="初学算法"><a href="#初学算法" class="headerlink" title="初学算法"></a>初学算法</h2><p>要说为什么会发生这样的转变，一个原因应该就是班助给我推荐了陈浩元学长，在寒假的时候刷了一下ACM的算法题，这也是我对于计算机入门的开始，大一上学期的时候玩玩闹闹也没有学到什么东西。后来开学又刷了一个月去新生赛玩了一下，虽然只拿了一个第六名，但是对于之前从来没有参加过这类比赛的我也算是一个小小的鼓励了吧。</p>
 <p>之后的事情却出乎了我的意料，本来是想着就这样刷算法题，到大二大三的时候去水个区域赛的牌子，到时候去当个算法工程师也不错。这个时候正好新思路招新摆台，本来我是没有什么兴趣的，但是在室友的踊跃报名之下，我决定去看看到底这个实验室是什么样子(大一上学期的时候觉得很厉害的说)，投了简历之后就来到了笔试环节，当时报的一个学习英语的班刚开课，时间冲突，于是我想那就不去了吧，反正待在陈浩元学长那刷题也不错。</p>
-<h2 id="ios组的生活"><a class="markdownIt-Anchor" href="#ios组的生活"></a> iOS组的生活</h2>
-<p>但是一条qq消息让这件事情出现了转机，当时的马均衡学长发来一条消息问我对iOS感不感兴趣，提前来面试一下，我突然激动了一下，因为以前从来没有过这种情况，于是我怀着激动的心情来到了新思路实验室。</p>
+<h2 id="iOS组的生活"><a href="#iOS组的生活" class="headerlink" title="iOS组的生活"></a>iOS组的生活</h2><p>但是一条qq消息让这件事情出现了转机，当时的马均衡学长发来一条消息问我对iOS感不感兴趣，提前来面试一下，我突然激动了一下，因为以前从来没有过这种情况，于是我怀着激动的心情来到了新思路实验室。</p>
 <p>第二天的早上我来到507的门口，看到里面的学长学姐对着电脑，上面呈现出五颜六色的代码块，对当时除了C语言什么也不会的我还是造成了相当大的冲击，后来就是面试过程了，问了我一些C语言有趣的的问题，因为刷了一个多月算法，加上当时还是想学，自己了解过，于是就免笔试通过了。</p>
 <p>之后就加入了iOS组进行考核，但不一样的是，带我的并不是本科生，而是一个研究生学长(金子威)，一开始并没有让我上手学习OC，更别说swift，而是继续巩固我的C语言，对于内存分区，指针有了深刻的理解之后才上手OC，接下来一个月考核的时间做了三个考核项目，第一天晚上其实就没回去，金子威学长很好心的给我提供了床和枕头，还有一个毯子，这种感觉其实还不错，然后就开始了我的逃课iOS之旅。</p>
-<h2 id="ios到geek"><a class="markdownIt-Anchor" href="#ios到geek"></a> iOS到Geek</h2>
-<p>在iOS待了半个学期之后就加入了金子威学长自己成立的Geek组，这是一个非常大胆的创新，他因此也承受了很多的压力，背了很多锅，最后成立下来到现在成长的很好付出了很多的努力，其实还是很感谢他的。</p>
+<h2 id="iOS到Geek"><a href="#iOS到Geek" class="headerlink" title="iOS到Geek"></a>iOS到Geek</h2><p>在iOS待了半个学期之后就加入了金子威学长自己成立的Geek组，这是一个非常大胆的创新，他因此也承受了很多的压力，背了很多锅，最后成立下来到现在成长的很好付出了很多的努力，其实还是很感谢他的。</p>
 <p>来到Geek组之后，似乎变成了以前电影中看到的人物，那些黑客们在黑窗口下飞速的操作，攻破一个又一个的服务器，在睡梦中的我都不自禁笑了起来，虽然也没有那么夸张，现在只是一个脚本小子罢了，高级的漏洞利用也没有实现过，所以当一些同学纷纷大神大神的叫起来的时候，我感觉如芒在背，甚至羞愧脸红，不是我强，是防护能力太弱呀！</p>
 <p>除了安全之外，产品能力也没有落下，接了一个外包项目，虽然因为对接问题没有结题，但是完成的还不错，给我的项目经历增色不少，同时对iOS的App运行原理、多线程、并发有了更深的理解，还在课余之时帮老师写了一些科研项目的算法实现，生活还是不紧不慢很充实的。</p>
-<h2 id="得到和失去"><a class="markdownIt-Anchor" href="#得到和失去"></a> 得到和失去</h2>
-<p>总体来说失去的应该就是我的学分吧😄，因为长期的不上课和期末懒得复习，导致我除了专业课基本每一门都是擦边球，虽然最后拿了奖学金，但是还是羞愧不已，后来也想通了，这些东西其实没什么还在乎的，虽然拿不了国奖，一等奖学金也够了，最主要的还是自身的技术，老实说我也不觉得上的这些课会对我有半毛钱的帮助。而且上课的催眠魔咒实在是太强大了(催眠就算了点名就过分了，难道不知道用点名留住学生的老师就像什么吗？)</p>
-<p>至于得到了应该就很多了，也无法一一说得清，技术上就可以直接参考博客，生活上得到了脖子疼和屁股疼😄，比赛方面主要是安全比赛中拿了两个奖，第一次出去和武汉大学的两个队一起都是二等奖，还是有些心中窃喜，后来想想估计是别人的CTF二队吧，一队可能就把我打肿了:P。</p>
+<h2 id="得到和失去"><a href="#得到和失去" class="headerlink" title="得到和失去"></a>得到和失去</h2><p>总体来说失去的应该就是我的学分吧:smile:，因为长期的不上课和期末懒得复习，导致我除了专业课基本每一门都是擦边球，虽然最后拿了奖学金，但是还是羞愧不已，后来也想通了，这些东西其实没什么还在乎的，虽然拿不了国奖，一等奖学金也够了，最主要的还是自身的技术，老实说我也不觉得上的这些课会对我有半毛钱的帮助。而且上课的催眠魔咒实在是太强大了(催眠就算了点名就过分了，难道不知道用点名留住学生的老师就像什么吗？)</p>
+<p>至于得到了应该就很多了，也无法一一说得清，技术上就可以直接参考博客，生活上得到了脖子疼和屁股疼:smile:，比赛方面主要是安全比赛中拿了两个奖，第一次出去和武汉大学的两个队一起都是二等奖，还是有些心中窃喜，后来想想估计是别人的CTF二队吧，一队可能就把我打肿了:P。</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/IMG_2644.JPG" alt="IMG_2644.JPG" title="" class="">
                 <p>IMG_2644.JPG</p>
             </figure>
-<p>第一次比赛的时候懵懂无知，只是刷了一下隐写术的题目，靠着之前的一点网络知识和linux工具在网络攻防的部分勉强不被打的太惨，但是一开始服务器做加固的时候因为一个文件上传的漏洞被打了好多分😢</p>
+<p>第一次比赛的时候懵懂无知，只是刷了一下隐写术的题目，靠着之前的一点网络知识和linux工具在网络攻防的部分勉强不被打的太惨，但是一开始服务器做加固的时候因为一个文件上传的漏洞被打了好多分:cry:</p>
 <figure class="image-box">
                 <img src="http://omunhj2f1.bkt.clouddn.com/IMG_2711.JPG" alt="IMG_2711.JPG" title="" class="">
                 <p>IMG_2711.JPG</p>
             </figure>
 <p>第二次比赛的时候也是临时被丢上去顶包，离二等奖之差一分，不得不说安全比赛真的很严格，奖项设置的这么少(是时候黑一把ACM了:P)，最过分的是来自主办方的恶意啊，把我的名字给打错了！！！这学期最后一次比赛是湖湘杯，很惨的是在复赛的时候被斩于马下，可能没有明白flag的py交易，还有那种完全没有道理的题目，不得不说完全不按套路出牌啊（韩红：兄弟你是来捣乱的吧），最后就到了考试周了，说是要复习吧，但是还是没有什么兴趣啊，最大的愿望是赶快做个抢红包的tweak啊！！！</p>
-<h1 id="2018的寄语"><a class="markdownIt-Anchor" href="#2018的寄语"></a> 2018的寄语</h1>
-<p>感觉未来的道路似乎都已经规划的差不多了，明年也许找个公司实习个暑假，然后就可以准备开始考研了，也许是华科吧，其实更想去浙大（浙大的AAA战队），考研好苦啊，好苦啊。之后大四就可以去玩耍了！！似乎这已经到20年了，倒不要紧，接下来就要猥琐发育，等神装再出山了。</p>
+<h1 id="2018的寄语"><a href="#2018的寄语" class="headerlink" title="2018的寄语"></a>2018的寄语</h1><p>感觉未来的道路似乎都已经规划的差不多了，明年也许找个公司实习个暑假，然后就可以准备开始考研了，也许是华科吧，其实更想去浙大（浙大的AAA战队），考研好苦啊，好苦啊。之后大四就可以去玩耍了！！似乎这已经到20年了，倒不要紧，接下来就要猥琐发育，等神装再出山了。</p>
 <p>在之后接任了Geek组的组长之后方方面面也要考虑的更加周全，其他的也不知道说什么了，总结结束！</p>
 ]]></content>
       
@@ -4540,6 +4646,19 @@
 <p>在这之外的一般称作全局IP，私有IP在一开始的时候没有打算要联网，在能交换私有IP和全局IP的NAT技术出现之后，配有私有IP的主机才能和配有全局IP的主机进行通信。</p>
 <p>因为全局IP要求保持全球内的唯一，但是私有地址不需要，只需要在同一个域内保持唯一即可。不同域内的私有IP相同不会影响使用。</p>
 <p>当下学校、医院等地方的IP地址分配都是用私有IP结合NAT技术使用，尽管如此，和全局IP比还是有一些限制，但由于IPv6没有得到普及，IPv4又快耗尽，所以NAT配上私有IP也是互联网的现状。</p>
+<p>那么这个NAT技术的本质到底是什么呢？今天介绍NAT的一种，也就是端口映射，它将外网主机的 IP 地址的一个端口映射到内网中一台机器，提供相应的服务。当用户访问该 IP 的这个端口时，服务器自动将请求映射到对应局域网内部的机器上。</p>
+<p>我们平时经过路由器，通过宽带，最终去到运营商那边，数据是从运营商出去，最终数据是回到运营商那边，运营商再把数据发送到用户的电脑。</p>
+<ul>
+<li>路由器，至少有两个端口：WAN 口和 LAN 口。</li>
+<li>WAN：接外部 IP 地址用，通常指的是出口，转发来自内部 LAN 接口的 IP 数据包，这个口的 IP 是唯一的。</li>
+<li>LAN：接内部 IP 地址用，LAN 内部是交换机。</li>
+</ul>
+<p>这里，我们简化这个过程，我们把运营商当做一个 NAT 设备。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png" alt="屏幕快照 2018-01-23 上午10.13.58.png" title="" class="">
+                <p>屏幕快照 2018-01-23 上午10.13.58.png</p>
+            </figure>
+<p>通过这样的层层端口映射，最终保证地址(IP + 端口)的唯一性。A 和 B 访问百度服务器，尽管它们的局域网 IP 是一样的，但是最终它们访问百度的地址(IP + 端口)是唯一的，所以，百度服务器回复时，原路返回时能够区分到底给谁回。</p>
 <p>Tips：为了安全问题，我们必须通过IP地址和主机找到管理人，可以使用<code>whois</code>命令来查看IP来源</p>
 <h3 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h3><p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
 <p>路由表的形成方式有两种，一种是管理员手动设置，叫做静态路由控制，还有一种是路由器和其他路由器相互交换信息的时候自动刷新，叫做动态路由控制。为了让动态路由及时刷新路由表，在网络互连的路由器之间都必须设置好路由协议，保证正常的读取路由控制信息。这个表是根据路由协议制作而成的。</p>
