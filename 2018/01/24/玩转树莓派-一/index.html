@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/01/24/玩转树莓派-一/">
+    
+    
+    <title>玩转树莓派(一) | Peterpan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="计算机硬件">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>玩转树莓派(一)</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">玩转树莓派(一)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-24T12:58:17.000Z" itemprop="datePublished" class="page-time">
+  2018-01-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/树莓派/">树莓派</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-玩转树莓派-一"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">玩转树莓派(一)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-24 20:58:17" datetime="2018-01-24T12:58:17.000Z"  itemprop="datePublished">2018-01-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/树莓派/">树莓派</a></li></ul>
+
+
+
+            
+	<span id="/2018/01/24/玩转树莓派-一/" class="leancloud_visitors" data-flag-title="玩转树莓派(一)" title="玩转树莓派(一)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/01/24/玩转树莓派-一/#comment">
+            <span class="valine-comment-count" data-xid="/2018/01/24/玩转树莓派-一/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%889.04.31.png" alt="">
+<p>在树莓派上折腾ARM的汇编，玩点小游戏，轻松上网岂不美哉，顺便恶补一下硬件知识</p>
+<a id="more"></a>
+<h1 id="什么是树莓派"><a class="markdownIt-Anchor" href="#什么是树莓派"></a> 什么是树莓派</h1>
+<p>这个玩意其实说白了就是一个便宜的教育用微机，非专业的其实玩他的意义不大，正常人想玩回家拿个iPad躺在床上看电视剧，就算想省钱买个国产的也是可以的，拿着树莓派除了玩一些弱智游戏别无他用，它甚至还没有你的手机性能好呢，而且电脑上都不会装linux的好么。</p>
+<p>话又说回来，其实在专业人士手里他其实也是一个玩具，说拿它跑个人网站，我好几台云服务器，拿他做NAS或者私有的git服务器，等板子少了数据丢失如果没有做备份哭都没有地方哭。所以如果有需要一个持续开机的电脑，一个用来学习Linux，学习简单编程的电脑，或者用它来打造某些好玩的设备，那它就比较合适。</p>
+<p>总的来说，树莓派就是一个玩具，今天我们就一起来玩转树莓派吧</p>
+<h1 id="装系统"><a class="markdownIt-Anchor" href="#装系统"></a> 装系统</h1>
+<p>给树莓派装系统，实质上也就是把系统烧录到SD卡中，一开始我不知道，在官网上下了一个Lite版的，只有一个恢复模式，类似于一个Mac上的Recovery mode，上面联网装操作系统，但是由于这个网络状况，一直都下载不成功，于是我重新看了一遍教程，将镜像下载下来，然后将镜像烧录卡中。</p>
+<p>这其中需要注意有两点，一个是这个SD卡最好是8G以上，而且装镜像之前要格式化（推荐使用SD Formatter），格式化成FAT32文件系统，另外一点就是烧录的工具推荐使用Win32DiskManaer，总的教程我丢了一份在我的云服务器上，直接ftp访问下载即可。<a href="ftp://118.89.38.168/data/" target="_blank" rel="external">下载地址</a></p>
+<p>安装了之后如果我们是直接在树莓派上操作会发现键盘用起来有些奇怪，这是因为默认是英式键盘的关系，我们使用命令去修改默认的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%8810.34.27.png" alt="屏幕快照 2018-01-24 下午10.34.27.png" title="" class="">
+                <p>屏幕快照 2018-01-24 下午10.34.27.png</p>
+            </figure>
+<p>剩下的可以参考网上的教程了，在我修改了之后还是发现打不出英文的双引号，然后我就放弃了，之后都是用ssh直接连过去，当个稳定的服务器还是不错的，目前只是在上面跑一个ftp服务，毕竟四处皆网盘嘛，多做几次备份总是没坏处的，就是这么的小心谨慎。</p>
+<h1 id="用途"><a class="markdownIt-Anchor" href="#用途"></a> 用途</h1>
+<p>对技术人员来说，可以做的事情就很多了，可以将它做为一台个人服务器，在上面放网站或者博客之类的，也可以做硬件改造，做成一个阅读器，当蓝牙音箱，或者作为一个路由器/跳板，在上面跑加速，如果可以跑一个集群起来还可以做一套智能家居了。总的来说，基本就是一个可塑性极强的玩具(只对技术人员来说)。</p>
+<p>下面我们来看看怎么给树莓派装上一个风扇，当然现在有可能买的时候就已经装好了：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.06.08.png" alt="屏幕快照 2018-01-25 上午12.06.08.png" title="" class="">
+                <p>屏幕快照 2018-01-25 上午12.06.08.png</p>
+            </figure>
+<p>然后我们需要支持中文，在本机上折腾的话还是会有点麻烦，就像我当时在Kali上安装输入法的时候也下了很大的功夫，建议还是通过ssh来连接，如果你不是把它当作一个微主机来用的话。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get instal ttf-wqy-microhei</div><div class="line">sudo apt-get install scim-pinyin</div><div class="line">sudo dpkg-reconfigure locales</div></pre></td></tr></table></figure>
+<p>这里要注意的一点就是Raspbian在现在的版本是默认禁用ssh的，所以我们通过修改config来开启，网络的配置上我们为了求稳选择和路由器无线连接，并且为它配置一个静态IP。</p>
+<p>Raspbian是基于Debian的一个优化版本，所以在配置上也基本是兼容的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line">iface eth0 inet dhcp</div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line">iface wlan0 inet manual</div><div class="line">    wpa-roam /home/pi/wlan0.conf</div><div class="line">iface default inet static</div><div class="line">    address 192.168.1.7</div><div class="line">    gateway 192.168.1.1</div><div class="line">    netmask 255.255.255.0</div><div class="line">    network 192.168.1.0</div><div class="line">    broadcast 192.168.1.255</div></pre></td></tr></table></figure>
+<p>配置写在<code>/etc/network/interfaces</code>中。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.11.17.png" alt="屏幕快照 2018-01-25 上午12.11.17.png" title="" class="">
+                <p>屏幕快照 2018-01-25 上午12.11.17.png</p>
+            </figure>
+<p>目前已经正常运行了一天了，但是很坑的一点就是如果这个玩具坏掉，也许会把你的卡槽都烧掉，到时候可能你就不会再想玩这种玩具了。</p>
+<h1 id="开启smb实现文件共享"><a class="markdownIt-Anchor" href="#开启smb实现文件共享"></a> 开启SMB实现文件共享</h1>
+<p>首先要更新一下软件源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
+<p>安装samba</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install samba samba-common-bin</div></pre></td></tr></table></figure>
+<p>安装完成后，配置/etc/samba/smb.conf文件.</p>
+<p>在其最后添加以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#================================================</div><div class="line"> </div><div class="line">[share]                                   #共享文件的名称，将在网络上以此名称显示</div><div class="line">        path = /samba                     #共享文件的路径</div><div class="line">        valid users = root pi             #允许访问的用户，这里我用的是root 和 pi 两个用户</div><div class="line">        browseable = yes                  #允许浏览                                 </div><div class="line">        public = yes                      #共享开放                                      </div><div class="line">        writable = yes                    #可写</div><div class="line"> </div><div class="line">#================================================</div></pre></td></tr></table></figure>
+<p>其他的权限修改可以自行查阅资料，保存后，重启samba服务，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/samba restart</div></pre></td></tr></table></figure>
+<p>最后添加共享用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smbpasswd –a pi  #直接使用了默认用户pi</div></pre></td></tr></table></figure>
+<p>之后的各种权限配置就可以参考ftp了，正好今天也刚在腾讯云上搭了一个ftp，就说一个比较常见的问题。关于匿名用户的权限，我们通过账号密码登陆的一般显示的都是<code>/home/ftp</code>下的文件路径，但是匿名用户显示的则是<code>/srv/ftp</code>下的，所以匿名用户的权限体现只能在这个目录下去体现。</p>
+<p>之前还在配置文件中改了半天，都不能匿名用户显示读取文件，原来是文件放错了位置。</p>
+<h1 id="利用vnc远程控制"><a class="markdownIt-Anchor" href="#利用vnc远程控制"></a> 利用VNC远程控制</h1>
+<p>很多windows的用户想要图形化操作(需求不同)，所以单纯的命令行并不能满足我们，这个时候我们就要添加一个vnc server，再用相应软件连接（该教程为简化版）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line"></div><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure>
+<p>安装完成后运行<code>tightvncserver</code>即可</p>
+<p>这时会要求输入控制密码，选择性输入查看密码，查看密码只能用来查看桌面，而控制密码才能对桌面进行操作。</p>
+<p>此后，在电脑上安装<a href="http://www.tightvnc.com/" target="_blank" rel="external">vnc软件</a></p>
+<p>安装时，选择自定义安装，仅安装tightvncviewer就可以。</p>
+<p>每个用户可以启动多个VNCSERVER远程桌面，它们用ip加端口号：ip:1、ip:2、ip:3 来标识、区分，使用同一端口会使另外登录的用户自动退出。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.35.07.png" alt="屏幕快照 2018-01-25 上午12.35.07.png" title="" class="">
+                <p>屏幕快照 2018-01-25 上午12.35.07.png</p>
+            </figure>
+<p>我们也可以选择安装<a href="http://www.tightvnc.com/download.php" target="_blank" rel="external">VNC Viewer</a>，这个更加轻量级一些</p>
+<p>下载Window版的 VNC-Viewer ，无需安装，解压即可。 比如，解压出：VNC-Viewer-5.0.3-Windows-32bit.exe</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.36.42.png" alt="屏幕快照 2018-01-25 上午12.36.42.png" title="" class="">
+                <p>屏幕快照 2018-01-25 上午12.36.42.png</p>
+            </figure>
+<p>参考：<a href="https://elinux.org/RPi_VNC_Server" target="_blank" rel="external">官网教程</a></p>
+
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-24T16:40:26.000Z" itemprop="dateUpdated">2018-01-25 00:40:26</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/01/24/玩转树莓派-一/" target="_blank" rel="external">http://yoursite.com/2018/01/24/玩转树莓派-一/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机硬件/">计算机硬件</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/24/玩转树莓派-一/&title=《玩转树莓派(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/24/玩转树莓派-一/&title=《玩转树莓派(一)》 — Peterpan's Blog&source=
+在树莓派上折腾ARM的汇编，玩点小游戏，轻松上网岂不美哉，顺便恶补一下硬件知识" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/23/ARM汇编上手-一/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ARM汇编上手</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是树莓派"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 什么是树莓派</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#装系统"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 装系统</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用途"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 用途</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开启smb实现文件共享"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 开启SMB实现文件共享</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#利用vnc远程控制"><span class="post-toc-number">5.</span> <span class="post-toc-text"> 利用VNC远程控制</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/24/玩转树莓派-一/&title=《玩转树莓派(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/24/玩转树莓派-一/&title=《玩转树莓派(一)》 — Peterpan's Blog&source=
+在树莓派上折腾ARM的汇编，玩点小游戏，轻松上网岂不美哉，顺便恶补一下硬件知识" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQU7EMAwFUO5/6SKxhSn/uwFpkpfVaChp3iwsx/bHR7yur5U/c71Y97t9f3LxwsDAeFvGdbsSxqvnk29mP8cP/4uBgXEAI9/u1QvaQHz/U+Znw8DAwHj1TB6m25QRAwMDY23ATYJmHlgxMDAw7hlPQueTOtgsQGNgYJzGaBsD//n5D/sbGBgYb8K4ypUU7lc1OItTYWBgbM24v47mIxctOImWbQEOAwNjb8YsjD4pnOXFtXs8BgbGCYxZES35axt2Z/v/kOFiYGBsx0jCa96qbAH376qLcRgYGFsz8nL880Qwv7gOz4mBgbEdYzbWkITm2SDFLE3EwMDYm5EX6JN0LQ+p7YW2wGNgYGzHyIvys6wz3+FR4wEDA+MAxpPmZTvItSD5+34GDAyMrRlJirYqBczTwaQtEY1cYGBgbMFoy/FtQS1vQM6aDcULMDAwtmM8H6eYNRWGA2cYGBgHMPIgmDcS2tGKvOUQ3cUxMDA2YrSNyTYpbGe3ZpkeBgbG3oz2QG2rst25vcpiYGCcw8g/59fR9jKcNAOG5TYMDIw3Z8zaA/k419pBsShBxMDA2I5xlSsvt+UBtx1Nw8DAOI3Rhrk2sM5C87BqiIGBsTUjCbJt03E2alYX2jAwMA5jzJqOM0Abmu+DPgYGBkabGq5qGCRX2WHAxcDAOICRF85axqMrNAYGxgGMvFi/Nuy2zYZfAi4GBsamjPYC2R4l/z4nLWhhYmBgvAfjE6gkx2Up+koeAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
+</body>
+</html>
