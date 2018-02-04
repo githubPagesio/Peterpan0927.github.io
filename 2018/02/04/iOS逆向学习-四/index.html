@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/02/04/iOS逆向学习-四/">
+    
+    
+    <title>iOS逆向学习(四) | Peterpan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Re">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>iOS逆向学习(四)</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">iOS逆向学习(四)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-04T13:09:36.000Z" itemprop="datePublished" class="page-time">
+  2018-02-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/实战分享/">实战分享</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-iOS逆向学习-四"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">iOS逆向学习(四)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-04 21:09:36" datetime="2018-02-04T13:09:36.000Z"  itemprop="datePublished">2018-02-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/实战分享/">实战分享</a></li></ul>
+
+
+
+            
+	<span id="/2018/02/04/iOS逆向学习-四/" class="leancloud_visitors" data-flag-title="iOS逆向学习(四)" title="iOS逆向学习(四)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/02/04/iOS逆向学习-四/#comment">
+            <span class="valine-comment-count" data-xid="/2018/02/04/iOS逆向学习-四/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8810.40.46.png" alt=""></p>
+<p>在初步上手了所有的工具之后，我们就需要来实战检测一下了，今天我以修改截屏功能和QQ的一些逆向经验来做一些小小的分享。</p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在开始学习iOS逆向的人一般都会有正向开发的基础，那么我们会发现大部分Tweak当中都是用的MRC去编译OC文件，我们写的一些Tweak同样也要遵守这样的规则，但是这样会对一些已经熟悉ARC的程序猿带来很大的困扰，这里就简述一下如何使用ARC去编译OC文件：</p>
+<p>我们只需要在Theos工程的MakeFile中添加一句话即可：</p>
+<blockquote>
+<p>ADDITIONAL_OBJFLAGS = -fobjc-arc</p>
+</blockquote>
+<p>后面的参数其实和我之前在讲MRC的时候在Xcode中添加的编译参数其实是一样的，那么类比过来就很简单了。</p>
+<p>另外在熟悉了工具之后我也看过别人写的一些Tweak，主要是由C/C++、OC写的，其中所用的一些语法需要有一定的C++基础，比如说会经常出现<code>extern &quot;C&quot;...</code>这样的语句，所以推荐最好有扎实的C基础和C++入门并且具备一定的正向开发和汇编基础再去进行逆向的学习，不然一定会很痛苦的。</p>
+<h1 id="美化截屏"><a href="#美化截屏" class="headerlink" title="美化截屏"></a>美化截屏</h1><p>当我们看到手机截屏的时候，是否可以想到可以自动的调整保存图片或着不保存，有没有想过切屏的时候可以做一些自己的小DIY来去美化这个过程，那么我们就来一起看看吧。</p>
+<p>首先我们要知道截屏是SpringBoard在控制的，于是乎我们的第一步是从头文件开始分析，class-dump出头文件之后:</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8811.03.45.png" alt="屏幕快照 2018-02-04 下午11.03.45.png" title="" class="">
+                <p>屏幕快照 2018-02-04 下午11.03.45.png</p>
+            </figure>
+<p>可以看到有接近1300个头文件，如果我们每个每个看那还不得累死啊，于是乎我们想到因为是寻找截屏函数，在OC中的易读性是非常高的，所以我们选择使用<code>grep</code>去做一下模式匹配:</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8811.05.19.png" alt="屏幕快照 2018-02-04 下午11.05.19.png" title="" class="">
+                <p>屏幕快照 2018-02-04 下午11.05.19.png</p>
+            </figure>
+<p>果不其然，一下就被我们找到了这个类在哪里，那么掌控截屏应该就是这个SBScreenShotter类了，我们就来通过头文件看看有什么公有方法可以调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#import &quot;NSObject.h&quot;</div><div class="line"></div><div class="line">@interface SBScreenShotter : NSObject</div><div class="line">&#123;</div><div class="line">    _Bool _writingScreenshot;</div><div class="line">    unsigned long long _screenshotWriteCount;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (id)sharedInstance;</div><div class="line">- (void)_decrementWriteCount;</div><div class="line">- (void)_incrementWriteCount;</div><div class="line">- (_Bool)_isWritingSnapshot;</div><div class="line">- (void)finishedWritingCarScreenshot:(id)arg1 didFinishSavingWithError:(id)arg2 context:(void *)arg3;</div><div class="line">- (void)finishedWritingScreenshot:(id)arg1 didFinishSavingWithError:(id)arg2 context:(void *)arg3;</div><div class="line">- (void)saveScreenshot:(_Bool)arg1;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>通过开发经验就可以看出来最后一个函数就是来保存截屏的了，直接通过<code>cycript</code>来测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#cy choose(SBScreenShotter)</div><div class="line">[0x1e457d81]</div><div class="line">#cy [#0x1e457d81 saveScreenshot:YES]</div><div class="line">#cy [#0x1e457d81 saveScreenshot:NO]</div></pre></td></tr></table></figure>
+<p>通过测试之后，原来那个BOOL类型的参数就是判断是否保存图片的了，我们会发现参数是YES还是NO的区别就是屏幕上是否会闪出白光，因为是屏幕产生的，所以我们可以大胆的猜测这个颜色也是可以更改的，那么我们继续去寻找一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -r flash SpringBoard/</div></pre></td></tr></table></figure>
+<p>通过这个我们定位到一个<code>SBScreenFlash</code>类，里面的方法应该就是我们所需要寻找的了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#import &quot;NSObject.h&quot;</div><div class="line"></div><div class="line">@class NSMutableArray, UIScreen, UIView, UIWindow;</div><div class="line"></div><div class="line">@interface SBScreenFlash : NSObject</div><div class="line">&#123;</div><div class="line">    NSMutableArray *_flashCompletionBlocks;</div><div class="line">    UIScreen *_screen;</div><div class="line">    UIWindow *_flashWindow;</div><div class="line">    UIView *_flashView;</div><div class="line">    _Bool _windowVisible;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (id)mainScreenFlasher;</div><div class="line">- (void)_animationDidStop:(id)arg1 finished:(id)arg2 context:(void *)arg3;</div><div class="line">- (void)_createUIWithColor:(id)arg1;</div><div class="line">- (void)_orderWindowFront:(id)arg1 withColor:(id)arg2;</div><div class="line">- (void)_orderWindowOut:(id)arg1;</div><div class="line">- (void)_tearDown;</div><div class="line">- (void)dealloc;</div><div class="line">- (void)flashColor:(id)arg1 withCompletion:(CDUnknownBlockType)arg2;</div><div class="line">- (void)flashWhiteWithCompletion:(CDUnknownBlockType)arg1;</div><div class="line">- (id)initWithScreen:(id)arg1;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>从代码的第21行可以精准的定位到这个函数，但是这个参数<code>arg1</code>到底是什么类型，我们并不清楚，难道就此放弃？或者去猜测，这都不是合理的选择，我们可以通过编写Tweak去测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">%hook SBScreenFlash</div><div class="line"> - (void)flashColor:(id)arg1 withCompletion:(id)arg2&#123;</div><div class="line"> 	%orig;</div><div class="line">  	NSLog(@&quot;flashColor: %s, %@&quot;, object_getClassName(arg1), arg1);</div><div class="line">&#125;</div><div class="line">%end</div></pre></td></tr></table></figure>
+<p>然后安装之后再测试一遍，到系统日志里面去查看一下</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8811.20.17.png" alt="屏幕快照 2018-02-04 下午11.20.17.png" title="" class="">
+                <p>屏幕快照 2018-02-04 下午11.20.17.png</p>
+            </figure>
+<p>我们可以看到这个应该是UIColor的一个子类，根据继承的性质我们就可以知道该如何传递参数了，而且UIColor是一个公开类，所以解析到这里我们就可以编写Tweak了，当然首先用<code>cycript</code>测试一遍，直接用单例拿到对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#cy [[SBScreenFlash mainScreenFlasher] flashColor:[UIColor redColor] withCompletion:nil]</div></pre></td></tr></table></figure>
+<p>果然屏幕闪过一道红光，那么这就算是成功了，但是单一的颜色不能满足需求，于是我决定使用随机的颜色：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%hook SBScreenFlash</div><div class="line"></div><div class="line">- (void)flashColor:(UIColor *)color withCompletion:(id)arg2&#123;</div><div class="line">  int R = (arc4random() % 256) ;</div><div class="line">  int G = (arc4random() % 256) ;</div><div class="line">  int B = (arc4random() % 256) ;</div><div class="line">  %orig([UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1], nil);</div><div class="line">&#125;</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure>
+<p>注意如果我们用的是MRC去编译的话就必须采用上面这种写法，如果使用下面这种写法必须要在MakeFile中加入ARC的编译参数，不然每一次截屏都会调用的是同一个UIColor对象，那么颜色也会是一样的，就不是随机了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">%hook SBScreenFlash</div><div class="line"></div><div class="line">- (void)flashColor:(UIColor *)color withCompletion:(id)arg2&#123;</div><div class="line">  int R = (arc4random() % 256) ;</div><div class="line">  int G = (arc4random() % 256) ;</div><div class="line">  int B = (arc4random() % 256) ;</div><div class="line">  UIColor *to = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];</div><div class="line">  %orig(to, nil);</div><div class="line">&#125;</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure>
+<p>这是因为在MRC中用完一个对象之后要向他发送<code>release</code>消息，不然它将一直的滞留在内存之中，之后SpringBoard挂掉之后才会被回收。虽然不太清楚底层实现，所以我猜测MRC编译的时候每一次都会调用上一次的对象，第一次随机出来什么颜色就是什么颜色，之后respring之后才会改变，根据我的测试也确实如此，加了arc编译之后就可以正常的random啦。所以这是一个需要注意的小点，当然如果有谁知道了它的底层实现是如何导致这样的结果，可以在我的博客下方进行留言。</p>
+<h1 id="对QQ的逆向分析"><a href="#对QQ的逆向分析" class="headerlink" title="对QQ的逆向分析"></a>对QQ的逆向分析</h1><p>只是玩一下截屏当然不能满足我们的好奇心，于是我又将手伸向了企鹅，但是企鹅是从StoreApp中下载的应用，所以首先应该砸壳，砸壳之后才能dump出他的头文件，但是dump之后发现出来了两个根本没用的头文件，所以class-dump也不是万能的，这个时候并不能止步，因为之前写过类似的IM类App，加上还有Reveal对其UI分析，所以我决定硬刚：</p>
+<p>中间省略一长串在<code>cycript</code>中的测试过程，其实主要是测试控制器之间的关系，果然不出我所料，主界面是采用的抽屉控制器，然后是一个TabBarVc，里面有三个<code>UINavigationController</code>，然后每个Vc中又套着自定义的控制器，把这些都给撸顺了之后，就可以使用一下我们的黑魔法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMethods</span>(<span class="params">className</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> count = <span class="keyword">new</span> <span class="keyword">new</span> Type(<span class="string">"I"</span>);</div><div class="line">  <span class="keyword">var</span> methods = class_copyMethodList(objc_getClass(className), count);</div><div class="line">  <span class="keyword">var</span> methodsArray = [];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; *count; i++) &#123;</div><div class="line">    <span class="keyword">var</span> method = methods[i];</div><div class="line">    methodsArray.push(&#123;<span class="attr">selector</span>:method_getName(method), <span class="attr">implementation</span>:method_getImplementation(method)&#125;);</div><div class="line">  &#125;</div><div class="line">  free(methods);</div><div class="line">  free(count);</div><div class="line">  <span class="keyword">return</span> methodsArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过这个类我们可以获取一个类的所有方法，但是这个并不是万能的，随意使用会导致程序crash掉，在这里我就不对整个QQ做介绍了，只分析一下<code>DrawerViewController</code></p>
+<p>在命令行中执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#cy printMethod(DrawerViewController)</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8811.52.24.png" alt="屏幕快照 2018-02-04 下午11.52.24.png" title="" class="">
+                <p>屏幕快照 2018-02-04 下午11.52.24.png</p>
+            </figure>
+<p>出来了一堆密密麻麻的函数，就拿<code>slideIn/OutByClick</code>举个例子吧，通过名字就知道这个应该是对侧边栏进行操作，滑进滑出，掌握了这些方法之后整个QQ也就为我们所掌控了，想要开发新的功能的话就需要更进一步的学习了，这里就不多提了，要善用利用工具和理性分析思考，这样就会发现逆向工程的世界特别的有趣。</p>
+<p>作为友好提示的说一下就是如果在<code>cycript</code>中设置View的frame的时候是无法使用<code>initWithFrame</code>方法的，我们要么选择通过结构体，要么通过字典格式来表示我们的rect:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">rect = <span class="keyword">new</span> (<span class="keyword">struct</span> CGRect)</div><div class="line">rect-&gt;origin.x = <span class="number">10</span></div><div class="line">rect-&gt;origin.y = <span class="number">10</span></div><div class="line">rect-&gt;size.width = <span class="number">10</span></div><div class="line">rect-&gt;size.height = <span class="number">10</span></div><div class="line">[view setFrame:*rect];</div></pre></td></tr></table></figure>
+<p>或者我们直接选择用字典的格式来表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rect = &#123;0:&#123;0:10,1:10&#125;,1:&#123;0:10,1:10&#125;&#125;</div></pre></td></tr></table></figure>
+<p>这个一开始还折腾了半天，按照上面一种写法必须要加*，因为rect本身是一个结构体，所以要解引用将地址传过去。</p>
+
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-02-04T16:05:26.000Z" itemprop="dateUpdated">2018-02-05 00:05:26</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/02/04/iOS逆向学习-四/" target="_blank" rel="external">http://yoursite.com/2018/02/04/iOS逆向学习-四/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/04/iOS逆向学习-四/&title=《iOS逆向学习(四)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/04/iOS逆向学习-四/&title=《iOS逆向学习(四)》 — Peterpan's Blog&source=
+在初步上手了所有的工具之后，我们就需要来实战检测一下了，今天我以修改截屏功能和QQ的一些逆向经验来做一些小小的分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/02/iOS逆向学习-三/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS逆向学习(三)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#美化截屏"><span class="post-toc-number">2.</span> <span class="post-toc-text">美化截屏</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对QQ的逆向分析"><span class="post-toc-number">3.</span> <span class="post-toc-text">对QQ的逆向分析</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/04/iOS逆向学习-四/&title=《iOS逆向学习(四)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/04/iOS逆向学习-四/&title=《iOS逆向学习(四)》 — Peterpan's Blog&source=
+在初步上手了所有的工具之后，我们就需要来实战检测一下了，今天我以修改截屏功能和QQ的一些逆向经验来做一些小小的分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3aS27DMAwFwNz/0i3QbWD3kZKDlhqtgsRQNV6w/Oj1itfXz3r/fPXr1TNXT76v1xMLAwPj3zKS7a6+SXbIV3VnDAyM0xh5kL3f7n63PDTnZ8PAwMDoJXa98IqBgYGxl1Etd3tHx8DAwKgWsUmqd7/zgy05DAyM0YyVwcDTnz8038DAwPjDjPUS9D5c5t+vlMcYGBizGetN/+rwIHkp1QEqBgbGbEZ+3SHJyqrNsm0tPAwMjNGMXgFZHU9GUT9u6hX+b2BgYIxg7Aqmu46Yl8rRDBYDA2MEo9qIrzbdyvV0a5yJgYFxAiO/KlFtlu0dM0RFLwYGxjhG/mhveJCkd73xwOVgAAMDYyijlwjeH3epHC3uj4GBcQJjvVmWH7dwuN4kFgMDYzSjmiZWk8hqMC0kiBgYGMcwkqQtCdAr17ySv3h52QIDA+NIRvX6Vx4uV3hRhouBgTGI0Ssm83D89EgAAwPjBEZ1VLk+vKwG6KVQi4GBMYKRN/rzhC8Pu9XUEwMD40zG00Vpnur1mm4YGBgnMHpXwapBufrMhoWBgTGI8VVc+Zhz/RJY3nTDwMCYzajGtF6zbL0kvj8PBgbGCYxew6s6PMjfX/UMGBgY5zCqFyM+X7L+krBiYGBgFNO+3jAgeXGbAy4GBsY4Rn6BbCVxbAZlDAyMAxh5EVsNl9UGXK9Jh4GBMZuxEpR3lb5JArp5voGBgfE/GN/6yMJ4xpXf1gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
+</body>
+</html>
