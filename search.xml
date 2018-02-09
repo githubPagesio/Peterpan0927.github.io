@@ -3,7 +3,7 @@
   
     
     <entry>
-      <title><![CDATA[iOS逆向学习(五)]]></title>
+      <title></title>
       <url>/2018/02/07/iOS%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0-%E4%BA%94/</url>
       <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt=""></p>
 <p>这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。</p>
@@ -62,6 +62,7 @@
 <li>根据类来获取属性，虽然在上一章博客中说过，但是现在一用就会崩，所以可以尝试这个，isa传递true:</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMethods</span>(<span class="params">className, isa</span>) </span>&#123; </div><div class="line">    <span class="keyword">var</span> count = <span class="keyword">new</span> <span class="keyword">new</span> Type(<span class="string">"I"</span>);</div><div class="line">    <span class="keyword">var</span> classObj = (isa != <span class="literal">undefined</span>) ? objc_getClass(className)-&gt;isa :     </div><div class="line">    objc_getClass(className); </div><div class="line">    <span class="keyword">var</span> methods = class_copyMethodList(classObj, count); </div><div class="line">    <span class="keyword">var</span> methodsArray = [];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; *count; i++) &#123; </div><div class="line">        <span class="keyword">var</span> method = methods[i]; </div><div class="line">        methodsArray.push(&#123;<span class="attr">selector</span>:method_getName(method),     </div><div class="line">        <span class="attr">implementation</span>:method_getImplementation(method)&#125;);</div><div class="line">    &#125;</div><div class="line">        free(methods); </div><div class="line">        <span class="keyword">return</span> methodsArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>补充：现在问题已经解决了，在Cydia中将版本装回之前的0.9.0.x版本即可。</p>
 <ol>
 <li>获取当前的控制器：</li>
 </ol>
@@ -71,16 +72,117 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cy# [button allTargets]</div><div class="line">[NSSet setWithArray:@[#&quot;&lt;ViewController: 0x20869990&gt;&quot;]]]</div><div class="line">cy# [button allControlEvents]</div><div class="line">64</div><div class="line">cy# [button actionsForTarget:#0x20869990 forControlEvent:64]</div><div class="line">@[&quot;onClick&quot;]</div></pre></td></tr></table></figure>
 <p>剩下的还有创建分类，block等等，不是特别的常用，至少我还没用到，就先不提了，如果想看完整的可以去Wiki上搜索cycript tricks，里面有一些更加神奇的技巧。</p>
-<h1 id="Mach-O简介和判断壳"><a href="#Mach-O简介和判断壳" class="headerlink" title="Mach-O简介和判断壳"></a>Mach-O简介和判断壳</h1><p>#2015移动安全挑战赛尝试</p>
+<h1 id="Mach-O简介和判断壳"><a href="#Mach-O简介和判断壳" class="headerlink" title="Mach-O简介和判断壳"></a>Mach-O简介和判断壳</h1><p>书中我们学到了一个砸壳的工具叫做<code>dumpdecrypted</code>，那么我们如何简单而又快速的判断一个App到底有没有壳呢？在这里先卖个关子，介绍一下Mach-O先：</p>
+<p><code>Mach-O</code> 是 <code>Mach object</code> 文件格式的缩写，它是一种用于记录可执行文件、对象代码、共享库、动态加载代码和内存转储的文件格式。作为 a.out 格式的替代品，Mach-O 提供了更好的扩展性，并提升了符号表中信息的访问速度。</p>
+<p>大多数基于 Mach 内核的操作系统都使用 <code>Mach-O</code>。<code>NeXTSTEP</code>、<code>OS X</code>和 <code>iOS</code> 是使用这种格式作为本地可执行文件、库和对象代码的例子。这种可执行文件的格式如下图所示（图是盗来的）：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.17.41.png" alt="屏幕快照 2018-02-08 上午11.17.41.png" title="" class="">
+                <p>屏幕快照 2018-02-08 上午11.17.41.png</p>
+            </figure>
+<p>文件由三部分组成：<code>Header</code>、<code>Load Commands</code>、<code>Data</code>，下面一一介绍：</p>
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * The 32-bit mach header appears at the very beginning of the object file for</div><div class="line"> * 32-bit architectures.</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> mach_header &#123;</div><div class="line">	<span class="keyword">uint32_t</span>	magic;		<span class="comment">/* mach magic number identifier */</span></div><div class="line">	<span class="keyword">cpu_type_t</span>	cputype;	<span class="comment">/* cpu specifier */</span></div><div class="line">	<span class="keyword">cpu_subtype_t</span>	cpusubtype;	<span class="comment">/* machine specifier */</span></div><div class="line">	<span class="keyword">uint32_t</span>	filetype;	<span class="comment">/* type of file */</span></div><div class="line">	<span class="keyword">uint32_t</span>	ncmds;		<span class="comment">/* number of load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	sizeofcmds;	<span class="comment">/* the size of all the load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/* Constant for the magic field of the mach_header (32-bit architectures) */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	MH_MAGIC	0xfeedface	<span class="comment">/* the mach magic number */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_CIGAM	0xcefaedfe	<span class="comment">/* NXSwapInt(MH_MAGIC) */</span></span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * The 64-bit mach header appears at the very beginning of object files for</div><div class="line"> * 64-bit architectures.</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> mach_header_64 &#123;</div><div class="line">	<span class="keyword">uint32_t</span>	magic;		<span class="comment">/* mach magic number identifier */</span></div><div class="line">	<span class="keyword">cpu_type_t</span>	cputype;	<span class="comment">/* cpu specifier */</span></div><div class="line">	<span class="keyword">cpu_subtype_t</span>	cpusubtype;	<span class="comment">/* machine specifier */</span></div><div class="line">	<span class="keyword">uint32_t</span>	filetype;	<span class="comment">/* type of file */</span></div><div class="line">	<span class="keyword">uint32_t</span>	ncmds;		<span class="comment">/* number of load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	sizeofcmds;	<span class="comment">/* the size of all the load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved;	<span class="comment">/* reserved */</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/* Constant for the magic field of the mach_header_64 (64-bit architectures) */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_MAGIC_64 0xfeedfacf <span class="comment">/* the 64-bit mach magic number */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_CIGAM_64 0xcffaedfe <span class="comment">/* NXSwapInt(MH_MAGIC_64) */</span></span></div></pre></td></tr></table></figure>
+<p>Header的作用就是让系统能快速的定位其运行环境和文件类型，分析文件头的工具我们使用<code>otool</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -hv MobileCal</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.26.10.png" alt="屏幕快照 2018-02-08 上午11.26.10.png" title="" class="">
+                <p>屏幕快照 2018-02-08 上午11.26.10.png</p>
+            </figure>
+<p>同时我们也可以看看fat的headers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">─[peterpan@panzhenpengdeMacBook-Air] - [~] - [2018-02-08 11:40:43]</div><div class="line">└─[1] otool  -f Bayinotool -f Bayin</div><div class="line">Fat headers</div><div class="line">fat_magic 0xcafebabe</div><div class="line">nfat_arch 2</div><div class="line">architecture 0  #核心1</div><div class="line">    cputype 12</div><div class="line">    cpusubtype 9</div><div class="line">    capabilities 0x0</div><div class="line">    offset 16384</div><div class="line">    size 26107984</div><div class="line">    align 2^14 (16384)</div><div class="line">architecture 1  #核心2</div><div class="line">    cputype 16777228</div><div class="line">    cpusubtype 0</div><div class="line">    capabilities 0x0</div><div class="line">    offset 26132480</div><div class="line">    size 29527600</div><div class="line">    align 2^14 (16384)</div></pre></td></tr></table></figure>
+<p>现在我们对于其中的一些参数还不清楚，我们继续往下看，<code>Load Command</code>是跟在头后面的加载命令区，所有的command之和加起来也就是上面的sizeofcmd字段的值，下面是load_command的结构体：</p>
+<h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> load_command &#123;</div><div class="line">    <span class="keyword">uint32_t</span> cmd;        <span class="comment">/* type of load command */</span></div><div class="line">    <span class="keyword">uint32_t</span> cmdsize;    <span class="comment">/* total size of command in bytes */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这些命令以LC开头，不同的加载命令有不同的专用结构体，当然上面的两个属性是都有的，命令的名称和长度会告诉系统如何去处理后面的二进制数据，对系统内核加载器和动态链接器起指导作用。如果当前 <code>LC_SEGMENT</code> 包含 <code>section</code>，那么 <code>section</code> 的结构体紧跟在 <code>LC_SEGMENT</code> 的结构体之后，所占字节数由 <code>SEGMENT</code> 的 <code>cmdsize</code> 字段给出：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8B%E5%8D%8812.09.25.png" alt="屏幕快照 2018-02-08 下午12.09.25.png" title="" class="">
+                <p>屏幕快照 2018-02-08 下午12.09.25.png</p>
+            </figure>
+<p>这个里面所展现的segement和section也是一开始的图中第三阶段需要加载的数据</p>
+<p>接下来是不同Cmd的作用：</p>
+<table>
+<thead>
+<tr>
+<th>Cmd</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LC_SEGMENT/LC_SEGMENT_64</td>
+<td>将对应的段中的数据加载并映射到进程的内存空间去</td>
+</tr>
+<tr>
+<td>LC_SYMTAB</td>
+<td>符号表信息</td>
+</tr>
+<tr>
+<td>LC_DYSYMTAB</td>
+<td>动态符号表信息</td>
+</tr>
+<tr>
+<td>LC_LOAD_DYLINKER</td>
+<td>启动动态加载连接器/usr/lib/dyld程序</td>
+</tr>
+<tr>
+<td>LC_UUID</td>
+<td>唯一的 UUID，标示该二进制文件，128bit</td>
+</tr>
+<tr>
+<td>LC_VERSION_MIN_IPHONEOS/MACOSX</td>
+<td>要求的最低系统版本（Xcode中的Deployment Target）</td>
+</tr>
+<tr>
+<td>LC_MAIN</td>
+<td>设置程序主线程的入口地址和栈大小</td>
+</tr>
+<tr>
+<td>LC_ENCRYPTION_INFO</td>
+<td>加密信息</td>
+</tr>
+<tr>
+<td>LC_LOAD_DYLIB</td>
+<td>加载的动态库，包括动态库地址、名称、版本号等</td>
+</tr>
+<tr>
+<td>LC_FUNCTION_STARTS</td>
+<td>函数地址起始表</td>
+</tr>
+<tr>
+<td>LC_CODE_SIGNATURE</td>
+<td>代码签名信息</td>
+</tr>
+</tbody>
+</table>
+<p>这个时候我们就可以揭晓上面我们埋的一个小坑了，一个App是否加密可以通过<code>otool -l | grep cryptid</code>来查看，如果是1则代表加密了，反之则没有。</p>
+<p><strong>补充：LC_DYSYMTAB符号表</strong></p>
+<p><code>LC_DYSYMTAB</code>符号表有非常大的作用，捕获到线上 <code>Crash</code> 或者 卡顿 堆栈的地址信息时，需要进行符号还原，进而确认卡顿、崩溃的具体位置，这个使用就要使用到<code>LC_DYSYMTAB</code>符号表；</p>
+<p>LC_DYSYMTAB符号表定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> symtab_command &#123;</div><div class="line">    <span class="keyword">uint32_t</span>    cmd;        <span class="comment">/* LC_SYMTAB */</span></div><div class="line">    <span class="keyword">uint32_t</span>    cmdsize;    <span class="comment">/* sizeof(struct symtab_command) */</span></div><div class="line">    <span class="keyword">uint32_t</span>    symoff;        <span class="comment">/* symbol table offset */</span></div><div class="line">    <span class="keyword">uint32_t</span>    nsyms;        <span class="comment">/* number of symbol table entries */</span></div><div class="line">    <span class="keyword">uint32_t</span>    stroff;        <span class="comment">/* string table offset */</span></div><div class="line">    <span class="keyword">uint32_t</span>    strsize;    <span class="comment">/* string table size in bytes */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>符号表在 <code>Mach-O</code>目标文件中的地址可以通过<code>LC_SYMTAB</code>加载命令指定的 <code>symoff</code>找到，对应的符号名称在<code>stroff</code>，总共有<code>nsyms</code>条符号信息</p>
+<p>根据 <code>Frame Pointer</code>拿到函数调用的地址（<code>address</code>），然后用<code>address</code> 、符号表、字符串表的对应关系找到对应的函数名，这就是符号解析的思路；</p>
+<h2 id="Segement"><a href="#Segement" class="headerlink" title="Segement"></a>Segement</h2><p><code>Mach-O</code> 文件有多个段（<code>Segment</code>），每个段有不同的功能。然后每个段又分为很多小的 <code>Section</code>。 <code>LC_SEGMENT</code> 意味着这部分文件需要映射到进程的地址空间去。一般有以下段名：</p>
+<ul>
+<li><code>__PAGEZERO</code>:　空指针陷阱段，映射到虚拟内存空间的第一页，用于捕捉对 NULL 指针的引用。</li>
+<li><code>__TEXT</code>:　包含了执行代码以及其他只读数据。该段数据可以 <code>VM_PROT_READ</code>(读)、<code>VM_PROT_EXECUTE</code>(执行)，不能被修改。</li>
+<li><code>__DATA</code>:　程序数据，该段可写 <code>VM_PROT_WRITE/READ/EXECUTE</code>。</li>
+<li><code>__LINKEDIT</code>:　链接器使用的符号以及其他表。</li>
+</ul>
+<p>段的结构体定义为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> segment_command &#123; <span class="comment">/* for 32-bit architectures */</span></div><div class="line">	<span class="keyword">uint32_t</span>	cmd;		<span class="comment">/* LC_SEGMENT */</span></div><div class="line">	<span class="keyword">uint32_t</span>	cmdsize;	<span class="comment">/* includes sizeof section structs */</span></div><div class="line">	<span class="keyword">char</span>		segname[<span class="number">16</span>];	<span class="comment">/* segment name */</span></div><div class="line">	<span class="keyword">uint32_t</span>	vmaddr;		<span class="comment">/* memory address of this segment 段的虚拟内存地址*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	vmsize;		<span class="comment">/* memory size of this segment  段的虚拟内存大小*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	fileoff;	<span class="comment">/* file offset of this segment  段在文件中的偏移量*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	filesize;	<span class="comment">/* amount to map from the file  段在文件中的大小*/</span></div><div class="line">	<span class="keyword">vm_prot_t</span>	maxprot;	<span class="comment">/* maximum VM protection */</span></div><div class="line">	<span class="keyword">vm_prot_t</span>	initprot;	<span class="comment">/* initial VM protection */</span></div><div class="line">	<span class="keyword">uint32_t</span>	nsects;		<span class="comment">/* number of sections in segment */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">struct</span> segment_command_64 &#123; <span class="comment">/* for 64-bit architectures */</span></div><div class="line">	<span class="keyword">uint32_t</span>	cmd;		<span class="comment">/* LC_SEGMENT_64 */</span></div><div class="line">	<span class="keyword">uint32_t</span>	cmdsize;	<span class="comment">/* includes sizeof section_64 structs */</span></div><div class="line">	<span class="keyword">char</span>		segname[<span class="number">16</span>];	<span class="comment">/* segment name */</span></div><div class="line">	<span class="keyword">uint64_t</span>	vmaddr;		<span class="comment">/* memory address of this segment */</span></div><div class="line">	<span class="keyword">uint64_t</span>	vmsize;		<span class="comment">/* memory size of this segment */</span></div><div class="line">	<span class="keyword">uint64_t</span>	fileoff;	<span class="comment">/* file offset of this segment */</span></div><div class="line">	<span class="keyword">uint64_t</span>	filesize;	<span class="comment">/* amount to map from the file */</span></div><div class="line">	<span class="keyword">vm_prot_t</span>	maxprot;	<span class="comment">/* maximum VM protection */</span></div><div class="line">	<span class="keyword">vm_prot_t</span>	initprot;	<span class="comment">/* initial VM protection */</span></div><div class="line">	<span class="keyword">uint32_t</span>	nsects;		<span class="comment">/* number of sections in segment */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>其中 <code>nsects</code> 字段就是表明该段中有多少个 <code>section</code>。文件映射的起始位置是由 <code>fileoff</code> 给出，映射到地址空间的 <code>vmaddr</code> 处。</p>
+<h4 id="Section"><a href="#Section" class="headerlink" title="Section"></a>Section</h4><p><code>Section</code> 是具体有用的数据存放的地方。它的结构体跟随在 <code>LC_SEGMENT</code> 结构体之后，<code>LC_SEGMENT</code> 又在 <code>Load Commands</code> 中，但是 <code>segment</code> 的数据内容是跟在 <code>Load Commands</code> 之后的。它的结构体为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> section &#123; <span class="comment">/* for 32-bit architectures */</span></div><div class="line">	<span class="keyword">char</span>		sectname[<span class="number">16</span>];	<span class="comment">/* name of this section */</span></div><div class="line">	<span class="keyword">char</span>		segname[<span class="number">16</span>];	<span class="comment">/* segment this section goes in */</span></div><div class="line">	<span class="keyword">uint32_t</span>	addr;		<span class="comment">/* memory address of this section 该节在内存中的起始位置*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	size;		<span class="comment">/* size in bytes of this section 该节的大小*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	offset;		<span class="comment">/* file offset of this section 该节的文件偏移*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	align;		<span class="comment">/* section alignment (power of 2) 字节大小对齐*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	reloff;		<span class="comment">/* file offset of relocation entries 重定位入口的文件偏移*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	nreloc;		<span class="comment">/* number of relocation entries 需要重定位的入口数量*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags (section type and attributes) */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved1;	<span class="comment">/* reserved (for offset or index) */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved2;	<span class="comment">/* reserved (for count or sizeof) */</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">struct</span> section_64 &#123; <span class="comment">/* for 64-bit architectures */</span></div><div class="line">	<span class="keyword">char</span>		sectname[<span class="number">16</span>];	<span class="comment">/* name of this section */</span></div><div class="line">	<span class="keyword">char</span>		segname[<span class="number">16</span>];	<span class="comment">/* segment this section goes in */</span></div><div class="line">	<span class="keyword">uint64_t</span>	addr;		<span class="comment">/* memory address of this section */</span></div><div class="line">	<span class="keyword">uint64_t</span>	size;		<span class="comment">/* size in bytes of this section */</span></div><div class="line">	<span class="keyword">uint32_t</span>	offset;		<span class="comment">/* file offset of this section */</span></div><div class="line">	<span class="keyword">uint32_t</span>	align;		<span class="comment">/* section alignment (power of 2) */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reloff;		<span class="comment">/* file offset of relocation entries */</span></div><div class="line">	<span class="keyword">uint32_t</span>	nreloc;		<span class="comment">/* number of relocation entries */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags (section type and attributes)*/</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved1;	<span class="comment">/* reserved (for offset or index) */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved2;	<span class="comment">/* reserved (for count or sizeof) */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved3;	<span class="comment">/* reserved */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>其中 <code>flag</code> 字段分为两个部分，一个是区域类型（<code>section type</code>），一个是区域属性（<code>section attributes</code>）。其中 <code>type</code> 是互斥的，即只能有一个类型，而 <code>attributes</code> 不是互斥的，可以有多个属性。如果段（segment）中的任何一个 <code>section</code> 拥有属性 <code>S_ATTR_DEBUG</code>，那么该段所有的 <code>section</code> 都必须拥有这个属性。具体的flag字段内容以及意义请参考 <code>/usr/include/mach-o/loader.h</code>。</p>
+<p>但是section的名字我们在此不做深究，还没有到那个程度，多说无益，不然就是完全抄袭了。</p>
 <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
 <li><a href="https://www.jianshu.com/p/7c41b03c9eb3" target="_blank" rel="external">镜观的博客</a></li>
 <li><a href="http://iphonedevwiki.net/index.php/Cycript_Tricks" target="_blank" rel="external">Wiki Cycript tricks</a></li>
+<li><a href="https://elliotsomething.github.io/2017/06/01/Mach-O%E5%AD%A6%E4%B9%A0/" target="_blank" rel="external">Mach-O学习</a></li>
 </ul>
 ]]></content>
       
         <categories>
             
-            <category> 调错与cycript用法总结 </category>
+            <category> 踩坑 Mach-O </category>
             
         </categories>
         
