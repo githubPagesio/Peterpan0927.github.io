@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/02/10/在Debian上搭建MC服务器/">
+    
+    
+    <title>在Debian上搭建MC服务器 | Peterpan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="服务器端">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>在Debian上搭建MC服务器</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">在Debian上搭建MC服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-10T13:25:06.000Z" itemprop="datePublished" class="page-time">
+  2018-02-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MC私服-一刀999/">MC私服 一刀999</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-在Debian上搭建MC服务器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">在Debian上搭建MC服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-10 21:25:06" datetime="2018-02-10T13:25:06.000Z"  itemprop="datePublished">2018-02-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MC私服-一刀999/">MC私服 一刀999</a></li></ul>
+
+
+
+            
+	<span id="/2018/02/10/在Debian上搭建MC服务器/" class="leancloud_visitors" data-flag-title="在Debian上搭建MC服务器" title="在Debian上搭建MC服务器">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/02/10/在Debian上搭建MC服务器/#comment">
+            <span class="valine-comment-count" data-xid="/2018/02/10/在Debian上搭建MC服务器/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" alt="屏幕快照 2018-02-10 下午9.27.16.png" title="" class="">
+                <p>屏幕快照 2018-02-10 下午9.27.16.png</p>
+            </figure>
+<p>大家都玩过我的世界这个经典的游戏，号称世界上第一款的沙盒游戏，虽然他的画质(呵呵)，但是他的自由度让我们都为之着迷，可以享受到真正作为一个上帝的乐趣，话说我在两年前的暑假还在这个游戏上建造过山车之类的，将世界打造成游乐场(当时还不会任何的技术)，<code>make a real world!</code></p>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>直到昨天的时候我突然又不小心看到了这个游戏，于是已经学了一些技术的我自然就想做一些DIY了，不是那种借用第三方的作弊器，that’s too boring。我想要搭建一个多人在线的MC服务器，当自己一个人的神还不够爽，之前看网上的各种花式玩法还是很羡慕的，虽然电脑是Mac的，但是依然不妨碍我们玩游戏的心，那么接下来我们就开始吧，我把整个构成分成几个环节：</p>
+<ol>
+<li>服务器上安装java环境，jre即可</li>
+<li>可以选择性的安装<code>screen</code>(可选)</li>
+<li>下载java版MC的服务端，然后跑起来</li>
+<li>本地获得对应服务端的客户端，然后连上去</li>
+</ol>
+<p>整个过程看起来十分的简单，但是其中还有一些问题我在第一次折腾的时候还是会有些蛋疼的，接下来就一步一步的走一波，从服务器端开始，希望没有计算机基础的游戏爱好者也可以学会。</p>
+<h1 id="debian安装java环境"><a class="markdownIt-Anchor" href="#debian安装java环境"></a> Debian安装java环境</h1>
+<p>由于我们的服务器是debian的系统，所以我们介绍的是Debian上的安装方法，当然这种东西最好使用Docker去跑，但是本博主的docker水平停留在学习一天的水平，只能用容器跑个网站，玩这个到时候把我系统网卡都跑崩了就不好了，毕竟docker和K8这玩意太蛋疼，废话不多说，开始安装：</p>
+<p>Debian官方没有维护专门的Java软件包，所以不能直接用apt-get工具来安装。在Debian系统中要安装Java，有两种方式，一种是用传统方式，一种是Debian方式。</p>
+<p>后面一种方法我们不讲，就说前一种，没装wget的朋友看下面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install wget</div></pre></td></tr></table></figure>
+<p>然后我们去官网上找一下我们需要下载的地址，可以直接输<code>sun.com</code>，然后跳转到<code>Oracle</code>的官网，找到java下载所在的页面，然后右键复制下载的地址：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.45.03.png" alt="屏幕快照 2018-02-10 下午9.45.03.png" title="" class="">
+                <p>屏幕快照 2018-02-10 下午9.45.03.png</p>
+            </figure>
+<p>在服务器中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://javadl.oracle.com/webapps/download/AutoDL?BundleId=230532_2f38c3b165be4555a1fa6e98c45e0808</div></pre></td></tr></table></figure>
+<p>然后获得一个AutoDLxxx的文件，这个文件首先要改个名字，叫做java.tar.gz，直接用<code>mv</code>就好，然后解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf java.tar.gz</div></pre></td></tr></table></figure>
+<p>出来一个jrexxx的文件夹，接下里就是配置环境变量了，找到.bash_profile（没有则创建一个，在家目录下）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export CLASSPATH=/usr/local/jrexxx/lib</div><div class="line">export JAVA_HOME=/usr/local/jrexxx</div><div class="line">export PATH=$JAVA_HOME/bin:$PATH</div></pre></td></tr></table></figure>
+<p>然后就用<code>java -version</code>测试一下了，应该到这里就成功了。</p>
+<p>第一步到此搞定，第二部想安装的一个<code>apt-get</code>就搞定。今天先说到这，明天继续更新。</p>
+
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-02-10T13:52:05.665Z" itemprop="dateUpdated">2018-02-10 21:52:05</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/02/10/在Debian上搭建MC服务器/" target="_blank" rel="external">http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器端/">服务器端</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/&title=《在Debian上搭建MC服务器》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/&title=《在Debian上搭建MC服务器》 — Peterpan's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/07/iOS逆向学习-五/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS逆向学习(五)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#debian安装java环境"><span class="post-toc-number">2.</span> <span class="post-toc-text"> Debian安装java环境</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/&title=《在Debian上搭建MC服务器》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/&title=《在Debian上搭建MC服务器》 — Peterpan's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOUlEQVR42u3aS47DIBAFwNz/0h5pdqPE5HVDRjEuVpFiA+UF6g+PRzyO3/H8e/z82VtnMzy/tXhgYGBclnEMx9nC4yfHGx0/efbM2YoYGBj3YVSXHE+as5OPMt4bBgYGxnw4OA4Q8+cxMDAwemFcL8jDwMDA6DGSJHb+2K2u8pFcHAMD44KMmcbAp3//U38DAwPjixlHcXwife0d0H/ewsDA2JoxLuLnaW1S1k8S4Jm0FgMDY1fGTIFsphnZu9JxunMMDIybMQovFxdOrlwkSexphIuBgbE1o5fEJoDqh6iGmBgYGHdg9FLN+QtePXAhF8fAwNiIkVyn6KWyyUE5Xyl8EeFiYGBszZi57FW9BVHuXYxnw8DA2JrROwqrLczqdqskDAyMvRnVElteIOu1PPOLIBgYGPdhrG06Ji2EZDYMDAyMZIbydYd4yWrXImpeYmBg3IaRh3drW5urgkgMDIxdGdVALTmgj3jkh/gbEgYGxtaMmeZl7wpXEurljPKXxsDAuCCj13TsHdO9EDP6ZBgYGDdg5MHZ2kJb71rGaScWAwNjU0avSZlspRpu9oLUqV4rBgbGRRhHcfSS25nmwbLbbRgYGJdlrC3954W26lrLOpUYGBiXZVTT1Dx8HG89mSefDQMD4w6M6iFbbTDkbc58ny/KbRgYGLdn5L/zf3tNiDeNTAwMDIy4WFYNQKtH7eIDFwMD4+sZ+TFX3XS1rNYLTzEwMPZmzBTr84sRMx+iECBiYGDsxvgB9Tp/rSuDqk4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
+</body>
+</html>
