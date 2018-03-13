@@ -1,190 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/10/30/CTF-图像学基础/">
-    
-    
-    <title>CTF-图像学基础 | Peterpan&#39;s Blog</title>
+	
+	<title>CTF-图像学基础</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="CTF">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>CTF-图像学基础</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">CTF-图像学基础</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-10-29T17:40:43.000Z" itemprop="datePublished" class="page-time">
-  2017-10-30
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/图像处理方式-存储结构/">图像处理方式 存储结构</a></li></ul>
+<h2 class="title">CTF-图像学基础</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年10月30日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/图像处理方式-存储结构/">图像处理方式 存储结构</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-CTF-图像学基础"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">CTF-图像学基础</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-10-30 01:40:43" datetime="2017-10-29T17:40:43.000Z"  itemprop="datePublished">2017-10-30</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/图像处理方式-存储结构/">图像处理方式 存储结构</a></li></ul>
-
-
-
-            
-	<span id="/2017/10/30/CTF-图像学基础/" class="leancloud_visitors" data-flag-title="CTF-图像学基础" title="CTF-图像学基础">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/10/30/CTF-图像学基础/#comment">
-            <span class="valine-comment-count" data-xid="/2017/10/30/CTF-图像学基础/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>似乎要一脚踏进了计算机图像学的大坑？不存在的</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00前言"><span class="toc-text">0x00前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01位图"><span class="toc-text">0x01位图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02图像处理"><span class="toc-text">0x02图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#灰度化"><span class="toc-text">灰度化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二值化"><span class="toc-text">二值化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反色"><span class="toc-text">反色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03调色板"><span class="toc-text">0x03调色板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#真彩色"><span class="toc-text">真彩色</span></a></li></ol></li></ol></li></ol></li></ol>
+<p>似乎要一脚踏进了计算机图像学的大坑？不存在的</p>
 <a id="more"></a>
 <h1 id="0x00前言"><a href="#0x00前言" class="headerlink" title="0x00前言"></a>0x00前言</h1><p>随着在CTF道路上的前进，从一开始看到图种都惊为天人的小白，到现在三板斧就能砍死这种杂碎的时候，中间肯定是经历了一些惨痛的经历的。但是由于隐写术这方面的学习路线并没有一个很成体系的学习方向，只能说在做题的过程中，了解到了各种密码学的知识，图像学的知识，可这些领域都算是过于陌生。现在只能算是入了门，但是我深刻的体会到在现在的做题中缺乏了对应的知识完全是寸步难行，所以决定总结一篇关于图像学方面的基础。</p>
 <h2 id="0x01位图"><a href="#0x01位图" class="headerlink" title="0x01位图"></a>0x01位图</h2><p>位图可以有两种概念，一种是指使用像素阵列来表示的图像，哟可以称作栅格图或者是点阵图。</p>
@@ -202,10 +65,7 @@
 <p>位图的像素都分配有特定的位置和的颜色值。每个像素的颜色信息由RGB组合或者灰度值表示。</p>
 <p>根据位深度，可以将位图分为1、4、8、16、24及32位图像等。每个像素使用的信息位数越多，可用的颜色就越多，颜色表现的就越逼真，那么相应的数据量也会越大。例如位深度位1的像素位图只有两个可能的值(黑色和白色)，所以又称为二值位图。</p>
 <p>下面就来看一下彩色图像，灰度图像（灰度图是一种特殊的伪彩色图）和二值图像的一个对比，这样应该会更加清楚：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png" alt="屏幕快照 2017-10-30 上午12.43.23.png" title="" class="">
-                <p>屏幕快照 2017-10-30 上午12.43.23.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png" alt=""></p>
 <h2 id="0x02图像处理"><a href="#0x02图像处理" class="headerlink" title="0x02图像处理"></a>0x02图像处理</h2><p>了解到了一些基本的概念之后，我们再来讨论一下计算机的几种图像处理方式：</p>
 <h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255。一般有以下四种方法对彩色图像进行灰度化： 　　</p>
 <ol>
@@ -254,314 +114,34 @@
 <p>我们知道，真彩图中包含最多达2^24种颜色，怎样从中选出256种颜色，又要使颜色的失真比较小，这是一个比较复杂的问题。一种简单的做法是将R：G：B以3：3：2表示，即取R，G的高3位，B的高两位，组成一个字节，这样就可以表示256种颜色了，但不难想象，这种方法的失真肯定很严重。</p>
 <p>我们下面介绍的算法能够比较好地实现真彩图到256色图的转换。它的思想是：准备一个长度为4096的数组，代表4096种颜色。对图中的每一个像素，取R、G、B的最高四位，拼成一个12位的整数，对应的数组元素加1。全部统计完后，就得到了这4096种颜色的使用频率。其中，可能有一些颜色一次也没用到，即对应的数组元素为零(假设不为零的数组元素共有PalCounts个)。将这些为零的数组元素清除出去，使得前PalCounts个元素都不为零。将这PalCounts个数按从大到小的顺序排列。这样，前256种颜色就是用的最多的颜色，它们将作为调色板上的256种颜色。对于剩下的PalCounts-256种颜色并不是简单地丢弃，而是用前256种颜色中的一种来代替，代替的原则是找有最小平方误差的那个。再次对图中的每一个像素，取R、G、B的最高四位，拼成一个12位的整数，如果对应值在前256种颜色中，则直接将该索引值填入位图数据中，如果是在后PalCounts-256种颜色中，则用代替色的索引值填入位图数据中。</p>
 <p>下面的两幅图中，图5.3是原真彩图，图.54是用上面的算法转换成的256色图，可以看出，效果还不错。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%881.26.14.png" alt="屏幕快照 2017-10-30 上午1.26.14.png" title="" class="">
-                <p>屏幕快照 2017-10-30 上午1.26.14.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%881.26.14.png" alt=""></p>
 <p>那么可能有人会问，不是还有32位的么，现在最大只有24位啊。这里就补充一下。如果存在第四个字节，则表示该图像表示alpha通道。尽管alpha通道只是一个透明通道，从图像学来说意义不大。然而这种32位元的图像却在桌面时代大行其道。因为有了阿尔法通道，在屏幕上描绘半透明图像变得简单，（这往往是对绘图硬件加速设备的要求）在电脑桌面上能更为轻而易举地实现半透明窗口、菜单渐隐和阴影等效果。</p>
 <p>虽然阿尔法通道对于显示缓冲来说没有意义，但是在现实系统中仍然使用着32位元真彩色，这是因为在32位的图中对于像素的寻址更加容易。对24位像素寻址需要乘以3，这样比通过移位就可以实现的乘以4的计算量更大。</p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2017-10-30T06:21:00.000Z" itemprop="dateUpdated">2017-10-30 14:21:00</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/10/30/CTF-图像学基础/" target="_blank" rel="external">http://yoursite.com/2017/10/30/CTF-图像学基础/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/30/CTF-图像学基础/&title=《CTF-图像学基础》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/30/CTF-图像学基础/&title=《CTF-图像学基础》 — Peterpan's Blog&source=似乎要一脚踏进了计算机图像学的大坑？不存在的" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/10/30/PIL学习-一/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">PIL学习(一)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/10/29/PNG在隐写中的应用/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">PNG在隐写中的应用</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x00前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">0x00前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x01位图"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">0x01位图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x02图像处理"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">0x02图像处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#灰度化"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">灰度化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二值化"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">二值化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反色"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">反色</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x03调色板"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">0x03调色板</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#真彩色"><span class="post-toc-number">1.3.0.1.</span> <span class="post-toc-text">真彩色</span></a></li></ol></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/30/CTF-图像学基础/&title=《CTF-图像学基础》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/30/CTF-图像学基础/&title=《CTF-图像学基础》 — Peterpan's Blog&source=似乎要一脚踏进了计算机图像学的大坑？不存在的" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3a0a6cMAwFwP3/n6ZSX1u45yRsVczkCaGFZFjJiu18PvE4fo/8znEyzp7986nPNwYGBsZjGcflOFtifn22xGtMvjYMDIz3MNZe1wbrM8xaaMbAwMBIAujZUpJF52/GwMDAaANuu628/n27xcTAwHgzI9mitenu2rNfz8UxMDAeyFhLRP/N9Rf7GxgYGA9hHOVoE92dBmexKgwMjNGM/CBFXla7DqP5xrFtfGJgYExlrJXPrgNxS2qPaPzlPgYGxmhG2wbI09o27K6l0/XJDgwMjKGMJKHd3xre1uDEwMAYx2iLZck2Lg/B+Qbxh1kwMDBGM+4t3yfsNq1tPyUGBsZsxk57YK0JmqfKyUfBwMCYyshTynyC9jf7ARoDA2M2YydlXSvVJXO1QR8DA+M9jJ1y2BpyrWH5w6fBwMAYx1hLLPMC/c7hsOLzYWBgjGbkAa5tVa41DJJF1/0NDAyMhzPWjkfcy8sT3dP7GBgYoxntgtby4/2DGnWhDQMDYxBjbYI1XhE647dhYGC8h3FXKS1vAyRluHwWDAyM2Yw2CG7tQMviWvJs/Z9gYGA8kHGUIy+QtU3KrRQXAwNjNCMfedsgR36jRYqBgTGVkQfZ/ZJcu/Usto8YGBgvYLRBti7fl7PXzQMMDAyM7SSzbRgkKe5WIxMDA2M0466N4H6ie3M/FgMD479ntMX6PGjusIv2KgYGxmjGTgKZNyCT67UmBAYGxmjGL8lIqHatnaiKAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/10/30/CTF-图像学基础/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

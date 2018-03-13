@@ -1,190 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/10/05/iOS多线程之GCD/">
-    
-    
-    <title>iOS多线程之GCD | Peterpan&#39;s Blog</title>
+	
+	<title>iOS多线程之GCD</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="iOS开发">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>iOS多线程之GCD</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">iOS多线程之GCD</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-10-05T10:09:12.000Z" itemprop="datePublished" class="page-time">
-  2017-10-05
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a></li></ul>
+<h2 class="title">iOS多线程之GCD</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年10月5日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-iOS多线程之GCD"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">iOS多线程之GCD</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-10-05 18:09:12" datetime="2017-10-05T10:09:12.000Z"  itemprop="datePublished">2017-10-05</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a></li></ul>
-
-
-
-            
-	<span id="/2017/10/05/iOS多线程之GCD/" class="leancloud_visitors" data-flag-title="iOS多线程之GCD" title="iOS多线程之GCD">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/10/05/iOS多线程之GCD/#comment">
-            <span class="valine-comment-count" data-xid="/2017/10/05/iOS多线程之GCD/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>了解到了消息循环之后，接下来就要学习iOS中最常使用的多线程使用方式了—GCD</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS多线程之GCD"><span class="toc-text">iOS多线程之GCD</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD改写"><span class="toc-text">GCD改写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主队列"><span class="toc-text">主队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#全局并发队列"><span class="toc-text">全局并发队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于GCD的一些Demo演练"><span class="toc-text">关于GCD的一些Demo演练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#延时执行和队列组"><span class="toc-text">延时执行和队列组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#延时执行"><span class="toc-text">延时执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#队列组"><span class="toc-text">队列组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD实现单例"><span class="toc-text">GCD实现单例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式的抽取"><span class="toc-text">单例模式的抽取</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD中的栅栏函数"><span class="toc-text">GCD中的栅栏函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD快速迭代"><span class="toc-text">GCD快速迭代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD补充"><span class="toc-text">GCD补充</span></a></li></ol></li></ol>
+<p>了解到了消息循环之后，接下来就要学习iOS中最常使用的多线程使用方式了—GCD</p>
 <a id="more"></a>
 <h1 id="iOS多线程之GCD"><a href="#iOS多线程之GCD" class="headerlink" title="iOS多线程之GCD"></a>iOS多线程之GCD</h1><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>GCD的全称是Grand Central Dispatch,纯C语言，提供了非常强大的函数，会自动的利用更多的CPU内核</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//GCD基本演示</div><div class="line">- (void)demo&#123;</div><div class="line">  	//创建任务</div><div class="line">  	dispatch_block_t = ^&#123;</div><div class="line">      NSLpg(@&quot;task&quot;, [NSThread currentThread]);</div><div class="line">	&#125;;</div><div class="line">  	//获取队列</div><div class="line">  	dispatch_queue_t queue = dispathch_get_global_queue(0, 0);</div><div class="line">  	//把任务放进队列</div><div class="line">  	dispatch_async(queue, task);</div><div class="line">&#125;</div><div class="line">//但是一般正常的用法是这样的：</div><div class="line">dispatch_async(dispatch_get_global_queue(0,0), ^&#123;</div><div class="line">   //代码部分</div><div class="line">   NSLog(@&quot;hello world&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -197,35 +60,20 @@
 <p>这个时候我们可以注意到并行队列异步执行其实是开了多个线程无序的执行，这个时候是效率最大的。如果是并行队列，同步执行的话会有什么样的后果呢？尝试了一下之后发现如果设置为同步执行的话和不开线程的效果一样,任务顺序执行，等于串行队列同步执行。</p>
 <h4 id="主队列"><a href="#主队列" class="headerlink" title="主队列"></a>主队列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//得到主队列</div><div class="line">dispatch_queue_t mainQueue = dispatch_get_main_queue();</div><div class="line">//异步执行</div><div class="line">for(int = 1 ; i &lt; 100 ; ++i )&#123;</div><div class="line">	dispatch_async(mainQueue, ^&#123;</div><div class="line">        NSLog(@&quot;main queue %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 这样的话所有的任务都会在主线程上执行，打印出来是这样的效果：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8A%E5%8D%8810.56.23.png" alt="屏幕快照 2017-10-05 上午10.56.23.png" title="" class="">
-                <p>屏幕快照 2017-10-05 上午10.56.23.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8A%E5%8D%8810.56.23.png" alt=""></p>
 <p>但是如果是同步执行的话，再去打印主队列所在的线程信息，会发现线程会卡在那里，这里展示一张图：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8A%E5%8D%8811.29.49.png" alt="屏幕快照 2017-10-05 上午11.29.49.png" title="" class="">
-                <p>屏幕快照 2017-10-05 上午11.29.49.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8A%E5%8D%8811.29.49.png" alt=""></p>
 <p>因为线程是同步执行的，这个时候主线程执行这个主队列的任务，但是主队列又要放到主线程中去执行，主线程是一个特殊的串行队列，所以要等大框执行完了才会执行小框的任务，所以就造成了在一个循环中不停的相互等待,导致线程死锁。这种情况下死锁是因为在主线程下，往主队列中添加任务同步执行产生的。</p>
 <h4 id="全局并发队列"><a href="#全局并发队列" class="headerlink" title="全局并发队列"></a>全局并发队列</h4><p>全局并发队列我们可以通过下面这种方式来得到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">	现在来解释一下中间这两个参数的意义</div><div class="line">	1.qos_class_t(iOS8之后)，dispatch_queue_priority_t(iOS8之前)</div><div class="line">	第一个参数是为了表示优先级，填0是为了适配两个不同的版本</div><div class="line">	2.flags 没什么用，给未来使用，填0即可</div><div class="line">*/</div><div class="line">dispatch_queue_t queue = dispatch_queue_global_queue(0,0);</div></pre></td></tr></table></figure>
 <p>最后放一张关系图来供参考所用：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%882.40.51.png" alt="屏幕快照 2017-10-05 下午2.40.51.png" title="" class="">
-                <p>屏幕快照 2017-10-05 下午2.40.51.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%882.40.51.png" alt=""></p>
 <p>另外关于串行，并行和同步异步之间的关系还可以参考<a href="https://liufubo1991.github.io/2017/07/13/%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E4%B8%8E%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%85%B3%E7%B3%BB/%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E4%B8%8E%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%85%B3%E7%B3%BB/" target="_blank" rel="external">博客</a></p>
 <h2 id="关于GCD的一些Demo演练"><a href="#关于GCD的一些Demo演练" class="headerlink" title="关于GCD的一些Demo演练"></a>关于GCD的一些Demo演练</h2><p>学习了关于GCD的一些基本用法之后，我们也需要来进行一些demo的演练来满足我们的日常需求：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%882.46.24.png" alt="屏幕快照 2017-10-05 下午2.46.24.png" title="" class="">
-                <p>屏幕快照 2017-10-05 下午2.46.24.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%882.46.24.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//首先分析1，2在子线程顺序执行，所以是异步串行队列</div><div class="line">- (void)demo&#123;</div><div class="line">    //创建串行队列</div><div class="line">    dispatch_queue_t serialQueue = dispatch_queue_create(&quot;serialQueue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">    dispatch_async(serialQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务1 %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(serialQueue, ^&#123;</div><div class="line">        NSLog(@&quot;任务2 %@&quot;, [NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    //完成之后通知主线程执行3，4</div><div class="line">    dispatch_sync(serialQueue, ^&#123;</div><div class="line">        dispatch_async(dispatch_get_main_queue(),^&#123;</div><div class="line">            NSLog(@&quot;任务3 %@&quot;, [NSThread currentThread]);</div><div class="line">        &#125;);</div><div class="line">        dispatch_async(dispatch_get_main_queue(),^&#123;</div><div class="line">            NSLog(@&quot;任务4 %@&quot;, [NSThread currentThread]);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    //完成之后再并发执行任务5，6，7，这个时候就需要用到全局并发队列，要先获取到主队列</div><div class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">       dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line">           NSLog(@&quot;任务5 %@&quot;, [NSThread currentThread]);</div><div class="line">       &#125;);</div><div class="line">       dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line">           NSLog(@&quot;任务6 %@&quot;, [NSThread currentThread]);</div><div class="line">       &#125;);</div><div class="line">       dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line">           NSLog(@&quot;任务7 %@&quot;, [NSThread currentThread]);</div><div class="line">       &#125;);</div><div class="line">    &#125;);   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果将它们队列之间的关系画一张图的话应该是如下图所示（手画的有点丑）：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/7DA841E463C1B07B74B06F79BE0D16C2.png" alt="7DA841E463C1B07B74B06F79BE0D16C2.png" title="" class="">
-                <p>7DA841E463C1B07B74B06F79BE0D16C2.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/7DA841E463C1B07B74B06F79BE0D16C2.png" alt=""></p>
 <h2 id="延时执行和队列组"><a href="#延时执行和队列组" class="headerlink" title="延时执行和队列组"></a>延时执行和队列组</h2><h4 id="延时执行"><a href="#延时执行" class="headerlink" title="延时执行"></a>延时执行</h4><p>在iOS中我们常常需要一个方法延时去执行，而实现的方式有很多种，下面的简单的介绍一下常用的几种延时执行的方式</p>
 <ol>
 <li>使用NSTimer，也就是定时器：</li>
@@ -242,10 +90,7 @@
 <h4 id="队列组"><a href="#队列组" class="headerlink" title="队列组"></a>队列组</h4><p>之前我们在写实战的Demo的时候，因为需求的原因，在很多队列之间进行跳转和切换，但是有些时候实现这样的功能我们还可以直接的使用队列组，队列组只有异步方法能添加任务，当组里所有任务都执行完后，它会通过一个方法通知我们</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)demo&#123;</div><div class="line">  	//创建组</div><div class="line">    dispatch_group_t group = dispatch_group_create();</div><div class="line">  	//开启异步任务</div><div class="line">  	dispatch_group_async(group, dispatch_get_global_queue(0,0), ^&#123;</div><div class="line">         for (NSInteger i = 0; i &lt; 3; i++) &#123;</div><div class="line">          NSLog(@&quot;group-01 - %@&quot;, [NSThread currentThread]);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  	//都完成后会自动通知</div><div class="line">  	dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</div><div class="line">      	NSLog(@&quot;完成 - %@&quot;, [NSThread currentThread]);</div><div class="line">  	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>下面来说一下dispatch_group_async这个方法的底层调用的是什么方法，如果我们使用一下man命令：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%885.15.15.png" alt="屏幕快照 2017-10-05 下午5.15.15.png" title="" class="">
-                <p>屏幕快照 2017-10-05 下午5.15.15.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%885.15.15.png" alt=""></p>
 <p>如果你使用的是MRC的话，应该就会用到retain和release方法，在ARC中我们可以忽略这两个方法，首先我们会使用<code>dispatch_group_enter(group);</code>进入到这个队列组，然后转到队列中，执行其中的任务,最后使用<br><code>dispatch_group_leave(group);</code>离开这个队列组。</p>
 <h2 id="GCD实现单例"><a href="#GCD实现单例" class="headerlink" title="GCD实现单例"></a>GCD实现单例</h2><p>dispatch_once中的代码只会被执行一次，所以我们很容易的就会和单例结合到一起，也就是说如果我们将对象的实例化写到一次性执行中的话，那么我们每次访问的都是同一个对象，因为对象的实例化只会执行一次。</p>
 <p>如果是在单线程中的话，可以通过静态变量实现，但是在多线程的情况下，有可能会返回不同的对象，如在单例对象初始化完成之前，多个线程同时访问单例，那么这些进程可能都获得了不同的单例对象，这也是为什么苹果提供了dispatch_once方法的原因。</p>
@@ -254,7 +99,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//因为单例对象是供全局使用的，所以我们如果正常的release掉肯定会报错</div><div class="line">- (oneway void)release&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)retain&#123;</div><div class="line">    return _instance;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//在非ARC环境下，单例对象都会重写其retainCount方法，返回一个最大值</div><div class="line">- (NSUInteger)retainCount&#123;</div><div class="line">    return MAXFLOAT;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//为了实现通用，我们还可以加上一个条件编译</div><div class="line">#if __has_feature(objc_arc)</div><div class="line">	//不作处理</div><div class="line">#else</div><div class="line">	//MRC环境，将上面的代码放到这里</div><div class="line">#endif</div></pre></td></tr></table></figure>
 <p>那么这个<code>dispatch_once</code>函数到底是如何实现线程安全的呢？下面就来解释一下，首先查到dispatch_once_t被定义为长整型，那么 dispatch_once函数是如何让两个同时调用这个方法的进程只执行一次函数的block区块呢？</p>
 <p>我们可以通过打印predicate的值发现，在block被访问过之后，这个值会更改为-1，所以我们猜测这个机制是以这个值作为判断条件的：</p>
-<p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%886.03.41.png" alt="屏幕快照 2017-10-05 下午6.03.41.png"></p>
+<p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-05%20%E4%B8%8B%E5%8D%886.03.41.png" alt=""></p>
 <p>如果可以参考一下这个函数的实现进行分析的话就会有更加直观的理解，所以现在对于其中真正的多线程保护逻辑还是并不清楚的，通过查看了其中一堆乱七八糟的宏定义之后更加蒙圈了..</p>
 <h4 id="单例模式的抽取"><a href="#单例模式的抽取" class="headerlink" title="单例模式的抽取"></a>单例模式的抽取</h4><p>在一个项目中，我们往往用到的不止一个单例对象，如果每次要实现单例对象的时候都把上面的代码复制修改一下，又未免显得过于繁琐，于是我们想到是否能用<code>继承</code>来解决这个问题，经过试验之后发现其实是不可行的，继承过去之后因为那个静态变量也是继承的，只能被调用一次，所以如果是继承关系的话，谁先实例化那么这个单例对象就是谁，无法达到我们想要的效果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//我们可以把单例的代码抽取出来变成一个宏</div><div class="line">#define SingleH +(instancetype)shareTool;</div><div class="line">#define SingleM //单例代码部分,但是注意要用连接符链接，不然就只是宏定义的就只要单独的一行</div></pre></td></tr></table></figure>
@@ -264,10 +109,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#define SingleH(name) +(instancetype)share##name;</div><div class="line">#if __has_feature(objc_arc)</div><div class="line">	//ARC的宏</div><div class="line">#else</div><div class="line">	//MRC的宏</div><div class="line">#endif</div></pre></td></tr></table></figure>
 <h2 id="GCD中的栅栏函数"><a href="#GCD中的栅栏函数" class="headerlink" title="GCD中的栅栏函数"></a>GCD中的栅栏函数</h2><p>栅栏函数一般用于在异步并行队列中分割队列中的任务执行，如现在有个需求是先并发执行1，2任务，再执行3。那么就可以在中间插入一个栅栏函数，但是有一点要注意的是，栅栏函数不能使用全局并发队列。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//手动创建一个并发队列</div><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;download&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">   NSLog(@&quot;download1--%@&quot;,[NSThread currentThread]); </div><div class="line">&#125;);</div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">   NSLog(@&quot;download2--%@&quot;,[NSThread currentThread]); </div><div class="line">&#125;);</div><div class="line">dispatch_barrier_async(queue, ^&#123;</div><div class="line">   NSLog(@&quot;++++++++&quot;); </div><div class="line">&#125;);</div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">   NSLog(@&quot;download3--%@&quot;,[NSThread currentThread]); </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>从打印结果可以看出已经生效：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8A%E5%8D%8812.39.36.png" alt="屏幕快照 2017-10-06 上午12.39.36.png" title="" class="">
-                <p>屏幕快照 2017-10-06 上午12.39.36.png</p>
-            </figure></p>
+<p>从打印结果可以看出已经生效：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8A%E5%8D%8812.39.36.png" alt=""></p>
 <p>接下来就来列举一下栅栏函数在不同的使用环境下所产生的效果：</p>
 <p>dispatch_barrier_async(dispatch_queue_t queue, dispatch_block_t block)  //异步</p>
 <ul>
@@ -297,307 +139,30 @@
 <li><a href="http://www.jianshu.com/p/481e4bef1bd6" target="_blank" rel="external">iOS中的多线程学习笔记</a></li>
 </ul>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2017-12-07T14:28:23.000Z" itemprop="dateUpdated">2017-12-07 22:28:23</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/10/05/iOS多线程之GCD/" target="_blank" rel="external">http://yoursite.com/2017/10/05/iOS多线程之GCD/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/05/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/05/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Peterpan's Blog&source=了解到了消息循环之后，接下来就要学习iOS中最常使用的多线程使用方式了—GCD" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/10/07/GFW-中间人攻击/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">GFW&amp;中间人攻击</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/29/iOS多线程/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">iOS多线程</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS多线程之GCD"><span class="post-toc-number">1.</span> <span class="post-toc-text">iOS多线程之GCD</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">基础概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GCD改写"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">GCD改写</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#队列"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">队列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#主队列"><span class="post-toc-number">1.3.0.1.</span> <span class="post-toc-text">主队列</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局并发队列"><span class="post-toc-number">1.3.0.2.</span> <span class="post-toc-text">全局并发队列</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于GCD的一些Demo演练"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">关于GCD的一些Demo演练</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#延时执行和队列组"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">延时执行和队列组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#延时执行"><span class="post-toc-number">1.5.0.1.</span> <span class="post-toc-text">延时执行</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#队列组"><span class="post-toc-number">1.5.0.2.</span> <span class="post-toc-text">队列组</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GCD实现单例"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">GCD实现单例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单例模式的抽取"><span class="post-toc-number">1.6.0.1.</span> <span class="post-toc-text">单例模式的抽取</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GCD中的栅栏函数"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">GCD中的栅栏函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GCD快速迭代"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">GCD快速迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GCD补充"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">GCD补充</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/05/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/05/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Peterpan's Blog&source=了解到了消息循环之后，接下来就要学习iOS中最常使用的多线程使用方式了—GCD" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aS3JDMQgFUe9/005VRpkY9wUlFaPWyOW8D8cDgkCPB17P7/Xzc73qu+q31NeMlgwZMj6WwQPi39Sk3ntfXSNDhox7GDzJ1vfW4b4Krr6yjk2GDBky0uBSZP0uGTJkyJgwSCKuN6UkicuQIUNGupkkTbF0+zpp7cmQIeMeRm8w8Deff32+IUOGjH/PeIYrLtfCYrEZlQwZMlYzSJueH4xI7+U/ASorZciQsZrBU14v3DrV8tFmzJYhQ8YKRi/c3lGJXomJopIhQ8ZqxiRF8tQ5T+7xSECGDBlLGb0CLj2KwVMneWawI5chQ8aHM9LyqzdISIvL+MCHDBkyljIm21G+ueV3NZ8pQ4aM1Yw0/aVh9TaxveadDBky7mGQQHmDnmxNj40WZMiQsZSRtrT40QoexIHELUOGjGsY8+SYpmbyMwVnRmTIkHEBo5ci+SGMU3+VIUPGnQxeCHIYH1geGDDIkCFjNYM3yHhaTLegvMTkm3AZMmRsYpxNoJMGHC863/zfkCFDxmWMtJh7jFdzFCpDhozVjEm5RlJtUJNiZPAEGTJkrGA8w9UbSablYNr+kyFDxm7GpGg7hUyLzlFJKkOGjI9l8CTLBwOTgo+PMIMCUYYMGSsY9fc90m807F6+XYYMGTJAUual5LypJ0OGDBk8yZ69hh8FkyFDxp0MvonlO0dyfVqYvkm4MmTIWMqYDAbm7bZTpacMGTKWMr4A9Io84jzXlbMAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/10/05/iOS多线程之GCD/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

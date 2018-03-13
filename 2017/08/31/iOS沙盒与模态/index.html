@@ -1,190 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/08/31/iOS沙盒与模态/">
-    
-    
-    <title>iOS沙盒与模态 | Peterpan&#39;s Blog</title>
+	
+	<title>iOS沙盒与模态</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="iOS开发">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>iOS沙盒与模态</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">iOS沙盒与模态</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-08-31T07:49:54.000Z" itemprop="datePublished" class="page-time">
-  2017-08-31
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a></li></ul>
+<h2 class="title">iOS沙盒与模态</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年8月31日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-iOS沙盒与模态"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">iOS沙盒与模态</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-08-31 15:49:54" datetime="2017-08-31T07:49:54.000Z"  itemprop="datePublished">2017-08-31</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a></li></ul>
-
-
-
-            
-	<span id="/2017/08/31/iOS沙盒与模态/" class="leancloud_visitors" data-flag-title="iOS沙盒与模态" title="iOS沙盒与模态">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/08/31/iOS沙盒与模态/#comment">
-            <span class="valine-comment-count" data-xid="/2017/08/31/iOS沙盒与模态/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~<br><a id="more"></a></p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS沙盒与模态"><span class="toc-text">iOS沙盒与模态</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS应用存储数据常用方式"><span class="toc-text">iOS应用存储数据常用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用沙盒结构分析"><span class="toc-text">应用沙盒结构分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#沙盒目录结构"><span class="toc-text">沙盒目录结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打开应用沙盒"><span class="toc-text">打开应用沙盒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#沙盒机制的好处"><span class="toc-text">沙盒机制的好处</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取路径"><span class="toc-text">获取路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-沙盒路径"><span class="toc-text">1.沙盒路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Documents路径"><span class="toc-text">2.Documents路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Tmp路径"><span class="toc-text">3.Tmp路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Library路径"><span class="toc-text">4.Library路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-应用程序包路径"><span class="toc-text">5.应用程序包路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#plist文件存储"><span class="toc-text">plist文件存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归档和反归档"><span class="toc-text">归档和反归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UITabBarController"><span class="toc-text">UITabBarController</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#纯代码创建方式"><span class="toc-text">纯代码创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过Storyboard加载tabBarController"><span class="toc-text">通过Storyboard加载tabBarController</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App主流框架结构"><span class="toc-text">App主流框架结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模态出控制器"><span class="toc-text">模态出控制器</span></a></li></ol></li></ol></li></ol>
+<p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~<br><a id="more"></a></p>
 <h1 id="iOS沙盒与模态"><a href="#iOS沙盒与模态" class="headerlink" title="iOS沙盒与模态"></a>iOS沙盒与模态</h1><h2 id="iOS应用存储数据常用方式"><a href="#iOS应用存储数据常用方式" class="headerlink" title="iOS应用存储数据常用方式"></a>iOS应用存储数据常用方式</h2><ul>
 <li><p>XML属性列表（plist）归档</p>
 </li>
@@ -237,31 +100,19 @@
 <p>那么如果要给它加上诸如联系人、空间之类的标题图片要怎么做呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pVc.tabBarItem.title = @&quot;Peterpan&quot;;</div><div class="line">pVc.tabBarItem.image = [UIImage imageNamed:@&quot;peterpan&quot;];</div></pre></td></tr></table></figure>
 <p>然后就会形成下面这样的效果(不要吐槽我的画质，开心就好～)</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png" alt="屏幕快照 2017-08-29 下午11.23.23.png" title="" class="">
-                <p>屏幕快照 2017-08-29 下午11.23.23.png</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png" alt=""></p>
 <p>这个时候发现图片居然是蓝色的？？？这是因为high_lighted状态系统默认会渲染成蓝色，如果要修改的话可以这样写代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//修改图片的渲染模式</div><div class="line">selectImage = [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">pVc.tabBarItem.selectedImage = selectImage;</div></pre></td></tr></table></figure>
 <h3 id="通过Storyboard加载tabBarController"><a href="#通过Storyboard加载tabBarController" class="headerlink" title="通过Storyboard加载tabBarController"></a>通过Storyboard加载tabBarController</h3><p>如果是从控件栏中拖入一个tabBarController，会一次性附加两个控制器，同时别忘了给tabBarController加上箭头，因为storyboard默认加载箭头指向的控制器。同时在附加控制器连线的时候，不同于导航控制器的show，而是点击之前的一条连线，有一个viewControllers，将之连到要加入的控制器即可。</p>
 <p>接下来说一下UITabBarButton中的一些属性，可以参考导航控制器的。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg" alt="891D21A5B819BE4CF04B2C9C607C0950.jpg" title="" class="">
-                <p>891D21A5B819BE4CF04B2C9C607C0950.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg" alt=""></p>
 <p>这个地方要说一点，就是和导航控制器不同的是，tabBarController的子控制器在进行切换的时候<code>不会被销毁</code>，导航控制器在切换子控制器的时候会将该子控制器上面的控制器弹出并销毁。</p>
-<h3 id="App主流框架结构"><a href="#App主流框架结构" class="headerlink" title="App主流框架结构"></a>App主流框架结构</h3><figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt="FCEFA1AAE0F65D78D5706A12306E39A6.jpg" title="" class="">
-                <p>FCEFA1AAE0F65D78D5706A12306E39A6.jpg</p>
-            </figure>
+<h3 id="App主流框架结构"><a href="#App主流框架结构" class="headerlink" title="App主流框架结构"></a>App主流框架结构</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt=""></p>
 <p>主流框架就是通过tabBarController配合导航控制器来使用，qq也是这样做的</p>
 <p>首先加载一个tabBarController，然后根据用户的点击选择跳转不同的导航控制器，导航控制器中再分别设置视图控制器等，如果动态那一栏可以使用静态单元格。</p>
 <p>其中有一些逻辑是需要我们注意的：</p>
 <p>1.在我们通过底部的按钮加载导航控制器之后，导航控制器内push的时候，tabBar需要隐藏，点击需要隐藏的控制器，右侧栏的layout那里有一个选项，勾选即可：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg" alt="30299C863BC1649EE7158C41B0B2E559.jpg" title="" class="">
-                <p>30299C863BC1649EE7158C41B0B2E559.jpg</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg" alt=""></p>
 <p>2.如果是静态单元格的话，可以直接选中tableViewCell来进行拖线的方式进行跳转</p>
 <h3 id="模态出控制器"><a href="#模态出控制器" class="headerlink" title="模态出控制器"></a>模态出控制器</h3><p>模态也是一种切换控制器显示的方法（之前是通过push和pop），任何控制器都可以通过模态来显示。</p>
 <p>模态的默认效果是新控制器从屏幕底下往上钻，直到覆盖原来的控制器为止</p>
@@ -272,307 +123,30 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (IBAction)btnClick:(id)sender&#123;</div><div class="line">    NewViewController *new = [[NewViewController alloc] init];</div><div class="line"></div><div class="line">  	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: new];</div><div class="line">  	//创建导航栏最左侧按钮</div><div class="line">  	new.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissClick)];</div><div class="line">  </div><div class="line">  	[self presentViewController:nav animated:YES completion:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>想用storyboard来实现当然也是可以的，只不过把之前的show换成Present-Modaily，转场效果可以自己设置哦～，个人觉得旋转的比较炫酷一点。</p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2017-12-07T14:28:43.000Z" itemprop="dateUpdated">2017-12-07 22:28:43</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/08/31/iOS沙盒与模态/" target="_blank" rel="external">http://yoursite.com/2017/08/31/iOS沙盒与模态/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&source=ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/03/TCP-IP-三/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">TCP/IP(三)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/28/Linux运维学习Day6/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Linux运维学习Day6</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS沙盒与模态"><span class="post-toc-number">1.</span> <span class="post-toc-text">iOS沙盒与模态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#iOS应用存储数据常用方式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">iOS应用存储数据常用方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用沙盒结构分析"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">应用沙盒结构分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#沙盒目录结构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">沙盒目录结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打开应用沙盒"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">打开应用沙盒</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#沙盒机制的好处"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">沙盒机制的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取路径"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">获取路径</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-沙盒路径"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">1.沙盒路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Documents路径"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">2.Documents路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Tmp路径"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">3.Tmp路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Library路径"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">4.Library路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-应用程序包路径"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">5.应用程序包路径</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#plist文件存储"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">plist文件存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#归档和反归档"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">归档和反归档</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UITabBarController"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">UITabBarController</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#纯代码创建方式"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">纯代码创建方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过Storyboard加载tabBarController"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">通过Storyboard加载tabBarController</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#App主流框架结构"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">App主流框架结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模态出控制器"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">模态出控制器</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&source=ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3ay26DMBAF0Pz/T6dSV5XawJ2xSYN9vIoSAhwWwzz8eMTr+b1+fk7Wq+OT8zyuWBgYGLdl5Lfy+/jj87x6ENXrRlQMDIwNGEmQrca65MjjayX3hoGBgZEH0+rK01AMDAyMXsCd+82/vTcwMDBuxei1zKoJYt6Gu7AWx8DAuCGjNxh4z+fL5xsYGBgfz3gOr1mtt6FiGAMDY2nG8UgyD8FJOZoPCXpnw8DAWJWRF6758fljSkrcodQQAwNjCcZIC6wXsnvNNQwMDIx8VJk3/avDyDyJxMDA2JlR3fhV3VRx/FBGmnEYGBhrM6qFa/Vi+Q3lieMfR2JgYCzN6LXD5l6+mhSWR5gYGBg3Z4w0v6rFZ7WpVyhoMTAwNmNUW2PVG+1tIDt5NBgYGJsxqkleb8DZC8ETanEMDIwbMqqBLw/NzXp6YEsZBgbGqoz8RHmBmo8T8mHnya8YGBhLM0Y2fvVadfmZq2wMDIy1GdXkr5pEVsNrMjA4eVVgYGAsx+htAsvHkLP+1XxvYGBgLMQYH0/m6d2sVh0GBsY+jLx0rLbeqoVueUMYBgbGBoxncY2PB/LWW54+YmBgrM3IV7lvN3Cx5rYwDAyMpRnj7bDxRv+EgIuBgbEBY2QM2dvaVQ3HJzAMDAyMIikJ370RZvl5YGBgbMbopYwjA4NCgMbAwNiA0QuRSWl6PADIk79omwUGBsaijLmDgd7gs7fJ7ML5BgYGxqcwvgA9mKh23Abf8gAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/08/31/iOS沙盒与模态/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>
