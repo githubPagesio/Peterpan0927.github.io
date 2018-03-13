@@ -5,7 +5,8 @@
     <entry>
       <title><![CDATA[ACM日常训练总结(一)]]></title>
       <url>/2018/03/13/ACM%E6%97%A5%E5%B8%B8%E8%AE%AD%E7%BB%83%E6%80%BB%E7%BB%93-%E4%B8%80/</url>
-      <content type="html"><![CDATA[<p>日常训练中感觉有些坑的题目大结集～</p>
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+<p>日常训练中感觉有些坑的题目大结集～</p>
 <a id="more"></a>
 <h1 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1020" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem Description</strong></p>
@@ -46,7 +47,8 @@
     <entry>
       <title><![CDATA[ACM数论上的难题]]></title>
       <url>/2018/03/13/ACM%E6%95%B0%E8%AE%BA%E4%B8%8A%E7%9A%84%E9%9A%BE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<p>比赛中没有那么多的时间去对每一个数学问题进行相关的公式推导，所以这里记载一些可能会用到而又不是板子的题目</p>
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+<p>比赛中没有那么多的时间去对每一个数学问题进行相关的公式推导，所以这里记载一些可能会用到而又不是板子的题目</p>
 <a id="more"></a>
 <h1 id="Cake"><a href="#Cake" class="headerlink" title="Cake"></a>Cake</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=4" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem</strong> <strong>Description</strong></p>
@@ -116,7 +118,9 @@
     <entry>
       <title><![CDATA[ACM之神奇的位运算]]></title>
       <url>/2018/03/12/ACM%E4%B9%8B%E7%A5%9E%E5%A5%87%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-      <content type="html"><![CDATA[<p>位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。</p>
+      <content type="html"><![CDATA[<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+<p>位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。</p>
+<a id="more"></a>
 <h1 id="Find-your-present"><a href="#Find-your-present" class="headerlink" title="Find your present"></a>Find your present</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=11" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem Description</strong><br>In the new year party, everybody will get a “special present”.Now it’s your turn to get your special present, a lot of presents now putting on the desk, and only one of them will be yours.Each present has a card number on it, and your present’s card number will be the one that different from all the others, and you can assume that only one number appear odd times.For example, there are 5 present, and their card numbers are 1, 2, 3, 2, 1.so your present will be the one with the card number of 3, because 3 is the number that different from all the others.<br><strong>Input</strong><br>The input file will consist of several cases.<br>Each case will be presented by an integer n (1&lt;=n&lt;1000000, and n is odd) at first. Following that, n positive integers will be given in a line, all integers will smaller than 2^31. These numbers indicate the card numbers of the presents.n = 0 ends the input.<br><strong>Output</strong><br>For each case, output an integer in a line, which is the card number of your present.<br><strong>Sample Input</strong><br>5<br>1 1 3 2 2<br>3<br>1 2 1<br>0<br><strong>Sample Output</strong><br>3<br>2<br><strong>Hint</strong><br>use scanf to avoid Time Limit Exceeded</p>
 <p>首先我们要知道异或的一些特性，然后看看能不解题有所启发：</p>
