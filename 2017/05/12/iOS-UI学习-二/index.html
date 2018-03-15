@@ -1,53 +1,123 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>iOS-UI学习(二)</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
+  <meta charset="utf-8">
+  
+  <title>iOS-UI学习(二) | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UI初步（二）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS-UI学习(二)">
+<meta property="og:url" content="http://yoursite.com/2017/05/12/iOS-UI学习-二/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="UI初步（二）">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/154562D5-9767-486C-98B2-F24030E30966.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/5E87432E-75AB-4A46-95F2-EBEA63384130.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/0B00C653-FEFA-49C9-96C5-0EBC9FC5E82A.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/688A2E58-81CA-4887-9BC8-F67579FCF3B7.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/7873B694-004F-4A7D-A163-645AED229C02.png">
+<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/24E07267-E3F5-49BC-A897-99368D74543C.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.799Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS-UI学习(二)">
+<meta name="twitter:description" content="UI初步（二）">
+<meta name="twitter:image" content="http://omg5mjb8v.bkt.clouddn.com/154562D5-9767-486C-98B2-F24030E30966.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
 
 </head>
 
 <body>
-
-
-<h2 class="title">iOS-UI学习(二)</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年5月12日
-
-
-    <a class="article-category-link" href="/categories/MVC初步-xib与storyboard/">MVC初步 xib与storyboard</a>
-
-
-
- </div>
---->
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/about" title="Music">
+            <li>Music</li>
+          </a>
+        
+          <a href="tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UI基础Day3"><span class="toc-text">UI基础Day3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-代码生成多个图片的方法（多重循环）"><span class="toc-text">1.代码生成多个图片的方法（多重循环）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-在View中嵌套图片和文字-以下代码均写在for循环中"><span class="toc-text">2.在View中嵌套图片和文字,以下代码均写在for循环中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-button属性（在按钮up的时候button的highlighted状态会被clear）"><span class="toc-text">3.button属性（在按钮up的时候button的highlighted状态会被clear）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-不可变数组和可变数组"><span class="toc-text">4.不可变数组和可变数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-注意，如果想使用懒加载加载数据的话，必须要用self-重写的getter方法，不然直接访问的是这个对象，而不是通过getter方法。"><span class="toc-text">5.注意，如果想使用懒加载加载数据的话，必须要用self.重写的getter方法，不然直接访问的是这个对象，而不是通过getter方法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-可以通过plist文件来优化"><span class="toc-text">6.可以通过plist文件来优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-循环时算法的优化"><span class="toc-text">7.循环时算法的优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-字典转模型"><span class="toc-text">8.字典转模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-id和instancetype的区别"><span class="toc-text">9.id和instancetype的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-xib的使用"><span class="toc-text">10.xib的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-xib和class关联以及简单mvc"><span class="toc-text">11.xib和class关联以及简单mvc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-xib和storyboard的异同点"><span class="toc-text">12.xib和storyboard的异同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-按钮的设置"><span class="toc-text">13.按钮的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-插件安装"><span class="toc-text">14.插件安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-九宫格完整代码展示"><span class="toc-text">15.九宫格完整代码展示</span></a></li></ol></li></ol>
-<p>UI初步（二）<br><a id="more"></a></p>
+        <section id="main"><article id="post-iOS-UI学习-二" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/12/iOS-UI学习-二/" class="article-date">
+  <time class="post-time" datetime="2017-05-12T12:12:01.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS-UI学习(二)
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MVC初步-xib与storyboard/">MVC初步 xib与storyboard</a>
+  </div>
+
+          
+              
+  &nbsp; | &nbsp;
+  <div class="view-box">
+    <span id="/2017/05/12/iOS-UI学习-二/" class="leancloud_visitors" data-flag-title="iOS-UI学习(二)">
+      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
+    </span>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UI初步（二）<br><a id="more"></a></p>
 <h1 id="UI基础Day3"><a href="#UI基础Day3" class="headerlink" title="UI基础Day3"></a>UI基础Day3</h1><h2 id="1-代码生成多个图片的方法（多重循环）"><a href="#1-代码生成多个图片的方法（多重循环）" class="headerlink" title="1.代码生成多个图片的方法（多重循环）"></a>1.代码生成多个图片的方法（多重循环）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    CGFloat Width = 50;</div><div class="line">    CGFloat Height = 25;</div><div class="line">    CGFloat margin = (CGRectGetMaxX(self.view.frame)-5*Width)/6;</div><div class="line">    for (int i = 0; i &lt; 15; i++) &#123;</div><div class="line">        NSInteger x = i/5;</div><div class="line">        NSInteger y = i%5;</div><div class="line">        CGFloat viewx = (y+1)*margin + y*Width;</div><div class="line">        CGFloat viewy = (x+1)*margin + x*Height;</div><div class="line">        UIView *imageview = [[UIView alloc] initWithFrame:CGRectMake(viewx, viewy, Width, Height)];</div><div class="line">        imageview.tag = i;</div><div class="line">        [imageview setBackgroundColor:[UIColor blueColor]];</div><div class="line">        [self.view addSubview:imageview];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-在View中嵌套图片和文字-以下代码均写在for循环中"><a href="#2-在View中嵌套图片和文字-以下代码均写在for循环中" class="headerlink" title="2.在View中嵌套图片和文字,以下代码均写在for循环中"></a>2.在View中嵌套图片和文字,以下代码均写在for循环中</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/154562D5-9767-486C-98B2-F24030E30966.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">nameLabel.text = @&quot;xxxx&quot;;</div><div class="line">//设置文本内容</div><div class="line">nameLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">//设置对齐的模式</div><div class="line">nameLabel.font = [UIFont boldSystemFontOfSize:15];</div><div class="line">//设置字体</div><div class="line">/*</div><div class="line">boldSystemFontOfSize  :   加粗体</div><div class="line">systemFontOfSize      :   默认体</div><div class="line">italicSystemFontOfSize:   斜体</div><div class="line">*/</div></pre></td></tr></table></figure>
@@ -103,30 +173,300 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line">#YellowView.h</div><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">@class AppModel;</div><div class="line"></div><div class="line">@interface YellowView : UIView</div><div class="line"></div><div class="line">// 属性如果非必要不会暴露在.h文件里</div><div class="line">// 不安全, 扩展性不好, 代码量</div><div class="line"></div><div class="line">@property (nonatomic, strong) AppModel *appModel;</div><div class="line"></div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">  </div><div class="line">#YellowView.m</div><div class="line">#import &quot;YellowView.h&quot;</div><div class="line">#import &quot;AppModel.h&quot;</div><div class="line"></div><div class="line">@interface YellowView()</div><div class="line"></div><div class="line">/**</div><div class="line"> 显示图片的ImageView</div><div class="line"> */</div><div class="line">@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;</div><div class="line">@property (weak, nonatomic) IBOutlet UILabel *nameLabel;</div><div class="line">@property (weak, nonatomic) IBOutlet UIButton *downloadButton;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation YellowView</div><div class="line"></div><div class="line"></div><div class="line">// 重写 appModel的set方法</div><div class="line"></div><div class="line">- (void)setAppModel:(AppModel *)appModel &#123;</div><div class="line">    </div><div class="line">    // 1. 先对属性进行赋值</div><div class="line">    _appModel = appModel;</div><div class="line"></div><div class="line">    </div><div class="line">    // 2. 对子控件进行赋值</div><div class="line">    _iconImageView.image = [UIImage imageNamed:appModel.icon];</div><div class="line">    _nameLabel.text = appModel.name;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 点击下载按钮调用的方法</div><div class="line">- (IBAction)didClickDownloadButton:(id)sender &#123;</div><div class="line">    </div><div class="line">    // 转为UIButton类型</div><div class="line">    UIButton *downButton = sender;</div><div class="line">    </div><div class="line">    // 拿到控制器的view</div><div class="line">    UIView *controllerView = self.superview;</div><div class="line">    </div><div class="line">    // 创建一个遮罩view</div><div class="line">    UIView *coverView = [[UIView alloc] initWithFrame:controllerView.bounds];</div><div class="line">    </div><div class="line">    // 设置透明度</div><div class="line">    // alpha 0(完全透明) &lt;--&gt; 1(完全不透明)</div><div class="line">    coverView.alpha = 0;</div><div class="line">    </div><div class="line">    // 设置颜色</div><div class="line">    [coverView setBackgroundColor:[UIColor blackColor]];</div><div class="line">    </div><div class="line">    // 添加到控制器的view上</div><div class="line">    [controllerView addSubview:coverView];</div><div class="line">    </div><div class="line">    // superView的size</div><div class="line">    CGSize superSize = controllerView.frame.size;</div><div class="line">    </div><div class="line">    // 添加coverView上的文本</div><div class="line">    UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, controllerView.bounds.size.width, 20)];</div><div class="line">    </div><div class="line">    NSLog(@&quot;%@&quot;, NSStringFromCGPoint(noticeLabel.center));</div><div class="line">    </div><div class="line">    // 设置对齐方式</div><div class="line">    noticeLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    </div><div class="line">    // 设置文字</div><div class="line">    noticeLabel.text = @&quot;下载中...&quot;;</div><div class="line">    </div><div class="line">    noticeLabel.textColor = [UIColor whiteColor];</div><div class="line">    </div><div class="line">    noticeLabel.center = CGPointMake(superSize.width/2, superSize.height/2);</div><div class="line">    </div><div class="line">    NSLog(@&quot;设置后: %@&quot;, NSStringFromCGPoint(noticeLabel.center));</div><div class="line">    </div><div class="line">    // 添加到coverView上</div><div class="line">    [coverView addSubview:noticeLabel];</div><div class="line">    </div><div class="line">    // 通过动画来显示 coverView</div><div class="line">    [UIView animateWithDuration:1 animations:^&#123;</div><div class="line">        </div><div class="line">        coverView.alpha = 0.6;</div><div class="line">        </div><div class="line">    &#125; completion:^(BOOL finished) &#123;</div><div class="line">        </div><div class="line">        [UIView animateWithDuration:1   // 动画执行的时间</div><div class="line">                              delay:1   // 延迟时间执行动画</div><div class="line">                            options:UIViewAnimationOptionCurveEaseInOut // 动画效果</div><div class="line">                         animations:^&#123;  // 要执行动画的操作</div><div class="line">                             </div><div class="line">                             coverView.alpha = 0;</div><div class="line">            </div><div class="line">        &#125; completion:^(BOOL finished) &#123; // 执行完动画之后的回调</div><div class="line">            </div><div class="line">            // 下载完成之后又, 要把button的状态修改为 被禁用状态</div><div class="line">            downButton.enabled = NO;</div><div class="line">            </div><div class="line">            // 把coverView 从父控件上移除</div><div class="line">            [coverView removeFromSuperview];</div><div class="line">            </div><div class="line">        &#125;];</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">#AppModel.h</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface AppModel : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> 这两个属性名称一定要和 字典里的key值保持一致</div><div class="line"> 属性的类型  -- &gt; 字典里key对应的value 类型保持一致</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line"></div><div class="line">@property (nonatomic, copy) NSString *icon;</div><div class="line"></div><div class="line">/**</div><div class="line"> id 和instancetype 都可以做为返回值</div><div class="line"> instancetype :  不可以作为参数类型 , 但 它可以检测返回类型</div><div class="line"> */</div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict;</div><div class="line"></div><div class="line"></div><div class="line">+ (instancetype)appModelWithDict:(NSDictionary *)dict;</div><div class="line"></div><div class="line">@end</div><div class="line">#AppModel.m</div><div class="line">#import &quot;AppModel.h&quot;</div><div class="line"></div><div class="line">@implementation AppModel</div><div class="line"></div><div class="line">- (instancetype)initWithDict:(NSDictionary *)dict &#123;</div><div class="line">    // 调用父类的实例化方法</div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        self.name = dict[@&quot;name&quot;];</div><div class="line">        self.icon = dict[@&quot;icon&quot;];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (instancetype)appModelWithDict:(NSDictionary *)dict &#123;</div><div class="line">    // 这里在进行alloc 的时候, 最好使用 self</div><div class="line">    return [[self alloc] initWithDict:dict];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/12/iOS-UI学习-二/" data-id="cjesc0hvn003wvmbr0g1db04d" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
 
-<!--<a href="http://yoursite.com/2017/05/12/iOS-UI学习-二/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/18/iOS-UI学习-三/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          iOS-UI学习(三)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/12/iOS-UI学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">iOS-UI学习</div>
+    </a>
+  
+</nav>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">null</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/about" title="Music">
+            <li>Music</li>
+          </a>
+        
+          <a href="tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
 </div>
 
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="/peterpan980927.cn/111" title="" class="menuItem">404</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz", "xDGMWtxNt0aReJDVkuYmSqBd");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.article-title').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
 
 
+  </div>
 </body>
 </html>
