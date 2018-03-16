@@ -5,28 +5,17 @@
   
   <title>ACM日常训练总结(二) | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HDU_1007
-传送门
-为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&amp;lt;iostream&amp;gt;#inclu">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="ACM日常训练总结(二)">
 <meta property="og:url" content="http://yoursite.com/2018/03/16/ACM日常训练总结-二/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="HDU_1007
-传送门
-为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&amp;lt;iostream&amp;gt;#inclu">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8A%E5%8D%8811.25.06.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%881.49.43.png">
-<meta property="og:updated_time" content="2018-03-16T08:39:03.989Z">
+<meta property="og:updated_time" content="2018-03-16T14:32:17.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACM日常训练总结(二)">
-<meta name="twitter:description" content="HDU_1007
-传送门
-为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&amp;lt;iostream&amp;gt;#inclu">
-<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8A%E5%8D%8811.25.06.png">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
   
@@ -111,7 +100,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="hdu_1007"><a class="markdownIt-Anchor" href="#hdu_1007"></a> HDU_1007</h1>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+<a id="more"></a>
+<h1 id="hdu_1007"><a class="markdownIt-Anchor" href="#hdu_1007"></a> HDU_1007</h1>
 <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1007" target="_blank" rel="external">传送门</a></p>
 <p>为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> min(a,b) ( ((a)&gt;(b)) ? (b):(a) )</span></div><div class="line"><span class="keyword">struct</span> point</div><div class="line">&#123;</div><div class="line">	<span class="keyword">double</span> x,y;</div><div class="line">&#125;a[<span class="number">100001</span>];</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> point &amp;a,<span class="keyword">const</span> point &amp;b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">fabs</span>(a.x-b.x)&lt;<span class="number">1e-8</span>)</div><div class="line">    <span class="comment">//如果两个点的x坐标相等，则对y坐标进行比较</span></div><div class="line">        <span class="keyword">return</span> a.y &lt; b.y;</div><div class="line">    <span class="keyword">return</span> a.x&lt;b.x;</div><div class="line">&#125;</div><div class="line"><span class="comment">//两点间距离</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(point a,point b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(a.x-b.x,<span class="number">2</span>)+<span class="built_in">pow</span>(a.y-b.y,<span class="number">2</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">S</span><span class="params">(point a[],<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">double</span> m=<span class="number">1e+10</span>;</div><div class="line">	<span class="keyword">if</span>(n==<span class="number">2</span>)</div><div class="line">		<span class="keyword">return</span> dis(a[<span class="number">0</span>],a[<span class="number">1</span>]);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-2</span>;i++)</div><div class="line">	&#123;</div><div class="line">		m=min(m,min(dis(a[i],a[i+<span class="number">1</span>]),min(dis(a[i],a[i+<span class="number">2</span>]),dis(a[i+<span class="number">1</span>],a[i+<span class="number">2</span>]))));</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> m;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n),n)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;a[i].x,&amp;a[i].y);</div><div class="line">		&#125;</div><div class="line">		sort(a,a+n,cmp);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,S(a,n)/<span class="number">2</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -120,12 +111,12 @@
 <p>所以为了过题多比较了一次，然后就过了，如果面对特别极端的情况的话还是需要想想其他的思路，如下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%881.49.43.png" alt="屏幕快照 2018-03-16 下午1.49.43.png"></p>
 <p>在这种情况下我的解决思路就是如果有x坐标相同的，那么就找到这个点之后第一个与其x坐标不相同的点，然后将二者之间的距离算出来，与当前最小值比较，体现在代码中应该就是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(a[i].x == a[i+<span class="number">1</span>].x)&#123;</div><div class="line">  	<span class="keyword">int</span> tmp2, tmp1;</div><div class="line">  	tmp1 = tmp2 = i;</div><div class="line">	<span class="keyword">while</span>(a[tmp1+<span class="number">1</span>] == x)</div><div class="line">      tmp1++;</div><div class="line">  	m = min(m, dis(a[i], a[tmp1]));</div><div class="line">  	i = tmp2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(a[i].x == a[i+<span class="number">1</span>].x)&#123;</div><div class="line">  	<span class="keyword">int</span> tmp2, tmp1;</div><div class="line">  	tmp1 = tmp2 = i;</div><div class="line">	<span class="keyword">while</span>(a[tmp1+<span class="number">1</span>] == x)</div><div class="line">      tmp1++;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> j = tmp2 ; j &lt;= tmp1 ; j++)&#123;</div><div class="line">    m = min(m, dis(a[j], a[tmp1]));</div><div class="line">  &#125;</div><div class="line">  	i = tmp2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjetozol70008kzbrk8j61oz1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjetozol70008kzbrk8j61oz1" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -138,7 +129,7 @@
   
   
     <a href="/2018/03/13/ACM日常训练总结-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">ACM日常训练总结(一)</div>
     </a>
   
@@ -202,7 +193,7 @@
     <div class="friend-link">
       <h2>友情链接</h2>
       
-        <a class="hvr-bounce-in" href="imbajin.com" target="_blank" title="Jin">
+        <a class="hvr-bounce-in" href="https://imbajin.com" target="_blank" title="Jin">
           Jin
         </a>
       
