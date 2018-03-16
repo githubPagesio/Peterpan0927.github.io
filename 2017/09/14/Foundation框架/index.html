@@ -5,17 +5,17 @@
   
   <title>Foundation框架 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="才发现居然没有发上来….这个算是必备技能吧">
+  <meta name="description" content="才发现居然没有发上来…这个算是必备技能吧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Foundation框架">
 <meta property="og:url" content="http://yoursite.com/2017/09/14/Foundation框架/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta property="og:description" content="才发现居然没有发上来…这个算是必备技能吧">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
 <meta property="og:updated_time" content="2018-03-13T16:00:22.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Foundation框架">
-<meta name="twitter:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta name="twitter:description" content="才发现居然没有发上来…这个算是必备技能吧">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -101,13 +101,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>才发现居然没有发上来….这个算是必备技能吧</p>
+        <p>才发现居然没有发上来…这个算是必备技能吧</p>
 <a id="more"></a>
-<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
+<h1 id="foundation"><a class="markdownIt-Anchor" href="#foundation"></a> Foundation</h1>
+<h2 id="框架"><a class="markdownIt-Anchor" href="#框架"></a> 框架</h2>
+<p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
 <p>核心三大库：字符串(NSString,NSMutableString)，集合(NSArray,NSMutableArray,键值对：NSDictionary,NSMutableDictionary)，文件(NSFileManager)</p>
 <p>推荐一个网站<a href="opensource.apple.com">苹果所有开源项目的托管网站</a></p>
 <p>学习构造方法和其他方法主要分为五类：增、删、改、查、其他</p>
-<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>1.单例的特点</p>
+<h2 id="单例模式"><a class="markdownIt-Anchor" href="#单例模式"></a> 单例模式</h2>
+<p>1.单例的特点</p>
 <p>1个类的对象无论在何时何地创建，创建出来的都是同一个对象</p>
 <p>2.无论如何创建对象，都会调用alloc方法来创建对象</p>
 <ul>
@@ -123,7 +126,8 @@
 <p>5.什么时候需要让类变成单例</p>
 <p>比如要做一个游戏的面板的尺寸，如果直接写就把程序写死，宏在程序运行的时候无法更改</p>
 <p>如果程序需要被整个程序共享，将数据以属性的方式存储在单例对象中，也就是说在A类中改了尺寸，B类访问的时候就是那个修改过的，因为只有一个对象。</p>
-<h2 id="NSString字符串"><a href="#NSString字符串" class="headerlink" title="NSString字符串"></a>NSString字符串</h2><p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
+<h2 id="nsstring字符串"><a class="markdownIt-Anchor" href="#nsstring字符串"></a> NSString字符串</h2>
+<p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
 <p>1.构造方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">initWithUTF8String: //将C语言字符串转换为OC字符串，因为OC没有输入函数，所以如果要读入字符串要用这种方法转换</div><div class="line">initWithFormat:  //</div><div class="line">initWithContentsOfURL: //</div><div class="line">initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息，先使用 nil//从文件中获取字符串</div><div class="line">//文件编码在mac上默认使用utf-8，或者用4</div></pre></td></tr></table></figure>
 <p>2.文件编码</p>
@@ -194,7 +198,8 @@
 <p>大小写转换</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSSString *str = @&quot;test&quot;;</div><div class="line">str = [str uppercaseString];</div><div class="line">str = [str lowercaseString];</div></pre></td></tr></table></figure>
-<h2 id="NSMutableString字符串"><a href="#NSMutableString字符串" class="headerlink" title="NSMutableString字符串"></a>NSMutableString字符串</h2><blockquote>
+<h2 id="nsmutablestring字符串"><a class="markdownIt-Anchor" href="#nsmutablestring字符串"></a> NSMutableString字符串</h2>
+<blockquote>
 <p>字符串的恒定性</p>
 </blockquote>
 <p>一旦创建一个字符串对象，那么这个字符串对象的内容就无法更改，我们修改字符串的时候，其实是重新创建了一个字符串对象，所以如果需要频繁的修改一个字符串，可以将其定义为NSMutableString，NSMutableString在父类NSString的基础之上做了扩展，存储在其中的字符串具有可变性，不会新创建对象。</p>
@@ -202,7 +207,8 @@
 <p>NSMutableString用法</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//直接追加字符串</div><div class="line">NSMutableString *str = [NSMutableString string];</div><div class="line">[str appendString:@&quot;sasa&quot;];</div><div class="line">//以拼接的方式追加内容</div><div class="line">int num = 1;</div><div class="line">[str appendFormat:@&quot;%d&quot;, num];</div><div class="line">//创建对象的时候，下面这种初始化方式是不行的</div><div class="line">NSMutableString *str = @&quot;hello&quot;;</div><div class="line">//因为@&quot;hello&quot;是一个NSString对象，子类指针指向父类对象，如果调用子类独有的方法就会运行出错。</div><div class="line">//剩下的因为继承的关系，和NSString的方法一致</div></pre></td></tr></table></figure>
-<h2 id="NSArray数组"><a href="#NSArray数组" class="headerlink" title="NSArray数组"></a>NSArray数组</h2><p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
+<h2 id="nsarray数组"><a class="markdownIt-Anchor" href="#nsarray数组"></a> NSArray数组</h2>
+<p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
 <blockquote>
 <p>初始化方法</p>
 </blockquote>
@@ -219,24 +225,28 @@
 <p>字符串与数组</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将数组元素和字符串连接起来</div><div class="line">NSString *str =  [arr componentsJoinedByString:@&quot;#&quot;];</div><div class="line">//将字符串转换为数组,以‘,’作为分隔</div><div class="line">NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];</div></pre></td></tr></table></figure>
-<h2 id="NSMutableArray数组"><a href="#NSMutableArray数组" class="headerlink" title="NSMutableArray数组"></a>NSMutableArray数组</h2><p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
+<h2 id="nsmutablearray数组"><a class="markdownIt-Anchor" href="#nsmutablearray数组"></a> NSMutableArray数组</h2>
+<p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
 <p>数组的创建可以参考NSSMutableArray</p>
 <p>可变数组添加元素的方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *arr = [NSMutableArray new];</div><div class="line">[arr addObject:@&quot;test&quot;];</div><div class="line">//将另一个数组作为可变数组的一个元素</div><div class="line">[arr addObject:arr1];</div><div class="line">//将另一个数组中的元素加进来</div><div class="line">[arr addObjectFromArray:arr1];</div><div class="line">//在可变数组指定的下标处加入一个元素</div><div class="line">[arr insertObject:@&quot;test&quot; atIndex:1];</div><div class="line">//删除指定下标的值</div><div class="line">[arr removeObjectAtIndex:1];</div><div class="line">//删除可变数组中所有的指定元素</div><div class="line">[arr removeObject@&quot;test&quot;];</div><div class="line">//删除指定范围内的元素</div><div class="line">[arr removeObject:@&quot;test&quot; inRange:NSMakeRange(0,3)];</div><div class="line">//删除最后一个元素</div><div class="line">[arr removeLastObject]</div><div class="line">//删除所有元素</div><div class="line">[arr removeAllObjects];</div></pre></td></tr></table></figure>
-<h2 id="NSNumber"><a href="#NSNumber" class="headerlink" title="NSNumber"></a>NSNumber</h2><p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
+<h2 id="nsnumber"><a class="markdownIt-Anchor" href="#nsnumber"></a> NSNumber</h2>
+<p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
 <blockquote>
 <p>基本数据类型存储到数组中的步骤</p>
 </blockquote>
 <p>1.先将基本数据类型包装到NSNumber对象中</p>
 <p>2.将NSNumber对象存储到NSArray数组中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSNumber *number = [NSNumber numberWithFloat:10.1f];</div><div class="line">NSArray *arr = @[number];</div><div class="line">//简写方式</div><div class="line">NSNumber *number1 = @10;</div><div class="line">//@10代表这个对象中包装的是整型数据10</div><div class="line">NSArray *arr1 = @[@10,@20,@30];</div><div class="line">//注意，如果后面的数据是一个变量，就要用小括弧扩起来</div><div class="line">int num  = 10;</div><div class="line">NSNumber *number2 = @(num);</div></pre></td></tr></table></figure>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
+<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
+<p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = @[@&quot;test&quot;, @10];</div><div class="line">[arr writeToFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
 <p>然后下次想要调用的时候就可以直接从plist文件中读取：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = [NSArray arrayWithContentsOfFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
-<h2 id="NSDictionary"><a href="#NSDictionary" class="headerlink" title="NSDictionary"></a>NSDictionary</h2><p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
+<h2 id="nsdictionary"><a class="markdownIt-Anchor" href="#nsdictionary"></a> NSDictionary</h2>
+<p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
 <p>存储数据的时候，要为存储的数据取一个别名，用来确定这个别名对应的数据。</p>
-<p>这种存储数据的方式就叫做键值对的存储方式 </p>
+<p>这种存储数据的方式就叫做键值对的存储方式</p>
 <blockquote>
 <p>创建字典数组</p>
 </blockquote>
@@ -247,7 +257,7 @@
 <p>1.以键值对的形式存储数据</p>
 <p>2.字典数组一旦创建，其中的元素不能动态的新增和删除</p>
 <p>3.键：只能是遵守了NSCoping协议的对象,而NSString就是遵守了这个协议</p>
-<p>   值：只能是OC对象</p>
+<p>值：只能是OC对象</p>
 <p>4.当往字典数组中存入一个键值对的时候，并不是按照顺序挨个存储，而是根据键和数组的长度做一个哈希算法算出一个下标，再将这个键值对存入这个下标对应的空间。</p>
 <p>5.取值的时候，也可以通过键做一个哈希算法，算出下标，然后直接找到对应的数据取出即可</p>
 <blockquote>
@@ -259,15 +269,18 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//这样方法遍历出来的是字典中所有的键</div><div class="line">for(id item in dict)&#123;</div><div class="line">  NSLog(@&quot;%@ = %@&quot;, item, dict[item]);</div><div class="line">&#125;</div><div class="line">//使用block</div><div class="line">[dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">        NSLog(@&quot;%@ = %@&quot;, key, obj);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
 <p><strong>和NSArray对比，存储数据的效率是NSArray更高，不需要进行计算；在取数据的时候，如果是全部取出来，也是NSArray的效率更高，但是如果是取出指定的几个的数据，就是NSDictionary了，因为不需要遍历。</strong></p>
-<h2 id="NSMutableDictionary"><a href="#NSMutableDictionary" class="headerlink" title="NSMutableDictionary"></a>NSMutableDictionary</h2><p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
+<h2 id="nsmutabledictionary"><a class="markdownIt-Anchor" href="#nsmutabledictionary"></a> NSMutableDictionary</h2>
+<p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
 <p>新增和删除键值对</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//新增，如果添加的键有重复，后添加的就会覆盖原有的</div><div class="line">[dict setObject:@&quot;jack&quot; forKey:@&quot;name&quot;];</div><div class="line">//删除所有键值对</div><div class="line">[dict removeAllObjects];</div><div class="line">//根据键来删除</div><div class="line">[dict removeObjectForKey:@&quot;age&quot;];</div></pre></td></tr></table></figure>
 <p>字典数组的持久化</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[dict writeToFile:@&quot;/Users/peterpan/Downloads/dict.plist&quot; atomically:NO];</div><div class="line">//从plist文件中读取</div><div class="line">NSDictionary *dict = [NSDictionary dictWithContentsOfFile@&quot;/Users/peterpan/Downloads/dict.plist&quot;];</div></pre></td></tr></table></figure>
-<h2 id="集合的内存管理"><a href="#集合的内存管理" class="headerlink" title="集合的内存管理"></a>集合的内存管理</h2><p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
+<h2 id="集合的内存管理"><a class="markdownIt-Anchor" href="#集合的内存管理"></a> 集合的内存管理</h2>
+<p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
 <p>2.使用@[]或@{}创建的集合是已经被autorelease过的，直接调用和类同名的类方法创建的对象也是。</p>
 <p>3.在ARC的模式下，集合的元素是一个强类型的指针。</p>
-<h2 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h2><p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
+<h2 id="nsfilemanager"><a class="markdownIt-Anchor" href="#nsfilemanager"></a> NSFileManager</h2>
+<p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSFileManager *manager = [NSFileManager defaultManager];</div></pre></td></tr></table></figure>
 <p>常用判断方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//判断文件夹或文件是否存在,返回值为BOOL类型</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的路径是否真实存储在我们的磁盘上，并且判断这个路径是一个文件夹还是文件</div><div class="line">BOOL flag = NO;</div><div class="line">//执行完后，如果flag是YES，那么给定路径是一个文件夹路径，否则就是文件路径</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot; isDirectory:&amp;flag];</div><div class="line">//判断指定的文件或文件夹是否可以读取</div><div class="line">[manager isReadableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以写入</div><div class="line">[manager isWritableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以删除</div><div class="line">[manager isDeletableFilePath:@&quot;/Users/peterpan/test.py&quot;];</div></pre></td></tr></table></figure>
@@ -277,38 +290,45 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//存储在磁盘上的任何文件都是以二进制的形式存储的</div><div class="line">//第二个参数是文件的内容，要求是文件的二进制内容,第三个参数可以自定义文件的属性</div><div class="line">//NSData对象就是专门用来保护二进制数据的</div><div class="line">NSString *str1 = @&quot;saaasaxas&quot;;</div><div class="line">    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    NSFileManager *manager = [NSFileManager new];</div><div class="line">    BOOL res = [manager createFileAtPath:@&quot;/Users/peterpan/test.txt&quot; contents:data attributes:nil];</div><div class="line">//在指定目录下创建文件夹，第二个参数是是否允许一路创建，第三个属性是指定属性</div><div class="line"> [manager createDirectoryAtPath:@&quot;/Users/peterpan/test&quot; withIntermediateDirectories:YES attributes:nil error:nil];</div><div class="line">//拷贝文件</div><div class="line">[manager copyItemAtPath:@&quot;xxx&quot; toPath@&quot;xxx&quot; error:nil];</div><div class="line">//移动文件,重命名</div><div class="line">[manager moveItemAtPath:@&quot;xxx&quot; toPath:@&quot;xxx&quot;error:nil];</div><div class="line">//删除文件</div><div class="line">[manager removeItemAtPath:@&quot;xxx&quot; error:nil];</div></pre></td></tr></table></figure>
 <p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">while(1)&#123;</div><div class="line">	NSFileManager *manager = [NSManager defaultManager];</div><div class="line">	NSString *path = @&quot;/Users/peterpan/Desktop&quot;</div><div class="line">	NSArray *arr = [manager contentsOfFileDirectoryAtPath:path error:nil];</div><div class="line">	if(arr.count &gt; 0)&#123;</div><div class="line">		for(NSString *str in arr)&#123;</div><div class="line">          	NSString *str1 = [NSString stringWithFormat:@&quot;%@%@&quot;, path,str];</div><div class="line">  			if([manager isDeletableFileAtPath:str])</div><div class="line">              [manager removeItemAtPath:str1 error:nil];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  NSLog(@&quot;扫描完成&quot;);</div><div class="line">  //CPU暂停指定的时间</div><div class="line">  [NSThread sleepForTimeInterval:10];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="CGPoint"><a href="#CGPoint" class="headerlink" title="CGPoint"></a>CGPoint</h2><p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
+<h2 id="cgpoint"><a class="markdownIt-Anchor" href="#cgpoint"></a> CGPoint</h2>
+<p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
 <p>CGPoint和NSPoint是同一个结构体，只不过定义了两个名字。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGPoint p1 = CGPointMake(20, 30);</div></pre></td></tr></table></figure>
-<h2 id="CGSize"><a href="#CGSize" class="headerlink" title="CGSize"></a>CGSize</h2><p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
+<h2 id="cgsize"><a class="markdownIt-Anchor" href="#cgsize"></a> CGSize</h2>
+<p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
 <p>NSSize和CGSize也是同一个结构体，只不过定义了两个名称</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGSize *s1 = CGSizeMake(20,20);</div></pre></td></tr></table></figure>
-<h2 id="CGRect"><a href="#CGRect" class="headerlink" title="CGRect"></a>CGRect</h2><p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
+<h2 id="cgrect"><a class="markdownIt-Anchor" href="#cgrect"></a> CGRect</h2>
+<p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
 <p>NSRect和CGRect同样也是一个结构体，定义了两个名称。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGRect *r1 = CGRectMake(10 ,20 ,30 ,40);</div></pre></td></tr></table></figure>
-<h2 id="NSValue"><a href="#NSValue" class="headerlink" title="NSValue"></a>NSValue</h2><p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
+<h2 id="nsvalue"><a class="markdownIt-Anchor" href="#nsvalue"></a> NSValue</h2>
+<p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CGPoint *p1 = CGPointMake(20, 30);</div><div class="line">//下面代码还可以改成valueWithSize等等结构体</div><div class="line">NSValue *v1 = [NSValue valueWithPoint:p1];</div><div class="line">//v1的属性都存放在sizeValue之中</div><div class="line">NSLog(@&quot;%@&quot;, NSStringFromPoint(v1.sizeValue));</div></pre></td></tr></table></figure>
-<h2 id="字符串和日期转换"><a href="#字符串和日期转换" class="headerlink" title="字符串和日期转换"></a>字符串和日期转换</h2><p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
+<h2 id="字符串和日期转换"><a class="markdownIt-Anchor" href="#字符串和日期转换"></a> 字符串和日期转换</h2>
+<p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate new];</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">//代表显示年月日十分秒</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSString *str = [formatter stringFromDate:date];</div><div class="line">//这样输出的就是当前时区的格式化时间,可以在时间之间随意的添加自定义的效果,e.g-&gt;yyyy年MM月dd日</div><div class="line">NSLog(@&quot;%@&quot;, str);</div></pre></td></tr></table></figure>
 <p>将字符串转换为时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *str = @&quot;2016-09-27 12:12:12&quot;;</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSDate *date = [formatter dateFromString:str];</div></pre></td></tr></table></figure>
-<h2 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h2><p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
+<h2 id="日期计算"><a class="markdownIt-Anchor" href="#日期计算"></a> 日期计算</h2>
+<p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//获取的默认是零时区的时间，到东八区的时间就是加八个小时</div><div class="line">NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5000];</div><div class="line">//求两个时间之差</div><div class="line">NSDate *date1 = [NSDate new];</div><div class="line">NSDate *date2 = [NSDate new];</div><div class="line">double res = [date1 timeIntervalSinceDate:date2];</div></pre></td></tr></table></figure>
-<h2 id="得到日期对象的各个部分"><a href="#得到日期对象的各个部分" class="headerlink" title="得到日期对象的各个部分"></a>得到日期对象的各个部分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate date];</div><div class="line">//创建一个日历对象，可以从日历对象中取到日期的各个部分</div><div class="line">NSCalendar *calendar = [NSCalendar currentCalendar];</div><div class="line">NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];</div><div class="line">//可以直接使用成员运算符取出日期对象的各个部分</div><div class="line">NSLog(@&quot;%lu&quot;, com.year);</div></pre></td></tr></table></figure>
+<h2 id="得到日期对象的各个部分"><a class="markdownIt-Anchor" href="#得到日期对象的各个部分"></a> 得到日期对象的各个部分</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate date];</div><div class="line">//创建一个日历对象，可以从日历对象中取到日期的各个部分</div><div class="line">NSCalendar *calendar = [NSCalendar currentCalendar];</div><div class="line">NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];</div><div class="line">//可以直接使用成员运算符取出日期对象的各个部分</div><div class="line">NSLog(@&quot;%lu&quot;, com.year);</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/14/Foundation框架/" data-id="cjeso2dyc001be2br6dud0qcq" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/14/Foundation框架/" data-id="cjetozomg001ckzbrxirm7q66" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -320,7 +340,7 @@
 <nav id="article-nav">
   
     <a href="/2017/09/17/CTF-隐写术/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           CTF-信息隐藏技术
@@ -330,7 +350,7 @@
   
   
     <a href="/2017/09/03/TCP-IP-三/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">TCP/IP(三)</div>
     </a>
   
@@ -376,8 +396,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

@@ -45,8 +45,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -103,10 +103,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-27%20%E4%B8%8B%E5%8D%884.22.55.png" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-27%20%E4%B8%8B%E5%8D%884.22.55.png" alt="">
 <p>上一次我们说过了ARM32，只是用来过渡，对于iOS来说，从iPhone5之后用的就已经全部都是ARM64了，因为每一种 CPU 的机器指令都是不一样的，因此对应的汇编语言也不一样，那么就来看看过渡之后的ARM有什么区别。</p>
 <a id="more"></a>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>首先要来扫一扫盲，我们生活中所说的arm64,armv7,i386这些分别对应着我们生活中的哪些设备呢？我以Apple系列来举个例子：</p>
+<h1 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h1>
+<p>首先要来扫一扫盲，我们生活中所说的arm64,armv7,i386这些分别对应着我们生活中的哪些设备呢？我以Apple系列来举个例子：</p>
 <ul>
 <li>armv7｜armv7s｜arm64都是ARM处理器的指令集</li>
 <li>i386｜x86_64 是Mac处理器的指令集</li>
@@ -115,16 +116,18 @@
 <p>比如说我用5s来作为我的工程测试机，那么我在写MakeFile的之后指定其CPU架构的时候就会做一个兼容(ARCHS)：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">THEOS_DEVICE_IP = <span class="number">192.168</span><span class="number">.1</span><span class="number">.129</span></div><div class="line">ARCHS = armv7 arm64</div><div class="line">TARGET = iphone:latest:<span class="number">7.0</span></div><div class="line"></div><div class="line">include /opt/theos/makefiles/common.mk</div><div class="line"></div><div class="line">TWEAK_NAME = ios_test</div><div class="line">ios_test_FILES = Tweak.xm</div><div class="line">ios_test_FRAMEWORKS = UIKit</div><div class="line"></div><div class="line">include $(THEOS_MAKE_PATH)/tweak.mk</div><div class="line"></div><div class="line">after-install::</div><div class="line">	install.exec <span class="string">"killall -9 SpringBoard"</span></div></pre></td></tr></table></figure>
 <p>这其中在第二行的时候指定了是兼容armv7和arm64架构的CPU</p>
-<h1 id="寄存器的变化"><a href="#寄存器的变化" class="headerlink" title="寄存器的变化"></a>寄存器的变化</h1><p>从ARM32到ARM64的过程中，寄存器的变化其实是很大的，在ARM32中，我们使用的是R0～R14和一个PC寄存器：</p>
+<h1 id="寄存器的变化"><a class="markdownIt-Anchor" href="#寄存器的变化"></a> 寄存器的变化</h1>
+<p>从ARM32到ARM64的过程中，寄存器的变化其实是很大的，在ARM32中，我们使用的是R0～R14和一个PC寄存器：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-30%20%E4%B8%8B%E5%8D%881.56.34.png" alt=""></p>
 <p>但是在ARM64中，事情似乎变的不一样了(在ARMv7中使用的仍然还是ARM32)</p>
 <ol>
-<li>arm64有32个64bit长度的通用寄存器x0～x30，sp，可以只使用其中的32bit w0～w30。 </li>
+<li>arm64有32个64bit长度的通用寄存器x0～x30，sp，可以只使用其中的32bit w0～w30。</li>
 <li>arm32只有16个32bit的通用寄存器r0~r12, lr, pc, sp. arm64有32个128bit SIMD寄存器v0～v31，arm32有16个128bit SIMD寄存器Q0～Q15，又可细分为32个64bit SIMD寄存器D0～D31。</li>
 <li>对于函数调用来说，arm64前面8个参数都是通过寄存器来传递x0～x7， arm32前面4个参数通过寄存器来传递r0～r3，其他通过栈传递。</li>
 <li>ARM64模式下，通用寄存器X18、X30不能被使用。而需要被自己写的过程所保护的是：X19、X20、X21、X22、X23、X24、X25、X26、X27、X28、X29寄存器；而SIMD寄存器需要保护的是V8、V9、V10、V11、V12、V13、V14、V15。</li>
 </ol>
-<h1 id="常用的汇编指令"><a href="#常用的汇编指令" class="headerlink" title="常用的汇编指令"></a>常用的汇编指令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">MOV X1, X0  ;寄存器X0的值传给X1</div><div class="line">ADD X0, X1, X2  ;寄存器X1和X2的值相加后给X0</div><div class="line">SUB X0, X1, X2  ;寄存器X1和X2的值相减后给X0</div><div class="line"></div><div class="line">AND X0, X0, #0xF    ;X0和0xF相与后的值给X0</div><div class="line">ORR X0, X0, #0x10   ;X0和0x10相或后的值给X0</div><div class="line">EOR X0, X0, #0x11   ;X0和0x11相异或后的值给X0</div><div class="line"></div><div class="line">LDR(LDUR) X5, [X6, #0x8]  ;X6寄存器的值(地址)加0x8的地址内的值给X5</div><div class="line">STR(STUR) X0, [SP, #0x8]  ;X0的值给(SP+0x8)地址指向的空间</div><div class="line"></div><div class="line">STP X29, X30, [SP, #0x1]    ;入栈操作</div><div class="line">LDP X29, X30, [SP, #0x1]    ;出栈操作</div><div class="line"></div><div class="line">CBZ     比较，如果结果为0，就跳转到后面的指令</div><div class="line">CBNZ    比较，如果结果非0，就跳转到后面的指令</div><div class="line"></div><div class="line">CMP     比较指令，结果影响CSPR状态</div><div class="line"></div><div class="line">B/BL    绝对跳转,无返回值/绝对跳转,返回值地址保存到LR(X30)</div><div class="line">RET     子程序返回，返回地址保存到LR(X30)</div><div class="line"></div><div class="line">ADRP    用来定位数据段中的数据, 因为ASLR会导致代码及数据的地址随机化, 用ADRP来根据PC做辅助定位</div></pre></td></tr></table></figure>
+<h1 id="常用的汇编指令"><a class="markdownIt-Anchor" href="#常用的汇编指令"></a> 常用的汇编指令</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">MOV X1, X0  ;寄存器X0的值传给X1</div><div class="line">ADD X0, X1, X2  ;寄存器X1和X2的值相加后给X0</div><div class="line">SUB X0, X1, X2  ;寄存器X1和X2的值相减后给X0</div><div class="line"></div><div class="line">AND X0, X0, #0xF    ;X0和0xF相与后的值给X0</div><div class="line">ORR X0, X0, #0x10   ;X0和0x10相或后的值给X0</div><div class="line">EOR X0, X0, #0x11   ;X0和0x11相异或后的值给X0</div><div class="line"></div><div class="line">LDR(LDUR) X5, [X6, #0x8]  ;X6寄存器的值(地址)加0x8的地址内的值给X5</div><div class="line">STR(STUR) X0, [SP, #0x8]  ;X0的值给(SP+0x8)地址指向的空间</div><div class="line"></div><div class="line">STP X29, X30, [SP, #0x1]    ;入栈操作</div><div class="line">LDP X29, X30, [SP, #0x1]    ;出栈操作</div><div class="line"></div><div class="line">CBZ     比较，如果结果为0，就跳转到后面的指令</div><div class="line">CBNZ    比较，如果结果非0，就跳转到后面的指令</div><div class="line"></div><div class="line">CMP     比较指令，结果影响CSPR状态</div><div class="line"></div><div class="line">B/BL    绝对跳转,无返回值/绝对跳转,返回值地址保存到LR(X30)</div><div class="line">RET     子程序返回，返回地址保存到LR(X30)</div><div class="line"></div><div class="line">ADRP    用来定位数据段中的数据, 因为ASLR会导致代码及数据的地址随机化, 用ADRP来根据PC做辅助定位</div></pre></td></tr></table></figure>
 <p>因为我们只是做一个基本的了解，只是为了可以大概的看懂反编译之后的汇编代码，所以只需要简单的介绍一下，知道意思即可，在上面的指令中我们尤其需要关注的就是BL指令了，作为逆向人员，需要对任何的跳转保持敏锐。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-30%20%E4%B8%8B%E5%8D%882.05.00.png" alt=""></p>
 <p>例如在上面的SpringBoard刷新函数中，我们去分析刷新到底干了什么重要的突破口也是跳转。</p>
@@ -132,7 +135,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add		eax, 20</div></pre></td></tr></table></figure>
 <p>但是在ARM中，我们会采用将<code>eax</code>中的值加上20再赋值给<code>eax</code>这样的思想，所以也就是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add		X0, X0, 20</div></pre></td></tr></table></figure>
-<h1 id="OC反汇编测试"><a href="#OC反汇编测试" class="headerlink" title="OC反汇编测试"></a>OC反汇编测试</h1><p>简单的C语言反汇编我们在之前的过程中就已经很熟悉了，基本看到如下的代码开头我们就知道接下来是要干什么了：</p>
+<h1 id="oc反汇编测试"><a class="markdownIt-Anchor" href="#oc反汇编测试"></a> OC反汇编测试</h1>
+<p>简单的C语言反汇编我们在之前的过程中就已经很熟悉了，基本看到如下的代码开头我们就知道接下来是要干什么了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">push	ebp</div><div class="line">mov		ebp, esp</div><div class="line">...</div><div class="line">pop 	ebp</div></pre></td></tr></table></figure>
 <p>那么我们在反汇编OC的程序的时候，情况是不是也是类似的呢？我们就来看看一个简单的类声明和实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">#import &quot;AppDelegate.h&quot;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line">@property (nonatomic, assign) NSInteger age;</div><div class="line">- (instancetype)initWithName:(NSString *)name age:(NSInteger)age;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation Person</div><div class="line"></div><div class="line">- (instancetype)initWithName:(NSString *)name age:(NSInteger)age &#123;</div><div class="line">    </div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        _name = name;</div><div class="line">        _age = age;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation AppDelegate</div><div class="line"></div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    </div><div class="line">    [self personTestCode];</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)personTestCode &#123;</div><div class="line">    </div><div class="line">    Person *xiaoming = [[Person alloc] initWithName:@&quot;xiaoming&quot; age:20];</div><div class="line">    xiaoming.age = 21;</div><div class="line">    Person *zhangfei = [[Person alloc] init];</div><div class="line">    zhangfei.name = @&quot;zhangfei&quot;;</div><div class="line">    zhangfei.age = 24;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
@@ -143,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/27/ARM64汇编/" data-id="cjeso2dxm000ge2brca9qgk8l" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/01/27/ARM64汇编/" data-id="cjetozolj000lkzbr4mk7lfg7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
@@ -155,7 +159,7 @@
 <nav id="article-nav">
   
     <a href="/2018/02/02/iOS逆向学习-三/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           iOS逆向学习(三)
@@ -165,7 +169,7 @@
   
   
     <a href="/2018/01/25/蓝桥杯java习题解读/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">蓝桥杯java习题解读</div>
     </a>
   
@@ -211,8 +215,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

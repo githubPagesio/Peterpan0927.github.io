@@ -45,8 +45,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -103,8 +103,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>CPU对于内存读写<br><a id="more"></a></p>
-<h1 id="CPU对于内存的读写"><a href="#CPU对于内存的读写" class="headerlink" title="CPU对于内存的读写"></a>CPU对于内存的读写</h1><p>CPU想从内存中读取数据，首先要指定内存的地址，如果是要进行数据的读写，必须要和外部器件（芯片）进行下面三种操作：</p>
+        <p>CPU对于内存读写</p>
+<a id="more"></a>
+<h1 id="cpu对于内存的读写"><a class="markdownIt-Anchor" href="#cpu对于内存的读写"></a> CPU对于内存的读写</h1>
+<p>CPU想从内存中读取数据，首先要指定内存的地址，如果是要进行数据的读写，必须要和外部器件（芯片）进行下面三种操作：</p>
 <ul>
 <li>存储单元的地址</li>
 <li>器件的选择，读或写的命令</li>
@@ -125,16 +127,20 @@
 <p>e.g-&gt;传送3号单元的内容到寄存器AX：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MOV AX,[3]</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="地址总线"><a href="#地址总线" class="headerlink" title="地址总线"></a>地址总线</h2><p>地址总线可以传递多少个不同的信息，CPU就可以对多少个存储单元进行寻址，如果说一个CPU有N个地址线，则可以说这个CPU的地址总线的宽度为N。这样的CPU最多可以寻找2的N次方个内存单元。</p>
+<h2 id="地址总线"><a class="markdownIt-Anchor" href="#地址总线"></a> 地址总线</h2>
+<p>地址总线可以传递多少个不同的信息，CPU就可以对多少个存储单元进行寻址，如果说一个CPU有N个地址线，则可以说这个CPU的地址总线的宽度为N。这样的CPU最多可以寻找2的N次方个内存单元。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%9C%B0%E5%9D%80%E6%80%BB%E7%BA%BF.png" alt=""></p>
-<h2 id="数据总线"><a href="#数据总线" class="headerlink" title="数据总线"></a>数据总线</h2><p>CPU与内存或其他器件之间进行数据传送是通过数据总线来进行的。数据总线的宽度决定了CPU和外界的数据传送速度。八根数据总线一次可以传输一个八位的二进制数据（一个字节），依此类推。</p>
+<h2 id="数据总线"><a class="markdownIt-Anchor" href="#数据总线"></a> 数据总线</h2>
+<p>CPU与内存或其他器件之间进行数据传送是通过数据总线来进行的。数据总线的宽度决定了CPU和外界的数据传送速度。八根数据总线一次可以传输一个八位的二进制数据（一个字节），依此类推。</p>
 <p>8088CPU的数据总线宽度为8，8086 的数据总线宽度为16，假设它们分别向内存写入数据89D8H（H表示16进制，是Hex的缩写）的时候：</p>
 <p>下图是8088CPU数据总线上的数据传输情况，如果是8086CPU则是一次传输完。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF.jpeg" alt=""></p>
-<h2 id="控制总线"><a href="#控制总线" class="headerlink" title="控制总线"></a>控制总线</h2><p>CPU对于外部器件的控制是通过控制总线来实现的。控制总线是一些不同总线的集合。由多少根控制总线，就意味着CPU提供了对外器件的多少种控制，控制总线的宽度决定了CPU对外的控制能力。</p>
+<h2 id="控制总线"><a class="markdownIt-Anchor" href="#控制总线"></a> 控制总线</h2>
+<p>CPU对于外部器件的控制是通过控制总线来实现的。控制总线是一些不同总线的集合。由多少根控制总线，就意味着CPU提供了对外器件的多少种控制，控制总线的宽度决定了CPU对外的控制能力。</p>
 <p>内存的读或写命令是由几根控制线综合发出的，其中有一根称为<code>读信号输出</code>的控制线负责由CPU向外传输读信号，CPU向该输出线输出低电平表示要读取数据；有一根称作<code>写信号输出</code>负责传送写信号。</p>
 <hr>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>1.汇编指令是机器指令的助记符，同机器指令一一对应</p>
+<h2 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h2>
+<p>1.汇编指令是机器指令的助记符，同机器指令一一对应</p>
 <p>2.每一种CPU都有自己的汇编指令集</p>
 <p>3.CPU可以直接使用的信息在内存里存放</p>
 <p>4.在存储器中数据和指令没有任何区别，都是二进制信息。</p>
@@ -151,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/14/CPU对于内存的读写/" data-id="cjeso2dxq000le2bry0gvgw5i" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/06/14/CPU对于内存的读写/" data-id="cjetozolt000skzbr6tcw6bf7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -163,7 +169,7 @@
 <nav id="article-nav">
   
     <a href="/2017/06/15/七牛图片自动上传/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           七牛图片自动上传
@@ -173,7 +179,7 @@
   
   
     <a href="/2017/06/11/iOS-UI学习-六/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">iOS-UI学习(六)</div>
     </a>
   
@@ -219,8 +225,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>82</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>79</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>83</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
