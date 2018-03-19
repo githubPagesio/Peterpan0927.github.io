@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>对于PVID和VID的研究 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于PVID和VID的研究">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/对于PVID和VID的研究/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
+<meta property="og:updated_time" content="2018-03-19T13:44:47.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对于PVID和VID的研究">
+<meta name="twitter:description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>84</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-对于PVID和VID的研究" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/对于PVID和VID的研究/" class="article-date">
+  <time class="post-time" datetime="2018-03-19T09:50:31.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">19</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      对于PVID和VID的研究
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/交换机/">交换机</a>,<a class="article-category-link" href="/categories/交换机/Vlan/">Vlan</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。</p>
+<a id="more"></a>
+<h1 id="问题演变"><a href="#问题演变" class="headerlink" title="问题演变"></a>问题演变</h1><p>因为傻瓜其实是没有划分vlan的，但是核心交换机上的那个口是个trunk，所以其实相当于我们的PC直连了一个trunk，我们知道平时连接PC的都是Access类型的端口，所以我猜想是这里出了问题。网上众说纷纭，有的人说这样可以，有的人说不行，在我做了初步测试之后是不行的，但是这并非绝对，因为我在论坛上看到了有人在讨论Native vlan和vlan的时候，我才明白，这才是问题的关键所在，那么接下来就是我们对与vlan和Native vlan的研究了：</p>
+<h1 id="交换机端口类型"><a href="#交换机端口类型" class="headerlink" title="交换机端口类型"></a>交换机端口类型</h1><p>PVID称作<code>Port-base Vlan ID</code>，用形象的说法来看，PVID和VID就好像超市里的扫描器和商品标记一样，但是PVID不仅解析VID还会生成VID，说的有点玄乎，俺么就来根据交换机的端口类型来解释一下吧：</p>
+<ol>
+<li>Access:</li>
+</ol>
+<p>Access端口负责接终端设备，他收到一个帧的时候，如果帧这个没有标记他就用自己的pvid给他打上标记，他在发出一个帧时如果VID=PVID<strong>就去掉标记(解标记)</strong>以保证传送给终端设备的帧没有被变动过(中间设备添加了标记)，pvid是在划分vlan时候每个端口都有的属性，默认情况下思科交换机中每个端口初始pvid是1，表示他是vlan 1的成员们如果你给他划分了其他VLAN那么PVID相应会发生更改</p>
+<ol>
+<li>Trunk:</li>
+</ol>
+<p>Trunk的意思是，它是一条<a href="http://baike.baidu.com/view/2365662.htm" target="_blank" rel="external">中继链路</a>，允许各种VLAN通过。它的规则和Access差不多，当收到一个没有tag的标记的时候就用自己的pvid给他标记，当发送一个帧时候如果vid=pvid则去掉pvid，<strong>与Access不同的是</strong>，Trunk有一个<strong>属于自己的本征VLAN(Native VLAN,也叫PVID)</strong>，用来发送一些<strong>cdp，bpdu</strong>等<a href="http://baike.baidu.com/view/1077.htm" target="_blank" rel="external"><strong>交换机</strong></a><strong>间</strong>联系的<strong>数据</strong>或者<strong>管理流量</strong>，从交换机<strong>自身</strong>产生的帧在发出去的时候<strong>是不会带标记的</strong>，<strong>因为VID=pvid所以标记被去掉</strong>，而<strong>对端接收</strong>到没有标记的帧时候就会用自身本征VLAN的信息给他<strong>加上标记</strong>，然后查看<strong>交换表</strong>如果<strong>发现目的地址</strong>是自己<strong>则去掉标记</strong>，如果发现目的mac地址不是自己则<strong>继续转发</strong>给<strong>其他Trunk同时去掉标记</strong>（因为一个<strong>交换机只有一个本征VLAN</strong>所有pvid=vid去掉标记）</p>
+<ol>
+<li>Hybrid:</li>
+</ol>
+<p>它允许VID=pvid。Hybrid与Trunk一样，在该端口上可以传送多个vlan的包，一般用于交换机与交换机之间，或者交换机与服务器之间的链接。如果收到的<a href="http://baike.baidu.com/view/25880.htm" target="_blank" rel="external">数据包</a>不带vlan，则加上pvid进行转发；如果<strong>收到</strong>的数据包带vlan，则判断该端口是否允许该vlan<strong>进入</strong>，如果可以则进行<strong>转发</strong>，否则<strong>丢弃。</strong></p>
+<p>我们知道802.1Q的VLAN是在二层帧里加进VLAN标识，俗称打tag，而计算机不<strong>能解析</strong>这种二层的帧，所以交换机的<strong>一个端口在分到一个VLAN时有tag和untag属性两种属性</strong>，<strong>tag端口用来连接设备，untag端口用来连接计算机</strong>。Tag端口出去的帧一般都打上了tag，tag中的VID<strong>有的来自PVID</strong>，<strong>有的则来自其它tag端口中本身</strong>就含有tag的<strong>帧</strong>。<br>设备互连时，由tag中的VID决定了一个二层帧属于哪个VLAN，而计算机不具备打tag的功能，所以只有给<strong>连接</strong>计算机的<strong>端口添加一个属性</strong>，<strong>用来决定计算机发出的未标记的帧属于哪个VLAN，这个属性就是PVID</strong>。</p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>首先上一张表吧：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Tagged数据帧</strong></th>
+<th></th>
+<th>Untagged数据帧</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>in</td>
+<td>out</td>
+<td>in</td>
+<td>out</td>
+</tr>
+<tr>
+<td><strong>Tagged端口</strong></td>
+<td><strong>原样接收</strong></td>
+<td><strong>原样发送</strong></td>
+<td><strong>按接收端口的PVID打TAG标记</strong></td>
+<td><strong>按照PVID打的TAG标记发送</strong></td>
+</tr>
+<tr>
+<td><strong>Untagged端口</strong></td>
+<td><strong>丢弃</strong></td>
+<td><strong>去掉TAG标记</strong></td>
+<td><strong>按接收端口的PVID打TAG标记</strong></td>
+<td><strong>原样发送</strong></td>
+</tr>
+</tbody>
+</table>
+<p>我们所谓的tag和untag全部都取决于过滤数据库的中的tag标记，如果值为tag，离开端口的输出帧仍然带标记，如果值为untag那么离开端口之前去除标记。</p>
+<p>现在我们来模拟寻找NAS的整个过程，看看为什么NAS上不了网，我们为什么ping不通它：</p>
+<ol>
+<li>我们从PC出发，来到交换机的Access Port，给我们打上它的VID，因为我们要寻找NAS，该交换机内没有NAS的Mac地址，所以我们广播该帧给所有Vlan和它相同的。</li>
+<li>只有主干24端口可以转发数据包，其他端口丢弃数据包，因为端口24是trunk，所以标签头不会被去掉，带着原来的标签头来到了新的交换机，因为交换机之间通过trunk级联，所以tag一直都没有被去掉…</li>
+<li>这个时候我们已经来到了核心交换机，知道通过端口3发向傻瓜交换机，依旧没有去掉tag，来到傻瓜交换机的24口，傻瓜交换机做的只有存储和转发功能，所以继续往下层转发直到NAS的网卡，网卡接受之后发现不认识这个数据帧，因为有tag，无法解析，于是我们的访问过程失败了。</li>
+<li>那么如果我们的NAS发了数据帧出去呢？因为没有到达核心交换机的时候是没有tag的，现实生活中，在三层网络中这种包就会直接被丢掉了，所以它的数据同样也传不出去。</li>
+</ol>
+<p>在这里我们需要牢记的一点是在现实生活中由于成本问题，傻瓜交换机只会具有最简单的功能，就只是存储和转发而已。</p>
+<h1 id="配置vlan的参考准则："><a href="#配置vlan的参考准则：" class="headerlink" title="配置vlan的参考准则："></a>配置vlan的参考准则：</h1><ol>
+<li><strong>对于untag端口，PVID要和所属VLAN的VID一致</strong></li>
+<li><strong>对于tag端口，PVID要不同于所有所属VLAN的VID；(使它原样发送)</strong></li>
+<li><strong>两台设备互联时，两端接口的PVID保持一致时，有弊也有利</strong></li>
+</ol>
+<p>其实我们也可以简单的理解为：</p>
+<ol>
+<li>ACCESS端口接PC，VID=PVID</li>
+<li>TRUNK端口级联，VID=全部，PVID=1</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/对于PVID和VID的研究/" data-id="cjeyakl6c006fjrbransmz93k" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的基本修养/">程序员的基本修养</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/16/ACM日常训练总结-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">ACM日常训练总结(二)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>84</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
