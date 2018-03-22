@@ -52,8 +52,9 @@
     <entry>
       <title><![CDATA[java蓝桥杯习题(二)]]></title>
       <url>/2018/03/21/java%E8%93%9D%E6%A1%A5%E6%9D%AF%E4%B9%A0%E9%A2%98-%E4%BA%8C/</url>
-      <content type="html"><![CDATA[<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" heigtht="350" width="600" alt="">
+      <content type="html"><![CDATA[<p>IDE和一些编程的小技巧分享</p>
  <a id="more"></a>
+<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" heigtht="350" width="600" alt="">
 <h1 id="蓝桥杯中java组的注意事项"><a class="markdownIt-Anchor" href="#蓝桥杯中java组的注意事项"></a> 蓝桥杯中java组的注意事项</h1>
 <ul>
 <li>
@@ -74,10 +75,17 @@
 <li>
 <p>浮点数进行运算、比较是相当危险的！<br>
 例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(0.2+0.1==0.3);</div><div class="line">//运行结果：false12</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="">System.out.println(0.2+0.1==0.3);
+//运行结果：false12
+</code></pre>
 <p>所以浮点数的比较不能用==。<br>
 道理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">浮点数在计算机内部是采用二进制（B Binary）的形式来表示的。</div><div class="line">0.1=1/2  0.01=1/4  0.001=1/8...</div><div class="line">十进制的0.3在二进制中是无限循环小数，从而会造成舍入</div><div class="line">0.3=0.299999999997or0.30000000000004</div><div class="line">12345</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="">浮点数在计算机内部是采用二进制（B Binary）的形式来表示的。
+0.1=1/2  0.01=1/4  0.001=1/8...
+十进制的0.3在二进制中是无限循环小数，从而会造成舍入
+0.3=0.299999999997or0.30000000000004
+12345
+</code></pre>
 <p>处理手段：<br>
 1.扩大倍数，转化为整数。<br>
 2.任意精度的浮点数：java.math包。</p>
@@ -124,19 +132,257 @@
 <h1 id="实战篇"><a class="markdownIt-Anchor" href="#实战篇"></a> 实战篇</h1>
 <h2 id="包子凑数"><a class="markdownIt-Anchor" href="#包子凑数"></a> 包子凑数</h2>
 <p>这个题的就是用到了扩展欧几里得的变形，如果满足所有数的最大公约数不为1则有无穷个，否则都是有限个。如果是有限个就用完全背包统计即可，下面是java实现的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Baozi</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> b==<span class="number">0</span> ? a : gcd(b, a%b);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> N = <span class="number">10010</span>;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span>[]  bk = <span class="keyword">new</span> <span class="keyword">boolean</span>[N];</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Scanner x = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">    <span class="keyword">int</span> m = x.nextInt();</div><div class="line">    <span class="keyword">int</span>[] number = <span class="keyword">new</span> <span class="keyword">int</span>[m];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</div><div class="line">        number[i] = x.nextInt();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> g = number[<span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</div><div class="line">      g = gcd(g, number[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(g != <span class="number">1</span>)&#123;</div><div class="line">      System.out.println(<span class="string">"INF"</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      bk[<span class="number">0</span>] = <span class="keyword">true</span>;</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i ++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j + number[i] &lt; N ; j ++)</div><div class="line">                <span class="keyword">if</span>(bk[j]) bk[j+number[i]]= <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = N-<span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i --)&#123;</div><div class="line">            <span class="keyword">if</span>(bk[i] == <span class="keyword">false</span>) count++;</div><div class="line">        &#125;</div><div class="line">        System.out.println(count);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="java"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Baozi</span></span>{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>{
+    <span class="hljs-keyword">return</span> b==<span class="hljs-number">0</span> ? a : gcd(b, a%b);
+  }
+  
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">10010</span>;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span>[]  bk = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[N];
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{
+    Scanner x = <span class="hljs-keyword">new</span> Scanner(System.in);
+    <span class="hljs-keyword">int</span> m = x.nextInt();
+    <span class="hljs-keyword">int</span>[] number = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m];
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; m ; i++){
+        number[i] = x.nextInt();
+    }
+    <span class="hljs-keyword">int</span> g = number[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; m ; i++){
+      g = gcd(g, number[i]);
+    }
+    <span class="hljs-keyword">if</span>(g != <span class="hljs-number">1</span>){
+      System.out.println(<span class="hljs-string">"INF"</span>);
+    }<span class="hljs-keyword">else</span>{
+      bk[<span class="hljs-number">0</span>] = <span class="hljs-keyword">true</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; m ; i ++)
+        {
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j + number[i] &lt; N ; j ++)
+                <span class="hljs-keyword">if</span>(bk[j]) bk[j+number[i]]= <span class="hljs-keyword">true</span>;
+        }
+        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = N-<span class="hljs-number">1</span> ; i &gt;= <span class="hljs-number">0</span> ; i --){
+            <span class="hljs-keyword">if</span>(bk[i] == <span class="hljs-keyword">false</span>) count++;
+        }
+        System.out.println(count);
+    }
+  }
+}
+</code></pre>
 <h2 id="日期问题"><a class="markdownIt-Anchor" href="#日期问题"></a> 日期问题</h2>
 <p>这个题目考主要是严谨，要对于年月日的边界条件判断，根据闰年来调整2月的天数等。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.Collections;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateQuestion</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 1 ,3 ,5 ,7 ,8 10 ,12</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;data&gt;ar;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> []day1 = &#123;<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>&#125;;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> []day2 = &#123;<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>&#125;;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">myget</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(a &gt;= <span class="number">60</span>)&#123;</div><div class="line">			a += <span class="number">1900</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			a += <span class="number">2000</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(b &gt;<span class="number">12</span> || b &lt;=<span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> days;</div><div class="line">		<span class="keyword">if</span>(a % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; a % <span class="number">100</span> != <span class="number">0</span> || a % <span class="number">400</span> == <span class="number">0</span>)&#123;</div><div class="line">			days = day2[b - <span class="number">1</span>];</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			days = day1[b - <span class="number">1</span>];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(c &gt; days || c &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">		</div><div class="line">		data tmp = <span class="keyword">new</span> data();</div><div class="line">		tmp.year = a;</div><div class="line">		tmp.month = b;</div><div class="line">		tmp.day = c;</div><div class="line">		ar.add(tmp);</div><div class="line">		</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">		ar = <span class="keyword">new</span> ArrayList&lt;data&gt;();</div><div class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		String tmp;</div><div class="line">		tmp = in.next();</div><div class="line">		String [] arr = <span class="keyword">new</span> String[<span class="number">3</span>];</div><div class="line">		arr = tmp.split(<span class="string">"/"</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</div><div class="line">			num[i] = Integer.parseInt(arr[i]);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 0 1 2</span></div><div class="line">		</div><div class="line">		myget(num[<span class="number">0</span>],num[<span class="number">1</span>],num[<span class="number">2</span>]);</div><div class="line">		myget(num[<span class="number">2</span>],num[<span class="number">1</span>],num[<span class="number">0</span>]);</div><div class="line">		myget(num[<span class="number">2</span>],num[<span class="number">0</span>],num[<span class="number">1</span>]);</div><div class="line"></div><div class="line">		</div><div class="line">		Collections.sort(ar);</div><div class="line">		</div><div class="line">		<span class="keyword">boolean</span> cf = <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">while</span>(cf)&#123;</div><div class="line">			<span class="keyword">int</span> sz = ar.size();</div><div class="line">			cf = <span class="keyword">false</span>;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;sz;i++)&#123;</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;sz;j++)&#123;</div><div class="line">					<span class="keyword">if</span>(ar.get(i).compareTo(ar.get(j)) == <span class="number">0</span> )&#123;</div><div class="line">						ar.remove(i);</div><div class="line">						cf = <span class="keyword">true</span>;</div><div class="line">						j = sz; i = sz;</div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ar.size();i++)&#123;</div><div class="line">			System.out.println(ar.get(i));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">data</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">data</span>&gt;</span>&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> year;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> month;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> day;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(data o)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(year == o.year)&#123;</div><div class="line">			<span class="keyword">if</span>(month == o.month)&#123;</div><div class="line">				<span class="keyword">return</span> day -o.day ;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> month - o.month;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> year-o.year;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">		String syear = String.valueOf(year);</div><div class="line">		String smon = String.valueOf(month);</div><div class="line">		<span class="keyword">if</span>(smon.length() == <span class="number">1</span>)&#123;</div><div class="line">			smon = <span class="string">"0"</span> + smon;</div><div class="line">		&#125;</div><div class="line">		String sday = String.valueOf(day);</div><div class="line">		<span class="keyword">if</span>(sday.length() == <span class="number">1</span>)&#123;</div><div class="line">			sday = <span class="string">"0"</span> + sday;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> syear + <span class="string">"-"</span> + smon + <span class="string">"-"</span> +sday;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="java"><span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.Scanner;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateQuestion</span>
+</span>{
+	<span class="hljs-comment">// 1 ,3 ,5 ,7 ,8 10 ,12</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ArrayList&lt;data&gt;ar;
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> []day1 = {<span class="hljs-number">31</span>,<span class="hljs-number">28</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>};
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> []day2 = {<span class="hljs-number">31</span>,<span class="hljs-number">29</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>,<span class="hljs-number">30</span>,<span class="hljs-number">31</span>};
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] num = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">3</span>];
+	
+	
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">myget</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b,<span class="hljs-keyword">int</span> c)</span></span>{
+		<span class="hljs-keyword">if</span>(a &gt;= <span class="hljs-number">60</span>){
+			a += <span class="hljs-number">1900</span>;
+		}<span class="hljs-keyword">else</span>{
+			a += <span class="hljs-number">2000</span>;
+		}
+		<span class="hljs-keyword">if</span>(b &gt;<span class="hljs-number">12</span> || b &lt;=<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
+		<span class="hljs-keyword">int</span> days;
+		<span class="hljs-keyword">if</span>(a % <span class="hljs-number">4</span> == <span class="hljs-number">0</span> &amp;&amp; a % <span class="hljs-number">100</span> != <span class="hljs-number">0</span> || a % <span class="hljs-number">400</span> == <span class="hljs-number">0</span>){
+			days = day2[b - <span class="hljs-number">1</span>];
+		}<span class="hljs-keyword">else</span>{
+			days = day1[b - <span class="hljs-number">1</span>];
+		}
+		<span class="hljs-keyword">if</span>(c &gt; days || c &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
+		
+		data tmp = <span class="hljs-keyword">new</span> data();
+		tmp.year = a;
+		tmp.month = b;
+		tmp.day = c;
+		ar.add(tmp);
+		
+		
+		
+	}
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{
+		ar = <span class="hljs-keyword">new</span> ArrayList&lt;data&gt;();
+		Scanner in = <span class="hljs-keyword">new</span> Scanner(System.in);
+		String tmp;
+		tmp = in.next();
+		String [] arr = <span class="hljs-keyword">new</span> String[<span class="hljs-number">3</span>];
+		arr = tmp.split(<span class="hljs-string">"/"</span>);
+		
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">3</span>;i++){
+			num[i] = Integer.parseInt(arr[i]);
+		}
+		<span class="hljs-comment">// 0 1 2</span>
+		
+		myget(num[<span class="hljs-number">0</span>],num[<span class="hljs-number">1</span>],num[<span class="hljs-number">2</span>]);
+		myget(num[<span class="hljs-number">2</span>],num[<span class="hljs-number">1</span>],num[<span class="hljs-number">0</span>]);
+		myget(num[<span class="hljs-number">2</span>],num[<span class="hljs-number">0</span>],num[<span class="hljs-number">1</span>]);
+
+		
+		Collections.sort(ar);
+		
+		<span class="hljs-keyword">boolean</span> cf = <span class="hljs-keyword">true</span>;
+		<span class="hljs-keyword">while</span>(cf){
+			<span class="hljs-keyword">int</span> sz = ar.size();
+			cf = <span class="hljs-keyword">false</span>;
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;sz;i++){
+				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i+<span class="hljs-number">1</span>;j&lt;sz;j++){
+					<span class="hljs-keyword">if</span>(ar.get(i).compareTo(ar.get(j)) == <span class="hljs-number">0</span> ){
+						ar.remove(i);
+						cf = <span class="hljs-keyword">true</span>;
+						j = sz; i = sz;
+						<span class="hljs-keyword">break</span>;
+					}
+				}
+			}
+		}
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;ar.size();i++){
+			System.out.println(ar.get(i));
+		}
+	}
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">data</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">data</span>&gt;</span>{
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> year;
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> month;
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> day;
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(data o)</span> </span>{
+		<span class="hljs-keyword">if</span>(year == o.year){
+			<span class="hljs-keyword">if</span>(month == o.month){
+				<span class="hljs-keyword">return</span> day -o.day ;
+			}
+			<span class="hljs-keyword">return</span> month - o.month;
+		}
+		<span class="hljs-keyword">return</span> year-o.year;
+	}
+	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span></span>{
+		String syear = String.valueOf(year);
+		String smon = String.valueOf(month);
+		<span class="hljs-keyword">if</span>(smon.length() == <span class="hljs-number">1</span>){
+			smon = <span class="hljs-string">"0"</span> + smon;
+		}
+		String sday = String.valueOf(day);
+		<span class="hljs-keyword">if</span>(sday.length() == <span class="hljs-number">1</span>){
+			sday = <span class="hljs-string">"0"</span> + sday;
+		}
+		<span class="hljs-keyword">return</span> syear + <span class="hljs-string">"-"</span> + smon + <span class="hljs-string">"-"</span> +sday;
+	}
+}
+</code></pre>
 <h1 id="承压计算"><a class="markdownIt-Anchor" href="#承压计算"></a> 承压计算</h1>
 <p>水题，注意边界判断即可：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"><span class="keyword">import</span> java.lang.Math;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cheng</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span>[][] arr = <span class="keyword">new</span> <span class="keyword">double</span> [<span class="number">100</span>][<span class="number">100</span>];</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> n = <span class="number">29</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Scanner sc = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= i ; j++ )&#123;</div><div class="line">        arr[i][j] = sc.nextDouble();</div><div class="line">      &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= i ; j++)&#123;</div><div class="line">        <span class="keyword">if</span>(j == <span class="number">0</span>) arr[i][j] += (arr[i-<span class="number">1</span>][j]/<span class="number">2</span>);</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">          arr[i][j] += arr[i-<span class="number">1</span>][j-<span class="number">1</span>]/<span class="number">2</span>;</div><div class="line">          arr[i][j] += arr[i-<span class="number">1</span>][j]/<span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    <span class="keyword">double</span> maxx = -<span class="number">1</span>;</div><div class="line">    <span class="keyword">double</span> minn = <span class="number">233333333</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++)&#123;</div><div class="line">        maxx = Math.max(arr[<span class="number">29</span>][i], maxx);</div><div class="line">        minn = Math.min(arr[<span class="number">29</span>][i], minn);</div><div class="line">      &#125;</div><div class="line">    maxx *= ((<span class="keyword">double</span>)<span class="number">2086458231</span>/minn);</div><div class="line">    System.out.println(maxx);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="java"><span class="hljs-keyword">import</span> java.util.Scanner;
+<span class="hljs-keyword">import</span> java.lang.Math;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cheng</span></span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span>[][] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span> [<span class="hljs-number">100</span>][<span class="hljs-number">100</span>];
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> n = <span class="hljs-number">29</span>;
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{
+    Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= i ; j++ ){
+        arr[i][j] = sc.nextDouble();
+      }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= n ; i++)
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= i ; j++){
+        <span class="hljs-keyword">if</span>(j == <span class="hljs-number">0</span>) arr[i][j] += (arr[i-<span class="hljs-number">1</span>][j]/<span class="hljs-number">2</span>);
+        <span class="hljs-keyword">else</span>{
+          arr[i][j] += arr[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>]/<span class="hljs-number">2</span>;
+          arr[i][j] += arr[i-<span class="hljs-number">1</span>][j]/<span class="hljs-number">2</span>;
+        }
+      }
+    <span class="hljs-keyword">double</span> maxx = -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">double</span> minn = <span class="hljs-number">233333333</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt;= n ; i++){
+        maxx = Math.max(arr[<span class="hljs-number">29</span>][i], maxx);
+        minn = Math.min(arr[<span class="hljs-number">29</span>][i], minn);
+      }
+    maxx *= ((<span class="hljs-keyword">double</span>)<span class="hljs-number">2086458231</span>/minn);
+    System.out.println(maxx);
+	}
+}
+</code></pre>
 <h2 id="k倍区间"><a class="markdownIt-Anchor" href="#k倍区间"></a> k倍区间</h2>
 <p>首先统计前缀和sum[i] 表示A1+A2+…+Ai.所以对于任意一段区间[l,r]的和就是sum[r]-sum[l-1].如果要保证这个区间和为K倍数就是：(sum[r]-sum[l-1])%k == 0.变形后就是：sum[r]%k==sum[l-1]%k，所以我们计算前缀和的时候顺带模K，然后统计前缀和中相同的数据就行了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100010</span>];</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bk = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100010</span>];</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Scanner sc = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">    <span class="keyword">int</span> n,k;</div><div class="line">    n = sc.nextInt();</div><div class="line">    k = sc.nextInt();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</div><div class="line">      arr[i] = sc.nextInt();</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    arr[<span class="number">0</span>] %= k;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; i++)</div><div class="line">      arr[i] = (arr[i-<span class="number">1</span>]+arr[i])%k;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</div><div class="line">      sum += (bk[arr[i]]++);</div><div class="line">	<span class="comment">//如果前缀和有余数为0的需要加上</span></div><div class="line">    System.out.println(sum+bk[<span class="number">0</span>]);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="java"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span></span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">100010</span>];
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] bk = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">100010</span>];
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{
+    Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);
+    <span class="hljs-keyword">int</span> n,k;
+    n = sc.nextInt();
+    k = sc.nextInt();
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      arr[i] = sc.nextInt();
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+    arr[<span class="hljs-number">0</span>] %= k;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt; n ; i++)
+      arr[i] = (arr[i-<span class="hljs-number">1</span>]+arr[i])%k;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      sum += (bk[arr[i]]++);
+	<span class="hljs-comment">//如果前缀和有余数为0的需要加上</span>
+    System.out.println(sum+bk[<span class="hljs-number">0</span>]);
+  }
+}
+</code></pre>
 <h2 id="分巧克力"><a class="markdownIt-Anchor" href="#分巧克力"></a> 分巧克力</h2>
 <p>利用二分来判断来快速的判断巧克力的边长是否合适：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tang</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> n,k;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> []l;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> []r;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> mid)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">			ans += (l[i] / mid) * (r[i]/mid);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(ans &gt;= k) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		n = in.nextInt();</div><div class="line">		k = in.nextInt();</div><div class="line">		 l= <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">		 r= <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">		<span class="keyword">int</span> minn = <span class="number">111111</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">			l[i] = in.nextInt();</div><div class="line">			r[i] = in.nextInt();</div><div class="line">			minn = Math.min(minn,Math.min(l[i],r[i]));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> le = <span class="number">1</span>,ri = minn;</div><div class="line">		<span class="keyword">int</span> maxx = <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> cc = <span class="number">50</span>;</div><div class="line">		<span class="keyword">while</span>(cc-- &gt; <span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">int</span> mid = (le + ri)/<span class="number">2</span>;</div><div class="line">			<span class="keyword">if</span>(test(mid))&#123;</div><div class="line">				maxx = Math.max(maxx,mid);</div><div class="line">				le = mid;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				ri = mid;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		System.out.println(maxx);	</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="highlight"><code class="java"><span class="hljs-keyword">import</span> java.util.Scanner;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tang</span> </span>{
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> n,k;
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> []l;
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> []r;
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> mid)</span></span>{
+		<span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++){
+			ans += (l[i] / mid) * (r[i]/mid);
+		}
+		<span class="hljs-keyword">if</span>(ans &gt;= k) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+	}
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+		Scanner in = <span class="hljs-keyword">new</span> Scanner(System.in);
+		n = in.nextInt();
+		k = in.nextInt();
+		 l= <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+		 r= <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+		<span class="hljs-keyword">int</span> minn = <span class="hljs-number">111111</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++){
+			l[i] = in.nextInt();
+			r[i] = in.nextInt();
+			minn = Math.min(minn,Math.min(l[i],r[i]));
+		}
+		<span class="hljs-keyword">int</span> le = <span class="hljs-number">1</span>,ri = minn;
+		<span class="hljs-keyword">int</span> maxx = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">int</span> cc = <span class="hljs-number">50</span>;
+		<span class="hljs-keyword">while</span>(cc-- &gt; <span class="hljs-number">0</span>){
+			<span class="hljs-keyword">int</span> mid = (le + ri)/<span class="hljs-number">2</span>;
+			<span class="hljs-keyword">if</span>(test(mid)){
+				maxx = Math.max(maxx,mid);
+				le = mid;
+			}<span class="hljs-keyword">else</span>{
+				ri = mid;
+			}
+		}
+		System.out.println(maxx);	
+	}
+} 
+</code></pre>
 ]]></content>
       
         <categories>
