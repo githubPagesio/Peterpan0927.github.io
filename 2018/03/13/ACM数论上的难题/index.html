@@ -101,23 +101,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>比赛中没有那么多的时间去对每一个数学问题进行相关的公式推导，所以这里记载一些可能会用到而又不是板子的题目</p>
 <a id="more"></a>
-<h1 id="cake"><a class="markdownIt-Anchor" href="#cake"></a> Cake</h1>
-<p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=4" target="_blank" rel="external">传送门</a></p>
+<h1 id="Cake"><a href="#Cake" class="headerlink" title="Cake"></a>Cake</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=4" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem</strong> <strong>Description</strong></p>
-<p>一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食.</p>
+<p>一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食. </p>
 <p><strong>Input</strong></p>
 <p>每行有两个数p和q.</p>
 <p><strong>Output</strong></p>
 <p>输出最少要将蛋糕切成多少块.</p>
 <p><strong>Sample Input</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2 3</div></pre></td></tr></table></figure>
-<p>2 3</p>
+<pre><code>2 3
+</code></pre><p>2 3 </p>
 <p><strong>Sample Output</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4</div></pre></td></tr></table></figure>
-<p><strong>Hint</strong></p>
+<pre><code>4
+</code></pre><p><strong>Hint</strong></p>
 <p>将蛋糕切成大小分别为1/3,1/3,1/6,1/6的四块即满足要求. 当2个人来时，每人可以吃1/3+1/6=1/2 , 1/2块。 当3个人来时，每人可以吃1/6+1/6=1/3 , 1/3, 1/3块。</p>
 <p>这个题主要是要从几何的角度出发去找规律，这样就会比较好想一点：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%884.16.52.png" alt=""></p>
@@ -125,34 +124,93 @@
 <p>而4和6的切割线数量分别是3和5,二者之和减去重合的那条线结果就是7条分割线，而7条线便将蛋糕分成了8块。</p>
 <p>再看8和4,分割线是7和3,重合数是最大公约数减1为3，因此由(p+q-2)-gcd(p,q)-1得到不重合的切割线数是7,即最小块数为8。所以答案就是p+q-gcd(p,q)。</p>
 <p>用代码表示就是一个gcd，然后输出即可：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> b ? gcd(b, a%b) : a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">        <span class="keyword">int</span> p,q;</div><div class="line">        <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;p,&amp;q))</div><div class="line">        &#123;</div><div class="line">        	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,p+q-gcd(p,q));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="big-number"><a class="markdownIt-Anchor" href="#big-number"></a> Big Number</h1>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1018" target="_blank" rel="external">传送门</a></p>
+<pre><code class="c">#include&lt;stdio.h&gt;
+
+int gcd(int a, int b){
+  return b ? gcd(b, a%b) : a;
+}
+
+int main(void)
+{
+        int p,q;
+        while(~scanf(&quot;%d%d&quot;,&amp;p,&amp;q))
+        {
+            printf(&quot;%d\n&quot;,p+q-gcd(p,q));
+        }
+        return 0;
+}
+</code></pre>
+<h1 id="Big-Number"><a href="#Big-Number" class="headerlink" title="Big Number"></a>Big Number</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1018" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem</strong> <strong>Description</strong></p>
-<p>In many applications very large integers numbers are required. Some of these applications are using keys for secure transmission of data, encryption, etc. In this problem you are given a number, you have to determine the number of digits in the factorial of the number.</p>
+<p>In many applications very large integers numbers are required. Some of these applications are using keys for secure transmission of data, encryption, etc. In this problem you are given a number, you have to determine the number of digits in the factorial of the number. </p>
 <p><strong>Input</strong></p>
 <p>Input consists of several lines of integer numbers. The first line contains an integer n, which is the number of cases to be tested, followed by n lines, one integer 1 ≤ n ≤ 107 on each line.</p>
 <p><strong>Output</strong></p>
 <p>The output contains the number of digits in the factorial of the integers appearing in the input.</p>
 <p><strong>Sample</strong> <strong>Input</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2</div><div class="line">10</div><div class="line">20</div></pre></td></tr></table></figure>
-<p><strong>Sample</strong> <strong>Output</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">7</div><div class="line">19</div></pre></td></tr></table></figure>
-<p>因为我们求的是十进制的数的位数，所以我们可以使用<code>log10()</code>函数来求解，将n!表示成10的次幂,即n!=10<sup>M(10的M次方，10</sup>2是3位，M+1就代表位数)则不小于M的最小整数就是n!的位数，对该式两边取对数，有M=log10^n!即：</p>
+<pre><code>2
+10
+20
+</code></pre><p><strong>Sample</strong> <strong>Output</strong></p>
+<pre><code>7
+19
+</code></pre><p>因为我们求的是十进制的数的位数，所以我们可以使用<code>log10()</code>函数来求解，将n!表示成10的次幂,即n!=10^M(10的M次方，10^2是3位，M+1就代表位数)则不小于M的最小整数就是n!的位数，对该式两边取对数，有M=log10^n!即：  </p>
 <blockquote>
-<p>M = log10<sup>1+log10</sup>2+log10<sup>3…+log10</sup>n</p>
+<p>M = log10^1+log10^2+log10^3…+log10^n</p>
 </blockquote>
 <p>循环求和,就能算得M值，该M是n!的精确位数。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"> <span class="keyword">int</span> count,var,j;</div><div class="line"> <span class="keyword">double</span> sum;</div><div class="line"> <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;count);</div><div class="line"> <span class="keyword">while</span>(count--)</div><div class="line"> &#123;</div><div class="line">  sum=<span class="number">0</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;var);</div><div class="line">  <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=var;j++)</div><div class="line">   sum+=<span class="built_in">log10</span>(j);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)sum+<span class="number">1</span>);</div><div class="line"> &#125;</div><div class="line"> <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+int main()
+{
+ int count,var,j;
+ double sum;
+ scanf(&quot;%d&quot;,&amp;count);
+ while(count--)
+ {
+  sum=0;
+  scanf(&quot;%d&quot;,&amp;var);
+  for(j=1;j&lt;=var;j++)
+   sum+=log10(j);
+  printf(&quot;%d\n&quot;,(int)sum+1);
+ }
+ return 0;
+}
+</code></pre>
 <p>但是在这里我们利用组合数学可以做出一种更高效的解法，我们用到称作斯特林公式：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%885.50.44.png" alt=""></p>
 <p>我们对于两边同取10的对数就可以得到一个新的等式，接下来就是编程实现了：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;  </span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;  </span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="keyword">int</span> n;  </div><div class="line">    <span class="keyword">int</span> N;  </div><div class="line">    <span class="keyword">int</span> ans;  </div><div class="line">    <span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1.0</span>);  </div><div class="line">    <span class="keyword">double</span> e=<span class="built_in">exp</span>(<span class="number">1.0</span>);  </div><div class="line">    <span class="built_in">cin</span>&gt;&gt;N;  </div><div class="line">    <span class="keyword">while</span> (N--)  </div><div class="line">    &#123;  </div><div class="line">        <span class="built_in">cin</span>&gt;&gt;n;  </div><div class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)  </div><div class="line">        &#123;  </div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"1"</span>&lt;&lt;<span class="built_in">endl</span>;  </div><div class="line">            <span class="keyword">continue</span>;  </div><div class="line">        &#125;  </div><div class="line">        ans=(<span class="keyword">int</span>)(<span class="built_in">log10</span>(<span class="built_in">sqrt</span>(<span class="number">2</span>*pi*n))+n*<span class="built_in">log10</span>(n/e)+<span class="number">1</span>);  </div><div class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="cpp">#include &lt;iostream&gt;  
+#include &lt;stdio.h&gt;  
+#include &lt;cmath&gt;  
+using namespace std;  
+int main()  
+{  
+    int n;  
+    int N;  
+    int ans;  
+    double pi=acos(-1.0);  
+    double e=exp(1.0);  
+    cin&gt;&gt;N;  
+    while (N--)  
+    {  
+        cin&gt;&gt;n;  
+        if(n==1)  
+        {  
+            cout&lt;&lt;&quot;1&quot;&lt;&lt;endl;  
+            continue;  
+        }  
+        ans=(int)(log10(sqrt(2*pi*n))+n*log10(n/e)+1);  
+        cout&lt;&lt;ans&lt;&lt;endl;  
+    }  
+    return 0;  
+}
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjf262kcn00068wbrhkw6e5et" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjf3ar2kv000be9br0b639sp7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>

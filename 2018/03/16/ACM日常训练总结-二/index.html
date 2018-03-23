@@ -101,46 +101,359 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>多写点DFS对于一个人的智力是有帮助的…</p>
 <a id="more"></a>
-<h1 id="hdu_1007"><a class="markdownIt-Anchor" href="#hdu_1007"></a> HDU_1007</h1>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1007" target="_blank" rel="external">传送门</a></p>
+<h1 id="HDU-1007"><a href="#HDU-1007" class="headerlink" title="HDU_1007"></a>HDU_1007</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1007" target="_blank" rel="external">传送门</a></p>
 <p>为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> min(a,b) ( ((a)&gt;(b)) ? (b):(a) )</span></div><div class="line"><span class="keyword">struct</span> point</div><div class="line">&#123;</div><div class="line">	<span class="keyword">double</span> x,y;</div><div class="line">&#125;a[<span class="number">100001</span>];</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> point &amp;a,<span class="keyword">const</span> point &amp;b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">fabs</span>(a.x-b.x)&lt;<span class="number">1e-8</span>)</div><div class="line">    <span class="comment">//如果两个点的x坐标相等，则对y坐标进行比较</span></div><div class="line">        <span class="keyword">return</span> a.y &lt; b.y;</div><div class="line">    <span class="keyword">return</span> a.x&lt;b.x;</div><div class="line">&#125;</div><div class="line"><span class="comment">//两点间距离</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(point a,point b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(a.x-b.x,<span class="number">2</span>)+<span class="built_in">pow</span>(a.y-b.y,<span class="number">2</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">S</span><span class="params">(point a[],<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">double</span> m=<span class="number">1e+10</span>;</div><div class="line">	<span class="keyword">if</span>(n==<span class="number">2</span>)</div><div class="line">		<span class="keyword">return</span> dis(a[<span class="number">0</span>],a[<span class="number">1</span>]);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-2</span>;i++)</div><div class="line">	&#123;</div><div class="line">		m=min(m,min(dis(a[i],a[i+<span class="number">1</span>]),min(dis(a[i],a[i+<span class="number">2</span>]),dis(a[i+<span class="number">1</span>],a[i+<span class="number">2</span>]))));</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> m;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n),n)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;a[i].x,&amp;a[i].y);</div><div class="line">		&#125;</div><div class="line">		sort(a,a+n,cmp);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,S(a,n)/<span class="number">2</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+#define min(a,b) ( ((a)&gt;(b)) ? (b):(a) )
+struct point
+{
+    double x,y;
+}a[100001];
+bool cmp(const point &amp;a,const point &amp;b)
+{
+    if(fabs(a.x-b.x)&lt;1e-8)
+    //如果两个点的x坐标相等，则对y坐标进行比较
+        return a.y &lt; b.y;
+    return a.x&lt;b.x;
+}
+//两点间距离
+double dis(point a,point b)
+{
+    return sqrt(pow(a.x-b.x,2)+pow(a.y-b.y,2));
+}
+
+double S(point a[],int n)
+{
+    double m=1e+10;
+    if(n==2)
+        return dis(a[0],a[1]);
+    for(int i=0;i&lt;n-2;i++)
+    {
+        m=min(m,min(dis(a[i],a[i+1]),min(dis(a[i],a[i+2]),dis(a[i+1],a[i+2]))));
+    }
+    return m;
+}
+
+int main()
+{
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;n),n)
+    {
+        for(int i=0;i&lt;n;i++)
+        {
+            scanf(&quot;%lf%lf&quot;,&amp;a[i].x,&amp;a[i].y);
+        }
+        sort(a,a+n,cmp);
+        printf(&quot;%.2lf\n&quot;,S(a,n)/2);
+    }
+    return 0;
+}
+</code></pre>
 <p>唯一一个有疑问的地方可能就是在输入的点大于2的情况下，为什么要比较三个点之间的距离关系取最小值，其实这个也只是为了过题目，因为只比较两个之间的最小值的话出现下面这种情况就不行了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8A%E5%8D%8811.25.06.png" alt="屏幕快照 2018-03-16 上午11.25.06.png"></p>
 <p>所以为了过题多比较了一次，然后就过了，如果面对特别极端的情况的话还是需要想想其他的思路，如下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%881.49.43.png" alt="屏幕快照 2018-03-16 下午1.49.43.png"></p>
 <p>在这种情况下我的解决思路就是如果有x坐标相同的，那么就找到这个点之后第一个与其x坐标不相同的点，然后将二者之间的距离算出来，与当前最小值比较，体现在代码中应该就是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(a[i].x == a[i+<span class="number">1</span>].x)&#123;</div><div class="line">  	<span class="keyword">int</span> tmp2, tmp1;</div><div class="line">  	tmp1 = tmp2 = i;</div><div class="line">	<span class="keyword">while</span>(a[tmp1+<span class="number">1</span>] == x)</div><div class="line">      tmp1++;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> j = tmp2 ; j &lt;= tmp1 ; j++)&#123;</div><div class="line">    m = min(m, dis(a[j], a[tmp1]));</div><div class="line">  &#125;</div><div class="line">  	i = tmp2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="hdu_1009"><a class="markdownIt-Anchor" href="#hdu_1009"></a> HDU_1009</h1>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1009" target="_blank" rel="external">传送门</a></p>
+<pre><code class="cpp">if(a[i].x == a[i+1].x){
+      int tmp2, tmp1;
+      tmp1 = tmp2 = i;
+    while(a[tmp1+1] == x)
+      tmp1++;
+  for(int j = tmp2 ; j &lt;= tmp1 ; j++){
+    m = min(m, dis(a[j], a[tmp1]));
+  }
+      i = tmp2;
+}
+</code></pre>
+<h1 id="HDU-1009"><a href="#HDU-1009" class="headerlink" title="HDU_1009"></a>HDU_1009</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1009" target="_blank" rel="external">传送门</a></p>
 <p>主要是题目比较长，就是一道简单的贪心，我们将咖啡豆数量除猫粮的数量得到性价比，然后根据性价比对于数组进行排序，然后就是贪心的实现了，尽量的取，按照数组顺序，能拿完就尽量拿完。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node&#123;</div><div class="line">  <span class="keyword">int</span> a,b;</div><div class="line">  <span class="keyword">double</span> c;</div><div class="line">&#125;arr[<span class="number">1100</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(node x, node y)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> x.c &gt; y.c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line"> <span class="keyword">int</span> m,n;</div><div class="line"> <span class="keyword">int</span> i,j;</div><div class="line"> <span class="keyword">double</span> sum;</div><div class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;m ,&amp;n))&#123;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</div><div class="line">    	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;arr[i].a, &amp;arr[i].b);</div><div class="line">      	arr[i].c = (<span class="keyword">double</span>)arr[i].a / arr[i],b;</div><div class="line">    &#125;</div><div class="line">    sort(arr, arr+n, cmp);</div><div class="line">    sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(j = <span class="number">0</span> ; j &lt; n ; j++)&#123;</div><div class="line">      <span class="keyword">if</span>(m &gt;= arr[i].b) sum += arr[i].a;</div><div class="line">      <span class="keyword">else</span> sum += m*(<span class="keyword">double</span>)arr[i].a/arr[i].b;</div><div class="line">      m -= arr[i].b;</div><div class="line">      <span class="keyword">if</span>(m &lt; <span class="number">0</span>) <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>, sum);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="flooded_uva815"><a class="markdownIt-Anchor" href="#flooded_uva815"></a> Flooded_Uva815</h1>
-<p>算法竞赛书上说可以锻炼思维的一道题，题目的意思就是说有一个n*m的网格，每个网格的面积都是10x10的正方形，现在洪水灌入，输入每个网格的海拔和洪水的体积，算百分之几的网格被淹没，以及水位的海拔高度：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> mmax=<span class="number">35</span>*<span class="number">35</span>;</div><div class="line"><span class="keyword">int</span> dp[mmax],n,m;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="comment">//这种用法还是真少见</span></div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> kase = <span class="number">1</span>; <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m), n&amp;&amp;m; kase++)</div><div class="line">   &#123;</div><div class="line">      n*=m;</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">         <span class="built_in">cin</span>&gt;&gt;dp[i];</div><div class="line">      sort(dp,dp+n);</div><div class="line">      dp[n]=<span class="number">0x7fffffff</span>;</div><div class="line"></div><div class="line">      <span class="keyword">int</span> t;<span class="keyword">double</span> sum;</div><div class="line">      <span class="built_in">cin</span>&gt;&gt;sum;sum/=<span class="number">100</span>;</div><div class="line"></div><div class="line">      <span class="keyword">for</span>(t=<span class="number">1</span>;t&lt;=n;t++)</div><div class="line">      &#123;</div><div class="line">         sum+=dp[t<span class="number">-1</span>];</div><div class="line">         <span class="keyword">if</span>(sum/t&lt;=dp[t])</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Region %d\n"</span>, kase);</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Water level is %.2lf meters.\n"</span>, sum/t);</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"%.2lf percent of the region is under water.\n\n"</span>, t*<span class="number">100.0</span>/n);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+struct node{
+  int a,b;
+  double c;
+}arr[1100];
+
+int cmp(node x, node y){
+  return x.c &gt; y.c;
+}
+
+int main(){
+ int m,n;
+ int i,j;
+ double sum;
+  while(~scanf(&quot;%d %d&quot;, &amp;m ,&amp;n)){
+    for(i = 0 ; i &lt; n ; i++){
+        scanf(&quot;%d %d&quot;, &amp;arr[i].a, &amp;arr[i].b);
+          arr[i].c = (double)arr[i].a / arr[i],b;
+    }
+    sort(arr, arr+n, cmp);
+    sum = 0;
+    for(j = 0 ; j &lt; n ; j++){
+      if(m &gt;= arr[i].b) sum += arr[i].a;
+      else sum += m*(double)arr[i].a/arr[i].b;
+      m -= arr[i].b;
+      if(m &lt; 0) break;
+    }
+    printf(&quot;%.3lf\n&quot;, sum);
+  }
+  return 0;
+}
+</code></pre>
+<h1 id="Flooded-Uva815"><a href="#Flooded-Uva815" class="headerlink" title="Flooded_Uva815"></a>Flooded_Uva815</h1><p>算法竞赛书上说可以锻炼思维的一道题，题目的意思就是说有一个n*m的网格，每个网格的面积都是10x10的正方形，现在洪水灌入，输入每个网格的海拔和洪水的体积，算百分之几的网格被淹没，以及水位的海拔高度：</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int mmax=35*35;
+int dp[mmax],n,m;
+
+int main()
+{
+  //这种用法还是真少见
+   for (int kase = 1; scanf(&quot;%d%d&quot;, &amp;n, &amp;m), n&amp;&amp;m; kase++)
+   {
+      n*=m;
+      for(int i=0;i&lt;n;i++)
+         cin&gt;&gt;dp[i];
+      sort(dp,dp+n);
+      dp[n]=0x7fffffff;
+
+      int t;double sum;
+      cin&gt;&gt;sum;sum/=100;
+
+      for(t=1;t&lt;=n;t++)
+      {
+         sum+=dp[t-1];
+         if(sum/t&lt;=dp[t])
+            break;
+      }
+      printf(&quot;Region %d\n&quot;, kase);
+      printf(&quot;Water level is %.2lf meters.\n&quot;, sum/t);
+      printf(&quot;%.2lf percent of the region is under water.\n\n&quot;, t*100.0/n);
+   }
+   return 0;
+}
+</code></pre>
 <p>首先我们要对输入的网格海拔排序，因为海水肯定会先淹没高的，所以找到的第一个没有淹没的就OK了，为了防止全淹了，要将数组的最后一个设置为最大，跳出循环。</p>
-<h1 id="uva_136"><a class="markdownIt-Anchor" href="#uva_136"></a> Uva_136</h1>
-<p>丑树是指不能被2，3，5以外的素数整除的数，将丑数从小到达排列起来，求第1500个丑数：</p>
+<h1 id="Uva-136"><a href="#Uva-136" class="headerlink" title="Uva_136"></a>Uva_136</h1><p>丑树是指不能被2，3，5以外的素数整除的数，将丑数从小到达排列起来，求第1500个丑数：</p>
 <p>其实这个题的关键做法就在于想到丑数其实就是一开始的丑数的2、3、5倍，从一个丑数我们可以生成三个丑数，但是我们每次生成丑数的时候要判断这个丑数是否已经生成过了，我们可以用到STL来简单的完成我们的需求：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> coeff[<span class="number">3</span>] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  priority_queue&lt;LL , <span class="built_in">vector</span>&lt;LL&gt;, greater&lt;LL&gt; &gt;pq;</div><div class="line">  <span class="built_in">set</span>&lt;LL&gt; s;</div><div class="line">  pq.push(<span class="number">1</span>);</div><div class="line">  s.insert(<span class="number">1</span>);</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; ; i++)&#123;</div><div class="line">    LL x = pq.top();</div><div class="line">    pq.pop();</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">1500</span>)&#123;</div><div class="line">      <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">3</span> ; j++)&#123;</div><div class="line">      LL x2 = x * coeff[j];</div><div class="line">      <span class="keyword">if</span>(!s.count(x2))&#123;</div><div class="line">        s.insert(x2);</div><div class="line">        pq.push(x2);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="uva_400"><a class="markdownIt-Anchor" href="#uva_400"></a> UVa_400</h1>
-<p>这个其实就是实现Unix中的ls命令，每一行要求只有60个字符，那么在读入文件名的时候我们就把文件名最长给找到：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxcol = <span class="number">60</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100</span>+<span class="number">5</span>;</div><div class="line"><span class="built_in">string</span> filenames[maxn];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s, <span class="keyword">int</span> len, <span class="keyword">char</span> extra)</span></span>&#123;</div><div class="line">  <span class="built_in">cout</span> &lt;&lt; s;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; len - s.length() ; i++)&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; extra;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> n;</div><div class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</div><div class="line">    <span class="keyword">int</span> M = <span class="number">0</span>;;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</div><div class="line">      <span class="built_in">cin</span> &gt;&gt; filenames[i];</div><div class="line">      M = max(M, (<span class="keyword">int</span>)filenames[i].length);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> cols = (maxcol - M)/(M+<span class="number">2</span>) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span> rows = (n + M - <span class="number">1</span>)/cols;</div><div class="line">    print(<span class="string">""</span>, <span class="number">60</span>, <span class="string">'-'</span>);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</div><div class="line">	sort(filenames, filenames+n);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span> ; r &lt; rows ; r++)</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span> ; c &lt; cols ; c++)&#123;</div><div class="line">        <span class="keyword">int</span> index = c*rows + r;</div><div class="line">        <span class="keyword">if</span>(index &lt; n)print(filenames[index], c == cols<span class="number">-1</span> ? M : M+<span class="number">2</span>, <span class="string">' '</span>);</div><div class="line">      &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="第八届蓝桥_纸牌三角形"><a class="markdownIt-Anchor" href="#第八届蓝桥_纸牌三角形"></a> 第八届蓝桥_纸牌三角形</h1>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">标题：纸牌三角形</div><div class="line">A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要求每个边的和相等。</div><div class="line">下图就是一种排法（如有对齐问题，参看p1.png）。</div><div class="line"></div><div class="line">      A</div><div class="line">     9 6</div><div class="line">    4   8</div><div class="line">   3 7 5 2</div><div class="line"></div><div class="line">这样的排法可能会有很多。</div><div class="line"></div><div class="line">如果考虑旋转、镜像后相同的算同一种，一共有多少种不同的排法呢？</div><div class="line"></div><div class="line">请你计算并提交该数字。</div><div class="line"></div><div class="line"></div><div class="line">注意：需要提交的是一个整数，不要提交任何多余内容。</div></pre></td></tr></table></figure>
-<p>因为翻转和镜像后算一种情况，所以这道题的关键在于查重，那么STL中的set就能帮上我们的忙了，分析完重复的情况之后我们发现每种情况有六个重复的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="built_in">set</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;st;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> arr[<span class="number">9</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</div><div class="line">  <span class="keyword">do</span>&#123;</div><div class="line">    <span class="keyword">if</span>(arr[<span class="number">0</span>] + arr[<span class="number">1</span>] + arr[<span class="number">2</span>] + arr[<span class="number">3</span>] == arr[<span class="number">3</span>] + arr[<span class="number">4</span>] + arr[<span class="number">5</span>] +arr[<span class="number">6</span>] &amp;&amp; arr[<span class="number">3</span>] + arr[<span class="number">4</span>] + arr[<span class="number">5</span>] +arr[<span class="number">6</span>] == arr[<span class="number">6</span>] + arr[<span class="number">7</span>] + arr[<span class="number">8</span>] + arr[<span class="number">0</span>])&#123;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; d;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f;</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">8</span>;i++)&#123;</div><div class="line">		  		a.push_back(arr[i%<span class="number">9</span>]);		  		</div><div class="line">		  	&#125;</div><div class="line">		  </div><div class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">8</span>;i++)&#123;</div><div class="line">		  		b.push_back(arr[(i+<span class="number">3</span>)%<span class="number">9</span>]);</div><div class="line">		  	&#125;</div><div class="line">		  	</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">8</span>;i++)&#123;</div><div class="line">		  		c.push_back(arr[(i+<span class="number">6</span>)%<span class="number">9</span>]);</div><div class="line">		  	&#125;</div><div class="line"></div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">9</span>;i&gt;=<span class="number">1</span>;i--)&#123;</div><div class="line">		  		d.push_back(arr[i%<span class="number">9</span>]);</div><div class="line">		  	&#125;</div><div class="line">		  	</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">9</span>;i&gt;=<span class="number">1</span>;i--)&#123;</div><div class="line">		  		e.push_back(arr[(i+<span class="number">3</span>)%<span class="number">9</span>]);</div><div class="line">		  	&#125;</div><div class="line">		  </div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">9</span>;i&gt;=<span class="number">1</span>;i--)&#123;</div><div class="line">		  		f.push_back(arr[(i+<span class="number">6</span>)%<span class="number">9</span>]);</div><div class="line">		  	&#125;</div><div class="line">		  	</div><div class="line">      <span class="keyword">if</span>(!st.count(a)&amp;&amp;!st.count(b) &amp;&amp;!st.count(c) &amp;&amp;!st.count(d) </div><div class="line">         &amp;&amp;!st.count(e) &amp;&amp;!st.count(f))&#123;</div><div class="line">        st.insert(a);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;<span class="keyword">while</span>(next_permutation(arr, arr+<span class="number">9</span>));</div><div class="line">  <span class="built_in">cout</span> &lt;&lt; st.size() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="poj-anniversary-cake"><a class="markdownIt-Anchor" href="#poj-anniversary-cake"></a> POJ Anniversary Cake</h1>
-<p><a href="https://blog.csdn.net/lyy289065406/article/details/6683250" target="_blank" rel="external">思路讲解</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> col[<span class="number">41</span>];</div><div class="line"><span class="keyword">int</span> s, n;</div><div class="line"><span class="keyword">int</span> sizenum[<span class="number">11</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> dep)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(dep == n) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">int</span> prow,minn = <span class="number">50</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= s ;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(minn &gt; col[i])&#123;</div><div class="line">      minn = col[i];</div><div class="line">      prow = i;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">int</span> size,p;</div><div class="line">  <span class="keyword">for</span>(size = <span class="number">10</span> ; size &gt; <span class="number">0</span> ; size--)&#123;</div><div class="line">    <span class="keyword">if</span>(!sizenum[size]) <span class="keyword">continue</span>;</div><div class="line">    <span class="keyword">if</span>(s - col[prow] &gt;= size &amp;&amp; s - prow + <span class="number">1</span> &gt;= size)&#123;</div><div class="line">      <span class="keyword">for</span>(p = prow ; p &lt;= prow + size <span class="number">-1</span> ; p++)</div><div class="line">        <span class="keyword">if</span>(col[p] != col[prow]) <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">if</span>(p == prow + size)&#123;</div><div class="line">        <span class="keyword">for</span>(p = prow; p &lt;= prow + size - <span class="number">1</span>; p++) col[p] += size;</div><div class="line">        sizenum[size]--;</div><div class="line">        <span class="keyword">if</span>(dfs(dep + <span class="number">1</span>)) <span class="keyword">return</span> <span class="number">1</span>;  <span class="comment">//若为假则下面回溯</span></div><div class="line">        sizenum[size]++;</div><div class="line">        <span class="keyword">for</span>(p = prow; p &lt;= prow + size - <span class="number">1</span>; p++) col[p] -= size;  </div><div class="line">      &#125;</div><div class="line">    &#125; </div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> t;</div><div class="line">  <span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">  <span class="keyword">while</span>(t--)&#123;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;s, &amp;n);</div><div class="line">    <span class="built_in">memset</span>(col, <span class="number">0</span>, <span class="keyword">sizeof</span>(col));</div><div class="line">    <span class="built_in">memset</span>(sizenum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sizenum));</div><div class="line">    <span class="keyword">int</span> area = <span class="number">0</span>,sid;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</div><div class="line">      <span class="built_in">cin</span> &gt;&gt; sid;</div><div class="line">      sizenum[sid]++;</div><div class="line">      area += sid*sid;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(area != s*s)&#123;</div><div class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"HUTUTU!\n"</span>;</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(dfs(<span class="number">0</span>)) <span class="built_in">cout</span> &lt;&lt; <span class="string">"KHOOOOB!\n"</span>;</div><div class="line">    <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"HUTUTU!\n"</span>; </div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include&lt;set&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+using namespace std;
+
+typedef long long LL;
+
+const int coeff[3] = {2, 3, 5};
+
+int main(){
+  priority_queue&lt;LL , vector&lt;LL&gt;, greater&lt;LL&gt; &gt;pq;
+  set&lt;LL&gt; s;
+  pq.push(1);
+  s.insert(1);
+  for(int i = 1 ; ; i++){
+    LL x = pq.top();
+    pq.pop();
+    if(i == 1500){
+      cout &lt;&lt; x &lt;&lt; endl;
+      break;
+    }
+    for(int j = 0 ; j &lt; 3 ; j++){
+      LL x2 = x * coeff[j];
+      if(!s.count(x2)){
+        s.insert(x2);
+        pq.push(x2);
+      }
+    }
+  }
+  return 0;
+}
+</code></pre>
+<h1 id="UVa-400"><a href="#UVa-400" class="headerlink" title="UVa_400"></a>UVa_400</h1><p>这个其实就是实现Unix中的ls命令，每一行要求只有60个字符，那么在读入文件名的时候我们就把文件名最长给找到：</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+const int maxcol = 60;
+const int maxn = 100+5;
+string filenames[maxn];
+
+void print(const string &amp;s, int len, char extra){
+  cout &lt;&lt; s;
+  for(int i = 0 ; i &lt; len - s.length() ; i++){
+    cout &lt;&lt; extra;
+  }
+}
+
+int main(){
+  int n;
+  while(cin &gt;&gt; n){
+    int M = 0;;
+    for(int i = 0 ; i &lt; n ; i++){
+      cin &gt;&gt; filenames[i];
+      M = max(M, (int)filenames[i].length);
+    }
+    int cols = (maxcol - M)/(M+2) + 1;
+    int rows = (n + M - 1)/cols;
+    print(&quot;&quot;, 60, &#39;-&#39;);
+    cout &lt;&lt; &#39;\n&#39;;
+    sort(filenames, filenames+n);
+    for(int r = 0 ; r &lt; rows ; r++)
+      for(int c = 0 ; c &lt; cols ; c++){
+        int index = c*rows + r;
+        if(index &lt; n)print(filenames[index], c == cols-1 ? M : M+2, &#39; &#39;);
+      }
+    cout &lt;&lt; &quot;\n&quot;;
+  }
+  return 0;
+}
+</code></pre>
+<h1 id="第八届蓝桥-纸牌三角形"><a href="#第八届蓝桥-纸牌三角形" class="headerlink" title="第八届蓝桥_纸牌三角形"></a>第八届蓝桥_纸牌三角形</h1><pre><code>标题：纸牌三角形
+A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要求每个边的和相等。
+下图就是一种排法（如有对齐问题，参看p1.png）。
+
+      A
+     9 6
+    4   8
+   3 7 5 2
+
+这样的排法可能会有很多。
+
+如果考虑旋转、镜像后相同的算同一种，一共有多少种不同的排法呢？
+
+请你计算并提交该数字。
+
+
+注意：需要提交的是一个整数，不要提交任何多余内容。
+</code></pre><p>因为翻转和镜像后算一种情况，所以这道题的关键在于查重，那么STL中的set就能帮上我们的忙了，分析完重复的情况之后我们发现每种情况有六个重复的：</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;set&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+set&lt;vector&lt;int&gt; &gt;st;
+
+int main(){
+  int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  do{
+    if(arr[0] + arr[1] + arr[2] + arr[3] == arr[3] + arr[4] + arr[5] +arr[6] &amp;&amp; arr[3] + arr[4] + arr[5] +arr[6] == arr[6] + arr[7] + arr[8] + arr[0]){
+      vector&lt;int&gt; a;
+      vector&lt;int&gt; b;
+      vector&lt;int&gt; c;
+      vector&lt;int&gt; d;
+      vector&lt;int&gt; e;
+      vector&lt;int&gt; f;
+      for(int i=0;i&lt;=8;i++){
+                  a.push_back(arr[i%9]);                  
+              }
+
+      for(int i=0;i&lt;=8;i++){
+                  b.push_back(arr[(i+3)%9]);
+              }
+
+      for(int i=0;i&lt;=8;i++){
+                  c.push_back(arr[(i+6)%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  d.push_back(arr[i%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  e.push_back(arr[(i+3)%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  f.push_back(arr[(i+6)%9]);
+              }
+
+      if(!st.count(a)&amp;&amp;!st.count(b) &amp;&amp;!st.count(c) &amp;&amp;!st.count(d) 
+         &amp;&amp;!st.count(e) &amp;&amp;!st.count(f)){
+        st.insert(a);
+      }
+    }
+  }while(next_permutation(arr, arr+9));
+  cout &lt;&lt; st.size() &lt;&lt; endl;
+  return 0;
+}
+</code></pre>
+<h1 id="POJ-Anniversary-Cake"><a href="#POJ-Anniversary-Cake" class="headerlink" title="POJ Anniversary Cake"></a>POJ Anniversary Cake</h1><p><a href="https://blog.csdn.net/lyy289065406/article/details/6683250" target="_blank" rel="external">思路讲解</a></p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+
+int col[41];
+int s, n;
+int sizenum[11];
+
+int dfs(int dep){
+  if(dep == n) return 1;
+  int prow,minn = 50;
+  for(int i = 1 ; i &lt;= s ;i++){
+    if(minn &gt; col[i]){
+      minn = col[i];
+      prow = i;
+    }
+  }
+  int size,p;
+  for(size = 10 ; size &gt; 0 ; size--){
+    if(!sizenum[size]) continue;
+    if(s - col[prow] &gt;= size &amp;&amp; s - prow + 1 &gt;= size){
+      for(p = prow ; p &lt;= prow + size -1 ; p++)
+        if(col[p] != col[prow]) break;
+      if(p == prow + size){
+        for(p = prow; p &lt;= prow + size - 1; p++) col[p] += size;
+        sizenum[size]--;
+        if(dfs(dep + 1)) return 1;  //若为假则下面回溯
+        sizenum[size]++;
+        for(p = prow; p &lt;= prow + size - 1; p++) col[p] -= size;  
+      }
+    } 
+  }
+  return 0;
+}
+
+int main(){
+  int t;
+  cin &gt;&gt; t;
+  while(t--){
+    scanf(&quot;%d %d&quot;, &amp;s, &amp;n);
+    memset(col, 0, sizeof(col));
+    memset(sizenum, 0, sizeof(sizenum));
+    int area = 0,sid;
+    for(int i = 1 ; i &lt;= n ; i++){
+      cin &gt;&gt; sid;
+      sizenum[sid]++;
+      area += sid*sid;
+    }
+    if(area != s*s){
+      cout &lt;&lt; &quot;HUTUTU!\n&quot;;
+      continue;
+    }
+    if(dfs(0)) cout &lt;&lt; &quot;KHOOOOB!\n&quot;;
+    else cout &lt;&lt; &quot;HUTUTU!\n&quot;; 
+  }
+  return 0;
+}
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf262kd1000g8wbrde8qbu1r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf3ar2ku000ae9br83wpu2u8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>

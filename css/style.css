@@ -1256,7 +1256,7 @@ body {
 }
 .article-date {
   float: left;
-  background-color: #6b69d6;
+  background-color: #5f5b5b;
   padding: 10px;
   position: relative;
   top: -20px;
@@ -1434,13 +1434,14 @@ a.article-title:hover {
   line-height: 1.4em;
   padding: 6px 15px;
   border-radius: 15px;
-  background: rgba(241,108,227,0.8);
+  background: #777;
   color: #fff;
   text-shadow: 0 1px #fff;
   text-decoration: none;
   font-size: 1.1em;
 }
 .article-more-link a:hover {
+  background0color: #777;
   color: #fff;
   text-decoration: none;
   text-shadow: 0 1px #1e7293;
@@ -1483,7 +1484,7 @@ a.article-title:hover {
   color: #fff;
 }
 .article-tag-list li:nth-child(1n+0) a {
-  background-color: #98c3de;
+  background-color: #777;
 }
 .article-tag-list li:nth-child(2n+0) a {
   background-color: #f9b3c7;
@@ -1824,7 +1825,7 @@ a.article-title:hover {
   margin-bottom: -40px;
   width: 40px;
   height: 40px;
-  background-color: #6b69d6;
+  background-color: #0e0e0e;
   text-align: center;
   border-radius: 50%;
 }
@@ -1908,8 +1909,8 @@ a.article-title:hover {
 }
 .article-entry pre,
 .article-entry .highlight {
-  border-left: 5px solid #eb3c3c;
-  background: #9d0f3c;
+  border-left: 5px solid #65424d;
+  background: #65424d;
   margin: 0 -20px;
   padding: 15px 20px;
   overflow: auto;
@@ -2124,28 +2125,28 @@ pre .javascript .function {
   color: #fff;
 }
 .tag-box a:nth-child(1n+0) {
-  background-color: #98c3de;
+  background-color: #777;
 }
 .tag-box a:nth-child(2n+0) {
-  background-color: #f9b3c7;
+  background-color: #777;
 }
 .tag-box a:nth-child(3n+0) {
-  background-color: #ffc4f0;
+  background-color: #777;
 }
 .tag-box a:nth-child(4n+0) {
-  background-color: #cfaa36;
+  background-color: #777;
 }
 .tag-box a:nth-child(5n+0) {
-  background-color: #eab085;
+  background-color: #777;
 }
 .tag-box a:nth-child(6n+0) {
-  background-color: #d75be3;
+  background-color: #777;
 }
 .tag-box a:nth-child(7n+0) {
-  background-color: #a5b600;
+  background-color: #777;
 }
 .tag-box a:nth-child(8n+0) {
-  background-color: #94f686;
+  background-color: #777;
 }
 .tag-box h1 {
   font-size: 1.5em;
@@ -2286,10 +2287,11 @@ pre .javascript .function {
   border-radius: 3px;
 }
 .widget a {
-  color: #258fb8;
+  color: #777;
   text-decoration: none;
 }
 .widget a:hover {
+  background-color: #777;
   text-decoration: underline;
 }
 .widget ul ul,
@@ -2384,11 +2386,11 @@ pre .javascript .function {
   text-align: center;
   font-size: 15px;
   font-weight: bold;
-  color: #6e90ef;
+  color: #777;
 }
 .social-link a:hover,
 .friend-link a:hover {
-  background-color: #6e90ef;
+  background-color: #777;
   color: #fff;
   border-radius: 5px;
   text-decoration: none;

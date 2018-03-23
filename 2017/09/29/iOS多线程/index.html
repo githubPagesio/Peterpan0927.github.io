@@ -104,18 +104,14 @@
       
         <p>为了追求极致的性能，iOS中的多线程是必经之路</p>
 <a id="more"></a>
-<h1 id="多线程的基本概念ios"><a class="markdownIt-Anchor" href="#多线程的基本概念ios"></a> 多线程的基本概念（iOS）</h1>
-<p>再说多线程之前首先要普及一下同步和异步的概念，我们之前在写程序的时候，代码都是顺序执行的，一个线程中执行多个任务，一次处理一个。而异步则是多个人处理多个任务，任务同时执行。</p>
-<h2 id="线程"><a class="markdownIt-Anchor" href="#线程"></a> 线程</h2>
-<p>进程之间是独立的，每个进程都运行在其专用的受保护的内存空间中，通过活动监视器可以查看Mac系统中所开启的进程。</p>
+<h1 id="多线程的基本概念（iOS）"><a href="#多线程的基本概念（iOS）" class="headerlink" title="多线程的基本概念（iOS）"></a>多线程的基本概念（iOS）</h1><p>再说多线程之前首先要普及一下同步和异步的概念，我们之前在写程序的时候，代码都是顺序执行的，一个线程中执行多个任务，一次处理一个。而异步则是多个人处理多个任务，任务同时执行。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>进程之间是独立的，每个进程都运行在其专用的受保护的内存空间中，通过活动监视器可以查看Mac系统中所开启的进程。</p>
 <p>1个程序由一个或多个线程组成，线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。但是事实上单核CPU并不能分别执行多个线程，而是采用了快速切换的方式，显现出一种同时执行的假象，就像我们看电影的时候只是在快速地播放图片而已。</p>
 <p>但是有一点需要注意的就是如果线程的数目非常的多，cpu在n个线程之间切换，消耗大量的cpu资源，每个线程被调度的次数会降低，线程的执行效率也会降低，多线程的缺点在于其空间成本和时间成本，不是线程开的越多越好，吃鸡虽好也不能多吃诶。</p>
 <p>同时多线程的优点也是十分的明显，可以适当提高程序的执行效率和资源的利用率(CPU&amp;内存，这么好的电脑自然要物尽其用)，线程上的任务在执行完之后也会自动销毁。</p>
-<h4 id="主线程"><a class="markdownIt-Anchor" href="#主线程"></a> 主线程</h4>
-<p>一个程序运行后，默认会开启一个线程，成为主线程或者UI线程，主线程一般用来刷新UI界面，处理UI事件（点击，滚动，拖拽）。</p>
+<h4 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h4><p>一个程序运行后，默认会开启一个线程，成为主线程或者UI线程，主线程一般用来刷新UI界面，处理UI事件（点击，滚动，拖拽）。</p>
 <p>要注意的是，不能在主线程上执行耗时的操作，不然这种操作会卡死线程，严重影响UI的流畅</p>
-<h4 id="多线程的实现方案"><a class="markdownIt-Anchor" href="#多线程的实现方案"></a> 多线程的实现方案</h4>
-<table>
+<h4 id="多线程的实现方案"><a href="#多线程的实现方案" class="headerlink" title="多线程的实现方案"></a>多线程的实现方案</h4><table>
 <thead>
 <tr>
 <th>技术方案</th>
@@ -156,83 +152,252 @@
 </tr>
 </tbody>
 </table>
-<h3 id="pthread"><a class="markdownIt-Anchor" href="#pthread"></a> pthread</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//但是这个只是作为一个了解，一般在iOS的项目中是不会使用这种写法</div><div class="line"></div><div class="line">- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event&#123;</div><div class="line">    NSLog(@&quot;%@&quot;, [NSThread currentThread]);</div><div class="line">    [self demo];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)demo&#123;</div><div class="line">    //参数1:pthread_t 线程的标识</div><div class="line">    //参数2:attr 线程的属性</div><div class="line">    //参数3:函数签名,void * 约等于OC中的id</div><div class="line">    //参数4:给函数参数</div><div class="line"></div><div class="line">    //__bridge:默认ARC下对OC对象有内存管理，不对C变量管理，桥接的作用是C变量在合适的时候释放</div><div class="line">    pthread_t PID;</div><div class="line">    NSString *str = @&quot;str&quot;;</div><div class="line">    int result =  pthread_create(&amp;PID, NULL, task, (__bridge void *)(str));</div><div class="line">    if(result == 0) NSLog(@&quot;OK&quot;);</div><div class="line">    else NSLog(@&quot;fail&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//线程要运行的函数</div><div class="line">void * task (void * param)&#123;</div><div class="line">    NSString *str = (__bridge NSString *)(param);</div><div class="line">    NSLog(@&quot;task is running %@-------&gt;%@ \n&quot;, [NSThread currentThread], str);</div><div class="line">    return NULL;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="nsthread"><a class="markdownIt-Anchor" href="#nsthread"></a> NSThread</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (void)demo&#123;</div><div class="line">    //参数1:对象</div><div class="line">    //参数2:方法</div><div class="line">    //参数3:方法的参数</div><div class="line">    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(task) object:nil];</div><div class="line">    //开启线程</div><div class="line">    [thread start];</div><div class="line">  	//上述方法也可以使用一行代码搞定</div><div class="line">  	[NSThread detachNewThreadSelector:@selector(task) toTarget:self withObject:nil];</div><div class="line">  	//还有一种方法是隐式创建线程</div><div class="line">  	[self performSelectorInBackground:@selector(task) withObject:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)task&#123;</div><div class="line">    NSLog(@&quot;task is running %@&quot;, [NSThread currentThread]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h3><pre><code class="objective-c">//但是这个只是作为一个了解，一般在iOS的项目中是不会使用这种写法
+
+- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event{
+    NSLog(@&quot;%@&quot;, [NSThread currentThread]);
+    [self demo];
+}
+
+- (void)demo{
+    //参数1:pthread_t 线程的标识
+    //参数2:attr 线程的属性
+    //参数3:函数签名,void * 约等于OC中的id
+    //参数4:给函数参数
+
+    //__bridge:默认ARC下对OC对象有内存管理，不对C变量管理，桥接的作用是C变量在合适的时候释放
+    pthread_t PID;
+    NSString *str = @&quot;str&quot;;
+    int result =  pthread_create(&amp;PID, NULL, task, (__bridge void *)(str));
+    if(result == 0) NSLog(@&quot;OK&quot;);
+    else NSLog(@&quot;fail&quot;);
+}
+
+//线程要运行的函数
+void * task (void * param){
+    NSString *str = (__bridge NSString *)(param);
+    NSLog(@&quot;task is running %@-------&gt;%@ \n&quot;, [NSThread currentThread], str);
+    return NULL;
+}
+</code></pre>
+<h3 id="NSThread"><a href="#NSThread" class="headerlink" title="NSThread"></a>NSThread</h3><pre><code class="objective-c">- (void)demo{
+    //参数1:对象
+    //参数2:方法
+    //参数3:方法的参数
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(task) object:nil];
+    //开启线程
+    [thread start];
+      //上述方法也可以使用一行代码搞定
+      [NSThread detachNewThreadSelector:@selector(task) toTarget:self withObject:nil];
+      //还有一种方法是隐式创建线程
+      [self performSelectorInBackground:@selector(task) withObject:nil];
+}
+
+- (void)task{
+    NSLog(@&quot;task is running %@&quot;, [NSThread currentThread]);
+}
+</code></pre>
 <p>线程的状态：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/thread.jpg" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//一些常用的方法介绍</div><div class="line"></div><div class="line">//阻塞进程</div><div class="line">[NSThread sleepForTimeInterval:1];</div><div class="line">[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];</div><div class="line">//手动杀死线程</div><div class="line">[NSThread exit];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//一些常用属性介绍</div><div class="line"></div><div class="line">//线程的名字</div><div class="line">thread.name = @&quot;thread&quot;;</div><div class="line">//优先级,取值范围为0.0-1.0，默认是0.5，1.0表示最高，这个优先级只是表示被CPU调用的几率大小，就算是0也是会被调用的。</div><div class="line">thread.threadPriority = 0;</div></pre></td></tr></table></figure>
-<h3 id="关于原子属性"><a class="markdownIt-Anchor" href="#关于原子属性"></a> 关于原子属性</h3>
-<p>如果是原子属性，那么在多个线程环  境下，只能有一个线程对你的属性进行赋值，读取无所谓</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (atomic, strong) NSObject *obj;</div></pre></td></tr></table></figure>
+<pre><code class="objective-c">//一些常用的方法介绍
+
+//阻塞进程
+[NSThread sleepForTimeInterval:1];
+[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];
+//手动杀死线程
+[NSThread exit];
+</code></pre>
+<pre><code class="objective-c">//一些常用属性介绍
+
+//线程的名字
+thread.name = @&quot;thread&quot;;
+//优先级,取值范围为0.0-1.0，默认是0.5，1.0表示最高，这个优先级只是表示被CPU调用的几率大小，就算是0也是会被调用的。
+thread.threadPriority = 0;
+</code></pre>
+<h3 id="关于原子属性"><a href="#关于原子属性" class="headerlink" title="关于原子属性"></a>关于原子属性</h3><p>如果是原子属性，那么在多个线程环  境下，只能有一个线程对你的属性进行赋值，读取无所谓</p>
+<pre><code class="objective-c">@property (atomic, strong) NSObject *obj;
+</code></pre>
 <p><code>atomic</code>: 原子操作（原子性是指事务的一个完整操作，操作成功就提交，反之就回滚. 原子操作就是指具有原子性的操作）在objective-c 属性设置里面默认的就是atomic，意思就是setter/getter函数是一个原子操作，如果多线程同时调用setter时，不会出现某一个线程执行完setter所有语句之前，另一个线程就开始执行setter，相当于函数头尾加了自旋锁. 这样的话并发访问性能会比较低.</p>
 <p><code>nonatomic</code>: 非原子操作 一般不需要多线程支持的时候就用它，这样在并发访问的时候效率会比较高.   在objective-c里面通常对象类型都应该声明为非原子性的. iOS中程序启动的时候系统只会自动生成一个单一的主线程.程序在执行的时候一般情况下是在同一个线程里面对一个属性进行操作. 如果在程序中我们确定某一个属性会在多线程中被使用，并且需要做数据同步，就必须设置成原子性的，但也可以设置成非原子性的，然后自己在程序中用加锁之类的来做数据同步.通常说nonatomic 是提高在非多线程应用中的读写效率.</p>
 <hr>
-<h2 id="多线程中的锁"><a class="markdownIt-Anchor" href="#多线程中的锁"></a> 多线程中的锁</h2>
-<h4 id="线程安全的产生"><a class="markdownIt-Anchor" href="#线程安全的产生"></a> 线程安全的产生</h4>
-<p>一个很简单的例子就是线程内操作了一个线程外的非线程安全变量(如多个线程操作同一个全局变量)，就需要考虑到线程安全和同步，下面有个简单的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (void)getImageName:(NSMutableArray *)imageNames&#123;//假如每个进来的都是一个线程</div><div class="line">    /*1.imageNames是线程外的变量，这个时候就需要考虑线程安全，</div><div class="line">    因为，假如我们当前imageNames的个数是1，线程A和B同时进来发现个数是大于0的，</div><div class="line">    都会去执行remove操作，结果肯定会有一个线程崩溃掉。</div><div class="line">    */</div><div class="line">    /*2.NSMutableArray *array = [[NSMutableArray alloc]initWithArray:imageNames];</div><div class="line">    这里如果新生成一个array，下面也把imageNames换成array就不需要考虑线程安全，</div><div class="line">    但是这样array.count判断永远大于0，也就是永远等于imageNames.count</div><div class="line">     */</div><div class="line">    NSString *imageName;</div><div class="line">    if (imageNames.count&gt;0) &#123;</div><div class="line">        imageName = [imageNames lastObject];</div><div class="line">        [imageNames removeObject:imageName];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="多线程中的锁"><a href="#多线程中的锁" class="headerlink" title="多线程中的锁"></a>多线程中的锁</h2><h4 id="线程安全的产生"><a href="#线程安全的产生" class="headerlink" title="线程安全的产生"></a>线程安全的产生</h4><p>一个很简单的例子就是线程内操作了一个线程外的非线程安全变量(如多个线程操作同一个全局变量)，就需要考虑到线程安全和同步，下面有个简单的例子：</p>
+<pre><code class="objective-c">- (void)getImageName:(NSMutableArray *)imageNames{//假如每个进来的都是一个线程
+    /*1.imageNames是线程外的变量，这个时候就需要考虑线程安全，
+    因为，假如我们当前imageNames的个数是1，线程A和B同时进来发现个数是大于0的，
+    都会去执行remove操作，结果肯定会有一个线程崩溃掉。
+    */
+    /*2.NSMutableArray *array = [[NSMutableArray alloc]initWithArray:imageNames];
+    这里如果新生成一个array，下面也把imageNames换成array就不需要考虑线程安全，
+    但是这样array.count判断永远大于0，也就是永远等于imageNames.count
+     */
+    NSString *imageName;
+    if (imageNames.count&gt;0) {
+        imageName = [imageNames lastObject];
+        [imageNames removeObject:imageName];
+    }
+}
+</code></pre>
 <p>那么这个时候问题就来了，怎么样才是合理的方案呢？下面就是锁的解决方案</p>
-<h4 id="锁的概念"><a class="markdownIt-Anchor" href="#锁的概念"></a> 锁的概念</h4>
-<p>锁是最常用的同步工具。一段代码在同一时间只能允许被一个线程访问，比如线程A进入加锁代码之后由于已经加锁，另一个线程就无法访问，只有等待前一个线程执行完加锁代码解锁，这个加锁代码才能被另一个线程锁访问。</p>
+<h4 id="锁的概念"><a href="#锁的概念" class="headerlink" title="锁的概念"></a>锁的概念</h4><p>锁是最常用的同步工具。一段代码在同一时间只能允许被一个线程访问，比如线程A进入加锁代码之后由于已经加锁，另一个线程就无法访问，只有等待前一个线程执行完加锁代码解锁，这个加锁代码才能被另一个线程锁访问。</p>
 <p>但是如果将过多的操作代码放入其中的话，一个线程执行的时候，另一个线程一直处于等待状态，这样就无法发挥多线程的作用了。</p>
-<h4 id="nslock"><a class="markdownIt-Anchor" href="#nslock"></a> NSLock</h4>
-<p>在Cocoa程序中NSlock中实现了一个简单的互斥锁，实现了NSLocking  protocol。</p>
+<h4 id="NSLock"><a href="#NSLock" class="headerlink" title="NSLock"></a>NSLock</h4><p>在Cocoa程序中NSlock中实现了一个简单的互斥锁，实现了NSLocking  protocol。</p>
 <p>lock:加锁、unlock：解锁、tryLock：尝试加锁，如果失败不会阻塞线程，而是直接返回。</p>
-<p>NOlockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取锁的话），如果到期还没有获取锁，则线程被唤醒，函数立即返回NO<br>
-使用tryLock并不能成功加锁，如果获取锁失败就不会执行加锁代码了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (void)getImageName:(NSMutableArray *)imageNames&#123;</div><div class="line">    NSString *imageName;</div><div class="line">    [lock lock];</div><div class="line">    if (imageNames.count &gt; 0) &#123;</div><div class="line">        imageName = [imageNames lastObject];</div><div class="line">        [imageNames removeObject:imageName];</div><div class="line">    &#125;</div><div class="line">    [lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="synchronized代码块"><a class="markdownIt-Anchor" href="#synchronized代码块"></a> @synchronized代码块</h4>
-<p>一开始最早接触的线程锁就是@synchronized，代码简单，名字可以叫同步锁或者叫互斥锁。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (void)getIamgeName:(int)index&#123;</div><div class="line">    NSString *imageName;</div><div class="line">    @synchronized(self) &#123;</div><div class="line">        if (imageNames.count &gt; 0) &#123;</div><div class="line">            imageName = [imageNames lastObject];</div><div class="line">            [imageNames removeObject:imageName];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>NOlockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取锁的话），如果到期还没有获取锁，则线程被唤醒，函数立即返回NO<br>使用tryLock并不能成功加锁，如果获取锁失败就不会执行加锁代码了。</p>
+<pre><code class="objective-c">- (void)getImageName:(NSMutableArray *)imageNames{
+    NSString *imageName;
+    [lock lock];
+    if (imageNames.count &gt; 0) {
+        imageName = [imageNames lastObject];
+        [imageNames removeObject:imageName];
+    }
+    [lock unlock];
+}
+</code></pre>
+<h4 id="synchronized代码块"><a href="#synchronized代码块" class="headerlink" title="@synchronized代码块"></a>@synchronized代码块</h4><p>一开始最早接触的线程锁就是@synchronized，代码简单，名字可以叫同步锁或者叫互斥锁。</p>
+<pre><code class="objective-c">- (void)getIamgeName:(int)index{
+    NSString *imageName;
+    @synchronized(self) {
+        if (imageNames.count &gt; 0) {
+            imageName = [imageNames lastObject];
+            [imageNames removeObject:imageName];
+        }
+    }
+}
+</code></pre>
 <p>将互斥锁和自旋锁相比较的话，被锁住后遭到其他线程访问其他线程的处理情况会不同：</p>
 <blockquote>
-<p>互斥锁：如果发现其他线程正在锁定代码，线程会进入休眠（就绪状态），等待其他线程打开之后才会被唤醒<br>
-自旋锁：如果发现其他线程正在锁定代码，线程会用死循环的方式，一直等待锁定的代码执行完成，更适合执行不耗时的代码。</p>
+<p>互斥锁：如果发现其他线程正在锁定代码，线程会进入休眠（就绪状态），等待其他线程打开之后才会被唤醒<br>自旋锁：如果发现其他线程正在锁定代码，线程会用死循环的方式，一直等待锁定的代码执行完成，更适合执行不耗时的代码。 </p>
 </blockquote>
 <p>⚠️：锁定一份代码只用一把锁，用多把锁是无效的</p>
-<h4 id="条件信号量dispatch_semaphore_t"><a class="markdownIt-Anchor" href="#条件信号量dispatch_semaphore_t"></a> 条件信号量dispatch_semaphore_t</h4>
-<p><code>dispatch_semaphore_t</code>GCD中信号量，也可以解决资源抢占问题,支持信号通知和信号等待。每当发送一个信号通知，则信号量+1；每当发送一个等待信号时信号量-1,；如果信号量为0则信号会处于等待状态，直到信号量大于0开始执行,这个从理解上的话可以类比一下MRC模式中的引用计数，但是还是有一些差别。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#import &quot;TestViewController.h&quot;</div><div class="line"></div><div class="line">@interface TestViewController ()</div><div class="line">&#123;</div><div class="line">    dispatch_semaphore_t semaphore;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation TestViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view.</div><div class="line">    semaphore = dispatch_semaphore_create(1);</div><div class="line">    /**</div><div class="line">     *  创建一个信号量为1的信号</div><div class="line">     *</div><div class="line">     */</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)getImageName:(NSMutableArray *)imageNames&#123;</div><div class="line">    NSString *imageName;</div><div class="line">    /**</div><div class="line">     *  semaphore：等待信号</div><div class="line">     DISPATCH_TIME_FOREVER：等待时间</div><div class="line">     wait之后信号量-1，为0</div><div class="line">     */</div><div class="line">    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</div><div class="line">    if (imageNames.count&gt;0) &#123;</div><div class="line">        imageName = [imageNames lastObject];</div><div class="line">        [imageNames removeObject:imageName];</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     *  发送一个信号通知，这时候信号量+1，为1</div><div class="line">     */</div><div class="line">    dispatch_semaphore_signal(semaphore);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<h4 id="条件锁nscondition"><a class="markdownIt-Anchor" href="#条件锁nscondition"></a> 条件锁NSCondition</h4>
-<p>NSCondition同样实现了NSLocking协议，所以和NSLock一样，也有lock和unlock方法，可以当作NSLock来解决线程同步问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (void)getIamgeName:(NSMutableArray *)imageNames&#123;</div><div class="line">    NSString *imageName;</div><div class="line">    [lock lock];</div><div class="line">    if (imageNames.count&gt;0) &#123;</div><div class="line">        imageName = [imageNames lastObject];</div><div class="line">        [imageNames removeObject:imageName];</div><div class="line">    &#125;</div><div class="line">    [lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="条件信号量dispatch-semaphore-t"><a href="#条件信号量dispatch-semaphore-t" class="headerlink" title="条件信号量dispatch_semaphore_t"></a>条件信号量dispatch_semaphore_t</h4><p><code>dispatch_semaphore_t</code>GCD中信号量，也可以解决资源抢占问题,支持信号通知和信号等待。每当发送一个信号通知，则信号量+1；每当发送一个等待信号时信号量-1,；如果信号量为0则信号会处于等待状态，直到信号量大于0开始执行,这个从理解上的话可以类比一下MRC模式中的引用计数，但是还是有一些差别。</p>
+<pre><code class="objective-c">#import &quot;TestViewController.h&quot;
+
+@interface TestViewController ()
+{
+    dispatch_semaphore_t semaphore;
+}
+@end
+
+@implementation TestViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    semaphore = dispatch_semaphore_create(1);
+    /**
+     *  创建一个信号量为1的信号
+     *
+     */
+}
+
+- (void)getImageName:(NSMutableArray *)imageNames{
+    NSString *imageName;
+    /**
+     *  semaphore：等待信号
+     DISPATCH_TIME_FOREVER：等待时间
+     wait之后信号量-1，为0
+     */
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    if (imageNames.count&gt;0) {
+        imageName = [imageNames lastObject];
+        [imageNames removeObject:imageName];
+    }
+    /**
+     *  发送一个信号通知，这时候信号量+1，为1
+     */
+    dispatch_semaphore_signal(semaphore);
+}
+
+@end
+</code></pre>
+<h4 id="条件锁NSCondition"><a href="#条件锁NSCondition" class="headerlink" title="条件锁NSCondition"></a>条件锁NSCondition</h4><p>NSCondition同样实现了NSLocking协议，所以和NSLock一样，也有lock和unlock方法，可以当作NSLock来解决线程同步问题。</p>
+<pre><code class="objective-c">- (void)getIamgeName:(NSMutableArray *)imageNames{
+    NSString *imageName;
+    [lock lock];
+    if (imageNames.count&gt;0) {
+        imageName = [imageNames lastObject];
+        [imageNames removeObject:imageName];
+    }
+    [lock unlock];
+}
+</code></pre>
 <hr>
-<h2 id="异步下载图片"><a class="markdownIt-Anchor" href="#异步下载图片"></a> 异步下载图片</h2>
-<p>这里通过之前的多线程知识来模拟一个异步下载图片的demo，因为大家都知道主线程是用来刷新UI的，所以网络请求图片放在一个子线程中，然后通过线程间的通信回到主线程刷新UI：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">//重写此方法默认不会加载xib和sb</div><div class="line">-(void)loadView&#123;</div><div class="line">    UIScrollView *sc = [[UIScrollView alloc] initWithFrame: [UIScreen mainScreen].bounds];</div><div class="line">    self.scrollView = sc;</div><div class="line">    self.view = sc;</div><div class="line">    </div><div class="line">    UIImageView *imageView = [[UIImageView alloc] init];</div><div class="line">    self.testImageView = imageView;</div><div class="line">    [self.view addSubview:imageView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    //创建一个线程</div><div class="line">    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(downloadImage) object:nil];</div><div class="line">    [thread start];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)downloadImage&#123;</div><div class="line">    NSLog(@&quot;downloading %@&quot;, [NSThread currentThread]);</div><div class="line">    NSURL *url = [NSURL URLWithString:@&quot;https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3751777155,630098310&amp;fm=27&amp;gp=0.jpg&quot;];</div><div class="line">    NSData *data = [NSData dataWithContentsOfURL:url];</div><div class="line">    UIImage *image = [UIImage imageWithData:data];</div><div class="line">    //线程间通信 子--&gt;主</div><div class="line">    [self performSelectorOnMainThread:@selector(updateUI:) withObject:image waitUntilDone:NO];</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)updateUI:(UIImage *)image&#123;</div><div class="line">    NSLog(@&quot;updateUI %@&quot;, [NSThread currentThread]);</div><div class="line">    self.testImageView.image = image;</div><div class="line">    </div><div class="line">    //根据图片的大小来调整位置</div><div class="line">    [self.testImageView sizeToFit];</div><div class="line">    [self.scrollView setContentSize:image.size];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="异步下载图片"><a href="#异步下载图片" class="headerlink" title="异步下载图片"></a>异步下载图片</h2><p>这里通过之前的多线程知识来模拟一个异步下载图片的demo，因为大家都知道主线程是用来刷新UI的，所以网络请求图片放在一个子线程中，然后通过线程间的通信回到主线程刷新UI：</p>
+<pre><code class="objective-c">//重写此方法默认不会加载xib和sb
+-(void)loadView{
+    UIScrollView *sc = [[UIScrollView alloc] initWithFrame: [UIScreen mainScreen].bounds];
+    self.scrollView = sc;
+    self.view = sc;
+
+    UIImageView *imageView = [[UIImageView alloc] init];
+    self.testImageView = imageView;
+    [self.view addSubview:imageView];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //创建一个线程
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(downloadImage) object:nil];
+    [thread start];
+}
+
+- (void)downloadImage{
+    NSLog(@&quot;downloading %@&quot;, [NSThread currentThread]);
+    NSURL *url = [NSURL URLWithString:@&quot;https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3751777155,630098310&amp;fm=27&amp;gp=0.jpg&quot;];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData:data];
+    //线程间通信 子--&gt;主
+    [self performSelectorOnMainThread:@selector(updateUI:) withObject:image waitUntilDone:NO];
+
+}
+
+- (void)updateUI:(UIImage *)image{
+    NSLog(@&quot;updateUI %@&quot;, [NSThread currentThread]);
+    self.testImageView.image = image;
+
+    //根据图片的大小来调整位置
+    [self.testImageView sizeToFit];
+    [self.scrollView setContentSize:image.size];
+}
+</code></pre>
 <hr>
-<h2 id="消息循环"><a class="markdownIt-Anchor" href="#消息循环"></a> 消息循环</h2>
-<h4 id="runloop"><a class="markdownIt-Anchor" href="#runloop"></a> RunLoop</h4>
-<ol>
+<h2 id="消息循环"><a href="#消息循环" class="headerlink" title="消息循环"></a>消息循环</h2><h4 id="RunLoop"><a href="#RunLoop" class="headerlink" title="RunLoop"></a>RunLoop</h4><ol>
 <li>概念：</li>
 </ol>
 <p>每个程序都有一个RunLoop对象，主线程默认开启RunLoop，子线程默认不开启，要注意的是如果子线程启动了循环之后没有停止循环，就不会执行任何后续的代码，会形成一个死循环。我们常用到的是 NSRunLoop ，其位于 Foundation 框架中。Foundation 框架实际上是 <code>Core Foundation</code> 的部分导出。而 <code>Core Foundation</code> 的源码是开源的。NSRunLoop 实际上是 CFRunLoop 的高层抽象。CFRunLoop 源码可以从<a href="https://opensource.apple.com/source/CF/" target="_blank" rel="external">这里</a> 下载到。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//在子线程中要手动的开启消息循环，方法有几种：</div><div class="line">//这种方法因为在不同的机子上性能不同，所以不能将时间写死</div><div class="line">[[NSRunLoop currentRunLoop] run UntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];</div><div class="line">//下面这种方法是使用全局变量来控制子线程中消息循环的开关</div><div class="line">NSRunLoop *theRL = [NSRunLoop currentLoop];</div><div class="line">while(shouldKeepRunning &amp;&amp; [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);</div></pre></td></tr></table></figure>
+<pre><code class="objective-c">//在子线程中要手动的开启消息循环，方法有几种：
+//这种方法因为在不同的机子上性能不同，所以不能将时间写死
+[[NSRunLoop currentRunLoop] run UntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];
+//下面这种方法是使用全局变量来控制子线程中消息循环的开关
+NSRunLoop *theRL = [NSRunLoop currentLoop];
+while(shouldKeepRunning &amp;&amp; [theRL runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+</code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-29%20%E4%B8%8B%E5%8D%881.51.24.png" alt=""></p>
-<ol start="2">
+<ol>
 <li>作用&amp;介绍：</li>
 </ol>
 <ul>
 <li>保证程序不退出。</li>
 <li>负责监听所有事件，例如：手势触摸，时钟触发，网络加载数据完成等</li>
-<li>如果没有事件发生，会让程序进入休眠状态</li>
+<li>如果没有事件发生，会让程序进入休眠状态<ul>
 <li>iOS有两套API访问和使用RunLoop，那就是<code>Foundation</code>和<code>Core Foundation</code>，两者之间的转换需要桥接</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CFStringRef CFDataType = (__bridge NSString*)FDataType</div><div class="line">NSString *FDataType = (__bridge CFStringRef)CFDataType</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code class="objective-c">CFStringRef CFDataType = (__bridge NSString*)FDataType
+NSString *FDataType = (__bridge CFStringRef)CFDataType
+</code></pre>
 <ul>
 <li>响应者链条事件监听过程</li>
 </ul>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-29%20%E4%B8%8B%E5%8D%882.06.26.png" alt=""></p>
-<ol start="4">
+<ol>
 <li>关系</li>
 </ol>
 <p>消息循环和输入源，定时器，运行模式之间到底是个什么样的关系呢？我们可以通过一张图来说明</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-16%20%E4%B8%8B%E5%8D%881.20.45.png" alt=""></p>
 <p>在RunLoop中，有多个运行模式，但是runloop只能选择一种模式运行，就像我们的空调有制冷模式、制热模式，但是在运行的时候只能选择一种模式。mode中至少要有一个source或者Timer，只有Observer是不被允许的。</p>
-<ol start="5">
+<ol>
 <li>系统默认注册的5个Mode</li>
 </ol>
 <ul>
@@ -242,7 +407,7 @@
 <li>UIInitializationRUnLoopMode：在刚启动App时进入的第一个mode，启动完成后就不再使用</li>
 <li>GSEventReceiiveRunLoopMode：接受系统事件内部的mode，通常用不到</li>
 </ul>
-<ol start="6">
+<ol>
 <li>事件驱动模型</li>
 </ol>
 <p>大部分的GUI程序都使用了事件驱动模型，因为一般的GUI用户输入频率比较低，如果每个部分不停的做轮训去获取用户输入，浪费时间又可能比较难处理。而事件处理则是由中央的系统把输入事件派送给需要的部分。事件驱动模型就是典型的职责链模式。它还充分的应用了<code>观察者模式</code>，还有一点很重要就是单线程的应用要处理外部事件都离不开消息循环，事件驱动模型和消息循环是天生一对。</p>
@@ -250,24 +415,81 @@
 <li>桌面上最有名的消息循环就是windows了，WinMain方法是一个死循环不断读取并处理。（派发给窗体）</li>
 <li>网页上JavaScript 应用也是单线程的，靠浏览器的消息循环驱动各种事件和回调。（派发给DOM）</li>
 </ul>
-<h4 id="时钟调度"><a class="markdownIt-Anchor" href="#时钟调度"></a> 时钟调度</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**使用方法：</div><div class="line">1.创建消息</div><div class="line">2.把消息放入循环，并制定消息的运行模式</div><div class="line">3.在与循环的模式相匹配的时候，消息运行（NSRunLoopCommonModes包含所有的模式，所有在用户交互的时候，循环的模式时钟会被匹配，所以时钟仍然会被触发）</div><div class="line"></div><div class="line">*／</div><div class="line">/*</div><div class="line">        - (void)addTimer:(NSTimer *)timer forMode:(NSString *)mode;</div><div class="line">        </div><div class="line">        NSDefaultRunLoopMode: 时钟，网络。           发生用户交互的时候，时钟会被暂停</div><div class="line">        NSRunLoopCommonModes（占位用的运行模式 ）: 用户交互，响应级别高。   发生用户交互的时候，时钟仍然会触发，如果时钟触发方法非常耗时，</div><div class="line">                                                   使用此方式时用户操作会造成非常严重的卡顿。</div><div class="line">    */</div></pre></td></tr></table></figure>
+<h4 id="时钟调度"><a href="#时钟调度" class="headerlink" title="时钟调度"></a>时钟调度</h4><pre><code class="objective-c">/**使用方法：
+1.创建消息
+2.把消息放入循环，并制定消息的运行模式
+3.在与循环的模式相匹配的时候，消息运行（NSRunLoopCommonModes包含所有的模式，所有在用户交互的时候，循环的模式时钟会被匹配，所以时钟仍然会被触发）
+
+*／
+/*
+        - (void)addTimer:(NSTimer *)timer forMode:(NSString *)mode;
+
+        NSDefaultRunLoopMode: 时钟，网络。           发生用户交互的时候，时钟会被暂停
+        NSRunLoopCommonModes（占位用的运行模式 ）: 用户交互，响应级别高。   发生用户交互的时候，时钟仍然会触发，如果时钟触发方法非常耗时，
+                                                   使用此方式时用户操作会造成非常严重的卡顿。
+    */
+</code></pre>
 <ul>
-<li>
-<p>以 NSRunLoopCommonModes 方式创建</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 调度时钟</div><div class="line">self.timer = [NSTimer timerWithTimeInterval:1.0 </div><div class="line">                                     target:self </div><div class="line">                                   selector:@selector(updateTimer) </div><div class="line">                                   userInfo:nil </div><div class="line">                                    repeats:YES];</div><div class="line"></div><div class="line">// 将时钟以 NSRunLoopCommonModes 模式添加到运行循环</div><div class="line">[[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];</div></pre></td></tr></table></figure>
+<li><p>以 NSRunLoopCommonModes 方式创建</p>
+<pre><code class="objective-c">    // 调度时钟
+    self.timer = [NSTimer timerWithTimeInterval:1.0 
+                                         target:self 
+                                       selector:@selector(updateTimer) 
+                                       userInfo:nil 
+                                        repeats:YES];
+
+    // 将时钟以 NSRunLoopCommonModes 模式添加到运行循环
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+</code></pre>
 </li>
-<li>
-<p>以 NSDefaultRunLoopMode 方式创建</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 调度时钟</div><div class="line">/*</div><div class="line">    默认将时钟以 NSDefaultRunLoopMode 模式添加到运行循环</div><div class="line">*/</div><div class="line">self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 </div><div class="line">                                              target:self </div><div class="line">                                            selector:@selector(updateTimer) </div><div class="line">                                            userInfo:nil </div><div class="line">                                             repeats:YES];</div></pre></td></tr></table></figure>
+<li><p>以 NSDefaultRunLoopMode 方式创建</p>
+<pre><code class="objective-c">    // 调度时钟
+    /*
+        默认将时钟以 NSDefaultRunLoopMode 模式添加到运行循环
+    */
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 
+                                                  target:self 
+                                                selector:@selector(updateTimer) 
+                                                userInfo:nil 
+                                                 repeats:YES];
+</code></pre>
 </li>
-<li>
-<p>子线程运行循环</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line"></div><div class="line">    // 在子线程开启时钟，由于子线程的运行循环没有启动，所以没法监听时钟事件</div><div class="line">    self.timer = [NSTimer timerWithTimeInterval:1.0 </div><div class="line">                                         target:self </div><div class="line">                                       selector:@selector(updateTimer) </div><div class="line">                                       userInfo:nil </div><div class="line">                                        repeats:YES];</div><div class="line"></div><div class="line">    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];</div><div class="line"></div><div class="line">    // 启动子线程的运行循环，这句代码就是一个死循环！如果不停止运行循环，不会执行后续的任何代码</div><div class="line">    CFRunLoopRun();</div><div class="line"></div><div class="line">    // 停止子线程运行循环之前，不会执行添加到此处的任何代码</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 运行循环执行操作方法</div><div class="line">- (void)updateTimer &#123;</div><div class="line"></div><div class="line">    static int num = 0;</div><div class="line"></div><div class="line">    NSLog(@&quot;%d %@&quot;, num++, [NSThread currentThread]);</div><div class="line"></div><div class="line">    // 满足条件后，停止当前的运行循环</div><div class="line">    if (num == 8) &#123;</div><div class="line"></div><div class="line">        // 一旦停止了运行循环，后续代码能够执行，执行完毕后，线程被自动销毁</div><div class="line">        CFRunLoopStop(CFRunLoopGetCurrent());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>子线程运行循环</p>
+<pre><code class="objective-c">    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+
+        // 在子线程开启时钟，由于子线程的运行循环没有启动，所以没法监听时钟事件
+        self.timer = [NSTimer timerWithTimeInterval:1.0 
+                                             target:self 
+                                           selector:@selector(updateTimer) 
+                                           userInfo:nil 
+                                            repeats:YES];
+
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+
+        // 启动子线程的运行循环，这句代码就是一个死循环！如果不停止运行循环，不会执行后续的任何代码
+        CFRunLoopRun();
+
+        // 停止子线程运行循环之前，不会执行添加到此处的任何代码
+    });
+
+    // 运行循环执行操作方法
+    - (void)updateTimer {
+
+        static int num = 0;
+
+        NSLog(@&quot;%d %@&quot;, num++, [NSThread currentThread]);
+
+        // 满足条件后，停止当前的运行循环
+        if (num == 8) {
+
+            // 一旦停止了运行循环，后续代码能够执行，执行完毕后，线程被自动销毁
+            CFRunLoopStop(CFRunLoopGetCurrent());
+        }
+    }
+</code></pre>
 </li>
 </ul>
-<h3 id="参考来源"><a class="markdownIt-Anchor" href="#参考来源"></a> 参考来源：</h3>
-<p><a href="http://www.jianshu.com/p/a9b900d38bff" target="_blank" rel="external">简书-iOS中的运行循环机制</a></p>
+<h3 id="参考来源："><a href="#参考来源：" class="headerlink" title="参考来源："></a>参考来源：</h3><p><a href="http://www.jianshu.com/p/a9b900d38bff" target="_blank" rel="external">简书-iOS中的运行循环机制</a></p>
 <p><a href="http://honglu.me/2017/03/30/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3RunLoop/" target="_blank" rel="external">深入理解RunLoop</a></p>
 <p><a href="https://www.zhihu.com/question/26805116" target="_blank" rel="external">知乎回答：为什么几乎所有的GUI都采用事件驱动模型</a></p>
 <p><a href="http://www.jianshu.com/p/d1fd9fa9ee66" target="_blank" rel="external">浅谈iOS中的RunLop</a></p>
@@ -275,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/29/iOS多线程/" data-id="cjf262kg0004k8wbrlvxfij72" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/29/iOS多线程/" data-id="cjf3ar2nn004oe9brhpen6tgd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>

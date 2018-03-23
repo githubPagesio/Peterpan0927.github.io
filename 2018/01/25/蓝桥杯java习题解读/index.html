@@ -106,27 +106,180 @@ Let get into the world of algorithm">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/315EF2D2297B92DBB04FFD1B9F718BB3.jpeg" height="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/315EF2D2297B92DBB04FFD1B9F718BB3.jpeg" height="350" width="600" alt=""></p>
 <p>朝来试看青枝上，几朵寒栈未肯消？</p>
 <p>Let get into the world of algorithm</p>
 <a id="more"></a>
-<h1 id="凑算式"><a class="markdownIt-Anchor" href="#凑算式"></a> 凑算式</h1>
-<p>垃圾题目就先不说了，从一道填空题开始说起，这是一个表面上看起来直接暴力的题目，其实我们的算法本质上来说就是通过枚举，只不过有的人是暴力枚举，下面看题：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8B%E5%8D%885.18.23.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">这个算式中A-I代表1-9的数字，不同的字母代表不同的数字。</div><div class="line"></div><div class="line">比如：</div><div class="line"></div><div class="line">6+8/3+952/714 就是一种解法，</div><div class="line"></div><div class="line">5+3/1+972/486 是另一种解法。</div><div class="line"></div><div class="line">这个算式一共有多少种解法？</div><div class="line"></div><div class="line">注意：你提交应该是个整数，不要填写任何多余的内容或说明性文字。</div></pre></td></tr></table></figure>
-<p>最简单的做法当然就是九层for循环套起来，然后比较，最后一层循环中判重，需要注意的就是比较的时候需要转换成小数，不然就会因为丢失精度导致漏解，但是这种lowB方法我们肯定不用，我们有两种选择，一个是通过回溯法，一个是通过Java中提供的栈数据结构：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">@利用栈</div><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by harry on 2016/10/16.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</div><div class="line">            stack.push(a);</div><div class="line">            fun(stack);</div><div class="line">            stack.pop();</div><div class="line">        &#125;</div><div class="line">        System.out.println(count);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">(Stack&lt;Integer&gt; stack)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">10</span>; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (stack.size() == <span class="number">9</span>) &#123;</div><div class="line">                <span class="keyword">int</span> a = stack.get(<span class="number">0</span>);</div><div class="line">                <span class="keyword">int</span> b = stack.get(<span class="number">1</span>);</div><div class="line">                <span class="keyword">int</span> c = stack.get(<span class="number">2</span>);</div><div class="line">                <span class="keyword">int</span> d = stack.get(<span class="number">3</span>);</div><div class="line">                <span class="keyword">int</span> e = stack.get(<span class="number">4</span>);</div><div class="line">                <span class="keyword">int</span> f = stack.get(<span class="number">5</span>);</div><div class="line">                <span class="keyword">int</span> g = stack.get(<span class="number">6</span>);</div><div class="line">                <span class="keyword">int</span> h = stack.get(<span class="number">7</span>);</div><div class="line">                <span class="keyword">int</span> i = stack.get(<span class="number">8</span>);</div><div class="line">                <span class="keyword">int</span> DEF = d * <span class="number">100</span> + e * <span class="number">10</span> + f;</div><div class="line">                <span class="keyword">int</span> GHI = g * <span class="number">100</span> + h * <span class="number">10</span> + i;</div><div class="line">                <span class="keyword">int</span> left = a * c * GHI + b * GHI + DEF * c;</div><div class="line">                <span class="keyword">int</span> right = <span class="number">10</span> * c * GHI;</div><div class="line">                <span class="keyword">if</span> (left == right ) &#123;</div><div class="line">                    count++;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;<span class="number">0</span></div><div class="line">            <span class="keyword">if</span> (!stack.contains(j)) &#123;</div><div class="line">                stack.push(j);</div><div class="line">                fun(stack);</div><div class="line">                stack.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="凑算式"><a href="#凑算式" class="headerlink" title="凑算式"></a>凑算式</h1><p>垃圾题目就先不说了，从一道填空题开始说起，这是一个表面上看起来直接暴力的题目，其实我们的算法本质上来说就是通过枚举，只不过有的人是暴力枚举，下面看题：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8B%E5%8D%885.18.23.png" alt=""></p>
+<pre><code>这个算式中A-I代表1-9的数字，不同的字母代表不同的数字。
+
+比如：
+
+6+8/3+952/714 就是一种解法，
+
+5+3/1+972/486 是另一种解法。
+
+这个算式一共有多少种解法？
+
+注意：你提交应该是个整数，不要填写任何多余的内容或说明性文字。
+</code></pre><p>最简单的做法当然就是九层for循环套起来，然后比较，最后一层循环中判重，需要注意的就是比较的时候需要转换成小数，不然就会因为丢失精度导致漏解，但是这种lowB方法我们肯定不用，我们有两种选择，一个是通过回溯法，一个是通过Java中提供的栈数据结构：</p>
+<pre><code class="java">@利用栈
+import java.util.Stack;
+/**
+ * Created by harry on 2016/10/16.
+ */
+
+public class Main {
+    public static int count = 0;
+    public static void main(String[] args) {
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+        for (int a = 1; a &lt; 10; a++) {
+            stack.push(a);
+            fun(stack);
+            stack.pop();
+        }
+        System.out.println(count);
+    }
+
+    private static void fun(Stack&lt;Integer&gt; stack) {
+        for (int j = 1; j &lt; 10; j++) {
+            if (stack.size() == 9) {
+                int a = stack.get(0);
+                int b = stack.get(1);
+                int c = stack.get(2);
+                int d = stack.get(3);
+                int e = stack.get(4);
+                int f = stack.get(5);
+                int g = stack.get(6);
+                int h = stack.get(7);
+                int i = stack.get(8);
+                int DEF = d * 100 + e * 10 + f;
+                int GHI = g * 100 + h * 10 + i;
+                int left = a * c * GHI + b * GHI + DEF * c;
+                int right = 10 * c * GHI;
+                if (left == right ) {
+                    count++;
+                }
+                return;
+            }0
+            if (!stack.contains(j)) {
+                stack.push(j);
+                fun(stack);
+                stack.pop();
+            }
+        }
+    }
+}
+</code></pre>
 <p>上面其实是把那个等式做了一次等价变换，这样的话就不需要计算小数，也不需要考虑精度的问题了。同样的，不利用stack我们也可以根据数据完成相同的效果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cal</span></span></div><div class="line">&#123;</div><div class="line"> <span class="keyword">static</span> <span class="keyword">boolean</span> k[]=<span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">10</span>];  <span class="comment">//判断这个数有没有被取过</span></div><div class="line"> <span class="keyword">static</span> <span class="keyword">int</span> g[]=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];<span class="comment">//存放9个数</span></div><div class="line"> <span class="keyword">static</span> <span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span></div><div class="line"> &#123;</div><div class="line">      ff(<span class="number">1</span>);</div><div class="line">      System.out.println(count);</div><div class="line"> &#125;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ff</span><span class="params">(<span class="keyword">int</span> m)</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="keyword">if</span>(m==<span class="number">10</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(check())count++;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">9</span>;i++)</div><div class="line">     &#123;</div><div class="line">         <span class="keyword">if</span>(k[i]==<span class="keyword">false</span>)</div><div class="line">         &#123;</div><div class="line">             k[i]=<span class="keyword">true</span>;    <span class="comment">//回溯法</span></div><div class="line">             g[m]=i;</div><div class="line">             System.out.printf(<span class="string">"g[m]=%d  m=%d\n"</span>, g[m], m);</div><div class="line">             ff(m+<span class="number">1</span>);</div><div class="line">             k[i]=<span class="keyword">false</span>;</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">()</span>  <span class="comment">//检验是不是为10</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="keyword">double</span> q=g[<span class="number">1</span>];</div><div class="line">     <span class="keyword">double</span> w=g[<span class="number">2</span>]*<span class="number">1.00</span>/g[<span class="number">3</span>];</div><div class="line">     <span class="keyword">double</span> e=(g[<span class="number">4</span>]*<span class="number">100</span>+g[<span class="number">5</span>]*<span class="number">10</span>+g[<span class="number">6</span>])*<span class="number">1.00</span>/(g[<span class="number">7</span>]*<span class="number">100</span>+g[<span class="number">8</span>]*<span class="number">10</span>+g[<span class="number">9</span>]);</div><div class="line">     <span class="keyword">if</span>(q+w+e==<span class="number">10.00</span>)<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">import java.util.*;
+public class Cal
+{
+ static boolean k[]=new boolean[10];  //判断这个数有没有被取过
+ static int g[]=new int[10];//存放9个数
+ static int count=0;
+ public static void main(String args[])
+ {
+      ff(1);
+      System.out.println(count);
+ }
+ public static void ff(int m)
+ {
+     if(m==10){
+        if(check())count++;
+     }
+     for(int i=1;i&lt;=9;i++)
+     {
+         if(k[i]==false)
+         {
+             k[i]=true;    //回溯法
+             g[m]=i;
+             System.out.printf(&quot;g[m]=%d  m=%d\n&quot;, g[m], m);
+             ff(m+1);
+             k[i]=false;
+         }
+     }
+ }
+ public static boolean check()  //检验是不是为10
+ {
+     double q=g[1];
+     double w=g[2]*1.00/g[3];
+     double e=(g[4]*100+g[5]*10+g[6])*1.00/(g[7]*100+g[8]*10+g[9]);
+     if(q+w+e==10.00)return true;
+     else return false;
+ }
+}
+</code></pre>
 <p>我们使用的就是DFS，首先直接从1开始遍历到底，然后向上层节点回溯，为了解释清楚这个玩意，我还画了一张图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8B%E5%8D%886.14.15.png" alt=""></p>
 <p>这两种方法都是实现的同一种思想，只不过实现的方式不同罢了。</p>
-<h1 id="分小组"><a class="markdownIt-Anchor" href="#分小组"></a> 分小组</h1>
-<p>这一道题其实可以使用数学的方法来解决，我还专门花了一天的时间去学习组合数学相关的知识，这才把高中的排列组合知识捡回来，这里推荐一下学堂在线上的组合数学公开课，讲的还是挺形象的:</p>
+<h1 id="分小组"><a href="#分小组" class="headerlink" title="分小组"></a>分小组</h1><p>这一道题其实可以使用数学的方法来解决，我还专门花了一天的时间去学习组合数学相关的知识，这才把高中的排列组合知识捡回来，这里推荐一下学堂在线上的组合数学公开课，讲的还是挺形象的:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-26%20%E4%B8%8A%E5%8D%8811.53.00.png" alt=""></p>
 <p>下面看题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">9名运动员参加比赛，需要分3组进行预赛。</div><div class="line"></div><div class="line">有哪些分组的方案呢？</div><div class="line"></div><div class="line">我们标记运动员为 A,B,C,... I</div><div class="line"></div><div class="line">下面的程序列出了所有的分组方法。</div><div class="line"></div><div class="line">该程序的正常输出为：</div><div class="line"></div><div class="line">ABC DEF GHI</div><div class="line">ABC DEG FHI</div><div class="line">ABC DEH FGI</div><div class="line">…</div></pre></td></tr></table></figure>
-<p>用代码来解决的思路还是比较好想的，直接阅读代码即可：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">remain</span><span class="params">(<span class="keyword">int</span>[] a)</span></span></div><div class="line">    &#123;</div><div class="line">        String s = <span class="string">""</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;a.length; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(a[i] == <span class="number">0</span>) s += (<span class="keyword">char</span>)(i+<span class="string">'A'</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(String s, <span class="keyword">int</span>[] a)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;a.length; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(a[i]==<span class="number">1</span>) <span class="keyword">continue</span>;</div><div class="line">            a[i] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;a.length; j++)&#123;</div><div class="line">                <span class="keyword">if</span>(a[j]==<span class="number">1</span>) <span class="keyword">continue</span>;</div><div class="line">                a[j]=<span class="number">1</span>;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=j+<span class="number">1</span>; k&lt;a.length; k++)&#123;</div><div class="line">                    <span class="keyword">if</span>(a[k]==<span class="number">1</span>) <span class="keyword">continue</span>;</div><div class="line">                    a[k]=<span class="number">1</span>;  </div><div class="line">                    System.out.println(s+<span class="string">" "</span>+(<span class="keyword">char</span>)(i+<span class="string">'A'</span>)+(<span class="keyword">char</span>)(j+<span class="string">'A'</span>)+(<span class="keyword">char</span>)(k+<span class="string">'A'</span>)+<span class="string">" "</span>+remain(a));</div><div class="line">                    a[k]=<span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">                a[j]=<span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            a[i] = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</div><div class="line">        a[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> b=<span class="number">1</span>; b&lt;a.length; b++)&#123;</div><div class="line">            a[b] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c=b+<span class="number">1</span>; c&lt;a.length; c++)&#123;</div><div class="line">                a[c] = <span class="number">1</span>;</div><div class="line">                String s = <span class="string">"A"</span> + (<span class="keyword">char</span>)(b+<span class="string">'A'</span>) + (<span class="keyword">char</span>)(c+<span class="string">'A'</span>);</div><div class="line">                f(s,a);</div><div class="line">                a[c] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            a[b] = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>9名运动员参加比赛，需要分3组进行预赛。
+
+有哪些分组的方案呢？
+
+我们标记运动员为 A,B,C,... I
+
+下面的程序列出了所有的分组方法。
+
+该程序的正常输出为：
+
+ABC DEF GHI
+ABC DEG FHI
+ABC DEH FGI
+…
+</code></pre><p>用代码来解决的思路还是比较好想的，直接阅读代码即可：</p>
+<pre><code class="java">public class A
+{
+    public static String remain(int[] a)
+    {
+        String s = &quot;&quot;;
+        for(int i=0; i&lt;a.length; i++){
+            if(a[i] == 0) s += (char)(i+&#39;A&#39;);
+        }
+        return s;
+    }
+
+    public static void f(String s, int[] a)
+    {
+        for(int i=0; i&lt;a.length; i++){
+            if(a[i]==1) continue;
+            a[i] = 1;
+            for(int j=i+1; j&lt;a.length; j++){
+                if(a[j]==1) continue;
+                a[j]=1;
+                for(int k=j+1; k&lt;a.length; k++){
+                    if(a[k]==1) continue;
+                    a[k]=1;  
+                    System.out.println(s+&quot; &quot;+(char)(i+&#39;A&#39;)+(char)(j+&#39;A&#39;)+(char)(k+&#39;A&#39;)+&quot; &quot;+remain(a));
+                    a[k]=0;
+                }
+                a[j]=0;
+            }
+            a[i] = 0;
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        int[] a = new int[9];
+        a[0] = 1;
+
+        for(int b=1; b&lt;a.length; b++){
+            a[b] = 1;
+            for(int c=b+1; c&lt;a.length; c++){
+                a[c] = 1;
+                String s = &quot;A&quot; + (char)(b+&#39;A&#39;) + (char)(c+&#39;A&#39;);
+                f(s,a);
+                a[c] = 0;
+            }
+            a[b] = 0;
+        }
+    }
+}
+</code></pre>
 <p>如果是从数学的角度来考虑我们就不能遗漏掉任何一种情况，不然都解决不了，首先抽象一下题干中的信息，九个不同的队，分到三组，每一组都要分到三个队所以这个应该只有排列没有组合，我们通过下面几步来解决：</p>
 <ol>
 <li>首先确立一个x队放在一组中，这个x是任意的，所以我们不需要C(9,1)，这一点很重要</li>
@@ -134,18 +287,92 @@ Let get into the world of algorithm">
 <li>然后我们继续填充第二个组，也就是挑出三个队，为C(6,3)，最后一组的答案也就确定了</li>
 </ol>
 <p>通过上面的三个分步推导得到结果C(8,2)xC(6,3)=560，最常见的错误解法就是直接通过C(9,3)xC(6,3)，至于为什么不能这样，我们直接看，当只有四支球队分两组的情况，这个时候有几种呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1 3		2 4</div><div class="line">1 2		3 4</div><div class="line">1 4		2 3</div></pre></td></tr></table></figure>
-<p>只有这三种情况，也就是C(3,1)而不是C(4,2)，因为前后两步之间并不是独立的，所以不能使用乘法，组内是无序的，组之间也是无序的，只有考虑的周全，才可以直接通过简单的方式去解决问题，不然还是暴力枚举吧嘻嘻</p>
-<h1 id="方格填数"><a class="markdownIt-Anchor" href="#方格填数"></a> 方格填数</h1>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">如下的10个格子</div><div class="line"></div><div class="line">+--+--+--+</div><div class="line">| | | |</div><div class="line">+--+--+--+--+</div><div class="line">| | | | |</div><div class="line">+--+--+--+--+</div><div class="line">| | | |</div><div class="line">+--+--+--+</div><div class="line"></div><div class="line">（如果显示有问题，也可以参看【图1.jpg】）</div><div class="line"></div><div class="line">填入0~9的数字。要求：连续的两个数字不能相邻。</div><div class="line">（左右、上下、对角都算相邻）</div><div class="line"></div><div class="line">一共有多少种可能的填数方案？</div><div class="line"></div><div class="line">请填写表示方案数目的整数。</div><div class="line">注意：你提交的应该是一个整数，不要填写任何多余的内容或说明性文字。</div></pre></td></tr></table></figure>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-26%20%E4%B8%8A%E5%8D%8810.33.57.png" alt=""></p>
+<pre><code>1 3        2 4
+1 2        3 4
+1 4        2 3
+</code></pre><p>只有这三种情况，也就是C(3,1)而不是C(4,2)，因为前后两步之间并不是独立的，所以不能使用乘法，组内是无序的，组之间也是无序的，只有考虑的周全，才可以直接通过简单的方式去解决问题，不然还是暴力枚举吧嘻嘻</p>
+<h1 id="方格填数"><a href="#方格填数" class="headerlink" title="方格填数"></a>方格填数</h1><pre><code>如下的10个格子
+
++--+--+--+
+| | | |
++--+--+--+--+
+| | | | |
++--+--+--+--+
+| | | |
++--+--+--+
+
+（如果显示有问题，也可以参看【图1.jpg】）
+
+填入0~9的数字。要求：连续的两个数字不能相邻。
+（左右、上下、对角都算相邻）
+
+一共有多少种可能的填数方案？
+
+请填写表示方案数目的整数。
+注意：你提交的应该是一个整数，不要填写任何多余的内容或说明性文字。
+</code></pre><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-26%20%E4%B8%8A%E5%8D%8810.33.57.png" alt=""></p>
 <p>这一题同样可以使用DFS去解决，思路其实和前面的凑算式差不多，只不过需要修改判断的条件罢了，只要掌握了前面一种，这一题也就没什么难度了，下面看看用栈来解决的代码思路；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FillNumber</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">        fun(stack);</div><div class="line">        <span class="keyword">long</span> endTime = System.currentTimeMillis();</div><div class="line">        System.out.println(<span class="string">"时间: "</span> + (endTime - startTime));</div><div class="line">        System.out.println(<span class="string">"count="</span> + count);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">(Stack&lt;Integer&gt; stack)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (stack.size() == <span class="number">10</span>) &#123;</div><div class="line">            <span class="keyword">int</span> A[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</div><div class="line">            A[<span class="number">0</span>] = stack.get(<span class="number">0</span>);</div><div class="line">            A[<span class="number">1</span>] = stack.get(<span class="number">1</span>);</div><div class="line">            A[<span class="number">2</span>] = stack.get(<span class="number">2</span>);</div><div class="line">            A[<span class="number">3</span>] = stack.get(<span class="number">3</span>);</div><div class="line">            A[<span class="number">4</span>] = stack.get(<span class="number">4</span>);</div><div class="line">            A[<span class="number">5</span>] = stack.get(<span class="number">5</span>);</div><div class="line">            A[<span class="number">6</span>] = stack.get(<span class="number">6</span>);</div><div class="line">            A[<span class="number">7</span>] = stack.get(<span class="number">7</span>);</div><div class="line">            A[<span class="number">8</span>] = stack.get(<span class="number">8</span>);</div><div class="line">            A[<span class="number">9</span>] = stack.get(<span class="number">9</span>);</div><div class="line">            <span class="keyword">boolean</span> one = isNeibor(A[<span class="number">0</span>], A[<span class="number">1</span>], A[<span class="number">5</span>], A[<span class="number">4</span>], A[<span class="number">3</span>]) &amp;&amp; isNeibor(A[<span class="number">1</span>], A[<span class="number">0</span>], A[<span class="number">2</span>], A[<span class="number">6</span>], A[<span class="number">5</span>], A[<span class="number">4</span>]) &amp;&amp; isNeibor(A[<span class="number">2</span>], A[<span class="number">1</span>], A[<span class="number">5</span>], A[<span class="number">6</span>]);</div><div class="line">            <span class="keyword">boolean</span> two = isNeibor(A[<span class="number">3</span>], A[<span class="number">0</span>], A[<span class="number">4</span>], A[<span class="number">8</span>], A[<span class="number">7</span>]) &amp;&amp; isNeibor(A[<span class="number">4</span>], A[<span class="number">0</span>], A[<span class="number">8</span>], A[<span class="number">5</span>], A[<span class="number">9</span>], A[<span class="number">8</span>], A[<span class="number">7</span>], A[<span class="number">3</span>])</div><div class="line">                    &amp;&amp; isNeibor(A[<span class="number">5</span>], A[<span class="number">0</span>], A[<span class="number">1</span>], A[<span class="number">2</span>], A[<span class="number">6</span>], A[<span class="number">9</span>], A[<span class="number">8</span>], A[<span class="number">4</span>]) &amp;&amp; isNeibor(A[<span class="number">6</span>], A[<span class="number">2</span>], A[<span class="number">1</span>], A[<span class="number">5</span>], A[<span class="number">9</span>]);</div><div class="line">            <span class="keyword">boolean</span> three = isNeibor(A[<span class="number">7</span>],  A[<span class="number">8</span>]) &amp;&amp; isNeibor(A[<span class="number">8</span>], A[<span class="number">9</span>]);</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (one &amp;&amp; two &amp;&amp; three) &#123;</div><div class="line">                System.out.printf(<span class="string">"%d,%d,%d, %d,%d,%d,%d, %d,%d,%d\n"</span>, A[<span class="number">0</span>], A[<span class="number">1</span>], A[<span class="number">2</span>], A[<span class="number">3</span>], A[<span class="number">4</span>], A[<span class="number">5</span>], A[<span class="number">6</span>], A[<span class="number">7</span>], A[<span class="number">8</span>], A[<span class="number">9</span>]);</div><div class="line">                count++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (!stack.contains(j)) &#123;</div><div class="line">                stack.push(j);</div><div class="line">                fun(stack);</div><div class="line">                stack.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">boolean</span> <span class="title">isNeibor</span><span class="params">(<span class="keyword">int</span> ...args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> first = args[<span class="number">0</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; args.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (Math.abs(first - args[i]) == <span class="number">1</span>) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">import java.util.Stack;
+public class FillNumber {
+    public static int count = 0;
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+        fun(stack);
+        long endTime = System.currentTimeMillis();
+        System.out.println(&quot;时间: &quot; + (endTime - startTime));
+        System.out.println(&quot;count=&quot; + count);
+    }
+
+    private static void fun(Stack&lt;Integer&gt; stack) {
+        if (stack.size() == 10) {
+            int A[] = new int[10];
+            A[0] = stack.get(0);
+            A[1] = stack.get(1);
+            A[2] = stack.get(2);
+            A[3] = stack.get(3);
+            A[4] = stack.get(4);
+            A[5] = stack.get(5);
+            A[6] = stack.get(6);
+            A[7] = stack.get(7);
+            A[8] = stack.get(8);
+            A[9] = stack.get(9);
+            boolean one = isNeibor(A[0], A[1], A[5], A[4], A[3]) &amp;&amp; isNeibor(A[1], A[0], A[2], A[6], A[5], A[4]) &amp;&amp; isNeibor(A[2], A[1], A[5], A[6]);
+            boolean two = isNeibor(A[3], A[0], A[4], A[8], A[7]) &amp;&amp; isNeibor(A[4], A[0], A[8], A[5], A[9], A[8], A[7], A[3])
+                    &amp;&amp; isNeibor(A[5], A[0], A[1], A[2], A[6], A[9], A[8], A[4]) &amp;&amp; isNeibor(A[6], A[2], A[1], A[5], A[9]);
+            boolean three = isNeibor(A[7],  A[8]) &amp;&amp; isNeibor(A[8], A[9]);
+
+            if (one &amp;&amp; two &amp;&amp; three) {
+                System.out.printf(&quot;%d,%d,%d, %d,%d,%d,%d, %d,%d,%d\n&quot;, A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9]);
+                count++;
+            }
+            return;
+        }
+        for (int j = 0; j &lt; 10; j++) {
+            if (!stack.contains(j)) {
+                stack.push(j);
+                fun(stack);
+                stack.pop();
+            }
+        }
+    }
+
+    public static  boolean isNeibor(int ...args){
+        int first = args[0];
+        for (int i = 1; i &lt; args.length; i++) {
+            if (Math.abs(first - args[i]) == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/25/蓝桥杯java习题解读/" data-id="cjf262ki2009q8wbr7be89xp7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/25/蓝桥杯java习题解读/" data-id="cjf3ar2ox007ee9br8iirq7s2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>

@@ -104,42 +104,282 @@
       
         <p>今天在社区中看到snakeninny大神写的一个干掉高德地图iOS客户端的反动态调试保护，之前只知道通过加壳的方式去干扰逆向的我心生好奇，决定看看这个保护是如何去实现的（首先声明，下面所做实验全都是在32位的机器下）</p>
 <a id="more"></a>
-<h1 id="0x00基础知识"><a class="markdownIt-Anchor" href="#0x00基础知识"></a> 0X00基础知识</h1>
-<p>你想过怎么实现对系统调用的拦截吗？你尝试过通过改变系统调用的参数来愚弄你的系统kernel吗？你想过调试器是如何使运行中的进程暂停并且控制它吗？</p>
+<h1 id="0X00基础知识"><a href="#0X00基础知识" class="headerlink" title="0X00基础知识"></a>0X00基础知识</h1><p>你想过怎么实现对系统调用的拦截吗？你尝试过通过改变系统调用的参数来愚弄你的系统kernel吗？你想过调试器是如何使运行中的进程暂停并且控制它吗？</p>
 <p>你可能会开始考虑怎么使用复杂的kernel编程来达到目的，那么，你错了。实际上Linux提供了一种优雅的机制来完成这些：ptrace系统函数。 ptrace提供了一种使父进程得以监视和控制其它进程的方式，它还能够改变子进程中的寄存器和内核映像，因而可以实现断点调试和系统调用的跟踪。使用ptrace，你可以在用户层拦截和修改系统调用(sys call)。那么我们的反动态调试保护的机制也是基于这个ptrace函数，而且这个也是目前公开的反动态调试保护的方法。</p>
-<p>当一个程序需要做系统调用的时候，它会将相关参数放进系统调用的相关寄存器，然后调用软中断0x80(不一定)，这个中断就像一个让程序接触到内核模式的窗口**(因为用户态的程序想要做系统调用的时候是必须交给内核态做审核的)**这个时候，程序将参数和系统调用号交给内核之后，内核完成接下来的调用执行，接下来我们可以举个例子，系统调用号将放入%eax，接下来的参数则依次放入%ebx.%ecx,%edx,%esi,%edi。（AT&amp;T汇编体系的汇编代码）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">; Write(2, &quot;Hello&quot;, 5)这个调用的汇编形式</div><div class="line">movl $4, %eax ;系统调用号</div><div class="line">movl $2, %ebx</div><div class="line">movl $hello, %ecx</div><div class="line">movl $5, %edx</div><div class="line">int  $0x80 ;软中断</div></pre></td></tr></table></figure>
+<p>当一个程序需要做系统调用的时候，它会将相关参数放进系统调用的相关寄存器，然后调用软中断0x80(不一定)，这个中断就像一个让程序接触到内核模式的窗口<strong>(因为用户态的程序想要做系统调用的时候是必须交给内核态做审核的)</strong>这个时候，程序将参数和系统调用号交给内核之后，内核完成接下来的调用执行，接下来我们可以举个例子，系统调用号将放入%eax，接下来的参数则依次放入%ebx.%ecx,%edx,%esi,%edi。（AT&amp;T汇编体系的汇编代码）</p>
+<pre><code class="assembly">; Write(2, &quot;Hello&quot;, 5)这个调用的汇编形式
+movl $4, %eax ;系统调用号
+movl $2, %ebx
+movl $hello, %ecx
+movl $5, %edx
+int  $0x80 ;软中断
+</code></pre>
 <p>那么，我们的ptrace是在什么时候出现的呢，操作系统在执行系统调用之前，内核会首先检查当前进程是否处于<code>traced</code>的状态。如果是的话，内核就会暂停当前进程并将控制权交给跟踪进程，让跟踪进程得以查看或者修改被跟踪进程的寄存器，下面用一段代码来演示这个跟踪程序的过程:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/reg.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">pid_t</span> child;</div><div class="line">  <span class="keyword">long</span> orig_eax;</div><div class="line">  child = fork();</div><div class="line">  <span class="keyword">if</span>(child == <span class="number">0</span>)&#123;</div><div class="line">    ptrace(PTRACE_TRACEME, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    execl(<span class="string">"/bin/ls"</span>, <span class="string">"ls"</span>, <span class="literal">NULL</span>;</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    orig_eax = ptrace(PTRACE_PEEKUSER, child, <span class="number">4</span> * ORIG_EAX, <span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The child made a system call %ld \n"</span>, orig_eax);</div><div class="line">    ptrace(PTRACE_CONT, child, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="c">#include &lt;sys/ptrace.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/reg.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main(){
+  pid_t child;
+  long orig_eax;
+  child = fork();
+  if(child == 0){
+    ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+    execl(&quot;/bin/ls&quot;, &quot;ls&quot;, NULL;
+  }else{
+    wait(NULL);
+    orig_eax = ptrace(PTRACE_PEEKUSER, child, 4 * ORIG_EAX, NULL);
+    printf(&quot;The child made a system call %ld \n&quot;, orig_eax);
+    ptrace(PTRACE_CONT, child, NULL, NULL);
+  }
+  return 0;
+}
+</code></pre>
 <p>在上面的代码中，是我在Ubuntu上可以运行的一段代码,执行之后的结果如下图所示：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8810.24.47.png" alt=""></p>
 <p>这个例子其实是父进程<code>fork</code>出了一个子进程，然后跟踪它，在调用<code>exec</code>函数之前，子进程用PTRACE_TRACEME作为第一个参数调用了ptrace函数，意思就是告诉内核来跟踪我吧。然后在子进程调用了<code>exec</code>之后，它将控制权交还给父进程。当时的父进程正使用<code>wait()</code>函数等待来自内核的通知，得到了通知之后，他就可以去查看子进程干了什么事情，观察一下寄存器的值。</p>
-<h1 id="0x01寄存器读写"><a class="markdownIt-Anchor" href="#0x01寄存器读写"></a> 0X01寄存器读写</h1>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">ptrace</span><span class="params">(<span class="keyword">enum</span> __ptrace_request request, <span class="keyword">pid_t</span> pid,</span></span></div><div class="line">                   <span class="keyword">void</span> *addr, <span class="keyword">void</span> *data);</div></pre></td></tr></table></figure>
+<h1 id="0X01寄存器读写"><a href="#0X01寄存器读写" class="headerlink" title="0X01寄存器读写"></a>0X01寄存器读写</h1><pre><code class="c">#include &lt;sys/ptrace.h&gt;
+long ptrace(enum __ptrace_request request, pid_t pid,
+                   void *addr, void *data);
+</code></pre>
 <p>根据man手册中的内容我们可以看到<code>ptrace</code>函数的定义以及需要引入的头文件，第一个参数就决定了<code>ptrace</code>的行为和其他的参数的使用方法，我通过头文件中的内容大概了解到这些枚举值的功能，至于头文件位置可以在通过<code>gcc</code>编译的时候查看相关的参数即可。在系统调用追踪时，常见的流程如下图所示：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/676200-20160220161141175-432928373.png" alt=""></p>
 <p>接下来我们就以write系统调用来看看是如何去肚脐寄存器的值的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/reg.h&gt;   /* For constants ORIG_EAX etc */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/user.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/syscall.h&gt; /* SYS_write */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">pid_t</span> child;</div><div class="line">    <span class="keyword">long</span> orig_eax;</div><div class="line">    <span class="keyword">int</span> status;</div><div class="line">    <span class="keyword">int</span> iscalling = <span class="number">0</span>;</div><div class="line">    <span class="keyword">struct</span> user_regs_struct regs;</div><div class="line"></div><div class="line">    child = fork();</div><div class="line">    <span class="keyword">if</span>(child == <span class="number">0</span>) &#123;</div><div class="line">        ptrace(PTRACE_TRACEME, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">        execl(<span class="string">"/bin/ls"</span>, <span class="string">"ls"</span>, <span class="string">"-l"</span>, <span class="string">"-h"</span>, <span class="literal">NULL</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</div><div class="line">            wait(&amp;status);</div><div class="line">            <span class="keyword">if</span>(WIFEXITED(status))</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            orig_eax = ptrace(PTRACE_PEEKUSER,</div><div class="line">                              child, <span class="number">4</span> * ORIG_EAX,</div><div class="line">                              <span class="literal">NULL</span>);</div><div class="line">            <span class="keyword">if</span>(orig_eax == SYS_write) &#123;</div><div class="line">                ptrace(PTRACE_GETREGS, child, <span class="literal">NULL</span>, &amp;regs);</div><div class="line">                <span class="keyword">if</span>(!iscalling) &#123;</div><div class="line">                    iscalling = <span class="number">1</span>;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"SYS_write call with %ld, %ld, %ld\n"</span>,</div><div class="line">                            regs.edi, regs.esi, regs.edx);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"SYS_write call return %ld\n"</span>, regs.eax);</div><div class="line">                    iscalling = <span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            ptrace(PTRACE_SYSCALL, child, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="c">#include &lt;sys/ptrace.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;sys/reg.h&gt;   /* For constants ORIG_EAX etc */
+#include &lt;sys/user.h&gt;
+#include &lt;sys/syscall.h&gt; /* SYS_write */
+#include &lt;stdio.h&gt;
+
+int main() {
+    pid_t child;
+    long orig_eax;
+    int status;
+    int iscalling = 0;
+    struct user_regs_struct regs;
+
+    child = fork();
+    if(child == 0) {
+        ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+        execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-l&quot;, &quot;-h&quot;, NULL);
+    } else {
+        while(1) {
+            wait(&amp;status);
+            if(WIFEXITED(status))
+                break;
+            orig_eax = ptrace(PTRACE_PEEKUSER,
+                              child, 4 * ORIG_EAX,
+                              NULL);
+            if(orig_eax == SYS_write) {
+                ptrace(PTRACE_GETREGS, child, NULL, &amp;regs);
+                if(!iscalling) {
+                    iscalling = 1;
+                    printf(&quot;SYS_write call with %ld, %ld, %ld\n&quot;,
+                            regs.edi, regs.esi, regs.edx);
+                }
+                else {
+                    printf(&quot;SYS_write call return %ld\n&quot;, regs.eax);
+                    iscalling = 0;
+                }
+            }
+            ptrace(PTRACE_SYSCALL, child, NULL, NULL);
+        }
+    }
+    return 0;
+}
+</code></pre>
 <p>编译运行之后有如下输出：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">10</span></div><div class="line">total <span class="number">88</span>K</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">10</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">51</span></div><div class="line">-rwxrwxr-x <span class="number">1</span> ubuntu ubuntu <span class="number">7.4</span>K Dec <span class="number">15</span> <span class="number">11</span>:<span class="number">31</span> a.out</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">51</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">52</span></div><div class="line">-rw------- <span class="number">1</span> ubuntu ubuntu <span class="number">1.7</span>K Aug <span class="number">28</span> <span class="number">16</span>:<span class="number">15</span> id_rsa</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">52</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">56</span></div><div class="line">-rw-r--r-- <span class="number">1</span> ubuntu ubuntu  <span class="number">406</span> Aug <span class="number">28</span> <span class="number">13</span>:<span class="number">51</span> id_rsa.pub</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">56</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">52</span></div><div class="line">-rw-rw-r-- <span class="number">1</span> ubuntu ubuntu  <span class="number">501</span> Dec <span class="number">15</span> <span class="number">10</span>:<span class="number">34</span> test.c</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">52</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">53</span></div><div class="line">-rw-rw-r-- <span class="number">1</span> ubuntu ubuntu <span class="number">1.9</span>K Dec <span class="number">15</span> <span class="number">11</span>:<span class="number">16</span> test1.c</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">53</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">53</span></div><div class="line">-rw-rw-r-- <span class="number">1</span> ubuntu ubuntu <span class="number">1.3</span>K Dec <span class="number">15</span> <span class="number">11</span>:<span class="number">31</span> test2.c</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">53</span></div><div class="line">SYS_write call with <span class="number">149205880</span>, <span class="number">-1217475232</span>, <span class="number">53</span></div><div class="line">-rw-rw-r-- <span class="number">1</span> ubuntu ubuntu  <span class="number">54</span>K Dec <span class="number">15</span> <span class="number">10</span>:<span class="number">49</span> tmp.out</div><div class="line">SYS_write call <span class="keyword">return</span> <span class="number">53</span></div></pre></td></tr></table></figure>
+<pre><code class="c">SYS_write call with 149205880, -1217475232, 10
+total 88K
+SYS_write call return 10
+SYS_write call with 149205880, -1217475232, 51
+-rwxrwxr-x 1 ubuntu ubuntu 7.4K Dec 15 11:31 a.out
+SYS_write call return 51
+SYS_write call with 149205880, -1217475232, 52
+-rw------- 1 ubuntu ubuntu 1.7K Aug 28 16:15 id_rsa
+SYS_write call return 52
+SYS_write call with 149205880, -1217475232, 56
+-rw-r--r-- 1 ubuntu ubuntu  406 Aug 28 13:51 id_rsa.pub
+SYS_write call return 56
+SYS_write call with 149205880, -1217475232, 52
+-rw-rw-r-- 1 ubuntu ubuntu  501 Dec 15 10:34 test.c
+SYS_write call return 52
+SYS_write call with 149205880, -1217475232, 53
+-rw-rw-r-- 1 ubuntu ubuntu 1.9K Dec 15 11:16 test1.c
+SYS_write call return 53
+SYS_write call with 149205880, -1217475232, 53
+-rw-rw-r-- 1 ubuntu ubuntu 1.3K Dec 15 11:31 test2.c
+SYS_write call return 53
+SYS_write call with 149205880, -1217475232, 53
+-rw-rw-r-- 1 ubuntu ubuntu  54K Dec 15 10:49 tmp.out
+SYS_write call return 53
+</code></pre>
 <p>可以看到我们的<code>ls -l -h</code>命令中，发生了8次<code>write</code>系统调用，这里读取寄存器的时候可以使用之前的<code>PTRACE_PEEKUSER</code>，也可以直接使用<code>PTRACE_GETREGS</code>将寄存器的值读取到结构体<code>user_regs_struct</code>中，这个结构体的定义在<code>sys/user.h</code>中，下面贴一下在32的系统中的定义方式:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> user_regs_struct</div><div class="line">&#123;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ebx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ecx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> edx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> esi;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> edi;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ebp;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eax;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xds;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xes;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xfs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xgs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> orig_eax;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eip;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xcs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eflags;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> esp;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xss;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre><code class="c">struct user_regs_struct
+{
+  long int ebx;
+  long int ecx;
+  long int edx;
+  long int esi;
+  long int edi;
+  long int ebp;
+  long int eax;
+  long int xds;
+  long int xes;
+  long int xfs;
+  long int xgs;
+  long int orig_eax;
+  long int eip;
+  long int xcs;
+  long int eflags;
+  long int esp;
+  long int xss;
+};
+</code></pre>
 <p>程序中的<code>WIFEXITED</code>宏是用来检查子进程是被<code>ptrace</code>暂停还是准备退出:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8811.57.17.png" alt=""></p>
 <p>另外还有一点就是<code>PTRACE_SYSCALL</code>参数，其作用就是使内核在子进程进入和退出系统系统调用的时候将其暂停，等价于<code>PTRACE_CONT</code>并且在下一个<code>entry/exit</code>系统调用之前暂停。</p>
-<h1 id="0x02进程追踪"><a class="markdownIt-Anchor" href="#0x02进程追踪"></a> 0X02进程追踪</h1>
-<p>上面的例子都是追踪并修改声明了<code>PTRACE_TRACEME</code>的子进程的，对于<code>ptrace</code>有了一个基本的了解之后接下来就可以看看追踪其他程序的进程，这个时候需要使用的就是<code>PTACRE_ATTACH</code>了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ptrace(PTRACE_ATTACH, pid, <span class="literal">NULL</span>, <span class="literal">NULL</span>)</div></pre></td></tr></table></figure>
+<h1 id="0X02进程追踪"><a href="#0X02进程追踪" class="headerlink" title="0X02进程追踪"></a>0X02进程追踪</h1><p>上面的例子都是追踪并修改声明了<code>PTRACE_TRACEME</code>的子进程的，对于<code>ptrace</code>有了一个基本的了解之后接下来就可以看看追踪其他程序的进程，这个时候需要使用的就是<code>PTACRE_ATTACH</code>了。</p>
+<pre><code class="c">ptrace(PTRACE_ATTACH, pid, NULL, NULL)
+</code></pre>
 <p>其中的pid号就是我们想要追踪的进程id号,当前进程会给被追踪进程发送<code>SIGSTOP</code>信号，但不要求立即停止，一般会等待子进程完成当前的调用，如果要结束追踪的话再调用<code>PTRACE_DETACH</code>即可，然后我们就可以通过ptrace来实现打断点的功能，但是首先这不是IDE，如果是QT的话是会有提示的，所以有些东西并不会报错，如果我们没有修改<code>ptrace</code>的配置文件，那么我们是无法达到预期效果也是不会报错的，所以首先第一件事情就是允许<code>ptrace</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/sysctl.d/10-ptrace.conf</div><div class="line">#修改kernel.yama.ptrace_scope的值为0</div></pre></td></tr></table></figure>
+<pre><code class="shell"> sudo vim /etc/sysctl.d/10-ptrace.conf
+ #修改kernel.yama.ptrace_scope的值为0
+</code></pre>
 <p>接下来我们首先写一个循环打印的程序来看看：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Hello, ptrace! [pid:%d]\n"</span>, getpid());</div><div class="line">        sleep(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/ptrace.h&gt;
+int main() {
+    while(1) {
+        printf(&quot;Hello, ptrace! [pid:%d]\n&quot;, getpid());
+        sleep(2);
+    }
+    return 0;
+}
+</code></pre>
 <p>程序每隔两秒就会打印一个值到终端，接下来我们另外编写一个程序：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/user.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> long_size = <span class="keyword">sizeof</span>(<span class="keyword">long</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getdata</span><span class="params">(<span class="keyword">pid_t</span> child, <span class="keyword">long</span> addr,</span></span></div><div class="line">             <span class="keyword">char</span> *str, <span class="keyword">int</span> len)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *laddr;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    <span class="keyword">union</span> u &#123;</div><div class="line">            <span class="keyword">long</span> val;</div><div class="line">            <span class="keyword">char</span> chars[long_size];</div><div class="line">    &#125;data;</div><div class="line"></div><div class="line">    i = <span class="number">0</span>;</div><div class="line">    j = len / long_size;</div><div class="line">    laddr = str;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        data.val = ptrace(PTRACE_PEEKDATA, child,</div><div class="line">                          addr + i * <span class="number">4</span>, <span class="literal">NULL</span>);</div><div class="line">        <span class="built_in">memcpy</span>(laddr, data.chars, long_size);</div><div class="line">        ++i;</div><div class="line">        laddr += long_size;</div><div class="line">    &#125;</div><div class="line">    j = len % long_size;</div><div class="line">    <span class="keyword">if</span>(j != <span class="number">0</span>) &#123;</div><div class="line">        data.val = ptrace(PTRACE_PEEKDATA, child,</div><div class="line">                          addr + i * <span class="number">4</span>, <span class="literal">NULL</span>);</div><div class="line">        <span class="built_in">memcpy</span>(laddr, data.chars, j);</div><div class="line">    &#125;</div><div class="line">    str[len] = <span class="string">'\0'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">putdata</span><span class="params">(<span class="keyword">pid_t</span> child, <span class="keyword">long</span> addr,</span></span></div><div class="line">             <span class="keyword">char</span> *str, <span class="keyword">int</span> len)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *laddr;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    <span class="keyword">union</span> u &#123;</div><div class="line">            <span class="keyword">long</span> val;</div><div class="line">            <span class="keyword">char</span> chars[long_size];</div><div class="line">    &#125;data;</div><div class="line"></div><div class="line">    i = <span class="number">0</span>;</div><div class="line">    j = len / long_size;</div><div class="line">    laddr = str;</div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        <span class="built_in">memcpy</span>(data.chars, laddr, long_size);</div><div class="line">        ptrace(PTRACE_POKEDATA, child,</div><div class="line">               addr + i * <span class="number">4</span>, data.val);</div><div class="line">        ++i;</div><div class="line">        laddr += long_size;</div><div class="line">    &#125;</div><div class="line">    j = len % long_size;</div><div class="line">    <span class="keyword">if</span>(j != <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">memcpy</span>(data.chars, laddr, j);</div><div class="line">        ptrace(PTRACE_POKEDATA, child,</div><div class="line">               addr + i * <span class="number">4</span>, data.val);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//attach.c</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(argc!=<span class="number">2</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Usage: %s pid\n"</span>, argv[<span class="number">0</span>]);</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">pid_t</span> victim = atoi(argv[<span class="number">1</span>]);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, victim);</div><div class="line">    <span class="keyword">struct</span> user_regs_struct regs;</div><div class="line">    <span class="comment">/* int 0x80, int3 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> code[] = &#123;<span class="number">0xcd</span>,<span class="number">0x80</span>,<span class="number">0xcc</span>,<span class="number">0x00</span>&#125;;</div><div class="line">    <span class="keyword">char</span> backup[<span class="number">4</span>];</div><div class="line">    ptrace(PTRACE_ATTACH, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    <span class="keyword">long</span> inst;</div><div class="line"></div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    ptrace(PTRACE_GETREGS, victim, <span class="literal">NULL</span>, &amp;regs);</div><div class="line">    inst = ptrace(PTRACE_PEEKTEXT, victim, regs.eip, <span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Victim: EIP:0x%lx INST: 0x%lx\n"</span>, regs.eip, inst);</div><div class="line"></div><div class="line">    <span class="comment">/* Copy instructions into a backup variable */</span></div><div class="line">    getdata(victim, regs.eip, backup, <span class="number">3</span>);</div><div class="line">    <span class="comment">/* Put the breakpoint */</span></div><div class="line">    putdata(victim, regs.eip, code, <span class="number">3</span>);</div><div class="line">    <span class="comment">/* Let the process continue and execute the int 3 instruction */</span></div><div class="line">    ptrace(PTRACE_CONT, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Press Enter to continue ptraced process.\n"</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ;i &lt; <span class="number">4</span> ; i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%c"</span>, backup[i]);</div><div class="line">    &#125;</div><div class="line">    getchar();</div><div class="line">    putdata(victim, regs.eip, backup, <span class="number">3</span>);</div><div class="line">    ptrace(PTRACE_SETREGS, victim, <span class="literal">NULL</span>, &amp;regs);</div><div class="line"></div><div class="line">    ptrace(PTRACE_CONT, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    ptrace(PTRACE_DETACH, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="c">#include &lt;sys/ptrace.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/user.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+const int long_size = sizeof(long);
+
+void getdata(pid_t child, long addr,
+             char *str, int len)
+{
+    char *laddr;
+    int i, j;
+    union u {
+            long val;
+            char chars[long_size];
+    }data;
+
+    i = 0;
+    j = len / long_size;
+    laddr = str;
+
+    while(i &lt; j) {
+        data.val = ptrace(PTRACE_PEEKDATA, child,
+                          addr + i * 4, NULL);
+        memcpy(laddr, data.chars, long_size);
+        ++i;
+        laddr += long_size;
+    }
+    j = len % long_size;
+    if(j != 0) {
+        data.val = ptrace(PTRACE_PEEKDATA, child,
+                          addr + i * 4, NULL);
+        memcpy(laddr, data.chars, j);
+    }
+    str[len] = &#39;\0&#39;;
+}
+
+void putdata(pid_t child, long addr,
+             char *str, int len)
+{
+    char *laddr;
+    int i, j;
+    union u {
+            long val;
+            char chars[long_size];
+    }data;
+
+    i = 0;
+    j = len / long_size;
+    laddr = str;
+    while(i &lt; j) {
+        memcpy(data.chars, laddr, long_size);
+        ptrace(PTRACE_POKEDATA, child,
+               addr + i * 4, data.val);
+        ++i;
+        laddr += long_size;
+    }
+    j = len % long_size;
+    if(j != 0) {
+        memcpy(data.chars, laddr, j);
+        ptrace(PTRACE_POKEDATA, child,
+               addr + i * 4, data.val);
+    }
+}
+
+
+//attach.c
+int main(int argc, char *argv[]) {
+    if(argc!=2) {
+        printf(&quot;Usage: %s pid\n&quot;, argv[0]);
+        return 1;
+    }
+    pid_t victim = atoi(argv[1]);
+    printf(&quot;%d&quot;, victim);
+    struct user_regs_struct regs;
+    /* int 0x80, int3 */
+    unsigned char code[] = {0xcd,0x80,0xcc,0x00};
+    char backup[4];
+    ptrace(PTRACE_ATTACH, victim, NULL, NULL);
+    long inst;
+
+    wait(NULL);
+    ptrace(PTRACE_GETREGS, victim, NULL, &amp;regs);
+    inst = ptrace(PTRACE_PEEKTEXT, victim, regs.eip, NULL);
+    printf(&quot;Victim: EIP:0x%lx INST: 0x%lx\n&quot;, regs.eip, inst);
+
+    /* Copy instructions into a backup variable */
+    getdata(victim, regs.eip, backup, 3);
+    /* Put the breakpoint */
+    putdata(victim, regs.eip, code, 3);
+    /* Let the process continue and execute the int 3 instruction */
+    ptrace(PTRACE_CONT, victim, NULL, NULL);
+
+    wait(NULL);
+    printf(&quot;Press Enter to continue ptraced process.\n&quot;);
+    for(int i =0 ;i &lt; 4 ; i++){
+    printf(&quot;%c&quot;, backup[i]);
+    }
+    getchar();
+    putdata(victim, regs.eip, backup, 3);
+    ptrace(PTRACE_SETREGS, victim, NULL, &amp;regs);
+
+    ptrace(PTRACE_CONT, victim, NULL, NULL);
+    ptrace(PTRACE_DETACH, victim, NULL, NULL);
+    return 0;
+}
+</code></pre>
 <p>上面这段代码也就是在打印的那个程序运行的时候，通过它的pid号追踪这个程序，读取到它的指令寄存器的内容，备份之后换成我们的中断指令，按下回车之后再使其继续运行，这就是我们动态注入，这个程序我在32位的Ubuntu上运行成功了，但是中断之后再返回进程就会被杀死，返回给我一个<code>Segmentation fault (core dumped)</code>，暂时还没有解决，因为涉及到很多种情况，但是<code>ptrace</code>的这种动态追踪已经实现了，由于这次的注入代码长度只有四个字节，所以直接用<code>shell</code>注入的，实际上应该是在目标进程中动态加载库文件(.so)，就和我们的iOS程序需要动态加载(.dylib)一样。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8B%E5%8D%884.26.49.png" alt=""></p>
 <p>至于ptrace是如何实现反动态调试和如果破解，下一次的博客再详细的说一下</p>
-<h1 id="0x03参考博客"><a class="markdownIt-Anchor" href="#0x03参考博客"></a> 0X03参考博客</h1>
-<ul>
+<h1 id="0X03参考博客"><a href="#0X03参考博客" class="headerlink" title="0X03参考博客"></a>0X03参考博客</h1><ul>
 <li><a href="http://www.cnblogs.com/pannengzhi/p/5203467.html" target="_blank" rel="external">LinuxHook笔记</a></li>
 <li><a href="http://blog.csdn.net/edonlii/article/details/8717029" target="_blank" rel="external">ptrace运行原理详解</a></li>
 <li><a href="https://www.cnblogs.com/zlingh/p/4409002.html" target="_blank" rel="external">Linux进程状态</a></li>
@@ -148,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/14/反动态调试保护/" data-id="cjf262kgx00618wbrg6duk4we" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/14/反动态调试保护/" data-id="cjf3ar2og0065e9brv28t4fzk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
