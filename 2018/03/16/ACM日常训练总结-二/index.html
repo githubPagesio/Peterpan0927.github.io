@@ -14,7 +14,8 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8A%E5%8D%8811.25.06.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%881.49.43.png">
-<meta property="og:updated_time" content="2018-03-22T15:04:24.148Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-23%20%E4%B8%8A%E5%8D%8811.59.59.png">
+<meta property="og:updated_time" content="2018-03-23T04:00:32.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACM日常训练总结(二)">
 <meta name="twitter:description" content="多写点DFS对于一个人的智力是有帮助的…">
@@ -135,7 +136,7 @@ double S(point a[],int n)
     if(n==2)
         return dis(a[0],a[1]);
     for(int i=0;i&lt;n-2;i++)
-    {
+    { 
         m=min(m,min(dis(a[i],a[i+1]),min(dis(a[i],a[i+2]),dis(a[i+1],a[i+2]))));
     }
     return m;
@@ -221,7 +222,7 @@ int dp[mmax],n,m;
 int main()
 {
   //这种用法还是真少见
-   for (int kase = 1; scanf(&quot;%d%d&quot;, &amp;n, &amp;m), n&amp;&amp;m; kase++)
+   for (int kase = 1; scanf(&quot;%d%d&quot;, &amp;n, &amp;m), n &amp;&amp; m ; kase++)
    {
       n*=m;
       for(int i=0;i&lt;n;i++)
@@ -229,12 +230,14 @@ int main()
       sort(dp,dp+n);
       dp[n]=0x7fffffff;
 
-      int t;double sum;
-      cin&gt;&gt;sum;sum/=100;
+      int t;
+      double sum;
+      cin &gt;&gt; sum;
+      sum/=100;
 
       for(t=1;t&lt;=n;t++)
       {
-         sum+=dp[t-1];
+         sum += dp[t-1];
          if(sum/t&lt;=dp[t])
             break;
       }
@@ -245,7 +248,8 @@ int main()
    return 0;
 }
 </code></pre>
-<p>首先我们要对输入的网格海拔排序，因为海水肯定会先淹没高的，所以找到的第一个没有淹没的就OK了，为了防止全淹了，要将数组的最后一个设置为最大，跳出循环。</p>
+<p>首先我们要对输入的网格海拔排序，因为海水肯定会先淹没高的，所以找到的第一个没有淹没的就OK了，为了防止全淹了，要将数组的最后一个设置为最大，跳出循环。这题的最大难度在于理解题目的意思，一开始我以为是往网格里面填，后来才知道是这个样子的：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-23%20%E4%B8%8A%E5%8D%8811.59.59.png" alt="屏幕快照 2018-03-23 上午11.59.59.png"></p>
 <h1 id="Uva-136"><a href="#Uva-136" class="headerlink" title="Uva_136"></a>Uva_136</h1><p>丑树是指不能被2，3，5以外的素数整除的数，将丑数从小到达排列起来，求第1500个丑数：</p>
 <p>其实这个题的关键做法就在于想到丑数其实就是一开始的丑数的2、3、5倍，从一个丑数我们可以生成三个丑数，但是我们每次生成丑数的时候要判断这个丑数是否已经生成过了，我们可以用到STL来简单的完成我们的需求：</p>
 <pre><code class="cpp">#include &lt;iostream&gt;
@@ -453,7 +457,7 @@ int main(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf3bq9ah000fjtbrilizowit" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf3m9k3j0009g3brw145xcru" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -465,7 +469,7 @@ int main(){
 <nav id="article-nav">
   
     <a href="/2018/03/19/对于PVID和VID的研究/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           对于PVID和VID的研究
@@ -475,7 +479,7 @@ int main(){
   
   
     <a href="/2018/03/13/ACM日常训练总结-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">ACM日常训练总结(一)</div>
     </a>
   
@@ -541,6 +545,14 @@ int main(){
       
         <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
           Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
         </a>
       
     </div>
