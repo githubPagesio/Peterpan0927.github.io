@@ -5,7 +5,9 @@
     <entry>
       <title><![CDATA[ACM日常训练总结(三)]]></title>
       <url>/2018/03/25/ACM%E6%97%A5%E5%B8%B8%E8%AE%AD%E7%BB%83-%E4%B8%89/</url>
-      <content type="html"><![CDATA[<h1 id="color-a-tree"><a class="markdownIt-Anchor" href="#color-a-tree"></a> Color a Tree</h1>
+      <content type="html"><![CDATA[<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+<a id="more"></a>
+<h1 id="color-a-tree"><a class="markdownIt-Anchor" href="#color-a-tree"></a> Color a Tree</h1>
 <p>这是一道贪心的题目，意思就是说有一颗树，每个节点都有一个权重，涂完每个节点的消费等于涂完它后的当前时间乘节点的权重，每个节点都只需要涂一分钟，但是涂这个节点的时候必须要先涂它的父节点，起始时间为0，问要使涂完的消费最少，这个消费应该是多少？</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-25%20%E4%B8%8B%E5%8D%881.50.18.png" alt="屏幕快照 2018-03-25 下午1.50.18.png"></p>
 <p>最主要的就是看出他是一个贪心了，然后我们通过每次寻找最大权重点，然后将这个点和他的父节点合并，然后将权重也累加，每次循环判断最大权重点，直到把所有的节点都合并到了根节点，这样就可以保证我们的每一步都是最优的：</p>
@@ -136,6 +138,77 @@ tydedef pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
+<h1 id="一道状压dp"><a class="markdownIt-Anchor" href="#一道状压dp"></a> 一道状压dp</h1>
+<pre class="highlight"><code class="">有一个N*M(N&lt;=5,M&lt;=1000)的棋盘，现在有1*2及2*1的小木块无数个，要盖满整个棋盘，有多少种方式？答案只需要mod1,000,000,007即可。
+
+例如：对于一个2*2的棋盘，有两种方法，一种是使用2个1*2的，一种是使用2个2*1的。
+</code></pre>
+<p>对于状态压缩的题目，关键之处就在于找到他的状态转移方程，这一道题的状态转移方程是：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;i++)  
+    {  
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;(<span class="hljs-number">1</span>&lt;&lt;N);j++)  
+        <span class="hljs-keyword">if</span> (dp[i][j])  
+        {  
+            dfs(i,<span class="hljs-number">0</span>,j,<span class="hljs-number">0</span>);  
+        }  
+    }  
+</code></pre>
+<p>所以最后的代码就是：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;  </span></span>
+  
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+  
+<span class="hljs-keyword">int</span> N, M;  
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> dp[<span class="hljs-number">1005</span>][<span class="hljs-number">34</span>];  
+  
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> j,<span class="hljs-keyword">int</span> state,<span class="hljs-keyword">int</span> nex)</span>  
+</span>{  
+    <span class="hljs-keyword">if</span> (j==N)  
+    {  
+  <span class="hljs-built_in">cout</span> &lt;&lt; nex &lt;&lt; <span class="hljs-built_in">endl</span>;
+        dp[i+<span class="hljs-number">1</span>][nex]+=dp[i][state];  
+        <span class="hljs-keyword">return</span>;  
+    }  
+    <span class="hljs-comment">//如果这个位置已经被上一列所占用,直接跳过  </span>
+    <span class="hljs-keyword">if</span> (((<span class="hljs-number">1</span>&lt;&lt;j)&amp;state)&gt;<span class="hljs-number">0</span>)  
+        dfs(i,j+<span class="hljs-number">1</span>,state,nex);  
+    <span class="hljs-comment">//如果这个位置是空的，尝试放一个1*2的  </span>
+    <span class="hljs-keyword">if</span> (((<span class="hljs-number">1</span>&lt;&lt;j)&amp;state)==<span class="hljs-number">0</span>)  
+        dfs(i,j+<span class="hljs-number">1</span>,state,nex|(<span class="hljs-number">1</span>&lt;&lt;j));  
+    <span class="hljs-comment">//如果这个位置以及下一个位置都是空的，尝试放一个2*1的  </span>
+    <span class="hljs-keyword">if</span> (j+<span class="hljs-number">1</span>&lt;N &amp;&amp; ((<span class="hljs-number">1</span>&lt;&lt;j)&amp;state)==<span class="hljs-number">0</span> &amp;&amp; ((<span class="hljs-number">1</span>&lt;&lt;(j+<span class="hljs-number">1</span>))&amp;state)==<span class="hljs-number">0</span>)  
+        dfs(i,j+<span class="hljs-number">2</span>,state,nex);  
+    <span class="hljs-keyword">return</span>;  
+}  
+  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">cin</span>&gt;&gt;N&gt;&gt;M)  
+    {  
+        <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));  
+        <span class="hljs-keyword">if</span> (N==<span class="hljs-number">0</span> &amp;&amp; M==<span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;  
+        dp[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;   
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;i++)  
+        {  
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;(<span class="hljs-number">1</span>&lt;&lt;N);j++)  
+            <span class="hljs-keyword">if</span> (dp[i][j])  
+            {  
+                dfs(i,<span class="hljs-number">0</span>,j,<span class="hljs-number">0</span>);  
+            }  
+        }
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= M+<span class="hljs-number">1</span> ;i++ ){
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt; N ; j++)
+            <span class="hljs-built_in">cout</span> &lt;&lt; dp[i][j] &lt;&lt; <span class="hljs-string">" "</span>;
+         <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+        } 
+        <span class="hljs-built_in">cout</span>&lt;&lt;dp[M+<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-built_in">endl</span>;  
+    }   
+}  
+</code></pre>
+<p>很好理解的hhh，转成二进制就行了。</p>
 ]]></content>
       
         <categories>
