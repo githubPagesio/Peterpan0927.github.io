@@ -42,7 +42,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -102,8 +102,10 @@
       
         <p>似乎要一脚踏进了计算机图像学的大坑？不存在的</p>
 <a id="more"></a>
-<h1 id="0x00前言"><a href="#0x00前言" class="headerlink" title="0x00前言"></a>0x00前言</h1><p>随着在CTF道路上的前进，从一开始看到图种都惊为天人的小白，到现在三板斧就能砍死这种杂碎的时候，中间肯定是经历了一些惨痛的经历的。但是由于隐写术这方面的学习路线并没有一个很成体系的学习方向，只能说在做题的过程中，了解到了各种密码学的知识，图像学的知识，可这些领域都算是过于陌生。现在只能算是入了门，但是我深刻的体会到在现在的做题中缺乏了对应的知识完全是寸步难行，所以决定总结一篇关于图像学方面的基础。</p>
-<h2 id="0x01位图"><a href="#0x01位图" class="headerlink" title="0x01位图"></a>0x01位图</h2><p>位图可以有两种概念，一种是指使用像素阵列来表示的图像，哟可以称作栅格图或者是点阵图。</p>
+<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00前言</h1>
+<p>随着在CTF道路上的前进，从一开始看到图种都惊为天人的小白，到现在三板斧就能砍死这种杂碎的时候，中间肯定是经历了一些惨痛的经历的。但是由于隐写术这方面的学习路线并没有一个很成体系的学习方向，只能说在做题的过程中，了解到了各种密码学的知识，图像学的知识，可这些领域都算是过于陌生。现在只能算是入了门，但是我深刻的体会到在现在的做题中缺乏了对应的知识完全是寸步难行，所以决定总结一篇关于图像学方面的基础。</p>
+<h2 id="0x01位图"><a class="markdownIt-Anchor" href="#0x01位图"></a> 0x01位图</h2>
+<p>位图可以有两种概念，一种是指使用像素阵列来表示的图像，哟可以称作栅格图或者是点阵图。</p>
 <p>还有一种则是指数据结构上的位图，也就是Bit-map，也就是用一个bit位去标记某个元素对应的value值，这个Key值即为该元素。由于采用了bit为单位去存储数据，因此在存储空间的方面可以大大地节省。</p>
 <p>下面举一个例子来说明什么是Bit-map的村塾。假设我们现在需要对0-7内的五个元素去进行排序（这里假设为4，5，7，3，2），先假设这些元素并没有重复。</p>
 <p>要表示8个数，我们就只需要8个Bit（1Bytes），首先我们开辟1Byte的空间，将这些空间的所有Bit位都置为0</p>
@@ -111,74 +113,74 @@
 <p>然后再处理第二个元素5，将第六个位置置为1，如此直至处理完所有的元素，将相应的位置置为1。</p>
 <p>然后我们现在遍历一遍Bit区域，将该位是一的位的编号输出（2，3，4，5，7），这样就达到了排序的目的。</p>
 <p>其实就是把计数排序用的统计数组的每个单位缩小成bit级别的布尔数组，一种非常精妙的方式，然后看看实现的方式；</p>
-<pre><code class="python"># -*- encoding:utf-8 -*-
-class Bitmap():
-    def __init__(self,max):
-        &#39;确定所需数组个数&#39;
-        self.size = int ((max + 31 - 1) / 31)
-        self.array = [0 for i in range(self.size)]
+<pre class="highlight"><code class="python"><span class="hljs-comment"># -*- encoding:utf-8 -*-</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bitmap</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self,max)</span>:</span>
+        <span class="hljs-string">'确定所需数组个数'</span>
+        self.size = int ((max + <span class="hljs-number">31</span> - <span class="hljs-number">1</span>) / <span class="hljs-number">31</span>)
+        self.array = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.size)]
 
-    def bitindex(self,num):
-        &#39;确定数组中元素的位索引&#39;
-        return num % 31
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bitindex</span><span class="hljs-params">(self,num)</span>:</span>
+        <span class="hljs-string">'确定数组中元素的位索引'</span>
+        <span class="hljs-keyword">return</span> num % <span class="hljs-number">31</span>
 
-    def set_1(self,num):
-        &#39;将元素所在的位置1&#39;
-        elemindex = num / 31
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_1</span><span class="hljs-params">(self,num)</span>:</span>
+        <span class="hljs-string">'将元素所在的位置1'</span>
+        elemindex = num / <span class="hljs-number">31</span>
         byteindex = self.bitindex(num)
         ele = self.array[elemindex]
-        self.array[elemindex] = ele | (1 &lt;&lt; byteindex)
+        self.array[elemindex] = ele | (<span class="hljs-number">1</span> &lt;&lt; byteindex)
 
-    def test_1(self,i):
-        &#39;检测元素存在的位置&#39;
-        elemindex = i / 31
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_1</span><span class="hljs-params">(self,i)</span>:</span>
+        <span class="hljs-string">'检测元素存在的位置'</span>
+        elemindex = i / <span class="hljs-number">31</span>
         byteindex = self.bitindex(i)
-        if self.array[elemindex] &amp; (1 &lt;&lt; byteindex):
-            return True
-        return False
-if __name__ == &#39;__main__&#39;:
-    Max = ord(&#39;z&#39;)
-    suffle_array = [x for x in &#39;qwelmfg&#39;]
+        <span class="hljs-keyword">if</span> self.array[elemindex] &amp; (<span class="hljs-number">1</span> &lt;&lt; byteindex):
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">True</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span>
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    Max = ord(<span class="hljs-string">'z'</span>)
+    suffle_array = [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">'qwelmfg'</span>]
     result = []
     bitmap = Bitmap(Max)
-    for c in suffle_array:
+    <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> suffle_array:
         bitmap.set_1(ord(c))
-    for i in range(Max+1):
-        if bitmap.test_1(i):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(Max+<span class="hljs-number">1</span>):
+        <span class="hljs-keyword">if</span> bitmap.test_1(i):
             result.append(chr(i))
-    print u&#39;原始数组为:    %s&#39; % suffle_array
-    print u&#39;排序后的数组为: %s&#39; % result
+    <span class="hljs-keyword">print</span> <span class="hljs-string">u'原始数组为:    %s'</span> % suffle_array
+    <span class="hljs-keyword">print</span> <span class="hljs-string">u'排序后的数组为: %s'</span> % result
 </code></pre>
 <p>当然还有一个看起来更加简洁的C++版，但是并不是那么的友好：</p>
-<pre><code class="c++">#define MASK  0X1F
-#define SHIFT 5    
-#define WORD 32   // the bits of a word
-#define N 10000000   //the max number
+<pre class="highlight"><code class="c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MASK  0X1F</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SHIFT 5    </span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WORD 32   <span class="hljs-comment">// the bits of a word</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10000000   <span class="hljs-comment">//the max number</span></span>
 
-#include&lt;iostream&gt;
-using namespace std;
-int bitmap[N/WORD];
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> bitmap[N/WORD];
 
-void bitmap_set(int i){
-    bitmap[i&gt;&gt;SHIFT] |= 1 &lt;&lt; (i &amp; MASK);
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bitmap_set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>{
+    bitmap[i&gt;&gt;SHIFT] |= <span class="hljs-number">1</span> &lt;&lt; (i &amp; MASK);
 }
 
-int bitmap_test(int i){
-    return bitmap[i&gt;&gt;SHIFT] &amp; (1 &lt;&lt; (i&amp;MASK));
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bitmap_test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>{
+    <span class="hljs-keyword">return</span> bitmap[i&gt;&gt;SHIFT] &amp; (<span class="hljs-number">1</span> &lt;&lt; (i&amp;MASK));
 }
 
-void bitmap_clear(int i){
-    bitmap[i&gt;&gt;SHIFT] &amp;= ~(1 &lt;&lt; (i &amp; MASK));
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bitmap_clear</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>{
+    bitmap[i&gt;&gt;SHIFT] &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; (i &amp; MASK));
 }
 
-int main(){
-    bitmap_set(38);
-    int two = bitmap_test(38);
-    cout &lt;&lt; two &lt;&lt; endl;
-    bitmap_clear(38);
-    two = bitmap_test(38);
-    cout &lt;&lt; two &lt;&lt; endl;
-    return 0;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    bitmap_set(<span class="hljs-number">38</span>);
+    <span class="hljs-keyword">int</span> two = bitmap_test(<span class="hljs-number">38</span>);
+    <span class="hljs-built_in">cout</span> &lt;&lt; two &lt;&lt; <span class="hljs-built_in">endl</span>;
+    bitmap_clear(<span class="hljs-number">38</span>);
+    two = bitmap_test(<span class="hljs-number">38</span>);
+    <span class="hljs-built_in">cout</span> &lt;&lt; two &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
 <p>这种在索引和数据压缩等方面有广泛的应用，代表了有限域中的稠集。</p>
@@ -186,121 +188,127 @@ int main(){
 <p>根据位深度，可以将位图分为1、4、8、16、24及32位图像等。每个像素使用的信息位数越多，可用的颜色就越多，颜色表现的就越逼真，那么相应的数据量也会越大。例如位深度位1的像素位图只有两个可能的值(黑色和白色)，所以又称为二值位图。</p>
 <p>下面就来看一下彩色图像，灰度图像（灰度图是一种特殊的伪彩色图）和二值图像的一个对比，这样应该会更加清楚：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8A%E5%8D%8812.43.23.png" alt=""></p>
-<h2 id="0x02图像处理"><a href="#0x02图像处理" class="headerlink" title="0x02图像处理"></a>0x02图像处理</h2><p>了解到了一些基本的概念之后，我们再来讨论一下计算机的几种图像处理方式：</p>
-<h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255。一般有以下四种方法对彩色图像进行灰度化： 　　</p>
+<h2 id="0x02图像处理"><a class="markdownIt-Anchor" href="#0x02图像处理"></a> 0x02图像处理</h2>
+<p>了解到了一些基本的概念之后，我们再来讨论一下计算机的几种图像处理方式：</p>
+<h3 id="灰度化"><a class="markdownIt-Anchor" href="#灰度化"></a> 灰度化</h3>
+<p>在RGB模型中，如果R=G=B时，则彩色表示一种灰度颜色，其中R=G=B的值叫灰度值，因此，灰度图像每个像素只需一个字节存放灰度值（又称强度值、亮度值），灰度范围为0-255。一般有以下四种方法对彩色图像进行灰度化：</p>
 <ol>
-<li>分量法 　　</li>
+<li>分量法</li>
 </ol>
 <p>将彩色图像中的三分量的亮度作为三个灰度图像的灰度值，可根据应用需要选取一种灰度图像。f1(i,j)=R(i,j) f2(i,j)=G(i,j) f3(i,j)=B(i,j) 其中fk(i,j)(k=1,2,3)为转换后的灰度图像在（i,j）处的灰度值。</p>
-<ol>
+<ol start="2">
 <li>最大值法</li>
 </ol>
-<p>将彩色图像中的三分量亮度的最大值作为灰度图的灰度值。 　　f(i,j)=max(R(i,j),G(i,j),B(i,j)) 　　</p>
-<ol>
-<li>平均值法 　　</li>
+<p>将彩色图像中的三分量亮度的最大值作为灰度图的灰度值。 　　f(i,j)=max(R(i,j),G(i,j),B(i,j))</p>
+<ol start="3">
+<li>平均值法</li>
 </ol>
-<p>将彩色图像中的三分量亮度求平均得到一个灰度图。 　　f(i,j)=(R(i,j)+G(i,j)+B(i,j)) /3 　　</p>
-<ol>
-<li>加权平均法 　　</li>
+<p>将彩色图像中的三分量亮度求平均得到一个灰度图。 　　f(i,j)=(R(i,j)+G(i,j)+B(i,j)) /3</p>
+<ol start="4">
+<li>加权平均法</li>
 </ol>
 <p>根据重要性及其它指标，将三个分量以不同的权值进行加权平均。由于人眼对绿色的敏感最高，对蓝色敏感最低，因此，按下式对RGB三分量进行加权平均能得到较合理的灰度图像。 　　f(i,j)=0.30R(i,j)+0.59G(i,j)+0.11B(i,j))</p>
-<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><ol>
+<h3 id="二值化"><a class="markdownIt-Anchor" href="#二值化"></a> 二值化</h3>
+<ol>
 <li>全局二值化</li>
 </ol>
 <p>一幅图像包括目标物体、背景还有噪声，要想从多值的数字图像中直接提取出目标物体，最常用的方法就是设定一个全局的阈值T，用T将图像的数据分成两部分：大于T的像素群和小于T的像素群。将大于T的像素群的像素值设定为白色（或者黑色），小于T的像素群的像素值设定为黑色（或者白色）。</p>
 <p>全局二值化，在表现图像细节方面存在很大缺陷。为了弥补这个缺陷，出现了局部二值化方法。</p>
-<ol>
+<ol start="2">
 <li>局部二值化</li>
 </ol>
 <p>局部二值化的方法就是按照一定的规则将整幅图像划分为N个窗口，对这N个窗口中的每一个窗口再按照一个统一的阈值T将该窗口内的像素划分为两部分，进行二值化处理。</p>
 <p>局部二值化也有一个缺陷。这个缺陷存在于那个统一阈值的选定。这个阈值是没有经过合理的运算得来，一般是取该窗口的平局值。这就导致在每一个窗口内仍然出现的是全局二值化的缺陷。为了解决这个问题，就出现了局部自适应二值化方法。</p>
-<ol>
+<ol start="3">
 <li>局部自适应二值化</li>
 </ol>
 <p>该方法就是在局部二值化的基础之上，将阈值的设定更加合理化。该方法的阈值是通过对该窗口像素的平均值E，像素之间的差平方P，像素之间的均方根值Q等各种局部特征，设定一个参数方程进行阈值的计算，例如：T=a<em>E+b</em>P+c*Q，其中a,b,c是自由参数。这样得出来的二值化图像就更能表现出二值化图像中的细节。</p>
-<h3 id="反色"><a href="#反色" class="headerlink" title="反色"></a>反色</h3><p>反色的实际含义是将R、G、B值反转。若颜色的量化级别是256，则新图的R、G、B值为255减去原图的R、G、B值。这里针对的是所有图，包括真彩图、带调色板的彩色图(又称为伪彩色图)、和灰度图。针对不同种类有不同的处理。先看看真彩图。我们知道真彩图不带调色板，每个像素用3个字节，表示R、G、B三个分量。所以处理很简单，把反转后的R、G、B值写入新图即可，比如一个点的颜色为(0,0,0)，反色后为(255,255,255)。再来看看带调色板的彩色图，我们知道位图中的数据只是对应调色板中的一个索引值，我们只需要将调色板中的颜色反转，形成新调色板，而位图数据不用动，就能够实现反转。</p>
+<h3 id="反色"><a class="markdownIt-Anchor" href="#反色"></a> 反色</h3>
+<p>反色的实际含义是将R、G、B值反转。若颜色的量化级别是256，则新图的R、G、B值为255减去原图的R、G、B值。这里针对的是所有图，包括真彩图、带调色板的彩色图(又称为伪彩色图)、和灰度图。针对不同种类有不同的处理。先看看真彩图。我们知道真彩图不带调色板，每个像素用3个字节，表示R、G、B三个分量。所以处理很简单，把反转后的R、G、B值写入新图即可，比如一个点的颜色为(0,0,0)，反色后为(255,255,255)。再来看看带调色板的彩色图，我们知道位图中的数据只是对应调色板中的一个索引值，我们只需要将调色板中的颜色反转，形成新调色板，而位图数据不用动，就能够实现反转。</p>
 <p>灰度图是一种特殊的伪彩色图，只不过调色板中的R、G、B值都是一样的而已。所以反转的处理和上面讲的一样。</p>
 <p>下面贴一下写的一个对灰度图像的本值，均值作分析的一个代码：</p>
-<pre><code class="python">#! /usr/bin/env python
-# -*- coding: utf-8 -*-
+<pre class="highlight"><code class="python"><span class="hljs-comment">#! /usr/bin/env python</span>
+<span class="hljs-comment"># -*- coding: utf-8 -*-</span>
 
-import numpy as np
-from PIL import Image
-from pylab import *
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 
-#设置存储的列表
+<span class="hljs-comment">#设置存储的列表</span>
 point_list = []
 power_list = []
 
-#存储一开始矩阵的长度
-length = 0
-#设置矩阵的输出
-np.set_printoptions(threshold=&#39;nan&#39;)
+<span class="hljs-comment">#存储一开始矩阵的长度</span>
+length = <span class="hljs-number">0</span>
+<span class="hljs-comment">#设置矩阵的输出</span>
+np.set_printoptions(threshold=<span class="hljs-string">'nan'</span>)
 
-#得到所有的本值和坐标
-def get_allpoints(array):
-    x_range = range(2, len(array)-2)
+<span class="hljs-comment">#得到所有的本值和坐标</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_allpoints</span><span class="hljs-params">(array)</span>:</span>
+    x_range = range(<span class="hljs-number">2</span>, len(array)<span class="hljs-number">-2</span>)
     y_range = x_range
-    for i in x_range:
-        for j in y_range:
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x_range:
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> y_range:
             point_list.append([i, j, array[i, j]])
-    return point_list
+    <span class="hljs-keyword">return</span> point_list
 
-#根据得到的本值坐标计算均值并加入对应列表
-def get_all_averageValue(point_range, array):
-    for point in point_range:
-        temp = get_averageValue(array, point[0], point[1])
+<span class="hljs-comment">#根据得到的本值坐标计算均值并加入对应列表</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_averageValue</span><span class="hljs-params">(point_range, array)</span>:</span>
+    <span class="hljs-keyword">for</span> point <span class="hljs-keyword">in</span> point_range:
+        temp = get_averageValue(array, point[<span class="hljs-number">0</span>], point[<span class="hljs-number">1</span>])
         point.append(temp)
 
-def get_averageValue(array, x ,y):
-    return get_aroundValue(array, x, y)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_averageValue</span><span class="hljs-params">(array, x ,y)</span>:</span>
+    <span class="hljs-keyword">return</span> get_aroundValue(array, x, y)
 
-def get_aroundValue(array, x, y):
-    average_sum = 0
-    rangeListX = range(x-1, x+2)
-    rangeListY = range(y-1, y+2)
-#    print(rangeListX)
-    for i in rangeListX:
-        for j in rangeListY:
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_aroundValue</span><span class="hljs-params">(array, x, y)</span>:</span>
+    average_sum = <span class="hljs-number">0</span>
+    rangeListX = range(x<span class="hljs-number">-1</span>, x+<span class="hljs-number">2</span>)
+    rangeListY = range(y<span class="hljs-number">-1</span>, y+<span class="hljs-number">2</span>)
+<span class="hljs-comment">#    print(rangeListX)</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> rangeListX:
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> rangeListY:
                 average_sum += array[i][j]
     average_sum -= array[x][y]
-    average_sum /= 8
-#    print(average_sum)
-    return average_sum
+    average_sum /= <span class="hljs-number">8</span>
+<span class="hljs-comment">#    print(average_sum)</span>
+    <span class="hljs-keyword">return</span> average_sum
 
-#得到所有的作用力点
-def get_allPowerPoint(array):
-    power_sum = 0
-    start = length - 3
-    while start &lt; ((length-4)*(length-5)-1):
+<span class="hljs-comment">#得到所有的作用力点</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_allPowerPoint</span><span class="hljs-params">(array)</span>:</span>
+    power_sum = <span class="hljs-number">0</span>
+    start = length - <span class="hljs-number">3</span>
+    <span class="hljs-keyword">while</span> start &lt; ((length<span class="hljs-number">-4</span>)*(length<span class="hljs-number">-5</span>)<span class="hljs-number">-1</span>):
         power_sum = get_aroundPower(array, start)
-        power_list.append([array[start][0], array[start][1], array[start][2], array[start][3], power_sum])
-        if start%(length-4) == (length-6):
-            start += 3
-        else:
-            start += 1
-#        print(start)
+        power_list.append([array[start][<span class="hljs-number">0</span>], array[start][<span class="hljs-number">1</span>], array[start][<span class="hljs-number">2</span>], array[start][<span class="hljs-number">3</span>], power_sum])
+        <span class="hljs-keyword">if</span> start%(length<span class="hljs-number">-4</span>) == (length<span class="hljs-number">-6</span>):
+            start += <span class="hljs-number">3</span>
+        <span class="hljs-keyword">else</span>:
+            start += <span class="hljs-number">1</span>
+<span class="hljs-comment">#        print(start)</span>
         print(length)
-    return power_list
+    <span class="hljs-keyword">return</span> power_list
 
-#将每个点的作用力存入列表
-def get_aroundPower(array, start):
-    power_sum = 0
-    power_sum += array[start+1][2] + array[start-1][2] + array[start-216][2] + array[start+216][2] + array[start+215][2] + array[start-215][2] + array[start+217][2] + array[start-217][2]
-    return power_sum
+<span class="hljs-comment">#将每个点的作用力存入列表</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_aroundPower</span><span class="hljs-params">(array, start)</span>:</span>
+    power_sum = <span class="hljs-number">0</span>
+    power_sum += array[start+<span class="hljs-number">1</span>][<span class="hljs-number">2</span>] + array[start<span class="hljs-number">-1</span>][<span class="hljs-number">2</span>] + array[start<span class="hljs-number">-216</span>][<span class="hljs-number">2</span>] + array[start+<span class="hljs-number">216</span>][<span class="hljs-number">2</span>] + array[start+<span class="hljs-number">215</span>][<span class="hljs-number">2</span>] + array[start<span class="hljs-number">-215</span>][<span class="hljs-number">2</span>] + array[start+<span class="hljs-number">217</span>][<span class="hljs-number">2</span>] + array[start<span class="hljs-number">-217</span>][<span class="hljs-number">2</span>]
+    <span class="hljs-keyword">return</span> power_sum
 
-if __name__==&#39;__main__&#39;:
-        path = raw_input(&quot;Please input the image path: &quot;)
-        image = Image.open(path).convert(&quot;L&quot;)
+<span class="hljs-keyword">if</span> __name__==<span class="hljs-string">'__main__'</span>:
+        path = raw_input(<span class="hljs-string">"Please input the image path: "</span>)
+        image = Image.open(path).convert(<span class="hljs-string">"L"</span>)
         image_array = np.array(image)
-        new_image_array = image_array/255.0;
+        new_image_array = image_array/<span class="hljs-number">255.0</span>;
         length = len(new_image_array)
         a = get_allpoints(new_image_array)
         get_all_averageValue(a, new_image_array)
         b = get_allPowerPoint(a)
         print(power_list)
+
 </code></pre>
-<h2 id="0x03调色板"><a href="#0x03调色板" class="headerlink" title="0x03调色板"></a>0x03调色板</h2><p>我们知道，自然界中的所有颜色都可以由红、绿、蓝(R，G，B)组合而成。有的颜色含有红色成分多一些，如深红；有的含有红色成分少一些，如浅红。针对含有红色成分的多少，可以分成0到255共256个等级，0级表示不含红色成分；255级表示含有100%的红色成分。同样，绿色和蓝色也被分成256级。这种分级概念称为量化。</p>
+<h2 id="0x03调色板"><a class="markdownIt-Anchor" href="#0x03调色板"></a> 0x03调色板</h2>
+<p>我们知道，自然界中的所有颜色都可以由红、绿、蓝(R，G，B)组合而成。有的颜色含有红色成分多一些，如深红；有的含有红色成分少一些，如浅红。针对含有红色成分的多少，可以分成0到255共256个等级，0级表示不含红色成分；255级表示含有100%的红色成分。同样，绿色和蓝色也被分成256级。这种分级概念称为量化。</p>
 <p>这样，根据红、绿、蓝各种不同的组合我们就能表示出256×256×256，约1600万种颜色。这么多颜色对于我们人眼来说已经足够丰富了。</p>
 <p>你大概已经明白了，当一幅图中每个像素赋予不同的RGB值时，能呈现出五彩缤纷的颜色了，这样就形成了彩色图。的确是这样的，但实际上的做法还有些差别。</p>
 <p>让我们来看看下面的例子。</p>
@@ -308,7 +316,8 @@ if __name__==&#39;__main__&#39;:
 <p>​        因为是一个16色图，也就是说这幅图中最多只有16种颜色，我们可以用一个表：表中的每一行记录一种颜色的R、G、B值。这样当我们表示一个像素的颜色时，只需要指出该颜色是在第几行，即该颜色在表中的索引值。举个例子，如果表的第0行为255，0，0(红色)，那么当某个像素为红色时，只需要标明0即可。</p>
 <p>​        让我们再来计算一下：16种状态可以用4位(bit)表示，所以一个像素要用半个字节。整个图象要用200×200×0.5，约20k字节，再加上表占用的字节为3×16=48字节.整个占用的字节数约为前面的1/6，省很多吧？</p>
 <p>这张R、G、B的表，就是我们常说的调色板(Palette)，另一种叫法是颜色查找表LUT(Look Up Table)，似乎更确切一些。Windows位图中便用到了调色板技术。其实不光是Windows位图，许多图象文件格式如pcx、tif、gif等都用到了。所以很好地掌握调色板的概念是十分有用的。</p>
-<h4 id="真彩色"><a href="#真彩色" class="headerlink" title="真彩色"></a>真彩色</h4><p>有一种图，它的颜色数高达256×256×256种，也就是说包含我们上述提到的R、G、B颜色表示方法中所有的颜色，这种图叫做真彩色图(true color)。真彩色图并不是说一幅图包含了所有的颜色，而是说它具有显示所有颜色的能力，即最多可以包含所有的颜色。表示真彩色图时，每个像素直接用R、G、B三个分量字节表示，而不采用调色板技术。原因很明显：如果用调色板，表示一个像素也要用24位，这是因为每种颜色的索引要用24位(因为总共有2^24种颜色，即调色板有2^24行)，和直接用R，G，B三个分量表示用的字节数一样，不但没有任何便宜，还要加上一个256×256×256×3个字节的大调色板。所以真彩色图直接用R、G、B三个分量表示，它又叫做24位色图。</p>
+<h4 id="真彩色"><a class="markdownIt-Anchor" href="#真彩色"></a> 真彩色</h4>
+<p>有一种图，它的颜色数高达256×256×256种，也就是说包含我们上述提到的R、G、B颜色表示方法中所有的颜色，这种图叫做真彩色图(true color)。真彩色图并不是说一幅图包含了所有的颜色，而是说它具有显示所有颜色的能力，即最多可以包含所有的颜色。表示真彩色图时，每个像素直接用R、G、B三个分量字节表示，而不采用调色板技术。原因很明显：如果用调色板，表示一个像素也要用24位，这是因为每种颜色的索引要用24位(因为总共有2<sup>24种颜色，即调色板有2</sup>24行)，和直接用R，G，B三个分量表示用的字节数一样，不但没有任何便宜，还要加上一个256×256×256×3个字节的大调色板。所以真彩色图直接用R、G、B三个分量表示，它又叫做24位色图。</p>
 <p>我们知道，真彩图中包含最多达2^24种颜色，怎样从中选出256种颜色，又要使颜色的失真比较小，这是一个比较复杂的问题。一种简单的做法是将R：G：B以3：3：2表示，即取R，G的高3位，B的高两位，组成一个字节，这样就可以表示256种颜色了，但不难想象，这种方法的失真肯定很严重。</p>
 <p>我们下面介绍的算法能够比较好地实现真彩图到256色图的转换。它的思想是：准备一个长度为4096的数组，代表4096种颜色。对图中的每一个像素，取R、G、B的最高四位，拼成一个12位的整数，对应的数组元素加1。全部统计完后，就得到了这4096种颜色的使用频率。其中，可能有一些颜色一次也没用到，即对应的数组元素为零(假设不为零的数组元素共有PalCounts个)。将这些为零的数组元素清除出去，使得前PalCounts个元素都不为零。将这PalCounts个数按从大到小的顺序排列。这样，前256种颜色就是用的最多的颜色，它们将作为调色板上的256种颜色。对于剩下的PalCounts-256种颜色并不是简单地丢弃，而是用前256种颜色中的一种来代替，代替的原则是找有最小平方误差的那个。再次对图中的每一个像素，取R、G、B的最高四位，拼成一个12位的整数，如果对应值在前256种颜色中，则直接将该索引值填入位图数据中，如果是在后PalCounts-256种颜色中，则用代替色的索引值填入位图数据中。</p>
 <p>下面的两幅图中，图5.3是原真彩图，图.54是用上面的算法转换成的256色图，可以看出，效果还不错。</p>
@@ -319,7 +328,7 @@ if __name__==&#39;__main__&#39;:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/30/CTF-图像学基础/" data-id="cjf3meh890010itbr1qvy60n5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/30/CTF-图像学基础/" data-id="cjf7qwq8u0015wxbrqe1681bg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -387,7 +396,7 @@ if __name__==&#39;__main__&#39;:
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

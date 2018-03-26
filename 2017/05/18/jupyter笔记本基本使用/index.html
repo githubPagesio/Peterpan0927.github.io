@@ -44,7 +44,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -102,210 +102,219 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>jupyter笔记本使用（爬虫）<br><a id="more"></a></p>
-<h1 id="jupyter笔记本使用"><a href="#jupyter笔记本使用" class="headerlink" title="jupyter笔记本使用"></a>jupyter笔记本使用</h1><h2 id="1-在交互式笔记本中进行数据查找"><a href="#1-在交互式笔记本中进行数据查找" class="headerlink" title="1.在交互式笔记本中进行数据查找"></a>1.在交互式笔记本中进行数据查找</h2><blockquote>
+        <p>jupyter笔记本使用（爬虫）</p>
+<a id="more"></a>
+<h1 id="jupyter笔记本使用"><a class="markdownIt-Anchor" href="#jupyter笔记本使用"></a> jupyter笔记本使用</h1>
+<h2 id="1在交互式笔记本中进行数据查找"><a class="markdownIt-Anchor" href="#1在交互式笔记本中进行数据查找"></a> 1.在交互式笔记本中进行数据查找</h2>
+<blockquote>
 <p>导入模块和数据库</p>
-<pre><code class="python">import pymongo
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
-ganji = client[&#39;ganji&#39;]
-item_info = ganji[&#39;item_info&#39;]
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pymongo
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
+ganji = client[<span class="hljs-string">'ganji'</span>]
+item_info = ganji[<span class="hljs-string">'item_info'</span>]
 </code></pre>
 <p>对数据库进行查询</p>
-<pre><code class="python">for i in item_info.find().limit(300):
-    print(i[&#39;area&#39;])
+<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find().limit(<span class="hljs-number">300</span>):
+	print(i[<span class="hljs-string">'area'</span>])
 </code></pre>
 <p>将area为None的地区替换为不明,去掉标点符号</p>
-<pre><code class="python">#先导入一个新模块
-from string import punctuation
-#索引的代码优化
-for i in item_info.find():
-    if i[&#39;area&#39;]:
-        area = [i for i in i[&#39;area&#39;] if i not in punctuation]
-    else:
-        area = [&#39;不明&#39;]
+<pre class="highlight"><code class="python"><span class="hljs-comment">#先导入一个新模块</span>
+<span class="hljs-keyword">from</span> string <span class="hljs-keyword">import</span> punctuation
+<span class="hljs-comment">#索引的代码优化</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find():
+    <span class="hljs-keyword">if</span> i[<span class="hljs-string">'area'</span>]:
+        area = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> i[<span class="hljs-string">'area'</span>] <span class="hljs-keyword">if</span> i <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> punctuation]
+    <span class="hljs-keyword">else</span>:
+        area = [<span class="hljs-string">'不明'</span>]
     print(area)
 </code></pre>
 <p>使用find函数进行精确的查找：</p>
-<pre><code class="python">import pymongo
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
-ganji = client[&#39;ganji&#39;]
-item_info = ganji[&#39;item_info&#39;]
-#第一个大括号内填写查找的条件，条件为空则是全部的数据，后面一个大括号内填写显示的条件，value为0表示不显示,$slice进行分片，返回可被分片数据中的第一个。
-#注意，如果在属性的查找中加入具体的操作符，就会显示其他的属性，这是mongodb的特殊显示方式。
-for i in item_info.find({},{&#39;area&#39;:{&#39;$slice:1&#39;},&#39;_id&#39;:0,&#39;price&#39;:0})
-#$in操作符表示只要包含两个中的一个即可
-for i in item_info.find({&#39;pub_date&#39;:{&#39;$in&#39;:[2016,2017]}},{&#39;area&#39;:{&#39;$slice:1&#39;},&#39;_id&#39;:0,&#39;price&#39;:0})
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pymongo
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
+ganji = client[<span class="hljs-string">'ganji'</span>]
+item_info = ganji[<span class="hljs-string">'item_info'</span>]
+<span class="hljs-comment">#第一个大括号内填写查找的条件，条件为空则是全部的数据，后面一个大括号内填写显示的条件，value为0表示不显示,$slice进行分片，返回可被分片数据中的第一个。</span>
+<span class="hljs-comment">#注意，如果在属性的查找中加入具体的操作符，就会显示其他的属性，这是mongodb的特殊显示方式。</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find({},{<span class="hljs-string">'area'</span>:{<span class="hljs-string">'$slice:1'</span>},<span class="hljs-string">'_id'</span>:<span class="hljs-number">0</span>,<span class="hljs-string">'price'</span>:<span class="hljs-number">0</span>})
+<span class="hljs-comment">#$in操作符表示只要包含两个中的一个即可</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find({<span class="hljs-string">'pub_date'</span>:{<span class="hljs-string">'$in'</span>:[<span class="hljs-number">2016</span>,<span class="hljs-number">2017</span>]}},{<span class="hljs-string">'area'</span>:{<span class="hljs-string">'$slice:1'</span>},<span class="hljs-string">'_id'</span>:<span class="hljs-number">0</span>,<span class="hljs-string">'price'</span>:<span class="hljs-number">0</span>})
 </code></pre>
 </blockquote>
-<h2 id="2-数据更新"><a href="#2-数据更新" class="headerlink" title="2.数据更新"></a>2.数据更新</h2><pre><code class="python">#将area为None的替换为不明
-for i in item_info.find():
-    if i[&#39;area&#39;]:
-        area = [i for i in i[&#39;area&#39;] if i not in punctuation]
-    else:
-        area = [&#39;不明&#39;]
-    item_info.update_one({&#39;_id&#39;:i[&#39;_id&#39;]}, {&#39;$set&#39;:{&#39;area&#39;:area}})
+<h2 id="2数据更新"><a class="markdownIt-Anchor" href="#2数据更新"></a> 2.数据更新</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#将area为None的替换为不明</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find():
+    <span class="hljs-keyword">if</span> i[<span class="hljs-string">'area'</span>]:
+        area = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> i[<span class="hljs-string">'area'</span>] <span class="hljs-keyword">if</span> i <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> punctuation]
+    <span class="hljs-keyword">else</span>:
+        area = [<span class="hljs-string">'不明'</span>]
+    item_info.update_one({<span class="hljs-string">'_id'</span>:i[<span class="hljs-string">'_id'</span>]}, {<span class="hljs-string">'$set'</span>:{<span class="hljs-string">'area'</span>:area}})
 </code></pre>
-<h2 id="3-利用图表来进行数据的展示"><a href="#3-利用图表来进行数据的展示" class="headerlink" title="3.利用图表来进行数据的展示"></a>3.利用图表来进行数据的展示</h2><blockquote>
+<h2 id="3利用图表来进行数据的展示"><a class="markdownIt-Anchor" href="#3利用图表来进行数据的展示"></a> 3.利用图表来进行数据的展示</h2>
+<blockquote>
 <p>环境准备：</p>
-<pre><code class="shell">pip3 install charts
-#由于版本问题，pip3获取的是对于python2.*版本兼容的模块包，所以我们需要cd到charts的目录下面进行版本更新，不然会疯狂的报错
+<pre class="highlight"><code class="shell">pip3 install charts
+<span class="hljs-meta">#</span><span class="bash">由于版本问题，pip3获取的是对于python2.*版本兼容的模块包，所以我们需要<span class="hljs-built_in">cd</span>到charts的目录下面进行版本更新，不然会疯狂的报错</span>
 2to3 -w *.py
-#这个命令是使本目录下所有的py文件更新到3.*版本
+<span class="hljs-meta">#</span><span class="bash">这个命令是使本目录下所有的py文件更新到3.*版本</span>
 </code></pre>
 <p>代码部分，<a href="http://www.cnblogs.com/tqsummer/archive/2010/12/27/1917927.html" target="_blank" rel="external">yield参考</a>：</p>
-<pre><code class="python">#统计地区的名字,set用于列表去重
+<pre class="highlight"><code class="python"><span class="hljs-comment">#统计地区的名字,set用于列表去重</span>
 area_list = []
-for i in item_info.find():
-    area_list.append(i[&#39;area&#39;][0])
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find():
+    area_list.append(i[<span class="hljs-string">'area'</span>][<span class="hljs-number">0</span>])
 area_index = list(set(area_list))
-#计算出现的次数
+<span class="hljs-comment">#计算出现的次数</span>
 post_times = []
-for index in area_index:
+<span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> area_index:
     post_times.append(area_list.count(index))
-#将数据格式转换成可视化图表模式的代码
-def data_gen(types):
-    length = 0
-    if length &lt;= len(area_index):
-        for area,times in zip(area_index,post_times):
-            data = {
-              &#39;name&#39; : area,
-              &#39;data&#39; : [times],
-              &#39;type&#39; : types
-            }
-            yield data
-            length += 1
-#最后生成图表
-series = [data for data in data_gen(&#39;column&#39;)]
-charts.plot(series, show=&#39;inline&#39;, options=dict(title=dict(text=&#39;七日内二手物品销售统计&#39;)))
+<span class="hljs-comment">#将数据格式转换成可视化图表模式的代码</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_gen</span><span class="hljs-params">(types)</span>:</span>
+    length = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">if</span> length &lt;= len(area_index):
+    	<span class="hljs-keyword">for</span> area,times <span class="hljs-keyword">in</span> zip(area_index,post_times):
+        	data = {
+          	<span class="hljs-string">'name'</span> : area,
+          	<span class="hljs-string">'data'</span> : [times],
+          	<span class="hljs-string">'type'</span> : types
+        	}
+        	<span class="hljs-keyword">yield</span> data
+        	length += <span class="hljs-number">1</span>
+<span class="hljs-comment">#最后生成图表</span>
+series = [data <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> data_gen(<span class="hljs-string">'column'</span>)]
+charts.plot(series, show=<span class="hljs-string">'inline'</span>, options=dict(title=dict(text=<span class="hljs-string">'七日内二手物品销售统计'</span>)))
 </code></pre>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/252E2171-55DD-407C-82B7-A9BAA6F7E82D.png" alt=""></p>
 </blockquote>
-<h2 id="4-进行数据的格式修改并更新"><a href="#4-进行数据的格式修改并更新" class="headerlink" title="4.进行数据的格式修改并更新"></a>4.进行数据的格式修改并更新</h2><pre><code class="python">#e.g:将‘-’替换为‘.‘
-for i in item_info.find():
-    frags = i[pub_date].split(&#39;-&#39;)
-    if len(frags) == 1:
+<h2 id="4进行数据的格式修改并更新"><a class="markdownIt-Anchor" href="#4进行数据的格式修改并更新"></a> 4.进行数据的格式修改并更新</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#e.g:将‘-’替换为‘.‘</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find():
+    frags = i[pub_date].split(<span class="hljs-string">'-'</span>)
+    <span class="hljs-keyword">if</span> len(frags) == <span class="hljs-number">1</span>:
         date = frags
-    else:
-        date = {}.{}.{}.format(frags[1],frags[2],frags[3])
-    item_info.update({&#39;_id&#39;:i[&#39;_id&#39;]},{&#39;$set&#39;:{&#39;pub_date&#39;:date}})5.date函数的使用
+    <span class="hljs-keyword">else</span>:
+        date = {}.{}.{}.format(frags[<span class="hljs-number">1</span>],frags[<span class="hljs-number">2</span>],frags[<span class="hljs-number">3</span>])
+    item_info.update({<span class="hljs-string">'_id'</span>:i[<span class="hljs-string">'_id'</span>]},{<span class="hljs-string">'$set'</span>:{<span class="hljs-string">'pub_date'</span>:date}})<span class="hljs-number">5.</span>date函数的使用
 </code></pre>
-<h2 id="5-使用date函数制作图表datetime模块"><a href="#5-使用date函数制作图表datetime模块" class="headerlink" title="5.使用date函数制作图表datetime模块"></a>5.使用date函数制作图表<a href="https://my.oschina.net/whp/blog/130710" target="_blank" rel="external">datetime模块</a></h2><pre><code class="python">#打印一段时间内的连续日期样例
-def get_all_dates(date1,date2):
-    the_date = date(int(date1.split(&#39;.&#39;)[0]),int(date1.split(&#39;.&#39;)[1]),int(date1.split(&#39;.&#39;)[2]))
-    end_date = date(int(date2.split(&#39;.&#39;)[0]),int(date2.split(&#39;.&#39;)[1]),int(date2.split(&#39;.&#39;)[2]))
-    days = timedelta(days=1)
-    while the_date &lt;= end_date:
-            yield the_date.strftime(&#39;%Y-%m-%d&#39;)
-            the_date = the_date + days
+<h2 id="5使用date函数制作图表datetime模块"><a class="markdownIt-Anchor" href="#5使用date函数制作图表datetime模块"></a> 5.使用date函数制作图表<a href="https://my.oschina.net/whp/blog/130710" target="_blank" rel="external">datetime模块</a></h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#打印一段时间内的连续日期样例</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_dates</span><span class="hljs-params">(date1,date2)</span>:</span>
+    the_date = date(int(date1.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>]),int(date1.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">1</span>]),int(date1.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">2</span>]))
+    end_date = date(int(date2.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>]),int(date2.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">1</span>]),int(date2.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">2</span>]))
+    days = timedelta(days=<span class="hljs-number">1</span>)
+    <span class="hljs-keyword">while</span> the_date &lt;= end_date:
+            <span class="hljs-keyword">yield</span> the_date.strftime(<span class="hljs-string">'%Y-%m-%d'</span>)
+            the_date = the_date + days      
 </code></pre>
-<pre><code class="python">#制作图表部分的代码
-def get_data_within(date1,date2,areas):
-    for area in areas:
+<pre class="highlight"><code class="python"><span class="hljs-comment">#制作图表部分的代码</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_data_within</span><span class="hljs-params">(date1,date2,areas)</span>:</span>
+    <span class="hljs-keyword">for</span> area <span class="hljs-keyword">in</span> areas:
         area_day_posts = []
-        for day in get_all_dates(date1,date2):
-            a = list(item_info.find({&#39;pub_date&#39;:date,&#39;area&#39;:area}))
+        <span class="hljs-keyword">for</span> day <span class="hljs-keyword">in</span> get_all_dates(date1,date2):
+            a = list(item_info.find({<span class="hljs-string">'pub_date'</span>:date,<span class="hljs-string">'area'</span>:area}))
             each_posts = len(a)
             area_day_posts.append(each_posts)
         data = {
-            &#39;name&#39; : area,
-            &#39;data&#39; : area_day_posts,
-            &#39;type&#39; : &#39;lines&#39;
+            <span class="hljs-string">'name'</span> : area,
+            <span class="hljs-string">'data'</span> : area_day_posts,
+            <span class="hljs-string">'type'</span> : <span class="hljs-string">'lines'</span>
         }
-        yield data
+        <span class="hljs-keyword">yield</span> data
 </code></pre>
-<h2 id="6-使用聚合管道高效查找数据MongoDB聚合管道"><a href="#6-使用聚合管道高效查找数据MongoDB聚合管道" class="headerlink" title="6.使用聚合管道高效查找数据MongoDB聚合管道"></a>6.使用聚合管道高效查找数据<a href="http://blog.csdn.net/zhangzhebjut/article/details/16848045" target="_blank" rel="external">MongoDB聚合管道</a></h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/C4DFB493-E981-4C81-BEA9-DE3F088943A2.png" alt=""></p>
-<pre><code class="python">#操作符的含义可以参考上面的链接,注意$group的操作是在内存中进行的，所以不能用它来对大量个数的文档来进行分组
+<h2 id="6使用聚合管道高效查找数据mongodb聚合管道"><a class="markdownIt-Anchor" href="#6使用聚合管道高效查找数据mongodb聚合管道"></a> 6.使用聚合管道高效查找数据<a href="http://blog.csdn.net/zhangzhebjut/article/details/16848045" target="_blank" rel="external">MongoDB聚合管道</a></h2>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/C4DFB493-E981-4C81-BEA9-DE3F088943A2.png" alt=""></p>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#操作符的含义可以参考上面的链接,注意$group的操作是在内存中进行的，所以不能用它来对大量个数的文档来进行分组</span>
 pipeline = [
-  {&#39;$match&#39;:{&#39;$and&#39;:[{&#39;pub_date&#39;:&#39;2015.4.12&#39;},{&#39;time&#39;:3}]}},
-  {&#39;$group&#39;:{&#39;_id&#39;:&#39;$price&#39;,&#39;counts&#39;:{&#39;$sum&#39;:1}}},
-  {&#39;$sort&#39;:{&#39;counts&#39;:-1}},
-  {&#39;$limit&#39;:3}
+  {<span class="hljs-string">'$match'</span>:{<span class="hljs-string">'$and'</span>:[{<span class="hljs-string">'pub_date'</span>:<span class="hljs-string">'2015.4.12'</span>},{<span class="hljs-string">'time'</span>:<span class="hljs-number">3</span>}]}},
+  {<span class="hljs-string">'$group'</span>:{<span class="hljs-string">'_id'</span>:<span class="hljs-string">'$price'</span>,<span class="hljs-string">'counts'</span>:{<span class="hljs-string">'$sum'</span>:<span class="hljs-number">1</span>}}},
+  {<span class="hljs-string">'$sort'</span>:{<span class="hljs-string">'counts'</span>:<span class="hljs-number">-1</span>}},
+  {<span class="hljs-string">'$limit'</span>:<span class="hljs-number">3</span>}
 ]
-for i in item_info.aggregate(pipeline):
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.aggregate(pipeline):
     print(i)
-#$slice如果只有一个参数，代表返回几个元素，如果有两个参数，第一个参数代表跳过几个元素，第二个参数代表返回几个元素。
-def data_gen(data, time):
+<span class="hljs-comment">#$slice如果只有一个参数，代表返回几个元素，如果有两个参数，第一个参数代表跳过几个元素，第二个参数代表返回几个元素。</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_gen</span><span class="hljs-params">(data, time)</span>:</span>
     pipeline = [
-      {&#39;$match&#39;:{&#39;$and&#39;:[{&#39;pub_date&#39;:&#39;2015.4.12&#39;},{&#39;time&#39;:3}]}},
-      {&#39;$group&#39;:{&#39;_id&#39;:{&#39;$slice&#39;:[&#39;$cates&#39;:2,1]},&#39;counts&#39;:        {&#39;$sum&#39;:1}}},
-      {&#39;sort&#39;:{&#39;counts&#39;:-1}}
-    ]
-    for i in item_info.aggregate(pipeline):
-        yield [i[&#39;_id&#39;][0], i[&#39;counts&#39;]]
-#制作饼图
+  	{<span class="hljs-string">'$match'</span>:{<span class="hljs-string">'$and'</span>:[{<span class="hljs-string">'pub_date'</span>:<span class="hljs-string">'2015.4.12'</span>},{<span class="hljs-string">'time'</span>:<span class="hljs-number">3</span>}]}},
+  	{<span class="hljs-string">'$group'</span>:{<span class="hljs-string">'_id'</span>:{<span class="hljs-string">'$slice'</span>:[<span class="hljs-string">'$cates'</span>:<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]},<span class="hljs-string">'counts'</span>:		{<span class="hljs-string">'$sum'</span>:<span class="hljs-number">1</span>}}},
+  	{<span class="hljs-string">'sort'</span>:{<span class="hljs-string">'counts'</span>:<span class="hljs-number">-1</span>}}
+	]
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.aggregate(pipeline):
+    	<span class="hljs-keyword">yield</span> [i[<span class="hljs-string">'_id'</span>][<span class="hljs-number">0</span>], i[<span class="hljs-string">'counts'</span>]]
+<span class="hljs-comment">#制作饼图</span>
 options = {
-  &#39;chart&#39; : {&#39;zoomType&#39;:&#39;xy&#39;},
-  &#39;title&#39; : {&#39;text&#39;:&#39;发帖量统计&#39;},
-  &#39;subtitle&#39; : {&#39;text&#39;:&#39;可视化统计图表&#39;}
+  <span class="hljs-string">'chart'</span> : {<span class="hljs-string">'zoomType'</span>:<span class="hljs-string">'xy'</span>},
+  <span class="hljs-string">'title'</span> : {<span class="hljs-string">'text'</span>:<span class="hljs-string">'发帖量统计'</span>},
+  <span class="hljs-string">'subtitle'</span> : {<span class="hljs-string">'text'</span>:<span class="hljs-string">'可视化统计图表'</span>}
 }
 series = [{
-      &#39;type&#39;:&#39;pie&#39;
-    &#39;name&#39;:&#39;pipe charts&#39;,
-    &#39;date&#39;:[i for i in date_gen(&#39;2016.01.10, 1&#39;)]
+  	<span class="hljs-string">'type'</span>:<span class="hljs-string">'pie'</span>
+    <span class="hljs-string">'name'</span>:<span class="hljs-string">'pipe charts'</span>,
+    <span class="hljs-string">'date'</span>:[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> date_gen(<span class="hljs-string">'2016.01.10, 1'</span>)]
     }]
-charts.plot(series, options=options, show=&#39;inline&#39;)
+charts.plot(series, options=options, show=<span class="hljs-string">'inline'</span>)
 </code></pre>
-<h2 id="7-任务代码"><a href="#7-任务代码" class="headerlink" title="7.任务代码"></a>7.任务代码</h2><pre><code class="python">import charts
-import pymongo
+<h2 id="7任务代码"><a class="markdownIt-Anchor" href="#7任务代码"></a> 7.任务代码</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> charts
+<span class="hljs-keyword">import</span> pymongo
 
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
-ceshi = client[&#39;ceshi&#39;]
-item_info = ceshi[&#39;item_infoS&#39;]
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
+ceshi = client[<span class="hljs-string">'ceshi'</span>]
+item_info = ceshi[<span class="hljs-string">'item_infoS'</span>]
 
-def data_gen(date1,date2,area,limit):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_gen</span><span class="hljs-params">(date1,date2,area,limit)</span>:</span>
     pipeline1 = [
-    {&#39;$match&#39;:{&#39;$and&#39;:[{&#39;pub_date&#39;:{&#39;$gte&#39;:date1,&#39;$lte&#39;:date2}},{&#39;area&#39;:{&#39;$all&#39;:area}}]}},
-    {&#39;$group&#39;:{&#39;_id&#39;:{&#39;$slice&#39;:[&#39;$cates&#39;,2,1]},&#39;counts&#39;:{&#39;$sum&#39;:1}}},
-    {&#39;$limit&#39;:limit},
-    {&#39;$sort&#39;:{&#39;counts&#39;:-1}}
+    {<span class="hljs-string">'$match'</span>:{<span class="hljs-string">'$and'</span>:[{<span class="hljs-string">'pub_date'</span>:{<span class="hljs-string">'$gte'</span>:date1,<span class="hljs-string">'$lte'</span>:date2}},{<span class="hljs-string">'area'</span>:{<span class="hljs-string">'$all'</span>:area}}]}},
+    {<span class="hljs-string">'$group'</span>:{<span class="hljs-string">'_id'</span>:{<span class="hljs-string">'$slice'</span>:[<span class="hljs-string">'$cates'</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]},<span class="hljs-string">'counts'</span>:{<span class="hljs-string">'$sum'</span>:<span class="hljs-number">1</span>}}},
+    {<span class="hljs-string">'$limit'</span>:limit},
+    {<span class="hljs-string">'$sort'</span>:{<span class="hljs-string">'counts'</span>:<span class="hljs-number">-1</span>}}
 ]
 
-    for i in item_info.aggregate(pipeline1):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.aggregate(pipeline1):
         data = {
-            &#39;name&#39;: i[&#39;_id&#39;][0],
-            &#39;data&#39;: [i[&#39;counts&#39;]],
-            &#39;type&#39;: &#39;column&#39;
+            <span class="hljs-string">'name'</span>: i[<span class="hljs-string">'_id'</span>][<span class="hljs-number">0</span>],
+            <span class="hljs-string">'data'</span>: [i[<span class="hljs-string">'counts'</span>]],
+            <span class="hljs-string">'type'</span>: <span class="hljs-string">'column'</span>
         }
-        yield data
-series = [i for i in data_gen(&#39;2015.12.25&#39;,&#39;2015.12.27&#39;,[&#39;朝阳&#39;],5)]
+        <span class="hljs-keyword">yield</span> data
+series = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data_gen(<span class="hljs-string">'2015.12.25'</span>,<span class="hljs-string">'2015.12.27'</span>,[<span class="hljs-string">'朝阳'</span>],<span class="hljs-number">5</span>)]
 options = {
-    &#39;chart&#39;   : {&#39;zoomType&#39;:&#39;xy&#39;},
-    &#39;title&#39;   : {&#39;text&#39;: &#39;发帖数量最大的类目&#39;},
-    &#39;subtitle&#39;: {&#39;text&#39;: &#39;数据图表&#39;},
-    &#39;yAxis&#39;   : {&#39;title&#39;: {&#39;text&#39;: &#39;数量&#39;}}
+    <span class="hljs-string">'chart'</span>   : {<span class="hljs-string">'zoomType'</span>:<span class="hljs-string">'xy'</span>},
+    <span class="hljs-string">'title'</span>   : {<span class="hljs-string">'text'</span>: <span class="hljs-string">'发帖数量最大的类目'</span>},
+    <span class="hljs-string">'subtitle'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'数据图表'</span>},
+    <span class="hljs-string">'yAxis'</span>   : {<span class="hljs-string">'title'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'数量'</span>}}
     }
 
-charts.plot(series,options=options,show=&#39;inline&#39;)
+charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span>)
 </code></pre>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/9361A126-4FA8-42FF-8811-A3B6D70ABAFE.png" alt=""></p>
-<pre><code class="python">#另一种charts的调用方式
-def data_gen2(date1,date2,cates):
+<pre class="highlight"><code class="python"><span class="hljs-comment">#另一种charts的调用方式</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_gen2</span><span class="hljs-params">(date1,date2,cates)</span>:</span>
     pipeline = [
-    {&#39;$match&#39;:{&#39;$and&#39;:[{&#39;pub_date&#39;:{&#39;$gte&#39;:date1,&#39;$lte&#39;:date2}},
-                       {&#39;cates&#39;:{&#39;$all&#39;:cates}},
-                       {&#39;look&#39;:{&#39;$nin&#39;:[&#39;-&#39;]}}
+    {<span class="hljs-string">'$match'</span>:{<span class="hljs-string">'$and'</span>:[{<span class="hljs-string">'pub_date'</span>:{<span class="hljs-string">'$gte'</span>:date1,<span class="hljs-string">'$lte'</span>:date2}},
+                       {<span class="hljs-string">'cates'</span>:{<span class="hljs-string">'$all'</span>:cates}},
+                       {<span class="hljs-string">'look'</span>:{<span class="hljs-string">'$nin'</span>:[<span class="hljs-string">'-'</span>]}}
                       ]}},
-    {&#39;$group&#39;:{&#39;_id&#39;:&#39;$look&#39;,&#39;avg_price&#39;:{&#39;$avg&#39;:&#39;$price&#39;}}},
-    {&#39;$sort&#39;:{&#39;avg_price&#39;:1}}
+    {<span class="hljs-string">'$group'</span>:{<span class="hljs-string">'_id'</span>:<span class="hljs-string">'$look'</span>,<span class="hljs-string">'avg_price'</span>:{<span class="hljs-string">'$avg'</span>:<span class="hljs-string">'$price'</span>}}},
+    {<span class="hljs-string">'$sort'</span>:{<span class="hljs-string">'avg_price'</span>:<span class="hljs-number">1</span>}}
 ]
-    for i in item_info.aggregate(pipeline):
-        yield i[&#39;avg_price&#39;]
-data = [i for i in data_gen2(&#39;2015.12.24&#39;,&#39;2016.01.10&#39;,[&#39;北京二手手机&#39;])]
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.aggregate(pipeline):
+        <span class="hljs-keyword">yield</span> i[<span class="hljs-string">'avg_price'</span>]
+data = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data_gen2(<span class="hljs-string">'2015.12.24'</span>,<span class="hljs-string">'2016.01.10'</span>,[<span class="hljs-string">'北京二手手机'</span>])]
 options = {
-    &#39;title&#39;: {&#39;text&#39;: &#39;新旧-价格&#39;},
-    &#39;xAxis&#39;   : {&#39;categories&#39;: [&#39;报废机/尸体&#39;,&#39;7成新及以下&#39;,&#39;8成新&#39;,&#39;9成新&#39;,&#39;95成新&#39;,&#39;99成新&#39;, &#39;全新&#39;]},
-    &#39;yAxis&#39;   : {&#39;title&#39;: {&#39;text&#39;: &#39;价格&#39;}},
-
+    <span class="hljs-string">'title'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'新旧-价格'</span>},
+    <span class="hljs-string">'xAxis'</span>   : {<span class="hljs-string">'categories'</span>: [<span class="hljs-string">'报废机/尸体'</span>,<span class="hljs-string">'7成新及以下'</span>,<span class="hljs-string">'8成新'</span>,<span class="hljs-string">'9成新'</span>,<span class="hljs-string">'95成新'</span>,<span class="hljs-string">'99成新'</span>, <span class="hljs-string">'全新'</span>]},
+    <span class="hljs-string">'yAxis'</span>   : {<span class="hljs-string">'title'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'价格'</span>}},
+    
 }
 
-charts.plot(data,show=&#39;inline&#39;, options=options)
+charts.plot(data,show=<span class="hljs-string">'inline'</span>, options=options)
 </code></pre>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%881.28.24.png" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/18/jupyter笔记本基本使用/" data-id="cjf3mehbd005sitbrj8a2udd3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/18/jupyter笔记本基本使用/" data-id="cjf7qwqbm005twxbrcnnrbwm7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -373,7 +382,7 @@ charts.plot(data,show=&#39;inline&#39;, options=options)
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

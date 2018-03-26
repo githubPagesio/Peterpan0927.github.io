@@ -43,7 +43,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -101,303 +101,346 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>学习笔记<br><a id="more"></a></p>
-<h1 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h1><p>什么是爬虫？</p>
-<p>网络爬虫（又被称为网页蜘蛛，网络机器人，在FOAF社区中间，更经常的称为网页追逐者），是一种按照一定的规则，自动的抓取万维网信息的程序或者脚本。<br>简单的来说，爬虫就是把别人网站的信息弄到自己的电脑上，再做一些过滤，筛选，归纳，整理，排序等等，如果数据量足够大，算法足够好，能给别人提供优质的检索服务，就可以做成类似google或baidu</p>
+        <p>学习笔记</p>
+<a id="more"></a>
+<h1 id="网络爬虫"><a class="markdownIt-Anchor" href="#网络爬虫"></a> 网络爬虫</h1>
+<p>什么是爬虫？</p>
+<p>网络爬虫（又被称为网页蜘蛛，网络机器人，在FOAF社区中间，更经常的称为网页追逐者），是一种按照一定的规则，自动的抓取万维网信息的程序或者脚本。<br>
+简单的来说，爬虫就是把别人网站的信息弄到自己的电脑上，再做一些过滤，筛选，归纳，整理，排序等等，如果数据量足够大，算法足够好，能给别人提供优质的检索服务，就可以做成类似google或baidu</p>
 <p>为什么选择python写爬虫？</p>
-<p>1）抓取网页本身的接口<br>相比与其他静态编程语言，如java，c#，C++，python抓取网页文档的接口更简洁；相比其他动态脚本语言，如perl，shell，python的urllib2包提供了较为完整的访问网页文档的API。（当然ruby也是很好的选择）<br>此外，抓取网页有时候需要模拟浏览器的行为，很多网站对于生硬的爬虫抓取都是封杀的。这是我们需要模拟user agent的行为构造合适的请求，譬如模拟用户登陆、模拟session/cookie的存储和设置。在python里都有非常优秀的第三方包帮你搞定，如Requests，mechanize等等。</p>
-<p>2）网页抓取后的处理<br>抓取的网页通常需要处理，比如过滤html标签，提取文本等。python的beautifulsoap提供了简洁的文档处理功能，能用极短的代码完成大部分文档的处理。</p>
+<p>1）抓取网页本身的接口<br>
+相比与其他静态编程语言，如java，c#，C++，python抓取网页文档的接口更简洁；相比其他动态脚本语言，如perl，shell，python的urllib2包提供了较为完整的访问网页文档的API。（当然ruby也是很好的选择）<br>
+此外，抓取网页有时候需要模拟浏览器的行为，很多网站对于生硬的爬虫抓取都是封杀的。这是我们需要模拟user agent的行为构造合适的请求，譬如模拟用户登陆、模拟session/cookie的存储和设置。在python里都有非常优秀的第三方包帮你搞定，如Requests，mechanize等等。</p>
+<p>2）网页抓取后的处理<br>
+抓取的网页通常需要处理，比如过滤html标签，提取文本等。python的beautifulsoap提供了简洁的文档处理功能，能用极短的代码完成大部分文档的处理。</p>
 <p>其实以上功能很多语言和工具都能做，但是用python能够干得最快，最干净。</p>
-<h2 id="1-urlopen"><a href="#1-urlopen" class="headerlink" title="1.urlopen:"></a>1.urlopen:</h2><p>打开一个url方法，返回一个文件对象，然后就可以进行类似文件对象的操作。模块：urllib</p>
+<h2 id="1urlopen"><a class="markdownIt-Anchor" href="#1urlopen"></a> 1.urlopen:</h2>
+<p>打开一个url方法，返回一个文件对象，然后就可以进行类似文件对象的操作。模块：urllib</p>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/AE9908A0-44A5-4B78-8557-360650F1CFFF.png" alt=""></p>
-<h2 id="2-urlretrieve"><a href="#2-urlretrieve" class="headerlink" title="2.urlretrieve():"></a>2.urlretrieve():</h2><p>urlretrieve方法将url定位到的html文件下载到你的本地硬盘当中,模块：utllib,当没有指定路径的时候可以放到临时路径下面</p>
-<pre><code class="python">import urllib
-a = urllib.urlretrieve(&quot;xxx&quot;,filename = &quot;/home/xx/xx/xx.xx&quot;)
-#将a保存在本地硬盘中，可用的方法和urlopen相同,可以选择保存的路径
+<h2 id="2urlretrieve"><a class="markdownIt-Anchor" href="#2urlretrieve"></a> 2.urlretrieve():</h2>
+<p>urlretrieve方法将url定位到的html文件下载到你的本地硬盘当中,模块：utllib,当没有指定路径的时候可以放到临时路径下面</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib
+a = urllib.urlretrieve(<span class="hljs-string">"xxx"</span>,filename = <span class="hljs-string">"/home/xx/xx/xx.xx"</span>)
+<span class="hljs-comment">#将a保存在本地硬盘中，可用的方法和urlopen相同,可以选择保存的路径</span>
 </code></pre>
-<h2 id="3-使用正则获取图片并保存在本地"><a href="#3-使用正则获取图片并保存在本地" class="headerlink" title="3.使用正则获取图片并保存在本地"></a>3.使用正则获取图片并保存在本地</h2><pre><code class="python">import re
-imgList = re.findall(r&#39;src=&quot;(.*?\.(jpg|png))&quot;&#39;,html)
-x = 0
-for imgurl in imgList:
-    print(&#39;正在下载%s&#39;%imgurl[0])
-    urllib.urlretrieve(imgurl[0],&#39;./downloads/%d.jpg&#39;%x)
-    x += 1
+<h2 id="3使用正则获取图片并保存在本地"><a class="markdownIt-Anchor" href="#3使用正则获取图片并保存在本地"></a> 3.使用正则获取图片并保存在本地</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> re
+imgList = re.findall(<span class="hljs-string">r'src="(.*?\.(jpg|png))"'</span>,html)
+x = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> imgurl <span class="hljs-keyword">in</span> imgList:
+    print(<span class="hljs-string">'正在下载%s'</span>%imgurl[<span class="hljs-number">0</span>])
+    urllib.urlretrieve(imgurl[<span class="hljs-number">0</span>],<span class="hljs-string">'./downloads/%d.jpg'</span>%x)
+    x += <span class="hljs-number">1</span>
 </code></pre>
-<h2 id="4-urlencode-GET和POST方法"><a href="#4-urlencode-GET和POST方法" class="headerlink" title="4.urlencode,GET和POST方法"></a>4.urlencode,GET和POST方法</h2><p>最重要的区别是GET方式是直接以链接形式访问，链接中包含了所有的参数，当然如果包含了密码的话是一种不安全的选择，不过你可以直观地看到自己提交了什么内容。POST则不会在网址上显示所有的参数，不过如果你想直接查看提交了什么就不太方便了。</p>
-<pre><code class="python">import urllib
-import urllib2
-
+<h2 id="4urlencodeget和post方法"><a class="markdownIt-Anchor" href="#4urlencodeget和post方法"></a> 4.urlencode,GET和POST方法</h2>
+<p>最重要的区别是GET方式是直接以链接形式访问，链接中包含了所有的参数，当然如果包含了密码的话是一种不安全的选择，不过你可以直观地看到自己提交了什么内容。POST则不会在网址上显示所有的参数，不过如果你想直接查看提交了什么就不太方便了。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib
+<span class="hljs-keyword">import</span> urllib2
+ 
 values = {}
-values[&#39;username&#39;] = &quot;1016903103@qq.com&quot;
-values[&#39;password&#39;] = &quot;XXXX&quot;
+values[<span class="hljs-string">'username'</span>] = <span class="hljs-string">"1016903103@qq.com"</span>
+values[<span class="hljs-string">'password'</span>] = <span class="hljs-string">"XXXX"</span>
 data = urllib.urlencode(values) 
-url = &quot;http://passport.csdn.net/account/login?from=http://my.csdn.net/my/mycsdn&quot;
+url = <span class="hljs-string">"http://passport.csdn.net/account/login?from=http://my.csdn.net/my/mycsdn"</span>
 request = urllib2.Request(url,data)
 response = urllib2.urlopen(request)
-print response.read()
-#POST方法，构建request时传入两个参数，url和data
+<span class="hljs-keyword">print</span> response.read()
+<span class="hljs-comment">#POST方法，构建request时传入两个参数，url和data</span>
 </code></pre>
-<pre><code class="python">import urllib2
-import urllib
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
+<span class="hljs-keyword">import</span> urllib
 values={}
-values[&#39;username&#39;] = &quot;1016903103@qq.com&quot;
-values[&#39;password&#39;]=&quot;XXXX&quot;
+values[<span class="hljs-string">'username'</span>] = <span class="hljs-string">"1016903103@qq.com"</span>
+values[<span class="hljs-string">'password'</span>]=<span class="hljs-string">"XXXX"</span>
 data = urllib.urlencode(values) 
-url = &quot;http://passport.csdn.net/account/login&quot;
-geturl = url + &quot;?&quot;+data
+url = <span class="hljs-string">"http://passport.csdn.net/account/login"</span>
+geturl = url + <span class="hljs-string">"?"</span>+data
 request = urllib2.Request(geturl)
 response = urllib2.urlopen(request)
-print response.read()
-#GET方法，直接把参数写到网址上面，直接构建一个带参数的URL出来即可。
+<span class="hljs-keyword">print</span> response.read()
+<span class="hljs-comment">#GET方法，直接把参数写到网址上面，直接构建一个带参数的URL出来即可。</span>
 </code></pre>
-<h2 id="5-urllib2和伪造请求头部"><a href="#5-urllib2和伪造请求头部" class="headerlink" title="5.urllib2和伪造请求头部"></a>5.urllib2和伪造请求头部</h2><p>目的：是服务器分不清你是爬虫还是浏览器</p>
+<h2 id="5urllib2和伪造请求头部"><a class="markdownIt-Anchor" href="#5urllib2和伪造请求头部"></a> 5.urllib2和伪造请求头部</h2>
+<p>目的：是服务器分不清你是爬虫还是浏览器</p>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/37300744-19C5-4DD5-8D90-606A58200F0A.png" alt=""></p>
 <p>设置Headers:</p>
-<pre><code class="python">import urllib
-import urllib2
-url = &#39;http://www.server.com/login&#39;
-user_agent = &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4)&#39;
-values = {&#39;username&#39; : &#39;pzp&#39;, &#39;password&#39; : &#39;ascndksv&#39;}
-headers = {&#39;User-Agent&#39; : user_agent}
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib
+<span class="hljs-keyword">import</span> urllib2
+url = <span class="hljs-string">'http://www.server.com/login'</span>
+user_agent = <span class="hljs-string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4)'</span>
+values = {<span class="hljs-string">'username'</span> : <span class="hljs-string">'pzp'</span>, <span class="hljs-string">'password'</span> : <span class="hljs-string">'ascndksv'</span>}
+headers = {<span class="hljs-string">'User-Agent'</span> : user_agent}
 data = urllib.urlencode(value)
 request = urllib.Request(url, data, headers)
 response = urllib.urlopen(request)
 page = response.read()
-#服务器会识别headers中的referer是不是它自己，如果不是，有的服务器不会响应，所以我们还可以在headers中加入referer,这样就可以应付防盗链了
-headers = {&#39;User-Agent&#39; : user_agent, &#39;Referer&#39; : &#39;xxxxxx&#39;}
+<span class="hljs-comment">#服务器会识别headers中的referer是不是它自己，如果不是，有的服务器不会响应，所以我们还可以在headers中加入referer,这样就可以应付防盗链了</span>
+headers = {<span class="hljs-string">'User-Agent'</span> : user_agent, <span class="hljs-string">'Referer'</span> : <span class="hljs-string">'xxxxxx'</span>}
 </code></pre>
 <p>关于headers的其他属性：</p>
 <blockquote>
 <p>User-Agent : 有些服务器或 Proxy 会通过该值来判断是否是浏览器发出的请求</p>
+</blockquote>
+<blockquote>
 <p>Content-Type : 在使用 REST 接口时，服务器会检查该值，用来确定 HTTP Body 中的内容该怎样解析。</p>
+</blockquote>
+<blockquote>
 <p>application/xml ： 在 XML RPC，如 RESTful/SOAP 调用时使用</p>
+</blockquote>
+<blockquote>
 <p>application/json ： 在 JSON RPC 调用时使用</p>
+</blockquote>
+<blockquote>
 <p>application/x-www-form-urlencoded ： 浏览器提交 Web 表单时使用</p>
+</blockquote>
+<blockquote>
 <p>在使用服务器提供的 RESTful 或 SOAP 服务时， Content-Type 设置错误会导致服务器拒绝服务</p>
 </blockquote>
-<h2 id="6-BeautifulSoup参考文章"><a href="#6-BeautifulSoup参考文章" class="headerlink" title="6.BeautifulSoup参考文章"></a>6.BeautifulSoup<a href="http://www.cnblogs.com/yupeng/p/3362031.html" target="_blank" rel="external">参考文章</a></h2><p>Beautiful Soup 是用Python写的一个HTML/XML的解析器，它可以很好的处理不规范标记并生成剖析树(parse tree)。 它提供简单又常用的导航（navigating），搜索以及修改剖析树的操作。它可以大大节省你的编程时间。</p>
-<pre><code class="python">from bs4 import BeautifulSoup
-import urllib2
-html = urllib2.urlopen(&quot;xxxxx&quot;)
+<h2 id="6beautifulsoup参考文章"><a class="markdownIt-Anchor" href="#6beautifulsoup参考文章"></a> 6.BeautifulSoup<a href="http://www.cnblogs.com/yupeng/p/3362031.html" target="_blank" rel="external">参考文章</a></h2>
+<p>Beautiful Soup 是用Python写的一个HTML/XML的解析器，它可以很好的处理不规范标记并生成剖析树(parse tree)。 它提供简单又常用的导航（navigating），搜索以及修改剖析树的操作。它可以大大节省你的编程时间。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+<span class="hljs-keyword">import</span> urllib2
+html = urllib2.urlopen(<span class="hljs-string">"xxxxx"</span>)
 html = html.read()
 soup = BeautifulSoup(html)
-#下面是几个常用的功能
-soup.标签名  #只会显示第一个
-soup.select(&#39;标签名&#39;)
-soup.select(&#39;.类名&#39;)
-soup.select(&#39;#id名&#39;)
-#可以通过标签名，类名，id名来寻找，可以找出所有的
-soup.select(&#39;标签名 id&#39;)  #组合查找
-soup.select(&#39;head &gt; title&#39;) #子标签查找
-soup.select(&#39;a[class=&quot;sister&quot;]&#39;)  #属性查找
-soup.标签名.string   #获取文字
-soup.标签名.attrs    #获取属性
-#通过遍历树来寻找
-soup.find_all(&#39;name, attrs, recursive, text, limit, **kwargs&#39;)
-#get_text
-soup.get_text()#获取文字信息，类似于string，但是string只能对一个对象使用
-soup.stripped_string#类似于get_text（）方法，但是会获取所有子标签的文字信息
+<span class="hljs-comment">#下面是几个常用的功能</span>
+soup.标签名  <span class="hljs-comment">#只会显示第一个</span>
+soup.select(<span class="hljs-string">'标签名'</span>)
+soup.select(<span class="hljs-string">'.类名'</span>)
+soup.select(<span class="hljs-string">'#id名'</span>)
+<span class="hljs-comment">#可以通过标签名，类名，id名来寻找，可以找出所有的</span>
+soup.select(<span class="hljs-string">'标签名 id'</span>)  <span class="hljs-comment">#组合查找</span>
+soup.select(<span class="hljs-string">'head &gt; title'</span>) <span class="hljs-comment">#子标签查找</span>
+soup.select(<span class="hljs-string">'a[class="sister"]'</span>)  <span class="hljs-comment">#属性查找</span>
+soup.标签名.string   <span class="hljs-comment">#获取文字</span>
+soup.标签名.attrs    <span class="hljs-comment">#获取属性</span>
+<span class="hljs-comment">#通过遍历树来寻找</span>
+soup.find_all(<span class="hljs-string">'name, attrs, recursive, text, limit, **kwargs'</span>)
+<span class="hljs-comment">#get_text</span>
+soup.get_text()<span class="hljs-comment">#获取文字信息，类似于string，但是string只能对一个对象使用</span>
+soup.stripped_string<span class="hljs-comment">#类似于get_text（）方法，但是会获取所有子标签的文字信息</span>
 </code></pre>
-<h2 id="7-使用select不断筛选-取得属性"><a href="#7-使用select不断筛选-取得属性" class="headerlink" title="7.使用select不断筛选,取得属性"></a>7.使用select不断筛选,取得属性</h2><pre><code class="python">#之前的过程省略,此时yy是一个列表，不能对他进行筛选操作
-yy = soup select(&#39;div[id=xxx]&#39;)
-#此时将列表又转换成了对象，可以继续操作了
-zz = yy[0]
-#指向性的提取对象中的属性
-zz[&#39;href&#39;]
-#将对象转换成列表
+<h2 id="7使用select不断筛选取得属性"><a class="markdownIt-Anchor" href="#7使用select不断筛选取得属性"></a> 7.使用select不断筛选,取得属性</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#之前的过程省略,此时yy是一个列表，不能对他进行筛选操作</span>
+yy = soup select(<span class="hljs-string">'div[id=xxx]'</span>)
+<span class="hljs-comment">#此时将列表又转换成了对象，可以继续操作了</span>
+zz = yy[<span class="hljs-number">0</span>]
+<span class="hljs-comment">#指向性的提取对象中的属性</span>
+zz[<span class="hljs-string">'href'</span>]
+<span class="hljs-comment">#将对象转换成列表</span>
 list(xxx)
 </code></pre>
-<h2 id="8-urlopen的分析"><a href="#8-urlopen的分析" class="headerlink" title="8.urlopen的分析"></a>8.urlopen的分析</h2><pre><code class="python">urlopen(url, data, timeout)
-#第一个参数url即为URL，第二个参数data是访问URL时要传送的数据，第三个timeout是设置超时时间。
+<h2 id="8urlopen的分析"><a class="markdownIt-Anchor" href="#8urlopen的分析"></a> 8.urlopen的分析</h2>
+<pre class="highlight"><code class="python">urlopen(url, data, timeout)
+<span class="hljs-comment">#第一个参数url即为URL，第二个参数data是访问URL时要传送的数据，第三个timeout是设置超时时间。</span>
 
-#第二三个参数是可以不传送的，data默认为空None，timeout默认为 socket._GLOBAL_DEFAULT_TIMEOUT
+<span class="hljs-comment">#第二三个参数是可以不传送的，data默认为空None，timeout默认为 socket._GLOBAL_DEFAULT_TIMEOUT</span>
 
-#第一个参数URL是必须要传送的
+<span class="hljs-comment">#第一个参数URL是必须要传送的</span>
 </code></pre>
-<h2 id="9-构造Request"><a href="#9-构造Request" class="headerlink" title="9.构造Request"></a>9.构造Request</h2><p>其实上面的urlopen参数可以传入一个request请求,它其实就是一个Request类的实例，构造时需要传入Url,Data等等的内容。因为在构建请求时还需要加入好多内容，通过构建一个request，服务器响应请求得到应答，这样显得逻辑上清晰明确。</p>
-<pre><code class="python">import urllib2
-
-request = urllib2.Request(&quot;http://www.baidu.com&quot;)
+<h2 id="9构造request"><a class="markdownIt-Anchor" href="#9构造request"></a> 9.构造Request</h2>
+<p>其实上面的urlopen参数可以传入一个request请求,它其实就是一个Request类的实例，构造时需要传入Url,Data等等的内容。因为在构建请求时还需要加入好多内容，通过构建一个request，服务器响应请求得到应答，这样显得逻辑上清晰明确。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
+ 
+request = urllib2.Request(<span class="hljs-string">"http://www.baidu.com"</span>)
 response = urllib2.urlopen(request)
-print response.read()
+<span class="hljs-keyword">print</span> response.read()
 </code></pre>
-<h2 id="10-Proxy（代理）的设置"><a href="#10-Proxy（代理）的设置" class="headerlink" title="10.Proxy（代理）的设置"></a>10.Proxy（代理）的设置</h2><p>urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一个网站它会检测某一段时间某个IP 的访问次数，如果访问次数过多，它会禁止你的访问。所以你可以设置一些代理服务器来帮助你做工作，每隔一段时间换一个代理，就不知道到底是谁了。</p>
-<pre><code class="python">import urllib2
-enable_proxy = True
-proxy_handler = urllib2.ProxyHandler({&quot;http&quot; : &#39;http://some-proxy.com:8080&#39;})
+<h2 id="10proxy代理的设置"><a class="markdownIt-Anchor" href="#10proxy代理的设置"></a> 10.Proxy（代理）的设置</h2>
+<p>urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一个网站它会检测某一段时间某个IP 的访问次数，如果访问次数过多，它会禁止你的访问。所以你可以设置一些代理服务器来帮助你做工作，每隔一段时间换一个代理，就不知道到底是谁了。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
+enable_proxy = <span class="hljs-keyword">True</span>
+proxy_handler = urllib2.ProxyHandler({<span class="hljs-string">"http"</span> : <span class="hljs-string">'http://some-proxy.com:8080'</span>})
 null_proxy_handler = urllib2.ProxyHandler({})
-if enable_proxy:
+<span class="hljs-keyword">if</span> enable_proxy:
     opener = urllib2.build_opener(proxy_handler)
-else:
+<span class="hljs-keyword">else</span>:
     opener = urllib2.build_opener(null_proxy_handler)
 urllib2.install_opener(opener)
 </code></pre>
-<h2 id="11-Timeout设置"><a href="#11-Timeout设置" class="headerlink" title="11.Timeout设置"></a>11.Timeout设置</h2><p>可以设置等待多久超时，为了解决一些网站实在响应过慢而造成的影响。如果第二个参数data为空那么要特别指定是timeout是多少，写明形参，如果data已经传入，则不必声明。</p>
-<pre><code class="python">import urllib2
-response = urllib2.urlopen(&#39;http://www.baidu.com&#39;, data, 10)
-import urllib2
-response = urllib2.urlopen(&#39;http://www.baidu.com&#39;, timeout=10)
+<h2 id="11timeout设置"><a class="markdownIt-Anchor" href="#11timeout设置"></a> 11.Timeout设置</h2>
+<p>可以设置等待多久超时，为了解决一些网站实在响应过慢而造成的影响。如果第二个参数data为空那么要特别指定是timeout是多少，写明形参，如果data已经传入，则不必声明。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
+response = urllib2.urlopen(<span class="hljs-string">'http://www.baidu.com'</span>, data, <span class="hljs-number">10</span>)
+<span class="hljs-keyword">import</span> urllib2
+response = urllib2.urlopen(<span class="hljs-string">'http://www.baidu.com'</span>, timeout=<span class="hljs-number">10</span>)
 </code></pre>
-<h2 id="12-PUT和DELETE方法"><a href="#12-PUT和DELETE方法" class="headerlink" title="12.PUT和DELETE方法"></a>12.PUT和DELETE方法</h2><p>PUT：这个方法比较少见。HTML表单也不支持这个。本质上来讲， PUT和POST极为相似，都是向服务器发送数据，但它们之间有一个重要区别，PUT通常指定了资源的存放位置，而POST则没有，POST的数据存放位置由服务器自己决定DELETE：删除某一个资源。基本上这个也很少见，不过还是有一些地方比如amazon的S3云服务里面就用的这个方法来删除资源。</p>
-<h2 id="13-URLError"><a href="#13-URLError" class="headerlink" title="13.URLError"></a>13.URLError</h2><p>产生原因：</p>
+<h2 id="12put和delete方法"><a class="markdownIt-Anchor" href="#12put和delete方法"></a> 12.PUT和DELETE方法</h2>
+<p>PUT：这个方法比较少见。HTML表单也不支持这个。本质上来讲， PUT和POST极为相似，都是向服务器发送数据，但它们之间有一个重要区别，PUT通常指定了资源的存放位置，而POST则没有，POST的数据存放位置由服务器自己决定DELETE：删除某一个资源。基本上这个也很少见，不过还是有一些地方比如amazon的S3云服务里面就用的这个方法来删除资源。</p>
+<h2 id="13urlerror"><a class="markdownIt-Anchor" href="#13urlerror"></a> 13.URLError</h2>
+<p>产生原因：</p>
 <ul>
 <li>网络无连接，即本机无法上网</li>
 <li>连接不到特定的服务器</li>
 <li>服务器不存在</li>
 </ul>
 <p>在代码中可以通过捕获异常来判断原因：</p>
-<pre><code class="python">import urllib2
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
 
-requset = urllib2.Request(&#39;http://www.xxxxx.com&#39;)
-try:
+requset = urllib2.Request(<span class="hljs-string">'http://www.xxxxx.com'</span>)
+<span class="hljs-keyword">try</span>:
     urllib2.urlopen(request)
-except urllib2.URLError, e:
-    print e.reason
-#如果访问了一个不存在的网址，那么运行的结果是：[Errno 11004] getaddrinfo failed
+<span class="hljs-keyword">except</span> urllib2.URLError, e:
+    <span class="hljs-keyword">print</span> e.reason
+<span class="hljs-comment">#如果访问了一个不存在的网址，那么运行的结果是：[Errno 11004] getaddrinfo failed</span>
 </code></pre>
 <p>HTTPError,是URLError的子类，所以也可以将父类捕获异常写在子类的后面</p>
-<pre><code class="python">import urllib2
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
 
-req = urllib2.Request(&#39;http://blog.csdn.net/cqcre&#39;)
-try:
+req = urllib2.Request(<span class="hljs-string">'http://blog.csdn.net/cqcre'</span>)
+<span class="hljs-keyword">try</span>:
     urllib2.urlopen(req)
-except urllib2.HTTPError, e:
-    print e.code
-except urllib2.URLError, e:
-    print e.reason
-else:
-    print (&quot;OK&quot;)
-#样例检错：403
+<span class="hljs-keyword">except</span> urllib2.HTTPError, e:
+    <span class="hljs-keyword">print</span> e.code
+<span class="hljs-keyword">except</span> urllib2.URLError, e:
+    <span class="hljs-keyword">print</span> e.reason
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">"OK"</span>)
+<span class="hljs-comment">#样例检错：403 </span>
 </code></pre>
-<h2 id="14-Opener概念"><a href="#14-Opener概念" class="headerlink" title="14.Opener概念"></a>14.Opener概念</h2><blockquote>
+<h2 id="14opener概念"><a class="markdownIt-Anchor" href="#14opener概念"></a> 14.Opener概念</h2>
+<blockquote>
 <p>Cookie，指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密）比如说有些网站需要登录后才能访问某个页面，在登录之前，你想抓取某个页面内容是不允许的。那么我们可以利用Urllib2库保存我们登录的Cookie，然后再抓取其他页面就达到目的了。</p>
+</blockquote>
+<blockquote>
 <p>当你获取一个URL你使用一个opener(一个urllib2.OpenerDirector的实例)。在前面，我们都是使用的默认的opener，也就是urlopen。它是一个特殊的opener，可以理解成opener的一个特殊实例，传入的参数仅仅是url，data，timeout。</p>
+</blockquote>
+<blockquote>
 <p>如果我们需要用到Cookie，只用这个opener是不能达到目的的，所以我们需要创建更一般的opener来实现对Cookie的设置。</p>
 </blockquote>
-<h2 id="15-Cookielib"><a href="#15-Cookielib" class="headerlink" title="15.Cookielib"></a>15.Cookielib</h2><p>该模块主要的对象有CookieJar、FileCookieJar、MozillaCookieJar、LWPCookieJar。</p>
+<h2 id="15cookielib"><a class="markdownIt-Anchor" href="#15cookielib"></a> 15.Cookielib</h2>
+<p>该模块主要的对象有CookieJar、FileCookieJar、MozillaCookieJar、LWPCookieJar。</p>
 <p>1.获取Cookie保存到变量</p>
-<pre><code class="python">import urllib2
-import cookielib
-#声明一个CookieJar对象实例来保存cookie
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> urllib2
+<span class="hljs-keyword">import</span> cookielib
+<span class="hljs-comment">#声明一个CookieJar对象实例来保存cookie</span>
 cookie = cookielib.CookieJar()
-#利用urllib2库的HTTPCookieProcessor对象来创建cookie处理器
+<span class="hljs-comment">#利用urllib2库的HTTPCookieProcessor对象来创建cookie处理器</span>
 handler=urllib2.HTTPCookieProcessor(cookie)
-#通过handler来构建opener
+<span class="hljs-comment">#通过handler来构建opener</span>
 opener = urllib2.build_opener(handler)
-#此处的open方法同urllib2的urlopen方法，也可以传入request
-response = opener.open(&#39;http://www.baidu.com&#39;)
-for item in cookie:
-    print &#39;Name = &#39;+item.name
-    print &#39;Value = &#39;+item.value
+<span class="hljs-comment">#此处的open方法同urllib2的urlopen方法，也可以传入request</span>
+response = opener.open(<span class="hljs-string">'http://www.baidu.com'</span>)
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> cookie:
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'Name = '</span>+item.name
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'Value = '</span>+item.value
 </code></pre>
 <p>2.保存Cookie到文件</p>
-<pre><code class="python">import cookielib
-import urllib2
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> cookielib
+<span class="hljs-keyword">import</span> urllib2
 
-#设置保存cookie的文件，同级目录下的cookie.txt
-filename = &#39;cookie.txt&#39;
-#声明一个MozillaCookieJar对象实例来保存cookie，之后写入文件
+<span class="hljs-comment">#设置保存cookie的文件，同级目录下的cookie.txt</span>
+filename = <span class="hljs-string">'cookie.txt'</span>
+<span class="hljs-comment">#声明一个MozillaCookieJar对象实例来保存cookie，之后写入文件</span>
 cookie = cookielib.MozillaCookieJar(filename)
-#利用urllib2库的HTTPCookieProcessor对象来创建cookie处理器
+<span class="hljs-comment">#利用urllib2库的HTTPCookieProcessor对象来创建cookie处理器</span>
 handler = urllib2.HTTPCookieProcessor(cookie)
-#通过handler来构建opener
+<span class="hljs-comment">#通过handler来构建opener</span>
 opener = urllib2.build_opener(handler)
-#创建一个请求，原理同urllib2的urlopen
-response = opener.open(&quot;http://www.baidu.com&quot;)
-#保存cookie到文件
-cookie.save(ignore_discard=True, ignore_expires=True)
-#ignore_discard的意思是即使cookies将被丢弃也将它保存下来
-#ignore_expires的意思是如果该文件中的cookie已经存在，则覆盖原文件写入
+<span class="hljs-comment">#创建一个请求，原理同urllib2的urlopen</span>
+response = opener.open(<span class="hljs-string">"http://www.baidu.com"</span>)
+<span class="hljs-comment">#保存cookie到文件</span>
+cookie.save(ignore_discard=<span class="hljs-keyword">True</span>, ignore_expires=<span class="hljs-keyword">True</span>)
+<span class="hljs-comment">#ignore_discard的意思是即使cookies将被丢弃也将它保存下来</span>
+<span class="hljs-comment">#ignore_expires的意思是如果该文件中的cookie已经存在，则覆盖原文件写入</span>
 </code></pre>
 <p>3.从文件中获取Cookie 值并访问</p>
-<pre><code class="python">import cookielib
-import urllib2
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> cookielib
+<span class="hljs-keyword">import</span> urllib2
 
-#创造一个MozillaCookieJar实例对象
+<span class="hljs-comment">#创造一个MozillaCookieJar实例对象</span>
 cookie = cookielib.MozillaCookieJar()
-#从文件中读入值到实例对象
-cookie.load(&#39;cookie.txt&#39;, ignore_disgard = True, ignore_expires = True)
-#创造请求的request
-request = urllib2.Request(&quot;http://www.baidu.com&quot;)
-#创建一个opener
+<span class="hljs-comment">#从文件中读入值到实例对象</span>
+cookie.load(<span class="hljs-string">'cookie.txt'</span>, ignore_disgard = <span class="hljs-keyword">True</span>, ignore_expires = <span class="hljs-keyword">True</span>)
+<span class="hljs-comment">#创造请求的request</span>
+request = urllib2.Request(<span class="hljs-string">"http://www.baidu.com"</span>)
+<span class="hljs-comment">#创建一个opener</span>
 opener = urllib2.bulid_opener(urllib2.HTTPCookieProcessor(cookie))
 reponse = opener.open(request)
-print reponse.read()
+<span class="hljs-keyword">print</span> reponse.read()
 </code></pre>
 <p>4.利用cookie模拟网站的登录</p>
-<pre><code class="python">#示例。。登录校园网
-import urllib
-import http.cookiejar
+<pre class="highlight"><code class="python"><span class="hljs-comment">#示例。。登录校园网</span>
+<span class="hljs-keyword">import</span> urllib
+<span class="hljs-keyword">import</span> http.cookiejar
 
-filename = &#39;cookie.txt&#39;
+filename = <span class="hljs-string">'cookie.txt'</span>
 
 cookie = http.cookiejar.MozillaCookieJar(filename)
 
 opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
 
 postdata = urllib.parse.urlencode({
-        &#39;text&#39; : &#39;2016xxxxxxxx&#39;,
-        &#39;password&#39;   : &#39;xxxxxxxxxxx&#39;
+        <span class="hljs-string">'text'</span> : <span class="hljs-string">'2016xxxxxxxx'</span>,
+        <span class="hljs-string">'password'</span>   : <span class="hljs-string">'xxxxxxxxxxx'</span>
 })
 
-loginurl = &#39;http://ids.scuec.edu.cn/amserver/UI/Login?goto=http://eol.scuec.edu.cn/meol/homepage/common/sso_login.jsp&#39;
+loginurl = <span class="hljs-string">'http://ids.scuec.edu.cn/amserver/UI/Login?goto=http://eol.scuec.edu.cn/meol/homepage/common/sso_login.jsp'</span>
 
-result = opener.open(loginurl, postdata.encode(&#39;utf-8&#39;))
+result = opener.open(loginurl, postdata.encode(<span class="hljs-string">'utf-8'</span>))
 
-cookie.save(ignore_discard=True,ignore_expires=True)
+cookie.save(ignore_discard=<span class="hljs-keyword">True</span>,ignore_expires=<span class="hljs-keyword">True</span>)
 
-gradeurl = &#39;http://eol.scuec.edu.cn/meol/jpk/course/layout/newpage/index.jsp?courseId=16574&#39;
+gradeurl = <span class="hljs-string">'http://eol.scuec.edu.cn/meol/jpk/course/layout/newpage/index.jsp?courseId=16574'</span>
 
 result = opener.open(gradeurl)
 
-print ((result.read()).decode(&#39;gbk&#39;))
+<span class="hljs-keyword">print</span> ((result.read()).decode(<span class="hljs-string">'gbk'</span>))
 </code></pre>
-<h2 id="16-利用正则表达式"><a href="#16-利用正则表达式" class="headerlink" title="16.利用正则表达式"></a>16.利用正则表达式</h2><h4 id="1-定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。"><a href="#1-定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。" class="headerlink" title="1.定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。"></a>1.定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。</h4><p><img src="http://omg5mjb8v.bkt.clouddn.com/20130515113723855-e1424095177180.png" alt=""></p>
-<h4 id="2-正则表达式的相关注解："><a href="#2-正则表达式的相关注解：" class="headerlink" title="2.正则表达式的相关注解："></a>2.正则表达式的相关注解：</h4><p>（1）数量词的贪婪模式与非贪婪模式</p>
-<p>正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式”ab<em>”如果用于查找”abbbc”，将找到”abbb”。而如果使用非贪婪的数量词”ab</em>?”，将找到”a”。</p>
+<h2 id="16利用正则表达式"><a class="markdownIt-Anchor" href="#16利用正则表达式"></a> 16.利用正则表达式</h2>
+<h4 id="1定义正则表达式是对字符串操作的一种逻辑公式就是用事先定义好的一些特定字符-及这些特定字符的组合组成一个规则字符串这个规则字符串用来表达对字符串的一种过滤逻辑"><a class="markdownIt-Anchor" href="#1定义正则表达式是对字符串操作的一种逻辑公式就是用事先定义好的一些特定字符-及这些特定字符的组合组成一个规则字符串这个规则字符串用来表达对字符串的一种过滤逻辑"></a> 1.定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。</h4>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/20130515113723855-e1424095177180.png" alt=""></p>
+<h4 id="2正则表达式的相关注解"><a class="markdownIt-Anchor" href="#2正则表达式的相关注解"></a> 2.正则表达式的相关注解：</h4>
+<p>（1）数量词的贪婪模式与非贪婪模式</p>
+<p>正则表达式通常用于在文本中查找匹配的字符串。Python里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式”ab*”如果用于查找”abbbc”，将找到”abbb”。而如果使用非贪婪的数量词”ab*?”，将找到”a”。</p>
 <p>注：我们一般使用非贪婪模式来提取。</p>
-<h3 id="（2）反斜杠问题"><a href="#（2）反斜杠问题" class="headerlink" title="（2）反斜杠问题"></a>（2）反斜杠问题</h3><p>与大多数编程语言相同，正则表达式里使用”\”作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符”\”，那么使用编程语言表示的正则表达式里将需要4个反斜杠”\\”：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。</p>
+<h3 id="2反斜杠问题"><a class="markdownIt-Anchor" href="#2反斜杠问题"></a> （2）反斜杠问题</h3>
+<p>与大多数编程语言相同，正则表达式里使用”\”作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符”\”，那么使用编程语言表示的正则表达式里将需要4个反斜杠”\\”：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。</p>
 <p>Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r”\”表示。同样，匹配一个数字的”\d”可以写成r”\d”。有了原生字符串，妈妈也不用担心是不是漏写了反斜杠，写出来的表达式也更直观了。</p>
-<h2 id="17-两种表达方式"><a href="#17-两种表达方式" class="headerlink" title="17.两种表达方式"></a>17.两种表达方式</h2><p>XPath:/html/body/div[2]/ul/li[1]/img</p>
+<h2 id="17两种表达方式"><a class="markdownIt-Anchor" href="#17两种表达方式"></a> 17.两种表达方式</h2>
+<p>XPath:/html/body/div[2]/ul/li[1]/img</p>
 <p>CSS Selector:body &gt; div.main-content &gt; li:nth-child(1) &gt; img</p>
-<h2 id="18-同步和异步加载"><a href="#18-同步和异步加载" class="headerlink" title="18.同步和异步加载"></a>18.同步和异步加载</h2><p>它允许无阻塞资源加载，并且使 onload 启动更快，允许页面内容加载，而不需要刷新页面，也可以根据页面内容延迟加载依赖。</p>
-<pre><code class="javascript">//异步加载
-&lt;strong&gt;(function() {  
-     var s = document.createElement(&#39;script&#39;);  
-     s.type = &#39;text/javascript&#39;;  
-     s.async = true;  
-     s.src = &#39;http://yourdomain.com/script.js&#39;;  
-     var x = document.getElementsByTagName(&#39;script&#39;)[0];  
+<h2 id="18同步和异步加载"><a class="markdownIt-Anchor" href="#18同步和异步加载"></a> 18.同步和异步加载</h2>
+<p>它允许无阻塞资源加载，并且使 onload 启动更快，允许页面内容加载，而不需要刷新页面，也可以根据页面内容延迟加载依赖。</p>
+<pre class="highlight"><code class="javascript"><span class="hljs-comment">//异步加载</span>
+&lt;strong&gt;(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{  
+     <span class="hljs-keyword">var</span> s = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'script'</span>);  
+     s.type = <span class="hljs-string">'text/javascript'</span>;  
+     s.async = <span class="hljs-literal">true</span>;  
+     s.src = <span class="hljs-string">'http://yourdomain.com/script.js'</span>;  
+     <span class="hljs-keyword">var</span> x = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'script'</span>)[<span class="hljs-number">0</span>];  
      x.parentNode.insertBefore(s, x);  
- })();&lt;/strong&gt;
+ })();<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span></span>  
 </code></pre>
-<pre><code class="javascript">//同步加载
-&lt;script src=&quot;http://XXX.com/script.js&quot;&gt;&lt;/script&gt;
+<pre class="highlight"><code class="javascript"><span class="hljs-comment">//同步加载</span>
+&lt;script src=<span class="hljs-string">"http://XXX.com/script.js"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
 </code></pre>
 <p>同步模式，又称阻塞模式，会阻止浏览器的后续处理，停止了后续的解析，因此停止了后续的文件加载（如图像）、渲染、代码执行。一般的script标签（不带async等属性）加载时会阻塞浏览器，也就是说，浏览器在下载或执行该js代码块时，后面的标签不会被解析，例如在head中添加一个script，但这个script下载时网络不稳定，很长时间没有下载完成对应的js文件，那么浏览器此时一直等待这个js文件下载，此时页面不会被渲染，用户看到的就是白屏。以前的一般建议是把<script>放在页面末尾</body>之前，这样尽可能减少这种阻塞行为，而先让页面展示出来。</p>
-<h2 id="19-抓取异步加载的数据"><a href="#19-抓取异步加载的数据" class="headerlink" title="19.抓取异步加载的数据"></a>19.抓取异步加载的数据</h2><pre><code class="python">def get_more_data(start, end):
-    for one in range(start, end):
+<h2 id="19抓取异步加载的数据"><a class="markdownIt-Anchor" href="#19抓取异步加载的数据"></a> 19.抓取异步加载的数据</h2>
+<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_more_data</span><span class="hljs-params">(start, end)</span>:</span>
+    <span class="hljs-keyword">for</span> one <span class="hljs-keyword">in</span> range(start, end):
         get_data(url+str(one))
-        tome.sleep(1)
+        tome.sleep(<span class="hljs-number">1</span>)
 </code></pre>
-<h2 id="20-使用MongoDB进行排版和插入"><a href="#20-使用MongoDB进行排版和插入" class="headerlink" title="20.使用MongoDB进行排版和插入"></a>20.使用MongoDB进行排版和插入</h2><pre><code class="python">#使用mongodb进行简单的读取和插入
-import pymongo
+<h2 id="20使用mongodb进行排版和插入"><a class="markdownIt-Anchor" href="#20使用mongodb进行排版和插入"></a> 20.使用MongoDB进行排版和插入</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#使用mongodb进行简单的读取和插入</span>
+<span class="hljs-keyword">import</span> pymongo
 
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
 
-DB = client[&#39;DB&#39;]
+DB = client[<span class="hljs-string">'DB'</span>]
 
-sheet_line = DB[&#39;sheet_line&#39;]
+sheet_line = DB[<span class="hljs-string">'sheet_line'</span>]
 
-path = &#39;/Users/mac/Desktop/1.md&#39;
+path = <span class="hljs-string">'/Users/mac/Desktop/1.md'</span>
 
-with open(path, &#39;r&#39;) as f:
+<span class="hljs-keyword">with</span> open(path, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> f:
     lines = f.readlines()
-    for index,line in enumerate(lines):
+    <span class="hljs-keyword">for</span> index,line <span class="hljs-keyword">in</span> enumerate(lines):
         data={
-                &#39;line&#39;  : line,
-                &#39;index&#39; : index,
-                &#39;words&#39; : len(line.split())
+                <span class="hljs-string">'line'</span>  : line,
+                <span class="hljs-string">'index'</span> : index,
+                <span class="hljs-string">'words'</span> : len(line.split())
              }
         print(data)
         sheet_line.insert_one(data)
@@ -410,167 +453,173 @@ with open(path, &#39;r&#39;) as f:
 <p>$gte:greater than equal</p>
 <p>$ne:not equal</p>
 </blockquote>
-<p>e.g-&gt;sheet.find{word:{‘$lt’:5}},表示找到sheet中所有字数比五小的。</p>
-<pre><code class="python">#找出字数小于等于三的行数并输出其内容
-for item in sheet_line.find{word:{&#39;$lte&#39;:3}}:
-    print(item[&#39;line&#39;])
+<p>e.g-&gt;sheet.find{word:{’$lt’:5}},表示找到sheet中所有字数比五小的。</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#找出字数小于等于三的行数并输出其内容</span>
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> sheet_line.find{word:{<span class="hljs-string">'$lte'</span>:<span class="hljs-number">3</span>}}:
+    print(item[<span class="hljs-string">'line'</span>])
 </code></pre>
-<h2 id="21-爬取大规模数据的工作流分析"><a href="#21-爬取大规模数据的工作流分析" class="headerlink" title="21.爬取大规模数据的工作流分析"></a>21.爬取大规模数据的工作流分析</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt=""></p>
+<h2 id="21爬取大规模数据的工作流分析"><a class="markdownIt-Anchor" href="#21爬取大规模数据的工作流分析"></a> 21.爬取大规模数据的工作流分析</h2>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt="" /></p>
 <p>在爬取大规模数据的时候，要分模块的去爬取</p>
 <p>1.构造一个爬取所有网页的爬虫，将爬取到的网页存储到数据库中</p>
 <p>2.再构造一个爬虫从数据中提取网址，爬取单个页面的信息</p>
-<pre><code class="python">#可以通过find方法来对不同的网页来进行适配,e.g:
-if soup.find(&#39;td&#39;,&#39;t&#39;):
-    #进行相关的爬取操作
-else:
-    pass
-#在对数据库进行插入操作的时候，也可以通过键值对的模式
- sheet_line.insert_one({&#39;url&#39; : &#39;http://www.xxx.com&#39;})
+<pre class="highlight"><code class="python"><span class="hljs-comment">#可以通过find方法来对不同的网页来进行适配,e.g:</span>
+<span class="hljs-keyword">if</span> soup.find(<span class="hljs-string">'td'</span>,<span class="hljs-string">'t'</span>):
+	<span class="hljs-comment">#进行相关的爬取操作</span>
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">pass</span>
+<span class="hljs-comment">#在对数据库进行插入操作的时候，也可以通过键值对的模式</span>
+ sheet_line.insert_one({<span class="hljs-string">'url'</span> : <span class="hljs-string">'http://www.xxx.com'</span>})
 </code></pre>
-<pre><code class="python">#将爬取的单个页面信息插入到数据库中
-def get_item_info(url):
+<pre class="highlight"><code class="python"><span class="hljs-comment">#将爬取的单个页面信息插入到数据库中</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_item_info</span><span class="hljs-params">(url)</span>:</span>
     web_data = requests.get(url)
-    soup = BeautifulSoup(web_data.text, &#39;lxml&#39;)
+    soup = BeautifulSoup(web_data.text, <span class="hljs-string">'lxml'</span>)
     title = soup.title.text
-    price = soup.select(&#39;span.price.c_f50&#39;)[0].text
-    date = soup.select(&#39;.time&#39;)[0].text
-    #进一步容错的设置
-    area = list(soup.select(&#39;.c_25d a&#39;)[0].stripped_strings) if soup.find_all(&#39;span&#39;,&#39;c_25d&#39;) else None
-    item_info.insert_one({&#39;title&#39;:title, &#39;date&#39;:date, &#39;area&#39;:area})
+    price = soup.select(<span class="hljs-string">'span.price.c_f50'</span>)[<span class="hljs-number">0</span>].text
+    date = soup.select(<span class="hljs-string">'.time'</span>)[<span class="hljs-number">0</span>].text
+    <span class="hljs-comment">#进一步容错的设置</span>
+    area = list(soup.select(<span class="hljs-string">'.c_25d a'</span>)[<span class="hljs-number">0</span>].stripped_strings) <span class="hljs-keyword">if</span> soup.find_all(<span class="hljs-string">'span'</span>,<span class="hljs-string">'c_25d'</span>) <span class="hljs-keyword">else</span> <span class="hljs-keyword">None</span>
+    item_info.insert_one({<span class="hljs-string">'title'</span>:title, <span class="hljs-string">'date'</span>:date, <span class="hljs-string">'area'</span>:area})
 </code></pre>
-<pre><code class="python">#对于404页面的判断，e.g:
-#404页面示例
-&lt;script src=&quot;http://www.douyu.com/js/404/jQuery-1.3.2.js&quot; type= &quot;text/javascript&quot;&gt;
-no_longer_exist = &#39;404&#39; in soup.find(&#39;script&#39;, type = &quot;text/javascript&quot;).get(&#39;src&#39;).split(&#39;/&#39;)
-#返回一个布尔型来判断，加上一个判断语句加入爬取页面信息的函数即可判断404
+<pre class="highlight"><code class="python"><span class="hljs-comment">#对于404页面的判断，e.g:</span>
+<span class="hljs-comment">#404页面示例</span>
+&lt;script src=<span class="hljs-string">"http://www.douyu.com/js/404/jQuery-1.3.2.js"</span> type= <span class="hljs-string">"text/javascript"</span>&gt;
+no_longer_exist = <span class="hljs-string">'404'</span> <span class="hljs-keyword">in</span> soup.find(<span class="hljs-string">'script'</span>, type = <span class="hljs-string">"text/javascript"</span>).get(<span class="hljs-string">'src'</span>).split(<span class="hljs-string">'/'</span>)
+<span class="hljs-comment">#返回一个布尔型来判断，加上一个判断语句加入爬取页面信息的函数即可判断404</span>
 </code></pre>
-<h2 id="22-进程和线程"><a href="#22-进程和线程" class="headerlink" title="22.进程和线程"></a>22.进程和线程</h2><h3 id="形象的理解方式："><a href="#形象的理解方式：" class="headerlink" title="形象的理解方式："></a>形象的理解方式：</h3><blockquote>
+<h2 id="22进程和线程"><a class="markdownIt-Anchor" href="#22进程和线程"></a> 22.进程和线程</h2>
+<h3 id="形象的理解方式"><a class="markdownIt-Anchor" href="#形象的理解方式"></a> 形象的理解方式：</h3>
+<blockquote>
 <p>单进程单线程：一个餐馆里一张桌子一个人吃饭</p>
 <p>单进程多线程：一个餐馆里一张桌子多个人吃饭</p>
 <p>多进程单线程：一个餐馆里多张桌子，每张桌子一个人吃饭</p>
 <p>多进程多线程：一个餐馆里多张桌子，每个桌子多个人吃法</p>
 </blockquote>
-<h2 id="23-多进程爬虫数据抓取"><a href="#23-多进程爬虫数据抓取" class="headerlink" title="23.多进程爬虫数据抓取"></a>23.多进程爬虫数据抓取</h2><pre><code class="python">#需要用到的库
-from multiprocessing import Pool
-from channel_extract import channel_list
+<h2 id="23多进程爬虫数据抓取"><a class="markdownIt-Anchor" href="#23多进程爬虫数据抓取"></a> 23.多进程爬虫数据抓取</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#需要用到的库</span>
+<span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Pool
+<span class="hljs-keyword">from</span> channel_extract <span class="hljs-keyword">import</span> channel_list
 
-def get_all_links_from(channel):
-    for num in range(1,101):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_links_from</span><span class="hljs-params">(channel)</span>:</span>
+    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">101</span>):
         get_link_from(channel,num)
 
-if __name__ == &#39;__main__&#39;:
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     pool = Pool()
     pool.map(get_all_links_from,channel_list.split())
 </code></pre>
-<h3 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h3><p>map(function,interable,…):对于可迭代函数’iterable’中的每一个元素应用’function’方法，将结果作为list返回</p>
-<pre><code class="python">e.g1-&gt;def add100(x):
-        return x + 100
-    hh = [11,22,33]
+<h3 id="map函数"><a class="markdownIt-Anchor" href="#map函数"></a> map函数</h3>
+<p>map(function,interable,…):对于可迭代函数’iterable’中的每一个元素应用’function’方法，将结果作为list返回</p>
+<pre class="highlight"><code class="python">e.g1-&gt;<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add100</span><span class="hljs-params">(x)</span>:</span>
+    	<span class="hljs-keyword">return</span> x + <span class="hljs-number">100</span>
+    hh = [<span class="hljs-number">11</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>]
     hhh = map(add100,hh)
-#此时hhh的值为[111,122,133]
-#如果给出了额外的可迭代参数，则对每个可迭代参数中的元素‘并行’的应用‘function’。
-e.g2-&gt;def abc(a,b,c)
-          return a*10000 + b*100 + c
-      list1 = [11,22,33]
-      list2 = [44,55,66]
-      list3 = [77,88,99]
-      hh = map(abc,list1,list2,list3)
-#此时hh的值为[114477,225588,336699],在每个list中，取出了下标相同的元素，执行了abc()。
-#如果&#39;function&#39;给出的是‘None’，自动假定一个‘identity’函数
-&gt;&gt;&gt; list1 = [11,22,33]
-&gt;&gt;&gt; map(None,list1)
+<span class="hljs-comment">#此时hhh的值为[111,122,133]</span>
+<span class="hljs-comment">#如果给出了额外的可迭代参数，则对每个可迭代参数中的元素‘并行’的应用‘function’。</span>
+e.g2-&gt;<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">abc</span><span class="hljs-params">(a,b,c)</span>
+	  	<span class="hljs-title">return</span> <span class="hljs-title">a</span>*10000 + <span class="hljs-title">b</span>*100 + <span class="hljs-title">c</span>
+	  <span class="hljs-title">list1</span> = [11,22,33]
+      <span class="hljs-title">list2</span> = [44,55,66]
+      <span class="hljs-title">list3</span> = [77,88,99]
+      <span class="hljs-title">hh</span> = <span class="hljs-title">map</span><span class="hljs-params">(abc,list1,list2,list3)</span>
+#此时<span class="hljs-title">hh</span>的值为[114477,225588,336699],在每个<span class="hljs-title">list</span>中，取出了下标相同的元素，执行了<span class="hljs-title">abc</span><span class="hljs-params">()</span>。
+#如果'<span class="hljs-title">function</span>'给出的是‘<span class="hljs-title">None</span>’，自动假定一个‘<span class="hljs-title">identity</span>’函数
+&gt;&gt;&gt; <span class="hljs-title">list1</span> = [11,22,33]
+&gt;&gt;&gt; <span class="hljs-title">map</span><span class="hljs-params">(None,list1)</span>
 [11, 22, 33]
-&gt;&gt;&gt; list1 = [11,22,33]
-&gt;&gt;&gt; list2 = [44,55,66]
-&gt;&gt;&gt; list3 = [77,88,99]
-&gt;&gt;&gt; map(None,list1,list2,list3)
-[(11, 44, 77), (22, 55, 88), (33, 66, 99)]
-</code></pre>
-<h2 id="24-爬取大规模数据实例代码"><a href="#24-爬取大规模数据实例代码" class="headerlink" title="24.爬取大规模数据实例代码"></a>24.爬取大规模数据实例代码</h2><pre><code class="python">#page_parsing.py
-from bs4 import BeautifulSoup
-import requests
-import random
-import pymongo
+&gt;&gt;&gt; <span class="hljs-title">list1</span> = [11,22,33]
+&gt;&gt;&gt; <span class="hljs-title">list2</span> = [44,55,66]
+&gt;&gt;&gt; <span class="hljs-title">list3</span> = [77,88,99]
+&gt;&gt;&gt; <span class="hljs-title">map</span><span class="hljs-params">(None,list1,list2,list3)</span>
+[<span class="hljs-params">(<span class="hljs-number">11</span>, <span class="hljs-number">44</span>, <span class="hljs-number">77</span>)</span>, <span class="hljs-params">(<span class="hljs-number">22</span>, <span class="hljs-number">55</span>, <span class="hljs-number">88</span>)</span>, <span class="hljs-params">(<span class="hljs-number">33</span>, <span class="hljs-number">66</span>, <span class="hljs-number">99</span>)</span>]
+</span></code></pre>
+<h2 id="24爬取大规模数据实例代码"><a class="markdownIt-Anchor" href="#24爬取大规模数据实例代码"></a> 24.爬取大规模数据实例代码</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#page_parsing.py</span>
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> pymongo
 
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
 
-ganji = client[&#39;ganji&#39;]
+ganji = client[<span class="hljs-string">'ganji'</span>]
 
-url_list = ganji[&#39;url_list&#39;]
+url_list = ganji[<span class="hljs-string">'url_list'</span>]
 
-item_info = ganji[&#39;item_info&#39;]
+item_info = ganji[<span class="hljs-string">'item_info'</span>]
 
 headers = {
-    &#39;User-Agent&#39; : &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&#39;,
-    &#39;Connection&#39; : &#39;keep-alive&#39;
+    <span class="hljs-string">'User-Agent'</span> : <span class="hljs-string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'</span>,
+    <span class="hljs-string">'Connection'</span> : <span class="hljs-string">'keep-alive'</span>
 }
 
 proxy_list = [
-    &#39;http://121.232.147.178:9000&#39;,
-    &#39;http://122.243.11.57:9000&#39;,
-    &#39;http://121.232.145.163:9000&#39;
+    <span class="hljs-string">'http://121.232.147.178:9000'</span>,
+    <span class="hljs-string">'http://122.243.11.57:9000'</span>,
+    <span class="hljs-string">'http://121.232.145.163:9000'</span>
 ]
 proxy_ip = random.choice(proxy_list)
-proxies = {&#39;http&#39; : proxy_ip}
+proxies = {<span class="hljs-string">'http'</span> : proxy_ip}
 
 
-def get_links_from(channel,pages,who_sells=&#39;o&#39;):
-    list_view = &#39;{}/{}{}/&#39;.format(channel, str(who_sells), str(pages))
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_links_from</span><span class="hljs-params">(channel,pages,who_sells=<span class="hljs-string">'o'</span>)</span>:</span>
+    list_view = <span class="hljs-string">'{}/{}{}/'</span>.format(channel, str(who_sells), str(pages))
     wb_data = requests.get(channel, headers=headers)
-    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
-    if soup.find(&#39;ul&#39;, &#39;pageLink&#39;):
-        for link in soup.select(&#39;td.t &gt; a.t&#39;):
-            item_link = link.get(&#39;href&#39;).split(&#39;?&#39;)[0]
-            #url_list.insert_one({&#39;url&#39;:item_link})
-            #print(item_link)
+    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
+    <span class="hljs-keyword">if</span> soup.find(<span class="hljs-string">'ul'</span>, <span class="hljs-string">'pageLink'</span>):
+        <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> soup.select(<span class="hljs-string">'td.t &gt; a.t'</span>):
+            item_link = link.get(<span class="hljs-string">'href'</span>).split(<span class="hljs-string">'?'</span>)[<span class="hljs-number">0</span>]
+            <span class="hljs-comment">#url_list.insert_one({'url':item_link})</span>
+            <span class="hljs-comment">#print(item_link)</span>
             get_item_info_from(item_link)
-            print(&#39;\n&#39;)
-    else:
-        #已经到达最后一页
-        pass
+            print(<span class="hljs-string">'\n'</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-comment">#已经到达最后一页</span>
+        <span class="hljs-keyword">pass</span>
 
-def get_item_info_from(url, data=None):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_item_info_from</span><span class="hljs-params">(url, data=None)</span>:</span>
     wb_data = requests.get(url, headers=headers)
-    if wb_data.status_code == 404:
-        pass
-    else:
-        try:
-            soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
+    <span class="hljs-keyword">if</span> wb_data.status_code == <span class="hljs-number">404</span>:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">try</span>:
+            soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
             data = {
-                &#39;title&#39;:soup.title.text.strip(),
-                &#39;price&#39;:soup.select(&#39;.f22.fc-orange.f-type&#39;)[0].text.strip(),
-                &#39;pub_data&#39;:soup.select(&#39;.pr-5&#39;)[0].text.strip().split()[0],
-                &#39;area&#39;:list(map(lambda x:x.text, soup.select(&#39;ul.det-infor &gt; li &gt; a&#39;))),
-                &#39;phoneNumber&#39;:soup.select(&#39;span.phoneNum-style&#39;)[0].text.strip(),
-                &#39;url&#39;:url
+                <span class="hljs-string">'title'</span>:soup.title.text.strip(),
+                <span class="hljs-string">'price'</span>:soup.select(<span class="hljs-string">'.f22.fc-orange.f-type'</span>)[<span class="hljs-number">0</span>].text.strip(),
+                <span class="hljs-string">'pub_data'</span>:soup.select(<span class="hljs-string">'.pr-5'</span>)[<span class="hljs-number">0</span>].text.strip().split()[<span class="hljs-number">0</span>],
+                <span class="hljs-string">'area'</span>:list(map(<span class="hljs-keyword">lambda</span> x:x.text, soup.select(<span class="hljs-string">'ul.det-infor &gt; li &gt; a'</span>))),
+                <span class="hljs-string">'phoneNumber'</span>:soup.select(<span class="hljs-string">'span.phoneNum-style'</span>)[<span class="hljs-number">0</span>].text.strip(),
+                <span class="hljs-string">'url'</span>:url
             }
             print(data)
-        #except IndexError:
-            pass
-        except AttributeError:
-            pass
+        <span class="hljs-comment">#except IndexError:</span>
+            <span class="hljs-keyword">pass</span>
+        <span class="hljs-keyword">except</span> AttributeError:
+            <span class="hljs-keyword">pass</span>
 
-#get_item_info_from(&#39;http://bj.ganji.com/shouji/29096013665341x.htm&#39;)
-#get_links_from(&#39;http://bj.ganji.com/shouji&#39;,2)
+<span class="hljs-comment">#get_item_info_from('http://bj.ganji.com/shouji/29096013665341x.htm')</span>
+<span class="hljs-comment">#get_links_from('http://bj.ganji.com/shouji',2)</span>
 </code></pre>
-<pre><code class="python">#channel_extracing.py
-import requests
-from bs4 import  BeautifulSoup
+<pre class="highlight"><code class="python"><span class="hljs-comment">#channel_extracing.py</span>
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span>  BeautifulSoup
 
-start_url = &#39;http://bj.ganji.com/wu&#39;
-url_host = &#39;http://bj.ganji.com&#39;
+start_url = <span class="hljs-string">'http://bj.ganji.com/wu'</span>
+url_host = <span class="hljs-string">'http://bj.ganji.com'</span>
 
-def get_index_url(url):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_index_url</span><span class="hljs-params">(url)</span>:</span>
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
-    links = soup.select(&#39;.fenlei &gt; dt &gt; a&#39;)
-    for link in links:
-        page_url = url_host + link.get(&#39;href&#39;)
+    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
+    links = soup.select(<span class="hljs-string">'.fenlei &gt; dt &gt; a'</span>)
+    <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> links:
+        page_url = url_host + link.get(<span class="hljs-string">'href'</span>)
         print(page_url)
 
-#get_index_url(start_url)
+<span class="hljs-comment">#get_index_url(start_url)</span>
 
-channel_list = &#39;&#39;&#39;
+channel_list = <span class="hljs-string">'''
 http://bj.ganji.com/jiaju/
 http://bj.ganji.com/rirongbaihuo/
 http://bj.ganji.com/shouji/
@@ -591,28 +640,30 @@ http://bj.ganji.com/xuniwupin/
 http://bj.ganji.com/qitawupin/
 http://bj.ganji.com/ershoufree/
 http://bj.ganji.com/wupinjiaohuan/
-&#39;&#39;&#39;
+'''</span>
 </code></pre>
-<pre><code class="python">#main.py
-from multiprocessing import Pool
-from channel_extracing import channel_list
-from page_parsing import get_item_info_from,get_links_from,url_list,item_info
+<pre class="highlight"><code class="python"><span class="hljs-comment">#main.py</span>
+<span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Pool
+<span class="hljs-keyword">from</span> channel_extracing <span class="hljs-keyword">import</span> channel_list
+<span class="hljs-keyword">from</span> page_parsing <span class="hljs-keyword">import</span> get_item_info_from,get_links_from,url_list,item_info
 
-def get_all_links(channel):
-    for i in range(1, 100):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_links</span><span class="hljs-params">(channel)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>):
         get_links_from(channel, i)
 
-if __name__ == &#39;__main__&#39;:
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     pool = Pool()
     pool.map(get_all_links, channel_list.split())
     pool.close()
     pool.join()
 </code></pre>
-<h2 id="25-更新数据库"><a href="#25-更新数据库" class="headerlink" title="25.更新数据库"></a>25.更新数据库</h2><pre><code class="python">db.collection.update()
-#update函数的用法,一般传入两个参数
-update({id:1},{$set:{name:2}})
+<h2 id="25更新数据库"><a class="markdownIt-Anchor" href="#25更新数据库"></a> 25.更新数据库</h2>
+<pre class="highlight"><code class="python">db.collection.update()
+<span class="hljs-comment">#update函数的用法,一般传入两个参数</span>
+update({id:<span class="hljs-number">1</span>},{$set:{name:<span class="hljs-number">2</span>}})
 </code></pre>
-<h2 id="26-突破爬虫封禁的几种方法参考"><a href="#26-突破爬虫封禁的几种方法参考" class="headerlink" title="26.突破爬虫封禁的几种方法参考"></a>26.突破爬虫封禁的几种方法<a href="http://bigsec.com/bigsec-news/wechat-2016-web-crawler?ref=bigsec-news1">参考</a></h2><p>1.构造合理的HTTP头部请求</p>
+<h2 id="26突破爬虫封禁的几种方法参考"><a class="markdownIt-Anchor" href="#26突破爬虫封禁的几种方法参考"></a> 26.突破爬虫封禁的几种方法<a href="http://bigsec.com/bigsec-news/wechat-2016-web-crawler?ref=bigsec-news1">参考</a></h2>
+<p>1.构造合理的HTTP头部请求</p>
 <p>2.学会正确的设置cookie</p>
 <p>3.正确的时间访问路径（不能访问过快）</p>
 <p>4.隐含输入字段值（honey pot）</p>
@@ -622,7 +673,7 @@ update({id:1},{$set:{name:2}})
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/12/网络爬虫/" data-id="cjf3mehc9007fitbr37oh8yy6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/12/网络爬虫/" data-id="cjf7qwqcb007kwxbrawkkvjsy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -690,7 +741,7 @@ update({id:1},{$set:{name:2}})
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

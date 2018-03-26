@@ -38,7 +38,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -61,6 +61,191 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-ACM日常训练-三" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/25/ACM日常训练-三/" class="article-date">
+  <time class="post-time" datetime="2018-03-25T05:46:32.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">25</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/25/ACM日常训练-三/">ACM日常训练总结(三)</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="color-a-tree"><a class="markdownIt-Anchor" href="#color-a-tree"></a> Color a Tree</h1>
+<p>这是一道贪心的题目，意思就是说有一颗树，每个节点都有一个权重，涂完每个节点的消费等于涂完它后的当前时间乘节点的权重，每个节点都只需要涂一分钟，但是涂这个节点的时候必须要先涂它的父节点，起始时间为0，问要使涂完的消费最少，这个消费应该是多少？</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-25%20%E4%B8%8B%E5%8D%881.50.18.png" alt="屏幕快照 2018-03-25 下午1.50.18.png"></p>
+<p>最主要的就是看出他是一个贪心了，然后我们通过每次寻找最大权重点，然后将这个点和他的父节点合并，然后将权重也累加，每次循环判断最大权重点，直到把所有的节点都合并到了根节点，这样就可以保证我们的每一步都是最优的：</p>
+<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-comment">//节点的结构体</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>  
+{</span>  
+    <span class="hljs-keyword">int</span> c,t,pre;
+  	<span class="hljs-comment">//节点的权重是c/t,一开始t都是1,读入的时候初始化为c</span>
+    <span class="hljs-keyword">double</span> w;  
+}s[<span class="hljs-number">1005</span>];  
+
+<span class="hljs-comment">//找到非根节点的最大权重点</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> r)</span>  
+</span>{  
+    <span class="hljs-keyword">double</span> maxi=<span class="hljs-number">-1</span>;  
+    <span class="hljs-keyword">int</span> p;  
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)  
+    {  
+        <span class="hljs-keyword">if</span>(s[i].w &gt; maxi &amp;&amp; i != r)  
+        {  
+            p=i;  
+            maxi=s[i].w;  
+        }  
+    }  
+    <span class="hljs-keyword">return</span> p;  
+}  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> n,r,i,a,b,ans,j,p,m;  
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;r),n|r)  
+    {  
+        ans=<span class="hljs-number">0</span>;  
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)  
+        {  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;s[i].c);  
+            s[i].t=<span class="hljs-number">1</span>;  
+            s[i].w=s[i].c;
+            <span class="hljs-comment">//因为根节点需要最先涂，所以在读入的时候就将那一分钟的消耗加上</span>
+            ans+=s[i].c;  
+        }  
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;n;i++)  
+        {  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;a,&amp;b);  
+            s[b].pre=a;  
+        }  
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;n;i++)  
+        {  
+            m=find(n,r);  
+            p=s[m].pre;  
+            s[m].w=<span class="hljs-number">0</span>;  
+            <span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)  
+                <span class="hljs-keyword">if</span>(s[j].pre==m)
+                  	<span class="hljs-comment">//当前最大权重点和其父节点合并之后将子节点的父节点置为最大权重点的父节点</span>
+                    s[j].pre=p;  
+            ans+=s[m].c*s[p].t;  
+            s[p].c+=s[m].c;  
+            s[p].t+=s[m].t; 
+          	<span class="hljs-comment">//重新计算权重</span>
+            s[p].w=<span class="hljs-number">1.0</span>*s[p].c/s[p].t;  
+        }  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans);  
+    }  
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
+</code></pre>
+<h1 id="uva_1592-database"><a class="markdownIt-Anchor" href="#uva_1592-database"></a> Uva_1592 dataBase</h1>
+<p>考虑到字符串匹配的太慢，所以通过map和pair做一个二元组映射，然后枚举列，因为列最大只有10，然后将行从上到下扫描，看看有没有相同的即可：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">10000</span>+<span class="hljs-number">5</span>;
+<span class="hljs-built_in">string</span> s[maxx][<span class="hljs-number">15</span>];
+<span class="hljs-built_in">map</span> &lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt;str_id;
+tydedef pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;p;
+<span class="hljs-keyword">int</span> n,m;
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span>&gt;&gt;n&gt;&gt;m)
+    {
+       str_id.clear();
+        getchar();
+        <span class="hljs-comment">//read</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+        {
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++)
+            {
+                s[i][j]=<span class="hljs-string">""</span>;
+                <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+                {
+                    <span class="hljs-keyword">char</span> c=getchar();
+                    <span class="hljs-keyword">if</span>(c==<span class="hljs-string">','</span>||c==<span class="hljs-string">'\n'</span>)<span class="hljs-keyword">break</span>;
+                     s[i][j]+=c;
+                }
+                str_id[s[i][j]]=j*<span class="hljs-number">100000</span>+i;<span class="hljs-comment">//id</span>
+            }
+        }
+        <span class="hljs-comment">//solve</span>
+        <span class="hljs-keyword">int</span> flag=<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;m;i++)
+        {
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i+<span class="hljs-number">1</span>;j&lt;=m;j++)
+            {
+                <span class="hljs-built_in">map</span>&lt;p,<span class="hljs-keyword">int</span>&gt;dx;
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=n;k++)
+                {
+                    <span class="hljs-keyword">int</span> x1=str_id[s[k][i]],x2=str_id[s[k][j]];
+                    p cnt=make_pair(x1,x2);
+                    <span class="hljs-keyword">if</span>(dx.count(cnt))
+                    {
+                        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"NO"</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
+                        <span class="hljs-built_in">cout</span>&lt;&lt;dx[cnt]&lt;&lt;<span class="hljs-string">" "</span>&lt;&lt;k&lt;&lt;<span class="hljs-built_in">endl</span>;
+                        <span class="hljs-built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="hljs-string">" "</span>&lt;&lt;j&lt;&lt;<span class="hljs-built_in">endl</span>;
+                        flag=<span class="hljs-number">0</span>;
+                        <span class="hljs-keyword">goto</span> END;
+                    }
+                    dx[cnt]=k;
+                }
+            }
+        }
+        END:
+            <span class="hljs-keyword">if</span>(flag)<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"YES"</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/25/ACM日常训练-三/" data-id="cjf7qwq7o0008wxbrfuaa1hnq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-DHCP-Starvation-Attack" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -107,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjf3meh8l001citbrs3xln3ht" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjf7qwq94001lwxbrublu4h3f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -166,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/21/java蓝桥杯习题-二/" data-id="cjf3mehbb005oitbr6exe43xj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/21/java蓝桥杯习题-二/" data-id="cjf7qwqbl005pwxbrheyfv1bc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -225,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/对于PVID和VID的研究/" data-id="cjf3mehbz006uitbrpykoumse" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/19/对于PVID和VID的研究/" data-id="cjf7qwqc2006vwxbrr2sbv6ma" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -275,7 +460,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/>
 <p>多写点DFS对于一个人的智力是有帮助的…</p>
         
           <p class="article-more-link">
@@ -285,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf3meh7n000fitbr2c09lgfy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf7qwq8g000qwxbrocpwvx57" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -335,7 +520,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/>
 <p>日常训练中感觉有些坑(水题)的题目大结集～</p>
         
           <p class="article-more-link">
@@ -345,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjf3meh7l000bitbrqwwkp0lg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjf7qwq8m000xwxbr10tlsztc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -395,7 +580,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/>
 <p>比赛中没有那么多的时间去对每一个数学问题进行相关的公式推导，所以这里记载一些可能会用到而又不是板子的题目</p>
         
           <p class="article-more-link">
@@ -405,7 +590,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjf3meh7j000aitbr35kl84v2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjf7qwq7t0009wxbrw8jm982m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -455,7 +640,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/>
 <p>位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。</p>
         
           <p class="article-more-link">
@@ -465,7 +650,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjf3meh7c0008itbr1xc7hrau" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjf7qwq7v000awxbrha32bnn1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -511,7 +696,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt/>
 <p>在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。</p>
         
           <p class="article-more-link">
@@ -521,7 +706,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/28/浅谈CPU的流水线/" data-id="cjf3mehc0006witbrvicz7ddp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/28/浅谈CPU的流水线/" data-id="cjf7qwqc1006swxbr02xkgt7m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -571,7 +756,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" height="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" height="350" width="600" alt/>
 <p>大家都玩过我的世界这个经典的游戏，号称世界上第一款的沙盒游戏，虽然他的画质(呵呵)，但是他的自由度让我们都为之着迷，可以享受到真正作为一个上帝的乐趣，话说我在两年前的暑假还在这个游戏上建造过山车之类的，将世界打造成游乐场(当时还不会任何的技术)，<code>make a real world!</code></p>
         
           <p class="article-more-link">
@@ -581,70 +766,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/" data-id="cjf3mehbr0069itbrje9650cz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/" data-id="cjf7qwqbw006cwxbre6cqp8cb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器端/">服务器端</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-iOS逆向学习-五" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/07/iOS逆向学习-五/" class="article-date">
-  <time class="post-time" datetime="2018-02-07T08:27:27.000Z" itemprop="datePublished">
-    <span class="post-month">2月</span><br/>
-    <span class="post-day">07</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/07/iOS逆向学习-五/">iOS逆向学习(五)</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/踩坑-Mach-O/">踩坑 Mach-O</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt/></p>
-<p>这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/07/iOS逆向学习-五/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/07/iOS逆向学习-五/" data-id="cjf3mehb5005bitbr9mrojgmz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
 
     </footer>
   </div>
@@ -695,7 +820,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

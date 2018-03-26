@@ -44,7 +44,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -102,8 +102,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>要了解一个操作系统首先就要了解它的文件系统<br><a id="more"></a></p>
-<h1 id="Linux运维学习Day3"><a href="#Linux运维学习Day3" class="headerlink" title="Linux运维学习Day3"></a>Linux运维学习Day3</h1><h2 id="Linux上的文件系统"><a href="#Linux上的文件系统" class="headerlink" title="Linux上的文件系统"></a>Linux上的文件系统</h2><p>根文件系统（rootfs）：</p>
+        <p>要了解一个操作系统首先就要了解它的文件系统</p>
+<a id="more"></a>
+<h1 id="linux运维学习day3"><a class="markdownIt-Anchor" href="#linux运维学习day3"></a> Linux运维学习Day3</h1>
+<h2 id="linux上的文件系统"><a class="markdownIt-Anchor" href="#linux上的文件系统"></a> Linux上的文件系统</h2>
+<p>根文件系统（rootfs）：</p>
 <p>正常的Linux文件系统都会遵从LSB，FHS（FileSystem Heirachy Standard）</p>
 <p>文件系统分析：</p>
 <p>/boot:引导文件的存放目录，内核文件（vmlinuz）、引导加载器（boot loader ,grub）都存放于此目录（只是在根上创建一个boot，然后把这个boot关联到一个独立的分区上）</p>
@@ -129,7 +132,7 @@
 <p>include:存放C程序头文件，头文件就是描述库的打开方式</p>
 <p>lib/lib64:同上，存放库的位置</p>
 <p>share:结构化独立的数据，例如doc、man等</p>
-<p>local:第三方应用程序的安装位置：bin,sbin,lib,lib64,etc,share….</p>
+<p>local:第三方应用程序的安装位置：bin,sbin,lib,lib64,etc,share…</p>
 </blockquote>
 <p>/var:variable data files（经常修改的文件存放位置）</p>
 <blockquote>
@@ -146,20 +149,22 @@
 <p>/proc:用于输出内核和进程信息相关的虚拟文件系统（将本来不是文件的输出成文件的样子，如进程文件只有一个参数）</p>
 <p>/sys:用于输出当前系统上硬件设备相关信息的虚拟文件系统</p>
 <p>/selinux:selinux相关的安全策略等信息的存储位置</p>
-<h4 id="Linux下的文件类型"><a href="#Linux下的文件类型" class="headerlink" title="Linux下的文件类型"></a>Linux下的文件类型</h4><p>-（f）:普通文件</p>
+<h4 id="linux下的文件类型"><a class="markdownIt-Anchor" href="#linux下的文件类型"></a> Linux下的文件类型</h4>
+<p>-（f）:普通文件</p>
 <p>d:目录文件</p>
 <p>b:块设备</p>
 <p>c:字符设备</p>
 <p>l:符号链接文件（软链接）</p>
 <p>p:管道文件</p>
 <p>s:套接字文件，socket,实现主机内的通信</p>
-<h2 id="bash基础特性"><a href="#bash基础特性" class="headerlink" title="bash基础特性"></a>bash基础特性</h2><p>1.命令历史</p>
+<h2 id="bash基础特性"><a class="markdownIt-Anchor" href="#bash基础特性"></a> bash基础特性</h2>
+<p>1.命令历史</p>
 <blockquote>
 <p>history：</p>
-<p>—–环境变量：</p>
-<p>———–HISTSIZE：命令历史记录的条数</p>
-<p>———–HISTFILE：~/.bash_history</p>
-<p>———–HISTFILESIZE: 命令历史<em>文件</em>记录历史条数</p>
+<p>-----环境变量：</p>
+<p>-----------HISTSIZE：命令历史记录的条数</p>
+<p>-----------HISTFILE：~/.bash_history</p>
+<p>-----------HISTFILESIZE: 命令历史<em>文件</em>记录历史条数</p>
 </blockquote>
 <p>调用上一条命令的最后一个参数（比较常用）</p>
 <p>!$、ESC+.、Alt+.</p>
@@ -167,20 +172,20 @@
 <p>控制命令历史的记录方式：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/EA941CB006CF15B6E71144131A294AFE.jpg" alt=""></p>
 <p>比如修改命令历史为忽略空格开头的命令：</p>
-<pre><code class="shell">export HISTCONTROL=&quot;ignorespace&quot;;   #这样修改只对当前shell和它的子shell有效
+<pre class="highlight"><code class="shell">export HISTCONTROL="ignorespace";   #这样修改只对当前shell和它的子shell有效
 </code></pre>
 <p>2.命令行展开</p>
 <p>~：展开为用户的主目录</p>
 <p>~USERNAME：展开为指定目录的主目录</p>
 <p>{}:可承载一个以逗号分隔的列表，并将其展开为多个路径</p>
-<pre><code class="shell">/tmp/{a,b} = /tmp/a /tmp/b
+<pre class="highlight"><code class="shell">/tmp/{a,b} = /tmp/a /tmp/b
 /tmp/{tom,jerry}/hi = /tmp/tom/hi /tmp/jerry/hi
 </code></pre>
 <p>3.命令的执行状态结果</p>
 <p>bash使用特殊变量$?保存最近一条命令的执行状态结果</p>
 <p>0:成功</p>
 <p>1-255:失败</p>
-<pre><code class="shell">echo $?   #通过打印来判断结果
+<pre class="highlight"><code class="shell">echo $?   #通过打印来判断结果
 </code></pre>
 <p>目录管理类命令：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/CE96188AB44DE3ED6B7F8D0DED5871BC.jpg" alt=""></p>
@@ -188,9 +193,9 @@
 <p>cat,more,less,tail,head</p>
 <p>其中cat除了不能翻页，其他的功能和more,less类似，但是cat可以将多个文件合并成一个文件</p>
 <p>那么head和tail又有什么区别呢，除了一个从头部开始显示，一个是从尾部开始显示之外，tail较之head还有一个跟踪文件新增加的内容的功能：</p>
-<pre><code class="shell">#以向配置文件中写测试为例子
+<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">以向配置文件中写测试为例子</span>
 tail -f /etc/rc.d/xxx
-echo &quot;test&quot; /etc/rc.d/xxx  #这个时候用上述命令查看的就会实时跟踪显示
+echo "test" /etc/rc.d/xxx  #这个时候用上述命令查看的就会实时跟踪显示
 </code></pre>
 <p>文件的时间戳管理工具: touch</p>
 <p>文件：metadata、data</p>
@@ -207,7 +212,7 @@ echo &quot;test&quot; /etc/rc.d/xxx  #这个时候用上述命令查看的就会
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/15/Linux运维学习Day3/" data-id="cjf3meh920021itbr0df0vjup" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/15/Linux运维学习Day3/" data-id="cjf7qwq9t002fwxbrbt2l7lml" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -275,7 +280,7 @@ echo &quot;test&quot; /etc/rc.d/xxx  #这个时候用上述命令查看的就会
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
       <a href="/categories"><div><strong>80</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
