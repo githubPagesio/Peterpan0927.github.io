@@ -38,8 +38,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -61,6 +61,159 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-背包专题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/背包专题/" class="article-date">
+  <time class="post-time" datetime="2018-04-02T01:47:10.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">02</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/02/背包专题/">背包专题</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/背包/">背包</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="bone-collector"><a class="markdownIt-Anchor" href="#bone-collector"></a> Bone Collector</h1>
+<p>一维数组，空间上优化</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> n,V,v[<span class="hljs-number">1005</span>],val[<span class="hljs-number">1005</span>],dp[<span class="hljs-number">1005</span>];
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; V;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;val[i]);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;v[i]);
+    <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">0</span> , <span class="hljs-keyword">sizeof</span>(dp));
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = V ; j &gt;= v[i] ; j--)
+        dp[j] = max(dp[j], dp[j-v[i]]+val[i]);
+    <span class="hljs-built_in">cout</span> &lt;&lt; dp[V] &lt;&lt; <span class="hljs-built_in">endl</span>;    
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="piggy-bank"><a class="markdownIt-Anchor" href="#piggy-bank"></a> Piggy Bank</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> loop(x,t,n) for (int x = t; x &lt; n; ++x)  </span>
+
+<span class="hljs-keyword">int</span> d[<span class="hljs-number">10005</span>],c[<span class="hljs-number">505</span>],v[<span class="hljs-number">505</span>];
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> E,F,n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; E &gt;&gt; F;
+    <span class="hljs-keyword">int</span> V = F-E;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    loop(i,<span class="hljs-number">0</span>,n)
+      <span class="hljs-built_in">cin</span> &gt;&gt; v[i] &gt;&gt; c[i];
+    loop(i,<span class="hljs-number">1</span>,V+<span class="hljs-number">1</span>)
+      d[i]=<span class="hljs-number">5000000</span>;
+    d[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    loop(i,<span class="hljs-number">0</span>,n)
+      loop(j,c[i],V+<span class="hljs-number">1</span>)
+        d[j] = min(d[j-c[i]] + v[i], d[j]);
+    <span class="hljs-keyword">if</span>(d[V] == <span class="hljs-number">5000000</span>)
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"This is impossible."</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The minimum amount of money in the piggy-bank is "</span> &lt;&lt; d[V] &lt;&lt;<span class="hljs-string">"."</span>&lt;&lt; <span class="hljs-built_in">endl</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="big-event-in-hdu"><a class="markdownIt-Anchor" href="#big-event-in-hdu"></a> Big Event in HDU</h1>
+<p>多重背包，母函数</p>
+<pre class="highlight"><code class="Cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-keyword">int</span> bag[<span class="hljs-number">333333</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+	<span class="hljs-keyword">int</span> n,w[<span class="hljs-number">555</span>];
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n)&amp;&amp;(n&gt;=<span class="hljs-number">0</span>))
+	{
+		<span class="hljs-keyword">int</span> i,j,sum=<span class="hljs-number">0</span>,size,k=<span class="hljs-number">1</span>;;
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+		{
+			<span class="hljs-keyword">int</span> tmp,v,m;
+			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>,&amp;v,&amp;m);
+			sum+=v*m;
+			tmp=<span class="hljs-number">1</span>;
+			<span class="hljs-keyword">while</span>(m&gt;tmp)
+			{
+				w[k++]=tmp*v;
+				m-=tmp;
+				tmp&lt;&lt;=<span class="hljs-number">1</span>;
+			}
+			w[k++]=m*v;
+		}
+		size=sum/<span class="hljs-number">2</span>;
+		<span class="hljs-built_in">memset</span>(bag,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(bag));
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;k;i++)
+			<span class="hljs-keyword">for</span>(j=size;j&gt;=w[i];j--)
+				<span class="hljs-keyword">if</span>(bag[j]&lt;bag[j-w[i]]+w[i])
+					bag[j]=bag[j-w[i]]+w[i];
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>,sum-bag[size],bag[size]);
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfibewm3007edwbrcxgkf7xl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-ACM日常训练-三" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -98,7 +251,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt/>
         
           <p class="article-more-link">
             <a href="/2018/03/25/ACM日常训练-三/#more">Read More</a>
@@ -107,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/25/ACM日常训练-三/" data-id="cjf7qwq7o0008wxbrfuaa1hnq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/25/ACM日常训练-三/" data-id="cjfibewhq000bdwbrpu3k31uy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -166,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjf7qwq94001lwxbrublu4h3f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjfibewig001adwbriov2y5is" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -225,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/21/java蓝桥杯习题-二/" data-id="cjf7qwqbl005pwxbrheyfv1bc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/21/java蓝桥杯习题-二/" data-id="cjfibewlh005wdwbrgpv7od4d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -284,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/对于PVID和VID的研究/" data-id="cjf7qwqc2006vwxbrr2sbv6ma" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/19/对于PVID和VID的研究/" data-id="cjfibewlx006zdwbrq9nujowj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -344,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjf7qwq8g000qwxbrocpwvx57" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjfibewhu000ddwbr4gz2cspw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -404,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjf7qwq8m000xwxbr10tlsztc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjfibewhm0006dwbr852cze9q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -464,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjf7qwq7t0009wxbrw8jm982m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM数论上的难题/" data-id="cjfibewho0007dwbr3un0h67t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -524,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjf7qwq7v000awxbrha32bnn1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjfibewhe0002dwbr0rei2ntw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -580,70 +733,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/28/浅谈CPU的流水线/" data-id="cjf7qwqc1006swxbr02xkgt7m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/28/浅谈CPU的流水线/" data-id="cjfibewlv006tdwbr6tkp7ldw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-在Debian上搭建MC服务器" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/10/在Debian上搭建MC服务器/" class="article-date">
-  <time class="post-time" datetime="2018-02-10T13:25:06.000Z" itemprop="datePublished">
-    <span class="post-month">2月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/10/在Debian上搭建MC服务器/">在Debian上搭建MC服务器</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MC私服-一刀999/">MC私服 一刀999</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" height="350" width="600" alt/>
-<p>大家都玩过我的世界这个经典的游戏，号称世界上第一款的沙盒游戏，虽然他的画质(呵呵)，但是他的自由度让我们都为之着迷，可以享受到真正作为一个上帝的乐趣，话说我在两年前的暑假还在这个游戏上建造过山车之类的，将世界打造成游乐场(当时还不会任何的技术)，<code>make a real world!</code></p>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/10/在Debian上搭建MC服务器/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/10/在Debian上搭建MC服务器/" data-id="cjf7qwqbw006cwxbre6cqp8cb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器端/">服务器端</a></li></ul>
 
     </footer>
   </div>
@@ -694,8 +787,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>87</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>80</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>背包专题 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Bone Collector
+一维数组，空间上优化
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+
+int main(){
+  int t;
+  cin &amp;gt;&amp;gt; t;
+  while(t--){">
+<meta property="og:type" content="article">
+<meta property="og:title" content="背包专题">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/背包专题/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="Bone Collector
+一维数组，空间上优化
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+
+int main(){
+  int t;
+  cin &amp;gt;&amp;gt; t;
+  while(t--){">
+<meta property="og:updated_time" content="2018-04-02T14:12:44.628Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="背包专题">
+<meta name="twitter:description" content="Bone Collector
+一维数组，空间上优化
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;cstdio&amp;gt;
+#include&amp;lt;cstring&amp;gt;
+#include&amp;lt;algorithm&amp;gt;
+using namespace std;
+
+int main(){
+  int t;
+  cin &amp;gt;&amp;gt; t;
+  while(t--){">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-背包专题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/背包专题/" class="article-date">
+  <time class="post-time" datetime="2018-04-02T01:47:10.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">02</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      背包专题
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/背包/">背包</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="bone-collector"><a class="markdownIt-Anchor" href="#bone-collector"></a> Bone Collector</h1>
+<p>一维数组，空间上优化</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> n,V,v[<span class="hljs-number">1005</span>],val[<span class="hljs-number">1005</span>],dp[<span class="hljs-number">1005</span>];
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; V;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;val[i]);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;v[i]);
+    <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">0</span> , <span class="hljs-keyword">sizeof</span>(dp));
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = V ; j &gt;= v[i] ; j--)
+        dp[j] = max(dp[j], dp[j-v[i]]+val[i]);
+    <span class="hljs-built_in">cout</span> &lt;&lt; dp[V] &lt;&lt; <span class="hljs-built_in">endl</span>;    
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="piggy-bank"><a class="markdownIt-Anchor" href="#piggy-bank"></a> Piggy Bank</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> loop(x,t,n) for (int x = t; x &lt; n; ++x)  </span>
+
+<span class="hljs-keyword">int</span> d[<span class="hljs-number">10005</span>],c[<span class="hljs-number">505</span>],v[<span class="hljs-number">505</span>];
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> E,F,n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; E &gt;&gt; F;
+    <span class="hljs-keyword">int</span> V = F-E;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    loop(i,<span class="hljs-number">0</span>,n)
+      <span class="hljs-built_in">cin</span> &gt;&gt; v[i] &gt;&gt; c[i];
+    loop(i,<span class="hljs-number">1</span>,V+<span class="hljs-number">1</span>)
+      d[i]=<span class="hljs-number">5000000</span>;
+    d[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    loop(i,<span class="hljs-number">0</span>,n)
+      loop(j,c[i],V+<span class="hljs-number">1</span>)
+        d[j] = min(d[j-c[i]] + v[i], d[j]);
+    <span class="hljs-keyword">if</span>(d[V] == <span class="hljs-number">5000000</span>)
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"This is impossible."</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The minimum amount of money in the piggy-bank is "</span> &lt;&lt; d[V] &lt;&lt;<span class="hljs-string">"."</span>&lt;&lt; <span class="hljs-built_in">endl</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="big-event-in-hdu"><a class="markdownIt-Anchor" href="#big-event-in-hdu"></a> Big Event in HDU</h1>
+<p>多重背包，母函数</p>
+<pre class="highlight"><code class="Cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-keyword">int</span> bag[<span class="hljs-number">333333</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+	<span class="hljs-keyword">int</span> n,w[<span class="hljs-number">555</span>];
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n)&amp;&amp;(n&gt;=<span class="hljs-number">0</span>))
+	{
+		<span class="hljs-keyword">int</span> i,j,sum=<span class="hljs-number">0</span>,size,k=<span class="hljs-number">1</span>;;
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+		{
+			<span class="hljs-keyword">int</span> tmp,v,m;
+			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>,&amp;v,&amp;m);
+			sum+=v*m;
+			tmp=<span class="hljs-number">1</span>;
+			<span class="hljs-keyword">while</span>(m&gt;tmp)
+			{
+				w[k++]=tmp*v;
+				m-=tmp;
+				tmp&lt;&lt;=<span class="hljs-number">1</span>;
+			}
+			w[k++]=m*v;
+		}
+		size=sum/<span class="hljs-number">2</span>;
+		<span class="hljs-built_in">memset</span>(bag,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(bag));
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;k;i++)
+			<span class="hljs-keyword">for</span>(j=size;j&gt;=w[i];j--)
+				<span class="hljs-keyword">if</span>(bag[j]&lt;bag[j-w[i]]+w[i])
+					bag[j]=bag[j-w[i]]+w[i];
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>,sum-bag[size],bag[size]);
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfibewm3007edwbrcxgkf7xl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/25/ACM日常训练-三/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ACM日常训练总结(三)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
