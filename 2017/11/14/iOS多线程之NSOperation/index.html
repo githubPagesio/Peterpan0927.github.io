@@ -5,14 +5,12 @@
   
   <title>iOS多线程之NSOperation | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。
-在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有">
+  <meta name="description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS多线程之NSOperation">
 <meta property="og:url" content="http://yoursite.com/2017/11/14/iOS多线程之NSOperation/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。
-在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有">
+<meta property="og:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8A%E5%8D%8811.07.26.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8B%E5%8D%881.41.06.png">
@@ -20,8 +18,7 @@
 <meta property="og:updated_time" content="2018-03-13T16:00:22.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS多线程之NSOperation">
-<meta name="twitter:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。
-在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有">
+<meta name="twitter:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -47,8 +44,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -105,11 +102,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。<br>
-在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优势的。</p>
+        <p>之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。<br>在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优势的。</p>
 <a id="more"></a>
-<h2 id="nsoperation介绍"><a class="markdownIt-Anchor" href="#nsoperation介绍"></a> NSOperation介绍</h2>
-<p>和GCD一样，NSOperation也是苹果提供给我们的一套多线程解决方案。实际上也是基于GCD开发的，但是比GCD的可控性和代码可读性更强（相信GCD那种风格的代码新手都不太习惯）。</p>
+<h2 id="NSOperation介绍"><a href="#NSOperation介绍" class="headerlink" title="NSOperation介绍"></a>NSOperation介绍</h2><p>和GCD一样，NSOperation也是苹果提供给我们的一套多线程解决方案。实际上也是基于GCD开发的，但是比GCD的可控性和代码可读性更强（相信GCD那种风格的代码新手都不太习惯）。</p>
 <p>NSOperation是一个<strong>抽象基类</strong>，没有什么实际使用的价值，所以我们必须要使用它的子类：</p>
 <ol>
 <li>NSInvocationOperation</li>
@@ -117,7 +112,7 @@
 <li>自定义子类继承NSOperation，实现内部的方法</li>
 </ol>
 <p>下面就来简单的介绍一下NSOperation及其子类的基本使用方法：</p>
-<pre class="highlight"><code class="objective-c">NSOperation * operation = [[NSOperation alloc]init];
+<pre><code class="objective-c">NSOperation * operation = [[NSOperation alloc]init];
 //开始执行
 [operation start];
 //取消执行
@@ -127,14 +122,14 @@
     NSLog(@&quot;执行结束&quot;);
 }];
 </code></pre>
-<pre class="highlight"><code class="objective-c">//NSInvocationOperation和NSthread的操作有点类似，都是通过绑定事件
+<pre><code class="objective-c">//NSInvocationOperation和NSthread的操作有点类似，都是通过绑定事件
 //创建
 NSInvocationOperation * invo = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(testNSInvocationOperation) object:nil];
 //启动
 [invo start];
 //但是不会这样使用，都是配合队列使用
 </code></pre>
-<pre class="highlight"><code class="objective-c">//NSBlockOperation有一点特殊，是可以直接实现多线程的
+<pre><code class="objective-c">//NSBlockOperation有一点特殊，是可以直接实现多线程的
 NSBlockOperation * blockOperation = [[NSBlockOperation 
 blockOperationWithBlock:^{
    NSLog(@&quot;1在第%@个线程&quot;,[NSThread currentThread]);
@@ -158,38 +153,36 @@ blockOperationWithBlock:^{
 <p>首先看看执行之后的结果：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-06%20%E4%B8%8B%E5%8D%884.55.05.png" alt=""></p>
 <p>从结果中我们可以分析NSBlockOperation确实实现了多线程，但是它并非是将所有的block都放到放到了子线程中。</p>
 <p>通过上面的打印记录我们可以发现，它会优先将block放到主线程中执行，若主线程已有待执行的代码，就开辟新的线程，但最大并发数为4（包括主线程在内，真机测试上不同）。如果block数量大于了4，那么剩下的Block就会等待某个线程空闲下来之后被分配到该线程，且依然是优先分配到主线程。</p>
-<h2 id="nsoperation中的队列"><a class="markdownIt-Anchor" href="#nsoperation中的队列"></a> NSOperation中的队列</h2>
-<p>在GCD中我们就学过有串行队列和并发队列，并且有主队列和全局并发队列。而在NSOperation中就显得简单了许多，只有主队列和非主队列：</p>
+<h2 id="NSOperation中的队列"><a href="#NSOperation中的队列" class="headerlink" title="NSOperation中的队列"></a>NSOperation中的队列</h2><p>在GCD中我们就学过有串行队列和并发队列，并且有主队列和全局并发队列。而在NSOperation中就显得简单了许多，只有主队列和非主队列：</p>
 <ol>
 <li>主队列：</li>
 </ol>
-<pre class="highlight"><code class="objective-c">[NSOperationQueue mainQueue] //和GCD中的主队列一样
+<pre><code class="objective-c">[NSOperationQueue mainQueue] //和GCD中的主队列一样
 </code></pre>
-<ol start="2">
+<ol>
 <li>非主队列</li>
 </ol>
-<pre class="highlight"><code class="objective-c">[[NSOperationQueue alloc] init] //非常特殊（同时具备并发和串行的功能），默认情况下非主队列为并发队列
+<pre><code class="objective-c">[[NSOperationQueue alloc] init] //非常特殊（同时具备并发和串行的功能），默认情况下非主队列为并发队列
 </code></pre>
-<ol start="3">
+<ol>
 <li>队列操作</li>
 </ol>
-<pre class="highlight"><code class="objective-c">NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+<pre><code class="objective-c">NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 //添加操作到队列
 NSInvocationOperation *op1 = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(testNSInvocationOperation) object:nil];
 [queue addOperation:op1];
 </code></pre>
-<ol start="4">
+<ol>
 <li>添加任务简化方法</li>
 </ol>
-<pre class="highlight"><code class="objective-c">//相比于之前在操作中添加任务的繁琐方式，和GCD一样，我们也有简化版
+<pre><code class="objective-c">//相比于之前在操作中添加任务的繁琐方式，和GCD一样，我们也有简化版
 NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 [queue addOperationWithBlock:^{
     NSLog(@&quot;7-------@&quot;, [NSThread currentThread]);
 }];
 </code></pre>
-<h2 id="自定义nsoperation"><a class="markdownIt-Anchor" href="#自定义nsoperation"></a> 自定义NSOperation</h2>
-<p>之前说过NSOperation是一个抽象基类，我们可以通过自定义类继承的方式来实现多线程，但是既然我们已经拥有上面两种实现多线程的方式了，那么为什么我们还需要去使用这个自定义类呢？下面就来看看：</p>
-<pre class="highlight"><code class="objective-c">//1.有利于代码的隐蔽，做一次封装
+<h2 id="自定义NSOperation"><a href="#自定义NSOperation" class="headerlink" title="自定义NSOperation"></a>自定义NSOperation</h2><p>之前说过NSOperation是一个抽象基类，我们可以通过自定义类继承的方式来实现多线程，但是既然我们已经拥有上面两种实现多线程的方式了，那么为什么我们还需要去使用这个自定义类呢？下面就来看看：</p>
+<pre><code class="objective-c">//1.有利于代码的隐蔽，做一次封装
 //2.有利于代码的复用性
 
 //在自定义类内部，告知要执行的任务
@@ -200,16 +193,15 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 //这个时候在其他类中如果要使用的话就只需要初始化一下就行了，就不需要把同一份代码到处用
 - (void)customWithQueue{
     XMGOperation *op1 = [[XMGOperation alloc] init];
-  	XMGOperation *op2 = [[XMGOperation alloc] init];
-  
-  	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-  	[queue addOperation:op1];
+      XMGOperation *op2 = [[XMGOperation alloc] init];
+
+      NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+      [queue addOperation:op1];
     [queue addOperation:op2];
 }
-
 </code></pre>
 <p>那么NSOperation还有什么其他的用法呢，不然如何与大名鼎鼎的GCD匹敌呢？下面就说说线程的暂停、恢复，取消和最大并发数：</p>
-<pre class="highlight"><code class="objective-c">//创建队列，默认是并发队列
+<pre><code class="objective-c">//创建队列，默认是并发队列
 NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 //设置最大并发数,限制开线程的数目
 queue.maxConcurrentOperation = 5;
@@ -224,12 +216,11 @@ queue.maxConcurrentOperationCount = 1;
 //队列中的任务是有状态的：已经执行完毕的 | 正在执行 | 排队等待状态，正在执行状态的任务是无法取消的
 </code></pre>
 <p>但是我们有一点需要注意，如果我们把操作封装了一下，放在一个类里面，那么结果就会大不一样，因为暂停的单位是队列中的任务，如果我们将所有的操作都封装在一个类里面，那么总共就只会有一个任务，那就是正在执行中的任务，正在执行的任务是无法取消的，所以暂停和取消也是无效的，但是我们可以在那个封装的类中加一个判断：</p>
-<pre class="highlight"><code class="objective-c">//只要添加了这条语句之后，那么就可以实现封装中的暂停操作了
+<pre><code class="objective-c">//只要添加了这条语句之后，那么就可以实现封装中的暂停操作了
 if(self.isCancelled) return;
 </code></pre>
-<h2 id="操作依赖监听和线程间通信"><a class="markdownIt-Anchor" href="#操作依赖监听和线程间通信"></a> 操作依赖监听和线程间通信</h2>
-<p>在GCD中我们可以通过栅栏函数去实现对于队列中的任务执行顺序的要求，那么在NSOperation中我们是通过操作依赖的方式，这样我们就可以任意调整任务执行的顺序了：</p>
-<pre class="highlight"><code class="objective-c">//添加操作依赖
+<h2 id="操作依赖监听和线程间通信"><a href="#操作依赖监听和线程间通信" class="headerlink" title="操作依赖监听和线程间通信"></a>操作依赖监听和线程间通信</h2><p>在GCD中我们可以通过栅栏函数去实现对于队列中的任务执行顺序的要求，那么在NSOperation中我们是通过操作依赖的方式，这样我们就可以任意调整任务执行的顺序了：</p>
+<pre><code class="objective-c">//添加操作依赖
 //注意点：不能循环依赖
 [op1 addDependency:op4];
 [op4 addDependency:op3];
@@ -242,7 +233,7 @@ if(self.isCancelled) return;
 [queue2 addOperation:op4];
 </code></pre>
 <p>那么我们可能有这样的一个需求，需要在任务完成之后发一条消息，类似于GCD中的队列组，队列中的任务完成后会发一个通知，不同的是，这里的监听是针对于任务的：</p>
-<pre class="highlight"><code class="objective-c">//操作监听
+<pre><code class="objective-c">//操作监听
 op3.conpletionBlock = ^{
   NSLog(@&quot;任务执行完毕&quot;)；  
 };
@@ -250,13 +241,13 @@ op3.conpletionBlock = ^{
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8A%E5%8D%8811.07.26.png" alt=""></p>
 <p>我们可以看到虽然添加了监听，但因为是异步执行的，所以他们并不一定在同一个线程执行，也不一定任务3执行完成后就会接着监听动作，如果我修改了最大并发数为1那么就可以看到任务3执行完就紧跟着监听的结果了。</p>
 <p>然后我们再来看看一个老生常谈的话题，那就是线程间通信，之前的<code>NSThread</code>和<code>GCD</code>中我们都已经讲过，现在看看<code>NSOperation</code>中是如何实现的，这里同样以下载图片为例子：</p>
-<pre class="highlight"><code class="objective-c">NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+<pre><code class="objective-c">NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 //封装操作
 NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
    NSURL *url = [NSURL URLWithString:@&quot;http://taobao.com/1.jpg&quot;];
    NSData *data = [NSData dataWithContentsOfURL:url];
    UIImage *image = [UIImage imageWithData:imageData];
-  
+
    //更新UI
    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       self.imageView.image = image; 
@@ -265,7 +256,7 @@ NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
 [queue addOperation:download];
 </code></pre>
 <p>下面以一个下载合并多张图片的的例子，将前面的知识进行一次综合应用：</p>
-<pre class="highlight"><code class="objective-c">- (void)test1{
+<pre><code class="objective-c">- (void)test1{
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     __block UIImage *image1 = [[UIImage alloc] init];
     __block UIImage *image2 = [[UIImage alloc] init];
@@ -282,13 +273,13 @@ NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
         image2 = [UIImage imageWithData:imageData];
         NSLog(@&quot;2-----%@&quot;, [NSThread currentThread]);
     }];
-    
+
     NSBlockOperation *combile = [NSBlockOperation blockOperationWithBlock:^{
         //开上下文
         UIGraphicsBeginImageContext(CGSizeMake(200, 200));
         [image1 drawInRect:CGRectMake(0, 0, 100, 200)];
         [image2 drawInRect:CGRectMake(100, 0, 100, 200)];
-        
+
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         //关闭上下文
         UIGraphicsEndImageContext();
@@ -298,21 +289,19 @@ NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
         }];
         NSLog(@&quot;combile-----%@&quot;, [NSThread currentThread]);
     }];
-    
+
     [combile addDependency:download1];
     [combile addDependency:download2];
-    
+
     [queue addOperation:download1];
     [queue addOperation:download2];
     [queue addOperation:combile];
 }
-
 </code></pre>
 <p>执行之后效果如图：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-13%20%E4%B8%8B%E5%8D%881.41.06.png" alt=""></p>
-<p>那么多线程在实际应用中到底有什么作用呢？说到这里的话就要提到我们的App有时候需要从网上加载图片，如果我们只是加载一两张图片还好，如果我们在TableView的cell中加载图片（每个cell都有），那么我们就会发现整个App的UI界面会非常的卡顿，简直就跟用了几年的安卓手机一样，这是因为我们把下载图片全部丢到了主线程中，而主线程是刷新UI的，还有一个问题就是图片会重新下载，这个时候我们的多线程就派上了用场。</p>
-<h2 id="多图下的优化问题"><a class="markdownIt-Anchor" href="#多图下的优化问题"></a> 多图下的优化问题</h2>
-<p>我们已经下载过一次的图片自然不可能重新去下载，所以我们需要程序的缓存，否则对流量的消耗和程序的流畅性影响都很大，只有将这个和多线程结合在一起才能形成一个完成的App，现在就着手去解决这两个问题：</p>
-<pre class="highlight"><code class="objective-c">//1.UI不流畅----&gt;开子线程下载图片
+<p>那么多线程在实际应用中到底有什么作用呢？说到这里的话就要提到我们的App有时候需要从网上加载图片，如果我们只是加载一两张图片还好，如果我们在TableView的cell中加载图片（每个cell都有），那么我们就会发现整个App的UI界面会非常的卡顿，简直就跟用了几年的安卓手机一样，这是因为我们把下载图片全部丢到了主线程中，而主线程是刷新UI的，还有一个问题就是图片会重新下载，这个时候我们的多线程就派上了用场。 </p>
+<h2 id="多图下的优化问题"><a href="#多图下的优化问题" class="headerlink" title="多图下的优化问题"></a>多图下的优化问题</h2><p>我们已经下载过一次的图片自然不可能重新去下载，所以我们需要程序的缓存，否则对流量的消耗和程序的流畅性影响都很大，只有将这个和多线程结合在一起才能形成一个完成的App，现在就着手去解决这两个问题：</p>
+<pre><code class="objective-c">//1.UI不流畅----&gt;开子线程下载图片
 //2.图片重复下载----&gt;先把之前下载过的图片保存起来
 
 //创建缓存字典
@@ -334,56 +323,56 @@ UIImage *image = [self.images objectForKey:appM.icon];
 if (image){
     cell.imageView.image = image;
 }else{
-  	NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  	NSString *filenName = [appM.icon lastPathComponent];
-  	NSString *fullPath = [caches stringByAppendingPathComponent:fileName];
-  	//检查磁盘缓存
-  	NSData *imageData = [NSData dataWithContentsOfFile:fullPath];
-  	if(imageData){
+      NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+      NSString *filenName = [appM.icon lastPathComponent];
+      NSString *fullPath = [caches stringByAppendingPathComponent:fileName];
+      //检查磁盘缓存
+      NSData *imageData = [NSData dataWithContentsOfFile:fullPath];
+      if(imageData){
         UIImage *image = [UIImage imageWithData:imageData];
-      	cell.imageView.image = image;
-      	//将图片保存到内存缓存
-      	[self.images setObject:image forKey:appM.icon];
+          cell.imageView.image = image;
+          //将图片保存到内存缓存
+          [self.images setObject:image forKey:appM.icon];
     }else{
         NSURL *url = [NSYRL URLWithString:appM.icon];
-  		NSData *imageData = [NSData dataWithContentsOfURL:url];
-  		UIImage *image = [UIImage imageWithData:imageData];
-  		cell.imageView.image = image;
-  		//将图片保存到内存缓存
-  		[self.images setObject:image forKey:appM.icon];
-  		//写数据到沙盒
-  		[imageData writeToFile:fullPath atomically:YES];
-   	 } 
+          NSData *imageData = [NSData dataWithContentsOfURL:url];
+          UIImage *image = [UIImage imageWithData:imageData];
+          cell.imageView.image = image;
+          //将图片保存到内存缓存
+          [self.images setObject:image forKey:appM.icon];
+          //写数据到沙盒
+          [imageData writeToFile:fullPath atomically:YES];
+        } 
 }
 </code></pre>
-<p>那么缓存的问题到这里已经比较完善的解决了，接下来就是解决UI不流畅的问题，也就是我们需要开一个子线程去下载图片，只需要修改下载的时候即可：</p>
-<pre class="highlight"><code class="objective-c">//创建一个队列的属性并实现懒加载
+<p> 那么缓存的问题到这里已经比较完善的解决了，接下来就是解决UI不流畅的问题，也就是我们需要开一个子线程去下载图片，只需要修改下载的时候即可：</p>
+<pre><code class="objective-c">//创建一个队列的属性并实现懒加载
 @property(nonatomic, strong) NSOperationQueue *queue;
 
 - (NSOperationQueue *)queue{
     if(_queue == nil){
         _queue = [[NSOperationQueue alloc] init];
-      	_queue.maxConcurrentOperationCount = 5;
+          _queue.maxConcurrentOperationCount = 5;
     }
-  	return _queue;
+      return _queue;
 }
 
 NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
-    	NSURL *url = [NSYRL URLWithString:appM.icon];
-  		NSData *imageData = [NSData dataWithContentsOfURL:url];
-  		UIImage *image = [UIImage imageWithData:imageData];
-  		//将图片保存到内存缓存
-  		[self.images setObject:image forKey:appM.icon];
-		[[NSOperationQueue mainQueue] addOperationWirhBlock:^{
+        NSURL *url = [NSYRL URLWithString:appM.icon];
+          NSData *imageData = [NSData dataWithContentsOfURL:url];
+          UIImage *image = [UIImage imageWithData:imageData];
+          //将图片保存到内存缓存
+          [self.images setObject:image forKey:appM.icon];
+        [[NSOperationQueue mainQueue] addOperationWirhBlock:^{
             cell.imageView.image = image;
         }];
-  		//写数据到沙盒
-  		[imageData writeToFile:fullPath atomically:YES];
-	}];
+          //写数据到沙盒
+          [imageData writeToFile:fullPath atomically:YES];
+    }];
 [self.queue addOperation:download];
 </code></pre>
 <p>显然正常来说上面的这份代码应该是没什么问题了，但是我们会发现在网速不太良好的情况下会出现重复下载的情况，原因就是我们在TableView初始化的时候往下滑动再往上滑动，这个时候第一个图片本来处理下载状态还没下好，滑上去之后就会再进行一次判断，然后就会再下载一次了。</p>
-<pre class="highlight"><code class="objective-c">//我们只需要做一个操作缓存即可，就像之前的图片一样，先定义一个字典
+<pre><code class="objective-c">//我们只需要做一个操作缓存即可，就像之前的图片一样，先定义一个字典
 @property (nonatomic ,strong) NSMutaleDictionary *operations
 
 //判断语句
@@ -392,63 +381,62 @@ if(download){
     //如果已经添加操作就什么也不做，等待即可
 }else{
     NSBlockOperation *download = [NSBlockOperation blockOperationWithBlock:^{
-    	NSURL *url = [NSURL URLWithString:appM.icon];
-  		NSData *imageData = [NSData dataWithContentsOfURL:url];
-  		UIImage *image = [UIImage imageWithData:imageData];
-      	//容错处理
-      	if(image == nil){
+        NSURL *url = [NSURL URLWithString:appM.icon];
+          NSData *imageData = [NSData dataWithContentsOfURL:url];
+          UIImage *image = [UIImage imageWithData:imageData];
+          //容错处理
+          if(image == nil){
             [self.operations removeObjectForKey:appM.icon];
-          	return;
+              return;
         }
-      	//将图片保存到内存缓存
-  		[self.images setObject:image forKey:appM.icon];
-		[[NSOperationQueue mainQueue] addOperationWirhBlock:^{
+          //将图片保存到内存缓存
+          [self.images setObject:image forKey:appM.icon];
+        [[NSOperationQueue mainQueue] addOperationWirhBlock:^{
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewAnimationLeft];
         }];
-  		//写数据到沙盒
-  		[imageData writeToFile:fullPath atomically:YES];
-      	
-      	//下载完成后移除下载操作
-      	[self.operations removeObjectForKey:appM.icon];
-	}];
-	[self.queue addOperation:download];    
-	//添加操作到操作缓存中
-	[self.operations setObject:download forKey:appM.icon]; 
+          //写数据到沙盒
+          [imageData writeToFile:fullPath atomically:YES];
+
+          //下载完成后移除下载操作
+          [self.operations removeObjectForKey:appM.icon];
+    }];
+    [self.queue addOperation:download];    
+    //添加操作到操作缓存中
+    [self.operations setObject:download forKey:appM.icon]; 
 }
 </code></pre>
 <p>还有一个问题就是图片不会显示，需要我们下滑上滑去刷新一次，这就是因为在cell的subtitle状态下，图片的<code>frame</code>默认是为0的(内存中还没有图片)，就算真实的图片赋值过去，因为<code>frame</code>是0，所以依旧不会显示，解决这个问题我们就只需要手动刷新即可</p>
-<pre class="highlight"><code class="objective-c">[[NSOperationQueue mainQueue] addOperationWirhBlock:^{
+<pre><code class="objective-c">[[NSOperationQueue mainQueue] addOperationWirhBlock:^{
             //cell.imageView.image = image;
-  			[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewAnimationLeft];
+              [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewAnimationLeft];
         }];
 </code></pre>
 <p>但是这个时候我们又会发现一个新的问题就是数据错乱，这个图片和实际的数据有时候并不搭配，也就是数据错乱，这是因为重用了之前的cell的图片，因为本身的图片还没有下载好：</p>
-<pre class="highlight"><code class="objective-c">if(download){
+<pre><code class="objective-c">if(download){
     //如果已经添加操作就什么也不做，等待即可
 }else{
-	//这个问题很简单，只需要在下载的时候先清空原有的图片即可，或者设置一个占位图片
-	cell.imageView.image = [UIImage imageNamed:@&quot;占位&quot;];
- 	//省略中间
+    //这个问题很简单，只需要在下载的时候先清空原有的图片即可，或者设置一个占位图片
+    cell.imageView.image = [UIImage imageNamed:@&quot;占位&quot;];
+     //省略中间
 }
 </code></pre>
 <p>这个多图下载的优化还是有很多的问题的，在这里总结一个整个过程的思维导图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-14%20%E4%B8%8A%E5%8D%881.07.48.png" alt=""></p>
 <p>最后补充的一点就是内存占用的问题，当图片过多的时候就会爆出内存警告，我们需要小小的优化一下：</p>
-<pre class="highlight"><code class="objective-c">- (void)didRecieveMemoryWarning{
+<pre><code class="objective-c">- (void)didRecieveMemoryWarning{
     [self.images removeAllObjects];
-  	[self.queue cacelAllObjections];
+      [self.queue cacelAllObjections];
 }
 </code></pre>
-<h3 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h3>
-<ul>
-<li><a href="http://www.jianshu.com/p/0c241a4918bf" target="_blank" rel="external">奔跑的炸鸡</a></li>
+<h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><ul>
+<li><a href="http://www.jianshu.com/p/0c241a4918bf" target="_blank" rel="external">奔跑的炸鸡</a>  </li>
 <li>小码哥教程(buy it by yourself)</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/14/iOS多线程之NSOperation/" data-id="cjfibewl3004rdwbrlfkjl1gv" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/14/iOS多线程之NSOperation/" data-id="cjfp3b7xe004xiabrnx1ukkji" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -460,7 +448,7 @@ if(download){
 <nav id="article-nav">
   
     <a href="/2017/11/21/Lctf-sumup/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           Lctf-sumup
@@ -470,7 +458,7 @@ if(download){
   
   
     <a href="/2017/11/06/Python-函数式编程/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Python-函数式编程</div>
     </a>
   
@@ -516,8 +504,8 @@ if(download){
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

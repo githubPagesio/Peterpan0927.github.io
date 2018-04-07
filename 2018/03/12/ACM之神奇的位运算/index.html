@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -99,60 +99,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。</p>
 <a id="more"></a>
-<h1 id="find-your-present"><a class="markdownIt-Anchor" href="#find-your-present"></a> Find your present</h1>
-<p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=11" target="_blank" rel="external">传送门</a></p>
-<p><strong>Problem Description</strong><br>
-In the new year party, everybody will get a “special present”.Now it’s your turn to get your special present, a lot of presents now putting on the desk, and only one of them will be yours.Each present has a card number on it, and your present’s card number will be the one that different from all the others, and you can assume that only one number appear odd times.For example, there are 5 present, and their card numbers are 1, 2, 3, 2, <a href="http://1.so" target="_blank" rel="external">1.so</a> your present will be the one with the card number of 3, because 3 is the number that different from all the others.<br>
-<strong>Input</strong><br>
-The input file will consist of several cases.<br>
-Each case will be presented by an integer n (1&lt;=n&lt;1000000, and n is odd) at first. Following that, n positive integers will be given in a line, all integers will smaller than 2^31. These numbers indicate the card numbers of the presents.n = 0 ends the input.<br>
-<strong>Output</strong><br>
-For each case, output an integer in a line, which is the card number of your present.<br>
-<strong>Sample Input</strong><br>
-5<br>
-1 1 3 2 2<br>
-3<br>
-1 2 1<br>
-0<br>
-<strong>Sample Output</strong><br>
-3<br>
-2<br>
-<strong>Hint</strong><br>
-use scanf to avoid Time Limit Exceeded</p>
+<h1 id="Find-your-present"><a href="#Find-your-present" class="headerlink" title="Find your present"></a>Find your present</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=11" target="_blank" rel="external">传送门</a></p>
+<p><strong>Problem Description</strong><br>In the new year party, everybody will get a “special present”.Now it’s your turn to get your special present, a lot of presents now putting on the desk, and only one of them will be yours.Each present has a card number on it, and your present’s card number will be the one that different from all the others, and you can assume that only one number appear odd times.For example, there are 5 present, and their card numbers are 1, 2, 3, 2, 1.so your present will be the one with the card number of 3, because 3 is the number that different from all the others.<br><strong>Input</strong><br>The input file will consist of several cases.<br>Each case will be presented by an integer n (1&lt;=n&lt;1000000, and n is odd) at first. Following that, n positive integers will be given in a line, all integers will smaller than 2^31. These numbers indicate the card numbers of the presents.n = 0 ends the input.<br><strong>Output</strong><br>For each case, output an integer in a line, which is the card number of your present.<br><strong>Sample Input</strong><br>5<br>1 1 3 2 2<br>3<br>1 2 1<br>0<br><strong>Sample Output</strong><br>3<br>2<br><strong>Hint</strong><br>use scanf to avoid Time Limit Exceeded</p>
 <p>首先我们要知道异或的一些特性，然后看看能不解题有所启发：</p>
 <ol>
 <li>a^b = b^a</li>
-<li>(a<sup>b)</sup>c = a<sup>(b</sup>c)</li>
-<li>a<sup>b</sup>a = b</li>
+<li>(a^b)^c = a^(b^c)</li>
+<li>a^b^a = b</li>
 <li>0^n = n</li>
 <li>n^n = 0</li>
 </ol>
 <p>那么我们可以发现其实我们所要寻找的特殊礼物也就是在输入的数字序列中没有另一个与之相同的数字，那么可以利用第4、5条性质，因为相同的数字之间异或都为0，0和任意数异或都为这个数，那么只需要设定一个起始ans，初始化为0，然后遍历序列进行异或，最后的答案就显而易见了：</p>
-<pre class="highlight"><code class="c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-  <span class="hljs-keyword">int</span> n,ans,m;
-  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n){
-    <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
-    ans=<span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span>(n--){
-      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;m);
+<pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+int main(){
+  int n,ans,m;
+  while(cin &gt;&gt; n){
+    if(n==0) break;
+    ans=0;
+    while(n--){
+      scanf(&quot;%d&quot;, &amp;m);
       ans ^= m;
     }
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);
+    printf(&quot;%d\n&quot;, ans);
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjfibewhe0002dwbr0rei2ntw" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/12/ACM之神奇的位运算/" data-id="cjfp3b7u00008iabr81jv0fgw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -164,7 +146,7 @@ use scanf to avoid Time Limit Exceeded</p>
 <nav id="article-nav">
   
     <a href="/2018/03/13/ACM数论上的难题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           ACM数论上的难题
@@ -174,7 +156,7 @@ use scanf to avoid Time Limit Exceeded</p>
   
   
     <a href="/2018/02/28/浅谈CPU的流水线/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">浅谈CPU的流水线</div>
     </a>
   
@@ -220,8 +202,8 @@ use scanf to avoid Time Limit Exceeded</p>
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

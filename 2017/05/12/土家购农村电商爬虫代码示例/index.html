@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -99,132 +99,131 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>网络爬虫</p>
-<a id="more"></a>
+        <p>网络爬虫<br><a id="more"></a></p>
 <p>首先在pycharm这个IDE中写爬虫的主体部分:</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#爬取链接和信息的部分</span>
-<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
-<span class="hljs-keyword">import</span> requests
-<span class="hljs-keyword">import</span> time
-<span class="hljs-keyword">import</span> pymongo
-<span class="hljs-keyword">import</span> random
+<pre><code class="python">#爬取链接和信息的部分
+from bs4 import BeautifulSoup
+import requests
+import time
+import pymongo
+import random
 
-<span class="hljs-comment">#连接本地数据库并创建两个表</span>
-client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
-tujiagou = client[<span class="hljs-string">'tujiagou'</span>]
-url_list = tujiagou[<span class="hljs-string">'url_list'</span>]
-item_info = tujiagou[<span class="hljs-string">'item_info'</span>]
+#连接本地数据库并创建两个表
+client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+tujiagou = client[&#39;tujiagou&#39;]
+url_list = tujiagou[&#39;url_list&#39;]
+item_info = tujiagou[&#39;item_info&#39;]
 
-start_url = <span class="hljs-string">'http://www.tujiago.com/'</span>
+start_url = &#39;http://www.tujiago.com/&#39;
 
 headers = {
-    <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'</span>,
-    <span class="hljs-string">'Cookie'</span>:<span class="hljs-string">'store_id=0; vary=staticdad85da5caa9112672513bb15a0d7952; UM_distinctid=15bf1838e3c153-064bb97bcefed4-153d655c-384000-15bf1838e3db2b; S[FIRST_REFER]=%7B%22ID%22%3A%22%22%2C%22REFER%22%3A%22https%3A%2F%2Fwww.google.co.jp%2F%22%2C%22DATE%22%3A1494404751000%7D; s=587fac54ade2a1a79d1a27819bdee8db; page_load_times=4; NTKF_T2D_CLIENTID=guestECE58596-E636-C47B-9C38-F1838DDD3CAE; nTalk_CACHE_DATA={uid:kf_9332_ISME9754_guestECE58596-E636-C4,tid:1494405582300579}; S[NOW_REFER]=%7B%22ID%22%3A%22%22%2C%22REFER%22%3A%22https%3A%2F%2Fwww.google.co.jp%2F%22%2C%22DATE%22%3A1494404751000%7D; S[N]=97FE7B11-7578-20E1-30BD-997B69666C35; CNZZDATA1259313336=1399165820-1494405492-null%7C1494405492'</span>,
-    <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://www.google.co.jp/'</span>
+    &#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36&#39;,
+    &#39;Cookie&#39;:&#39;store_id=0; vary=staticdad85da5caa9112672513bb15a0d7952; UM_distinctid=15bf1838e3c153-064bb97bcefed4-153d655c-384000-15bf1838e3db2b; S[FIRST_REFER]=%7B%22ID%22%3A%22%22%2C%22REFER%22%3A%22https%3A%2F%2Fwww.google.co.jp%2F%22%2C%22DATE%22%3A1494404751000%7D; s=587fac54ade2a1a79d1a27819bdee8db; page_load_times=4; NTKF_T2D_CLIENTID=guestECE58596-E636-C47B-9C38-F1838DDD3CAE; nTalk_CACHE_DATA={uid:kf_9332_ISME9754_guestECE58596-E636-C4,tid:1494405582300579}; S[NOW_REFER]=%7B%22ID%22%3A%22%22%2C%22REFER%22%3A%22https%3A%2F%2Fwww.google.co.jp%2F%22%2C%22DATE%22%3A1494404751000%7D; S[N]=97FE7B11-7578-20E1-30BD-997B69666C35; CNZZDATA1259313336=1399165820-1494405492-null%7C1494405492&#39;,
+    &#39;Referer&#39;:&#39;https://www.google.co.jp/&#39;
 }
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_links_from</span><span class="hljs-params">(channel)</span>:</span>
+def get_links_from(channel):
     list_view = channel
     wb_data = requests.get(list_view,headers=headers)
-    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
-    <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> soup.select(<span class="hljs-string">'.ui-page-num &gt; a'</span>):
-            item_link = link.get(<span class="hljs-string">'href'</span>)
+    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
+    for link in soup.select(&#39;.ui-page-num &gt; a&#39;):
+            item_link = link.get(&#39;href&#39;)
             get_links_from_links(item_link)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_links_from_links</span><span class="hljs-params">(channel)</span>:</span>
+def get_links_from_links(channel):
     list_view = channel
     wb_data = requests.get(list_view, headers=headers)
-    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
-    <span class="hljs-keyword">for</span> item_link <span class="hljs-keyword">in</span> soup.select(<span class="hljs-string">'a.entry-title'</span>):
-        item_link = start_url + item_link.get(<span class="hljs-string">'href'</span>)
-        time.sleep(<span class="hljs-number">1</span>)
+    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
+    for item_link in soup.select(&#39;a.entry-title&#39;):
+        item_link = start_url + item_link.get(&#39;href&#39;)
+        time.sleep(1)
         get_item_info_from(item_link)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_item_info_from</span><span class="hljs-params">(url,data=None)</span>:</span>
+def get_item_info_from(url,data=None):
     wb_data = requests.get(url,headers=headers)
-    <span class="hljs-keyword">if</span> wb_data.status_code == <span class="hljs-number">404</span>:
-        <span class="hljs-keyword">pass</span>
-    <span class="hljs-keyword">else</span>:
-        <span class="hljs-keyword">try</span>:
-            soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
+    if wb_data.status_code == 404:
+        pass
+    else:
+        try:
+            soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
             data = {
-                <span class="hljs-string">'title'</span>:soup.title.text.strip(),
-                <span class="hljs-string">'price'</span>:soup.select(<span class="hljs-string">'em.goodsprice'</span>)[<span class="hljs-number">0</span>].text.strip(),
-                <span class="hljs-string">'area'</span>: soup.select(<span class="hljs-string">'span.tb-deliveryAdd.deliveryAddModi'</span>)[<span class="hljs-number">0</span>].text.strip(),
-                <span class="hljs-string">'view'</span>:list(soup.select(<span class="hljs-string">'em.color_3355aa.evaluation'</span>)[<span class="hljs-number">0</span>].stripped_strings),
-                <span class="hljs-string">'url'</span>:url
+                &#39;title&#39;:soup.title.text.strip(),
+                &#39;price&#39;:soup.select(&#39;em.goodsprice&#39;)[0].text.strip(),
+                &#39;area&#39;: soup.select(&#39;span.tb-deliveryAdd.deliveryAddModi&#39;)[0].text.strip(),
+                &#39;view&#39;:list(soup.select(&#39;em.color_3355aa.evaluation&#39;)[0].stripped_strings),
+                &#39;url&#39;:url
             }
-        <span class="hljs-keyword">except</span> IndexError:
-            <span class="hljs-keyword">pass</span>
-        <span class="hljs-keyword">except</span> AttributeError:
-            <span class="hljs-keyword">pass</span>
+        except IndexError:
+            pass
+        except AttributeError:
+            pass
         print(data)
-        <span class="hljs-keyword">if</span> data:
+        if data:
             item_info.insert_one(data)
 </code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#主函数部分</span>
-<span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Pool
-<span class="hljs-keyword">from</span> page_parsing <span class="hljs-keyword">import</span> get_item_info_from,get_links_from_links,get_links_from
-<span class="hljs-keyword">from</span> channel_extracting <span class="hljs-keyword">import</span> channel_list
+<pre><code class="python">#主函数部分
+from multiprocessing import Pool
+from page_parsing import get_item_info_from,get_links_from_links,get_links_from
+from channel_extracting import channel_list
 
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
-    pool = Pool(processes=<span class="hljs-number">6</span>)
+if __name__ == &#39;__main__&#39;:
+    pool = Pool(processes=6)
     pool.map(get_links_from,channel_list.split())
     pool.close()
     pool.join()
 </code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#爬取主页面链接</span>
-<span class="hljs-keyword">import</span> requests
-<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+<pre><code class="python">#爬取主页面链接
+import requests
+from bs4 import BeautifulSoup
 
-start_url = <span class="hljs-string">'http://www.tujiago.com/'</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_index_url</span><span class="hljs-params">(url)</span>:</span>
+start_url = &#39;http://www.tujiago.com/&#39;
+def get_index_url(url):
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
-    links = soup.select(<span class="hljs-string">'p.category-1 &gt; a'</span>)
-    <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> links:
-        page_url = start_url + link.get(<span class="hljs-string">'href'</span>)
+    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
+    links = soup.select(&#39;p.category-1 &gt; a&#39;)
+    for link in links:
+        page_url = start_url + link.get(&#39;href&#39;)
         print(page_url)
 
-<span class="hljs-comment">#get_index_url(start_url)</span>
+#get_index_url(start_url)
 
-channel_list = <span class="hljs-string">'''
+channel_list = &#39;&#39;&#39;
 http://www.tujiago.com//index.php/gallery-656.html
 http://www.tujiago.com//index.php/gallery-797.html
 http://www.tujiago.com//index.php/gallery-699.html
 http://www.tujiago.com//index.php/gallery-769.html
 http://www.tujiago.com//index.php/gallery-689.html
 http://www.tujiago.com//index.php/gallery-949.html
-'''</span>
+&#39;&#39;&#39;
 </code></pre>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#在jupyter notebook中的操作</span>
-<span class="hljs-keyword">import</span> pymongo
-<span class="hljs-keyword">import</span> charts
+<pre><code class="python">#在jupyter notebook中的操作
+import pymongo
+import charts
 
-client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
-tujiagou = client[<span class="hljs-string">'tujiagou'</span>]
-url_list = tujiagou[<span class="hljs-string">'url_list'</span>]
-item_info = tujiagou[<span class="hljs-string">'item_info'</span>]
+client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+tujiagou = client[&#39;tujiagou&#39;]
+url_list = tujiagou[&#39;url_list&#39;]
+item_info = tujiagou[&#39;item_info&#39;]
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">data_gen</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> item_info.find({},{<span class="hljs-string">'price'</span>:<span class="hljs-number">1</span>,<span class="hljs-string">'view'</span>:<span class="hljs-number">1</span>,<span class="hljs-string">'title'</span>:<span class="hljs-number">1</span>}).limit(<span class="hljs-number">6</span>):
+def data_gen():
+    for i in item_info.find({},{&#39;price&#39;:1,&#39;view&#39;:1,&#39;title&#39;:1}).limit(6):
         data = {
-            <span class="hljs-string">'name'</span>: i[<span class="hljs-string">'title'</span>],
-            <span class="hljs-string">'data'</span>: [int(i[<span class="hljs-string">'view'</span>][<span class="hljs-number">0</span>])],
-            <span class="hljs-string">'type'</span>: <span class="hljs-string">'column'</span>
+            &#39;name&#39;: i[&#39;title&#39;],
+            &#39;data&#39;: [int(i[&#39;view&#39;][0])],
+            &#39;type&#39;: &#39;column&#39;
         }
-        <span class="hljs-keyword">yield</span> data
-        
-series = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data_gen()]
+        yield data
+
+series = [i for i in data_gen()]
 options = {
-    <span class="hljs-string">'chart'</span>   : {<span class="hljs-string">'zoomType'</span>:<span class="hljs-string">'xy'</span>},
-    <span class="hljs-string">'title'</span>   : {<span class="hljs-string">'text'</span>: <span class="hljs-string">'土家购浏览量与价钱的关系'</span>},
-    <span class="hljs-string">'subtitle'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'柱状图分析'</span>},
-    <span class="hljs-string">'yAxis'</span>   : {<span class="hljs-string">'title'</span>: {<span class="hljs-string">'text'</span>: <span class="hljs-string">'浏览量'</span>}},
-    <span class="hljs-string">'xAxis'</span>   : {<span class="hljs-string">'categories'</span>: [<span class="hljs-string">'商品类别'</span>]},
+    &#39;chart&#39;   : {&#39;zoomType&#39;:&#39;xy&#39;},
+    &#39;title&#39;   : {&#39;text&#39;: &#39;土家购浏览量与价钱的关系&#39;},
+    &#39;subtitle&#39;: {&#39;text&#39;: &#39;柱状图分析&#39;},
+    &#39;yAxis&#39;   : {&#39;title&#39;: {&#39;text&#39;: &#39;浏览量&#39;}},
+    &#39;xAxis&#39;   : {&#39;categories&#39;: [&#39;商品类别&#39;]},
     }
 
-charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span>)
+charts.plot(series,options=options,show=&#39;inline&#39;)
 </code></pre>
 <p>最后会生成如下的图表效果：</p>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%883.53.00.png" alt=""></p>
@@ -232,7 +231,7 @@ charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/12/土家购农村电商爬虫代码示例/" data-id="cjfibewlp006adwbrf9jow6ml" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/05/12/土家购农村电商爬虫代码示例/" data-id="cjfp3b7y3006diabrd7vlfeb2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -244,7 +243,7 @@ charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span
 <nav id="article-nav">
   
     <a href="/2017/05/12/RSA密钥生成的过程-数学证明/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           RSA密钥生成的过程(数学证明)
@@ -254,7 +253,7 @@ charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span
   
   
     <a href="/2017/03/21/多终端同步hexo博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">多终端同步hexo博客</div>
     </a>
   
@@ -300,8 +299,8 @@ charts.plot(series,options=options,show=<span class="hljs-string">'inline'</span
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

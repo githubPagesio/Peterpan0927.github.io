@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>状态压缩专题 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="状态压缩专题">
+<meta property="og:url" content="http://yoursite.com/2018/04/07/状态压缩专题/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
+<meta property="og:updated_time" content="2018-04-07T08:00:53.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="状态压缩专题">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-状态压缩专题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/07/状态压缩专题/" class="article-date">
+  <time class="post-time" datetime="2018-04-07T07:58:38.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      状态压缩专题
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/状态压缩/">状态压缩</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+<a id="more"></a>
+<h1 id="状压之铺砖块"><a href="#状压之铺砖块" class="headerlink" title="状压之铺砖块"></a>状压之铺砖块</h1><pre><code>有一个N*M(N&lt;=5,M&lt;=1000)的棋盘，现在有1*2及2*1的小木块无数个，要盖满整个棋盘，有多少种方式？答案只需要mod1,000,000,007即可。
+
+例如：对于一个2*2的棋盘，有两种方法，一种是使用2个1*2的，一种是使用2个2*1的。
+</code></pre><p>对于状态压缩的题目，关键之处就在于找到他的状态转移方程，这一道题的状态转移方程是：</p>
+<pre><code class="cpp">for (int i=1;i&lt;=M;i++)  
+    {  
+        for (int j=0;j&lt;(1&lt;&lt;N);j++)  
+        if (dp[i][j])  
+        {  
+            dfs(i,0,j,0);  
+        }  
+    }
+</code></pre>
+<p>所以最后的代码就是：</p>
+<pre><code class="cpp">#include &lt;cstdio&gt;  
+#include &lt;cstring&gt;  
+#include &lt;algorithm&gt;  
+#include &lt;iostream&gt;  
+
+using namespace std;  
+
+int N, M;  
+long long dp[1005][34];  
+
+void dfs(int i,int j,int state,int nex)  
+{  
+    if (j==N)  
+    {  
+  cout &lt;&lt; nex &lt;&lt; endl;
+        dp[i+1][nex]+=dp[i][state];  
+        return;  
+    }  
+    //如果这个位置已经被上一列所占用,直接跳过  
+    if (((1&lt;&lt;j)&amp;state)&gt;0)  
+        dfs(i,j+1,state,nex);  
+    //如果这个位置是空的，尝试放一个1*2的  
+    if (((1&lt;&lt;j)&amp;state)==0)  
+        dfs(i,j+1,state,nex|(1&lt;&lt;j));  
+    //如果这个位置以及下一个位置都是空的，尝试放一个2*1的  
+    if (j+1&lt;N &amp;&amp; ((1&lt;&lt;j)&amp;state)==0 &amp;&amp; ((1&lt;&lt;(j+1))&amp;state)==0)  
+        dfs(i,j+2,state,nex);  
+    return;  
+}  
+
+int main()  
+{  
+    while (cin&gt;&gt;N&gt;&gt;M)  
+    {  
+        memset(dp,0,sizeof(dp));  
+        if (N==0 &amp;&amp; M==0) break;  
+        dp[1][0]=1;   
+        for (int i=1;i&lt;=M;i++)  
+        {  
+            for (int j=0;j&lt;(1&lt;&lt;N);j++)  
+            if (dp[i][j])  
+            {  
+                dfs(i,0,j,0);  
+            }  
+        }
+        for(int i = 1 ; i &lt;= M+1 ;i++ ){
+          for(int j = 0 ; j &lt; N ; j++)
+            cout &lt;&lt; dp[i][j] &lt;&lt; &quot; &quot;;
+         cout &lt;&lt; &quot;\n&quot;;
+        } 
+        cout&lt;&lt;dp[M+1][0]&lt;&lt;endl;  
+    }   
+}
+</code></pre>
+<p>很好理解的hhh，转成二进制就行了。</p>
+<h1 id="状态压缩之牛吃草"><a href="#状态压缩之牛吃草" class="headerlink" title="状态压缩之牛吃草"></a>状态压缩之牛吃草</h1><pre><code>给出一个n行m列的草地，1表示肥沃，0表示贫瘠，现在要把任意数量牛放在肥沃的草地上，但是要求所有牛不能相邻，问有多少种放法。
+</code></pre><p>搬运工写注释</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;stdio.h&gt;
+using namespace std;
+int ans,n,m,dp[13][1&lt;&lt;13],map[13],st[1&lt;&lt;13];
+int M=1e8;
+int judge1(int x)//判断此状态是否有相邻的牛
+{
+    return x&amp;(x&lt;&lt;1);
+}
+int  judge2(int i,int x)//判断此状态与地图是否冲突
+{
+    return map[i]&amp;x;
+}
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for (int i=1;i&lt;=n;i++)
+    for (int j=1;j&lt;=m;j++)
+    {
+        int x;
+        scanf(&quot;%d&quot;,&amp;x);
+          //状态转换，在判断的时候，1表示草地贫瘠
+        if (x==0) map[i]+=(1&lt;&lt;(j-1));
+    }
+    int tot=0;
+    //tot最后为最大的状态数
+    for (int i=0;i&lt;=(1&lt;&lt;m)-1;i++)
+    if (!judge1(i))
+    {
+        tot++;
+        st[tot]=i;
+    }
+    //对第一行进行预处理，得到可能情况存入dp数组
+    for (int i=1;i&lt;=tot;i++)
+    {
+        if (judge2(1,st[i])==0)
+        dp[1][i]=1;
+    }
+    for (int i=2;i&lt;=n;i++)
+    {
+        for (int j=1;j&lt;=tot;j++)
+        {
+            if (judge2(i,st[j])) continue;
+              //遍历可能的状态，看看和上一行是否冲突
+            for (int k=1;k&lt;=tot;k++)
+            {
+                if (judge2(i-1,st[k])) continue;
+                if ((st[j]&amp;st[k])==0)
+                {
+                    dp[i][j] += dp[i-1][k];
+                    dp[i][j] %= M;
+                }
+            }       
+        }
+    }
+    for (int i=1;i&lt;=tot;i++)
+    {
+        ans+=dp[n][i];
+        ans%=M;
+    }
+    printf(&quot;%d\n&quot;,ans);
+}
+</code></pre>
+<h1 id="状态压缩之炮兵阵地"><a href="#状态压缩之炮兵阵地" class="headerlink" title="状态压缩之炮兵阵地"></a>状态压缩之炮兵阵地</h1><pre><code>司令部的将军们打算在N*M的网格地图上部署他们的炮兵部队。一个N*M的地图由N行M列组成，地图的每一格可能是山地（用&quot;H&quot; 表示），也可能是平原（用&quot;P&quot;表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示：
+</code></pre><pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+
+int n,m,sta[105];
+int map[105];
+long long dp[105][65][65];
+char s[15];
+
+bool judge(int x){
+  if((x&amp;(x&lt;&lt;1))!=0 || (x&amp;(x&lt;&lt;2))!=0) return 0;
+  return 1;
+}
+
+int sum(int x){
+  int su = 0;
+  x = sta[x];
+  for(int i = 0 ; i &lt; m ; i++)
+    if(((1&lt;&lt;i)&amp;x)!=0) su++;
+  return su;
+}
+
+int main(){
+  scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+  for (int i=1;i&lt;=n;i++)
+    {
+        scanf(&quot;%s&quot;,s);
+        for (int j=0;j&lt;m;j++)
+        {
+            if (s[j]==&#39;H&#39;)
+            map[i]+=(1&lt;&lt;j);
+        }
+    }
+  int tot = 0;
+  for(int i = 0 ; i &lt; (1 &lt;&lt; m) ; i++){
+    if(judge(i)){
+      tot++;
+      sta[tot] = i;
+    }
+  }
+  memset(dp, 0 , sizeof(dp));
+  //初始化dp数组第一行
+  for(int i = 1 ; i &lt;= tot ; i++)
+    if((map[1]&amp;sta[i])==0)
+      dp[1][i][1] = sum(i);
+
+  for(int i = 2 ; i &lt;= n ; i++)
+    //i-2行的状态
+    for(int j = 1 ; j &lt;= tot ; j++){
+      if((map[i-2]&amp;sta[j])!=0) continue;
+      //i-1行的状态
+      for(int k = 1 ; k &lt;= tot ; k++){
+        if((map[i-1]&amp;sta[k])!=0) continue;
+        if((sta[k]&amp;sta[j])!=0) continue;
+        //i行的状态
+        for(int w = 1 ; w&lt;= tot ; w++){
+          if((map[i]&amp;sta[w])!=0) continue;
+          if((sta[w]&amp;sta[k])!=0) continue;
+          if((sta[w]&amp;sta[j])!=0) continue;
+          dp[i][w][k] = max(dp[i][w][k], dp[i-1][k][j]+sum(w));
+        }
+      }
+    }
+  long long ans = 0;
+  for( int i = 1 ; i &lt;= tot ;i++ )
+    for(int j = 1 ; j&lt;= tot ;j++ ){
+      ans = max(dp[n][j][i],ans);
+    }
+    printf(&quot;%lld&quot;,ans);
+  return 0;
+}
+</code></pre>
+<h1 id="手写迪杰斯特拉小试"><a href="#手写迪杰斯特拉小试" class="headerlink" title="手写迪杰斯特拉小试"></a>手写迪杰斯特拉小试</h1><pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+
+const int maxnum = 100;
+const int maxint = 999999;
+
+void Dijkstra(int n, int v, int *dist, int*prev, int c[maxnum][maxnum]){
+  bool s[maxnum];
+  for(int i = 1 ; i &lt;=n ; i++){
+    dist[i] = c[v][i];
+    s[i] = 0;
+    if(dist[i] == maxint)
+      prev[i] = 0;
+    else
+      prev[i] = v;
+  }
+  dist[v] = 0;
+  s[v] = 1;
+  for(int i = 2 ; i &lt;= n ; i++){
+    int tmp = maxint;
+    int u = v;
+    for(int j = 1 ; j &lt;= n ; j++){
+      //找没有放入集合离起点最近的点
+      if(!s[j] &amp;&amp; dist[j] &lt; tmp){
+        u = j;
+        tmp = dist[j];
+      }
+    }
+    s[u] = 1;
+    for(int j = 1 ; j &lt;= n ; j++){
+      if(!s[j] &amp;&amp; c[u][j] &lt; maxint){
+        int newdist = dist[u] + c[u][j];
+        if(newdist &lt; dist[j]){
+          dist[j] = newdist;
+          prev[j] = u;
+        }
+      }
+    }
+  }
+}
+
+int main(){
+    // 各数组都从下标1开始
+    int dist[maxnum];     // 表示当前点到源点的最短路径长度
+    int prev[maxnum];     // 记录当前点的前一个结点
+    int c[maxnum][maxnum];   // 记录图的两点间路径长度
+    int n, line;             // 图的结点数和路径数
+
+    // 输入结点数
+    cin &gt;&gt; n;
+    // 输入路径数
+    cin &gt;&gt; line;
+    int p, q, len;          // 输入p, q两点及其路径长度
+
+    // 初始化c[][]为maxint
+    for(int i=1; i&lt;=n; ++i)
+        for(int j=1; j&lt;=n; ++j)
+            c[i][j] = maxint;
+
+    for(int i=1; i&lt;=line; ++i)  
+    {
+        cin &gt;&gt; p &gt;&gt; q &gt;&gt; len;
+        if(len &lt; c[p][q])       // 有重边
+        {
+            c[p][q] = len;      // p指向q
+            c[q][p] = len;      // q指向p，这样表示无向图
+        }
+    }
+
+    for(int i=1; i&lt;=n; ++i)
+        dist[i] = maxint;
+    for(int i=1; i&lt;=n; ++i)
+    {
+        for(int j=1; j&lt;=n; ++j)
+            printf(&quot;%8d&quot;, c[i][j]);
+        printf(&quot;\n&quot;);
+    }
+
+    Dijkstra(n, 1, dist, prev, c);
+
+    // 最短路径长度
+    cout &lt;&lt; &quot;源点到最后一个顶点的最短路径长度: &quot; &lt;&lt; dist[n] &lt;&lt; endl;
+  return 0;
+}
+</code></pre>
+<h1 id="HDU-2717"><a href="#HDU-2717" class="headerlink" title="HDU_2717"></a>HDU_2717</h1><p>一个BFS解决的事情</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int N, K;
+int line[100005];
+
+void BFS()
+{
+    queue&lt;int&gt; que;
+    que.push(N);
+    line[N] = 0;
+
+    while(!que.empty())
+    {
+        int tmp = que.front();
+        que.pop();
+
+        if(tmp == K)
+            break;
+
+        int next = tmp-1;
+        if(next&gt;=0 &amp;&amp; !line[next])
+        {
+            que.push(next);
+            line[next] = line[tmp] + 1;
+        }
+
+        next = tmp+1;
+        if(next&gt;=0 &amp;&amp; !line[next])
+        {
+            que.push(next);
+            line[next] = line[tmp] + 1;
+        }
+
+        next = tmp*2;
+        if(next&lt;=100000 &amp;&amp; !line[next] &amp;&amp; next-K&lt;K-tmp)
+        {
+            que.push(next);
+            line[next] = line[tmp] + 1;
+        }
+    }
+}
+
+int main()
+{
+    //freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin);
+    while(scanf(&quot;%d %d&quot;, &amp;N, &amp;K) != EOF)
+    {
+        memset(line, 0, sizeof(line));
+        BFS();
+        printf(&quot;%d\n&quot;, line[K]);
+
+    }
+
+}
+</code></pre>
+<h1 id="POJ-1234"><a href="#POJ-1234" class="headerlink" title="POJ_1234"></a>POJ_1234</h1><pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;queue&gt;
+#include&lt;cstring&gt;
+using namespace std;
+
+const int maxr = 21;
+const int maxc = 21;
+
+int vis[maxr][maxc][1 &lt;&lt; 14];
+
+int maze[maxr][maxc];
+
+int R,C;
+
+struct Node{
+  int x,y;
+  int st, dist;
+  Node(int x, int y, int st, int dist):x(x), y(y), st(st), dist(dist){}
+};
+queue&lt;Node&gt;Q;
+int L;  
+int kase=0; 
+int dir[10]; 
+int dx[]={1,0,-1,0}; 
+int dy[]={0,-1,0,1}; 
+
+bool check(int x, int y, Node node){
+
+    for(int i=L-1;i&gt;=1;i--)  
+    {  
+        dir[i]=node.st&amp;3;//提取相对方向  
+        node.st&gt;&gt;=2;  
+    }  
+    int xx=node.x,yy=node.y;  
+    for(int i=1;i&lt;L;i++)  
+    {  
+        xx+= dx[dir[i]];  
+        yy+= dy[dir[i]];  
+        if(xx==x&amp;&amp;yy==y) return true;//表示冲突  
+    }  
+    return false;//表示无冲突  
+}
+
+int BFS(Node node){
+  kase++;
+  if(node.x == 1 &amp;&amp; node.y == 1) return 0;
+  while(!Q.empty()) Q.pop();
+  Q.push(node);
+  vis[node.x][node.y][node.st] = kase;
+  while(!Q.empty()){
+    Node node = Q.front();
+    Q.pop();
+    int x = node.x, y=node.y, st=node.st,dist=node.dist;
+    for(int d = 0 ; d &lt; 4 ;d++){
+      int nx = x+dx[d],ny = y+dy[d];
+      if(nx == 1 &amp;&amp; ny == 1) return dist+1;
+      if(nx &lt; 1 || nx&gt; R || ny &lt; 1 || ny &gt; C || maze[nx][ny] == 1 || check(nx, ny, node)) continue;
+      int ndist = dist + 1, nst = (st&gt;&gt;2)+( ((d+2)%4)&lt;&lt;(2*(L-2)));
+      if(vis[nx][ny][nst]==kase) continue;
+      Q.push(Node(nx,ny,nst,ndist));
+      vis[nx][ny][nst]=kase;  
+    }
+  }
+  return -1;
+}
+
+int main(){
+  while(scanf(&quot;%d%d%d&quot;,&amp;R,&amp;C,&amp;L)==3)  
+    {  
+        if(R==0&amp;&amp;C==0&amp;&amp;L==0) break;  
+        int x,y,nx,ny;  
+        Node node(0,0,0,0);  
+        scanf(&quot;%d%d&quot;,&amp;node.x,&amp;node.y);  
+        x=node.x,y=node.y;  
+        for(int i=1;i&lt;L;i++)  
+        {  
+            scanf(&quot;%d%d&quot;,&amp;nx,&amp;ny);  
+            for(int d=0;d&lt;4;d++)  
+            {  
+                if(x+dx[d]==nx &amp;&amp; y+dy[d]==ny)  
+                {  
+                    node.st = (node.st&lt;&lt;2)+d;  
+                    break;  
+                }  
+            }  
+            x=nx,y=ny;  
+        }  
+        int blocks;  
+        scanf(&quot;%d&quot;,&amp;blocks);  
+        memset(maze,0,sizeof(maze));  
+        for(int i=1;i&lt;=blocks;i++)  
+        {  
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);  
+            maze[x][y]=1;  
+        }  
+        printf(&quot;Case %d: %d\n&quot;,kase,BFS(node));  
+    }  
+    return 0;    
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/07/状态压缩专题/" data-id="cjfp3b7ye0073iabr8fr1e5lu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/02/背包专题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">背包专题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

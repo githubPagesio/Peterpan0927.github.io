@@ -46,8 +46,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -106,8 +106,7 @@
       
         <p>物有本末，事有终始，知所先后，则近道矣。逆向工程则是帮助我们去理解编程中的道</p>
 <a id="more"></a>
-<h1 id="欢迎来到逆向的世界"><a class="markdownIt-Anchor" href="#欢迎来到逆向的世界"></a> 欢迎来到逆向的世界</h1>
-<p>到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。</p>
+<h1 id="欢迎来到逆向的世界"><a href="#欢迎来到逆向的世界" class="headerlink" title="欢迎来到逆向的世界"></a>欢迎来到逆向的世界</h1><p>到现在也大概做了几个月的iOS开发了，让我头疼的并不是那些复杂的用户逻辑和项目中无聊的业务需求，而是整个iOS系统都十分的封闭，这对于天性崇尚自由的我显然是一种挑战 ，那么越狱就算是我的一个大目标，而越狱的基础就是iOS逆向工程，所以在掌握了基本的开发和拥有了一定的项目能力之后，我毅然决然地选择了iOS逆向这一条路。</p>
 <p>那么究竟什么是iOS的逆向呢，打个比方，如果写App的那些工程师是为了构建一个安全的应用给普通人去使用，那么逆向工程师就是一杆长矛，专门去刺破那些看似安全的App防护盾。对于微信和WhatsApp这样的IM类软件，交流的数据是核心，而对于银行，支付宝这样的电商类软件，交易的数据和用户的信息是他们的核心内容。这些核心数据都是需要重点保护的，于是开发员们通过反调试，数据加密，代码混淆等各种手段去重重保护自己的App避免被逆向工程师们破解，从而引发各种各样的安全问题影响用户的体验。</p>
 <p>目前的App的防护技术和iOS的逆向技术根本就不在一个平面上。一般的App防护，就像一座城堡，将App的MVC不知在城堡内部，看起来易守难攻，就像下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-06%20%E4%B8%8B%E5%8D%8810.59.01.png" alt=""></p>
@@ -138,37 +137,27 @@
 </blockquote>
 <p>在分析完整个App之后，我们就可以开始使用开发工具去写程序了。开发工程师在<code>App store</code>的战场上惯用Xcode，但是转移到越狱iOS之后，除了基于Xcode的<code>iOSOpenDev</code>，还有偏命令行的<code>Theos</code>：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.52.37.png" alt=""></p>
-<h1 id="越狱的平台"><a class="markdownIt-Anchor" href="#越狱的平台"></a> 越狱的平台</h1>
-<p>iOS的系统对于大部分来说都是一个封闭的黑盒子，就算有盘古、太极这种越狱团队的存在，大部分人还是会选择安全的生存在墙内，这样就可以免受系统崩溃的困扰了，但是身为调查兵团的一员显然是无法满足的，向着自由进发吧！：</p>
+<h1 id="越狱的平台"><a href="#越狱的平台" class="headerlink" title="越狱的平台"></a>越狱的平台</h1><p>iOS的系统对于大部分来说都是一个封闭的黑盒子，就算有盘古、太极这种越狱团队的存在，大部分人还是会选择安全的生存在墙内，这样就可以免受系统崩溃的困扰了，但是身为调查兵团的一员显然是无法满足的，向着自由进发吧！：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-07%20%E4%B8%8B%E5%8D%881.58.29.png" alt=""></p>
-<h3 id="ios系统结构"><a class="markdownIt-Anchor" href="#ios系统结构"></a> iOS系统结构</h3>
-<ol>
+<h3 id="iOS系统结构"><a href="#iOS系统结构" class="headerlink" title="iOS系统结构"></a>iOS系统结构</h3><ol>
 <li>对于没有越狱的手机，苹果开发给第三方直接访问iOS的文件系统的接口十分的优先，因此，纯粹的App开发者可能会对鱼iOS的系统结构一无所知</li>
 <li>在越狱之后，我们可以访问iOS全文件系统，这是我们开展iOS逆向工程的首要前提。</li>
 </ol>
-<h3 id="ios目录结构简介"><a class="markdownIt-Anchor" href="#ios目录结构简介"></a> iOS目录结构简介</h3>
-<p>iOS是由OS X演化而来的，OS X又是和Unix有着千丝万缕的联系，可以参考一下Unix下的文件系统标准。接下来要说的就是在iOS中使用的比较频繁的几个目录：</p>
+<h3 id="iOS目录结构简介"><a href="#iOS目录结构简介" class="headerlink" title="iOS目录结构简介"></a>iOS目录结构简介</h3><p>iOS是由OS X演化而来的，OS X又是和Unix有着千丝万缕的联系，可以参考一下Unix下的文件系统标准。接下来要说的就是在iOS中使用的比较频繁的几个目录：</p>
 <ol>
-<li>
-<p>/Applications:存放所有的系统App和来自于Cydia中的App(deb格式)，不包括StoreApp(ipa格式)</p>
+<li><p>/Applications:存放所有的系统App和来自于Cydia中的App(deb格式)，不包括StoreApp(ipa格式)</p>
 </li>
-<li>
-<p>/Developer:如果一台设备连接Xcode被指定为调试用机，Xcode就会在iOS中生成这个目录，包含着一些调试用的数据和工具</p>
+<li><p>/Developer:如果一台设备连接Xcode被指定为调试用机，Xcode就会在iOS中生成这个目录，包含着一些调试用的数据和工具</p>
 </li>
-<li>
-<p>/Library:存放一些提供系统支持的数据,其中/Library/MobileSubstrate 下存放了所有基于 CydiaSubstrate(原名 MobileSubstrate)的插件。</p>
+<li><p>/Library:存放一些提供系统支持的数据,其中/Library/MobileSubstrate 下存放了所有基于 CydiaSubstrate(原名 MobileSubstrate)的插件。</p>
 </li>
-<li>
-<p>/System/Library :iOS 文件系统中最重要的目录之一,存放大量系统组件</p>
+<li><p>/System/Library :iOS 文件系统中最重要的目录之一,存放大量系统组件</p>
 </li>
-<li>
-<p>/System/Library/Frameworks和/System/Library/PrivateFrameworks:存放iOS中的各种 framework,其中出现在 SDK 文档里的只是冰山一角,还有数不清的未公开功能等待我们去挖 。</p>
+<li><p>/System/Library/Frameworks和/System/Library/PrivateFrameworks:存放iOS中的各种 framework,其中出现在 SDK 文档里的只是冰山一角,还有数不清的未公开功能等待我们去挖 。</p>
 </li>
-<li>
-<p>/System/Library/CoreServices里的SpringBoard.app:iOS 面管理器(类似于Windows里的explorer),是用户与系统交流的最重要中介。</p>
+<li><p>/System/Library/CoreServices里的SpringBoard.app:iOS 面管理器(类似于Windows里的explorer),是用户与系统交流的最重要中介。</p>
 </li>
-<li>
-<p>/User:用户目录,实际指向/var/mobile,这个目录里存放大量用户数据,比如:</p>
+<li><p>/User:用户目录,实际指向/var/mobile,这个目录里存放大量用户数据,比如:</p>
 <p>● /var/mobile/Media/DCIM下存放照片;</p>
 <p>● /var/mobile/Media/Recordings下存放录音文件;</p>
 <p>● /var/mobile/Library/SMS下存放短信数据 ;</p>
@@ -176,38 +165,35 @@
 <p>另外还有一个很重要的子目录就是/var/mobile/Containers，其中存放着从App store中下载的App</p>
 </li>
 </ol>
-<h3 id="ios的二进制文件类型"><a class="markdownIt-Anchor" href="#ios的二进制文件类型"></a> iOS的二进制文件类型</h3>
-<p>这里稍微提一下就是iOS的文件权限和linux类似，就不赘述了。在逆向工程的初学阶段，我们的目标主要就是Application、Dynamic Library、Daemon这三类的二进制文件，对他们的了解越深，逆向工程也就越顺利</p>
+<h3 id="iOS的二进制文件类型"><a href="#iOS的二进制文件类型" class="headerlink" title="iOS的二进制文件类型"></a>iOS的二进制文件类型</h3><p>这里稍微提一下就是iOS的文件权限和linux类似，就不赘述了。在逆向工程的初学阶段，我们的目标主要就是Application、Dynamic Library、Daemon这三类的二进制文件，对他们的了解越深，逆向工程也就越顺利</p>
 <ol>
 <li>Application相关概念</li>
 </ol>
 <blockquote>
 <p>bundle：是一个按某种标准结构来组织的目录,其中包含了二进制文件及运行所需的资源。正向开发中常见的 App 和 framework都是以bundle的形式存在的;在越狱iOS中常见的PreferenceBundle，可以看成是一种依附于Settings 的 App。Settings 的 App,结构与 App 类似,本质也是 bundle。</p>
-</blockquote>
-<blockquote>
 <p>Framework 也是 bundle,但 framework 的 bundle 中存放的是一个 dylib,而不是可执行文件。相对来说,framework的地位比 App 更高,因为一个 App 的绝大多数功能都是通过调用 framework 提供的接口来实现的。将某个 bundle 确立为逆向目标后,绝大多数逆向线索都可以在 bundle 内找到,这大大 低了逆向工程的复杂度。</p>
 </blockquote>
-<ol start="2">
+<ol>
 <li>App 目录结构 ：</li>
 </ol>
 <ul>
-<li>Info.plist</li>
+<li>Info.plist </li>
 </ul>
 <p>info.plist文件记录了App的基本信息,如bundle identifier、可执行文件名、图标文件名等。可以通过 Xcode 自带的命 行工具 plutil 查看bundle identifier的值,如下:</p>
-<pre class="highlight"><code class="Shell">plutil -p /Users/snakeninny/Code/iOSSystemBinaries/8.1_iPhone5
+<pre><code class="Shell">plutil -p /Users/snakeninny/Code/iOSSystemBinaries/8.1_iPhone5
 /SiriViewService.app/Info.plist | grep CFBundleIdentifier
 </code></pre>
 <ul>
 <li>lproj目录：lproj目录下存放的是各种本地化的字符 (.strings),是iOS逆向工程的重要线索,也可以用 plutil 查看,如下:</li>
 </ul>
-<pre class="highlight"><code class="shell">plutil -p /Users/snakeninny/Code/iOSSystemBinaries/8.1_iPhone5
+<pre><code class="shell">plutil -p /Users/snakeninny/Code/iOSSystemBinaries/8.1_iPhone5
 /SiriViewService.app/en.lproj/Localizable.strings
 </code></pre>
-<ol start="3">
+<ol>
 <li>系统AppVS商店App：</li>
 </ol>
 <p>Cydia App 的安装包格式一般是 deb,StoreApp 的安装包格式一般是ipa。其中 deb 是来自 Debian 的安装包格式,由 Cydia作者saurik移到iOS中,它的主用户和主组一般是 root 和 admin,能够以 root权限运行;而 ipa 是苹果为 iOS 推出的专用App安装包格式,主用户和主组都是mobile,只能以mobile权限运行。</p>
-<ol start="4">
+<ol>
 <li>Dynamic Library：</li>
 </ol>
 <ul>
@@ -217,35 +203,34 @@
 <li>dylib 则相对“智能”一些,它不会改变可执行文件的大小,只有当 App 需要用到这个 dylib 时,iOS 才会把它加载进内存,成为 App 进程的一部分。</li>
 <li>dylib 的权限是由它寄生的那个 App 决定的,同一个 dylib 寄生在系统 App 和 StoreApp 里时的权限是不同的。</li>
 </ul>
-<ol start="5">
+<ol>
 <li>Daemon</li>
 </ol>
 <p>大部分的iOS开发者可能会秉持着一个观念，就是iOS中没有着真正的后台多任务，App在后台的作用会被大大的限制，事实上在iOS4之前就是这样的，你的应用程序在你按下Home键的那一刻就已经灰飞烟灭了，在之后的iOS5，6之后虽然有所改进，支持了部分的后台运行，但是功能也很有限，在App上架的时候也会检查有没有越权操作。但自从iOS7之后，就涌现出了类似推送唤醒这样的功能，真正的后台多任务其实是存在的。关于iOS 的多任务可以参考<a href="http://andrew-anlu.github.io/blog/2016/04/19/ioszhong-de-duo-ren-wu/" target="_blank" rel="external">安陆的技术博客</a></p>
 <p>后台多任务的问题说完之后我们就回到正题，所有的类Unix系统一样都有daemon(守护进程，windows中称service)。越狱之后daemin也将展现在我们的面前。</p>
 <p>Daemon位后台运行而生，如imagent保障了iMessage的正确收发，syslogd则用于记录所有的系统日志等。在iOS中，Daemon主要是由一个可执行文件和一个plist组成。iOS的根进程是launchd，它会在开机时检查/System/Library/launchDaemons和/Library/LaunchDaemons下所有格式符合规定的plist文件，然后去启动对应的daemon，在这里的plist作用就和我们App中的info.plist文件作用类似，即记录守护进程的基本信息，例如；</p>
-<pre class="highlight"><code class="shell">peterpan in ~ λ  plutil -p /System/Library/LaunchDaemons/finger.plist
+<pre><code class="shell">peterpan in ~ λ  plutil -p /System/Library/LaunchDaemons/finger.plist
 {
-  "InitGroups" =&gt; 1
-  "Disabled" =&gt; 1
-  "inetdCompatibility" =&gt; {
-    "Wait" =&gt; 0
+  &quot;InitGroups&quot; =&gt; 1
+  &quot;Disabled&quot; =&gt; 1
+  &quot;inetdCompatibility&quot; =&gt; {
+    &quot;Wait&quot; =&gt; 0
   }
-  "Sockets" =&gt; {
-    "Listeners" =&gt; {
-      "SockServiceName" =&gt; "finger"
+  &quot;Sockets&quot; =&gt; {
+    &quot;Listeners&quot; =&gt; {
+      &quot;SockServiceName&quot; =&gt; &quot;finger&quot;
     }
   }
-  "ProgramArguments" =&gt; [
-    0 =&gt; "/usr/libexec/fingerd"
-    1 =&gt; "-s"
+  &quot;ProgramArguments&quot; =&gt; [
+    0 =&gt; &quot;/usr/libexec/fingerd&quot;
+    1 =&gt; &quot;-s&quot;
   ]
-  "UserName" =&gt; "nobody"
-  "Label" =&gt; "com.apple.fingerd"
+  &quot;UserName&quot; =&gt; &quot;nobody&quot;
+  &quot;Label&quot; =&gt; &quot;com.apple.fingerd&quot;
 }
 </code></pre>
 <p>相对于App，守护进程提供的功能要底层的多，逆向的难度也要大很多，随意改动也许就会出现类似于白苹果的惨案，所以暂时还是不要把这个当作联系的目标，虽然是测试机，但是还是值点钱的。</p>
-<h2 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h2>
-<p>首先我们已经了解到了什么是iOS逆向工程，以及逆向工程的步骤，还有iOS中的文件目录结构，在下一节的学习当中应该就会以实战的例子演示什么才是逆向工程了。但是其实这一节提到的所有知识深究下去都是可以研究很久的，在这里只会简单的提一下，下面丢几个链接，感兴趣的可以去了解：</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>首先我们已经了解到了什么是iOS逆向工程，以及逆向工程的步骤，还有iOS中的文件目录结构，在下一节的学习当中应该就会以实战的例子演示什么才是逆向工程了。但是其实这一节提到的所有知识深究下去都是可以研究很久的，在这里只会简单的提一下，下面丢几个链接，感兴趣的可以去了解：</p>
 <ul>
 <li><a href="http://andrew-anlu.github.io/blog/2016/04/19/ioszhong-de-duo-ren-wu/" target="_blank" rel="external">iOS的后台多任务</a></li>
 <li><a href="http://blog.csdn.net/ssirreplaceable/article/details/52190215" target="_blank" rel="external">iOS中常见文件以及程序启动原理</a></li>
@@ -255,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/06/iOS逆向学习-一/" data-id="cjfibewl80059dwbrqxy08x3m" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/06/iOS逆向学习-一/" data-id="cjfp3b7xk005biabrujxw6jk5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -267,7 +252,7 @@
 <nav id="article-nav">
   
     <a href="/2017/12/08/iOS网络部分-一/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           iOS网络部分(一)
@@ -277,7 +262,7 @@
   
   
     <a href="/2017/11/24/盲水印技术/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">盲水印技术</div>
     </a>
   
@@ -323,8 +308,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

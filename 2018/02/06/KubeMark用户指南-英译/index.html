@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -99,21 +99,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-06%20%E4%B8%8B%E5%8D%885.07.24.png" height="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-06%20%E4%B8%8B%E5%8D%885.07.24.png" height="350" width="600" alt=""></p>
 <p>对github上的英文手册的翻译，对k8集群的性能测试，原文在此-<a href="https://github.com/kubernetes/community/blob/master/contributors/devel/kubemark-guide.md#kubemark-user-guide" target="_blank" rel="external">kubemark-user-guide</a></p>
 <a id="more"></a>
-<h1 id="kubemark用户指南"><a class="markdownIt-Anchor" href="#kubemark用户指南"></a> Kubemark用户指南</h1>
-<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
-<p>Kubemark是一个性能测试工具，允许用户在模拟集群上运行实验。主要的用例是可扩展性测试，因为模拟集群可能比真实集群大得多。其目标是揭露仅出现在较大集群上的主组件（API服务器，控制器管理器或调度程序）的问题（例如，小内存泄漏）。</p>
+<h1 id="Kubemark用户指南"><a href="#Kubemark用户指南" class="headerlink" title="Kubemark用户指南"></a>Kubemark用户指南</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Kubemark是一个性能测试工具，允许用户在模拟集群上运行实验。主要的用例是可扩展性测试，因为模拟集群可能比真实集群大得多。其目标是揭露仅出现在较大集群上的主组件（API服务器，控制器管理器或调度程序）的问题（例如，小内存泄漏）。</p>
 <p>这个文件是了解Kubemark是什么，不是什么，以及如何使用它的入门知识。</p>
-<h2 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h2>
-<p>从大体结构上看，KubeMark测试集群由两个部分组成：一个真实的<code>master节点</code>和一组<code>Hollow（空心） 节点</code>。任何带有&quot;Hollow&quot;前缀的组件意味着实际组件的实例化并删除移动组件。最好的例子就是<code>HollowKubelet</code>，它看起来像是一个普通的<code>Kubelet</code>，但是并没有启动任何的东西，也没有做任何磁盘映射-这只是一个虚假的<code>Kubelet</code>。本文末尾有更详细的设计和实施细节。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>从大体结构上看，KubeMark测试集群由两个部分组成：一个真实的<code>master节点</code>和一组<code>Hollow（空心） 节点</code>。任何带有”Hollow”前缀的组件意味着实际组件的实例化并删除移动组件。最好的例子就是<code>HollowKubelet</code>，它看起来像是一个普通的<code>Kubelet</code>，但是并没有启动任何的东西，也没有做任何磁盘映射-这只是一个虚假的<code>Kubelet</code>。本文末尾有更详细的设计和实施细节。</p>
 <p>目前，主组件作为由kubelet创建/管理的pod运行在专用机器上，根据VM发行版，它自身作为主VM上的systemd或supervisord服务运行（我们使用了GCI镜像标准，尽管当下systemd还是主流）。拥有专用主机的master与在外部集群上运行master组件相比略有优势，因为master组件可以完全隔离主机资源。另一方面，HollowNodes在一个“外部”K8集群上以一个pod的方式运行，这个pod使用单独的命名空间（名为kubemark）。<strong>通过在真实环境的K8集群中构建多个pod，以模拟出kubemark测试集群的方案是这个测试架构设计的核心。</strong></p>
-<h2 id="要求"><a class="markdownIt-Anchor" href="#要求"></a> 要求</h2>
-<p>要运行Kubemark，您需要一个K8集群（称为<code>external cluster</code>）来运行所有的HollowNodes和一个专用的master。master必须直接从<code>HollowNodes</code>进行路由。您还需要访问Docker镜像仓库（<a href="http://xn--GCEgcr-kp7iqmha37fz6we4qip3ag5spn6c.io" target="_blank" rel="external">在GCE云主机的情况下为gcr.io</a>），该仓库具有etcd，hollow-node和node-problem-detector的容器镜像。 （可以把镜像仓库本地化）</p>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>要运行Kubemark，您需要一个K8集群（称为<code>external cluster</code>）来运行所有的HollowNodes和一个专用的master。master必须直接从<code>HollowNodes</code>进行路由。您还需要访问Docker镜像仓库（在GCE云主机的情况下为gcr.io），该仓库具有etcd，hollow-node和node-problem-detector的容器镜像。 （可以把镜像仓库本地化）</p>
 <p>目前，自动构建脚本在GCE上是简单易用的，但是其他平台包括本地环境没有很好的支持，（我们）正努力将kubemark代码重构，使得它在其他云提供者上运行kubemark集群也变得相对简单。</p>
-<h2 id="常见用例和帮助程序脚本"><a class="markdownIt-Anchor" href="#常见用例和帮助程序脚本"></a> 常见用例和帮助程序脚本</h2>
-<p>Kubemark的常见工作流程是：</p>
+<h2 id="常见用例和帮助程序脚本"><a href="#常见用例和帮助程序脚本" class="headerlink" title="常见用例和帮助程序脚本"></a>常见用例和帮助程序脚本</h2><p>Kubemark的常见工作流程是：</p>
 <ul>
 <li>开启一个测试集群（在GCE上）</li>
 <li>在测试集群上运行e2e测试  （what is e2e 测试）</li>
@@ -121,14 +116,11 @@
 <li>退出测试集群</li>
 </ul>
 <p>对于那些想要将<code>Kubemark</code>移植到不同提供商的人来说，描述中的<em>注释</em>（在哪？目前未知）会比较有用。当上面提到的重构完成时，我们会用一个干净的API替换这些注释，这样可以让kubemark在任何提供者之上运行。</p>
-<h3 id="开始一个kubemark集群"><a class="markdownIt-Anchor" href="#开始一个kubemark集群"></a> 开始一个Kubemark集群</h3>
-<p>要在GCE上启动Kubemark测试集群，您需要自行创建一个外部的K8集群（可以是GCE或其他主机），确保kubeconfig默认指向它，构建一个kubernetes系统（例如通过运行 <code>make quick-release</code>）并运行<code>test/kubemark/start-kubemark.sh</code>脚本。该脚本将为主服务器创建一个虚拟机（安装好了PD并且设置了防火墙规则），然后启动kubelet并运行主组件的pods。接下来，它会在外部集群上将<code>Hollow Node</code>设置为Pods，并配置好所有必要的设置，让他们与kubemark apiserver通信。它将使用存储 <code>cluster/kubemark/config-default.sh</code> 的配置- 你可以根据需要调整它，但是注意到一些特性可能还没有实现，因为实现Hollow组件/ mock可能会落后于“真实”的。对于性能测试，<strong>重要？</strong>（interesting）的变量是<code>NUM_NODES</code>和<code>KUBEMARK_MASTER_SIZE</code>。启动kubemark脚本后，您将拥有一个测试集群和一个用于与测试集群通信的kubeconfig文件，这个文件存储在<code>test/kubemark/resources/kubeconfig.kubemark</code>目录下。</p>
+<h3 id="开始一个Kubemark集群"><a href="#开始一个Kubemark集群" class="headerlink" title="开始一个Kubemark集群"></a>开始一个Kubemark集群</h3><p>要在GCE上启动Kubemark测试集群，您需要自行创建一个外部的K8集群（可以是GCE或其他主机），确保kubeconfig默认指向它，构建一个kubernetes系统（例如通过运行 <code>make quick-release</code>）并运行<code>test/kubemark/start-kubemark.sh</code>脚本。该脚本将为主服务器创建一个虚拟机（安装好了PD并且设置了防火墙规则），然后启动kubelet并运行主组件的pods。接下来，它会在外部集群上将<code>Hollow Node</code>设置为Pods，并配置好所有必要的设置，让他们与kubemark apiserver通信。它将使用存储 <code>cluster/kubemark/config-default.sh</code> 的配置- 你可以根据需要调整它，但是注意到一些特性可能还没有实现，因为实现Hollow组件/ mock可能会落后于“真实”的。对于性能测试，<strong>重要？</strong>（interesting）的变量是<code>NUM_NODES</code>和<code>KUBEMARK_MASTER_SIZE</code>。启动kubemark脚本后，您将拥有一个测试集群和一个用于与测试集群通信的kubeconfig文件，这个文件存储在<code>test/kubemark/resources/kubeconfig.kubemark</code>目录下。</p>
 <p>目前我们正在运行的<code>Hollow Node</code>，一般限制为0.09个CPU核心/ pod和220MB的内存。但是，如果我们还考虑在“外部”集群上运行的默认集群插件和fluentd所收集的资源，则此限制将变为0.1 CPU核心/ pod，从而在每个核心上允许运行10个<code>Hollow Node</code>节点（在“n1-standard-8“VM节点）。</p>
-<h4 id="背后细节"><a class="markdownIt-Anchor" href="#背后细节"></a> 背后细节：</h4>
-<p>start-kubemark.sh脚本做了很多事情：</p>
+<h4 id="背后细节："><a href="#背后细节：" class="headerlink" title="背后细节："></a>背后细节：</h4><p>start-kubemark.sh脚本做了很多事情：</p>
 <ul>
-<li>
-<p>准备一个名为MASTER_NAME的master（这个变量的值应该由此设置）：（</p>
+<li><p>准备一个名为MASTER_NAME的master（这个变量的值应该由此设置）：（</p>
 <p>以下步骤使用gcloud，在GCE之外应该很容易）</p>
 <ol>
 <li>创建一个网络存储磁盘以供主服务器使用（如果标记，给etcd-events多一个）</li>
@@ -138,10 +130,9 @@
 </ol>
 </li>
 </ul>
-<p>*端口443是master上的一个安全端口，用于与API服务器的所有外部通信。在最后一句话中，*外部 不仅仅意味着来自集群外部，还有来自其他机器（包括所有节点）的所有流量。目前本地组件，即ControllerManager和调度程序使用不安全的端口8080与API服务器通信。</p>
+<p><em>端口443是master上的一个安全端口，用于与API服务器的所有外部通信。在最后一句话中，</em>外部 不仅仅意味着来自集群外部，还有来自其他机器（包括所有节点）的所有流量。目前本地组件，即ControllerManager和调度程序使用不安全的端口8080与API服务器通信。</p>
 <ul>
-<li>
-<p>[可选项]建立为kubemark集群设置PKI所需的必要证书/密钥（<em>以下步骤独立于GCE，适用于所有提供商</em>）</p>
+<li><p>[可选项]建立为kubemark集群设置PKI所需的必要证书/密钥（<em>以下步骤独立于GCE，适用于所有提供商</em>）</p>
 <ol>
 <li>生成一个随机命名的临时目录，用于存储在EXIT上删除陷阱的PKI证书/密钥。</li>
 <li>在master中为“admin”创建一个不记名token令牌。</li>
@@ -150,8 +141,7 @@
 <li>在本地写一个kubeconfig以<code>test/kubemark/resources/kubeconfig.kubemark</code>启用本地kubectl的使用。</li>
 </ol>
 </li>
-<li>
-<p>设置环境并启动主组件（通过<code>start-kubemark-master.sh</code>脚本）：（<em>以下步骤使用gcloud进行SSH和SCP的掌握，不用GCE应该很容易做到</em>）</p>
+<li><p>设置环境并启动主组件（通过<code>start-kubemark-master.sh</code>脚本）：（<em>以下步骤使用gcloud进行SSH和SCP的掌握，不用GCE应该很容易做到</em>）</p>
 <ol>
 <li>SSH到master，并创建一个新的目录（<code>/etc/srv/kubernetes</code>），并写入所有的证书/密钥/令牌/密码。</li>
 <li>将所有的<code>master pod</code>的资源配置文件、shell脚本(<code>start-kubemark-master.sh</code>, <code>configure-kubectl.sh</code>等)、 配置环境文件(<code>kubemark-master-env.sh</code>)从本机SCP到master。</li>
@@ -159,11 +149,10 @@
 </ol>
 <p>注意：目录结构和由启动脚本执行的功能可能因主发行版而异。我们目前支持<code>gci-dev-56-8977-0-0</code>GCE 的GCI镜像。</p>
 </li>
-<li>
-<p>在外部集群上设置并启动<code>Hollow Node</code>（作为Pod）：（以下步骤（第二和第三除外）独立于GCE，适用于所有提供商）</p>
+<li><p>在外部集群上设置并启动<code>Hollow Node</code>（作为Pod）：（以下步骤（第二和第三除外）独立于GCE，适用于所有提供商）</p>
 <ol>
 <li>从linux / amd64平台中下载适应当前kubernetes版本的的kubemark二进制文件。</li>
-<li>使用这个二进制文件为<code>Hollow Node</code>创建一个Docker镜像，并将其上传到一个远程的Docker仓库。（<a href="http://xn--GCEgcr-dw7iy4c6ybf68b0n1a041c.io/%E4%BD%9C%E4%B8%BA%E6%88%91%E4%BB%AC%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%BA%93%EF%BC%8C%E5%AF%B9%E4%BA%8E%E5%85%B6%E4%BB%96%E6%8F%90%E4%BE%9B%E4%B8%8A%E5%BA%94%E8%AF%A5%E6%98%AF%E5%85%B6%E4%BB%96%E7%9A%84%EF%BC%89" target="_blank" rel="external">我们在GCE中使用gcr.io/作为我们的远程库，对于其他提供上应该是其他的）</a></li>
+<li>使用这个二进制文件为<code>Hollow Node</code>创建一个Docker镜像，并将其上传到一个远程的Docker仓库。（我们在GCE中使用gcr.io/作为我们的远程库，对于其他提供上应该是其他的）</li>
 <li>[一次性]除了HollowKubelet和HollowProxy之外，为NodeProblemDetector创建并上传一个Docker镜像（参见kubernetes / node-problem-detector repo），这是<code>Hollow Node</code> pod中的一个容器。然而我们用的是一个会被检测到空的规则和条件的空配置，此步骤仅适用于其他云提供商，因为GCE的docker镜像已存在于GCR上。</li>
 <li>创建并存储一个用于HollowKubelet / HollowProxy，addons，kubeconfig，和用于<code>HollowNode</code>与 <code>HollowNodeProblemDetecto</code>r的configMaps的kubeconfig加密文件。</li>
 <li>在替换hollow-node_template.json资源中的所有变量之后，为启动它们的<code>HollowNodes</code>创建一个ReplicationController。</li>
@@ -171,36 +160,32 @@
 </ol>
 </li>
 </ul>
-<h3 id="在kubemark集群上运行e2e测试"><a class="markdownIt-Anchor" href="#在kubemark集群上运行e2e测试"></a> 在Kubemark集群上运行e2e测试</h3>
-<p>要在上一步创建的Kubemark集群上运行标准的e2e测试，请执行<code>test/kubemark/run-e2e-tests.sh</code>脚本。它会配置<code>ginko</code>使用Kubemark集群而不是其他的东西并启动一个e2e测试。此脚本不需要任何更改就可以在其他云提供商上工作。</p>
-<p>默认情况下（如果没有东西会被传递给它），脚本将运行Density '30测试。如果你想运行一个不同的e2e测试，你只需要提供你想传递给<code>hack/ginkgo-e2e.sh</code>脚本的标志，例如<code>--ginkgo.focus=&quot;Load&quot;</code>运行负载测试。</p>
+<h3 id="在Kubemark集群上运行e2e测试"><a href="#在Kubemark集群上运行e2e测试" class="headerlink" title="在Kubemark集群上运行e2e测试"></a>在Kubemark集群上运行e2e测试</h3><p>要在上一步创建的Kubemark集群上运行标准的e2e测试，请执行<code>test/kubemark/run-e2e-tests.sh</code>脚本。它会配置<code>ginko</code>使用Kubemark集群而不是其他的东西并启动一个e2e测试。此脚本不需要任何更改就可以在其他云提供商上工作。</p>
+<p>默认情况下（如果没有东西会被传递给它），脚本将运行Density ‘30测试。如果你想运行一个不同的e2e测试，你只需要提供你想传递给<code>hack/ginkgo-e2e.sh</code>脚本的标志，例如<code>--ginkgo.focus=&quot;Load&quot;</code>运行负载测试。</p>
 <p>默认情况下，在每次测试结束时，它将删除Kubemark Master上的命名空间及其下的所有内容（例如事件，复制控制器），这需要花费很多时间。大多数情况下不需要这样的工作：如果您在运行后删除了Kubemark集群<code>run-e2e-tests.sh</code>，你不关心命名空间的删除性能，具体涉及到etcd; 有一个标志，使您可以避免名称空间删除：<code>--delete-namespace=false</code>。添加标志应该让你看到日志：<code>Found DeleteNamespace=false, skipping namespace deletion!</code></p>
-<h3 id="监视测试执行和调试问题"><a class="markdownIt-Anchor" href="#监视测试执行和调试问题"></a> 监视测试执行和调试问题</h3>
-<p>Run-e2e-tests会在Kubemark上打印与普通e2e集群相同的输出，但是如果您需要深入挖掘，您需要了解如何调试<code>HollowNodes</code>以及当前master与普通机器的区别。</p>
+<h3 id="监视测试执行和调试问题"><a href="#监视测试执行和调试问题" class="headerlink" title="监视测试执行和调试问题"></a>监视测试执行和调试问题</h3><p>Run-e2e-tests会在Kubemark上打印与普通e2e集群相同的输出，但是如果您需要深入挖掘，您需要了解如何调试<code>HollowNodes</code>以及当前master与普通机器的区别。</p>
 <p>如果你需要调试master，你可以像在普通master上做类似的事情。Kubemark设置和普通设置的区别在于Kubemark的etcd是作为一个简单的docker容器运行的，所有的主组件都像普通进程一样运行。没有Kubelet监督他们。日志存储在完全相同的地方，即<code>/var/logs/</code>目录。因为二进制文件不受任何监督，所以在崩溃的情况下不会重新启动。</p>
 <p>为了帮助你在集群启动脚本中进行调试，在<code>~/configure-kubectl.sh</code>主服务器上放置了一个 脚本。它负责下载<code>gcloud</code>和<code>kubectl</code>工具和配置kubectl工作在不安全的master端口（如果有安全问题就会派上用场）。脚本运行后，你可以使用master机器上的kubectl命令来控制整个集群。</p>
 <p>调试<code>HollowNodes</code>更麻烦一点，就好像你遇到了一个问题，你需要知道哪个<code>HollowNode</code>对应着Master所知道的<code>HollowNode</code>。在自注册过程中，HollowNodes提供其集群IP作为名称，这意味着如果您需要查找名为HollowNode的用户<code>10.2.4.5</code>，只需使用此集群IP在外部集群中查找Pod。在 <code>test/kubemark/get-real-pod-for-hollow-node.sh</code>下有一个帮助脚本来为你做这个。</p>
 <p>当你有一个Pod名称，你可以<code>kubectl logs</code>在外部集群上使用获取日志，或者使用一个<code>kubectl describe pod</code>调用来找到一个外部节点，在这个外部节点上运行这个特定的<code>HollowNode</code>，这样你就可以SSH了。</p>
 <p>例如，您想要查看<code>my-pod</code>运行Pod的HollowKubelet的日志。要做到这一点，你可以执行：</p>
-<pre class="highlight"><code class="Shell"><span class="hljs-meta">$</span><span class="bash"> kubectl kubernetes/<span class="hljs-built_in">test</span>/kubemark/resources/kubeconfig.kubemark describe pod my-pod</span>
+<pre><code class="Shell">$ kubectl kubernetes/test/kubemark/resources/kubeconfig.kubemark describe pod my-pod
 </code></pre>
 <p>然后会输出pod的描述:</p>
-<pre class="highlight"><code class="shell">Node:				1.2.3.4/1.2.3.4
+<pre><code class="shell">Node:                1.2.3.4/1.2.3.4
 </code></pre>
 <p>要学习使用上述脚本的<code>hollow-node</code>对应于节点的pod<code>1.2.3.4</code>：</p>
-<pre class="highlight"><code class="Shell"><span class="hljs-meta">$</span><span class="bash"> kubernetes/<span class="hljs-built_in">test</span>/kubemark/get-real-pod-for-hollow-node.sh 1.2.3.4</span>
+<pre><code class="Shell">$ kubernetes/test/kubemark/get-real-pod-for-hollow-node.sh 1.2.3.4
 </code></pre>
 <p>然后就会输出:</p>
-<pre class="highlight"><code class="shell">hollow-node-1234
+<pre><code class="shell">hollow-node-1234
 </code></pre>
 <p>现在您只需使用普通的kubectl命令来获取日志：</p>
-<pre class="highlight"><code class="shell">kubectl --namespace=kubemark logs hollow-node-1234
+<pre><code class="shell">kubectl --namespace=kubemark logs hollow-node-1234
 </code></pre>
 <p>所有这些东西都应该在所有云提供商上完全一样。</p>
-<h3 id="退出kubemark集群"><a class="markdownIt-Anchor" href="#退出kubemark集群"></a> 退出Kubemark集群</h3>
-<p>在GCE上，您只需要执行<code>test/kubemark/stop-kubemark.sh</code>脚本，它将删除HollowNode ReplicationController和所有资源。在其他提供商，你需要自己删除所有这些东西。作为上述工作的一部分，还需要将kubemark重构为独立于提供者和特定于提供者的部分，再将删除了特定于提供者部分的资源转移到纯净的API中。</p>
-<h2 id="一些当前的实施细节和未来路线图"><a class="markdownIt-Anchor" href="#一些当前的实施细节和未来路线图"></a> 一些当前的实施细节和未来路线图</h2>
-<p>Kubemark master使用与普通Kubernetes完全相同的二进制文件。这意味着它永远不会过时。另一方面，<code>HollowNodes</code>使用现有的Kubelet的简化版（称为SimpleKubelet），它删除了其<code>runtime</code>管理器<code>pkg/kubelet/dockertools/fake_manager.go</code>，也是大部分的逻辑所在之处。因为没有简单的方法来模拟其他管理器（例如VolumeManager），所以它们在Kubemark中不被支持（例如，我们不能在其中调度具有和本地磁盘有映射关系的Pod）。</p>
+<h3 id="退出Kubemark集群"><a href="#退出Kubemark集群" class="headerlink" title="退出Kubemark集群"></a>退出Kubemark集群</h3><p>在GCE上，您只需要执行<code>test/kubemark/stop-kubemark.sh</code>脚本，它将删除HollowNode ReplicationController和所有资源。在其他提供商，你需要自己删除所有这些东西。作为上述工作的一部分，还需要将kubemark重构为独立于提供者和特定于提供者的部分，再将删除了特定于提供者部分的资源转移到纯净的API中。 </p>
+<h2 id="一些当前的实施细节和未来路线图"><a href="#一些当前的实施细节和未来路线图" class="headerlink" title="一些当前的实施细节和未来路线图"></a>一些当前的实施细节和未来路线图</h2><p>Kubemark master使用与普通Kubernetes完全相同的二进制文件。这意味着它永远不会过时。另一方面，<code>HollowNodes</code>使用现有的Kubelet的简化版（称为SimpleKubelet），它删除了其<code>runtime</code>管理器<code>pkg/kubelet/dockertools/fake_manager.go</code>，也是大部分的逻辑所在之处。因为没有简单的方法来模拟其他管理器（例如VolumeManager），所以它们在Kubemark中不被支持（例如，我们不能在其中调度具有和本地磁盘有映射关系的Pod）。</p>
 <p>我们目前计划沿着以下方向扩展kubemark：</p>
 <ul>
 <li>正如您在上述位置注意到的那样，我们的目标是使kubemark更加结构化，并且易于跨多个云提供商运行，而无需使用定义良好的kubemark提供程序API调整设置脚本。</li>
@@ -213,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/06/KubeMark用户指南-英译/" data-id="cjfibewiz001xdwbrn79qc0jg" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/02/06/KubeMark用户指南-英译/" data-id="cjfp3b7vd001viabrv2hg8u8b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
@@ -225,7 +210,7 @@
 <nav id="article-nav">
   
     <a href="/2018/02/07/iOS逆向学习-五/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           iOS逆向学习(五)
@@ -235,7 +220,7 @@
   
   
     <a href="/2018/02/04/iOS逆向学习-四/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">iOS逆向学习(四)</div>
     </a>
   
@@ -281,8 +266,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
