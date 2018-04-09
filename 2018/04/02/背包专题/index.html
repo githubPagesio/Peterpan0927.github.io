@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
-<meta property="og:updated_time" content="2018-04-08T15:59:32.824Z">
+<meta property="og:updated_time" content="2018-04-09T15:48:20.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="背包专题">
 <meta name="twitter:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。">
@@ -310,6 +310,7 @@
    	}
    	zero(amount*cost);
 }
+
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
 </span>{
 	<span class="hljs-keyword">int</span> i,j,k,n,m,a[<span class="hljs-number">205</span>],c[<span class="hljs-number">205</span>];
@@ -526,6 +527,143 @@
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
 }  
 </code></pre>
+<h1 id="守望者的逃离"><a class="markdownIt-Anchor" href="#守望者的逃离"></a> 守望者的逃离</h1>
+<p>优化版本，因为有三种选择，所以不可能在一次循环中解决问题，所以我们先一直闪现，然后用跑步来优化其中一部分情况，因为距离很长，所以我们只能通过枚举时间。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXT 300001</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> magic,dis,tim,ans;
+<span class="hljs-keyword">int</span> f[MAXT];  <span class="hljs-comment">//f[i]表示当时间为i时的最优解 </span>
+<span class="hljs-keyword">bool</span> flag;    <span class="hljs-comment">//flag表示能否逃出荒岛 </span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">()</span>  <span class="hljs-comment">//核心代码，dp </span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){  <span class="hljs-comment">//这个循环先处理不停闪现的情况，原则是有魔法就闪，没有就停下来补 </span>
+        <span class="hljs-keyword">if</span> (magic&gt;=<span class="hljs-number">10</span>){        <span class="hljs-comment">//够魔法值，进行闪现 </span>
+            f[i]=f[i<span class="hljs-number">-1</span>]+<span class="hljs-number">60</span>;
+            magic-=<span class="hljs-number">10</span>;
+        }<span class="hljs-keyword">else</span>{      <span class="hljs-comment">//不够魔法值，停下来补充 </span>
+            f[i]=f[i<span class="hljs-number">-1</span>];
+            magic+=<span class="hljs-number">4</span>;
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){  <span class="hljs-comment">//对于所有时间，看是否能用普通跑步来优化 </span>
+        f[i]=max(f[i],f[i<span class="hljs-number">-1</span>]+<span class="hljs-number">17</span>);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">find_ans</span><span class="hljs-params">()</span>  <span class="hljs-comment">//找到答案（不重要） </span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){
+        <span class="hljs-keyword">if</span> (f[i]&gt;=dis){
+            flag=<span class="hljs-literal">true</span>;
+            ans=i;
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">if</span> (i==tim){
+            flag=<span class="hljs-literal">false</span>;
+            ans=f[i];
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (flag){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Yes\n%d\n"</span>,ans);
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"No\n%d\n"</span>,ans);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(f));
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d %d"</span>,&amp;magic,&amp;dis,&amp;tim);
+    dp();
+    find_ans();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="朴素的网络游戏"><a class="markdownIt-Anchor" href="#朴素的网络游戏"></a> 朴素的网络游戏</h1>
+<p>这个题目的关键所在就是我们需要知道就算有多对夫妻，最优的情况也只会出现在一对夫妻一起住的情况下。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">310</span>][<span class="hljs-number">310</span>][<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> b[<span class="hljs-number">310</span>];
+<span class="hljs-keyword">int</span> p[<span class="hljs-number">310</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+	<span class="hljs-keyword">int</span> m,f,r,c;
+	<span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">127</span>, <span class="hljs-keyword">sizeof</span>(dp));
+	<span class="hljs-built_in">cin</span> &gt;&gt; m &gt;&gt; f &gt;&gt; r &gt;&gt; c;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= r ;i++)
+		<span class="hljs-built_in">cin</span> &gt;&gt; b[i] &gt;&gt; p[i];
+	dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l = <span class="hljs-number">1</span> ; l &lt;= r ;l++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = m ; i &gt;= <span class="hljs-number">0</span> ;i--)
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = f ; j &gt;= <span class="hljs-number">0</span> ;j--){
+				<span class="hljs-keyword">if</span>(b[l] &gt;= <span class="hljs-number">2</span>) dp[i][j][<span class="hljs-number">1</span>] = min(dp[i][j][<span class="hljs-number">0</span>]+p[l], dp[i][j][<span class="hljs-number">1</span>]);
+              	<span class="hljs-comment">//尽量往这个房间里放，放满取最小</span>
+				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> o = <span class="hljs-number">1</span> ; o &lt;= b[l] ;o++){
+					<span class="hljs-keyword">if</span>(i+o&lt;=m+c&amp;&amp;i&gt;=o) dp[i][j][<span class="hljs-number">0</span>]=min(dp[i][j][<span class="hljs-number">0</span>],dp[i-o][j][<span class="hljs-number">0</span>]+p[l]);
+					<span class="hljs-keyword">if</span>(j+o&lt;=f+c&amp;&amp;j&gt;=o) dp[i][j][<span class="hljs-number">0</span>]=min(dp[i][j][<span class="hljs-number">0</span>],dp[i][j-o][<span class="hljs-number">0</span>]+p[l]);
+				}
+			}
+	<span class="hljs-keyword">int</span> ans=<span class="hljs-number">9999999</span>;
+	<span class="hljs-keyword">if</span>(c&gt;=<span class="hljs-number">1</span>) ans=min(dp[m<span class="hljs-number">-1</span>][f<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>],dp[m][f][<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">else</span> ans=min(ans,dp[m][f][<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">if</span>(ans!=<span class="hljs-number">9999999</span>)<span class="hljs-built_in">cout</span>&lt;&lt;ans;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Impossible"</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="拼拼图的小衫"><a class="markdownIt-Anchor" href="#拼拼图的小衫"></a> 拼拼图的小衫</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">1000</span>;
+<span class="hljs-keyword">int</span> n,m,T,a[maxn+<span class="hljs-number">10</span>];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>{</span>
+    <span class="hljs-keyword">int</span> t,s;
+    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-keyword">const</span> node d) <span class="hljs-keyword">const</span>{
+        <span class="hljs-keyword">if</span> (t&lt;d.t)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (t&gt;d.t)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> s&lt;d.s;
+    }
+    node <span class="hljs-keyword">operator</span> + (<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> d) <span class="hljs-keyword">const</span>{
+        <span class="hljs-keyword">if</span> (s+d&lt;=T)
+            <span class="hljs-keyword">return</span> (node){t,s+d};
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> (node){t+<span class="hljs-number">1</span>,d};
+    }
+};
+node f[maxn+<span class="hljs-number">10</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;T);
+    node te;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
+    f[<span class="hljs-number">0</span>].t=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++){
+        f[i]=f[i<span class="hljs-number">-1</span>]+a[i];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=i<span class="hljs-number">-1</span>;j&gt;=<span class="hljs-number">1</span>;j--){
+            te=f[j<span class="hljs-number">-1</span>]+a[i];
+            <span class="hljs-keyword">if</span> (te&lt;f[j])
+                f[j]=te;
+        }
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=n;i&gt;=<span class="hljs-number">0</span>;i--)
+        <span class="hljs-keyword">if</span> (f[i].t&lt;=m){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,i);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        }
+}
+</code></pre>
 <h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
 <p><a href="https://www.kancloud.cn/kancloud/pack/70125" target="_blank" rel="external">背包九讲</a></p>
 <p><a href="https://blog.csdn.net/herbertpotter/article/details/77480346" target="_blank" rel="external">专题训练</a></p>
@@ -534,7 +672,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfp3b7yn007qiabrkv7l4iwo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfsevx60009d2ebrfuldc1by" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -546,7 +684,7 @@
 <nav id="article-nav">
   
     <a href="/2018/04/07/状态压缩专题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           状态压缩专题
@@ -556,7 +694,7 @@
   
   
     <a href="/2018/03/25/ACM日常训练-三/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">ACM日常训练总结(三)</div>
     </a>
   

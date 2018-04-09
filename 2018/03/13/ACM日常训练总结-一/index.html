@@ -100,326 +100,339 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
 <p>日常训练中感觉有些坑(水题)的题目大结集～</p>
 <a id="more"></a>
-<h1 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1020" target="_blank" rel="external">传送门</a></p>
+<h1 id="encoding"><a class="markdownIt-Anchor" href="#encoding"></a> Encoding</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1020" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem Description</strong></p>
-<p>Given a string containing only ‘A’ - ‘Z’, we could encode it using the following method: </p>
+<p>Given a string containing only ‘A’ - ‘Z’, we could encode it using the following method:</p>
 <ol>
 <li>Each sub-string containing k same characters should be encoded to “kX” where “X” is the only character in this sub-string.</li>
 <li>If the length of the sub-string is 1, ‘1’ should be ignored.</li>
 </ol>
 <p><strong>Input</strong></p>
-<p>The first line contains an integer N (1 &lt;= N &lt;= 100) which indicates the number of test cases. The next N lines contain N strings. Each string consists of only ‘A’ - ‘Z’ and the length is less than 10000. </p>
+<p>The first line contains an integer N (1 &lt;= N &lt;= 100) which indicates the number of test cases. The next N lines contain N strings. Each string consists of only ‘A’ - ‘Z’ and the length is less than 10000.</p>
 <p><strong>Output</strong></p>
-<p>For each test case, output the encoded string in a line </p>
+<p>For each test case, output the encoded string in a line</p>
 <p><strong>Sample Input</strong></p>
-<pre><code>2 ABC ABBCCC
-</code></pre><p><strong>Sample Output</strong></p>
-<pre><code>ABC A2B3C
-</code></pre><p>这个题目坑的地方主要在与你要理解清楚它是把每个子串做加密，而不是最后把相同的字母统计然后输出，我一开始以为的是统计整个序列中每个字符的个数输出，所以写的代码如下：</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;string.h&gt;
-using namespace std;
+<pre class="highlight"><code class="">2 ABC ABBCCC 
+</code></pre>
+<p><strong>Sample Output</strong></p>
+<pre class="highlight"><code class="">ABC A2B3C
+</code></pre>
+<p>这个题目坑的地方主要在与你要理解清楚它是把每个子串做加密，而不是最后把相同的字母统计然后输出，我一开始以为的是统计整个序列中每个字符的个数输出，所以写的代码如下：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int N;
-  char ch;
-  int flag=1;
-  scanf(&quot;%d&quot;, &amp;N);
-  while(N--){
-    int a[30]={0};
-    if(flag) {getchar(); flag=0;}
-    while(true){
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> N;
+  <span class="hljs-keyword">char</span> ch;
+  <span class="hljs-keyword">int</span> flag=<span class="hljs-number">1</span>;
+  <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;N);
+  <span class="hljs-keyword">while</span>(N--){
+    <span class="hljs-keyword">int</span> a[<span class="hljs-number">30</span>]={<span class="hljs-number">0</span>};
+    <span class="hljs-keyword">if</span>(flag) {getchar(); flag=<span class="hljs-number">0</span>;}
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
     ch=getchar();
-    if(ch == &#39;\n&#39;) break;
-    else{
-      a[ch-65] += 1;
+    <span class="hljs-keyword">if</span>(ch == <span class="hljs-string">'\n'</span>) <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">else</span>{
+      a[ch<span class="hljs-number">-65</span>] += <span class="hljs-number">1</span>;
     }
     }
-    for(int i = 0 ; i&lt; 26 ; i++){
-      if(a[i]==1) cout &lt;&lt; char(i+65);
-      else if(a[i] &gt; 1) cout &lt;&lt; a[i] &lt;&lt; char(i+65);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i&lt; <span class="hljs-number">26</span> ; i++){
+      <span class="hljs-keyword">if</span>(a[i]==<span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">char</span>(i+<span class="hljs-number">65</span>);
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(a[i] &gt; <span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="hljs-keyword">char</span>(i+<span class="hljs-number">65</span>);
     }
-    cout &lt;&lt; endl;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
   }
 
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<p> 因为HDU上面没有多的测试样例可以看，所以一开始错了好几次，后来才发现是<code>Each-substring</code>，所以用C++中的string类来做就比较简单了：</p>
-<pre><code class="cpp">#include &lt;iostream&gt;  
-#include &lt;algorithm&gt;  
-#include &lt;cstdio&gt;  
-#include &lt;string&gt;  
-#include &lt;cstring&gt;  
-using namespace std;  
-int main()  
-{  
-    int t;  
-    string s;  
-    cin&gt;&gt;t;  
+<p>因为HDU上面没有多的测试样例可以看，所以一开始错了好几次，后来才发现是<code>Each-substring</code>，所以用C++中的string类来做就比较简单了：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;  </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> t;  
+    <span class="hljs-built_in">string</span> s;  
+    <span class="hljs-built_in">cin</span>&gt;&gt;t;  
     getchar();  
-    while(t--)  
+    <span class="hljs-keyword">while</span>(t--)  
     {  
-        cin&gt;&gt;s;  
-        int len=s.size();  
-        int ans=1;///用ans来记录字符出现的次数  
-        int temp=s[0];///用temp来存储第一个字符  
-        for(int i=1; i&lt;=len; i++)///将temp与后边的字符进行比较，相同的ans++  
+        <span class="hljs-built_in">cin</span>&gt;&gt;s;  
+        <span class="hljs-keyword">int</span> len=s.size();  
+        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">1</span>;<span class="hljs-comment">///用ans来记录字符出现的次数  </span>
+        <span class="hljs-keyword">int</span> temp=s[<span class="hljs-number">0</span>];<span class="hljs-comment">///用temp来存储第一个字符  </span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=len; i++)<span class="hljs-comment">///将temp与后边的字符进行比较，相同的ans++  </span>
         {  
-            if(s[i]!=temp)  
+            <span class="hljs-keyword">if</span>(s[i]!=temp)  
             {  
-                if(ans==1)///如果次数为1，忽略1，直接输出  
+                <span class="hljs-keyword">if</span>(ans==<span class="hljs-number">1</span>)<span class="hljs-comment">///如果次数为1，忽略1，直接输出  </span>
                 {  
-                    cout&lt;&lt;s[i-1];  
+                    <span class="hljs-built_in">cout</span>&lt;&lt;s[i<span class="hljs-number">-1</span>];  
                     temp=s[i];  
                 }  
-                else  
+                <span class="hljs-keyword">else</span>  
                 {  
-                    cout&lt;&lt;ans&lt;&lt;s[i-1];  
+                    <span class="hljs-built_in">cout</span>&lt;&lt;ans&lt;&lt;s[i<span class="hljs-number">-1</span>];  
                     temp=s[i];  
-                    ans=1;  
+                    ans=<span class="hljs-number">1</span>;  
                 }  
             }  
-            else  
+            <span class="hljs-keyword">else</span>  
                 ans++;  
         }  
-        cout&lt;&lt;endl;  
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;  
     }  
-    return 0;  
-}
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h2 id="Least-Common-Multiple"><a href="#Least-Common-Multiple" class="headerlink" title="Least Common Multiple"></a>Least Common Multiple</h2><p><strong>Problem Description </strong><br>The least common multiple (LCM) of a set of positive integers is the smallest positive integer which is divisible by all the numbers in the set. For example, the LCM of 5, 7 and 15 is 105.</p>
-<p><strong>Input</strong><br>Input will consist of multiple problem instances. The first line of the input will contain a single integer indicating the number of problem instances. Each instance will consist of a single line of the form m n1 n2 n3 … nm where m is the number of integers in the set and n1 … nm are the integers. All integers will be positive and lie within the range of a 32-bit integer.</p>
-<p><strong>Output</strong><br>For each problem instance, output a single line containing the corresponding LCM. All results will lie in the range of a 32-bit integer.</p>
-<p><strong>Sample Input </strong></p>
-<pre><code>2 
+<h2 id="least-common-multiple"><a class="markdownIt-Anchor" href="#least-common-multiple"></a> Least Common Multiple</h2>
+<p>**Problem Description **<br>
+The least common multiple (LCM) of a set of positive integers is the smallest positive integer which is divisible by all the numbers in the set. For example, the LCM of 5, 7 and 15 is 105.</p>
+<p><strong>Input</strong><br>
+Input will consist of multiple problem instances. The first line of the input will contain a single integer indicating the number of problem instances. Each instance will consist of a single line of the form m n1 n2 n3 … nm where m is the number of integers in the set and n1 … nm are the integers. All integers will be positive and lie within the range of a 32-bit integer.</p>
+<p><strong>Output</strong><br>
+For each problem instance, output a single line containing the corresponding LCM. All results will lie in the range of a 32-bit integer.</p>
+<p>**Sample Input **</p>
+<pre class="highlight"><code class="">2 
 3 5 7 15 
 6 4 10296 936 1287 792 1
-</code></pre><p><strong>Sample Output </strong></p>
-<pre><code>105 
+</code></pre>
+<p>**Sample Output **</p>
+<pre class="highlight"><code class="">105 
 10296
-</code></pre><p>乍一看我们要求很多数的总共最大公约数，可能一开始会慌了神，如果没有想到循环求两个数的最大公约数可能会用穷举的办法，因为最大公约数必定是最大的那个数的倍数，所以这样写代码也是可以过的：</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
+</code></pre>
+<p>乍一看我们要求很多数的总共最大公约数，可能一开始会慌了神，如果没有想到循环求两个数的最大公约数可能会用穷举的办法，因为最大公约数必定是最大的那个数的倍数，所以这样写代码也是可以过的：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int n,t;
-  scanf(&quot;%d&quot;, &amp;n);
-  while(n--){
-    scanf(&quot;%d&quot;, &amp;t);
-    int a[100001]={0};
-    for(int i = 0 ; i &lt; t ; i++)
-      scanf(&quot;%d&quot;, &amp;a[i]);
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> n,t;
+  <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);
+  <span class="hljs-keyword">while</span>(n--){
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;t);
+    <span class="hljs-keyword">int</span> a[<span class="hljs-number">100001</span>]={<span class="hljs-number">0</span>};
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; t ; i++)
+      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;a[i]);
     sort(a, a+t);
-    int max = a[t-1];
-    int p;
-    for(p=max;;p+=max){
-      int opp=0;
-      for(int i = 0 ; i &lt; t ; i++){
-        if(p%a[i]!=0){
+    <span class="hljs-keyword">int</span> max = a[t<span class="hljs-number">-1</span>];
+    <span class="hljs-keyword">int</span> p;
+    <span class="hljs-keyword">for</span>(p=max;;p+=max){
+      <span class="hljs-keyword">int</span> opp=<span class="hljs-number">0</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; t ; i++){
+        <span class="hljs-keyword">if</span>(p%a[i]!=<span class="hljs-number">0</span>){
           opp++;
-          break;
+          <span class="hljs-keyword">break</span>;
         }
       }
-      if(!opp) break;
+      <span class="hljs-keyword">if</span>(!opp) <span class="hljs-keyword">break</span>;
     }
-    printf(&quot;%d\n&quot;, p);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, p);
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
 <p>但是我们可以在输入的时候做一些改变，然后循环的去求解最大公约数，这样算法复杂度就降低了很多：</p>
-<pre><code class="c">#include&lt;stdio.h&gt;  
-
-int gcd(int a, int b) {  
-    return b?gcd(b, a%b):a;  
+<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;  </span></span>
+  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{  
+    <span class="hljs-keyword">return</span> b?gcd(b, a%b):a;  
 }  
-
-int main(void)  
-{  
-    int T, n, x, temp;  
-    scanf(&quot;%d&quot;, &amp;T);  
-
-    while (T--) {  
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;temp);  
-        for (int i = 1; i &lt; n; ++i) {  
-            scanf(&quot;%d&quot;, &amp;x);  
-        //lcm
-          temp = temp / gcd(temp, x) * x;  
+  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> T, n, x, temp;  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;T);  
+  
+    <span class="hljs-keyword">while</span> (T--) {  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;n, &amp;temp);  
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) {  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;x);  
+        <span class="hljs-comment">//lcm</span>
+      	temp = temp / gcd(temp, x) * x;  
         }  
-        printf(&quot;%d\n&quot;, temp);  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, temp);  
     }  
-
-    return 0;  
-}
+  
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h1 id="A-B-Problem-II"><a href="#A-B-Problem-II" class="headerlink" title="A+B Problem II"></a>A+B Problem II</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1002" target="_blank" rel="external">传送门</a></p>
+<h1 id="ab-problem-ii"><a class="markdownIt-Anchor" href="#ab-problem-ii"></a> A+B Problem II</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1002" target="_blank" rel="external">传送门</a></p>
 <p>这个大整数加法如果直接加肯定会越界，所以我们先转换成字符串，然后转换回来每一位进行加法运算，结果放进整型数组，然后逐个输出，这样就可以解决问题了：</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;string.h&gt;
-using namespace std;
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int N;
-  scanf(&quot;%d&quot;, &amp;N);
-  for(int i = 1 ; i &lt;= N ; i++){
-    char s1[1001],s2[1002];
-    int a[1002]={0},b[1001]={0},c[1001]={0};
-    int len1,len2,len3;
-    int max;
-    int p,q;
-    int m,n;
-    scanf(&quot;%s %s&quot;, s1, s2);
-    len1 = strlen(s1);
-    len2 = strlen(s2);
-    if(len1 &gt; len2) max = len1;
-    else max = len2;
-    for(p = 0 , q = len1-1 ; p &lt; len1 ; p++, q--)
-      a[p] = s1[q] - 48;
-    for(p = 0 , q = len2 - 1 ; p &lt; len2 ; p++ , q--)
-      b[p] = s2[q] - 48;
-    for(m = 0, n = 0 ; n &lt; max ; n++){
-      c[n] = (a[n] + b[n] + m)%10;
-      m = (a[n] + b[n] + m)/10;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> N;
+  <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;N);
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= N ; i++){
+    <span class="hljs-keyword">char</span> s1[<span class="hljs-number">1001</span>],s2[<span class="hljs-number">1002</span>];
+    <span class="hljs-keyword">int</span> a[<span class="hljs-number">1002</span>]={<span class="hljs-number">0</span>},b[<span class="hljs-number">1001</span>]={<span class="hljs-number">0</span>},c[<span class="hljs-number">1001</span>]={<span class="hljs-number">0</span>};
+    <span class="hljs-keyword">int</span> len1,len2,len3;
+    <span class="hljs-keyword">int</span> max;
+    <span class="hljs-keyword">int</span> p,q;
+    <span class="hljs-keyword">int</span> m,n;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s %s"</span>, s1, s2);
+    len1 = <span class="hljs-built_in">strlen</span>(s1);
+    len2 = <span class="hljs-built_in">strlen</span>(s2);
+    <span class="hljs-keyword">if</span>(len1 &gt; len2) max = len1;
+    <span class="hljs-keyword">else</span> max = len2;
+    <span class="hljs-keyword">for</span>(p = <span class="hljs-number">0</span> , q = len1<span class="hljs-number">-1</span> ; p &lt; len1 ; p++, q--)
+      a[p] = s1[q] - <span class="hljs-number">48</span>;
+    <span class="hljs-keyword">for</span>(p = <span class="hljs-number">0</span> , q = len2 - <span class="hljs-number">1</span> ; p &lt; len2 ; p++ , q--)
+      b[p] = s2[q] - <span class="hljs-number">48</span>;
+    <span class="hljs-keyword">for</span>(m = <span class="hljs-number">0</span>, n = <span class="hljs-number">0</span> ; n &lt; max ; n++){
+      c[n] = (a[n] + b[n] + m)%<span class="hljs-number">10</span>;
+      m = (a[n] + b[n] + m)/<span class="hljs-number">10</span>;
     }
-    printf(&quot;Case %d:\n%s + %s = &quot;, i, s1, s2);
-    if(!m){
-      for(len3=max-1 ; len3 &gt;= 0 ; len3--)
-        printf(&quot;%d&quot;, c[len3]);
-    }else{
-      c[max] = 1;
-      for(len3=max ; len3 &gt;= 0 ; len3--)
-        printf(&quot;%d&quot;, c[len3]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Case %d:\n%s + %s = "</span>, i, s1, s2);
+    <span class="hljs-keyword">if</span>(!m){
+      <span class="hljs-keyword">for</span>(len3=max<span class="hljs-number">-1</span> ; len3 &gt;= <span class="hljs-number">0</span> ; len3--)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, c[len3]);
+    }<span class="hljs-keyword">else</span>{
+      c[max] = <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">for</span>(len3=max ; len3 &gt;= <span class="hljs-number">0</span> ; len3--)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, c[len3]);
     }
-    if(i==N){
-      printf(&quot;\n&quot;);
-    }else{
-      printf(&quot;\n\n&quot;);
+    <span class="hljs-keyword">if</span>(i==N){
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    }<span class="hljs-keyword">else</span>{
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n\n"</span>);
     }
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="Max-Sum"><a href="#Max-Sum" class="headerlink" title="Max Sum"></a>Max Sum</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1003" target="_blank" rel="external">传送门</a></p>
+<h1 id="max-sum"><a class="markdownIt-Anchor" href="#max-sum"></a> Max Sum</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1003" target="_blank" rel="external">传送门</a></p>
 <p>这个其实可以用动态规划的思想去解决，其实我们每一次判断的本质就是：</p>
 <blockquote>
 <p>sum = max(sum + t, t)</p>
 </blockquote>
 <p>然后注意一下起始点和终止点的位置就好了，水题鉴定完毕。</p>
-<pre><code class="c">#include &lt;stdio.h&gt;  
-int main()  
-{  
-    int z,n,max,sum;  
-    int a,b,A,B,t;  
-    scanf(&quot;%d&quot;,&amp;z);  
-    for(int k=1;k&lt;=z;k++)  
+<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;  </span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> z,n,max,sum;  
+    <span class="hljs-keyword">int</span> a,b,A,B,t;  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;z);  
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=z;k++)  
     {  
-        scanf(&quot;%d&quot;,&amp;n);  
-        sum = max = -1001;  
-        for(int i=1;i&lt;=n;i++)  
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);  
+        sum = max = <span class="hljs-number">-1001</span>;  
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)  
         {  
-            scanf(&quot;%d&quot;,&amp;t);  
-            if(sum+t &lt; t)  
-                sum = t , a = b = i;      //a、b记录当前连续子序列的起始、结束位置  
-            else  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;t);  
+            <span class="hljs-keyword">if</span>(sum+t &lt; t)  
+                sum = t , a = b = i;      <span class="hljs-comment">//a、b记录当前连续子序列的起始、结束位置  </span>
+            <span class="hljs-keyword">else</span>  
                 sum += t , ++b;  
-            if(max &lt; sum)  
+            <span class="hljs-keyword">if</span>(max &lt; sum)  
                 max = sum , A = a , B = b;  
         }  
-        printf(&quot;Case %d:\n%d %d %d\n&quot;,k,max,A,B);  
-        if(k-z) puts(&quot;&quot;);  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Case %d:\n%d %d %d\n"</span>,k,max,A,B);  
+        <span class="hljs-keyword">if</span>(k-z) <span class="hljs-built_in">puts</span>(<span class="hljs-string">""</span>);  
     }  
-    return 0;  
-}
-</code></pre>
-<h1 id="免费馅饼"><a href="#免费馅饼" class="headerlink" title="免费馅饼"></a>免费馅饼</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1176" target="_blank" rel="external">传送门</a></p>
-<p>转换成数塔就很好做了</p>
-<pre><code class="cpp">#include &lt;stdio.h&gt;  
-#include &lt;string.h&gt;  
-int dp[100005][15];  
-int max(int a,int b,int c)  
-{  
-    int max=a;  
-    if(b&gt;max)  
-        max=b;  
-    if(c&gt;max)  
-        max=c;  
-    return max;  
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
 }  
-int main()  
-{  
-    int n,i,j;  
-    while(~scanf(&quot;%d&quot;,&amp;n))  
+</code></pre>
+<h1 id="免费馅饼"><a class="markdownIt-Anchor" href="#免费馅饼"></a> 免费馅饼</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1176" target="_blank" rel="external">传送门</a></p>
+<p>转换成数塔就很好做了</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;  </span></span>
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">100005</span>][<span class="hljs-number">15</span>];  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b,<span class="hljs-keyword">int</span> c)</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> max=a;  
+    <span class="hljs-keyword">if</span>(b&gt;max)  
+        max=b;  
+    <span class="hljs-keyword">if</span>(c&gt;max)  
+        max=c;  
+    <span class="hljs-keyword">return</span> max;  
+}  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> n,i,j;  
+    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n))  
     {  
-        if(n==0)  
-            break;  
-        int maxT=0;  
-        memset(dp,0,sizeof(dp));  
-        for(i=0;i&lt;n;i++)  
+        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)  
+            <span class="hljs-keyword">break</span>;  
+        <span class="hljs-keyword">int</span> maxT=<span class="hljs-number">0</span>;  
+        <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));  
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)  
         {  
-            int x,t;  
-            scanf(&quot;%d %d&quot;,&amp;x,&amp;t);  
-              //避免做边界判断，所以从1开始，那么max取出来的dp[i][0]就是0
-            dp[t][x+1]++;  
-            if(t&gt;maxT)  
+            <span class="hljs-keyword">int</span> x,t;  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>,&amp;x,&amp;t);  
+          	<span class="hljs-comment">//避免做边界判断，所以从1开始，那么max取出来的dp[i][0]就是0</span>
+            dp[t][x+<span class="hljs-number">1</span>]++;  
+            <span class="hljs-keyword">if</span>(t&gt;maxT)  
                 maxT=t;  
         }
-        for( i = maxT - 1 ; i &gt;= 0 ; i--)  
+        <span class="hljs-keyword">for</span>( i = maxT - <span class="hljs-number">1</span> ; i &gt;= <span class="hljs-number">0</span> ; i--)  
         {  
-            for(j = 1 ; j &lt;= 11 ; j++)  
+            <span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span> ; j &lt;= <span class="hljs-number">11</span> ; j++)  
             {  
-                dp[i][j]+=max(dp[i+1][j-1],dp[i+1][j+1],dp[i+1][j]);  
+                dp[i][j]+=max(dp[i+<span class="hljs-number">1</span>][j<span class="hljs-number">-1</span>],dp[i+<span class="hljs-number">1</span>][j+<span class="hljs-number">1</span>],dp[i+<span class="hljs-number">1</span>][j]);  
             }  
         }  
-        printf(&quot;%d\n&quot;,dp[0][5]);  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,dp[<span class="hljs-number">0</span>][<span class="hljs-number">5</span>]);  
     }  
-    return 0;  
-}
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h1 id="Let-the-Ballon-Rise"><a href="#Let-the-Ballon-Rise" class="headerlink" title="Let the Ballon Rise"></a>Let the Ballon Rise</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1004" target="_blank" rel="external">传送门</a></p>
+<h1 id="let-the-ballon-rise"><a class="markdownIt-Anchor" href="#let-the-ballon-rise"></a> Let the Ballon Rise</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1004" target="_blank" rel="external">传送门</a></p>
 <p>这个可以直接通过对于STL的掌握来完成，用到upper_bound和lower_bound两个函数：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-15%20%E4%B8%8B%E5%8D%889.57.00.png" alt=""></p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-using namespace std;
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int n;
-  string s[1010];
-  while(scanf(&quot;%d&quot;, &amp;n) &amp;&amp; n){
-    for(int i = 0 ; i &lt; n ; i++)
-      cin &gt;&gt; s[i];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> n;
+  <span class="hljs-built_in">string</span> s[<span class="hljs-number">1010</span>];
+  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n) &amp;&amp; n){
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      <span class="hljs-built_in">cin</span> &gt;&gt; s[i];
     sort(s, s+n);
-    int cnt = 0;
-    int ans = -1;
-    int maxl = -1;
-    for(int i = 0 ; i &lt; n ;){
+    <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">int</span> maxl = <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ;){
       cnt = upper_bound(s, s+n, s[i]) - lower_bound(s, s+n, s[i]);
-      if(cnt &gt; maxl){
+      <span class="hljs-keyword">if</span>(cnt &gt; maxl){
         maxl = cnt;
         ans = i;
       }
       i += cnt;
     }
-    cout &lt;&lt; s[ans] &lt;&lt; endl;
+    <span class="hljs-built_in">cout</span> &lt;&lt; s[ans] &lt;&lt; <span class="hljs-built_in">endl</span>;
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<p>说到这里的时候不得不说一下HDU上的discuss区有的人虽然代码可以通过测试样例，但是其实思想是错的..特殊情况过不了，所以看答案需谨慎啊。</p>
+<p>说到这里的时候不得不说一下HDU上的discuss区有的人虽然代码可以通过测试样例，但是其实思想是错的…特殊情况过不了，所以看答案需谨慎啊。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjfp3b7u9000fiabrp63ue0vv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/13/ACM日常训练总结-一/" data-id="cjfsevx0m00072ebr5atrqq0z" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -431,7 +444,7 @@ int main(){
 <nav id="article-nav">
   
     <a href="/2018/03/16/ACM日常训练总结-二/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           ACM日常训练总结(二)
@@ -441,7 +454,7 @@ int main(){
   
   
     <a href="/2018/03/13/ACM数论上的难题/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">ACM数论上的难题</div>
     </a>
   
