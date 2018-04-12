@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数位dp | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="数位dp">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/数位dp/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
+<meta property="og:updated_time" content="2018-04-12T14:52:15.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数位dp">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-数位dp" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/11/数位dp/" class="article-date">
+  <time class="post-time" datetime="2018-04-11T05:46:59.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数位dp
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dp模版/">dp模版</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+<a id="more"></a>
+<h1 id="思想介绍"><a class="markdownIt-Anchor" href="#思想介绍"></a> 思想介绍</h1>
+<p>其实所谓的数位dp就是基于数字的每一位的状态来转移的dp，经历过之前的题目的同学说到这里其实就比较好理解了，通常的数位dp可以写成记忆化搜索的模版的形式：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> s, <span class="hljs-keyword">bool</span> e)</span></span>{
+  <span class="hljs-keyword">if</span>(i==<span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> s==target_s;
+  <span class="hljs-keyword">if</span>(!e &amp;&amp; f[i][s]!=<span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[i][s];
+  <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">int</span> u = e ? num[i] : <span class="hljs-number">9</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = first?<span class="hljs-number">1</span>:<span class="hljs-number">0</span> ; d&lt;=u ; d++)
+    res += dfs(i<span class="hljs-number">-1</span>, new_s(s,d),e&amp;&amp;d==u);
+  <span class="hljs-keyword">return</span> e?res:f[i][s]=res;
+}
+</code></pre>
+<p>其中的f是记忆化数组，初始化为-1，i 为当前处理串的第i位，表示还有i+1位等待处理，s是之前数字的状态，如果有其他限制条件就继续往上加，e表示之前的数是否是上界的前缀(也就是后面的数是不是可以随便填)。因为这就是个模版，所以直接上题来体验一下就好了。</p>
+<h1 id="hdu_3555"><a class="markdownIt-Anchor" href="#hdu_3555"></a> HDU_3555</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
+LL n;
+LL f[<span class="hljs-number">31</span>][<span class="hljs-number">2</span>][<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> digit[<span class="hljs-number">35</span>];
+
+<span class="hljs-function">LL <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> have,<span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">if</span>(len == <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> have;
+  <span class="hljs-keyword">if</span>(!e &amp;&amp; f[len][have][s] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][have][s];
+
+  LL ans = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">9</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = <span class="hljs-number">0</span> ; d &lt;= u ;d++){
+    <span class="hljs-keyword">if</span>(s &amp;&amp; d == <span class="hljs-number">9</span>) ans += dfs(len<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, d==<span class="hljs-number">4</span>, e &amp;&amp; d == u);
+    <span class="hljs-keyword">else</span> ans += dfs(len<span class="hljs-number">-1</span>,have,d==<span class="hljs-number">4</span>, e &amp;&amp; d == u);
+  } 
+  <span class="hljs-keyword">return</span> e ? ans : f[len][have][s] = ans;
+}
+
+<span class="hljs-function">LL <span class="hljs-title">solve</span><span class="hljs-params">(LL x)</span></span>{
+  <span class="hljs-built_in">memset</span>(digit, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(digit));
+  <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(x){
+    digit[i++]=x%<span class="hljs-number">10</span>;
+    x /= <span class="hljs-number">10</span>;
+  }
+  <span class="hljs-keyword">return</span> dfs(i<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(f));
+    <span class="hljs-built_in">cout</span> &lt;&lt; solve(n) &lt;&lt; <span class="hljs-built_in">endl</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="hdu_2089"><a class="markdownIt-Anchor" href="#hdu_2089"></a> HDU_2089</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> n,m;
+<span class="hljs-keyword">int</span> f[<span class="hljs-number">8</span>][<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> digit[<span class="hljs-number">10</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cal_len</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{
+  <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(x){
+    sum += <span class="hljs-number">1</span>;
+    x /= <span class="hljs-number">10</span>;
+  }
+  <span class="hljs-keyword">return</span> sum;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cal_digit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> len)</span></span>{
+  <span class="hljs-built_in">memset</span>(digit,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(digit));
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= len ;i++){
+    digit[i] = x%<span class="hljs-number">10</span>;
+    x /= <span class="hljs-number">10</span>; 
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len, <span class="hljs-keyword">int</span> s, <span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span>(!e &amp;&amp; f[len][s]!=<span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][s];
+
+  <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">9</span>;
+  <span class="hljs-comment">//因为车子牌号不是数字，首位可以是0</span>
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ;  i&lt;= u ;i++){
+    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">4</span> || (s &amp;&amp; i == <span class="hljs-number">2</span>)) <span class="hljs-keyword">continue</span>;
+    ans += dfs(len<span class="hljs-number">-1</span>, i == <span class="hljs-number">6</span>, e &amp;&amp; i == u);
+  }
+  <span class="hljs-keyword">return</span> e ? ans : f[len][s] = ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{
+  <span class="hljs-keyword">int</span> len  = cal_len(x);
+  cal_digit(x, len);
+
+  <span class="hljs-keyword">int</span> res = dfs(len,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+  <span class="hljs-keyword">return</span> res;
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(f));
+  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; n+m){
+    <span class="hljs-built_in">cout</span> &lt;&lt; solve(m) - solve(n<span class="hljs-number">-1</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="hdu_3652"><a class="markdownIt-Anchor" href="#hdu_3652"></a> HDU_3652</h1>
+<p>因为有两个判断条件，所以加一维</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> Memset(a,b) memset(a,b,sizeof(a));</span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> digit[<span class="hljs-number">16</span>];
+<span class="hljs-keyword">int</span> f[<span class="hljs-number">16</span>][<span class="hljs-number">16</span>][<span class="hljs-number">3</span>];
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> mod, <span class="hljs-keyword">int</span> s ,<span class="hljs-keyword">int</span> e)</span></span>{
+    <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> s == <span class="hljs-number">2</span> &amp;&amp; mod == <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(!e &amp;&amp; f[len][mod][s] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][mod][s];
+    <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">9</span>;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = <span class="hljs-number">0</span>; d &lt;= u ; d++){
+        <span class="hljs-keyword">int</span> _mod = (mod*<span class="hljs-number">10</span> + d)%<span class="hljs-number">13</span>;
+        <span class="hljs-keyword">int</span> _s = s;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-number">0</span> &amp;&amp; d == <span class="hljs-number">1</span>) _s = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d != <span class="hljs-number">1</span>) _s = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d == <span class="hljs-number">3</span>) _s = <span class="hljs-number">2</span>;
+        ans += dfs(len<span class="hljs-number">-1</span>, _mod, _s ,e &amp;&amp; u==d);
+    }
+    <span class="hljs-keyword">return</span> e ? ans : f[len][mod][s] = ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{
+    <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">memset</span>(digit,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(digit));
+    <span class="hljs-keyword">while</span>(x){
+      	len += <span class="hljs-number">1</span>;
+        digit[len] = x%<span class="hljs-number">10</span>;
+        x /= <span class="hljs-number">10</span>;
+    }
+    dfs(len,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> t;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt;t){
+        <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(f));
+        <span class="hljs-built_in">cout</span> &lt;&lt; solve(t) &lt;&lt; <span class="hljs-built_in">endl</span>; 
+    }
+}
+</code></pre>
+<p>那么经过这个之后我们是不是就可以想到对于第一题在于空间上进行一次优化，因为判断条件是可以叠加的，所有我们只需要修改关键地方的代码即可：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-function">LL <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> s == <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">if</span>(!e &amp;&amp; f[len][s] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][s];
+
+  LL ans = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">9</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = <span class="hljs-number">0</span> ; d &lt;= u ;d++){
+    <span class="hljs-keyword">int</span> _s = s;
+    <span class="hljs-keyword">if</span>(s == <span class="hljs-number">0</span> &amp;&amp; d == <span class="hljs-number">4</span>) _s = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d != <span class="hljs-number">4</span>) _s = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d == <span class="hljs-number">9</span>) _s = <span class="hljs-number">2</span>;
+    ans += dfs(len<span class="hljs-number">-1</span>, _s , e &amp;&amp; u==d);
+  }
+  <span class="hljs-keyword">return</span> e ? ans : f[len][s] = ans;
+}
+</code></pre>
+<p>当然这都只是简单题，下面就上一点难度吧。</p>
+<h1 id="hdu_3709"><a class="markdownIt-Anchor" href="#hdu_3709"></a> HDU_3709</h1>
+<p>因为支点不好在数位dp里面进行枚举，所以我们在外层通过一个循环来枚举，dfs中固定支点</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXN 20</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
+<span class="hljs-keyword">int</span> t;
+LL n,m;
+<span class="hljs-keyword">int</span> digit[MAXN];
+LL f[MAXN][MAXN][<span class="hljs-number">2005</span>];
+
+<span class="hljs-function">LL <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len, <span class="hljs-keyword">int</span> o, <span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">if</span>(len &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> s == <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span>(s &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span>(!e &amp;&amp; f[len][o][s] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][o][s];
+  <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">9</span>;
+  LL ans = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = <span class="hljs-number">0</span> ; d &lt;= u ; d++){
+    <span class="hljs-keyword">int</span> next = s+(len-o)*d;
+    ans += dfs(len<span class="hljs-number">-1</span>,o,next,e&amp;&amp;(u==d));
+  }
+  <span class="hljs-keyword">if</span>(!e) f[len][o][s] = ans;
+  <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-function">LL <span class="hljs-title">solve</span><span class="hljs-params">(LL x)</span></span>{
+  <span class="hljs-built_in">memset</span>(digit,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(digit));
+  <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(x){
+    len += <span class="hljs-number">1</span>;
+    digit[len] = x%<span class="hljs-number">10</span>;
+    x /= <span class="hljs-number">10</span>;
+  }
+  LL ans = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= len ; i++)
+    ans += dfs(len,i,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+  <span class="hljs-keyword">return</span> ans - (len<span class="hljs-number">-1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;t);
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(f));
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld"</span>, &amp;n, &amp;m);
+    LL ans = solve(m) - solve(n<span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/11/数位dp/" data-id="cjfwn7gu6006qhbbre39mot5u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/07/状态压缩专题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">状态压缩专题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

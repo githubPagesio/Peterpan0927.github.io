@@ -5,17 +5,18 @@
   
   <title>背包专题 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。">
+  <meta name="description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="背包专题">
 <meta property="og:url" content="http://yoursite.com/2018/04/02/背包专题/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。">
+<meta property="og:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
-<meta property="og:updated_time" content="2018-04-09T15:48:20.625Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-10%20%E4%B8%8B%E5%8D%882.49.27.png">
+<meta property="og:updated_time" content="2018-04-12T07:36:00.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="背包专题">
-<meta name="twitter:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。">
+<meta name="twitter:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -41,8 +42,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -100,7 +101,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
-<p>背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。</p>
+<p>背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)</p>
 <a id="more"></a>
 <h1 id="bone-collector"><a class="markdownIt-Anchor" href="#bone-collector"></a> Bone Collector</h1>
 <p>一维数组，空间上优化</p>
@@ -508,7 +509,7 @@
             maxhight+=h;  
             <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;h);  
         }  
-  
+  		<span class="hljs-comment">//01背包</span>
         <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=m;++i)  
         {  
             <span class="hljs-keyword">for</span>(j=maxhight-a[i];j&gt;=<span class="hljs-number">0</span>;--j)  
@@ -623,6 +624,9 @@
 }
 </code></pre>
 <h1 id="拼拼图的小衫"><a class="markdownIt-Anchor" href="#拼拼图的小衫"></a> 拼拼图的小衫</h1>
+<p>这个题目直接使用<code>f[i,j]</code>表示第i个集合还有j的剩余时候可以放入的最大拼图数显然不合理，因为还要满足不交叉，所以我们换一种思路，通过<code>f[j]</code>表示放入第j个数最少需要多少个集合，这个集合中已经放了多少空间：</p>
+<pre class="highlight"><code class="">f[j] = (t,s)
+</code></pre>
 <pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">1000</span>;
 <span class="hljs-keyword">int</span> n,m,T,a[maxn+<span class="hljs-number">10</span>];
@@ -664,6 +668,104 @@ node f[maxn+<span class="hljs-number">10</span>];
         }
 }
 </code></pre>
+<h1 id="兴奋剂检查"><a class="markdownIt-Anchor" href="#兴奋剂检查"></a> 兴奋剂检查</h1>
+<p>一开始的时候以为是一个01背包，然后我通过枚举药品的个数还有检测的指标个数，最后再通过药品加成做一次01背包，但是这样只能过一部分数据，最后看答案发现是要将多重条件压缩然后做01背包。因为原来的那种写法相当把所有的限制条件叠到一个背包上了。：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-10%20%E4%B8%8B%E5%8D%882.49.27.png" alt="屏幕快照 2018-04-10 下午2.49.27.png"></p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n, m;
+<span class="hljs-keyword">int</span> p[<span class="hljs-number">6</span>], f[<span class="hljs-number">6</span>];
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">5001000</span>];
+
+<span class="hljs-comment">//做一次hash</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;n, &amp;m);
+    <span class="hljs-built_in">memset</span>(p, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(p));
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) {
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;p[i]);
+    }
+    <span class="hljs-keyword">int</span> x;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;x);
+        <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(f));
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;f[j]);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = p[<span class="hljs-number">1</span>]; a &gt;= f[<span class="hljs-number">1</span>]; a--) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = p[<span class="hljs-number">2</span>]; b &gt;= f[<span class="hljs-number">2</span>]; b--) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = p[<span class="hljs-number">3</span>]; c &gt;= f[<span class="hljs-number">3</span>]; c--) {
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> d = p[<span class="hljs-number">4</span>]; d &gt;= f[<span class="hljs-number">4</span>]; d--) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> e = p[<span class="hljs-number">5</span>]; e &gt;= f[<span class="hljs-number">5</span>]; e--) {
+                            <span class="hljs-keyword">int</span> now = h(a, b, c, d, e), pre = h(a-f[<span class="hljs-number">1</span>], b-f[<span class="hljs-number">2</span>], c-f[<span class="hljs-number">3</span>], d-f[<span class="hljs-number">4</span>], e-f[<span class="hljs-number">5</span>]);
+                            dp[now] = max(dp[now], dp[pre] + x);
+                            ans = max(ans, dp[now]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="高性能计算机"><a class="markdownIt-Anchor" href="#高性能计算机"></a> 高性能计算机</h1>
+<p>算法导论上的一道题，用到二次dp，还有一些高级优化等待进一步看黑书，首先看看low逼的版本怎么做吧:</p>
+<p>首先我们可以划分成两个子问题：</p>
+<ol>
+<li>算出第i个计算节点完成ai个任务A和bi个任务B所需要的最短时间</li>
+<li>算出前i个节点完成ai个任务和bi个任务所需要的最短时间，计算之前需要预处理一下。</li>
+</ol>
+<p>前者很简单，后者的状态转移方程要首先对前i-1个节点的最短时间和第i个节点的最短时间取一个最大值然后比较，因为在操作系统中两个并行任务计算完成时间肯定是取最晚完成的那个。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> n,na,nb,ta[<span class="hljs-number">61</span>],tb[<span class="hljs-number">61</span>],ka[<span class="hljs-number">61</span>],kb[<span class="hljs-number">61</span>];
+<span class="hljs-keyword">int</span> tim[<span class="hljs-number">21</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>],dp[<span class="hljs-number">21</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{
+	<span class="hljs-keyword">int</span> t[<span class="hljs-number">2</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>];
+	<span class="hljs-built_in">memset</span>(t,<span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span>(t));
+	<span class="hljs-comment">//初始化</span>
+	t[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = t[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i&lt;= na ;i++){
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= nb ;j++){
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span> ; k&lt;=i;k++) t[<span class="hljs-number">0</span>][i][j] = min(t[<span class="hljs-number">1</span>][i-k][j]+ta[x]+ka[x]*k*k, t[<span class="hljs-number">0</span>][i][j]);
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span> ; k&lt;=j;k++) t[<span class="hljs-number">1</span>][i][j] = min(t[<span class="hljs-number">1</span>][i][j], t[<span class="hljs-number">0</span>][i][j-k]+tb[x]+kb[x]*k*k);
+			tim[x][i][j] = min(t[<span class="hljs-number">1</span>][i][j], t[<span class="hljs-number">0</span>][i][j]);
+		}
+		
+	}
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+	<span class="hljs-built_in">cin</span> &gt;&gt; na &gt;&gt; nb;
+	<span class="hljs-built_in">cin</span> &gt;&gt; n;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ;i &lt;= n ;i++)
+		<span class="hljs-built_in">cin</span> &gt;&gt; ta[i] &gt;&gt; tb[i] &gt;&gt; ka[i] &gt;&gt; kb[i];
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i&lt;= n ;i++) calc(i);
+	
+	<span class="hljs-built_in">memset</span>(dp , <span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span>(dp));
+	
+	<span class="hljs-comment">//预处理</span>
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i&lt;=na ;i++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ;j &lt;=nb ;j++)
+			dp[<span class="hljs-number">1</span>][i][j] = tim[<span class="hljs-number">1</span>][i][j];
+	
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span> ; x &lt;= n ; x++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ;i &lt;= na ;i++)
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= nb ;j++ )
+				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> ki = <span class="hljs-number">0</span> ; ki &lt;= i ; ki++)
+					<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> kj = <span class="hljs-number">0</span> ; kj &lt;= j ;kj++)
+						dp[x][i][j] = min(dp[x][i][j], max(dp[x<span class="hljs-number">-1</span>][i-ki][j-kj], tim[x][ki][kj]));
+	<span class="hljs-built_in">cout</span> &lt;&lt; dp[n][na][nb] &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+</code></pre>
 <h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
 <p><a href="https://www.kancloud.cn/kancloud/pack/70125" target="_blank" rel="external">背包九讲</a></p>
 <p><a href="https://blog.csdn.net/herbertpotter/article/details/77480346" target="_blank" rel="external">专题训练</a></p>
@@ -672,7 +774,7 @@ node f[maxn+<span class="hljs-number">10</span>];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfsevx60009d2ebrfuldc1by" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjfwn7gul007xhbbrss069gb9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -684,7 +786,7 @@ node f[maxn+<span class="hljs-number">10</span>];
 <nav id="article-nav">
   
     <a href="/2018/04/07/状态压缩专题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           状态压缩专题
@@ -694,7 +796,7 @@ node f[maxn+<span class="hljs-number">10</span>];
   
   
     <a href="/2018/03/25/ACM日常训练-三/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">ACM日常训练总结(三)</div>
     </a>
   
@@ -740,8 +842,8 @@ node f[maxn+<span class="hljs-number">10</span>];
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>82</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
