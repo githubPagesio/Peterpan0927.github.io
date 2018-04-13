@@ -6,6 +6,7 @@
       <title><![CDATA[数位dp]]></title>
       <url>/2018/04/11/%E6%95%B0%E4%BD%8Ddp/</url>
       <content type="html"><![CDATA[<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+<p>通常数位dp和记忆化dfs是不分家的，如果dfs还没有写会还是先练练dfs吧</p>
 <a id="more"></a>
 <h1 id="思想介绍"><a class="markdownIt-Anchor" href="#思想介绍"></a> 思想介绍</h1>
 <p>其实所谓的数位dp就是基于数字的每一位的状态来转移的dp，经历过之前的题目的同学说到这里其实就比较好理解了，通常的数位dp可以写成记忆化搜索的模版的形式：</p>
@@ -148,7 +149,7 @@ LL f[<span class="hljs-number">31</span>][<span class="hljs-number">2</span>][<s
         <span class="hljs-keyword">int</span> _s = s;
         <span class="hljs-keyword">if</span>(s == <span class="hljs-number">0</span> &amp;&amp; d == <span class="hljs-number">1</span>) _s = <span class="hljs-number">1</span>;
         <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d != <span class="hljs-number">1</span>) _s = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp; d == <span class="hljs-number">3</span>) _s = <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-number">1</span> &amp;&amp;  d == <span class="hljs-number">3</span>) _s = <span class="hljs-number">2</span>;
         ans += dfs(len<span class="hljs-number">-1</span>, _mod, _s ,e &amp;&amp; u==d);
     }
     <span class="hljs-keyword">return</span> e ? ans : f[len][mod][s] = ans;
@@ -244,6 +245,63 @@ LL f[MAXN][MAXN][<span class="hljs-number">2005</span>];
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);
   }
   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="poj_3252"><a class="markdownIt-Anchor" href="#poj_3252"></a> POJ_3252</h1>
+<p>主要的难度在于前导0的处理上，对于回归条件的判断。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">int</span> digit[<span class="hljs-number">50</span>];
+LL f[<span class="hljs-number">50</span>][<span class="hljs-number">50</span>][<span class="hljs-number">50</span>];
+
+
+<span class="hljs-function">LL <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> len,<span class="hljs-keyword">int</span> zero, <span class="hljs-keyword">int</span> one ,<span class="hljs-keyword">int</span> e,<span class="hljs-keyword">int</span> fi)</span></span>{
+    <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>){
+        <span class="hljs-keyword">if</span>(fi) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span>(zero &gt;= one) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">if</span>(!e &amp;&amp; !fi &amp;&amp; f[len][zero][one] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[len][zero][one];
+    <span class="hljs-keyword">int</span> u = e ? digit[len] : <span class="hljs-number">1</span>;
+    LL ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> d = <span class="hljs-number">0</span>; d &lt;= u ; d++){
+        <span class="hljs-keyword">if</span>(fi){
+            <span class="hljs-keyword">if</span>(d==<span class="hljs-number">0</span>) ans+=dfs(len<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,e&amp;&amp;(u==d),<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">else</span> ans+=dfs(len<span class="hljs-number">-1</span>,zero,one+<span class="hljs-number">1</span>,e&amp;&amp;(u==d),<span class="hljs-number">0</span>);
+        }<span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">if</span>(d==<span class="hljs-number">0</span>)  
+                ans+=dfs(len<span class="hljs-number">-1</span>,zero+<span class="hljs-number">1</span>,one,e&amp;&amp;u==d,<span class="hljs-number">0</span>);<span class="hljs-comment">//在二进制后面放0  </span>
+            <span class="hljs-keyword">else</span>  
+                ans+=dfs(len<span class="hljs-number">-1</span>,zero,one+<span class="hljs-number">1</span>,e&amp;&amp;u==d,<span class="hljs-number">0</span>);<span class="hljs-comment">//放1  </span>
+        }
+    }
+    <span class="hljs-keyword">return</span> (e&amp;&amp;fi) ? ans : f[len][zero][one] = ans;
+}
+
+<span class="hljs-function">LL <span class="hljs-title">solve</span><span class="hljs-params">(LL x)</span></span>{
+    <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">memset</span>(digit,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(digit));
+    <span class="hljs-keyword">while</span>(x){
+        digit[++len] = x &amp; <span class="hljs-number">1</span>;
+        x &gt;&gt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> dfs(len,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    LL n,m;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m){
+        <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">-1</span>,<span class="hljs-keyword">sizeof</span>(f));
+        <span class="hljs-built_in">cout</span> &lt;&lt; solve(m)-solve(n<span class="hljs-number">-1</span>) &lt;&lt; <span class="hljs-built_in">endl</span>; 
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
 ]]></content>
