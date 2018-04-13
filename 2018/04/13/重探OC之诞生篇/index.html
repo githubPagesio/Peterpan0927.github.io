@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>重探OC之诞生篇 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在各方面知识有了十足的长进之后，决定重新来看看这个一开始接触的语言，就会发现有很多的不同感受">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重探OC之诞生篇">
+<meta property="og:url" content="http://yoursite.com/2018/04/13/重探OC之诞生篇/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="在各方面知识有了十足的长进之后，决定重新来看看这个一开始接触的语言，就会发现有很多的不同感受">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-13%20%E4%B8%8B%E5%8D%882.24.58.png">
+<meta property="og:updated_time" content="2018-04-13T14:02:47.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重探OC之诞生篇">
+<meta name="twitter:description" content="在各方面知识有了十足的长进之后，决定重新来看看这个一开始接触的语言，就会发现有很多的不同感受">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-13%20%E4%B8%8B%E5%8D%882.24.58.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-重探OC之诞生篇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/13/重探OC之诞生篇/" class="article-date">
+  <time class="post-time" datetime="2018-04-13T06:15:30.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">13</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      重探OC之诞生篇
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OC的诞生/">OC的诞生</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在各方面知识有了十足的长进之后，决定重新来看看这个一开始接触的语言，就会发现有很多的不同感受</p>
+<a id="more"></a>
+<h1 id="OC的诞生"><a href="#OC的诞生" class="headerlink" title="OC的诞生"></a>OC的诞生</h1><p>我们都知道OC是<code>Brad Cox</code>在C语言的基础之上改进一个面向对象版本的C语言，它兼容C的语法，说到这里就不得不提到<code>SmallTalk</code>，这是历史上第二个面向对象的程序语言，而<code>Brad Cox</code>和<code>Tom Love</code>正是借鉴了其面向对象的思想和消息机制，从而创造出了一个易用且轻量的C语言扩展。</p>
+<p>相信学过OC的同学都会有个问题，为什么对象调用方法的时候要套在一个<code>[]</code>之内，之前我也觉得奇怪，但只是简单将其归咎为设计者的奇怪癖好，等到我重新去了解的时候，才发现还真是，因为在原生的<code>SmallTalk</code>中，是一切皆为对象的，所有的调用都是发消息：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-13%20%E4%B8%8B%E5%8D%882.24.58.png" alt="wiki百科"></p>
+<p>比如我们用一个工厂方法在实例化一个对象的时候：</p>
+<pre><code class="smalltalk">p := Person name:&quot;123&quot; age : 26
+</code></pre>
+<p>想法是好的，但是首先要解析这样的语法，再转换为C语言代码，和其他C语言代码一起编译，过程可以参考一下现在JS中的<code>CoffeeJs</code>和<code>JSX</code>。但是这样的工作如果碰到那种复杂的循环嵌套调用，语法解析实在太难，于是就在两边加了个中括号，这样语法解析就好写多了。这也是OC中奇怪的中括号四不像语法诞生的原因，借用已有的C语言编译器成本低多了，而且完全兼容。</p>
+<pre><code class="objective-c">Person P = [Person name:@&quot;123&quot; age:26];
+</code></pre>
+<p>但是随着iOS开发火起来了，OC这个鬼畜的语法也让苹果不爽，于是自己造了个<code>Clang</code>摆脱掉<code>gcc</code>，最后干脆甩掉OC，自己单干了，搞了个<code>swift</code>，可以算是摆脱了这个历史包袱吧。</p>
+<h1 id="OC的技术支持"><a href="#OC的技术支持" class="headerlink" title="OC的技术支持"></a>OC的技术支持</h1><p>有了预处理器之后，语法解析倒是统一了，面向对象的模型和消息机制的移植问题还等待解决：</p>
+<p>对象模型其实就是照搬<code>SmalTalk</code>那一套，还有什么<code>self</code>关键字都是的，这里的转换在预处理阶段就可以完成，重写之后的Class就是C语言的中的结构体，所以也没什么额外支持。</p>
+<p>至于消息机制的实现是不能在预处理或者编译阶段实现的，因为这是一个动态的过程，所以需要提供若干个<strong>运行的</strong>C函数，最后这些函数打个包形成一个集合就是最早的<code>Runtime</code>了。</p>
+<p>为单纯的 C 语言扩展，Runtime 中只要实现几个最基础的函数（如 objc_msgSend）即可，但为了构建整套 Objective-C 面向对象的基础库（如 Foundation），Runtime 还需要提供像 NSObject 这样的 <code>Root Class</code> 作为面向对象的起点、提供运行时反射机制以及运行时对 Class 结构修改的 API 等。再后来，即便是 Objective-C 语言本身的不断发展，新语言特性的加入，也不外乎是扩展 Clang 和扩展 Runtime，比如：</p>
+<ul>
+<li>ARC：编译器分析对象引用关系，在合适的位置插入内存管理的函数，并需要把这些函数打包加到 Runtime 中，如 objc_storeStrong，objc_storeWeak等，同时还要处理 dealloc 函数，自动加入对 super 的调用等，具体可以看<a href="http://blog.sunnyxx.com/2014/04/02/objc_dig_arc_dealloc/" target="_blank" rel="external">这篇文章</a>。</li>
+<li>Lightweight Generics：叫做 “轻量泛型” 是因为只增加了编译器检查的支持，而泛型信息并未影响到运行时，所以 Runtime 库无需改动。</li>
+<li>Syntax Sugars：比如 Boxed Expr（@123）、Array Literal（@[…]）、Dictionary Literal（@{…}）和轻量泛型一样，只是把如 @123 在编译期 rewrite 成<code>[NSNumber numberWithInt:123]</code>而已，无需改动 Runtime。</li>
+<li>Non Fragile Ivars: 类实例变量的动态调整技术，用于实现 Objective-C Binary 的兼容性，随着 Objective-C 2.0 出现，需要编译器和 Runtime 的共同配合。</li>
+</ul>
+<h1 id="OC的消息机制"><a href="#OC的消息机制" class="headerlink" title="OC的消息机制"></a>OC的消息机制</h1><p><code>Alan Kay</code>强调<code>SmallTalk</code>的核心是并不是它的面向对象，而是他的消息机制，那么借鉴它的OC消息机制也是同样的地位。我们知道在传统的C语言中所谓的调用函数就是跳转到内存中的那个函数的位置继续执行，并不具有动态的特性，从汇编上来看就像<code>call</code>一样。</p>
+<p>然后在OC中的方法并不会马上的执行，而是发送消息，这个消息也许会被执行，也许会被转发，也许会无视，这都是运行时决定的，我们来看看OC函数调用的一个翻译：</p>
+<pre><code class="objective-c">[array insertObject:foo anIndex:0];
+objc_msgSend(array, @selector(insertObject:atIndex:),foo, 0);
+</code></pre>
+<p>知道OC中的方法实质之后，我们就来解读一个消息的发送过程和出现意外的处理情况，因为OC的所有底层都是C写的，所以我们的对象和类也都是结构体了，我们来看看几个需要了解的结构体：</p>
+<pre><code class="c">struct objc_object {  
+    Class isa  OBJC_ISA_AVAILABILITY;
+};
+
+struct objc_class {  
+    Class isa  OBJC_ISA_AVAILABILITY;
+#if !__OBJC2__
+    Class super_class;
+    const char *name;
+    long version;
+    long info;
+    long instance_size;
+    struct objc_ivar_list *ivars;
+    struct objc_method_list **methodLists;
+    struct objc_cache *cache;
+    struct objc_protocol_list *protocols;
+#endif
+};
+
+struct objc_method_list {  
+    struct objc_method_list *obsolete;
+    int method_count;
+
+#ifdef __LP64__
+    int space;
+#endif
+
+    /* variable length structure */
+    struct objc_method method_list[1];
+};
+
+struct objc_method {  
+    SEL method_name;
+    char *method_types;    /* a string representing argument/return types */
+    IMP method_imp;
+};
+</code></pre>
+<ol>
+<li>发送消息之后，首先通过对象的isa指针找到它的类对象，</li>
+<li>然后在类对象的<code>method list</code>去找方法，没找到则通过父类向上层遍历</li>
+<li>找到之后去执行它的实现IMP，IMP是OC中实现代码块的地址</li>
+<li>如果最后也没有找到也不是没有救了，在抛出异常之前还有三次机会，这个可以参考<a href="http://tech.glowing.com/cn/objective-c-runtime/" target="_blank" rel="external">文章</a></li>
+</ol>
+<h1 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h1><p>今天在做CTF题目的时候顺便就又看了看逆向了，尼玛深坑啊，手机的中文库被我搞崩了（搞得我以为是cycript的问题还跑去调用framework对unicode进行切换，知道打开QQ才发现根本就没有中文啊！！！），整个手机闪烁着杀马特一样的光芒还以为要爆炸了，最后虽然看出来是凯撒和AES做五次出来的结果，但是想要在手机上开断点的时候发现应用一打开就闪退，虽然iOS8.3已经比较低了，但是这个应用居然是要在6.x下跑的！不达目的誓不罢休啊，下固件刷机吧，真是无奈.jpg。</p>
+<p>明天还有ACM校赛，感觉要绝望的迎接审判了，虽然觉得这种程度根本用不上dp的呢，暴力加搜索打天下，剩下就交给队友吧～</p>
+<p># </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/13/重探OC之诞生篇/" data-id="cjfy0vxbm007rprbr9qdbp6tk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/11/数位dp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数位dp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

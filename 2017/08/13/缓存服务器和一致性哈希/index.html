@@ -46,8 +46,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -104,38 +104,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于hash算法在服务器端的应用是怎么样的呢？</p>
-<a id="more"></a>
-<h1 id="缓存服务器和一致性哈希"><a class="markdownIt-Anchor" href="#缓存服务器和一致性哈希"></a> 缓存服务器和一致性哈希</h1>
-<h2 id="缓存服务器"><a class="markdownIt-Anchor" href="#缓存服务器"></a> 缓存服务器</h2>
-<p>缓存服务器相对于一般服务器的作用就是提速，因为缓存服务器是直接从内存中读取数据，相对于从硬盘中读取数据，这个速度要快了至少十万倍。</p>
+        <p>关于hash算法在服务器端的应用是怎么样的呢？<br><a id="more"></a></p>
+<h1 id="缓存服务器和一致性哈希"><a href="#缓存服务器和一致性哈希" class="headerlink" title="缓存服务器和一致性哈希"></a>缓存服务器和一致性哈希</h1><h2 id="缓存服务器"><a href="#缓存服务器" class="headerlink" title="缓存服务器"></a>缓存服务器</h2><p>缓存服务器相对于一般服务器的作用就是提速，因为缓存服务器是直接从内存中读取数据，相对于从硬盘中读取数据，这个速度要快了至少十万倍。</p>
 <p>那么缓存服务器相对于一般的服务器是如何优化的呢？</p>
-<pre class="highlight"><code class="javascript"><span class="hljs-comment">//一般的提取数据方法</span>
-<span class="hljs-keyword">var</span> data = Database.get(<span class="hljs-number">111</span>);  <span class="hljs-comment">// 从数据库拿数据，慢</span>
-<span class="hljs-keyword">return</span> data;
+<pre><code class="javascript">//一般的提取数据方法
+var data = Database.get(111);  // 从数据库拿数据，慢
+return data;
 </code></pre>
-<pre class="highlight"><code class="javascript"><span class="hljs-comment">//从缓存服务器中提取数据</span>
-<span class="hljs-keyword">var</span> myAwesomeCache = {};  <span class="hljs-comment">// 我们的缓存，只是内存中一个字典</span>
+<pre><code class="javascript">//从缓存服务器中提取数据
+var myAwesomeCache = {};  // 我们的缓存，只是内存中一个字典
 
 ...
 
-var data = myAwesomeCache[<span class="hljs-string">'111'</span>];  <span class="hljs-comment">// 先从内存拿，快</span>
-<span class="hljs-keyword">if</span> (data != <span class="hljs-literal">null</span>) {
-    <span class="hljs-keyword">return</span> data;  <span class="hljs-comment">// 有就直接用</span>
+var data = myAwesomeCache[&#39;111&#39;];  // 先从内存拿，快
+if (data != null) {
+    return data;  // 有就直接用
 }
 
-data = Database.get(<span class="hljs-string">'111'</span>);  <span class="hljs-comment">// 没有才从数据库拿</span>
-myAwesomeCache[<span class="hljs-string">'111'</span>] = data;  <span class="hljs-comment">// 而且拿完记得加进缓存</span>
-<span class="hljs-keyword">return</span> data;
+data = Database.get(&#39;111&#39;);  // 没有才从数据库拿
+myAwesomeCache[&#39;111&#39;] = data;  // 而且拿完记得加进缓存
+return data;
 </code></pre>
 <p>添加缓存前，由于每次请求都从数据库中拿数据，需要通过网络／磁盘，速度慢，数据库压力大。</p>
 <p>现在将结果放在内存中做缓存，如果后面的请求命中了这个缓存，就能直接从内存中获取数据，而内存显然比网络／磁盘快的多。</p>
 <p>通常来说内存虽然速度比磁盘快，但成本高，容量小。但是断电会失效。</p>
-<h2 id="一致性哈希"><a class="markdownIt-Anchor" href="#一致性哈希"></a> 一致性哈希</h2>
-<h3 id="负载均衡和哈希算法"><a class="markdownIt-Anchor" href="#负载均衡和哈希算法"></a> 负载均衡和哈希算法</h3>
-<p>分布式系统中（如：web存储），当服务增长到一定规模时，惯常的方法就是集群化，引入负载均衡，这样做的好处是：1.高可用。2.解耦。从外部看，透明了集群的内部细节（外部通过负载均衡服务器通信，然后由负载均衡服务器分发请求）。</p>
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><h3 id="负载均衡和哈希算法"><a href="#负载均衡和哈希算法" class="headerlink" title="负载均衡和哈希算法"></a>负载均衡和哈希算法</h3><p>分布式系统中（如：web存储），当服务增长到一定规模时，惯常的方法就是集群化，引入负载均衡，这样做的好处是：1.高可用。2.解耦。从外部看，透明了集群的内部细节（外部通过负载均衡服务器通信，然后由负载均衡服务器分发请求）。</p>
 <p>假设有四个cache服务器组成的集群，当一个对象object传入集群时，这个对象应该存储到哪一个cache中呢？一种简单的方法就是用映射公式：</p>
-<pre class="highlight"><code class="matlab">Hash(object)<span class="hljs-comment">%4</span>
+<pre><code class="matlab">Hash(object)%4
 </code></pre>
 <p>这个算法就可以保证任何object都会尽可能随机落在其中一个cache中。</p>
 <p>然后考虑以下情况：</p>
@@ -164,7 +159,7 @@ myAwesomeCache[<span class="hljs-string">'111'</span>] = data;  <span class="hlj
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/13/缓存服务器和一致性哈希/" data-id="cjfwn7guf007ihbbr6v9h6lfx" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/08/13/缓存服务器和一致性哈希/" data-id="cjfy0vxbg007dprbr2mncmab7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器端/">服务器端</a></li></ul>
@@ -176,7 +171,7 @@ myAwesomeCache[<span class="hljs-string">'111'</span>] = data;  <span class="hlj
 <nav id="article-nav">
   
     <a href="/2017/08/15/Linux运维学习Day1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           Linux运维学习Day1
@@ -186,7 +181,7 @@ myAwesomeCache[<span class="hljs-string">'111'</span>] = data;  <span class="hlj
   
   
     <a href="/2017/08/13/iOS-UI-启动原理和导航控制器/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">iOS-UI 启动原理和导航控制器</div>
     </a>
   
@@ -232,8 +227,8 @@ myAwesomeCache[<span class="hljs-string">'111'</span>] = data;  <span class="hlj
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

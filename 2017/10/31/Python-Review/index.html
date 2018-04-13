@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -101,19 +101,16 @@
       
         <p>也算是几个月没正经写过python了，是时候重拾这把宝刀了</p>
 <a id="more"></a>
-<h2 id="0x00-前言"><a class="markdownIt-Anchor" href="#0x00-前言"></a> 0X00-前言</h2>
-<p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
+<h2 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00-前言"></a>0X00-前言</h2><p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
 <hr>
-<h2 id="0x01-python基础部分"><a class="markdownIt-Anchor" href="#0x01-python基础部分"></a> 0X01-Python基础部分</h2>
-<h3 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码</h3>
-<p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
+<h2 id="0X01-Python基础部分"><a href="#0X01-Python基础部分" class="headerlink" title="0X01-Python基础部分"></a>0X01-Python基础部分</h2><h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
 <p>现在，捋一捋ASCII编码和Unicode编码的区别：ASCII编码是1个字节，而Unicode编码通常是2个字节。</p>
 <p>字母<code>A</code>用ASCII编码是十进制的<code>65</code>，二进制的<code>01000001</code>；</p>
-<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>'0'</code>和整数<code>0</code>是不同的；</p>
+<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>&#39;0&#39;</code>和整数<code>0</code>是不同的；</p>
 <p>汉字<code>中</code>已经超出了ASCII编码的范围，用Unicode编码是十进制的<code>20013</code>，二进制的<code>01001110 00101101</code>。</p>
 <p>你可以猜测，如果把ASCII编码的<code>A</code>用Unicode编码，只需要在前面补0就可以，因此，<code>A</code>的Unicode编码是<code>00000000 01000001</code>。</p>
 <p>新的问题又出现了：如果统一成Unicode编码，乱码问题从此消失了。但是，如果你写的文本基本上全部是英文的话，用Unicode编码比ASCII编码需要多一倍的存储空间，在存储和传输上就十分不划算。</p>
-<p>所以，本着节约的精神，又出现了把Unicode编码转化为&quot;可变长编码&quot;&quot;的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
+<p>所以，本着节约的精神，又出现了把Unicode编码转化为”可变长编码””的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
 <table>
 <thead>
 <tr>
@@ -145,289 +142,282 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt=""></p>
 <p>那么这个时候可能会有人问为什么在内存中使用Unicode呢，全部使用UTF-8岂不是更好么，这个时候参照知乎上的答案来说应该是内存存储字节流的时候，字符不定长会给算法带来麻烦。比如说我们无法确定第2000个字符从哪里开始，所以会采用Unicode,而在存储的时候，自然是选择不定长的UTF-8了，这里还是扔出一个<a href="https://www.zhihu.com/question/52346583" target="_blank" rel="external">链接</a>。</p>
 <p>还有一点需要注意的就是python3和python2的字符串编码差别还是挺大的，可以自行查阅一番。</p>
-<h3 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h3>
-<p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
 <p>对于单个的字符串，python提供了<code>ord()</code>函数获取字符的整型表示，<code>chr()</code>函数将编码转换为对应的字符串</p>
 <p>如果知道字符的整数编码，还可以使用十六进制写：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">'\u4e2d\u6587'</span>
-<span class="hljs-string">'中文'</span>
+<pre><code class="python">&gt;&gt;&gt; &#39;\u4e2d\u6587&#39;
+&#39;中文&#39;
 </code></pre>
 <p>由于Python的字符串类型是<code>str</code>，在内存中以Unicode表示，一个字符对应若干个字节。如果要在网络上传输，或者保存到磁盘上，就需要把<code>str</code>变为以字节为单位的<code>bytes</code>。Python对<code>bytes</code>类型的数据用带<code>b</code>前缀的单引号或双引号表示,以Unicode表示的<code>str</code>可以通过<code>encode</code>方法编码为指定的<code>byte</code></p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">'ABC'</span>.encode(<span class="hljs-string">'ascii'</span>)
-<span class="hljs-string">b'ABC'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">'中文'</span>.encode(<span class="hljs-string">'utf-8'</span>)
-<span class="hljs-string">b'\xe4\xb8\xad\xe6\x96\x87'</span>
+<pre><code class="python">&gt;&gt;&gt; &#39;ABC&#39;.encode(&#39;ascii&#39;)
+b&#39;ABC&#39;
+&gt;&gt;&gt; &#39;中文&#39;.encode(&#39;utf-8&#39;)
+b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;
 </code></pre>
 <p>中文无法使用<code>ASCII</code>编码，因为这已经超过了其编码的范围，反过来，如果我们从网络或磁盘上读取了字节流，那么读到的数据就是<code>bytes</code>。要把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">b'ABC'</span>.decode(<span class="hljs-string">'ascii'</span>)
-<span class="hljs-string">'ABC'</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="hljs-string">'utf-8'</span>)
-<span class="hljs-string">'中文'</span>
+<pre><code class="python">&gt;&gt;&gt; b&#39;ABC&#39;.decode(&#39;ascii&#39;)
+&#39;ABC&#39;
+&gt;&gt;&gt; b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;.decode(&#39;utf-8&#39;)
+&#39;中文&#39;
 </code></pre>
-<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>'xx.x%'</code>，只保留小数点后1位：</p>
-<pre class="highlight"><code class="python">print(<span class="hljs-string">'%.1f%%'</span> %((s2-s1)/s1*<span class="hljs-number">100</span>))
+<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>&#39;xx.x%&#39;</code>，只保留小数点后1位：</p>
+<pre><code class="python">print(&#39;%.1f%%&#39; %((s2-s1)/s1*100))
 </code></pre>
-<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
-<p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>s = set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>s
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<pre><code class="python">&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s
+{1, 2, 3}
 </code></pre>
 <p>注意，传入的参数是一个list，只是表明这个set内部有这几个元素，现实的顺序也不表示set是有序的，重复的元素会在set中被自动过滤掉，使用<code>add(key)</code>方法可以添加元素到set中，<code>remove(key)</code>来删除元素，当然也可以重复添加，但是不会有效果：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>s = set([<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>s
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>s.add(<span class="hljs-number">4</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>s
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>s.add(<span class="hljs-number">4</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>s
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>s.remove(<span class="hljs-number">4</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>s
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<pre><code class="python">&gt;&gt;&gt; s = set([1, 1, 2, 2, 3, 3])
+&gt;&gt;&gt; s
+{1, 2, 3}
+&gt;&gt;&gt; s.add(4)
+&gt;&gt;&gt; s
+{1, 2, 3, 4}
+&gt;&gt;&gt; s.add(4)
+&gt;&gt;&gt; s
+{1, 2, 3, 4}
+&gt;&gt;&gt; s.remove(4)
+&gt;&gt;&gt; s
+{1, 2, 3}
 </code></pre>
 <p>通过上面的特性我们不难发现，set可以看成数学上的无序集合，因此，两个ste可以做数学意义上的交集、并集操作</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>s1 = set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>s2 = set([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>s1 &amp; s2
-{<span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>s1 | s2
-{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}
+<pre><code class="python">&gt;&gt;&gt; s1 = set([1, 2, 3])
+&gt;&gt;&gt; s2 = set([2, 3, 4])
+&gt;&gt;&gt; s1 &amp; s2
+{2, 3}
+&gt;&gt;&gt; s1 | s2
+{1, 2, 3, 4}
 </code></pre>
 <p>这里有一个在评论区需要注意的点，可以拿出来说一下，在给set函数传参的时候，以下几种情况：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>s = set((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
-<span class="hljs-meta">&gt;&gt;&gt; </span>s = set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-meta">&gt;&gt;&gt; </span>s = set((<span class="hljs-number">1</span>,[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]))
+<pre><code class="python">&gt;&gt;&gt; s = set((1, 2, 3))
+&gt;&gt;&gt; s = set([1, 2, 3])
+&gt;&gt;&gt; s = set((1,[2, 3]))
 Traceback (most recent call last):
-  File <span class="hljs-string">"&lt;stdin&gt;"</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
-TypeError: unhashable type: <span class="hljs-string">'list'</span>
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: unhashable type: &#39;list&#39;
 </code></pre>
 <p>那么这种情况到底是为什么呢？是因为set不接受可变参数，可能有人要问了，列表就是可变参数啊，列表在赋值给s的时候是将列表中的每个元素作为value赋值进去的，str是不可变对象，而在第三种情况下参数内有一个是列表，所以就会失败，如果把[2, 3]改为（2，3）就可以成功了。</p>
-<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
-<p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
 <ol>
 <li>可变参数</li>
 </ol>
 <p>在Python函数中，还可以定义可变参数。顾名思义，可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。</p>
 <p>我们以数学题为例子，给定一组数字a，b，c……，请计算a2 + b2 + c2 + ……。</p>
 <p>要定义出这个函数，我们必须确定输入的参数。由于参数个数不确定，我们首先想到可以把a，b，c……作为一个list或tuple传进来，这样，函数可以定义如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc</span><span class="hljs-params">(numbers)</span>:</span>
-  sum = <span class="hljs-number">0</span>
-  <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> numbers:
+<pre><code class="python">def calc(numbers):
+  sum = 0
+  for n in numbers:
     sum += n
-  <span class="hljs-keyword">return</span> sum
+  return sum
 </code></pre>
 <p>但是在调用的时候，需要传入一个列表或者元组，如果利用可变参数，调用函数的方式可以简化成这样：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc</span><span class="hljs-params">(*numbers)</span>:</span>
-    sum = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> numbers:
+<pre><code class="python">def calc(*numbers):
+    sum = 0
+    for n in numbers:
         sum = sum + n * n
-    <span class="hljs-keyword">return</span> sum
-<span class="hljs-comment">#执行函数</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>calc(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
-<span class="hljs-number">14</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>calc(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>)
-<span class="hljs-number">84</span>
+    return sum
+#执行函数
+&gt;&gt;&gt; calc(1, 2, 3)
+14
+&gt;&gt;&gt; calc(1, 3, 5, 7)
+84
 </code></pre>
 <p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？虽然可以使用下标一个个传，但是这样未免过于麻烦，所以Python允许在列表或者元组前面加一个<code>*</code>，把list或turple作为可变参数传递进去：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-<span class="hljs-meta">&gt;&gt;&gt; </span>calc(*nums)
-<span class="hljs-number">14</span>
+<pre><code class="python">&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
 </code></pre>
-<ol start="2">
+<ol>
 <li>关键字参数</li>
 </ol>
 <p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, **kw)</span>:</span>
-    print(<span class="hljs-string">'name:'</span>, name, <span class="hljs-string">'age:'</span>, age, <span class="hljs-string">'other:'</span>, kw)
+<pre><code class="python">def person(name, age, **kw):
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
 </code></pre>
 <p>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Michael'</span>, <span class="hljs-number">30</span>)
-name: Michael age: <span class="hljs-number">30</span> other: {}
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Michael&#39;, 30)
+name: Michael age: 30 other: {}
 </code></pre>
 <p>也可以传入任意个数的关键字参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Bob'</span>, <span class="hljs-number">35</span>, city=<span class="hljs-string">'Beijing'</span>)
-name: Bob age: <span class="hljs-number">35</span> other: {<span class="hljs-string">'city'</span>: <span class="hljs-string">'Beijing'</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Adam'</span>, <span class="hljs-number">45</span>, gender=<span class="hljs-string">'M'</span>, job=<span class="hljs-string">'Engineer'</span>)
-name: Adam age: <span class="hljs-number">45</span> other: {<span class="hljs-string">'gender'</span>: <span class="hljs-string">'M'</span>, <span class="hljs-string">'job'</span>: <span class="hljs-string">'Engineer'</span>}
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+name: Bob age: 35 other: {&#39;city&#39;: &#39;Beijing&#39;}
+&gt;&gt;&gt; person(&#39;Adam&#39;, 45, gender=&#39;M&#39;, job=&#39;Engineer&#39;)
+name: Adam age: 45 other: {&#39;gender&#39;: &#39;M&#39;, &#39;job&#39;: &#39;Engineer&#39;}
 </code></pre>
 <p>关键字参数有什么用？它可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。</p>
 <p>和可变参数类似，也可以先组装出一个dict，然后，把该dict转换为关键字参数传进去：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>extra = {<span class="hljs-string">'city'</span>: <span class="hljs-string">'Beijing'</span>, <span class="hljs-string">'job'</span>: <span class="hljs-string">'Engineer'</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, city=extra[<span class="hljs-string">'city'</span>], job=extra[<span class="hljs-string">'job'</span>])
-name: Jack age: <span class="hljs-number">24</span> other: {<span class="hljs-string">'city'</span>: <span class="hljs-string">'Beijing'</span>, <span class="hljs-string">'job'</span>: <span class="hljs-string">'Engineer'</span>}
+<pre><code class="python">&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=extra[&#39;city&#39;], job=extra[&#39;job&#39;])
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
 </code></pre>
 <p>当然，上面复杂的调用可以用简化的写法：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>extra = {<span class="hljs-string">'city'</span>: <span class="hljs-string">'Beijing'</span>, <span class="hljs-string">'job'</span>: <span class="hljs-string">'Engineer'</span>}
-<span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, **extra)
-name: Jack age: <span class="hljs-number">24</span> other: {<span class="hljs-string">'city'</span>: <span class="hljs-string">'Beijing'</span>, <span class="hljs-string">'job'</span>: <span class="hljs-string">'Engineer'</span>}
+<pre><code class="python">&gt;&gt;&gt; extra = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+&gt;&gt;&gt; person(&#39;Jack&#39;, 24, **extra)
+name: Jack age: 24 other: {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
 </code></pre>
 <p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
-<ol start="3">
+<ol>
 <li>命名关键字参数</li>
 </ol>
 <p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过<code>kw</code>检查。</p>
 <p>仍以<code>person()</code>函数为例，我们希望检查是否有<code>city</code>和<code>job</code>参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, **kw)</span>:</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-string">'city'</span> <span class="hljs-keyword">in</span> kw:
-        <span class="hljs-comment"># 有city参数</span>
-        <span class="hljs-keyword">pass</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-string">'job'</span> <span class="hljs-keyword">in</span> kw:
-        <span class="hljs-comment"># 有job参数</span>
-        <span class="hljs-keyword">pass</span>
-    print(<span class="hljs-string">'name:'</span>, name, <span class="hljs-string">'age:'</span>, age, <span class="hljs-string">'other:'</span>, kw)
+<pre><code class="python">def person(name, age, **kw):
+    if &#39;city&#39; in kw:
+        # 有city参数
+        pass
+    if &#39;job&#39; in kw:
+        # 有job参数
+        pass
+    print(&#39;name:&#39;, name, &#39;age:&#39;, age, &#39;other:&#39;, kw)
 </code></pre>
 <p>但是调用者仍可以传入不受限制的关键字参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, city=<span class="hljs-string">'Beijing'</span>, addr=<span class="hljs-string">'Chaoyang'</span>, zipcode=<span class="hljs-number">123456</span>)
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=&#39;Beijing&#39;, addr=&#39;Chaoyang&#39;, zipcode=123456)
 </code></pre>
 <p>如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收<code>city</code>和<code>job</code>作为关键字参数。这种方式定义的函数如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, *, city, job)</span>:</span>
+<pre><code class="python">def person(name, age, *, city, job):
     print(name, age, city, job)
 </code></pre>
 <p>和关键字参数<code>**kw</code>不同，命名关键字参数需要一个特殊分隔符<code>*</code>，<code>*</code>后面的参数被视为命名关键字参数。</p>
 <p>调用方式如下：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, city=<span class="hljs-string">'Beijing'</span>, job=<span class="hljs-string">'Engineer'</span>)
-Jack <span class="hljs-number">24</span> Beijing Engineer
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Jack&#39;, 24, city=&#39;Beijing&#39;, job=&#39;Engineer&#39;)
+Jack 24 Beijing Engineer
 </code></pre>
 <p>如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, *args, city, job)</span>:</span>
+<pre><code class="python">def person(name, age, *args, city, job):
     print(name, age, args, city, job)
 </code></pre>
 <p>命名关键字参数必须传入参数名，这和位置参数不同。如果没有传入参数名，调用将报错：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, <span class="hljs-string">'Beijing'</span>, <span class="hljs-string">'Engineer'</span>)
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Jack&#39;, 24, &#39;Beijing&#39;, &#39;Engineer&#39;)
 Traceback (most recent call last):
-  File <span class="hljs-string">"&lt;stdin&gt;"</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
-TypeError: person() takes <span class="hljs-number">2</span> positional arguments but <span class="hljs-number">4</span> were given
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: person() takes 2 positional arguments but 4 were given
 </code></pre>
 <p>由于调用时缺少参数名<code>city</code>和<code>job</code>，Python解释器把这4个参数均视为位置参数，但<code>person()</code>函数仅接受2个位置参数。</p>
 <p>命名关键字参数可以有缺省值，从而简化调用：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, *, city=<span class="hljs-string">'Beijing'</span>, job)</span>:</span>
+<pre><code class="python">def person(name, age, *, city=&#39;Beijing&#39;, job):
     print(name, age, city, job)
 </code></pre>
 <p>由于命名关键字参数<code>city</code>具有默认值，调用时，可不传入<code>city</code>参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>person(<span class="hljs-string">'Jack'</span>, <span class="hljs-number">24</span>, job=<span class="hljs-string">'Engineer'</span>)
-Jack <span class="hljs-number">24</span> Beijing Engineer
+<pre><code class="python">&gt;&gt;&gt; person(&#39;Jack&#39;, 24, job=&#39;Engineer&#39;)
+Jack 24 Beijing Engineer
 </code></pre>
 <p>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<code>*</code>作为特殊分隔符。如果缺少<code>*</code>，Python解释器将无法识别位置参数和命名关键字参数：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">person</span><span class="hljs-params">(name, age, city, job)</span>:</span>
-    <span class="hljs-comment"># 缺少 *，city和job被视为位置参数</span>
-    <span class="hljs-keyword">pass</span>
+<pre><code class="python">def person(name, age, city, job):
+    # 缺少 *，city和job被视为位置参数
+    pass
 </code></pre>
 <p>Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
-<ol start="4">
+<ol>
 <li>递归函数</li>
 </ol>
 <p>递归函数也就是在函数内部调用自身，这里使用一个汉诺塔问题帮助理解，丢个代码就跑：</p>
-<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">move</span><span class="hljs-params">(n, a, b, c)</span>:</span>
-    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:
-        print(a, <span class="hljs-string">'--&gt;'</span>, c)    <span class="hljs-comment"># 这是汉诺塔的正确玩法! </span>
-    <span class="hljs-keyword">else</span>:
-        move(n - <span class="hljs-number">1</span>, a, c, b)
-        move(<span class="hljs-number">1</span>, a, b, c)
-        move(n - <span class="hljs-number">1</span>, b, a, c)
-<span class="hljs-comment">#其实写出这个函数只需要搞清楚三步即可</span>
-<span class="hljs-comment">#1. 除最后一层移至B</span>
-<span class="hljs-comment">#2. 最后一层移至C</span>
-<span class="hljs-comment">#3. 复原至C</span>
+<pre><code class="python">def move(n, a, b, c):
+    if n == 1:
+        print(a, &#39;--&gt;&#39;, c)    # 这是汉诺塔的正确玩法! 
+    else:
+        move(n - 1, a, c, b)
+        move(1, a, b, c)
+        move(n - 1, b, a, c)
+#其实写出这个函数只需要搞清楚三步即可
+#1. 除最后一层移至B
+#2. 最后一层移至C
+#3. 复原至C
 </code></pre>
 <hr>
-<h2 id="0x02-python高级特性"><a class="markdownIt-Anchor" href="#0x02-python高级特性"></a> 0X02-Python高级特性</h2>
-<p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
-<h3 id="切片和列表生成式"><a class="markdownIt-Anchor" href="#切片和列表生成式"></a> 切片和列表生成式：</h3>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>L = [<span class="hljs-string">'Tom'</span>, <span class="hljs-string">'Jerry'</span>, <span class="hljs-string">'阿福'</span>, <span class="hljs-string">'lanlanlu'</span>]
+<h2 id="0X02-Python高级特性"><a href="#0X02-Python高级特性" class="headerlink" title="0X02-Python高级特性"></a>0X02-Python高级特性</h2><p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
+<h3 id="切片和列表生成式："><a href="#切片和列表生成式：" class="headerlink" title="切片和列表生成式："></a>切片和列表生成式：</h3><pre><code class="python">&gt;&gt;&gt; L = [&#39;Tom&#39;, &#39;Jerry&#39;, &#39;阿福&#39;, &#39;lanlanlu&#39;]
 </code></pre>
 <p>对于这样的一个列表，我们需要取前三个元素应该怎么操作呢：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#第一种当然可以使用传统的方式</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>[ L[<span class="hljs-number">0</span>], L[<span class="hljs-number">1</span>], L[<span class="hljs-number">2</span>] ]
-[<span class="hljs-string">'Tom'</span>, <span class="hljs-string">'Jerry'</span>, <span class="hljs-string">'阿福'</span>]
-<span class="hljs-comment">#或者使用循环的方式</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>r = []
-<span class="hljs-meta">&gt;&gt;&gt; </span>n = <span class="hljs-number">3</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):
-<span class="hljs-meta">... </span>    r.append(L[i])
+<pre><code class="python">#第一种当然可以使用传统的方式
+&gt;&gt;&gt; [ L[0], L[1], L[2] ]
+[&#39;Tom&#39;, &#39;Jerry&#39;, &#39;阿福&#39;]
+#或者使用循环的方式
+&gt;&gt;&gt; r = []
+&gt;&gt;&gt; n = 3
+&gt;&gt;&gt; for i in range(n):
+...     r.append(L[i])
 </code></pre>
 <p>对这种经常取指定索引范围的操作用循环非常的繁琐，在学习完切片(Slice)之后我们会使用更简单的方式:</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>L[<span class="hljs-number">0</span>:<span class="hljs-number">3</span>]
-[<span class="hljs-string">'Tom'</span>, <span class="hljs-string">'Jerry'</span>, <span class="hljs-string">'阿福'</span>]
+<pre><code class="python">&gt;&gt;&gt; L[0:3]
+[&#39;Tom&#39;, &#39;Jerry&#39;, &#39;阿福&#39;]
 </code></pre>
 <p><code>L[0:3]</code>表示，从索引<code>0</code>开始取，直到索引<code>3</code>为止，但不包括索引<code>3</code>。即索引<code>0</code>，<code>1</code>，<code>2</code>，正好是3个元素。如果第一个元素就是0，还可以省略为<code>L[:3]</code>。这个时候我们又有新的需求了，需要倒数两个元素：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>L[<span class="hljs-number">-2</span>:]
-[<span class="hljs-string">'阿福'</span>, <span class="hljs-string">'lanlanlu'</span>]
+<pre><code class="python">&gt;&gt;&gt; L[-2:]
+[&#39;阿福&#39;, &#39;lanlanlu&#39;]
 </code></pre>
 <p>切片还有一个操作就是可以选择取出的间隔，也就是第三个参数，这是一个缺省参数，默认是1:</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>L[::<span class="hljs-number">2</span>]
-[<span class="hljs-string">'Jerry'</span>, <span class="hljs-string">'lanlanlu'</span>]
+<pre><code class="python">&gt;&gt;&gt; L[::2]
+[&#39;Jerry&#39;, &#39;lanlanlu&#39;]
 </code></pre>
 <p>以上的这种操作在很多语言都需要借助函数来完成，而在python中只要切片一个操作即可，一行代码就可以完成其他语言很多行才能完成的操作。接下来再来说一下python的迭代，在很多语言如C或者java中，迭代是通过下标来完成的：</p>
-<pre class="highlight"><code class="c"><span class="hljs-keyword">for</span>( <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt; <span class="hljs-keyword">sizeof</span>(arr)/<span class="hljs-number">4</span> ; i++ ){
+<pre><code class="c">for( int i = 1 ; i &lt; sizeof(arr)/4 ; i++ ){
     sum += arr[i];
 }
 </code></pre>
 <p>可以看出，Python的<code>for</code>循环抽象程度要高于C的<code>for</code>循环，因为Python的<code>for</code>循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上。</p>
 <p>list这种数据类型虽然有下标，但很多其他数据类型是没有下标的，但是，只要是可迭代对象，无论有无下标，都可以迭代，这种特性被称作鸭子类型(walk likes a duck, eat like a duck ,then that’s a duck)，当然这种特性对于Python，Ruby，Lisp的程序员来说只是很正常的特性罢了。下面举个例子：</p>
-<pre class="highlight"><code class="python">d = {<span class="hljs-string">'a'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'b'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'c'</span>: <span class="hljs-number">3</span>}
-<span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> d:
+<pre><code class="python">d = {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
+for key in d:
   print(key)
 </code></pre>
 <p>因为dict的存储不是按照list的方式顺序排列，所以，迭代出的结果顺序很可能不一样。</p>
 <p>默认情况下，dict迭代的是key。如果要迭代value，可以用<code>for value in d.values()</code>，如果要同时迭代key和value，可以用<code>for k, v in d.items()</code>。</p>
 <p>由于字符串也是可迭代对象，因此，也可以作用于for循环：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">"ABC"</span>:
+<pre><code class="python">for ch in &quot;ABC&quot;:
   print(ch)
 </code></pre>
 <p>这就是鸭子类型，当我们在迭代的时候，只要作用一个可迭代对象即可，并不需要太关心对象究竟是什么类型，我们可以通过collections模块中的Iterable类型来判断：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Iterable
-<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-string">'abc'</span>, Iterable) <span class="hljs-comment"># str是否可迭代</span>
-<span class="hljs-keyword">True</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], Iterable) <span class="hljs-comment"># list是否可迭代</span>
-<span class="hljs-keyword">True</span>
-<span class="hljs-meta">&gt;&gt;&gt; </span>isinstance(<span class="hljs-number">123</span>, Iterable) <span class="hljs-comment"># 整数是否可迭代</span>
-<span class="hljs-keyword">False</span>
+<pre><code class="python">&gt;&gt;&gt; from collections import Iterable
+&gt;&gt;&gt; isinstance(&#39;abc&#39;, Iterable) # str是否可迭代
+True
+&gt;&gt;&gt; isinstance([1,2,3], Iterable) # list是否可迭代
+True
+&gt;&gt;&gt; isinstance(123, Iterable) # 整数是否可迭代
+False
 </code></pre>
 <p>如果我们一定想要实现C语言中的那种下标循环也是可以的，我们可以将list变成索引-元素对的形式，再对它们同时迭代：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> i, value <span class="hljs-keyword">in</span> enumerate([<span class="hljs-string">'Tom'</span>, <span class="hljs-string">'Jerry'</span>, <span class="hljs-string">'lanlanlu'</span>]):
+<pre><code class="python">for i, value in enumerate([&#39;Tom&#39;, &#39;Jerry&#39;, &#39;lanlanlu&#39;]):
   print(i, value)
 </code></pre>
 <p>这个时候我们会发现生成列表也是一件很麻烦的事情，虽然生成1-100的顺序数我们可以通过<code>range</code>来实现，如果我们有更复杂的要求如生成<code>[1x1, 2x2...]</code>，就需要用到列表生成式：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>L = [x*x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>)]
-<span class="hljs-comment">#这样相比于去循环简单了许多</span>
+<pre><code class="python">&gt;&gt;&gt; L = [x*x for x in range(100)]
+#这样相比于去循环简单了许多
 </code></pre>
 <p>我们还可以使用二层循环，并且加上判断，这样就可以完全代替了冗长的for循环语法了：</p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>[m+n <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-string">'ABCDEFG'</span> <span class="hljs-keyword">if</span> m !=<span class="hljs-string">'D'</span> <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-string">'!@$#%^*&amp;'</span> <span class="hljs-keyword">if</span> n != <span class="hljs-string">'^'</span>]
-[<span class="hljs-string">'A!'</span>, <span class="hljs-string">'A@'</span>, <span class="hljs-string">'A$'</span>, <span class="hljs-string">'A#'</span>, <span class="hljs-string">'A%'</span>, <span class="hljs-string">'A*'</span>, <span class="hljs-string">'A&amp;'</span>, <span class="hljs-string">'B!'</span>, <span class="hljs-string">'B@'</span>, <span class="hljs-string">'B$'</span>, <span class="hljs-string">'B#'</span>, <span class="hljs-string">'B%'</span>, <span class="hljs-string">'B*'</span>, <span class="hljs-string">'B&amp;'</span>, <span class="hljs-string">'C!'</span>, <span class="hljs-string">'C@'</span>, <span class="hljs-string">'C$'</span>, <span class="hljs-string">'C#'</span>, <span class="hljs-string">'C%'</span>, <span class="hljs-string">'C*'</span>, <span class="hljs-string">'C&amp;'</span>, <span class="hljs-string">'E!'</span>, <span class="hljs-string">'E@'</span>, <span class="hljs-string">'E$'</span>, <span class="hljs-string">'E#'</span>, <span class="hljs-string">'E%'</span>, <span class="hljs-string">'E*'</span>, <span class="hljs-string">'E&amp;'</span>, <span class="hljs-string">'F!'</span>, <span class="hljs-string">'F@'</span>, <span class="hljs-string">'F$'</span>, <span class="hljs-string">'F#'</span>, <span class="hljs-string">'F%'</span>, <span class="hljs-string">'F*'</span>, <span class="hljs-string">'F&amp;'</span>, <span class="hljs-string">'G!'</span>, <span class="hljs-string">'G@'</span>, <span class="hljs-string">'G$'</span>, <span class="hljs-string">'G#'</span>, <span class="hljs-string">'G%'</span>, <span class="hljs-string">'G*'</span>, <span class="hljs-string">'G&amp;'</span>]
+<pre><code class="python">&gt;&gt;&gt; [m+n for m in &#39;ABCDEFG&#39; if m !=&#39;D&#39; for n in &#39;!@$#%^*&amp;&#39; if n != &#39;^&#39;]
+[&#39;A!&#39;, &#39;A@&#39;, &#39;A$&#39;, &#39;A#&#39;, &#39;A%&#39;, &#39;A*&#39;, &#39;A&amp;&#39;, &#39;B!&#39;, &#39;B@&#39;, &#39;B$&#39;, &#39;B#&#39;, &#39;B%&#39;, &#39;B*&#39;, &#39;B&amp;&#39;, &#39;C!&#39;, &#39;C@&#39;, &#39;C$&#39;, &#39;C#&#39;, &#39;C%&#39;, &#39;C*&#39;, &#39;C&amp;&#39;, &#39;E!&#39;, &#39;E@&#39;, &#39;E$&#39;, &#39;E#&#39;, &#39;E%&#39;, &#39;E*&#39;, &#39;E&amp;&#39;, &#39;F!&#39;, &#39;F@&#39;, &#39;F$&#39;, &#39;F#&#39;, &#39;F%&#39;, &#39;F*&#39;, &#39;F&amp;&#39;, &#39;G!&#39;, &#39;G@&#39;, &#39;G$&#39;, &#39;G#&#39;, &#39;G%&#39;, &#39;G*&#39;, &#39;G&amp;&#39;]
 </code></pre>
 <p>还可以通过列表生成式将列表中的字母换成小写或者转换写法等等操作，根据需求可以灵活的调整。</p>
-<h3 id="生成器和迭代器"><a class="markdownIt-Anchor" href="#生成器和迭代器"></a> 生成器和迭代器</h3>
-<p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
+<h3 id="生成器和迭代器"><a href="#生成器和迭代器" class="headerlink" title="生成器和迭代器"></a>生成器和迭代器</h3><p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
 <p>而关于迭代器，我们可以了解到所有可以被<code>nex()</code>函数不断调用并返回下一个值的都是一个迭代器。这里有一个误区，那就是诸如list、tuple之类的虽然是可迭代对象，但不是迭代器。那么这是为什么呢</p>
 <p>这是因为Python的<code>Iterator</code>对象表示的是一个数据流，Iterator对象可以被<code>next()</code>函数调用并不断返回下一个数据，直到没有数据时抛出<code>StopIteration</code>错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过<code>next()</code>函数实现按需计算下一个数据，所以<code>Iterator</code>的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
 <p><code>Iterator</code>甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。</p>
-<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
-<ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
 <li>凡是可以作用于<code>for</code>循环的都是可迭代对象</li>
 <li>凡是可作用于<code>next()</code>函数的对象都是迭代器类型，它们表示一个惰性计算的序列。</li>
 <li>集合数据类型如<code>list</code>、<code>dict</code>、<code>str</code>等是<code>Iterable</code>但不是<code>Iterator</code>，不过可以通过<code>iter()</code>函数获得一个<code>Iterator</code>对象。</li>
 <li>for循环的实质就是在不断的调用<code>next()</code>函数，下面举个例子：</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> ,<span class="hljs-number">4</span>]:
-  <span class="hljs-keyword">pass</span>
+<pre><code class="python">for i in [1, 2, 3 ,4]:
+  pass
 </code></pre>
 <p>实际上可以完全等价于：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#首先进行一次转换获得迭代器对象</span>
-it = iter([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> ,<span class="hljs-number">4</span>])
-<span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-  <span class="hljs-keyword">try</span>:
+<pre><code class="python">#首先进行一次转换获得迭代器对象
+it = iter([1, 2, 3 ,4])
+while True:
+  try:
     x = next(it)
-  <span class="hljs-keyword">except</span> StopIteration:
-    <span class="hljs-keyword">break</span>
+  except StopIteration:
+    break
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/31/Python-Review/" data-id="cjfwn7gs7003bhbbrylwp2z7z" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/31/Python-Review/" data-id="cjfy0vx8x0030prbr52mnnuq7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -439,7 +429,7 @@ it = iter([<span class="hljs-number">1</span>, <span class="hljs-number">2</span
 <nav id="article-nav">
   
     <a href="/2017/11/01/CTF-MISC-二/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           CTF-MISC(二)
@@ -449,7 +439,7 @@ it = iter([<span class="hljs-number">1</span>, <span class="hljs-number">2</span
   
   
     <a href="/2017/10/30/PIL学习-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">PIL学习(一)</div>
     </a>
   
@@ -495,8 +485,8 @@ it = iter([<span class="hljs-number">1</span>, <span class="hljs-number">2</span
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

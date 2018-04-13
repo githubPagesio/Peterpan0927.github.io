@@ -42,8 +42,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -102,114 +102,109 @@
       
         <p>突破script kid的境界了～离解锁脚本大师的成就又近一步</p>
 <a id="more"></a>
-<h2 id="0x00-前言pil介绍和安装"><a class="markdownIt-Anchor" href="#0x00-前言pil介绍和安装"></a> 0x00-前言&amp;PIL介绍和安装</h2>
-<p>在对于隐写术的学习的同时我们也了解到了许多图像学的知识,虽然诸如<code>binwalk</code>、<code>stegsolve</code>、<code>stegdetect</code>这样的工具对我们的解题的帮助非常大，但是从博客中也不难看到，有很多题目是通过python的脚本去生成二维码或者提取图像的最低位，这个时候工具的帮助也是有限的，熟练的编写这样的脚本就成为了一个优秀的CTFer的基本素养。现在就让我们一起来进行PIL库的学习吧～</p>
+<h2 id="0x00-前言-amp-PIL介绍和安装"><a href="#0x00-前言-amp-PIL介绍和安装" class="headerlink" title="0x00-前言&amp;PIL介绍和安装"></a>0x00-前言&amp;PIL介绍和安装</h2><p>在对于隐写术的学习的同时我们也了解到了许多图像学的知识,虽然诸如<code>binwalk</code>、<code>stegsolve</code>、<code>stegdetect</code>这样的工具对我们的解题的帮助非常大，但是从博客中也不难看到，有很多题目是通过python的脚本去生成二维码或者提取图像的最低位，这个时候工具的帮助也是有限的，熟练的编写这样的脚本就成为了一个优秀的CTFer的基本素养。现在就让我们一起来进行PIL库的学习吧～</p>
 <p>Pillow是Python里的图像处理库（PIL：Python Image Library），提供了了广泛的文件格式支持，强大的图像处理能力，主要包括图像储存、图像显示、格式转换以及基本的图像处理操作等。</p>
 <p>虽然本篇介绍的是 PIL，但实际上安装的却是 Pillow。PIL 的更新速度很慢，而且存在一些难以配置的问题，不推荐使用；而 Pillow 库则是 PIL 的一个分支，维护和开发活跃，Pillow 兼容 PIL 的绝大多数语法，推荐使用。</p>
 <p>在Mac上可以先使用Homebrew安装python3,然后再使用pip安装pillow模块</p>
-<pre class="highlight"><code class="shell">pip3 install Pillow
+<pre><code class="shell">pip3 install Pillow
 </code></pre>
 <p>安装好之后，打开 Python 解释器，输入 <code>from PIL import Image</code> 来测试是否安装成功。</p>
 <p>⚠️注意：有一些教程默认是用import Image的，但是在window 的64位系统中如果没有在cmd中执行pip install PIL是找不到Image模块的，所以呢必须先安装Pillow，在cmd中运行pip install Pillow，这里也要变成from PIL import Image</p>
 <hr>
-<h2 id="0x01-image模块"><a class="markdownIt-Anchor" href="#0x01-image模块"></a> 0x01-Image模块</h2>
-<p>Image可以说是PIL中最重要的一个模块了，它可以用作创建图片对象，并进行一些图像的基本操作。</p>
-<h3 id="读取和存储操作"><a class="markdownIt-Anchor" href="#读取和存储操作"></a> 读取和存储操作</h3>
-<ol>
+<h2 id="0x01-Image模块"><a href="#0x01-Image模块" class="headerlink" title="0x01-Image模块"></a>0x01-Image模块</h2><p>Image可以说是PIL中最重要的一个模块了，它可以用作创建图片对象，并进行一些图像的基本操作。</p>
+<h3 id="读取和存储操作"><a href="#读取和存储操作" class="headerlink" title="读取和存储操作"></a>读取和存储操作</h3><ol>
 <li>PIL的open()函数用于创建PIL对象，比如读取一张图片：</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
+img = Image.open(&#39;test.jpg&#39;)
 </code></pre>
-<ol start="2">
+<ol>
 <li>存储图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-<span class="hljs-comment">#生成缩略图</span>
-img.thumbnail((<span class="hljs-number">128</span>,<span class="hljs-number">128</span>))
+img = Image.open(&#39;test.jpg&#39;)
+#生成缩略图
+img.thumbnail((128,128))
 
-<span class="hljs-comment">#保存图片</span>
-img.save(<span class="hljs-string">'test1.jpg'</span>, <span class="hljs-string">'JPEG'</span>)
+#保存图片
+img.save(&#39;test1.jpg&#39;, &#39;JPEG&#39;)
 </code></pre>
-<h3 id="生成新的图像"><a class="markdownIt-Anchor" href="#生成新的图像"></a> 生成新的图像</h3>
-<p>Image的new方法用来生成新的图像，下面是他的定义</p>
+<h3 id="生成新的图像"><a href="#生成新的图像" class="headerlink" title="生成新的图像"></a>生成新的图像</h3><p>Image的new方法用来生成新的图像，下面是他的定义</p>
 <blockquote>
 <p>Image.new(mode,size) ⇒ image</p>
-<p>Image.new(mode, size, color) ⇒ image</p>
+<p> Image.new(mode, size, color) ⇒ image</p>
 </blockquote>
 <p>使用给定的变量mode和size生成新的图像。Size是给定的宽/高二元组，这是按照像素数来计算的。对于单通道图像，变量color只给定一个值；对于多通道图像，变量color给定一个元组（每个通道对应一个值）。在版本1.1.4及其之后，用户也可以用颜色的名称，比如给变量color赋值为“red”。如果没有对变量color赋值，图像内容将会被全部赋值为0（图像即为黑色）。如果变量color是空，图像将不会被初始化，即图像的内容全为0。这对向该图像复制或绘制某些内容是有用的。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
-<span class="hljs-meta">&gt;&gt;&gt; </span>im= Image.new(<span class="hljs-string">"RGB"</span>, (<span class="hljs-number">128</span>, <span class="hljs-number">128</span>), <span class="hljs-string">"red"</span>)
-<span class="hljs-meta">&gt;&gt;&gt; </span>im.show()
+<pre><code class="python">from PIL import Image
+&gt;&gt;&gt; im= Image.new(&quot;RGB&quot;, (128, 128), &quot;red&quot;)
+&gt;&gt;&gt; im.show()
 </code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%886.47.31.png" alt=""></p>
-<pre class="highlight"><code class="python"><span class="hljs-meta">&gt;&gt;&gt; </span>im= Image.new(<span class="hljs-string">"RGB"</span>, (<span class="hljs-number">128</span>, <span class="hljs-number">128</span>))
-<span class="hljs-meta">&gt;&gt;&gt; </span>im.show()
+<pre><code class="python">&gt;&gt;&gt; im= Image.new(&quot;RGB&quot;, (128, 128))
+&gt;&gt;&gt; im.show()
 </code></pre>
 <p>图像im为128x128大小的黑色图像，因为变量color不赋值的话，图像内容被设置为0，即黑色。</p>
-<h3 id="图像的一些基本操作"><a class="markdownIt-Anchor" href="#图像的一些基本操作"></a> 图像的一些基本操作</h3>
-<ol>
+<h3 id="图像的一些基本操作"><a href="#图像的一些基本操作" class="headerlink" title="图像的一些基本操作"></a>图像的一些基本操作</h3><ol>
 <li>输出图片的信息（格式、尺寸以及图像类型）</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
+img = Image.open(&#39;test.jpg&#39;)
 
-<span class="hljs-comment">#输出信息</span>
+#输出信息
 print(img.format, img.size, img.mode)
 </code></pre>
-<ol start="2">
+<ol>
 <li>显示图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
+img = Image.open(&#39;test.jpg&#39;)
 
 img.show()
 </code></pre>
-<ol start="3">
+<ol>
 <li>旋转图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-<span class="hljs-comment">#逆时针旋转45度</span>
-rorate1 = img.rotate(<span class="hljs-number">45</span>)
+img = Image.open(&#39;test.jpg&#39;)
+#逆时针旋转45度
+rorate1 = img.rotate(45)
 rorate1.show()
-<span class="hljs-comment"># 逆时针旋转90</span>
+# 逆时针旋转90
 rorate2 = img.transpose(Image.ROTATE_90)
 rorate2.show()
 </code></pre>
 <p>⚠️：只有选择90度，180度以及270度的时候才能用img.transpose(Image.ROTATE_90)，其他角度用rotate，就像iOS中的tranform方法一样，可以类比一下。</p>
-<ol start="4">
+<ol>
 <li>缩放图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># coding=utf-8</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python"># coding=utf-8
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
+img = Image.open(&#39;test.jpg&#39;)
 
-<span class="hljs-comment"># 缩放图片为50*50</span>
-resize1 = img.resize((<span class="hljs-number">50</span>, <span class="hljs-number">50</span>))
+# 缩放图片为50*50
+resize1 = img.resize((50, 50))
 resize1.show()
 </code></pre>
-<ol start="5">
+<ol>
 <li>生成缩略图</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-<span class="hljs-comment">#生成缩略图</span>
-img.thumbnail((<span class="hljs-number">128</span>,<span class="hljs-number">128</span>))
+img = Image.open(&#39;test.jpg&#39;)
+#生成缩略图
+img.thumbnail((128,128))
 
 img.show()
 </code></pre>
@@ -220,171 +215,167 @@ img.show()
 <li><code>resize()</code>中的size参数直接设定了resize之后图片的规格, 而<code>thumbnail()</code>中的size参数则是设定了x/y上的最大值. 也就是说, 经过<code>resize()</code>处理的图片可能会被拉伸, 而经过<code>thumbnail()</code>处理的图片不会被拉伸</li>
 <li><code>thumbnail()</code>函数内部调用了<code>resize()</code>, 可以认为<code>thumbnail()</code>是对<code>resize()</code>的一种封装</li>
 </ul>
-<ol start="6">
+<ol>
 <li>图片灰度化</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-grey = img .convert(<span class="hljs-string">'L'</span>)
+img = Image.open(&#39;test.jpg&#39;)
+grey = img .convert(&#39;L&#39;)
 grey.show()
 </code></pre>
-<ol start="7">
+<ol>
 <li>某个像素点的获取和修改</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-<span class="hljs-comment">#打印某个像素点的值</span>
-print(img.getpixel((<span class="hljs-number">100</span>,<span class="hljs-number">100</span>)))
-<span class="hljs-comment">#更改像素点的值</span>
-img.putpixel((<span class="hljs-number">100</span>, <span class="hljs-number">100</span>),(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+img = Image.open(&#39;test.jpg&#39;)
+#打印某个像素点的值
+print(img.getpixel((100,100)))
+#更改像素点的值
+img.putpixel((100, 100),(0, 0, 0))
 </code></pre>
-<ol start="9">
+<ol>
 <li>裁剪图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIL import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
+img = Image.open(&#39;test.jpg&#39;)
 
-<span class="hljs-comment">#裁剪图片，box为裁剪图片的区域范围</span>
-box = (<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">250</span>, <span class="hljs-number">250</span>)
+#裁剪图片，box为裁剪图片的区域范围
+box = (100, 100, 250, 250)
 region = img.crop(box)
 region.show()
 </code></pre>
-<ol start="10">
+<ol>
 <li>粘贴图片</li>
 </ol>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#-*- coding:utf-8 -*-</span>
-<span class="hljs-keyword">from</span> PIl <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#-*- coding:utf-8 -*-
+from PIl import Image
 
-img = Image.open(<span class="hljs-string">'test.jpg'</span>)
-<span class="hljs-comment"># 裁剪图片  box为裁剪图片的区域范围</span>
-box = (<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">250</span>, <span class="hljs-number">250</span>)
+img = Image.open(&#39;test.jpg&#39;)
+# 裁剪图片  box为裁剪图片的区域范围
+box = (100, 100, 250, 250)
 region = img.crop(box)
 region.show()
 
-<span class="hljs-comment"># 逆时针旋转图片180度</span>
+# 逆时针旋转图片180度
 region2 = region.transpose(Image.ROTATE_180)
 region2.show()
 
-<span class="hljs-comment"># 图片的粘贴</span>
+# 图片的粘贴
 img.paste(region2, box)
 img.show()
 </code></pre>
-<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
-<p>从上述的方法中我们可以看到Image模块已然可以满足我们的基本需求，但是如果我们需要有更高的要求，可以使用Matplotlib类库，它具有比PIL更加强大的绘图功能，比如说绘制条状图，饼状图，散点图等。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上述的方法中我们可以看到Image模块已然可以满足我们的基本需求，但是如果我们需要有更高的要求，可以使用Matplotlib类库，它具有比PIL更加强大的绘图功能，比如说绘制条状图，饼状图，散点图等。</p>
 <p>其实Image中还有许多方法没有讲述，留待补充。</p>
 <hr>
-<h2 id="0x02-imagedraw模块"><a class="markdownIt-Anchor" href="#0x02-imagedraw模块"></a> 0x02-ImageDraw模块</h2>
-<p>ImageDraw模块提供了对图像对象的简单2D绘制，用户可以通过这个模块创建新的图像，为web应用实战产生各类的图形，但其实还有更高级的绘图库<a href="http://effbot.org/zone/aggdraw-index.htm" target="_blank" rel="external">The aggdraw Module</a></p>
+<h2 id="0x02-ImageDraw模块"><a href="#0x02-ImageDraw模块" class="headerlink" title="0x02-ImageDraw模块"></a>0x02-ImageDraw模块</h2><p>ImageDraw模块提供了对图像对象的简单2D绘制，用户可以通过这个模块创建新的图像，为web应用实战产生各类的图形，但其实还有更高级的绘图库<a href="http://effbot.org/zone/aggdraw-index.htm" target="_blank" rel="external">The aggdraw Module</a></p>
 <p>ImageDraw绘图接口使用的是和PIL一样的坐标系统，下面就来说一下ImageDraw模块中的函数。</p>
-<h3 id="imagedraw中的函数"><a class="markdownIt-Anchor" href="#imagedraw中的函数"></a> ImageDraw中的函数</h3>
-<blockquote>
+<h3 id="ImageDraw中的函数"><a href="#ImageDraw中的函数" class="headerlink" title="ImageDraw中的函数"></a>ImageDraw中的函数</h3><blockquote>
 <p>Draw方法：Draw(image) =&gt; Draw instance</p>
 </blockquote>
 <p>含义：创建一个可以在给定图像上绘图的对象，图像的内容会被修改</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> ImageDraw, Image
-im = Image.open(<span class="hljs-string">"test.jpg"</span>)
+<pre><code class="python">from PIL import ImageDraw, Image
+im = Image.open(&quot;test.jpg&quot;)
 draw = ImageDraw.Draw(im)
-draw.line((<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)+im.size, fill = <span class="hljs-number">128</span>)
-draw.line((<span class="hljs-number">0</span>,im01.size[<span class="hljs-number">1</span>], im.size[<span class="hljs-number">0</span>], <span class="hljs-number">0</span>), fill = <span class="hljs-number">128</span>)
+draw.line((0, 0)+im.size, fill = 128)
+draw.line((0,im01.size[1], im.size[0], 0), fill = 128)
 im.show()
-<span class="hljs-keyword">del</span> draw
+del draw
 </code></pre>
 <p>在图片上绘制了两条灰色的对角线，如下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8810.11.14.png" alt=""></p>
-<h3 id="imagedraw模块中的方法"><a class="markdownIt-Anchor" href="#imagedraw模块中的方法"></a> ImageDraw模块中的方法</h3>
-<ol>
+<h3 id="ImageDraw模块中的方法"><a href="#ImageDraw模块中的方法" class="headerlink" title="ImageDraw模块中的方法"></a>ImageDraw模块中的方法</h3><ol>
 <li>Arc</li>
 </ol>
 <p>定义：draw.arc(xy, start, end, options)</p>
 <p>含义：在给定的区域内，在开始和结束角度之间绘制一条弧（圆的一部分）。</p>
 <p>变量options中fill设置弧的颜色。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image,ImageDraw
-im01 = Image.open(<span class="hljs-string">"test.jpg"</span>)
+<pre><code class="python">from PIL import Image,ImageDraw
+im01 = Image.open(&quot;test.jpg&quot;)
 draw =ImageDraw.Draw(im01)
-draw.arc((<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">200</span>,<span class="hljs-number">200</span>),<span class="hljs-number">0</span>, <span class="hljs-number">90</span>, fill = (<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))
-draw.arc((<span class="hljs-number">300</span>,<span class="hljs-number">300</span>,<span class="hljs-number">500</span>,<span class="hljs-number">500</span>), <span class="hljs-number">0</span>, <span class="hljs-number">-90</span>, fill = (<span class="hljs-number">0</span>,<span class="hljs-number">255</span>,<span class="hljs-number">0</span>))
-draw.arc((<span class="hljs-number">200</span>,<span class="hljs-number">200</span>,<span class="hljs-number">300</span>,<span class="hljs-number">300</span>),<span class="hljs-number">-90</span>, <span class="hljs-number">0</span>, fill = (<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>))
+draw.arc((0,0,200,200),0, 90, fill = (255,0,0))
+draw.arc((300,300,500,500), 0, -90, fill = (0,255,0))
+draw.arc((200,200,300,300),-90, 0, fill = (0,0,255))
 im01.show()
-<span class="hljs-keyword">del</span> draw
+del draw
 </code></pre>
-<ol start="2">
+<ol>
 <li>Chord</li>
 </ol>
 <p>定义：draw.chord(xy,start, end, options)</p>
 <p>含义：和方法arc()一样，但是使用直线连接起始点。</p>
 <p>变量options的outline给定弦轮廓的颜色。Fill给定弦内部的颜色。</p>
 <p>例子：</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
+<pre><code class="python">from PIL import Image, ImageDraw
 
-im01 =Image.open(<span class="hljs-string">"test.jpg"</span>)
+im01 =Image.open(&quot;test.jpg&quot;)
 
 draw =ImageDraw.Draw(im01)
 
-draw.chord((<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">200</span>,<span class="hljs-number">200</span>),<span class="hljs-number">0</span>, <span class="hljs-number">90</span>, fill = (<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))
+draw.chord((0,0,200,200),0, 90, fill = (255,0,0))
 
-draw.chord((<span class="hljs-number">300</span>,<span class="hljs-number">300</span>,<span class="hljs-number">500</span>,<span class="hljs-number">500</span>), <span class="hljs-number">0</span>, <span class="hljs-number">-90</span>, fill = (<span class="hljs-number">0</span>,<span class="hljs-number">255</span>,<span class="hljs-number">0</span>))
+draw.chord((300,300,500,500), 0, -90, fill = (0,255,0))
 
-draw.chord((<span class="hljs-number">200</span>,<span class="hljs-number">200</span>,<span class="hljs-number">300</span>,<span class="hljs-number">300</span>), <span class="hljs-number">-90</span>, <span class="hljs-number">0</span>, fill = (<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>))
+draw.chord((200,200,300,300), -90, 0, fill = (0,0,255))
 
 im01.show()
 </code></pre>
-<ol start="3">
+<ol>
 <li>Point</li>
 </ol>
 <p>定义：draw.point(xy,options)</p>
 <p>含义：在给定的坐标点上画一些点。</p>
 <p>坐标列表是包含2元组[(x,y),…]或者数字[x,y,…]的任何序列对象。</p>
 <p>变量options的fill给定点的颜色。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
+<pre><code class="python">from PIL import Image, ImageDraw
 
-im01 = Image.open(<span class="hljs-string">"test.jpg"</span>)
+im01 = Image.open(&quot;test.jpg&quot;)
 
 draw = ImageDraw.Draw(im01)
 
-draw.point([(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),(<span class="hljs-number">100</span>,<span class="hljs-number">150</span>), (<span class="hljs-number">110</span>, <span class="hljs-number">50</span>)], fill = (<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+draw.point([(0,0),(100,150), (110, 50)], fill = (255, 0, 0))
 
-draw.point([<span class="hljs-number">0</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>,<span class="hljs-number">110</span>, <span class="hljs-number">210</span>, <span class="hljs-number">150</span>], fill = (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>))
+draw.point([0,10,100,110, 210, 150], fill = (0, 255, 0))
 
 im01.show()
 </code></pre>
 <p>还有一些诸如绘制图形，折线之类的方法就不多赘述了，参考<a href="http://blog.csdn.net/icamera0/article/details/50747084" target="_blank" rel="external">博客</a>，接下来我们利用学的两个模块来分析一个脚本。</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#!/usr/bin/env python3</span>
-<span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval <span class="hljs-keyword">as</span> make_tuple
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image, ImageDraw
-f = open(<span class="hljs-string">'p&amp;s.txt'</span>, <span class="hljs-string">'r'</span>)
-points = [make_tuple(line) <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f.readlines()]
+<pre><code class="python">#!/usr/bin/env python3
+from ast import literal_eval as make_tuple
+from PIL import Image, ImageDraw
+f = open(&#39;p&amp;s.txt&#39;, &#39;r&#39;)
+points = [make_tuple(line) for line in f.readlines()]
 f.close()
-image = Image.new(<span class="hljs-string">'RGB'</span>, (<span class="hljs-number">270</span>, <span class="hljs-number">270</span>), <span class="hljs-string">'#ffffff'</span>)
+image = Image.new(&#39;RGB&#39;, (270, 270), &#39;#ffffff&#39;)
 draw = ImageDraw.Draw(image)
-<span class="hljs-keyword">for</span> point <span class="hljs-keyword">in</span> points:
-	draw.point(point, fill=<span class="hljs-string">"#000000"</span>)
-image.save(<span class="hljs-string">'qrcode.png'</span>)
+for point in points:
+    draw.point(point, fill=&quot;#000000&quot;)
+image.save(&#39;qrcode.png&#39;)
 </code></pre>
 <p>这个代码中打开txt文件，将其中的坐标点画成黑色，使用到了我们的ImageDraw，那么我们可以尝试着去使用只用Image改写这个脚本来验证今天学习的成果：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#! /usr/bin/env python3</span>
-<span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval <span class="hljs-keyword">as</span> make_tuple
-<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<pre><code class="python">#! /usr/bin/env python3
+from ast import literal_eval as make_tuple
+from PIL import Image
 
-f = open(<span class="hljs-string">'p&amp;s.txt'</span>, <span class="hljs-string">'r'</span>)
-points = [make_tuple(line) <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f.readlines()]
+f = open(&#39;p&amp;s.txt&#39;, &#39;r&#39;)
+points = [make_tuple(line) for line in f.readlines()]
 f.close()
-image = Image.new(<span class="hljs-string">'RGB'</span>, (<span class="hljs-number">270</span>, <span class="hljs-number">270</span>), <span class="hljs-string">'#ffffff'</span>)
-<span class="hljs-keyword">for</span> point <span class="hljs-keyword">in</span> points:
- 	image.putpixel((point[<span class="hljs-number">0</span>]<span class="hljs-number">-1</span>, point[<span class="hljs-number">1</span>]<span class="hljs-number">-1</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
-image.save(<span class="hljs-string">"qrcode.png"</span>)
+image = Image.new(&#39;RGB&#39;, (270, 270), &#39;#ffffff&#39;)
+for point in points:
+     image.putpixel((point[0]-1, point[1]-1), (0, 0, 0))
+image.save(&quot;qrcode.png&quot;)
 </code></pre>
 <p>这样就完成了，那么PIL学习的第一天就先告一段落吧！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/30/PIL学习-一/" data-id="cjfwn7grz002xhbbrcntvei68" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/30/PIL学习-一/" data-id="cjfy0vx8t002qprbrotfndkfq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -396,7 +387,7 @@ image.save(<span class="hljs-string">"qrcode.png"</span>)
 <nav id="article-nav">
   
     <a href="/2017/10/31/Python-Review/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           Python3-Review
@@ -406,7 +397,7 @@ image.save(<span class="hljs-string">"qrcode.png"</span>)
   
   
     <a href="/2017/10/30/CTF-图像学基础/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">CTF-图像学基础</div>
     </a>
   
@@ -452,8 +443,8 @@ image.save(<span class="hljs-string">"qrcode.png"</span>)
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>90</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>91</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>84</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
