@@ -13,7 +13,7 @@
 <meta property="og:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-10%20%E4%B8%8B%E5%8D%882.49.27.png">
-<meta property="og:updated_time" content="2018-04-12T07:36:00.176Z">
+<meta property="og:updated_time" content="2018-04-13T03:22:53.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="背包专题">
 <meta name="twitter:description" content="背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)">
@@ -680,7 +680,9 @@ node f[maxn+<span class="hljs-number">10</span>];
 <span class="hljs-keyword">int</span> dp[<span class="hljs-number">5001000</span>];
 
 <span class="hljs-comment">//做一次hash</span>
-
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">h</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> d, <span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">return</span> a*(p[<span class="hljs-number">2</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + b*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + c*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + d*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + e;
+}
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;n, &amp;m);

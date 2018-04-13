@@ -1246,7 +1246,9 @@ node f[maxn+<span class="hljs-number">10</span>];
 <span class="hljs-keyword">int</span> dp[<span class="hljs-number">5001000</span>];
 
 <span class="hljs-comment">//做一次hash</span>
-
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">h</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> d, <span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">return</span> a*(p[<span class="hljs-number">2</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + b*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + c*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + d*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + e;
+}
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;n, &amp;m);
