@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>重探OC之Type&amp;Value篇 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重探OC之Type&Value篇">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/重探OC之Type-Value篇/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.47.33.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.50.23.png">
+<meta property="og:updated_time" content="2018-04-15T14:23:37.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重探OC之Type&Value篇">
+<meta name="twitter:description" content="学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.47.33.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>92</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>85</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-重探OC之Type-Value篇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/15/重探OC之Type-Value篇/" class="article-date">
+  <time class="post-time" datetime="2018-04-15T00:42:58.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">15</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      重探OC之Type&amp;Value篇
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OC的中类型本质/">OC的中类型本质</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换</p>
+<a id="more"></a>
+<h1 id="Type和value的本质"><a href="#Type和value的本质" class="headerlink" title="Type和value的本质"></a>Type和value的本质</h1><p>类型其实是个很虚的东西，因为这个东西的价值被我们人为赋予的，打个比方，如果我们大家都认为香奈儿值钱，那么它就值钱，如果大家都不用这个，那么它本身就是没有价值的。其实从头到尾这个物品的本身都没有改变过，只是我们看它的方式不同，同样，类型也是一样的：</p>
+<pre><code class="c">int c=3;
+char a=(char)c;
+</code></pre>
+<p>这个C语言中的强制类型转换从高层语言上来说是从一种类型转换成一种类型，那么底层是什么样的呢，首先我们从x86_64的汇编来一窥究竟：</p>
+<pre><code class="assembly">movl $123, -4(%rbp)
+movl -4(%rbp), %eax
+movb %al, %cl
+movb %cl, -5(%rbp)
+</code></pre>
+<p>这段汇编代码还是很好懂的，首先我们将立即数转移到栈基址寄存器下4字节，这条指令中出现的 <code>movl</code> 表示按低 32 位的长度来拷贝（也就是一个 int 的长度），与之相似的还有 8 位的 <code>movb</code>（char）、16 位的 <code>movw</code> (short)、64 位的 <code>movq</code> (long in 64) 等；<code>$123</code> 即字面常量值；<code>-4(%rbp)</code> 代表 base pointer - 栈基地址寄存器，偏移 4 字节的位置。这个指令执行后内存如下所示：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.47.33.png" alt="int型"></p>
+<p>然后我们将这个数转移到<code>eax</code>寄存器中，然后将低八位也就是代表着<code>char</code>类型的数据转移到<code>ecx</code>寄存器的低八位，最后将这个<code>char</code>类型的数据转移到栈基地址偏移5字节的位置处，这个时候内存图就是：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.50.23.png" alt="强转之后"></p>
+<p>对于静态语言来说，可能这个类型就是提供给编译器检查，还包括寄存器选用，栈空间分配等功能，但是对于动态语言来说，这个类型需要保存到进行时，然后在用的时候再进行判断，所以在这里我们就需要引入一个新的概念就是<code>Type Encoding</code></p>
+<h1 id="Type-Encoding"><a href="#Type-Encoding" class="headerlink" title="Type Encoding"></a>Type Encoding</h1><p>首先我们知道OC中的<code>NSValue</code>类是用来存储一个C或者OC数据的容器，它可以保存<code>int</code>、<code>float</code>、<code>pointer</code>等类型的数据，对于它们进行一个封装，其实这个类可以称作是轻量级的包装冠军，因为上一章中我们说过OC是在C的基础上利用<code>SmallTalk</code>的思想的一次拓展，所以那些类其实是就是将C语言中的基础类型包装起来，而<code>NSNumber</code>用来包装的是标量，<code>NSValue</code>则都可以，我个人觉得可以参考一下<code>java</code>中的包装类。</p>
+<p>其中<code>NSValue</code>类有一个<code>+valueWithBytes:objCType:</code>方法，它的第二个参数需要用 Objective-C 的编译器指令 <code>@encode()</code> 来创建，比如我们首先来封装一个C语言的<code>int</code>类型，再将它赋值回去打印：</p>
+<pre><code class="objective-c">int b =1;
+int *a=&amp;b;
+NSValue *value = [NSValue valueWithBytes:a objCType:@encode(int)];
+int c;
+[value getValue:&amp;c];
+NSLog(@&quot;%d&quot;,c);
+</code></pre>
+<p><code>@encode</code>是<a href="http://nshipster.com/at-compiler-directives/" target="_blank" rel="external">@编译器指令</a> 之一，返回一个给定类型编码为一种内部表示的字符串（例如，<code>@encode(int)</code>→ <code>i</code>），类似于 ANSI C 的 <code>typeof</code> 操作。苹果的 Objective-C 运行时库内部利用类型编码帮助加快消息分发。</p>
+<p>我们可以通过OC的代码来简单演示一下：</p>
+<pre><code class="objective-c">#import&lt;Foundation/Foundation.h&gt;
+
+int main(){
+  NSLog(@&quot;int :%s&quot;, @encode(int));
+  NSLog(@&quot;float :%s&quot;, @encode(float));
+  NSLog(@&quot;void :%s&quot;, @encode(void));
+  NSLog(@&quot;BOOL :%s&quot;, @encode(bool));
+}
+</code></pre>
+<p>输出结果为:</p>
+<pre><code>2018-04-15 09:00:34.241 a.out[30083:7960588] int :i
+2018-04-15 09:00:34.241 a.out[30083:7960588] float :f
+2018-04-15 09:00:34.241 a.out[30083:7960588] void :v
+2018-04-15 09:00:34.241 a.out[30083:7960588] BOOL :B
+</code></pre><p>其实类型编码的实质就是将一种类型的结构转换为精炼的表示，<code>NSValue</code>用类型编码创建必要的数据结构来在内部表示这些值，比如说我们存储一个结构体就变的非常的简洁：</p>
+<pre><code class="objective-c">typedef struct example{
+  id anObject;
+  char *aString;
+  int anInt;
+}Example;
+//那么编码就可以表示成
+{example=@*i}
+</code></pre>
+<p>然而，对于动态语言，Type 不仅在编译期起到上述作用，<strong>还需要保留到运行时，让动态调用得以实现</strong>，被称作 <code>Type Encodings</code>，对于 Objective-C 所有 Type 的编码，都可以在<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html" target="_blank" rel="external">这个官方文档</a>中查到，里面的编码和用 <code>@encode()</code> 生成的一致，比如：</p>
+<pre><code class="objective-c">@encode(int) =&gt; &quot;i&quot;
+@encode(float) =&gt; &quot;f&quot;
+@encode(id) =&gt; &quot;@&quot;
+@encode(SEL) =&gt; &quot;:&quot;
+@encode(CGRect) =&gt; &quot;{CGRect={CGPoint=dd}{CGSize=dd}}&quot; // 64
+</code></pre>
+<p>Objective-C Class 中每个实例变量的 Type 信息全部被编码，Runtime 也提供了 <code>ivar_getTypeEncoding</code> 来访问。<br>同时，为支持消息的转发和动态调用，Objective-C Method 的 Type 信息也被以 “返回值 Type + 参数 Types” 的形式<strong>组合编码</strong>，还需要考虑到 <code>self</code> 和 <code>_cmd</code> 这两个隐含参数：</p>
+<pre><code class="objective-c">- (void)foo; =&gt; &quot;v@:&quot;
+- (int)barWithBaz:(double)baz; =&gt; &quot;iv@:d&quot;
+</code></pre>
+<blockquote>
+<p>注：上面的方法的 Encoding 使用新的格式，旧的格式中包含调用栈大小和布局信息，如 <code>i24@0:8i16i20</code>，表示调用栈帧共 24 字节大小，后面每个参数跟着的数字表示该参数在调用栈的偏移值，在 x86_64 和 ARM 成为主流后，调用的 Calling Conventions 发生巨大变化，开始借助寄存器传参，所以在“参数压栈”时代的这种编码方式逐渐被废弃。</p>
+</blockquote>
+<p>方法的编码可以使用 <code>method_getTypeEncoding</code> 获取，在 Cocoa 层，被 <code>NSMethodSignature</code> 封装，并提供了一些便捷的解析方法。</p>
+<p>多说一句，纯 Swift 声称自己是静态的语言，因为在编译后，任何结构都会被 <code>Name Mangling</code> 压缩成一个符号，比如下面的方法：</p>
+<pre><code class="objective-c">class Sark {
+    func foo(bar: Int) -&gt; Int {
+        return bar;
+    }
+}
+</code></pre>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
+<li><a href="http://blog.sunnyxx.com/2016/08/13/reunderstanding-runtime-1/" target="_blank" rel="external">sunny的技术博客</a></li>
+<li><a href="http://nshipster.cn/type-encodings/" target="_blank" rel="external">Type Encodings</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/15/重探OC之Type-Value篇/" data-id="cjg0wiu3400abvjbrpiwigtau" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/13/重探OC之诞生篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">重探OC之诞生篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>92</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>85</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
