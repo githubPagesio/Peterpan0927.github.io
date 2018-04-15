@@ -13,7 +13,7 @@
 <meta property="og:description" content="学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.47.33.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.50.23.png">
-<meta property="og:updated_time" content="2018-04-15T14:23:37.213Z">
+<meta property="og:updated_time" content="2018-04-15T14:35:14.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重探OC之Type&Value篇">
 <meta name="twitter:description" content="学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换">
@@ -126,6 +126,7 @@ int c;
 [value getValue:&amp;c];
 NSLog(@&quot;%d&quot;,c);
 </code></pre>
+<p>在这里可以说一个有意思的事情，如果我们是一个<code>char</code>类型的字符串，然后传递是这个字符串本身，然后encode是<code>char *</code>类型，那么它就会当作一个<code>char</code>类型的指针保存，也就是只有四个字节(根据具体系统)，后面的就会丢失，如果要保存完整性，我们就要传递这个字符串的地址，这样再还原的时候相当于是把那个字符串的地址给赋值回去，所以也不会出现什么问题了。</p>
 <p><code>@encode</code>是<a href="http://nshipster.com/at-compiler-directives/" target="_blank" rel="external">@编译器指令</a> 之一，返回一个给定类型编码为一种内部表示的字符串（例如，<code>@encode(int)</code>→ <code>i</code>），类似于 ANSI C 的 <code>typeof</code> 操作。苹果的 Objective-C 运行时库内部利用类型编码帮助加快消息分发。</p>
 <p>我们可以通过OC的代码来简单演示一下：</p>
 <pre><code class="objective-c">#import&lt;Foundation/Foundation.h&gt;

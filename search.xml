@@ -31,6 +31,7 @@ int c;
 [value getValue:&amp;c];
 NSLog(@&quot;%d&quot;,c);
 </code></pre>
+<p>在这里可以说一个有意思的事情，如果我们是一个<code>char</code>类型的字符串，然后传递是这个字符串本身，然后encode是<code>char *</code>类型，那么它就会当作一个<code>char</code>类型的指针保存，也就是只有四个字节(根据具体系统)，后面的就会丢失，如果要保存完整性，我们就要传递这个字符串的地址，这样再还原的时候相当于是把那个字符串的地址给赋值回去，所以也不会出现什么问题了。</p>
 <p><code>@encode</code>是<a href="http://nshipster.com/at-compiler-directives/" target="_blank" rel="external">@编译器指令</a> 之一，返回一个给定类型编码为一种内部表示的字符串（例如，<code>@encode(int)</code>→ <code>i</code>），类似于 ANSI C 的 <code>typeof</code> 操作。苹果的 Objective-C 运行时库内部利用类型编码帮助加快消息分发。</p>
 <p>我们可以通过OC的代码来简单演示一下：</p>
 <pre><code class="objective-c">#import&lt;Foundation/Foundation.h&gt;
