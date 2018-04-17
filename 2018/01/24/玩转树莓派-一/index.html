@@ -46,8 +46,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -104,30 +104,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%889.04.31.png" height="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%889.04.31.png" height="350" width="600" alt="">
 <p>在树莓派上折腾ARM的汇编，玩点小游戏，轻松上网岂不美哉，顺便恶补一下硬件知识</p>
 <a id="more"></a>
-<h1 id="什么是树莓派"><a href="#什么是树莓派" class="headerlink" title="什么是树莓派"></a>什么是树莓派</h1><p>这个玩意其实说白了就是一个便宜的教育用微机，非专业的其实玩他的意义不大，正常人想玩回家拿个iPad躺在床上看电视剧，就算想省钱买个国产的也是可以的，拿着树莓派除了玩一些弱智游戏别无他用，它甚至还没有你的手机性能好呢，而且电脑上都不会装linux的好么。</p>
+<h1 id="什么是树莓派"><a class="markdownIt-Anchor" href="#什么是树莓派"></a> 什么是树莓派</h1>
+<p>这个玩意其实说白了就是一个便宜的教育用微机，非专业的其实玩他的意义不大，正常人想玩回家拿个iPad躺在床上看电视剧，就算想省钱买个国产的也是可以的，拿着树莓派除了玩一些弱智游戏别无他用，它甚至还没有你的手机性能好呢，而且电脑上都不会装linux的好么。</p>
 <p>话又说回来，其实在专业人士手里他其实也是一个玩具，说拿它跑个人网站，我好几台云服务器，拿他做NAS或者私有的git服务器，等板子少了数据丢失如果没有做备份哭都没有地方哭。所以如果有需要一个持续开机的电脑，一个用来学习Linux，学习简单编程的电脑，或者用它来打造某些好玩的设备，那它就比较合适。</p>
 <p>总的来说，树莓派就是一个玩具，今天我们就一起来玩转树莓派吧</p>
-<h1 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h1><p>给树莓派装系统，实质上也就是把系统烧录到SD卡中，一开始我不知道，在官网上下了一个Lite版的，只有一个恢复模式，类似于一个Mac上的Recovery mode，上面联网装操作系统，但是由于这个网络状况，一直都下载不成功，于是我重新看了一遍教程，将镜像下载下来，然后将镜像烧录卡中。</p>
+<h1 id="装系统"><a class="markdownIt-Anchor" href="#装系统"></a> 装系统</h1>
+<p>给树莓派装系统，实质上也就是把系统烧录到SD卡中，一开始我不知道，在官网上下了一个Lite版的，只有一个恢复模式，类似于一个Mac上的Recovery mode，上面联网装操作系统，但是由于这个网络状况，一直都下载不成功，于是我重新看了一遍教程，将镜像下载下来，然后将镜像烧录卡中。</p>
 <p>这其中需要注意有两点，一个是这个SD卡最好是8G以上，而且装镜像之前要格式化（推荐使用SD Formatter），格式化成FAT32文件系统，另外一点就是烧录的工具推荐使用Win32DiskManaer，总的教程我丢了一份在我的云服务器上，直接ftp访问下载即可。<a href="ftp://118.89.38.168/data/" target="_blank" rel="external">下载地址</a></p>
 <p>安装了之后如果我们是直接在树莓派上操作会发现键盘用起来有些奇怪，这是因为默认是英式键盘的关系，我们使用命令去修改默认的配置：</p>
-<pre><code class="shell">sudo raspi-config
+<pre class="highlight"><code class="shell">sudo raspi-config
 </code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%8810.34.27.png" alt=""></p>
 <p>剩下的可以参考网上的教程了，在我修改了之后还是发现打不出英文的双引号，然后我就放弃了，之后都是用ssh直接连过去，当个稳定的服务器还是不错的，目前只是在上面跑一个ftp服务，毕竟四处皆网盘嘛，多做几次备份总是没坏处的，就是这么的小心谨慎。</p>
-<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>对技术人员来说，可以做的事情就很多了，可以将它做为一台个人服务器，在上面放网站或者博客之类的，也可以做硬件改造，做成一个阅读器，当蓝牙音箱，或者作为一个路由器/跳板，在上面跑加速，如果可以跑一个集群起来还可以做一套智能家居了。总的来说，基本就是一个可塑性极强的玩具(只对技术人员来说)。</p>
+<h1 id="用途"><a class="markdownIt-Anchor" href="#用途"></a> 用途</h1>
+<p>对技术人员来说，可以做的事情就很多了，可以将它做为一台个人服务器，在上面放网站或者博客之类的，也可以做硬件改造，做成一个阅读器，当蓝牙音箱，或者作为一个路由器/跳板，在上面跑加速，如果可以跑一个集群起来还可以做一套智能家居了。总的来说，基本就是一个可塑性极强的玩具(只对技术人员来说)。</p>
 <p>下面我们来看看怎么给树莓派装上一个风扇，当然现在有可能买的时候就已经装好了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.06.08.png" alt=""></p>
 <p>然后我们需要支持中文，在本机上折腾的话还是会有点麻烦，就像我当时在Kali上安装输入法的时候也下了很大的功夫，建议还是通过ssh来连接，如果你不是把它当作一个微主机来用的话。</p>
-<pre><code class="shell">sudo apt-get instal ttf-wqy-microhei
+<pre class="highlight"><code class="shell">sudo apt-get instal ttf-wqy-microhei
 sudo apt-get install scim-pinyin
 sudo dpkg-reconfigure locales
 </code></pre>
 <p>这里要注意的一点就是Raspbian在现在的版本是默认禁用ssh的，所以我们通过修改config来开启，网络的配置上我们为了求稳选择和路由器无线连接，并且为它配置一个静态IP。</p>
 <p>Raspbian是基于Debian的一个优化版本，所以在配置上也基本是兼容的：</p>
-<pre><code class="shell">auto lo
+<pre class="highlight"><code class="shell">auto lo
 iface lo inet loopback
 iface eth0 inet dhcp
 auto wlan0
@@ -144,35 +147,37 @@ iface default inet static
 <p>配置写在<code>/etc/network/interfaces</code>中。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.11.17.png" alt=""></p>
 <p>目前已经正常运行了一天了，但是很坑的一点就是如果这个玩具坏掉，也许会把你的卡槽都烧掉，到时候可能你就不会再想玩这种玩具了。</p>
-<h1 id="开启SMB实现文件共享"><a href="#开启SMB实现文件共享" class="headerlink" title="开启SMB实现文件共享"></a>开启SMB实现文件共享</h1><p>首先要更新一下软件源：</p>
-<pre><code class="shell">sudo apt-get update
+<h1 id="开启smb实现文件共享"><a class="markdownIt-Anchor" href="#开启smb实现文件共享"></a> 开启SMB实现文件共享</h1>
+<p>首先要更新一下软件源：</p>
+<pre class="highlight"><code class="shell">sudo apt-get update
 </code></pre>
 <p>安装samba</p>
-<pre><code class="shell">sudo apt-get install samba samba-common-bin
+<pre class="highlight"><code class="shell">sudo apt-get install samba samba-common-bin
 </code></pre>
 <p>安装完成后，配置/etc/samba/smb.conf文件.</p>
 <p>在其最后添加以下命令：</p>
-<pre><code class="Shell">#================================================
-
+<pre class="highlight"><code class="Shell"><span class="hljs-meta">#</span><span class="bash">================================================</span>
+ 
 [share]                                   #共享文件的名称，将在网络上以此名称显示
         path = /samba                     #共享文件的路径
         valid users = root pi             #允许访问的用户，这里我用的是root 和 pi 两个用户
         browseable = yes                  #允许浏览                                 
         public = yes                      #共享开放                                      
         writable = yes                    #可写
-
-#================================================
+<span class="hljs-meta"> 
+#</span><span class="bash">================================================</span>
 </code></pre>
 <p>其他的权限修改可以自行查阅资料，保存后，重启samba服务，输入</p>
-<pre><code class="Shell">/etc/init.d/samba restart
+<pre class="highlight"><code class="Shell">/etc/init.d/samba restart
 </code></pre>
-<p> 最后添加共享用户：</p>
-<pre><code class="shell">smbpasswd –a pi  #直接使用了默认用户pi
+<p>最后添加共享用户：</p>
+<pre class="highlight"><code class="shell">smbpasswd –a pi  #直接使用了默认用户pi
 </code></pre>
 <p>之后的各种权限配置就可以参考ftp了，正好今天也刚在腾讯云上搭了一个ftp，就说一个比较常见的问题。关于匿名用户的权限，我们通过账号密码登陆的一般显示的都是<code>/home/ftp</code>下的文件路径，但是匿名用户显示的则是<code>/srv/ftp</code>下的，所以匿名用户的权限体现只能在这个目录下去体现。</p>
 <p>之前还在配置文件中改了半天，都不能匿名用户显示读取文件，原来是文件放错了位置。</p>
-<h1 id="利用VNC远程控制"><a href="#利用VNC远程控制" class="headerlink" title="利用VNC远程控制"></a>利用VNC远程控制</h1><p>很多windows的用户想要图形化操作(需求不同)，所以单纯的命令行并不能满足我们，这个时候我们就要添加一个vnc server，再用相应软件连接（该教程为简化版）</p>
-<pre><code class="shell">sudo apt-get update
+<h1 id="利用vnc远程控制"><a class="markdownIt-Anchor" href="#利用vnc远程控制"></a> 利用VNC远程控制</h1>
+<p>很多windows的用户想要图形化操作(需求不同)，所以单纯的命令行并不能满足我们，这个时候我们就要添加一个vnc server，再用相应软件连接（该教程为简化版）</p>
+<pre class="highlight"><code class="shell">sudo apt-get update
 
 sudo apt-get install tightvncserver
 </code></pre>
@@ -190,7 +195,7 @@ sudo apt-get install tightvncserver
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/24/玩转树莓派-一/" data-id="cjg27ffkc007ad4br2topjmb1" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/01/24/玩转树莓派-一/" data-id="cjg3qpiyn006x6nbrqz8z1xfq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机硬件/">计算机硬件</a></li></ul>
@@ -258,8 +263,8 @@ sudo apt-get install tightvncserver
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

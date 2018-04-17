@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -101,31 +101,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UI初步（三）<br><a id="more"></a></p>
-<h1 id="UI基础Day4"><a href="#UI基础Day4" class="headerlink" title="UI基础Day4"></a>UI基础Day4</h1><h2 id="1-应用图标的启动图片的设置"><a href="#1-应用图标的启动图片的设置" class="headerlink" title="1.应用图标的启动图片的设置"></a>1.应用图标的启动图片的设置</h2><blockquote>
+        <p>UI初步（三）</p>
+<a id="more"></a>
+<h1 id="ui基础day4"><a class="markdownIt-Anchor" href="#ui基础day4"></a> UI基础Day4</h1>
+<h2 id="1应用图标的启动图片的设置"><a class="markdownIt-Anchor" href="#1应用图标的启动图片的设置"></a> 1.应用图标的启动图片的设置</h2>
+<blockquote>
 <p>应用图标：将尺寸合适的图片拖入Assets.xcassets中的Applcon中</p>
 <p>启动图片：在项目栏中找到Launch Images Source,点击后面的方框,删掉Launch Screen File来进行修改(iOS7及之前，iOS8以后直接在Launch Screen进行插入图片),<a href="http://www.jianshu.com/p/a3315f6896a7" target="_blank" rel="external">参考7</a>，<a href="http://www.liuchuo.net/archives/2537" target="_blank" rel="external">参考8</a>,注意屏幕尺寸一定要做适配</p>
 </blockquote>
-<h2 id="2-屏幕尺寸和图片规格介绍"><a href="#2-屏幕尺寸和图片规格介绍" class="headerlink" title="2.屏幕尺寸和图片规格介绍"></a>2.屏幕尺寸和图片规格介绍</h2><p>屏幕尺寸：</p>
+<h2 id="2屏幕尺寸和图片规格介绍"><a class="markdownIt-Anchor" href="#2屏幕尺寸和图片规格介绍"></a> 2.屏幕尺寸和图片规格介绍</h2>
+<p>屏幕尺寸：</p>
 <p><img src="http://omg5mjb8v.bkt.clouddn.com/6D43B2B7-6DD9-4B71-B1D9-F012564F18AD.png" alt=""></p>
 <p>图片规格：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8810.32.56.png" alt=""></p>
-<h2 id="3-状态栏的设置参考博客"><a href="#3-状态栏的设置参考博客" class="headerlink" title="3.状态栏的设置参考博客"></a>3.状态栏的设置<a href="http://www.jianshu.com/p/5aa05983b445" target="_blank" rel="external">参考博客</a></h2><p>加载启动图片时，如果不想显示状态栏可以在project中设置属性Hide status bar</p>
+<h2 id="3状态栏的设置参考博客"><a class="markdownIt-Anchor" href="#3状态栏的设置参考博客"></a> 3.状态栏的设置<a href="http://www.jianshu.com/p/5aa05983b445" target="_blank" rel="external">参考博客</a></h2>
+<p>加载启动图片时，如果不想显示状态栏可以在project中设置属性Hide status bar</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8A%E5%8D%8811.32.03.png" alt=""></p>
 <p>进入main.storyboard,在背景图片是黑色的时候，如果要显示状态栏，可以通过代码实现，<a href="http://www.jianshu.com/p/9f7f3fa624e7" target="_blank" rel="external">app状态栏样式设计</a>：</p>
-<pre><code class="objective-c">-(UIStatusBarStyle)preferredStatusBarStyle{
+<pre class="highlight"><code class="objective-c">-(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 //隐藏状态栏
 -(BOOL)preferredStatusBarStyle{
     return YES;
 </code></pre>
-<h2 id="4-不同状态的按钮设置（代码）"><a href="#4-不同状态的按钮设置（代码）" class="headerlink" title="4.不同状态的按钮设置（代码）"></a>4.不同状态的按钮设置（代码）</h2><pre><code class="objective-c">[button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer&quot; ] forState:UIControlStateNormal];
+<h2 id="4不同状态的按钮设置代码"><a class="markdownIt-Anchor" href="#4不同状态的按钮设置代码"></a> 4.不同状态的按钮设置（代码）</h2>
+<pre class="highlight"><code class="objective-c">[button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer&quot; ] forState:UIControlStateNormal];
 [button setBackgroundImage:[UIImage imageNamed:@&quot;btn_answer_highlighted&quot; ] forState:UIControlStateHighlighted];
 //记得最后初始化之后要将按钮加入到父控件当中
 [_answerView addSubview:button];
 </code></pre>
-<h2 id="5-对于self-super-init-的思考"><a href="#5-对于self-super-init-的思考" class="headerlink" title="5.对于self = [super init]的思考"></a>5.对于self = [super init]的思考</h2><pre><code class="objective-c">- (instancetype)init
+<h2 id="5对于self-super-init的思考"><a class="markdownIt-Anchor" href="#5对于self-super-init的思考"></a> 5.对于self = [super init]的思考</h2>
+<pre class="highlight"><code class="objective-c">- (instancetype)init
 {
     if (self = [super init]) {
         // Custom initialization
@@ -136,8 +143,9 @@
 //如果初始化一个对象失败，就会返回nil，当返回nil的时候self = [super init]测试的主体就不会再继续执行。如果不这样做，你可能会操作一个不可用的对象，它的行为是不可预测的，最终可能会导致你的程序崩溃。
 </code></pre>
 <p><code>self</code>表示当前这个类的对象，而<code>super</code>是一个编译器标示符，和<code>self</code>指向同一个消息接受者。在本例中，无论是<code>[self class]</code>还是<code>[super class]</code>，接受消息者都是<code>Son</code>对象，但<code>super</code>与<code>self</code>不同的是，<code>self</code>调用<code>class</code>方法时，是在子类<code>Son</code>中查找方法，而<code>super</code>调用<code>class</code>方法时，是在父类<code>Father</code>中查找方法。</p>
-<h2 id="6-对象初始化方式的比较"><a href="#6-对象初始化方式的比较" class="headerlink" title="6.对象初始化方式的比较"></a>6.对象初始化方式的比较</h2><p>[class new]和[[class alloc]init]源码分析：</p>
-<pre><code class="objective-c">+ new 
+<h2 id="6对象初始化方式的比较"><a class="markdownIt-Anchor" href="#6对象初始化方式的比较"></a> 6.对象初始化方式的比较</h2>
+<p>[class new]和[[class alloc]init]源码分析：</p>
+<pre class="highlight"><code class="objective-c">+ new 
 { 
     id newObject = (*_alloc)((Class)self, 0); 
     Class metaClass = self-&gt;isa; 
@@ -158,22 +166,25 @@
 }
 //[class new]默认调用 alloc与init方法，那么我们无法使用自定义的初始化方法，多了更多的局限性。那么[class alloc] init] 会更方便， 当然[class alloc] init] 的设计也是由于历史的原因。
 </code></pre>
-<h2 id="7-字典转模型实现懒加载的过程"><a href="#7-字典转模型实现懒加载的过程" class="headerlink" title="7.字典转模型实现懒加载的过程"></a>7.字典转模型实现懒加载的过程</h2><blockquote>
+<h2 id="7字典转模型实现懒加载的过程"><a class="markdownIt-Anchor" href="#7字典转模型实现懒加载的过程"></a> 7.字典转模型实现懒加载的过程</h2>
+<blockquote>
 <p>读取文件路径</p>
 <p>读取文件到临时数组</p>
 <p>创建一个可变数组</p>
 <p>遍历临时数组中的字典转为模型，存放到可变数组</p>
 <p>把可变数组赋值给属性数组</p>
 </blockquote>
-<h2 id="8-清除子控件的方法"><a href="#8-清除子控件的方法" class="headerlink" title="8.清除子控件的方法"></a>8.清除子控件的方法</h2><pre><code class="objective-c">//1.遍历子控件，一个个删除
+<h2 id="8清除子控件的方法"><a class="markdownIt-Anchor" href="#8清除子控件的方法"></a> 8.清除子控件的方法</h2>
+<pre class="highlight"><code class="objective-c">//1.遍历子控件，一个个删除
 for(UIView *view in _answer.subviews){
-    [view removeFromSuperiew];
+	[view removeFromSuperiew];
 }
 //2.让让数组中所有的元素都执行清除方法
  [_answerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 //为了内存优化，需要将上一次加载的子控件的内存释放掉
 </code></pre>
-<h2 id="9-猜字谜代码讲解"><a href="#9-猜字谜代码讲解" class="headerlink" title="9.猜字谜代码讲解"></a>9.猜字谜代码讲解</h2><pre><code class="objective-c">//ViewController.m
+<h2 id="9猜字谜代码讲解"><a class="markdownIt-Anchor" href="#9猜字谜代码讲解"></a> 9.猜字谜代码讲解</h2>
+<pre class="highlight"><code class="objective-c">//ViewController.m
 
 #import &quot;ViewController.h&quot;
 
@@ -261,11 +272,11 @@ for(UIView *view in _answer.subviews){
         [button addTarget:self action:@selector(didClickOptionButton:) forControlEvents:UIControlEventTouchUpInside];
         [_optionView addSubview:button];
     }
-
+    
 }
 
 -(void)setupAnswerViewWithLength:(NSInteger)count{
-
+    
     CGFloat startX = (kScreenSize.width - count*kButtonWidth - (count-1)*kMargin)/2;
     //添加本题的时候要清除上一题的Button,让数组中所有的元素都执行清除方法
     [_answerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -346,7 +357,7 @@ for(UIView *view in _answer.subviews){
             }
              [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop){
                  UIButton *answerButton = obj;
-
+                 
                  [answerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
              }];
         }
@@ -374,7 +385,7 @@ for(UIView *view in _answer.subviews){
     }];
     [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop){
         UIButton *answerButton = obj;
-
+        
         [answerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     }];
     //打开选项区域的用户交互
@@ -387,7 +398,7 @@ for(UIView *view in _answer.subviews){
 }
 
 - (IBAction)didClickTipButton:(UIButton *)sender {
-
+    
     NSInteger currentCoin = _coinButton.currentTitle.integerValue;
     currentCoin -= 1000;
     //做一个判断分数是否大于1000
@@ -413,7 +424,7 @@ for(UIView *view in _answer.subviews){
             //如果不是第一个字符串，则清空
             [answerButton setTitle:@&quot;&quot; forState:UIControlStateNormal];
         }
-
+        
     }];
     [_optionView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop){
         UIButton *optionButton = obj;
@@ -427,7 +438,7 @@ for(UIView *view in _answer.subviews){
     }];
     [_answerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj,NSUInteger idx, BOOL *_Nonnull stop){
         UIButton *answerButton = obj;
-
+        
         [answerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }];
     _optionView.userInteractionEnabled = YES;
@@ -497,8 +508,9 @@ for(UIView *view in _answer.subviews){
 
 
 @end
+
 </code></pre>
-<pre><code class="objective-c">//猜测字谜的答案部分，字典转模型
+<pre class="highlight"><code class="objective-c">//猜测字谜的答案部分，字典转模型
 //  GuessModel.m
 #import &quot;GuessModel.h&quot;
 
@@ -525,19 +537,22 @@ for(UIView *view in _answer.subviews){
 -(instancetype)initWithDict:(NSDictionary *)dict;
 +(instancetype)guessModelDict:(NSDictionary *)dict;
 @end
+
 </code></pre>
-<h2 id="10-UIAlertController提示框"><a href="#10-UIAlertController提示框" class="headerlink" title="10.UIAlertController提示框"></a>10.UIAlertController提示框</h2><p>两种提示的方式：</p>
+<h2 id="10uialertcontroller提示框"><a class="markdownIt-Anchor" href="#10uialertcontroller提示框"></a> 10.UIAlertController提示框</h2>
+<p>两种提示的方式：</p>
 <p>1.中部弹出：style为UIAlertControllerStyleAlert</p>
 <p>2.底部弹出：style为UIAlertControllerStyleActionSheet</p>
-<pre><code class="objective-c">//创建点击的选项并加入提示框
+<pre class="highlight"><code class="objective-c">//创建点击的选项并加入提示框
 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:nil];
         [alertView addAction:cancelAction];
         [alertView addAction:sureAction];
 //在handler中可以进行回调，nil则没有触发事件
 </code></pre>
-<h2 id="11-KVC模型"><a href="#11-KVC模型" class="headerlink" title="11.KVC模型"></a>11.KVC模型</h2><p>使用kvc进行快速赋值<a href="http://www.jianshu.com/p/870eb4b4170a" target="_blank" rel="external">字典快速赋值</a>：</p>
-<pre><code class="objective-c">test.name=dic[@&quot;name&quot;];
+<h2 id="11kvc模型"><a class="markdownIt-Anchor" href="#11kvc模型"></a> 11.KVC模型</h2>
+<p>使用kvc进行快速赋值<a href="http://www.jianshu.com/p/870eb4b4170a" target="_blank" rel="external">字典快速赋值</a>：</p>
+<pre class="highlight"><code class="objective-c">test.name=dic[@&quot;name&quot;];
 test.sex=dic[@&quot;sex&quot;];
 test.age=dic[@&quot;age&quot;];
 //将赋值的过程替换为一句话
@@ -548,9 +563,9 @@ test.age=dic[@&quot;age&quot;];
 NSLog(@&quot;test.other=%@&quot;,test.other);
 test.other=(null)
 //如果dict中有不存在于Model中的元素
-Terminating app due to uncaught exception &#39;NSUnknownKeyException&#39;,
-reason: &#39;[&lt;PersonModel 0x7fd731517910&gt; setValue:forUndefinedKey:]:
-this class is not key value coding-compliant for the key age.&#39;
+Terminating app due to uncaught exception 'NSUnknownKeyException',
+reason: '[&lt;PersonModel 0x7fd731517910&gt; setValue:forUndefinedKey:]:
+this class is not key value coding-compliant for the key age.'
 //通过了编译，但是运行时报错,解决方式就是实现一个方法setValue:forUndefinedKey: 这个方法能过滤掉不存在的键值。在model.h／m文件中添加
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
@@ -562,7 +577,7 @@ this class is not key value coding-compliant for the key age.&#39;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/18/iOS-UI学习-三/" data-id="cjg27ffiz0049d4brqnkcfuyt" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/05/18/iOS-UI学习-三/" data-id="cjg3qpixe00486nbrzh8snbvf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -630,8 +645,8 @@ this class is not key value coding-compliant for the key age.&#39;
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

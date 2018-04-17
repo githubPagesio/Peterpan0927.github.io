@@ -44,8 +44,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -102,54 +102,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~<br><a id="more"></a></p>
-<h1 id="iOS沙盒与模态"><a href="#iOS沙盒与模态" class="headerlink" title="iOS沙盒与模态"></a>iOS沙盒与模态</h1><h2 id="iOS应用存储数据常用方式"><a href="#iOS应用存储数据常用方式" class="headerlink" title="iOS应用存储数据常用方式"></a>iOS应用存储数据常用方式</h2><ul>
-<li><p>XML属性列表（plist）归档</p>
+        <p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~</p>
+<a id="more"></a>
+<h1 id="ios沙盒与模态"><a class="markdownIt-Anchor" href="#ios沙盒与模态"></a> iOS沙盒与模态</h1>
+<h2 id="ios应用存储数据常用方式"><a class="markdownIt-Anchor" href="#ios应用存储数据常用方式"></a> iOS应用存储数据常用方式</h2>
+<ul>
+<li>
+<p>XML属性列表（plist）归档</p>
 </li>
-<li><p>Preference（偏好设置）</p>
+<li>
+<p>Preference（偏好设置）</p>
 <p>本质还是通过plist文件存储数据，但是使用更简单（不需要关注文件，文件夹路径和名称）</p>
 </li>
-<li><p>NSKeyedArchiver归档（NSCoding）</p>
+<li>
+<p>NSKeyedArchiver归档（NSCoding）</p>
 <p>把任何对象，直接保存为文件的方式</p>
 </li>
-<li><p>SQLite3</p>
+<li>
+<p>SQLite3</p>
 <p>当非常大的数据存储时使用</p>
 </li>
-<li><p>Core Data</p>
+<li>
+<p>Core Data</p>
 <p>对SQLite3的封装</p>
 </li>
 </ul>
-<h2 id="应用沙盒结构分析"><a href="#应用沙盒结构分析" class="headerlink" title="应用沙盒结构分析"></a>应用沙盒结构分析</h2><p>每个ios应用都有自己的应用沙盒，沙盒机制规定每个应用都只能访问当前沙盒目录下面的文件（也有例外，比如在用户授权情况下访问通讯录，相册等），这个规则展示了iOS系统的封闭性。在开发中常常需要数据存储的功能，比如存取文件，归档解档等。</p>
-<h3 id="沙盒目录结构"><a href="#沙盒目录结构" class="headerlink" title="沙盒目录结构"></a>沙盒目录结构</h3><ol>
-<li><p>Documents(文档数据)<br>保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录，如游戏进度存档等。</p>
+<h2 id="应用沙盒结构分析"><a class="markdownIt-Anchor" href="#应用沙盒结构分析"></a> 应用沙盒结构分析</h2>
+<p>每个ios应用都有自己的应用沙盒，沙盒机制规定每个应用都只能访问当前沙盒目录下面的文件（也有例外，比如在用户授权情况下访问通讯录，相册等），这个规则展示了iOS系统的封闭性。在开发中常常需要数据存储的功能，比如存取文件，归档解档等。</p>
+<h3 id="沙盒目录结构"><a class="markdownIt-Anchor" href="#沙盒目录结构"></a> 沙盒目录结构</h3>
+<ol>
+<li>
+<p>Documents(文档数据)<br>
+保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录，如游戏进度存档等。</p>
 </li>
-<li><p>Library(资源库)<br>Library下默认有两个文件夹，Caches文件夹和tmp文件夹</p>
+<li>
+<p>Library(资源库)<br>
+Library下默认有两个文件夹，Caches文件夹和tmp文件夹</p>
 <blockquote>
-<p>a. Caches(缓存)<br>保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。该文件夹一般用于存储体积大、不需要备份的非重要数据</p>
-<p>b. Preferences(偏好设置)<br>保存应用的所有偏好设置，ios的Settings(设置)，应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录，通常存储一些基本的软件配置信息，比如记住密码，自动登录等。</p>
+<p>a. Caches(缓存)<br>
+保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。该文件夹一般用于存储体积大、不需要备份的非重要数据</p>
+<p>b. Preferences(偏好设置)<br>
+保存应用的所有偏好设置，ios的Settings(设置)，应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录，通常存储一些基本的软件配置信息，比如记住密码，自动登录等。</p>
 </blockquote>
 </li>
-<li><p>tmp(临时文件目录)<br>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。iPhone在重启时，会丢弃所有的tmp文件</p>
+<li>
+<p>tmp(临时文件目录)<br>
+保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。iPhone在重启时，会丢弃所有的tmp文件</p>
 </li>
 </ol>
 <p>我们平时操作的数据主要使用Documents目录</p>
-<h2 id="打开应用沙盒"><a href="#打开应用沙盒" class="headerlink" title="打开应用沙盒"></a>打开应用沙盒</h2><p>应用沙盒是在MAC的资源库（Library目录下），资源库文件夹默认是隐藏的,要显示隐藏的资源库才能查看iPhone模拟器的应用沙盒。</p>
+<h2 id="打开应用沙盒"><a class="markdownIt-Anchor" href="#打开应用沙盒"></a> 打开应用沙盒</h2>
+<p>应用沙盒是在MAC的资源库（Library目录下），资源库文件夹默认是隐藏的,要显示隐藏的资源库才能查看iPhone模拟器的应用沙盒。</p>
 <p>1.显示隐藏的文件</p>
-<pre><code class="shell">#显示Mac隐藏的文件
+<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">显示Mac隐藏的文件</span>
 defaults write com.apple.finder AppleShowAllFiles YES
-#隐藏Mac隐藏文件
+<span class="hljs-meta">#</span><span class="bash">隐藏Mac隐藏文件</span>
 defaults write com.apple.finder AppleShowAllFiles NO
-#输入以上的命令之后，重新启动finder即可
+<span class="hljs-meta">#</span><span class="bash">输入以上的命令之后，重新启动finder即可</span>
 </code></pre>
 <p>2.安装<strong>SimPholders</strong>应用程序，该应用可以轻松查看每一个应用程序的应用沙盒</p>
-<h3 id="沙盒机制的好处"><a href="#沙盒机制的好处" class="headerlink" title="沙盒机制的好处"></a>沙盒机制的好处</h3><p>1.安全：别的App无法修改你的程序或数据</p>
+<h3 id="沙盒机制的好处"><a class="markdownIt-Anchor" href="#沙盒机制的好处"></a> 沙盒机制的好处</h3>
+<p>1.安全：别的App无法修改你的程序或数据</p>
 <p>2.保护隐私：别的App无法读取你的程序和数据</p>
 <p>3.方便删除：因为一个App中所有的内容都在自己的沙盒中，所以删除沙盒就可以彻底删除程序</p>
-<h2 id="获取路径"><a href="#获取路径" class="headerlink" title="获取路径"></a>获取路径</h2><h3 id="1-沙盒路径"><a href="#1-沙盒路径" class="headerlink" title="1.沙盒路径"></a>1.沙盒路径</h3><pre><code class="objective-c">NSString *path = NSHomeDirectory();
+<h2 id="获取路径"><a class="markdownIt-Anchor" href="#获取路径"></a> 获取路径</h2>
+<h3 id="1沙盒路径"><a class="markdownIt-Anchor" href="#1沙盒路径"></a> 1.沙盒路径</h3>
+<pre class="highlight"><code class="objective-c">NSString *path = NSHomeDirectory();
 NSLog(@&quot;%@&quot;, path);
 NSLog(@&quot;%@&quot;, [NSBundle mainBundle].bundlePath);
 </code></pre>
-<h3 id="2-Documents路径"><a href="#2-Documents路径" class="headerlink" title="2.Documents路径"></a>2.Documents路径</h3><pre><code class="objective-c"> // NSDocumentDirectory：目标文件夹
+<h3 id="2documents路径"><a class="markdownIt-Anchor" href="#2documents路径"></a> 2.Documents路径</h3>
+<pre class="highlight"><code class="objective-c"> // NSDocumentDirectory：目标文件夹
     // NSUserDomainMask：作用域
     // YES：是否展开波浪线
     // 在iOS中，只有一个目录跟传入的参数匹配，所以这个集合里面只有一个元素，用firstObject取第一个元素
@@ -157,7 +180,8 @@ NSLog(@&quot;%@&quot;, [NSBundle mainBundle].bundlePath);
 
     NSLog(@&quot;%@&quot;,documentsPath);
 </code></pre>
-<h3 id="3-Tmp路径"><a href="#3-Tmp路径" class="headerlink" title="3.Tmp路径"></a>3.Tmp路径</h3><pre><code class="objective-c">NSString *tmpPath = NSTemporaryDirectory();
+<h3 id="3tmp路径"><a class="markdownIt-Anchor" href="#3tmp路径"></a> 3.Tmp路径</h3>
+<pre class="highlight"><code class="objective-c">NSString *tmpPath = NSTemporaryDirectory();
 
 NSLog(@&quot;%@&quot;,tmpPath);  
 //或者使用沙盒根目录进行拼接
@@ -168,18 +192,21 @@ NSString *tmpPath = [homePath stringByAppendingPathComponent:@&quot;tmp&quot;];
 
 NSLog(@&quot;%@&quot;,tmpPath);
 </code></pre>
-<h3 id="4-Library路径"><a href="#4-Library路径" class="headerlink" title="4.Library路径"></a>4.Library路径</h3><pre><code class="objective-c">//Caches路径
+<h3 id="4library路径"><a class="markdownIt-Anchor" href="#4library路径"></a> 4.Library路径</h3>
+<pre class="highlight"><code class="objective-c">//Caches路径
 NSString *filePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,    
                          NSUserDomainMask, YES).firstObject;
 //Preference路径                         
 NSString *filePath = NSSearchPathForDirectoriesInDomains
   (NSPreferencePanesDirectory, NSUserDomainMask, YES).firstObject;
 </code></pre>
-<h3 id="5-应用程序包路径"><a href="#5-应用程序包路径" class="headerlink" title="5.应用程序包路径"></a>5.应用程序包路径</h3><pre><code class="objective-c"> NSString *imagePath = [NSBundle mainBundle].resourcePath;
+<h3 id="5应用程序包路径"><a class="markdownIt-Anchor" href="#5应用程序包路径"></a> 5.应用程序包路径</h3>
+<pre class="highlight"><code class="objective-c"> NSString *imagePath = [NSBundle mainBundle].resourcePath;
 //获取目录下一个图片的路径
  NSString *imagePath = [[NSBundle mainBundle]pathForResource:@&quot;apple&quot; ofType:@&quot;png&quot;];
 </code></pre>
-<h2 id="plist文件存储"><a href="#plist文件存储" class="headerlink" title="plist文件存储"></a>plist文件存储</h2><pre><code class="objective-c">NSArray *names = [NSArray arrayWithObjects:@&quot;1&quot;, @&quot;2&quot;, @&quot;3&quot;, nil];
+<h2 id="plist文件存储"><a class="markdownIt-Anchor" href="#plist文件存储"></a> plist文件存储</h2>
+<pre class="highlight"><code class="objective-c">NSArray *names = [NSArray arrayWithObjects:@&quot;1&quot;, @&quot;2&quot;, @&quot;3&quot;, nil];
 
 NSString *path = [NSSearchPathForDirectoryInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 
@@ -195,11 +222,12 @@ NSUserDefaults *userDefaults= [NSUserDefaults standardUserDefaults];
 //立即存储
 [userDefaults synchronize];
 </code></pre>
-<h2 id="归档和反归档"><a href="#归档和反归档" class="headerlink" title="归档和反归档"></a>归档和反归档</h2><p>通过plist可以保存数据，但是无法直接将对象保存到一个文件当中。比如自己创建的一个Person对象就没有writeToFile方法。但是我们可以通过归档的方式将任何遵守NSCoding协议的对象存储到文件中。</p>
-<pre><code class="objective-c">//首先在这个类中要遵从NSCoding协议，并且在这个类中实现代理方法
+<h2 id="归档和反归档"><a class="markdownIt-Anchor" href="#归档和反归档"></a> 归档和反归档</h2>
+<p>通过plist可以保存数据，但是无法直接将对象保存到一个文件当中。比如自己创建的一个Person对象就没有writeToFile方法。但是我们可以通过归档的方式将任何遵守NSCoding协议的对象存储到文件中。</p>
+<pre class="highlight"><code class="objective-c">//首先在这个类中要遵从NSCoding协议，并且在这个类中实现代理方法
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.name forKey:@&quot;name&quot;];
-      [aCoder encodeObject:self.phoneNumber forKey:@&quot;phoneNumber&quot;];
+  	[aCoder encodeObject:self.phoneNumber forKey:@&quot;phoneNumber&quot;];
 }
 
 
@@ -212,11 +240,11 @@ NSString *filePath = [path stringByAppendingPathComponent:@&quot;contact.plist&q
 [NSKeyedArchiver archiveRootObject:person toFile:fileName];
 </code></pre>
 <p>同时我们也可以通过反归档的方式，将文件重新还原成对象，同样也要遵从NSCoding协议：ee</p>
-<pre><code class="objective-c">//实现反归档的代理方法
+<pre class="highlight"><code class="objective-c">//实现反归档的代理方法
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if(self = [super init]){
         self.name = [aDecoder decodeObjectForKey:@&quot;name&quot;];
-          self.phoneNumber = [aDecoder decodeObjectForKey:@&quot;phoneNumber&quot;];
+      	self.phoneNumber = [aDecoder decodeObjectForKey:@&quot;phoneNumber&quot;];
     }
   return self;
 }
@@ -225,10 +253,12 @@ NSString *filePath = [path stringByAppendingPathComponent:@&quot;contact.plist&q
 NSString *path = [NSSearchPathForDirectoryInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 NSString *filePath = [path stringByAppendingPathComponent:@&quot;contact.plist&quot;];
 //进行反归档
-Person *person = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
+Person *person = [NSKeyedUnarchiver unarchiveObjectWithFile:filename]; 
 </code></pre>
-<h2 id="UITabBarController"><a href="#UITabBarController" class="headerlink" title="UITabBarController"></a>UITabBarController</h2><h3 id="纯代码创建方式"><a href="#纯代码创建方式" class="headerlink" title="纯代码创建方式"></a>纯代码创建方式</h3><p>和导航控制器相对的，这个相当于是底部的导航控制器，其创建方式和导航控制器也非常的类似，记得要把info.plist中的那个”Main”删掉啊：</p>
-<pre><code class="objective-c">self.window= [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+<h2 id="uitabbarcontroller"><a class="markdownIt-Anchor" href="#uitabbarcontroller"></a> UITabBarController</h2>
+<h3 id="纯代码创建方式"><a class="markdownIt-Anchor" href="#纯代码创建方式"></a> 纯代码创建方式</h3>
+<p>和导航控制器相对的，这个相当于是底部的导航控制器，其创建方式和导航控制器也非常的类似，记得要把info.plist中的那个&quot;Main&quot;删掉啊：</p>
+<pre class="highlight"><code class="objective-c">self.window= [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
 UITabBarController *tabBarVc = [UITabBarViewController alloc] init];
 
@@ -245,55 +275,58 @@ self.window.rootViewController = tabBarVc;
 tabBarVc.viewControllers = @[pVc, pVc1];
 </code></pre>
 <p>那么如果要给它加上诸如联系人、空间之类的标题图片要怎么做呢？</p>
-<pre><code class="objective-c">pVc.tabBarItem.title = @&quot;Peterpan&quot;;
+<pre class="highlight"><code class="objective-c">pVc.tabBarItem.title = @&quot;Peterpan&quot;;
 pVc.tabBarItem.image = [UIImage imageNamed:@&quot;peterpan&quot;];
 </code></pre>
 <p>然后就会形成下面这样的效果(不要吐槽我的画质，开心就好～)</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png" alt=""></p>
 <p>这个时候发现图片居然是蓝色的？？？这是因为high_lighted状态系统默认会渲染成蓝色，如果要修改的话可以这样写代码：</p>
-<pre><code class="objective-c">//修改图片的渲染模式
+<pre class="highlight"><code class="objective-c">//修改图片的渲染模式
 selectImage = [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 pVc.tabBarItem.selectedImage = selectImage;
 </code></pre>
-<h3 id="通过Storyboard加载tabBarController"><a href="#通过Storyboard加载tabBarController" class="headerlink" title="通过Storyboard加载tabBarController"></a>通过Storyboard加载tabBarController</h3><p>如果是从控件栏中拖入一个tabBarController，会一次性附加两个控制器，同时别忘了给tabBarController加上箭头，因为storyboard默认加载箭头指向的控制器。同时在附加控制器连线的时候，不同于导航控制器的show，而是点击之前的一条连线，有一个viewControllers，将之连到要加入的控制器即可。</p>
+<h3 id="通过storyboard加载tabbarcontroller"><a class="markdownIt-Anchor" href="#通过storyboard加载tabbarcontroller"></a> 通过Storyboard加载tabBarController</h3>
+<p>如果是从控件栏中拖入一个tabBarController，会一次性附加两个控制器，同时别忘了给tabBarController加上箭头，因为storyboard默认加载箭头指向的控制器。同时在附加控制器连线的时候，不同于导航控制器的show，而是点击之前的一条连线，有一个viewControllers，将之连到要加入的控制器即可。</p>
 <p>接下来说一下UITabBarButton中的一些属性，可以参考导航控制器的。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg" alt=""></p>
 <p>这个地方要说一点，就是和导航控制器不同的是，tabBarController的子控制器在进行切换的时候<code>不会被销毁</code>，导航控制器在切换子控制器的时候会将该子控制器上面的控制器弹出并销毁。</p>
-<h3 id="App主流框架结构"><a href="#App主流框架结构" class="headerlink" title="App主流框架结构"></a>App主流框架结构</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt=""></p>
+<h3 id="app主流框架结构"><a class="markdownIt-Anchor" href="#app主流框架结构"></a> App主流框架结构</h3>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg" alt=""></p>
 <p>主流框架就是通过tabBarController配合导航控制器来使用，qq也是这样做的</p>
 <p>首先加载一个tabBarController，然后根据用户的点击选择跳转不同的导航控制器，导航控制器中再分别设置视图控制器等，如果动态那一栏可以使用静态单元格。</p>
 <p>其中有一些逻辑是需要我们注意的：</p>
 <p>1.在我们通过底部的按钮加载导航控制器之后，导航控制器内push的时候，tabBar需要隐藏，点击需要隐藏的控制器，右侧栏的layout那里有一个选项，勾选即可：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg" alt=""></p>
 <p>2.如果是静态单元格的话，可以直接选中tableViewCell来进行拖线的方式进行跳转</p>
-<h3 id="模态出控制器"><a href="#模态出控制器" class="headerlink" title="模态出控制器"></a>模态出控制器</h3><p>模态也是一种切换控制器显示的方法（之前是通过push和pop），任何控制器都可以通过模态来显示。</p>
+<h3 id="模态出控制器"><a class="markdownIt-Anchor" href="#模态出控制器"></a> 模态出控制器</h3>
+<p>模态也是一种切换控制器显示的方法（之前是通过push和pop），任何控制器都可以通过模态来显示。</p>
 <p>模态的默认效果是新控制器从屏幕底下往上钻，直到覆盖原来的控制器为止</p>
-<pre><code class="objective-c">#import &quot;ViewController.h&quot;
+<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
 #import &quot;NewViewController.h&quot;
 
 @interface ViewController()
-
+  
 @end
-
+  
 @implementation ViewController
-
+  
 - (IBAction)btnClick:(id)sender{
     NewViewController *new = [[NewViewController alloc] init];
-
-    //设置代理
-      new.delegate = self;
-
-      [self presentViewController:new animated:YES completion:nil];
+  
+	//设置代理
+  	new.delegate = self;
+  	
+  	[self presentViewController:new animated:YES completion:nil];
 }
 
 @end
 </code></pre>
 <p>如果是推出控制器的时候，要是用代理的模式：</p>
-<pre><code class="objective-c">//.h文件中设置代理
+<pre class="highlight"><code class="objective-c">//.h文件中设置代理
 @protocol NewViewControllerDelegate &lt;NSObject&gt;
 
 - (void)newControllerDismissBtnClick:(NewViewController *)newVc;
-
+  
 @end
 - (IBAction)dismissClick:(id)sender{
     if([self.delegate respondsToSelector:@selector(newViewControllerDismissBtnClick)]){
@@ -308,14 +341,14 @@ pVc.tabBarItem.selectedImage = selectImage;
 //但是这里一般不会用代理hhh，是不是觉得被骗了，直接dismiss就好了
 </code></pre>
 <p>但是在控制器中间放一个按钮始终感觉非常的奇怪，所以我们一般在使用的时候可以把要显示的控制器包装在一个导航控制器中。</p>
-<pre><code class="objective-c">- (IBAction)btnClick:(id)sender{
+<pre class="highlight"><code class="objective-c">- (IBAction)btnClick:(id)sender{
     NewViewController *new = [[NewViewController alloc] init];
 
-      UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: new];
-      //创建导航栏最左侧按钮
-      new.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissClick)];
-
-      [self presentViewController:nav animated:YES completion:nil];
+  	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: new];
+  	//创建导航栏最左侧按钮
+  	new.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissClick)];
+  
+  	[self presentViewController:nav animated:YES completion:nil];
 }
 </code></pre>
 <p>想用storyboard来实现当然也是可以的，只不过把之前的show换成Present-Modaily，转场效果可以自己设置哦～，个人觉得旋转的比较炫酷一点。</p>
@@ -323,7 +356,7 @@ pVc.tabBarItem.selectedImage = selectImage;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/31/iOS沙盒与模态/" data-id="cjg27ffjm0054d4brqvbn0lcu" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/08/31/iOS沙盒与模态/" data-id="cjg3qpixk004m6nbrwrn123gz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -391,8 +424,8 @@ pVc.tabBarItem.selectedImage = selectImage;
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

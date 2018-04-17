@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>反动态调试保护的实现和破解 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反动态调试保护的实现和破解">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png">
+<meta property="og:updated_time" content="2018-04-17T14:04:40.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反动态调试保护的实现和破解">
+<meta name="twitter:description" content="之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-反动态调试保护的实现和破解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/反动态调试保护的实现和破解/" class="article-date">
+  <time class="post-time" datetime="2018-04-17T04:38:17.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">17</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      反动态调试保护的实现和破解
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crack/">crack</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是<code>ptrace</code>系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。</p>
+<a id="more"></a>
+<h1 id="反调试"><a class="markdownIt-Anchor" href="#反调试"></a> 反调试</h1>
+<ol>
+<li>ptrace</li>
+</ol>
+<p>我们知道<code>ptrace</code>是一个可以对运行中的进程进行跟踪和控制的手段，但是还有一个参数大部分人都没有注意，那就是<code>PT_DENY_ATTACH</code>，这个参数的意义就是告诉系统阻止调试器的调试，所以最常见的方法就是这种，这次我们的绕开示例也是从这个角度来下手：</p>
+<pre class="highlight"><code class="c"><span class="hljs-meta">#import<span class="hljs-meta-string">&lt;mach-o/dyld.h&gt;</span></span>
+<span class="hljs-meta">#import<span class="hljs-meta-string">&lt;dlfcn.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> PT_DENY_ATTACH</span>
+	<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PT_DENY_ATTACH 31</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">int</span> <span class="hljs-params">(*<span class="hljs-keyword">ptrace_ptr_t</span>)</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _request, <span class="hljs-keyword">pid_t</span> _pid,<span class="hljs-keyword">caddr_t</span> _addr, <span class="hljs-keyword">int</span> _data)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">disable_gdb</span><span class="hljs-params">()</span></span>{
+  	<span class="hljs-keyword">void</span> *handle = dlopen(<span class="hljs-number">0</span>, RTLD_GLOBAL | RTLD_NOW);
+	<span class="hljs-keyword">ptrace_ptr_t</span> ptrace_ptr = (<span class="hljs-keyword">ptrace_ptr_t</span>)dlsym(handle, <span class="hljs-string">"ptrace"</span>);
+	ptrace_ptr(PT_DENY_ATTACH, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+  	dlclose(handle);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  @autoreleasepool{
+    <span class="hljs-comment">//DEBUG代表是测试版而不是发行版，所以不需要开启反调试</span>
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> DEBUG</span>
+    <span class="hljs-comment">//do nothing </span>
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span>
+    disable_gdb();
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+  }
+}
+</code></pre>
+<p>我们可以将这个写在main函数中，用来防止我们的程序被调试，相当于向<code>ptrace</code>它的父进程发送消息说不要再跟踪我了，如果对这里有什么不明白的可以参考它的前置章节<a href="https://peterpan980927.cn/2017/12/14/%E5%8F%8D%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E4%BF%9D%E6%8A%A4/#more" target="_blank" rel="external">ptrace基础</a></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png" alt="屏幕快照 2018-04-17 下午3.32.23.png"></p>
+<p>从man手册中我们看到，使用<code>PT_DENY_ATTACH</code>的时候，其他的参数都会被忽略，因为这个是由被追踪进程发送的信号</p>
+<ol start="2">
+<li>sysctl</li>
+</ol>
+<p>这本来是一个在内核运行时动态修改内核的运行参数的命令，我们可以用它来查看进程的信息，也就是说我们可以发现这个进程是否处于调试状态。当进程处于调试状态的时候<code>info.kp_proc.p_flag</code>就会变成1，所以就可以通过<code>sysctl</code>查询进程的<code>kinfo_proc</code>信息就可以判断了：</p>
+<pre class="highlight"><code class="c">include &lt;assert.h&gt;
+ <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+ <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+ <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+ <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/sysctl.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">AmIBeingDebugged</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+    <span class="hljs-comment">// Returns true if the current process is being debugged (either</span>
+    <span class="hljs-comment">// running under the debugger or has a debugger attached post facto).</span>
+</span>{
+    <span class="hljs-keyword">int</span>                 junk;
+    <span class="hljs-keyword">int</span>                 mib[<span class="hljs-number">4</span>];
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">kinfo_proc</span>   <span class="hljs-title">info</span>;</span>
+    <span class="hljs-keyword">size_t</span>              size;
+
+    <span class="hljs-comment">// Initialize the flags so that, if sysctl fails for some bizarre</span>
+    <span class="hljs-comment">// reason, we get a predictable result.</span>
+
+    info.kp_proc.p_flag = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">// Initialize mib, which tells sysctl the info we want, in this case</span>
+    <span class="hljs-comment">// we're looking for information about a specific process ID.</span>
+
+    mib[<span class="hljs-number">0</span>] = CTL_KERN;
+    mib[<span class="hljs-number">1</span>] = KERN_PROC;
+    mib[<span class="hljs-number">2</span>] = KERN_PROC_PID;
+    mib[<span class="hljs-number">3</span>] = getpid();
+
+    <span class="hljs-comment">// Call sysctl.</span>
+
+    size = <span class="hljs-keyword">sizeof</span>(info);
+    junk = sysctl(mib, <span class="hljs-keyword">sizeof</span>(mib) / <span class="hljs-keyword">sizeof</span>(*mib), &amp;info, &amp;size, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>);
+    assert(junk == <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// We're being debugged if the P_TRACED flag is set.</span>
+	
+    <span class="hljs-keyword">return</span> ( (info.kp_proc.p_flag &amp; P_TRACED) != <span class="hljs-number">0</span> );
+}
+</code></pre>
+<ol start="3">
+<li>syscall</li>
+</ol>
+<p>这个是利用一个内核调用表找到<code>ptrace</code>所对应的编号，然后直接将编号作为参数使用系统调用，效果等同于ptrace:</p>
+<pre class="highlight"><code class="">syscall(26,31,0,0)
+</code></pre>
+<ol start="4">
+<li>arm</li>
+</ol>
+<p>直接使用汇编来实现：</p>
+<pre class="highlight"><code class="assembly">#ifdef __arm__
+	asm volatile(
+      &quot;mov r0,#31\n&quot;
+      &quot;mov r1,#0\n&quot;
+      &quot;mov r2,#26\n&quot;
+      &quot;mov r12,#26\n&quot;
+      &quot;svc #80\n&quot;
+	);
+#endif
+#ifdef __arm64__
+	asm volatile(
+		&quot;mov x0,#26\n&quot;
+		&quot;mov x1,#31\n&quot;
+		&quot;mov x2,#0\n&quot;
+		&quot;mov x3,#0\n&quot;
+		&quot;mov x16,#0\n&quot;
+		&quot;svc #128\n&quot;
+	);
+</code></pre>
+<p>剩下的不太常见就不介绍了，可以看看下面参考的那位仁兄写的</p>
+<h1 id="打破反调试"><a class="markdownIt-Anchor" href="#打破反调试"></a> 打破反调试</h1>
+<p>其实只要对对应的方法进行hook就好了，在这里我们使用<code>MSHookFunction</code>而不采用封装好的上层<code>Logos</code>语法：</p>
+<pre class="highlight"><code class="c"><span class="hljs-meta">#import <span class="hljs-meta-string">&lt;substrate.h&gt;</span></span>
+<span class="hljs-meta">#import <span class="hljs-meta-string">&lt;sys/sysctl.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">int</span> <span class="hljs-params">(*orig_ptrace)</span><span class="hljs-params">(<span class="hljs-keyword">int</span> request, <span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">caddr_t</span> addr, <span class="hljs-keyword">int</span> data)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">my_ptrace</span><span class="hljs-params">(<span class="hljs-keyword">int</span> request, <span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">caddr_t</span> addr, <span class="hljs-keyword">int</span> data)</span></span>{
+  <span class="hljs-keyword">if</span>(request == <span class="hljs-number">31</span>){
+    NSLog(@<span class="hljs-string">"[AntiAntiDebug] - ptrace is PT_DENY_ATTACH"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-keyword">return</span> orig_ptrace(request,pid,addr,data);
+}
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span>* (*orig_dlsym)(<span class="hljs-keyword">void</span>* handle, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* symbol);
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span>* <span class="hljs-title">my_dlsym</span><span class="hljs-params">(<span class="hljs-keyword">void</span>* handle, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* symbol)</span></span>{
+	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">strcmp</span>(symbol, <span class="hljs-string">"ptrace"</span>) == <span class="hljs-number">0</span>){
+		NSLog(@<span class="hljs-string">"[AntiAntiDebug] - dlsym get ptrace symbol"</span>);
+		<span class="hljs-keyword">return</span> (<span class="hljs-keyword">void</span>*)my_ptrace;
+    }
+   	<span class="hljs-keyword">return</span> orig_dlsym(handle, symbol);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">int</span> <span class="hljs-params">(*orig_sysctl)</span><span class="hljs-params">(<span class="hljs-keyword">int</span> * name, u_int namelen, <span class="hljs-keyword">void</span> * info, <span class="hljs-keyword">size_t</span> * infosize, <span class="hljs-keyword">void</span> * newinfo, <span class="hljs-keyword">size_t</span> newinfosize)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">my_sysctl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> * name, u_int namelen, <span class="hljs-keyword">void</span> * info, <span class="hljs-keyword">size_t</span> * infosize, <span class="hljs-keyword">void</span> * newinfo, <span class="hljs-keyword">size_t</span> newinfosize)</span></span>{
+	<span class="hljs-keyword">int</span> ret = orig_sysctl(name,namelen,info,infosize,newinfo,newinfosize);
+	<span class="hljs-keyword">if</span>(namelen == <span class="hljs-number">4</span> &amp;&amp; name[<span class="hljs-number">0</span>] == <span class="hljs-number">1</span> &amp;&amp; name[<span class="hljs-number">1</span>] == <span class="hljs-number">14</span> &amp;&amp; name[<span class="hljs-number">2</span>] == <span class="hljs-number">1</span>){
+		<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">kinfo_proc</span> *<span class="hljs-title">info_ptr</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">kinfo_proc</span> *)<span class="hljs-title">info</span>;</span>
+        <span class="hljs-keyword">if</span>(info_ptr &amp;&amp; (info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) != <span class="hljs-number">0</span>){
+            NSLog(@<span class="hljs-string">"[AntiAntiDebug] - sysctl query trace status."</span>);
+            info_ptr-&gt;kp_proc.p_flag ^= P_TRACED;
+            <span class="hljs-keyword">if</span>((info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) == <span class="hljs-number">0</span>){
+                NSLog(@<span class="hljs-string">"[AntiAntiDebug] trace status reomve success!"</span>);
+            }
+        }
+	}
+	<span class="hljs-keyword">return</span> ret;
+}
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span>* (*orig_syscall)(<span class="hljs-keyword">int</span> code, va_list args);
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span>* <span class="hljs-title">my_syscall</span><span class="hljs-params">(<span class="hljs-keyword">int</span> code, va_list args)</span></span>{
+	<span class="hljs-keyword">int</span> request;
+    va_list newArgs;
+    va_copy(newArgs, args);
+    <span class="hljs-keyword">if</span>(code == <span class="hljs-number">26</span>){
+        request = (<span class="hljs-keyword">long</span>)args;
+        <span class="hljs-keyword">if</span>(request == <span class="hljs-number">31</span>){
+            NSLog(@<span class="hljs-string">"[AntiAntiDebug] - syscall call ptrace, and request is PT_DENY_ATTACH"</span>);
+            <span class="hljs-keyword">return</span> nil;
+        }
+    }
+    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">void</span>*)orig_syscall(code, newArgs);
+}
+
+%ctor{
+	MSHookFunction((<span class="hljs-keyword">void</span> *)MSFindSymbol(<span class="hljs-literal">NULL</span>,<span class="hljs-string">"_ptrace"</span>),(<span class="hljs-keyword">void</span>*)my_ptrace,(<span class="hljs-keyword">void</span>**)&amp;orig_ptrace);
+	MSHookFunction((<span class="hljs-keyword">void</span> *)dlsym,(<span class="hljs-keyword">void</span>*)my_dlsym,(<span class="hljs-keyword">void</span>**)&amp;orig_dlsym);
+	MSHookFunction((<span class="hljs-keyword">void</span> *)sysctl,(<span class="hljs-keyword">void</span>*)my_sysctl,(<span class="hljs-keyword">void</span>**)&amp;orig_sysctl);
+	MSHookFunction((<span class="hljs-keyword">void</span> *)syscall,(<span class="hljs-keyword">void</span>*)my_syscall,(<span class="hljs-keyword">void</span>**)&amp;orig_syscall);
+
+	NSLog(@<span class="hljs-string">"[AntiAntiDebug] Module loaded!!!"</span>);
+}
+</code></pre>
+<p>然后我们去看日志就知道到底是什么保护了。</p>
+<p>除了编写tweak之外我们还可以通过lldb下断点的情况来解决这个问题，我们可以通过debugserver连接然后找到ptrace(或者是其他的方法)调用的位置，然后在汇编代码中找到对应的位置，然后直接返回或者修改都可以，但是每次都这样子太麻烦了，所以我们可以用python的自动化脚本来封装一下：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#!/usr/bin/python</span>
+<span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-string">"""
+反反调试脚本，过了反调试后记得:
+aadebug -d
+否则会很卡，如果有定时器定时检测，建议写tweak
+"""</span>
+<span class="hljs-keyword">import</span> lldb
+<span class="hljs-keyword">import</span> fblldbbase <span class="hljs-keyword">as</span> fb
+<span class="hljs-keyword">import</span> fblldbobjcruntimehelpers <span class="hljs-keyword">as</span> objc
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lldbcommands</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> [
+        AMAntiAntiDebug()
+    ]
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AMAntiAntiDebug</span><span class="hljs-params">(fb.FBCommand)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'aadebug'</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">description</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"anti anti debug ptrace syscall sysctl"</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">options</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> [
+            fb.FBCommandArgument(short=<span class="hljs-string">'-d'</span>, long=<span class="hljs-string">'--disable'</span>, arg=<span class="hljs-string">'disable'</span>, boolean=<span class="hljs-keyword">True</span>, default=<span class="hljs-keyword">False</span>, help=<span class="hljs-string">'disable anti anti debug.'</span>)
+        ]
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self, arguments, options)</span>:</span>
+        <span class="hljs-keyword">if</span> options.disable:
+            target = lldb.debugger.GetSelectedTarget()
+            target.BreakpointDelete(self.ptrace.id)
+            target.BreakpointDelete(self.syscall.id)
+            target.BreakpointDelete(self.sysctl.id)
+            <span class="hljs-keyword">print</span> <span class="hljs-string">"anti anti debug is disabled!!!"</span>
+        <span class="hljs-keyword">else</span>:
+            self.antiPtrace()
+            self.antiSyscall()
+            self.antiSysctl()
+            <span class="hljs-keyword">print</span> <span class="hljs-string">"anti anti debug finished!!!"</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">antiPtrace</span><span class="hljs-params">(self)</span>:</span>
+        ptrace = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="hljs-string">"ptrace"</span>)
+        <span class="hljs-keyword">if</span> is64Bit():
+            ptrace.SetCondition(<span class="hljs-string">'$x0==31'</span>)
+        <span class="hljs-keyword">else</span>:
+            ptrace.SetCondition(<span class="hljs-string">'$r0==31'</span>)
+        ptrace.SetScriptCallbackFunction(<span class="hljs-string">'sys.modules[\''</span> + __name__ + <span class="hljs-string">'\'].ptrace_callback'</span>)
+        self.ptrace = ptrace
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">antiSyscall</span><span class="hljs-params">(self)</span>:</span>
+        syscall = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="hljs-string">"syscall"</span>)
+        <span class="hljs-keyword">if</span> is64Bit():
+            syscall.SetCondition(<span class="hljs-string">'$x0==26 &amp;&amp; *(int *)$sp==31'</span>)
+        <span class="hljs-keyword">else</span>:
+            syscall.SetCondition(<span class="hljs-string">'$r0==26 &amp;&amp; $r1==31'</span>)
+        syscall.SetScriptCallbackFunction(<span class="hljs-string">'sys.modules[\''</span> + __name__ + <span class="hljs-string">'\'].syscall_callback'</span>)
+        self.syscall = syscall
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">antiSysctl</span><span class="hljs-params">(self)</span>:</span>
+        sysctl = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="hljs-string">"sysctl"</span>)
+        <span class="hljs-keyword">if</span> is64Bit():
+            sysctl.SetCondition(<span class="hljs-string">'$x1==4 &amp;&amp; *(int *)$x0==1 &amp;&amp; *(int *)($x0+4)==14 &amp;&amp; *(int *)($x0+8)==1'</span>)
+        <span class="hljs-keyword">else</span>:
+            sysctl.SetCondition(<span class="hljs-string">'$r1==4 &amp;&amp; *(int *)$r0==1 &amp;&amp; *(int *)($r0+4)==14 &amp;&amp; *(int *)($r0+8)==1'</span>)
+        sysctl.SetScriptCallbackFunction(<span class="hljs-string">'sys.modules[\''</span> + __name__ + <span class="hljs-string">'\'].sysctl_callback'</span>)
+        self.sysctl = sysctl
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">antiExit</span><span class="hljs-params">(self)</span>:</span>
+        self.exit = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="hljs-string">"exit"</span>)
+        exit.SetScriptCallbackFunction(<span class="hljs-string">'sys.modules[\''</span> + __name__ + <span class="hljs-string">'\'].exit_callback'</span>)
+<span class="hljs-comment">#暂时只考虑armv7和arm64</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is64Bit</span><span class="hljs-params">()</span>:</span>
+    arch = objc.currentArch()
+    <span class="hljs-keyword">if</span> arch == <span class="hljs-string">"arm64"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">True</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ptrace_callback</span><span class="hljs-params">(frame, bp_loc, internal_dict)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">"find ptrace"</span>
+    register = <span class="hljs-string">"x0"</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is64Bit():
+        register = <span class="hljs-string">"r0"</span>
+    frame.FindRegister(register).value = <span class="hljs-string">"0"</span>
+    lldb.debugger.HandleCommand(<span class="hljs-string">'continue'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">syscall_callback</span><span class="hljs-params">(frame, bp_loc, internal_dict)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">"find syscall"</span>
+    <span class="hljs-comment">#不知道怎么用api修改sp指向的内容QAQ</span>
+    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())
+    <span class="hljs-keyword">if</span> is64Bit():
+        lldb.debugger.HandleCommand(<span class="hljs-string">'memory write "$sp" 0'</span>)
+    <span class="hljs-keyword">else</span>:
+        lldb.debugger.HandleCommand(<span class="hljs-string">'register write $r1 0'</span>)
+    lldb.debugger.HandleCommand(<span class="hljs-string">'continue'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sysctl_callback</span><span class="hljs-params">(frame, bp_loc, internal_dict)</span>:</span>
+    module = frame.GetThread().GetFrameAtIndex(<span class="hljs-number">1</span>).GetModule()
+    currentModule = lldb.debugger.GetSelectedTarget().GetModuleAtIndex(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">if</span> module == currentModule:
+        <span class="hljs-keyword">print</span> <span class="hljs-string">"find sysctl"</span>
+        register = <span class="hljs-string">"x2"</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is64Bit():
+            register = <span class="hljs-string">"r2"</span>
+        frame.FindRegister(register).value = <span class="hljs-string">"0"</span>
+    lldb.debugger.HandleCommand(<span class="hljs-string">'continue'</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exit_callback</span><span class="hljs-params">(frame, bp_loc, internal_dict)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">"find exit"</span>
+    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())
+    lldb.debugger.HandleCommand(<span class="hljs-string">'thread return'</span>)
+    lldb.debugger.HandleCommand(<span class="hljs-string">'continue'</span>)
+</code></pre>
+<h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
+<p><a href="http://bbs.iosre.com/t/topic/8179" target="_blank" rel="external">关于反调试那些事</a></p>
+<p>大部分代码参考自<code>aloneMonkey</code>，做了一些小的修改和自己的理解注释</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/" data-id="cjg3qpiyg00676nbrj6jcezdw" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/16/黑书动态规划习题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">黑书动态规划习题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

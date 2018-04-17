@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -99,30 +99,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>学习笔记<br><a id="more"></a></p>
-<h2 id="19-抓取异步加载的数据"><a href="#19-抓取异步加载的数据" class="headerlink" title="19.抓取异步加载的数据"></a>19.抓取异步加载的数据</h2><pre><code class="python">def get_more_data(start, end):
-    for one in range(start, end):
+        <p>学习笔记</p>
+<a id="more"></a>
+<h2 id="19抓取异步加载的数据"><a class="markdownIt-Anchor" href="#19抓取异步加载的数据"></a> 19.抓取异步加载的数据</h2>
+<pre class="highlight"><code class="python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_more_data</span><span class="hljs-params">(start, end)</span>:</span>
+    <span class="hljs-keyword">for</span> one <span class="hljs-keyword">in</span> range(start, end):
         get_data(url+str(one))
-        tome.sleep(1)
+        tome.sleep(<span class="hljs-number">1</span>)
 </code></pre>
-<h2 id="20-使用MongoDB进行排版和插入"><a href="#20-使用MongoDB进行排版和插入" class="headerlink" title="20.使用MongoDB进行排版和插入"></a>20.使用MongoDB进行排版和插入</h2><pre><code class="python">#使用mongodb进行简单的读取和插入
-import pymongo
+<h2 id="20使用mongodb进行排版和插入"><a class="markdownIt-Anchor" href="#20使用mongodb进行排版和插入"></a> 20.使用MongoDB进行排版和插入</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#使用mongodb进行简单的读取和插入</span>
+<span class="hljs-keyword">import</span> pymongo
 
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
 
-DB = client[&#39;DB&#39;]
+DB = client[<span class="hljs-string">'DB'</span>]
 
-sheet_line = DB[&#39;sheet_line&#39;]
+sheet_line = DB[<span class="hljs-string">'sheet_line'</span>]
 
-path = &#39;/Users/mac/Desktop/1.md&#39;
+path = <span class="hljs-string">'/Users/mac/Desktop/1.md'</span>
 
-with open(path, &#39;r&#39;) as f:
+<span class="hljs-keyword">with</span> open(path, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> f:
     lines = f.readlines()
-    for index,line in enumerate(lines):
+    <span class="hljs-keyword">for</span> index,line <span class="hljs-keyword">in</span> enumerate(lines):
         data={
-                &#39;line&#39;  : line,
-                &#39;index&#39; : index,
-                &#39;words&#39; : len(line.split())
+                <span class="hljs-string">'line'</span>  : line,
+                <span class="hljs-string">'index'</span> : index,
+                <span class="hljs-string">'words'</span> : len(line.split())
              }
         print(data)
         sheet_line.insert_one(data)
@@ -135,167 +138,173 @@ with open(path, &#39;r&#39;) as f:
 <p>$gte:greater than equal</p>
 <p>$ne:not equal</p>
 </blockquote>
-<p>e.g-&gt;sheet.find{word:{‘$lt’:5}},表示找到sheet中所有字数比五小的。</p>
-<pre><code class="python">#找出字数小于等于三的行数并输出其内容
-for item in sheet_line.find{word:{&#39;$lte&#39;:3}}:
-    print(item[&#39;line&#39;])
+<p>e.g-&gt;sheet.find{word:{’$lt’:5}},表示找到sheet中所有字数比五小的。</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#找出字数小于等于三的行数并输出其内容</span>
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> sheet_line.find{word:{<span class="hljs-string">'$lte'</span>:<span class="hljs-number">3</span>}}:
+    print(item[<span class="hljs-string">'line'</span>])
 </code></pre>
-<h2 id="21-爬取大规模数据的工作流分析"><a href="#21-爬取大规模数据的工作流分析" class="headerlink" title="21.爬取大规模数据的工作流分析"></a>21.爬取大规模数据的工作流分析</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt=""></p>
+<h2 id="21爬取大规模数据的工作流分析"><a class="markdownIt-Anchor" href="#21爬取大规模数据的工作流分析"></a> 21.爬取大规模数据的工作流分析</h2>
+<p><img src="http://omg5mjb8v.bkt.clouddn.com/7B2E42E6-4839-4CCB-81FB-9D4785BDDA12.png" alt=""></p>
 <p>在爬取大规模数据的时候，要分模块的去爬取</p>
 <p>1.构造一个爬取所有网页的爬虫，将爬取到的网页存储到数据库中</p>
 <p>2.再构造一个爬虫从数据中提取网址，爬取单个页面的信息</p>
-<pre><code class="python">#可以通过find方法来对不同的网页来进行适配,e.g:
-if soup.find(&#39;td&#39;,&#39;t&#39;):
-    #进行相关的爬取操作
-else:
-    pass
-#在对数据库进行插入操作的时候，也可以通过键值对的模式
- sheet_line.insert_one({&#39;url&#39; : &#39;http://www.xxx.com&#39;})
+<pre class="highlight"><code class="python"><span class="hljs-comment">#可以通过find方法来对不同的网页来进行适配,e.g:</span>
+<span class="hljs-keyword">if</span> soup.find(<span class="hljs-string">'td'</span>,<span class="hljs-string">'t'</span>):
+	<span class="hljs-comment">#进行相关的爬取操作</span>
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">pass</span>
+<span class="hljs-comment">#在对数据库进行插入操作的时候，也可以通过键值对的模式</span>
+ sheet_line.insert_one({<span class="hljs-string">'url'</span> : <span class="hljs-string">'http://www.xxx.com'</span>})
 </code></pre>
-<pre><code class="python">#将爬取的单个页面信息插入到数据库中
-def get_item_info(url):
+<pre class="highlight"><code class="python"><span class="hljs-comment">#将爬取的单个页面信息插入到数据库中</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_item_info</span><span class="hljs-params">(url)</span>:</span>
     web_data = requests.get(url)
-    soup = BeautifulSoup(web_data.text, &#39;lxml&#39;)
+    soup = BeautifulSoup(web_data.text, <span class="hljs-string">'lxml'</span>)
     title = soup.title.text
-    price = soup.select(&#39;span.price.c_f50&#39;)[0].text
-    date = soup.select(&#39;.time&#39;)[0].text
-    #进一步容错的设置
-    area = list(soup.select(&#39;.c_25d a&#39;)[0].stripped_strings) if soup.find_all(&#39;span&#39;,&#39;c_25d&#39;) else None
-    item_info.insert_one({&#39;title&#39;:title, &#39;date&#39;:date, &#39;area&#39;:area})
+    price = soup.select(<span class="hljs-string">'span.price.c_f50'</span>)[<span class="hljs-number">0</span>].text
+    date = soup.select(<span class="hljs-string">'.time'</span>)[<span class="hljs-number">0</span>].text
+    <span class="hljs-comment">#进一步容错的设置</span>
+    area = list(soup.select(<span class="hljs-string">'.c_25d a'</span>)[<span class="hljs-number">0</span>].stripped_strings) <span class="hljs-keyword">if</span> soup.find_all(<span class="hljs-string">'span'</span>,<span class="hljs-string">'c_25d'</span>) <span class="hljs-keyword">else</span> <span class="hljs-keyword">None</span>
+    item_info.insert_one({<span class="hljs-string">'title'</span>:title, <span class="hljs-string">'date'</span>:date, <span class="hljs-string">'area'</span>:area})
 </code></pre>
-<pre><code class="python">#对于404页面的判断，e.g:
-#404页面示例
-&lt;script src=&quot;http://www.douyu.com/js/404/jQuery-1.3.2.js&quot; type= &quot;text/javascript&quot;&gt;
-no_longer_exist = &#39;404&#39; in soup.find(&#39;script&#39;, type = &quot;text/javascript&quot;).get(&#39;src&#39;).split(&#39;/&#39;)
-#返回一个布尔型来判断，加上一个判断语句加入爬取页面信息的函数即可判断404
+<pre class="highlight"><code class="python"><span class="hljs-comment">#对于404页面的判断，e.g:</span>
+<span class="hljs-comment">#404页面示例</span>
+&lt;script src=<span class="hljs-string">"http://www.douyu.com/js/404/jQuery-1.3.2.js"</span> type= <span class="hljs-string">"text/javascript"</span>&gt;
+no_longer_exist = <span class="hljs-string">'404'</span> <span class="hljs-keyword">in</span> soup.find(<span class="hljs-string">'script'</span>, type = <span class="hljs-string">"text/javascript"</span>).get(<span class="hljs-string">'src'</span>).split(<span class="hljs-string">'/'</span>)
+<span class="hljs-comment">#返回一个布尔型来判断，加上一个判断语句加入爬取页面信息的函数即可判断404</span>
 </code></pre>
-<h2 id="22-进程和线程"><a href="#22-进程和线程" class="headerlink" title="22.进程和线程"></a>22.进程和线程</h2><h3 id="形象的理解方式："><a href="#形象的理解方式：" class="headerlink" title="形象的理解方式："></a>形象的理解方式：</h3><blockquote>
+<h2 id="22进程和线程"><a class="markdownIt-Anchor" href="#22进程和线程"></a> 22.进程和线程</h2>
+<h3 id="形象的理解方式"><a class="markdownIt-Anchor" href="#形象的理解方式"></a> 形象的理解方式：</h3>
+<blockquote>
 <p>单进程单线程：一个餐馆里一张桌子一个人吃饭</p>
 <p>单进程多线程：一个餐馆里一张桌子多个人吃饭</p>
 <p>多进程单线程：一个餐馆里多张桌子，每张桌子一个人吃饭</p>
 <p>多进程多线程：一个餐馆里多张桌子，每个桌子多个人吃法</p>
 </blockquote>
-<h2 id="23-多进程爬虫数据抓取"><a href="#23-多进程爬虫数据抓取" class="headerlink" title="23.多进程爬虫数据抓取"></a>23.多进程爬虫数据抓取</h2><pre><code class="python">#需要用到的库
-from multiprocessing import Pool
-from channel_extract import channel_list
+<h2 id="23多进程爬虫数据抓取"><a class="markdownIt-Anchor" href="#23多进程爬虫数据抓取"></a> 23.多进程爬虫数据抓取</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#需要用到的库</span>
+<span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Pool
+<span class="hljs-keyword">from</span> channel_extract <span class="hljs-keyword">import</span> channel_list
 
-def get_all_links_from(channel):
-    for num in range(1,101):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_links_from</span><span class="hljs-params">(channel)</span>:</span>
+    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">101</span>):
         get_link_from(channel,num)
 
-if __name__ == &#39;__main__&#39;:
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     pool = Pool()
     pool.map(get_all_links_from,channel_list.split())
 </code></pre>
-<h3 id="map函数"><a href="#map函数" class="headerlink" title="map函数"></a>map函数</h3><p>map(function,interable,…):对于可迭代函数’iterable’中的每一个元素应用’function’方法，将结果作为list返回</p>
-<pre><code class="python">e.g1-&gt;def add100(x):
-        return x + 100
-    hh = [11,22,33]
+<h3 id="map函数"><a class="markdownIt-Anchor" href="#map函数"></a> map函数</h3>
+<p>map(function,interable,…):对于可迭代函数’iterable’中的每一个元素应用’function’方法，将结果作为list返回</p>
+<pre class="highlight"><code class="python">e.g1-&gt;<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add100</span><span class="hljs-params">(x)</span>:</span>
+    	<span class="hljs-keyword">return</span> x + <span class="hljs-number">100</span>
+    hh = [<span class="hljs-number">11</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>]
     hhh = map(add100,hh)
-#此时hhh的值为[111,122,133]
-#如果给出了额外的可迭代参数，则对每个可迭代参数中的元素‘并行’的应用‘function’。
-e.g2-&gt;def abc(a,b,c)
-          return a*10000 + b*100 + c
-      list1 = [11,22,33]
-      list2 = [44,55,66]
-      list3 = [77,88,99]
-      hh = map(abc,list1,list2,list3)
-#此时hh的值为[114477,225588,336699],在每个list中，取出了下标相同的元素，执行了abc()。
-#如果&#39;function&#39;给出的是‘None’，自动假定一个‘identity’函数
-&gt;&gt;&gt; list1 = [11,22,33]
-&gt;&gt;&gt; map(None,list1)
+<span class="hljs-comment">#此时hhh的值为[111,122,133]</span>
+<span class="hljs-comment">#如果给出了额外的可迭代参数，则对每个可迭代参数中的元素‘并行’的应用‘function’。</span>
+e.g2-&gt;<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">abc</span><span class="hljs-params">(a,b,c)</span>
+	  	<span class="hljs-title">return</span> <span class="hljs-title">a</span>*10000 + <span class="hljs-title">b</span>*100 + <span class="hljs-title">c</span>
+	  <span class="hljs-title">list1</span> = [11,22,33]
+      <span class="hljs-title">list2</span> = [44,55,66]
+      <span class="hljs-title">list3</span> = [77,88,99]
+      <span class="hljs-title">hh</span> = <span class="hljs-title">map</span><span class="hljs-params">(abc,list1,list2,list3)</span>
+#此时<span class="hljs-title">hh</span>的值为[114477,225588,336699],在每个<span class="hljs-title">list</span>中，取出了下标相同的元素，执行了<span class="hljs-title">abc</span><span class="hljs-params">()</span>。
+#如果'<span class="hljs-title">function</span>'给出的是‘<span class="hljs-title">None</span>’，自动假定一个‘<span class="hljs-title">identity</span>’函数
+&gt;&gt;&gt; <span class="hljs-title">list1</span> = [11,22,33]
+&gt;&gt;&gt; <span class="hljs-title">map</span><span class="hljs-params">(None,list1)</span>
 [11, 22, 33]
-&gt;&gt;&gt; list1 = [11,22,33]
-&gt;&gt;&gt; list2 = [44,55,66]
-&gt;&gt;&gt; list3 = [77,88,99]
-&gt;&gt;&gt; map(None,list1,list2,list3)
-[(11, 44, 77), (22, 55, 88), (33, 66, 99)]
-</code></pre>
-<h2 id="24-爬取大规模数据实例代码"><a href="#24-爬取大规模数据实例代码" class="headerlink" title="24.爬取大规模数据实例代码"></a>24.爬取大规模数据实例代码</h2><pre><code class="python">#page_parsing.py
-from bs4 import BeautifulSoup
-import requests
-import random
-import pymongo
+&gt;&gt;&gt; <span class="hljs-title">list1</span> = [11,22,33]
+&gt;&gt;&gt; <span class="hljs-title">list2</span> = [44,55,66]
+&gt;&gt;&gt; <span class="hljs-title">list3</span> = [77,88,99]
+&gt;&gt;&gt; <span class="hljs-title">map</span><span class="hljs-params">(None,list1,list2,list3)</span>
+[<span class="hljs-params">(<span class="hljs-number">11</span>, <span class="hljs-number">44</span>, <span class="hljs-number">77</span>)</span>, <span class="hljs-params">(<span class="hljs-number">22</span>, <span class="hljs-number">55</span>, <span class="hljs-number">88</span>)</span>, <span class="hljs-params">(<span class="hljs-number">33</span>, <span class="hljs-number">66</span>, <span class="hljs-number">99</span>)</span>]
+</span></code></pre>
+<h2 id="24爬取大规模数据实例代码"><a class="markdownIt-Anchor" href="#24爬取大规模数据实例代码"></a> 24.爬取大规模数据实例代码</h2>
+<pre class="highlight"><code class="python"><span class="hljs-comment">#page_parsing.py</span>
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> pymongo
 
-client = pymongo.MongoClient(&#39;localhost&#39;, 27017)
+client = pymongo.MongoClient(<span class="hljs-string">'localhost'</span>, <span class="hljs-number">27017</span>)
 
-ganji = client[&#39;ganji&#39;]
+ganji = client[<span class="hljs-string">'ganji'</span>]
 
-url_list = ganji[&#39;url_list&#39;]
+url_list = ganji[<span class="hljs-string">'url_list'</span>]
 
-item_info = ganji[&#39;item_info&#39;]
+item_info = ganji[<span class="hljs-string">'item_info'</span>]
 
 headers = {
-    &#39;User-Agent&#39; : &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36&#39;,
-    &#39;Connection&#39; : &#39;keep-alive&#39;
+    <span class="hljs-string">'User-Agent'</span> : <span class="hljs-string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'</span>,
+    <span class="hljs-string">'Connection'</span> : <span class="hljs-string">'keep-alive'</span>
 }
 
 proxy_list = [
-    &#39;http://121.232.147.178:9000&#39;,
-    &#39;http://122.243.11.57:9000&#39;,
-    &#39;http://121.232.145.163:9000&#39;
+    <span class="hljs-string">'http://121.232.147.178:9000'</span>,
+    <span class="hljs-string">'http://122.243.11.57:9000'</span>,
+    <span class="hljs-string">'http://121.232.145.163:9000'</span>
 ]
 proxy_ip = random.choice(proxy_list)
-proxies = {&#39;http&#39; : proxy_ip}
+proxies = {<span class="hljs-string">'http'</span> : proxy_ip}
 
 
-def get_links_from(channel,pages,who_sells=&#39;o&#39;):
-    list_view = &#39;{}/{}{}/&#39;.format(channel, str(who_sells), str(pages))
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_links_from</span><span class="hljs-params">(channel,pages,who_sells=<span class="hljs-string">'o'</span>)</span>:</span>
+    list_view = <span class="hljs-string">'{}/{}{}/'</span>.format(channel, str(who_sells), str(pages))
     wb_data = requests.get(channel, headers=headers)
-    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
-    if soup.find(&#39;ul&#39;, &#39;pageLink&#39;):
-        for link in soup.select(&#39;td.t &gt; a.t&#39;):
-            item_link = link.get(&#39;href&#39;).split(&#39;?&#39;)[0]
-            #url_list.insert_one({&#39;url&#39;:item_link})
-            #print(item_link)
+    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
+    <span class="hljs-keyword">if</span> soup.find(<span class="hljs-string">'ul'</span>, <span class="hljs-string">'pageLink'</span>):
+        <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> soup.select(<span class="hljs-string">'td.t &gt; a.t'</span>):
+            item_link = link.get(<span class="hljs-string">'href'</span>).split(<span class="hljs-string">'?'</span>)[<span class="hljs-number">0</span>]
+            <span class="hljs-comment">#url_list.insert_one({'url':item_link})</span>
+            <span class="hljs-comment">#print(item_link)</span>
             get_item_info_from(item_link)
-            print(&#39;\n&#39;)
-    else:
-        #已经到达最后一页
-        pass
+            print(<span class="hljs-string">'\n'</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-comment">#已经到达最后一页</span>
+        <span class="hljs-keyword">pass</span>
 
-def get_item_info_from(url, data=None):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_item_info_from</span><span class="hljs-params">(url, data=None)</span>:</span>
     wb_data = requests.get(url, headers=headers)
-    if wb_data.status_code == 404:
-        pass
-    else:
-        try:
-            soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
+    <span class="hljs-keyword">if</span> wb_data.status_code == <span class="hljs-number">404</span>:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">try</span>:
+            soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
             data = {
-                &#39;title&#39;:soup.title.text.strip(),
-                &#39;price&#39;:soup.select(&#39;.f22.fc-orange.f-type&#39;)[0].text.strip(),
-                &#39;pub_data&#39;:soup.select(&#39;.pr-5&#39;)[0].text.strip().split()[0],
-                &#39;area&#39;:list(map(lambda x:x.text, soup.select(&#39;ul.det-infor &gt; li &gt; a&#39;))),
-                &#39;phoneNumber&#39;:soup.select(&#39;span.phoneNum-style&#39;)[0].text.strip(),
-                &#39;url&#39;:url
+                <span class="hljs-string">'title'</span>:soup.title.text.strip(),
+                <span class="hljs-string">'price'</span>:soup.select(<span class="hljs-string">'.f22.fc-orange.f-type'</span>)[<span class="hljs-number">0</span>].text.strip(),
+                <span class="hljs-string">'pub_data'</span>:soup.select(<span class="hljs-string">'.pr-5'</span>)[<span class="hljs-number">0</span>].text.strip().split()[<span class="hljs-number">0</span>],
+                <span class="hljs-string">'area'</span>:list(map(<span class="hljs-keyword">lambda</span> x:x.text, soup.select(<span class="hljs-string">'ul.det-infor &gt; li &gt; a'</span>))),
+                <span class="hljs-string">'phoneNumber'</span>:soup.select(<span class="hljs-string">'span.phoneNum-style'</span>)[<span class="hljs-number">0</span>].text.strip(),
+                <span class="hljs-string">'url'</span>:url
             }
             print(data)
-        #except IndexError:
-            pass
-        except AttributeError:
-            pass
+        <span class="hljs-comment">#except IndexError:</span>
+            <span class="hljs-keyword">pass</span>
+        <span class="hljs-keyword">except</span> AttributeError:
+            <span class="hljs-keyword">pass</span>
 
-#get_item_info_from(&#39;http://bj.ganji.com/shouji/29096013665341x.htm&#39;)
-#get_links_from(&#39;http://bj.ganji.com/shouji&#39;,2)
+<span class="hljs-comment">#get_item_info_from('http://bj.ganji.com/shouji/29096013665341x.htm')</span>
+<span class="hljs-comment">#get_links_from('http://bj.ganji.com/shouji',2)</span>
 </code></pre>
-<pre><code class="python">#channel_extracing.py
-import requests
-from bs4 import  BeautifulSoup
+<pre class="highlight"><code class="python"><span class="hljs-comment">#channel_extracing.py</span>
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span>  BeautifulSoup
 
-start_url = &#39;http://bj.ganji.com/wu&#39;
-url_host = &#39;http://bj.ganji.com&#39;
+start_url = <span class="hljs-string">'http://bj.ganji.com/wu'</span>
+url_host = <span class="hljs-string">'http://bj.ganji.com'</span>
 
-def get_index_url(url):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_index_url</span><span class="hljs-params">(url)</span>:</span>
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, &#39;lxml&#39;)
-    links = soup.select(&#39;.fenlei &gt; dt &gt; a&#39;)
-    for link in links:
-        page_url = url_host + link.get(&#39;href&#39;)
+    soup = BeautifulSoup(wb_data.text, <span class="hljs-string">'lxml'</span>)
+    links = soup.select(<span class="hljs-string">'.fenlei &gt; dt &gt; a'</span>)
+    <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> links:
+        page_url = url_host + link.get(<span class="hljs-string">'href'</span>)
         print(page_url)
 
-#get_index_url(start_url)
+<span class="hljs-comment">#get_index_url(start_url)</span>
 
-channel_list = &#39;&#39;&#39;
+channel_list = <span class="hljs-string">'''
 http://bj.ganji.com/jiaju/
 http://bj.ganji.com/rirongbaihuo/
 http://bj.ganji.com/shouji/
@@ -316,28 +325,30 @@ http://bj.ganji.com/xuniwupin/
 http://bj.ganji.com/qitawupin/
 http://bj.ganji.com/ershoufree/
 http://bj.ganji.com/wupinjiaohuan/
-&#39;&#39;&#39;
+'''</span>
 </code></pre>
-<pre><code class="python">#main.py
-from multiprocessing import Pool
-from channel_extracing import channel_list
-from page_parsing import get_item_info_from,get_links_from,url_list,item_info
+<pre class="highlight"><code class="python"><span class="hljs-comment">#main.py</span>
+<span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Pool
+<span class="hljs-keyword">from</span> channel_extracing <span class="hljs-keyword">import</span> channel_list
+<span class="hljs-keyword">from</span> page_parsing <span class="hljs-keyword">import</span> get_item_info_from,get_links_from,url_list,item_info
 
-def get_all_links(channel):
-    for i in range(1, 100):
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_all_links</span><span class="hljs-params">(channel)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>):
         get_links_from(channel, i)
 
-if __name__ == &#39;__main__&#39;:
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
     pool = Pool()
     pool.map(get_all_links, channel_list.split())
     pool.close()
     pool.join()
 </code></pre>
-<h2 id="25-更新数据库"><a href="#25-更新数据库" class="headerlink" title="25.更新数据库"></a>25.更新数据库</h2><pre><code class="python">db.collection.update()
-#update函数的用法,一般传入两个参数
-update({id:1},{$set:{name:2}})
+<h2 id="25更新数据库"><a class="markdownIt-Anchor" href="#25更新数据库"></a> 25.更新数据库</h2>
+<pre class="highlight"><code class="python">db.collection.update()
+<span class="hljs-comment">#update函数的用法,一般传入两个参数</span>
+update({id:<span class="hljs-number">1</span>},{$set:{name:<span class="hljs-number">2</span>}})
 </code></pre>
-<h2 id="26-突破爬虫封禁的几种方法参考"><a href="#26-突破爬虫封禁的几种方法参考" class="headerlink" title="26.突破爬虫封禁的几种方法参考"></a>26.突破爬虫封禁的几种方法<a href="http://bigsec.com/bigsec-news/wechat-2016-web-crawler?ref=bigsec-news1" target="_blank" rel="external">参考</a></h2><p>1.构造合理的HTTP头部请求</p>
+<h2 id="26突破爬虫封禁的几种方法参考"><a class="markdownIt-Anchor" href="#26突破爬虫封禁的几种方法参考"></a> 26.突破爬虫封禁的几种方法<a href="http://bigsec.com/bigsec-news/wechat-2016-web-crawler?ref=bigsec-news1" target="_blank" rel="external">参考</a></h2>
+<p>1.构造合理的HTTP头部请求</p>
 <p>2.学会正确的设置cookie</p>
 <p>3.正确的时间访问路径（不能访问过快）</p>
 <p>4.隐含输入字段值（honey pot）</p>
@@ -347,7 +358,7 @@ update({id:1},{$set:{name:2}})
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/12/网络爬虫-二/" data-id="cjg27ffkj007nd4brrewdkjyp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/05/12/网络爬虫-二/" data-id="cjg3qpiyw007i6nbrbp7zoite" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -415,8 +426,8 @@ update({id:1},{$set:{name:2}})
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>93</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>86</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
