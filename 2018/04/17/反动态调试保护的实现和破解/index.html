@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png">
-<meta property="og:updated_time" content="2018-04-17T14:04:40.992Z">
+<meta property="og:updated_time" content="2018-04-18T05:16:02.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="反动态调试保护的实现和破解">
 <meta name="twitter:description" content="之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。">
@@ -136,6 +136,7 @@
 <p>我们可以将这个写在main函数中，用来防止我们的程序被调试，相当于向<code>ptrace</code>它的父进程发送消息说不要再跟踪我了，如果对这里有什么不明白的可以参考它的前置章节<a href="https://peterpan980927.cn/2017/12/14/%E5%8F%8D%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E4%BF%9D%E6%8A%A4/#more" target="_blank" rel="external">ptrace基础</a></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png" alt="屏幕快照 2018-04-17 下午3.32.23.png"></p>
 <p>从man手册中我们看到，使用<code>PT_DENY_ATTACH</code>的时候，其他的参数都会被忽略，因为这个是由被追踪进程发送的信号</p>
+<p>还有一个我们会发现就是我们没有直接使用ptrace，而是通过另一种方式，这是因为在iPhone的真实运行环境中是没有<code>sys/ptrace</code>抛出的，所以我们可以使用<code>dlopen</code>去拿到他，然后再操作。</p>
 <ol start="2">
 <li>sysctl</li>
 </ol>
@@ -382,7 +383,7 @@ aadebug -d
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/" data-id="cjg3qpiyg00676nbrj6jcezdw" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/" data-id="cjg4spway0066xubr7h3zcu12" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -395,7 +396,7 @@ aadebug -d
   
   
     <a href="/2018/04/16/黑书动态规划习题/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">黑书动态规划习题</div>
     </a>
   

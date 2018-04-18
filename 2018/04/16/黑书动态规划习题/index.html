@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/16/黑书动态规划习题/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="书中小部分给了伪代码，大部分都是状态转移方程，考虑实现的问题，所以对其中的部分习题做一个汇总，主要针对动归的一些核心思想进行解释，如最优子结构还有决策的无后效性。(高中生实在太强了，菜狗要退坑了！！！)">
-<meta property="og:updated_time" content="2018-04-17T11:32:09.463Z">
+<meta property="og:updated_time" content="2018-04-18T07:48:48.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黑书动态规划习题">
 <meta name="twitter:description" content="书中小部分给了伪代码，大部分都是状态转移方程，考虑实现的问题，所以对其中的部分习题做一个汇总，主要针对动归的一些核心思想进行解释，如最优子结构还有决策的无后效性。(高中生实在太强了，菜狗要退坑了！！！)">
@@ -183,7 +183,7 @@
 <li>放到前一个堆上</li>
 <li>另外开一个新的堆</li>
 </ol>
-<p>所以我们用一个4维数组来表示我们状态的转移：</p>
+<p>所以我们用一个4维数组来表示我们状态的转移，这个我们还是用递归加记忆化做，用递推太麻烦….</p>
 <pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
@@ -267,11 +267,77 @@ Retangle r[<span class="hljs-number">100</span>];
   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
+<h1 id="方块消除"><a class="markdownIt-Anchor" href="#方块消除"></a> 方块消除</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;  </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+  
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX(a, b) a&gt;b?a:b  </span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 202  </span>
+  
+<span class="hljs-keyword">int</span> color[N], len[N], after[N];  
+<span class="hljs-keyword">int</span> dp[N][N][N];  
+  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> cas, m, n;  
+    <span class="hljs-keyword">int</span> i, j, l, r, k, p, id;  
+    <span class="hljs-keyword">int</span> seq[N], cnt;  
+    <span class="hljs-keyword">bool</span> vis[N];  
+      
+    cas = <span class="hljs-number">1</span>;  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;m);  
+    <span class="hljs-keyword">while</span>(m--)  
+    {  
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);  
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;seq[<span class="hljs-number">1</span>]);  
+        id = cnt = <span class="hljs-number">1</span>;  
+        <span class="hljs-keyword">for</span>(i = <span class="hljs-number">2</span>; i &lt;= n; i++){  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;seq[i]);  
+            <span class="hljs-keyword">if</span>(seq[i] == seq[i<span class="hljs-number">-1</span>])  
+                cnt++;  
+            <span class="hljs-keyword">else</span> {  
+                color[id] = seq[i<span class="hljs-number">-1</span>];  
+                len[id++] = cnt;  
+                cnt = <span class="hljs-number">1</span>;  
+            }  
+        }  
+        color[id] = seq[n];  
+        len[id++] = cnt;  
+          
+        <span class="hljs-built_in">memset</span>(vis, <span class="hljs-literal">false</span>, <span class="hljs-keyword">sizeof</span>(vis));  
+        <span class="hljs-keyword">for</span>(i = id<span class="hljs-number">-1</span>; i &gt;= <span class="hljs-number">1</span>; i--){ <span class="hljs-comment">/*此处after[i]记录i之后与i颜色相同的方块最多有多少个*/</span>                                       <span class="hljs-keyword">if</span>(vis[i]) <span class="hljs-keyword">continue</span>;  after[i] = <span class="hljs-number">0</span>;  
+            <span class="hljs-keyword">int</span> tmp = i;  
+            <span class="hljs-keyword">for</span>(j = i<span class="hljs-number">-2</span>; j &gt;= <span class="hljs-number">1</span>; j--)  
+                <span class="hljs-keyword">if</span>(color[j] == color[tmp]){  
+                    after[j] = after[tmp] + len[tmp];  
+                    tmp = j;  
+                    vis[j--] = <span class="hljs-literal">true</span>;  
+                }  
+        }  
+      
+        <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(dp));  
+        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span>; j &lt; id; j++){  <span class="hljs-comment">//按长度遍历  </span>
+            <span class="hljs-keyword">for</span>(l = <span class="hljs-number">1</span>; l+j<span class="hljs-number">-1</span> &lt; id; l++){    
+                r = l+j<span class="hljs-number">-1</span>;  
+                <span class="hljs-keyword">for</span>(k = <span class="hljs-number">0</span>; k &lt;= after[r]; k++){ <span class="hljs-comment">//k为未来接在r后的方块数  </span>
+                    dp[l][r][k] = dp[l][r<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>]+(len[r]+k)*(len[r]+k);  
+                    <span class="hljs-keyword">for</span>(p = r<span class="hljs-number">-2</span>; p &gt;= l; p--)  
+                        <span class="hljs-keyword">if</span>(color[p] == color[r])  
+                            dp[l][r][k] = MAX(dp[l][r][k], dp[l][p][k+len[r]]+dp[p+<span class="hljs-number">1</span>][r<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>]);  
+                }  
+            }  
+        }  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Case %d: %d\n"</span>, cas++, dp[<span class="hljs-number">1</span>][id<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>]);  
+    }  
+    system(<span class="hljs-string">"pause"</span>);  
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/黑书动态规划习题/" data-id="cjg3qpiz2007z6nbr7s05h412" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/16/黑书动态规划习题/" data-id="cjg4spwbk007zxubrywc0cas0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -283,7 +349,7 @@ Retangle r[<span class="hljs-number">100</span>];
 <nav id="article-nav">
   
     <a href="/2018/04/17/反动态调试保护的实现和破解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           反动态调试保护的实现和破解
@@ -293,7 +359,7 @@ Retangle r[<span class="hljs-number">100</span>];
   
   
     <a href="/2018/04/15/重探OC之Type-Value篇/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">重探OC之Type&amp;Value篇</div>
     </a>
   
