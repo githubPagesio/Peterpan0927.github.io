@@ -45,8 +45,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -103,12 +103,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UI初步</p>
-<a id="more"></a>
-<h1 id="ui基础day1-2"><a class="markdownIt-Anchor" href="#ui基础day1-2"></a> UI基础(Day1-2)</h1>
-<p>iOS模拟器:当没有应用设备但是需要测试的时候使用，可以通过菜单栏来进行一些基础操作。</p>
-<h2 id="1mainstoryboard的作用基本设置"><a class="markdownIt-Anchor" href="#1mainstoryboard的作用基本设置"></a> 1.Main.storyBoard的作用基本设置</h2>
-<blockquote>
+        <p>UI初步<br><a id="more"></a></p>
+<h1 id="UI基础-Day1-2"><a href="#UI基础-Day1-2" class="headerlink" title="UI基础(Day1-2)"></a>UI基础(Day1-2)</h1><p>iOS模拟器:当没有应用设备但是需要测试的时候使用，可以通过菜单栏来进行一些基础操作。</p>
+<h2 id="1-Main-storyBoard的作用基本设置"><a href="#1-Main-storyBoard的作用基本设置" class="headerlink" title="1.Main.storyBoard的作用基本设置"></a>1.Main.storyBoard的作用基本设置</h2><blockquote>
 <p>改变可视化界面的属性，在右边的菜单栏中进行修改。</p>
 <p>在右下角进行对控件的调试</p>
 <p>自动布局功能</p>
@@ -117,21 +114,18 @@
 <p>当不小心删除了页面之后，可以通过command+z还原</p>
 <p>如果想要键盘每次自动弹出，就把hardware中的连接硬件取消掉，只留下虚拟键盘</p>
 </blockquote>
-<h2 id="2常用基本控件选择"><a class="markdownIt-Anchor" href="#2常用基本控件选择"></a> 2.常用基本控件选择</h2>
-<blockquote>
+<h2 id="2-常用基本控件选择"><a href="#2-常用基本控件选择" class="headerlink" title="2.常用基本控件选择"></a>2.常用基本控件选择</h2><blockquote>
 <p>label:单纯显示文字</p>
 <p>Button:点击</p>
 <p>Text:输入文字</p>
 </blockquote>
-<h2 id="3viewcontroller视图控制器"><a class="markdownIt-Anchor" href="#3viewcontroller视图控制器"></a> 3.ViewController（视图控制器）</h2>
-<blockquote>
+<h2 id="3-ViewController（视图控制器）"><a href="#3-ViewController（视图控制器）" class="headerlink" title="3.ViewController（视图控制器）"></a>3.ViewController（视图控制器）</h2><blockquote>
 <p>管理视图，写代码部分</p>
 <p>ViewController里的View是由ViewController管理的</p>
 <p>UIView,UIViewController这两个类本身没有关系，UIView的作用是显示,UIViewController中有一个UIView的属性</p>
 <p>可以在这里取消自动布局</p>
 </blockquote>
-<h2 id="4控件连线"><a class="markdownIt-Anchor" href="#4控件连线"></a> 4.控件连线</h2>
-<blockquote>
+<h2 id="4-控件连线"><a href="#4-控件连线" class="headerlink" title="4.控件连线"></a>4.控件连线</h2><blockquote>
 <p>右键点击控件，选择触发的事件，注意不同事件的触发效果不同</p>
 <p>把代码中的返回值类型中改成IBAction,将它们连线,快速连线可以按住control拖拽来生成新名字的方法。</p>
 <p>易错点：当删除方法的时候需要把按钮和方法都删除，不然会报错</p>
@@ -139,8 +133,7 @@
 <p>对于只需要在控制器中使用的控件（属性），我们一般声明在类扩展中，UI控件统统使用weak,UI控件需要连线，也需要添加标识IBOutlet<img src="http://omg5mjb8v.bkt.clouddn.com/8E4C5C77-6CF2-4222-A0A2-C76479B055DA.png" alt=""></p>
 <p>一个事件可以和多个控件一起连线</p>
 </blockquote>
-<h2 id="5计算器方法示例"><a class="markdownIt-Anchor" href="#5计算器方法示例"></a> 5.计算器方法示例</h2>
-<pre class="highlight"><code class="objective-c">-(IBAction)doSum{
+<h2 id="5-计算器方法示例"><a href="#5-计算器方法示例" class="headerlink" title="5.计算器方法示例"></a>5.计算器方法示例</h2><pre><code class="objective-c">-(IBAction)doSum{
   int num1 = [self.field1.text intValue];
   int num2 = [self.field2.text intValue];
   int sum = num1 + num2;
@@ -152,20 +145,18 @@
   [self.view endEditing:YES];
 }
 </code></pre>
-<h2 id="6uikit坐标系"><a class="markdownIt-Anchor" href="#6uikit坐标系"></a> 6.UIKit坐标系</h2>
-<blockquote>
+<h2 id="6-UIKit坐标系"><a href="#6-UIKit坐标系" class="headerlink" title="6.UIKit坐标系"></a>6.UIKit坐标系</h2><blockquote>
 <p>坐标原点与左上角重合</p>
 <p>可以在View里面不断嵌套View子控件，使用相对坐标，坐标只是相对于它的父控件的位置</p>
 </blockquote>
-<h2 id="7uiview"><a class="markdownIt-Anchor" href="#7uiview"></a> 7.UIView</h2>
-<blockquote>
+<h2 id="7-UIView"><a href="#7-UIView" class="headerlink" title="7.UIView"></a>7.UIView</h2><blockquote>
 <p>UI界面上，所有能看到的东西都是UIView</p>
 <p>所有的控件都是直接或者间接继承UIView</p>
 <p>UIView是一个容器，里面可以添加其他的控件</p>
 <p>修改父控件的颜色:sender就是我们点击的那个按钮</p>
 <p>superview属性:获取父控件</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//随机颜色获取
+<pre><code class="objective-c">//随机颜色获取
 -(IBAction)changeFatherViewColor:(UIButton *)sender{
   UIView *fatherview = sender.superview;
   //使用随机数来生成三原色的浓淡程度
@@ -177,12 +168,12 @@
   fatherview.backgroundColor = randomcolor;
 }
 </code></pre>
-<pre class="highlight"><code class="objective-c">//使用代码方式设置控件的位置，不能直接修改控件的Frame属性，可以把Frame属性保存到一个临时变量上修改。
+<pre><code class="objective-c">//使用代码方式设置控件的位置，不能直接修改控件的Frame属性，可以把Frame属性保存到一个临时变量上修改。
 CGRect oldFrame = createview.frame;
 oldFrame.origin.x = 10;
 createview.frame = oldFrame
 </code></pre>
-<pre class="highlight"><code class="objective-c">//创建动画方法一：头尾式动画
+<pre><code class="objective-c">//创建动画方法一：头尾式动画
 [UIView beginAnimations:nil context:nil];
 //修改动画的各种属性
 [UIView setAnimationsDuration:时间 单位：秒];//在多少秒内完成指令
@@ -196,7 +187,7 @@ createview.frame = oldFrame
         createview.frame = oldFrame;
     }];
 </code></pre>
-<pre class="highlight"><code class="objective-c">/*按钮设置的注意点
+<pre><code class="objective-c">/*按钮设置的注意点
 image属性可以设置按钮的图片，这样设置的图片跟文字平级
 设置background图片文字是在图片的后面
 按钮有很多种状态，默认是default：可以设置一套样式
@@ -208,23 +199,20 @@ disabled:禁用状态
 1.放在项目中
 2.放在Assets.xcassets
 </code></pre>
-<h2 id="8代码形式的添加button如果想要设置不同形态的样式需要分别创建"><a class="markdownIt-Anchor" href="#8代码形式的添加button如果想要设置不同形态的样式需要分别创建"></a> 8.代码形式的添加button，如果想要设置不同形态的样式，需要分别创建</h2>
-<p><img src="http://omg5mjb8v.bkt.clouddn.com/D9EE7EAD-673C-4E4A-95F3-43082AA158A9.png" alt=""></p>
-<pre class="highlight"><code class="objective-c">//绑定方法e.g
+<h2 id="8-代码形式的添加button，如果想要设置不同形态的样式，需要分别创建"><a href="#8-代码形式的添加button，如果想要设置不同形态的样式，需要分别创建" class="headerlink" title="8.代码形式的添加button，如果想要设置不同形态的样式，需要分别创建"></a>8.代码形式的添加button，如果想要设置不同形态的样式，需要分别创建</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/D9EE7EAD-673C-4E4A-95F3-43082AA158A9.png" alt=""></p>
+<pre><code class="objective-c">//绑定方法e.g
 [btn addTarget:self action:@selector(haha) forControlEvents:UIControlEventTouchUpInside];
 </code></pre>
-<h2 id="9tag属性的使用"><a class="markdownIt-Anchor" href="#9tag属性的使用"></a> 9.tag属性的使用</h2>
-<blockquote>
+<h2 id="9-tag属性的使用"><a href="#9-tag属性的使用" class="headerlink" title="9.tag属性的使用"></a>9.tag属性的使用</h2><blockquote>
 <p>所有直接或者间接继承来自UIView的控件都有一个tag属性</p>
 <p>这个属性，只能用来保存一个数字，对空间的外观没有任何影响</p>
 <p>可以通过属性来判断控件的类别：sender.tag，可以在main.storyboard里面定义。</p>
 </blockquote>
-<h2 id="10transform属性的使用"><a class="markdownIt-Anchor" href="#10transform属性的使用"></a> 10.transform属性的使用</h2>
-<blockquote>
+<h2 id="10-transform属性的使用"><a href="#10-transform属性的使用" class="headerlink" title="10.transform属性的使用"></a>10.transform属性的使用</h2><blockquote>
 <p>可以使用动画效果</p>
 <p>可以用来修改控件的位置，大小，还有空间的旋转</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//使图片进行各种移动实例
+<pre><code class="objective-c">//使图片进行各种移动实例
 #import &quot;ViewController.h&quot;
 
 @interface ViewController ()
@@ -273,27 +261,25 @@ disabled:禁用状态
 }
 @end
 </code></pre>
-<h2 id="10获取删除子控件"><a class="markdownIt-Anchor" href="#10获取删除子控件"></a> 10.获取删除子控件</h2>
-<blockquote>
+<h2 id="10-获取删除子控件"><a href="#10-获取删除子控件" class="headerlink" title="10.获取删除子控件"></a>10.获取删除子控件</h2><blockquote>
 <p>通过自身View的subview来获取子控件的属性，通过removeFromSuperview删除</p>
-<pre class="highlight"><code class="objective-c">self.whiteview.subviews其实是一个数组，存放的是每一个子控件的信息，可以通过下标来访问，通过removeFromSuperview来删除，删除之后类似于栈数据结构，移除栈顶元素之后自动前补，如果为空继续删除，会进行报错。
+<pre><code class="objective-c">self.whiteview.subviews其实是一个数组，存放的是每一个子控件的信息，可以通过下标来访问，通过removeFromSuperview来删除，删除之后类似于栈数据结构，移除栈顶元素之后自动前补，如果为空继续删除，会进行报错。
 </code></pre>
 <p>或者通过for循环来删除</p>
-<pre class="highlight"><code class="objective-c">//可以把子类对象放到父类类型的变量中
+<pre><code class="objective-c">//可以把子类对象放到父类类型的变量中
 for (UILabel *label in self.whiteview.subviews)
   [label removeFromSuperview];
 </code></pre>
 <p>删除指定tag的view</p>
-<pre class="highlight"><code class="objective-c">[self.whiteview viewWithTag:x]获取下标为x的控件
+<pre><code class="objective-c">[self.whiteview viewWithTag:x]获取下标为x的控件
 如果自己的tag和子控件一样，也能够获取到，优先获取父控件，而且如果删除了父控件，那么它所有的子控件都会被删除
 </code></pre>
 </blockquote>
-<h2 id="11设置一个图片浏览器的例子"><a class="markdownIt-Anchor" href="#11设置一个图片浏览器的例子"></a> 11.设置一个图片浏览器的例子</h2>
-<blockquote>
+<h2 id="11-设置一个图片浏览器的例子"><a href="#11-设置一个图片浏览器的例子" class="headerlink" title="11.设置一个图片浏览器的例子"></a>11.设置一个图片浏览器的例子</h2><blockquote>
 <p>label属性的设置：lines属性设置为0可以自动换行，高度不够，自动换行也是看不到的</p>
 <p>按钮的启用禁用：按钮有一个属性，enabled 如果是yes，就是可以点击，反之亦然。</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
+<pre><code class="objective-c">#import &quot;ViewController.h&quot;
 
 @interface ViewController ()
 @property(assign, nonatomic)int index;
@@ -354,10 +340,8 @@ for (UILabel *label in self.whiteview.subviews)
 }
 
 @end
-
 </code></pre>
-<h2 id="12storyboard控制器"><a class="markdownIt-Anchor" href="#12storyboard控制器"></a> 12.storyboard控制器</h2>
-<blockquote>
+<h2 id="12-storyboard控制器"><a href="#12-storyboard控制器" class="headerlink" title="12.storyboard控制器"></a>12.storyboard控制器</h2><blockquote>
 <p>main.storyboard里面可以加载多个ViewController,但是程序启动的时候，默认加载的是箭头指向的那个。</p>
 <p>可以拖拉箭头或者修改is initial ViewController属性来设置</p>
 <p>在storyboard中的控制器，如果想要跟代码建立联系，需要设置CustomClass</p>
@@ -365,37 +349,32 @@ for (UILabel *label in self.whiteview.subviews)
 <p>如果添加了多个storyboard，默认会找到项目设置中设置的那个</p>
 <p>storyboard的实质是一个文本文件，有一定的格式的文件，格式为xml,每一个通过托拉拽的方式添加的控件信息，全部以标签的形式保存在文本中</p>
 </blockquote>
-<h2 id="13程序启动的实质"><a class="markdownIt-Anchor" href="#13程序启动的实质"></a> 13.程序启动的实质</h2>
-<p><img src="http://omg5mjb8v.bkt.clouddn.com/CD2ECE37-7AD0-46A2-A03C-B4AF645ADDF9.png" alt=""></p>
-<h2 id="14bundle和图片放置位置的区别"><a class="markdownIt-Anchor" href="#14bundle和图片放置位置的区别"></a> 14.Bundle和图片放置位置的区别</h2>
-<blockquote>
+<h2 id="13-程序启动的实质"><a href="#13-程序启动的实质" class="headerlink" title="13.程序启动的实质"></a>13.程序启动的实质</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/CD2ECE37-7AD0-46A2-A03C-B4AF645ADDF9.png" alt=""></p>
+<h2 id="14-Bundle和图片放置位置的区别"><a href="#14-Bundle和图片放置位置的区别" class="headerlink" title="14.Bundle和图片放置位置的区别"></a>14.Bundle和图片放置位置的区别</h2><blockquote>
 <p>应用程序.app就是bundle</p>
 <p>iOS程序打包好之后其实也是xxx.app</p>
 <p>通过NSLog(NSHomeDirectory())打印的路径向前移动两个文件夹,bundle中找到相应的app</p>
 <p>图片直接放在项目中，在bundle中可以直接看到，放在Assets.xcassets中，打包以后，会加密到Assets.car中，目前为止无法还原出来，更加安全。</p>
 <p>NSBundle这个类对应到了当前项目打包以后的xxx.app，使用mainBundle方法可以获取当前应用程序的xx.app。</p>
-<pre class="highlight"><code class="objective-c">NSBundle *mainBundle = [NSBundle mainBundle];
+<pre><code class="objective-c">NSBundle *mainBundle = [NSBundle mainBundle];
 NSString *path = [mainBundle pathForResource:@&quot;名字&quot; ofType:@&quot;类型&quot;];
 NSString *path = [mainBundle pathForResource:@&quot;名字.类型&quot; ofType:@&quot;nil&quot;];//两种方法都可以，可以直接把后缀名加到名字的后面
 NSLog(path);
 </code></pre>
 <p>bundle中的所有问价全路径都可以通过pathForResource方法来获取</p>
 </blockquote>
-<h2 id="15plist配合bundle初始化数组和字典"><a class="markdownIt-Anchor" href="#15plist配合bundle初始化数组和字典"></a> 15.Plist配合bundle初始化数组和字典</h2>
-<blockquote>
+<h2 id="15-Plist配合bundle初始化数组和字典"><a href="#15-Plist配合bundle初始化数组和字典" class="headerlink" title="15.Plist配合bundle初始化数组和字典"></a>15.Plist配合bundle初始化数组和字典</h2><blockquote>
 <p>可以用来保存字典</p>
 <p>项目中的plist文件，保存的位置是bundle中</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//首先创建一个plist，在其中添加你需要的键值对，然后通过路径获取plist
+<pre><code class="objective-c">//首先创建一个plist，在其中添加你需要的键值对，然后通过路径获取plist
 NSBundle *mainBundle = [NSBundle mainBundle];
 NSString *path = [mainBundle pathForResource:@&quot;xxx.plist&quot; ofType:@&quot;nil&quot;];
 //此时通过路径来初始化字典，初始化数组也是同样的方式，也可以在数组里面嵌套字典。
 NSDictionary *dict = [NSDictionary dictionaryWithContentOfFile:path];
 </code></pre>
-<h2 id="16使用uiview播放动画"><a class="markdownIt-Anchor" href="#16使用uiview播放动画"></a> 16.使用UIView播放动画</h2>
-<p><img src="http://omg5mjb8v.bkt.clouddn.com/1CE00FF4-3E56-4EBA-A9A7-EE061640E832.png" alt=""></p>
-<h2 id="17ios开发中内存处理的细节"><a class="markdownIt-Anchor" href="#17ios开发中内存处理的细节"></a> 17.iOS开发中内存处理的细节</h2>
-<blockquote>
+<h2 id="16-使用UIView播放动画"><a href="#16-使用UIView播放动画" class="headerlink" title="16.使用UIView播放动画"></a>16.使用UIView播放动画</h2><p><img src="http://omg5mjb8v.bkt.clouddn.com/1CE00FF4-3E56-4EBA-A9A7-EE061640E832.png" alt=""></p>
+<h2 id="17-iOS开发中内存处理的细节"><a href="#17-iOS开发中内存处理的细节" class="headerlink" title="17.iOS开发中内存处理的细节"></a>17.iOS开发中内存处理的细节</h2><blockquote>
 <p>开发iOS项目，如果app占用内存过大，iOS会发送一个警告给应用程序</p>
 <p>程序员可以在警告中释放内存</p>
 <p>如果发送了警告以后，app内存占用没有任何改变，就会闪退</p>
@@ -406,7 +385,7 @@ NSDictionary *dict = [NSDictionary dictionaryWithContentOfFile:path];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/12/iOS-UI学习/" data-id="cjg4spwa1004jxubr4xzeir4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/12/iOS-UI学习/" data-id="cjg66q98a004j2nbry4ezvyai" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -474,8 +453,8 @@ NSDictionary *dict = [NSDictionary dictionaryWithContentOfFile:path];
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

@@ -50,8 +50,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -110,99 +110,93 @@
       
         <p>这里我们会学习更方便的扩展正则表达式并更加深入的理解配置文件的加载流程</p>
 <a id="more"></a>
-<h1 id="linux运维学习day6"><a class="markdownIt-Anchor" href="#linux运维学习day6"></a> Linux运维学习Day6</h1>
-<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
-<p>我们在学习的时候除了在本机上使用虚拟机的时候,也可以通过购买虚拟服务器（VPS），比较著名的有Linode…这些我们通过ssh访问并使用的服务器其实是在同一个服务器上的虚拟机。</p>
+<h1 id="Linux运维学习Day6"><a href="#Linux运维学习Day6" class="headerlink" title="Linux运维学习Day6"></a>Linux运维学习Day6</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>我们在学习的时候除了在本机上使用虚拟机的时候,也可以通过购买虚拟服务器（VPS），比较著名的有Linode…这些我们通过ssh访问并使用的服务器其实是在同一个服务器上的虚拟机。</p>
 <p>这些服务器有多个处理器，每个处理器是多核的，就可以分出多个虚拟机去售卖，但是如果同一个服务器的所有购买者同时上线，祈祷不要出现这种情况吧，会比较卡，如果因为他人的I/O操作导致自己的进程响应缓慢，换个服务器吧骚年～。</p>
-<h2 id="egrep和扩展正则表达式"><a class="markdownIt-Anchor" href="#egrep和扩展正则表达式"></a> egrep和扩展正则表达式</h2>
-<p>egrep就是使用的扩展正则表达式，他的使用也可以描述成</p>
-<pre class="highlight"><code class="shell">grep -E
+<h2 id="egrep和扩展正则表达式"><a href="#egrep和扩展正则表达式" class="headerlink" title="egrep和扩展正则表达式"></a>egrep和扩展正则表达式</h2><p>egrep就是使用的扩展正则表达式，他的使用也可以描述成</p>
+<pre><code class="shell">grep -E
 </code></pre>
 <p>其中扩展正则表达式和传统的正则表达式有些许的不同</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/C0211EED7800B5EADC37A0F1E75CB7F8.png" alt=""></p>
 <p>练习：</p>
 <p>1.显示当前root、centos或user1用户的默认shell和UID</p>
-<pre class="highlight"><code class="shell">grep -E '^(root|centos|user1)\&gt;' /etc/passwd | cut -d: -f1,3,7 
+<pre><code class="shell">grep -E &#39;^(root|centos|user1)\&gt;&#39; /etc/passwd | cut -d: -f1,3,7
 </code></pre>
 <p>2.找出/etc/rc.d/init.d/functions文件中某个单词后面跟一个小括号的行:</p>
-<pre class="highlight"><code class="Sh">grep -E -o <span class="hljs-string">'^[[:alpha:]]+\(\)'</span> /etc/rc.d/init.d/<span class="hljs-built_in">functions</span>
+<pre><code class="Sh">grep -E -o &#39;^[[:alpha:]]+\(\)&#39; /etc/rc.d/init.d/functions
 </code></pre>
 <p>3.使用echo输出一绝对路径，使用egrep取出其基名</p>
-<pre class="highlight"><code class="shell">echo /etc/passwd | grep -E -o '[^/]+/?$' | cut -d'/' -f1
+<pre><code class="shell">echo /etc/passwd | grep -E -o &#39;[^/]+/?$&#39; | cut -d&#39;/&#39; -f1
 </code></pre>
 <p>4.找出ifconfig命令结果中1-255中的数值</p>
-<pre class="highlight"><code class="shell">ifconfig | grep -E -o "\&lt;([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;"
+<pre><code class="shell">ifconfig | grep -E -o &quot;\&lt;([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;&quot;
 </code></pre>
 <p>5.找出ifconfig命令结果中的ip地址</p>
-<pre class="highlight"><code class="shell">ifconfig | grep -E -o "(\&lt;([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;\.)(\&lt;([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;\.){2}\&lt;([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;"
+<pre><code class="shell">ifconfig | grep -E -o &quot;(\&lt;([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;\.)(\&lt;([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;\.){2}\&lt;([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\&gt;&quot;
 </code></pre>
-<h2 id="bash的基础特性"><a class="markdownIt-Anchor" href="#bash的基础特性"></a> bash的基础特性</h2>
-<p>bash中变量的种类：</p>
+<h2 id="bash的基础特性"><a href="#bash的基础特性" class="headerlink" title="bash的基础特性"></a>bash的基础特性</h2><p>bash中变量的种类：</p>
 <ul>
 <li>本地变量：生效范围为当前shell进程，对当前shell之外的其它shell进程都无效</li>
 <li>环境变量：生效范围为当前shell进程及其子进程</li>
 <li>局部变量：生效范围为当前shell进程中某代码片段（通常指函数）</li>
 <li>位置变量：$1,$2…来表示，用于让脚本在脚本代码中调用命令行传递给他的参数</li>
 </ul>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">! /bin/bash</span>
+<pre><code class="shell">#! /bin/bash
 echo $1
 echo $2
-<span class="hljs-meta">#</span><span class="bash">执行这个shell脚本之后会根据传入的参数进行输出</span>
+#执行这个shell脚本之后会根据传入的参数进行输出
 </code></pre>
 <ul>
-<li>特殊变量：0、?、#、@、$*</li>
+<li>特殊变量：$0、$?、$#、$@、$*</li>
 </ul>
 <p>1.本地变量：</p>
 <blockquote>
-<p>变量赋值：name=‘value’</p>
+<p>变量赋值：name=’value’</p>
 <p>可以使用引用：</p>
-<p>1.可以直接是字符串：name=“value”</p>
-<p>2.变量引用：name=&quot;$value&quot;</p>
+<p>1.可以直接是字符串：name=”value”</p>
+<p>2.变量引用：name=”$value”</p>
 <p>3.命令引用：name=$(COMMAND)</p>
-</blockquote>
-<blockquote>
-<p>变量引用：name、{name}，后者在有混淆时将变量与混淆字符分隔开</p>
-<p>&quot; &quot;:弱引用,其中的变量引用会被替换成变量值</p>
-<p>’ ':强引用,其中的变量引用不会被替换成变量值，而是保持原字符串</p>
+<p>变量引用：$name、${name}，后者在有混淆时将变量与混淆字符分隔开</p>
+<p>“ “:弱引用,其中的变量引用会被替换成变量值</p>
+<p>‘ ‘:强引用,其中的变量引用不会被替换成变量值，而是保持原字符串</p>
 </blockquote>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%884.22.14.png" alt=""></p>
 <blockquote>
 <p>显示、销毁已定义的所有变量</p>
 </blockquote>
-<pre class="highlight"><code class="shell">set 
+<pre><code class="shell">set 
 unset name
 </code></pre>
 <p>2.环境变量</p>
 <blockquote>
 <p>变量声明，赋值：</p>
 </blockquote>
-<pre class="highlight"><code class="shell">export name=VALUE 
+<pre><code class="shell">export name=VALUE 
 declare -x name=VALUE
-<span class="hljs-meta">#</span><span class="bash">如果把本地变量转换成环境变量只需要用</span>
-name='2'
+#如果把本地变量转换成环境变量只需要用
+name=&#39;2&#39;
 declare -x name
 </code></pre>
 <blockquote>
 <p>变量引用</p>
 </blockquote>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">$</span><span class="bash">name</span>
-<span class="hljs-meta">$</span><span class="bash">{name}</span>
+<pre><code class="shell">$name
+${name}
 </code></pre>
 <blockquote>
 <p>显示所有的环境变量</p>
 </blockquote>
-<pre class="highlight"><code class="shell">export 
+<pre><code class="shell">export 
 env
 printenv
 </code></pre>
 <blockquote>
 <p>销毁</p>
 </blockquote>
-<pre class="highlight"><code class="shell">unset name
+<pre><code class="shell">unset name
 </code></pre>
 <p>bash有许多内建的环境变量：PATH、SHELL、UID、HOME、PWD…</p>
 <p>3.只读变量</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">只读变量无法被修改，只能等到进程中止时消亡</span>
+<pre><code class="shell">#只读变量无法被修改，只能等到进程中止时消亡
 readonly name
 declare -r name
 </code></pre>
@@ -210,119 +204,95 @@ declare -r name
 <p>在脚本代码中调用通过命令行传递给脚本的参数：</p>
 <blockquote>
 <p>$1、$2…:对应调用第1，第2等参数</p>
-</blockquote>
-<blockquote>
 <p>$0:命令本身</p>
-</blockquote>
-<blockquote>
 <p>$*:传递给脚本的所有参数，所有参数当成一个字符串</p>
-</blockquote>
-<blockquote>
 <p>$@:传递给脚本的所有参数，每个参数当成单独的字符串</p>
-</blockquote>
-<blockquote>
 <p>$#:传递给脚本的参数的个数</p>
-</blockquote>
-<blockquote>
 <p>shift [n]:可以踢掉传递进来的变量，n表示数量，默认为1</p>
 </blockquote>
 <p>示例：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-15%20%E4%B8%8B%E5%8D%887.21.44.png" alt=""></p>
-<h2 id="bash环境配置"><a class="markdownIt-Anchor" href="#bash环境配置"></a> bash环境配置</h2>
-<h4 id="按生效范围划分存在两类"><a class="markdownIt-Anchor" href="#按生效范围划分存在两类"></a> 按生效范围划分，存在两类：</h4>
-<blockquote>
+<h2 id="bash环境配置"><a href="#bash环境配置" class="headerlink" title="bash环境配置"></a>bash环境配置</h2><h4 id="按生效范围划分，存在两类："><a href="#按生效范围划分，存在两类：" class="headerlink" title="按生效范围划分，存在两类："></a>按生效范围划分，存在两类：</h4><blockquote>
 <p>全局配置</p>
-<pre class="highlight"><code class="shell">/etc/profile
+<pre><code class="shell">/etc/profile
 /etc/profile.d/*.sh
 /etc/bashrc
 </code></pre>
-</blockquote>
-<blockquote>
 <p>个人配置</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">个人用户读取</span>
+<pre><code class="shell">#个人用户读取
 ~/.bash_profile
 ~/.bashrc
 </code></pre>
 </blockquote>
-<h4 id="按功能划分存在两类但是界限不明确可能会都用到"><a class="markdownIt-Anchor" href="#按功能划分存在两类但是界限不明确可能会都用到"></a> 按功能划分，存在两类，但是界限不明确，可能会都用到</h4>
-<blockquote>
+<h4 id="按功能划分，存在两类，但是界限不明确，可能会都用到"><a href="#按功能划分，存在两类，但是界限不明确，可能会都用到" class="headerlink" title="按功能划分，存在两类，但是界限不明确，可能会都用到"></a>按功能划分，存在两类，但是界限不明确，可能会都用到</h4><blockquote>
 <p>profile类：为交互式登陆shell提供配置</p>
 </blockquote>
-<h5 id="作用定义环境变量-运行命令和脚本"><a class="markdownIt-Anchor" href="#作用定义环境变量-运行命令和脚本"></a> 作用：定义环境变量、运行命令和脚本</h5>
-<blockquote>
+<h5 id="作用：定义环境变量、运行命令和脚本"><a href="#作用：定义环境变量、运行命令和脚本" class="headerlink" title="作用：定义环境变量、运行命令和脚本"></a>作用：定义环境变量、运行命令和脚本</h5><blockquote>
 <p>bashrc类：为非交互式登陆的shell提供配置</p>
 </blockquote>
-<h4 id="作用定义变量别名-定义本地变量"><a class="markdownIt-Anchor" href="#作用定义变量别名-定义本地变量"></a> 作用：定义变量别名、定义本地变量</h4>
-<h4 id="shell登录"><a class="markdownIt-Anchor" href="#shell登录"></a> shell登录</h4>
-<blockquote>
+<h4 id="作用：定义变量别名、定义本地变量"><a href="#作用：定义变量别名、定义本地变量" class="headerlink" title="作用：定义变量别名、定义本地变量"></a>作用：定义变量别名、定义本地变量</h4><h4 id="shell登录"><a href="#shell登录" class="headerlink" title="shell登录"></a>shell登录</h4><blockquote>
 <p>交互式登陆：</p>
 </blockquote>
 <p>1.直接通过终端输入账号密码登录</p>
 <p>2.使用’su - UserName’切换的用户</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">读取次序</span>
+<pre><code class="shell">#读取次序
 /etc/profile-&gt;/etc/profile.d/*.sh-&gt;~.bash_profile-&gt; ~./bashrc-&gt;/etc/bashrc
 </code></pre>
 <blockquote>
 <p>非交互式登陆</p>
 </blockquote>
-<p><a href="http://1.su" target="_blank" rel="external">1.su</a> UserName</p>
+<p>1.su UserName</p>
 <p>2.图形界面打开的终端</p>
 <p>3.执行脚本</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">读取次序</span>
+<pre><code class="shell">#读取次序
 ~/.bashrc-&gt;/etc/bashrc-&gt;/etc/profile.d/*.sh
 </code></pre>
 <p>编辑配置文件定义的新配置的生效方式：</p>
 <p>1.重新启动shell进程</p>
 <p>2.使用source或.命令进程</p>
-<h2 id="bash中的算数运算"><a class="markdownIt-Anchor" href="#bash中的算数运算"></a> bash中的算数运算</h2>
-<p>如果忘记了bash中的算术运算符记得使用命令<code>help let</code>哦</p>
-<h3 id="实现算数运算"><a class="markdownIt-Anchor" href="#实现算数运算"></a> 实现算数运算</h3>
-<pre class="highlight"><code class="shell">let var=算数表达式
+<h2 id="bash中的算数运算"><a href="#bash中的算数运算" class="headerlink" title="bash中的算数运算"></a>bash中的算数运算</h2><p>如果忘记了bash中的算术运算符记得使用命令<code>help let</code>哦</p>
+<h3 id="实现算数运算"><a href="#实现算数运算" class="headerlink" title="实现算数运算"></a>实现算数运算</h3><pre><code class="shell">let var=算数表达式
 
 var=$[算数表达式]    #有返回值，可以直接引用或者打印-&gt;echo $[算数表达式]
 
 var=$((算数表达式))
 
 var=$(expr arg1 arg2...)
-<span class="hljs-meta">
-#</span><span class="bash">其中乘法符号有些情况需要转义</span>
+
+#其中乘法符号有些情况需要转义
 </code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%882.50.35.png" alt=""></p>
 <p>bash中有内建的随机数生成器：$RANDOM</p>
-<h2 id="练习"><a class="markdownIt-Anchor" href="#练习"></a> 练习</h2>
-<p>传入两个文件路径，写一个脚本统计这两个文件中的空白行数目</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">! /bin/bash</span>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>传入两个文件路径，写一个脚本统计这两个文件中的空白行数目</p>
+<pre><code class="shell">#! /bin/bash
 
-spaceline1=$(grep '^[[:space:]]*$' $1 | wc -l)
-spaceline2=$(grep '^[[:space:]]*$' $2 | wc -l)
+spaceline1=$(grep &#39;^[[:space:]]*$&#39; $1 | wc -l)
+spaceline2=$(grep &#39;^[[:space:]]*$&#39; $2 | wc -l)
 
-echo "the sum of spaceline: $[$spaceline1 + $spaceline2] "
+echo &quot;the sum of spaceline: $[$spaceline1 + $spaceline2] &quot;
 </code></pre>
 <p>统计/etc,/var,/usr目录共有多少个一级子目录和文件</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
-<span class="hljs-meta">#</span><span class="bash">统计/etc, /var, /usr目录中共有多少个一级子目录和文件</span>
+<pre><code class="shell">#!/bin/bash
+#统计/etc, /var, /usr目录中共有多少个一级子目录和文件
 etcnum=`ls -A -1 /etc/ |wc -l`
 varnum=`ls -A -1 /var/ |wc -l`
 usernum=`ls -A -1 /usr/ |wc -l`
 let sum=$etcnum+$varnum+$usernum
-echo "/etc, /var, /usr目录中共有多少个一级子目录和文件:$sum"
+echo &quot;/etc, /var, /usr目录中共有多少个一级子目录和文件:$sum&quot;
 </code></pre>
 <p><code>个人优化版</code>：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%883.33.24.png" alt=""></p>
-<h2 id="条件测试"><a class="markdownIt-Anchor" href="#条件测试"></a> 条件测试</h2>
-<p>判断某需求是否满足，需要由测试机制来实现</p>
-<h3 id="测试命令"><a class="markdownIt-Anchor" href="#测试命令"></a> 测试命令：</h3>
-<pre class="highlight"><code class="shell">test EXPRESSION
+<h2 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h2><p>判断某需求是否满足，需要由测试机制来实现</p>
+<h3 id="测试命令："><a href="#测试命令：" class="headerlink" title="测试命令："></a>测试命令：</h3><pre><code class="shell">test EXPRESSION
 [ EXPRESSION ]
 [[ EXPRESSION ]]
-<span class="hljs-meta">#</span><span class="bash">EXPRESSION前后必须有空白字符 </span>
+#EXPRESSION前后必须有空白字符
 </code></pre>
-<h3 id="bash的测试类型"><a class="markdownIt-Anchor" href="#bash的测试类型"></a> bash的测试类型：</h3>
-<p>数值测试：<img src="http://omunhj2f1.bkt.clouddn.com/72FA56A8E13D4C952988EE09511A64D7.png" alt=""></p>
+<h3 id="bash的测试类型："><a href="#bash的测试类型：" class="headerlink" title="bash的测试类型："></a>bash的测试类型：</h3><p>数值测试：<img src="http://omunhj2f1.bkt.clouddn.com/72FA56A8E13D4C952988EE09511A64D7.png" alt=""></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-17%20%E4%B8%8B%E5%8D%8811.21.10.png" alt=""></p>
 <p>⚠️：做比较的时候<code>-xx</code>前后要有空格</p>
 <p>字符串测试：<img src="http://omunhj2f1.bkt.clouddn.com/006A2D9C7C1E27BA15D24C9F89AD79AF.jpg" alt=""></p>
 <p>⚠️：用于字符串比较时用到的操作数都应该使用引号,其中<code>=~</code>表达式一般用于<code>[[]]</code>中，e.g:</p>
-<pre class="highlight"><code class="shell">name=Obama
-[[ "$name" =~ ^O.* ]]
+<pre><code class="shell">name=Obama
+[[ &quot;$name&quot; =~ ^O.* ]]
 echo $?
 0
 </code></pre>
@@ -359,36 +329,31 @@ echo $?
 </tbody>
 </table>
 <p>除此之外还有文件权限测试，文件大小测试还有双目测试,这些可以在<code>help test</code>中看到</p>
-<h4 id="同时测试语句可以组合使用"><a class="markdownIt-Anchor" href="#同时测试语句可以组合使用"></a> 同时测试语句可以组合使用：</h4>
-<p>1.COMMAND1 &amp;&amp; COMMAND2</p>
-<p>COMMAND1 || COMMAND2</p>
-<pre class="highlight"><code class="shell">[ -e FILE ] &amp;&amp; [ -r FILE ]
+<h4 id="同时测试语句可以组合使用："><a href="#同时测试语句可以组合使用：" class="headerlink" title="同时测试语句可以组合使用："></a>同时测试语句可以组合使用：</h4><p>1.COMMAND1 &amp;&amp; COMMAND2</p>
+<p>  COMMAND1 || COMMAND2</p>
+<pre><code class="shell">[ -e FILE ] &amp;&amp; [ -r FILE ]
 </code></pre>
 <p>2.COMMAND1 -a COMMAND2</p>
-<p>COMMAND1 -o COMMAND2</p>
-<pre class="highlight"><code class="shell">[ -z "$hostname" -o "$hostname"=="localhost.localdomain" ] &amp;&amp; hostname hello
+<p>   COMMAND1 -o COMMAND2</p>
+<pre><code class="shell">[ -z &quot;$hostname&quot; -o &quot;$hostname&quot;==&quot;localhost.localdomain&quot; ] &amp;&amp; hostname hello
 </code></pre>
 <p>注意：在管理员用户下使用权限的测试语句结果会很<strong>诡异</strong></p>
-<h3 id="bash自定义退出状态码"><a class="markdownIt-Anchor" href="#bash自定义退出状态码"></a> bash自定义退出状态码</h3>
-<p>exit [n] : 自定义状态码</p>
+<h3 id="bash自定义退出状态码"><a href="#bash自定义退出状态码" class="headerlink" title="bash自定义退出状态码"></a>bash自定义退出状态码</h3><p>exit [n] : 自定义状态码</p>
 <p>⚠️：脚本中一旦遇到exit命令，脚本会立即终止，终止推出状态取决于exit命令后面的数字，如果没有给，整个脚本的退出状态取决于脚本中执行的最后一条命令的状态码，这个值会被返回给脚本的父进程，根据其做下一步的处理。</p>
-<h3 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h3>
-<p>写一个脚本，接收文件路径为参数，如果参数个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数不小于1，则显示第一个参数所指向的文件</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">#</span><span class="bash">! /bin/bash</span>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>写一个脚本，接收文件路径为参数，如果参数个数小于1，则提示用户“至少应该给一个参数”，并立即退出；如果参数个数不小于1，则显示第一个参数所指向的文件</p>
+<pre><code class="shell">#! /bin/bash
 
 count=$#
 
-[ $count -lt 1 ] &amp;&amp; echo "至少应该给一个参数" &amp;&amp; exit 1
+[ $count -lt 1 ] &amp;&amp; echo &quot;至少应该给一个参数&quot; &amp;&amp; exit 1
 
-FILE1=$[grep '^$' $1 | wc -l]
+FILE1=$[grep &#39;^$&#39; $1 | wc -l]
 
-echo "$1空白行数为$FILE1行"
+echo &quot;$1空白行数为$FILE1行&quot;
 </code></pre>
-<h3 id="vim常用操作"><a class="markdownIt-Anchor" href="#vim常用操作"></a> vim常用操作</h3>
-<p><strong>Vim</strong> 的学习曲线是非常陡的，一开始学习的时候，面对很多的操作命令要去记住，常常望而却步。</p>
+<h3 id="vim常用操作"><a href="#vim常用操作" class="headerlink" title="vim常用操作"></a>vim常用操作</h3><p><strong>Vim</strong> 的学习曲线是非常陡的，一开始学习的时候，面对很多的操作命令要去记住，常常望而却步。</p>
 <p>其实，只要记住一些常用的命令，加之在工作中坚持使用 <strong>Vim</strong> 进行编辑，很快就能得心应手了。</p>
-<h4 id="光标移动cursor-movement"><a class="markdownIt-Anchor" href="#光标移动cursor-movement"></a> 光标移动(Cursor Movement)</h4>
-<table>
+<h4 id="光标移动-Cursor-Movement"><a href="#光标移动-Cursor-Movement" class="headerlink" title="光标移动(Cursor Movement)"></a>光标移动(Cursor Movement)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -438,8 +403,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="插入模式insert-mode"><a class="markdownIt-Anchor" href="#插入模式insert-mode"></a> 插入模式(Insert Mode)</h4>
-<table>
+<h4 id="插入模式-Insert-Mode"><a href="#插入模式-Insert-Mode" class="headerlink" title="插入模式(Insert Mode)"></a>插入模式(Insert Mode)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -473,8 +437,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="编辑editing"><a class="markdownIt-Anchor" href="#编辑editing"></a> 编辑(Editing)</h4>
-<table>
+<h4 id="编辑-Editing"><a href="#编辑-Editing" class="headerlink" title="编辑(Editing)"></a>编辑(Editing)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -524,8 +487,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="关闭exiting"><a class="markdownIt-Anchor" href="#关闭exiting"></a> 关闭(Exiting)</h4>
-<table>
+<h4 id="关闭-Exiting"><a href="#关闭-Exiting" class="headerlink" title="关闭(Exiting)"></a>关闭(Exiting)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -551,8 +513,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="搜索search"><a class="markdownIt-Anchor" href="#搜索search"></a> 搜索(Search)</h4>
-<table>
+<h4 id="搜索-Search"><a href="#搜索-Search" class="headerlink" title="搜索(Search)"></a>搜索(Search)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -578,8 +539,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="视觉模式visual-mode"><a class="markdownIt-Anchor" href="#视觉模式visual-mode"></a> 视觉模式(Visual Mode)</h4>
-<table>
+<h4 id="视觉模式-Visual-Mode"><a href="#视觉模式-Visual-Mode" class="headerlink" title="视觉模式(Visual Mode)"></a>视觉模式(Visual Mode)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -597,8 +557,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="剪切和复制cut-and-paste"><a class="markdownIt-Anchor" href="#剪切和复制cut-and-paste"></a> 剪切和复制(Cut and Paste)</h4>
-<table>
+<h4 id="剪切和复制-Cut-and-Paste"><a href="#剪切和复制-Cut-and-Paste" class="headerlink" title="剪切和复制(Cut and Paste)"></a>剪切和复制(Cut and Paste)</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -640,8 +599,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="窗口操作"><a class="markdownIt-Anchor" href="#窗口操作"></a> 窗口操作</h4>
-<table>
+<h4 id="窗口操作"><a href="#窗口操作" class="headerlink" title="窗口操作"></a>窗口操作</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -675,8 +633,7 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="地址定界"><a class="markdownIt-Anchor" href="#地址定界"></a> 地址定界</h4>
-<table>
+<h4 id="地址定界"><a href="#地址定界" class="headerlink" title="地址定界"></a>地址定界</h4><table>
 <thead>
 <tr>
 <th style="text-align:center">:start_pos, end_pos</th>
@@ -737,9 +694,8 @@ echo "$1空白行数为$FILE1行"
 </tr>
 </tbody>
 </table>
-<h4 id="查找并替换"><a class="markdownIt-Anchor" href="#查找并替换"></a> 查找并替换</h4>
-<p>s:在末行模式下完成查找替换工作</p>
-<pre class="highlight"><code class="shell">s/要查找的内容/替换为的内容/修饰符
+<h4 id="查找并替换"><a href="#查找并替换" class="headerlink" title="查找并替换"></a>查找并替换</h4><p>s:在末行模式下完成查找替换工作</p>
+<pre><code class="shell">s/要查找的内容/替换为的内容/修饰符
 </code></pre>
 <p>要查找的内容可以使用模式。替换的内容不能使用模式，但可以使用\1、\2、…等后向引用符，还可以使用<code>&amp;</code>引用前面查到到的整个内容</p>
 <p>修饰符：</p>
@@ -759,16 +715,15 @@ echo "$1空白行数为$FILE1行"
 </table>
 <p>比如说将rxxt替换为RxxT:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-28%20%E4%B8%8A%E5%8D%8812.45.30.png" alt=""></p>
 <p>其中查找替换中的分隔符可以替换为其他字符，例如@，所以如果要将所有的/etc/fstab替换为/var/log：</p>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">%</span><span class="bash">s@/etc/fstab@/var/<span class="hljs-built_in">log</span>@g</span>
+<pre><code class="shell">%s@/etc/fstab@/var/log@g
 </code></pre>
 <p>下面还有几个例子可供参考：</p>
-<pre class="highlight"><code class="Vim">#<span class="hljs-number">1</span>.删除/etc/grub.d行首前面的空格
+<pre><code class="Vim">#1.删除/etc/grub.d行首前面的空格
 %s/^[[:space:]]\+//g
-#<span class="hljs-number">2</span>.为以空白字符开头的行前面添加一个#
+#2.为以空白字符开头的行前面添加一个#
 %s/^[[:space:]]\+/#&amp;//g
 </code></pre>
-<h4 id="多文件模式"><a class="markdownIt-Anchor" href="#多文件模式"></a> 多文件模式</h4>
-<pre class="highlight"><code class="shell">vim file1 file2 ...
+<h4 id="多文件模式"><a href="#多文件模式" class="headerlink" title="多文件模式"></a>多文件模式</h4><pre><code class="shell">vim file1 file2 ...
 </code></pre>
 <table>
 <thead>
@@ -801,13 +756,13 @@ echo "$1空白行数为$FILE1行"
 </tbody>
 </table>
 <p>例子，去除文件中以#开头后面跟若干个空格的空格，只留下#</p>
-<pre class="highlight"><code class="shell">:%s/^#[[:space:]]*/#/g
+<pre><code class="shell">:%s/^#[[:space:]]*/#/g
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/28/Linux运维学习Day6/" data-id="cjg4spw8u002cxubrqnuj7xcs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/28/Linux运维学习Day6/" data-id="cjg66q97200282nbrde2ipc0i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -875,8 +830,8 @@ echo "$1空白行数为$FILE1行"
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

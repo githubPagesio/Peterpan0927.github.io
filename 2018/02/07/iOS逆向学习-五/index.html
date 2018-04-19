@@ -46,8 +46,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -104,115 +104,114 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt=""></p>
 <p>这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。</p>
 <a id="more"></a>
-<h1 id="关于reveal调试无法显示"><a class="markdownIt-Anchor" href="#关于reveal调试无法显示"></a> 关于Reveal调试无法显示</h1>
-<p>之前在论坛上发了一个帖子说我在注入照相机的时候，调用对应的拍照函数没有被系统日志记录，后来snakeninny大神在下面留言说可能是这个函数并没有被调用，之后我又追问了一番，决定使用Reveal进行分析一下，但是正在外面，用手机开了个热点，然后发现相机怎么也无法显示，当时也没有多想，等会去之后还是这个问题，于是我在系统日志中去寻找了一下:</p>
-<pre class="highlight"><code class="shell">cat /var/log/syslog | grep Camera
+<h1 id="关于Reveal调试无法显示"><a href="#关于Reveal调试无法显示" class="headerlink" title="关于Reveal调试无法显示"></a>关于Reveal调试无法显示</h1><p>之前在论坛上发了一个帖子说我在注入照相机的时候，调用对应的拍照函数没有被系统日志记录，后来snakeninny大神在下面留言说可能是这个函数并没有被调用，之后我又追问了一番，决定使用Reveal进行分析一下，但是正在外面，用手机开了个热点，然后发现相机怎么也无法显示，当时也没有多想，等会去之后还是这个问题，于是我在系统日志中去寻找了一下:</p>
+<pre><code class="shell">cat /var/log/syslog | grep Camera
 </code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%885.16.34.png" alt=""></p>
 <p>那么看起来应该是权限问题了，通过报错信息搜索并没有找到答案，后来通过一下搜索技巧在StackOverFlow上找到了一个<a href="https://stackoverflow.com/questions/27126315/cannot-bind-a-socket-inside-apple-calendar-dylib-injection" target="_blank" rel="external">回答</a>，从上面的回答来看遇到了和我一样问题，但他很敏锐的注意到了这个可执行文件的路径下还有一个Entitlements.plist文件，而在其他的包中没有发现。</p>
 <p>下面的回答说是因为沙盒机制，除了系统的App，还有很多系统组件也使用着这些沙盒，在那个plist文件中我们可以看到，更加确切的说是从<code>seatbelt-profiles</code>key来看，一开始是二进制plist，我们先转换成xml格式方便观察：</p>
-<pre class="highlight"><code class="shell">plutil -convert xml1 Entitlements.plist
+<pre><code class="shell">plutil -convert xml1 Entitlements.plist
 </code></pre>
 <p>下面是转换后的plist文件：</p>
-<pre class="highlight"><code class="xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
-<span class="hljs-meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">plist</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"1.0"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">dict</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>CanInheritApplicationStateFromOtherProcesses<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>application-identifier<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>com.apple.camera<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>checklessPersistentURLTranslation<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.QuartzCore.global-capture<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.QuartzCore.secure-mode<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.UIKit.vends-view-services<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.accounts.appleaccount.fullaccess<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.avfoundation.allow-still-image-capture-shutter-sound-manipulation<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.coreaudio.allow-amr-decode<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.developer.extension-host.photo-editing<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.excludes-extensions<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.mediastream.mstreamd-access<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.mobile.deleted.AllowFreeSpace<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.photos.bourgeoisie<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.MobileGestalt.AllowedProtectedKeys<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EthernetMacAddress<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>WifiAddressData<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>WifiAddress<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UniqueDeviceID<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.accounts.allaccounts<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.allow-explicit-graphics-priority<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.assetsd.nebulad.access<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>camera<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.corerecents<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.imcore.imremoteurlconnection<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.lockdown.finegrained-get<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>NULL/ActivationPrivateKey<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>NULL/DeviceCertificate<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.tcc.allow<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>kTCCServiceMicrophone<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>kTCCServicePhotos<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>kTCCServiceCamera<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.private.tcc.allow.overridable<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>kTCCServiceAddressBook<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.security.exception.mach-lookup.global-name<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>com.apple.assetsd.nebulad<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.springboard.activateawayviewplugins<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.springboard.opensensitiveurl<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.springboard.openurlinbackground<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.springboard.setWantsLockButtonEvents<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.wifi.manager-access<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.wlan.authentication<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>fairplay<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">integer</span>&gt;</span>1615507317<span class="hljs-tag">&lt;/<span class="hljs-name">integer</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>keychain-access-groups<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>apple<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>com.apple.youtube.credentials<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>com.apple.videouploadplugins.credentials<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>platform-application<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>seatbelt-profiles<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>MobileSlideShow<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
-	<span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dict</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">plist</span>&gt;</span>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;CanInheritApplicationStateFromOtherProcesses&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;application-identifier&lt;/key&gt;
+    &lt;string&gt;com.apple.camera&lt;/string&gt;
+    &lt;key&gt;checklessPersistentURLTranslation&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.QuartzCore.global-capture&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.QuartzCore.secure-mode&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.UIKit.vends-view-services&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.accounts.appleaccount.fullaccess&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.avfoundation.allow-still-image-capture-shutter-sound-manipulation&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.coreaudio.allow-amr-decode&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.developer.extension-host.photo-editing&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.excludes-extensions&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.mediastream.mstreamd-access&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.mobile.deleted.AllowFreeSpace&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.photos.bourgeoisie&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.private.MobileGestalt.AllowedProtectedKeys&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;EthernetMacAddress&lt;/string&gt;
+        &lt;string&gt;WifiAddressData&lt;/string&gt;
+        &lt;string&gt;WifiAddress&lt;/string&gt;
+        &lt;string&gt;UniqueDeviceID&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;com.apple.private.accounts.allaccounts&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.private.allow-explicit-graphics-priority&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.private.assetsd.nebulad.access&lt;/key&gt;
+    &lt;string&gt;camera&lt;/string&gt;
+    &lt;key&gt;com.apple.private.corerecents&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.private.imcore.imremoteurlconnection&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.private.lockdown.finegrained-get&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;NULL/ActivationPrivateKey&lt;/string&gt;
+        &lt;string&gt;NULL/DeviceCertificate&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;com.apple.private.tcc.allow&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;kTCCServiceMicrophone&lt;/string&gt;
+        &lt;string&gt;kTCCServicePhotos&lt;/string&gt;
+        &lt;string&gt;kTCCServiceCamera&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;com.apple.private.tcc.allow.overridable&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;kTCCServiceAddressBook&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;com.apple.security.exception.mach-lookup.global-name&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;com.apple.assetsd.nebulad&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;com.apple.springboard.activateawayviewplugins&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.springboard.opensensitiveurl&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.springboard.openurlinbackground&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.springboard.setWantsLockButtonEvents&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.wifi.manager-access&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;com.apple.wlan.authentication&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;fairplay&lt;/key&gt;
+    &lt;integer&gt;1615507317&lt;/integer&gt;
+    &lt;key&gt;keychain-access-groups&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;apple&lt;/string&gt;
+        &lt;string&gt;com.apple.youtube.credentials&lt;/string&gt;
+        &lt;string&gt;com.apple.videouploadplugins.credentials&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;platform-application&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;seatbelt-profiles&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;MobileSlideShow&lt;/string&gt;
+    &lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
 </code></pre>
 <p>我们通过发现在<code>seatbelt-profiles</code>下有一个数组，这个数组中保存一个叫做MobileSlideShow的值，所以整个网络都会被堵塞，解决的方法说了两种：</p>
 <ol>
@@ -220,170 +219,167 @@
 <li>对移出沙盒的应用进行重签名，这样才会有权限，我们就可以在动态库中做任何事情，这种方式就要简单一些</li>
 </ol>
 <p>在这里选择第二种，只对<code>Entitlements.plist</code>文件进行改动是不够的，我们需要使用<code>ldid</code>：</p>
-<pre class="highlight"><code class="shell">ldid -e Camera &gt; entitlements.xml
+<pre><code class="shell">ldid -e Camera &gt; entitlements.xml
 </code></pre>
 <p>这样子就可以了，这个时候我们的entitlements.xml的内容即为：</p>
-<pre class="highlight"><code class="xml"><span class="hljs-meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">plist</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"1.0"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">dict</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>com.apple.springboard.debugapplications<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>get-task-allow<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>task_for_pid-allow<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>run-unsigned-code<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">true</span>/&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dict</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">plist</span>&gt;</span>
+<pre><code class="xml">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+        &lt;key&gt;com.apple.springboard.debugapplications&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;get-task-allow&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;task_for_pid-allow&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;run-unsigned-code&lt;/key&gt;
+        &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
 </code></pre>
 <p>然后我们利用这个xml给app进行重签名之后就可以了：</p>
-<pre class="highlight"><code class="shell">ldid -Sentitlements.xml Camera
+<pre><code class="shell">ldid -Sentitlements.xml Camera
 </code></pre>
 <p>这里注意千万不要走入歧路，一定要cd到那个App的目录底下进行，不要拷出来或者scp到Mac上，看到xml如果不是像上面的话，基本上就失败了。</p>
 <p>这个时候我们打开Reveal的时候就连上了，我们如果想要看拍照的那个按钮的类就直接通过UI分析即可，就像snakeninny大神说的，要善于将多种工具结合起来使用：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%886.19.35.png" alt=""></p>
 <p>但是这样也会造成一个问题就是Camera照相就会闪退，所以注意做好备份，运行的时候再把原来的放回去</p>
-<h1 id="cycript语法总结"><a class="markdownIt-Anchor" href="#cycript语法总结"></a> Cycript语法总结</h1>
-<p>之前简单的说了一下语法，但是最近一直使用这个踩了一些坑，那么如何快速的定位到我们所需要的地方呢，下面就是精髓所在了：</p>
+<h1 id="Cycript语法总结"><a href="#Cycript语法总结" class="headerlink" title="Cycript语法总结"></a>Cycript语法总结</h1><p>之前简单的说了一下语法，但是最近一直使用这个踩了一些坑，那么如何快速的定位到我们所需要的地方呢，下面就是精髓所在了：</p>
 <ol>
 <li>从全局上了解这个App，最好的方法就会去打印他的视图层次：</li>
 </ol>
-<pre class="highlight"><code class="shell">UIApp.keyWindow.recursiveDescription().toString()
+<pre><code class="shell">UIApp.keyWindow.recursiveDescription().toString()
 </code></pre>
-<ol start="2">
+<ol>
 <li>在我们需要用到框架内的函数时候进行导入：</li>
 </ol>
-<pre class="highlight"><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFramework</span>(<span class="hljs-params">fw</span>) </span>{ 
-   <span class="hljs-keyword">var</span> h=<span class="hljs-string">"/System/Library/"</span>,t=<span class="hljs-string">"Frameworks/"</span>+fw+<span class="hljs-string">".framework"</span>;
+<pre><code class="javascript">function loadFramework(fw) { 
+   var h=&quot;/System/Library/&quot;,t=&quot;Frameworks/&quot;+fw+&quot;.framework&quot;;
    [[NSBundle bundleWithPath:h+t]||
-   [NSBundle bundleWithPath:h+<span class="hljs-string">"Private"</span>+t] load];
+   [NSBundle bundleWithPath:h+&quot;Private&quot;+t] load];
 }
 </code></pre>
-<ol start="3">
+<ol>
 <li>实现NSLog</li>
 </ol>
-<pre class="highlight"><code class="javascript">NSLog_ = dlsym(RTLD_DEFAULT, <span class="hljs-string">"NSLog"</span>)
-NSLog = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ 
-   <span class="hljs-keyword">var</span> types = <span class="hljs-string">'v'</span>, args = [], count = <span class="hljs-built_in">arguments</span>.length;
-   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i != count; ++i) {
-      types += <span class="hljs-string">'@'</span>;
-      args.push(<span class="hljs-built_in">arguments</span>[i]);
+<pre><code class="javascript">NSLog_ = dlsym(RTLD_DEFAULT, &quot;NSLog&quot;)
+NSLog = function() { 
+   var types = &#39;v&#39;, args = [], count = arguments.length;
+   for (var i = 0; i != count; ++i) {
+      types += &#39;@&#39;;
+      args.push(arguments[i]);
   } 
-  <span class="hljs-keyword">new</span> Functor(NSLog_, types).apply(<span class="hljs-literal">null</span>, args);
+  new Functor(NSLog_, types).apply(null, args);
 }
 </code></pre>
-<ol start="4">
+<ol>
 <li>Using CGGeometry functions，有些人还是习惯正向开发时的写法可以用这个:</li>
 </ol>
-<pre class="highlight"><code class="shell">function CGPointMake(x, y) { return {x:x, y:y}; }
+<pre><code class="shell">function CGPointMake(x, y) { return {x:x, y:y}; }
 function CGSizeMake(w, h) { return {width:w, height:h}; }
 function CGRectMake(x, y, w, h) { return {origin:CGPointMake(x,y), size:CGSizeMake(w, h)}; }
 </code></pre>
-<ol start="5">
+<ol>
 <li>输出对象的属性</li>
 </ol>
-<pre class="highlight"><code class="javascript">方法<span class="hljs-number">1</span>： 简单基本获取方法。
+<pre><code class="javascript">方法1： 简单基本获取方法。
 *controller（直接在对象前面加个*）
 
-方法<span class="hljs-number">2</span>：方法一无法获取，就使用方法<span class="hljs-number">2</span>
-[i <span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> *UIApp)]
+方法2：方法一无法获取，就使用方法2
+[i for (i in *UIApp)]
 
-方法<span class="hljs-number">3</span>：建议方法三，方法三能获取到更多
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tryPrintIvars</span>(<span class="hljs-params">a</span>)</span>{ <span class="hljs-keyword">var</span> x={}; <span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> *a){ <span class="hljs-keyword">try</span>{ x[i] = (*a)[i]; } <span class="hljs-keyword">catch</span>(e){} } <span class="hljs-keyword">return</span> x; }
+方法3：建议方法三，方法三能获取到更多
+function tryPrintIvars(a){ var x={}; for(i in *a){ try{ x[i] = (*a)[i]; } catch(e){} } return x; }
 </code></pre>
-<ol start="6">
+<ol>
 <li>根据类来获取属性，虽然在上一章博客中说过，但是现在一用就会崩，所以可以尝试这个，isa传递true:</li>
 </ol>
-<pre class="highlight"><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printMethods</span>(<span class="hljs-params">className, isa</span>) </span>{ 
-    <span class="hljs-keyword">var</span> count = <span class="hljs-keyword">new</span> <span class="hljs-keyword">new</span> Type(<span class="hljs-string">"I"</span>);
-    <span class="hljs-keyword">var</span> classObj = (isa != <span class="hljs-literal">undefined</span>) ? objc_getClass(className)-&gt;isa :     
+<pre><code class="javascript">function printMethods(className, isa) { 
+    var count = new new Type(&quot;I&quot;);
+    var classObj = (isa != undefined) ? objc_getClass(className)-&gt;isa :     
     objc_getClass(className); 
-    <span class="hljs-keyword">var</span> methods = class_copyMethodList(classObj, count); 
-    <span class="hljs-keyword">var</span> methodsArray = [];
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; *count; i++) { 
-        <span class="hljs-keyword">var</span> method = methods[i]; 
-        methodsArray.push({<span class="hljs-attr">selector</span>:method_getName(method),     
-        <span class="hljs-attr">implementation</span>:method_getImplementation(method)});
+    var methods = class_copyMethodList(classObj, count); 
+    var methodsArray = [];
+    for(var i = 0; i &lt; *count; i++) { 
+        var method = methods[i]; 
+        methodsArray.push({selector:method_getName(method),     
+        implementation:method_getImplementation(method)});
     }
         free(methods); 
-        <span class="hljs-keyword">return</span> methodsArray;
+        return methodsArray;
 }
 </code></pre>
 <p>补充：现在问题已经解决了，在Cydia中将版本装回之前的0.9.0.x版本即可。</p>
-<ol start="7">
+<ol>
 <li>获取当前的控制器：</li>
 </ol>
-<pre class="highlight"><code class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">currentVC</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> app = [UIApplication sharedApplication]  
-    <span class="hljs-keyword">var</span> keyWindow = app.keyWindow  
-    <span class="hljs-keyword">var</span> rootController = keyWindow.rootViewController  
-    <span class="hljs-keyword">var</span> visibleController = rootController.visibleViewController  
-    <span class="hljs-keyword">if</span> (!visibleController){
-       <span class="hljs-keyword">return</span> rootController
+<pre><code class="javascript">function currentVC() {
+    var app = [UIApplication sharedApplication]  
+    var keyWindow = app.keyWindow  
+    var rootController = keyWindow.rootViewController  
+    var visibleController = rootController.visibleViewController  
+    if (!visibleController){
+       return rootController
     }
-    <span class="hljs-keyword">return</span> visibleController.childViewControllers[<span class="hljs-number">0</span>]
+    return visibleController.childViewControllers[0]
 }
-<span class="hljs-keyword">var</span> vc = currentVC()
+var vc = currentVC()
 </code></pre>
-<ol start="8">
+<ol>
 <li>获取按钮上的绑定事件(不一定会有太大效果，比赛中可能生效)</li>
 </ol>
-<pre class="highlight"><code class="shell"><span class="hljs-meta">cy#</span><span class="bash"> [button allTargets]</span>
-[NSSet setWithArray:@[#"&lt;ViewController: 0x20869990&gt;"]]]
-<span class="hljs-meta">cy#</span><span class="bash"> [button allControlEvents]</span>
+<pre><code class="shell">cy# [button allTargets]
+[NSSet setWithArray:@[#&quot;&lt;ViewController: 0x20869990&gt;&quot;]]]
+cy# [button allControlEvents]
 64
-<span class="hljs-meta">cy#</span><span class="bash"> [button actionsForTarget:<span class="hljs-comment">#0x20869990 forControlEvent:64]</span></span>
-@["onClick"]
+cy# [button actionsForTarget:#0x20869990 forControlEvent:64]
+@[&quot;onClick&quot;]
 </code></pre>
 <p>剩下的还有创建分类，block等等，不是特别的常用，至少我还没用到，就先不提了，如果想看完整的可以去Wiki上搜索cycript tricks，里面有一些更加神奇的技巧。</p>
-<h1 id="mach-o简介和判断壳"><a class="markdownIt-Anchor" href="#mach-o简介和判断壳"></a> Mach-O简介和判断壳</h1>
-<p>书中我们学到了一个砸壳的工具叫做<code>dumpdecrypted</code>，那么我们如何简单而又快速的判断一个App到底有没有壳呢？在这里先卖个关子，介绍一下Mach-O先：</p>
+<h1 id="Mach-O简介和判断壳"><a href="#Mach-O简介和判断壳" class="headerlink" title="Mach-O简介和判断壳"></a>Mach-O简介和判断壳</h1><p>书中我们学到了一个砸壳的工具叫做<code>dumpdecrypted</code>，那么我们如何简单而又快速的判断一个App到底有没有壳呢？在这里先卖个关子，介绍一下Mach-O先：</p>
 <p><code>Mach-O</code> 是 <code>Mach object</code> 文件格式的缩写，它是一种用于记录可执行文件、对象代码、共享库、动态加载代码和内存转储的文件格式。作为 a.out 格式的替代品，Mach-O 提供了更好的扩展性，并提升了符号表中信息的访问速度。</p>
 <p>大多数基于 Mach 内核的操作系统都使用 <code>Mach-O</code>。<code>NeXTSTEP</code>、<code>OS X</code>和 <code>iOS</code> 是使用这种格式作为本地可执行文件、库和对象代码的例子。这种可执行文件的格式如下图所示（图是盗来的）：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.17.41.png" alt=""></p>
 <p>文件由三部分组成：<code>Header</code>、<code>Load Commands</code>、<code>Data</code>，下面一一介绍：</p>
-<h2 id="header"><a class="markdownIt-Anchor" href="#header"></a> Header</h2>
-<pre class="highlight"><code class="c"><span class="hljs-comment">/*
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><pre><code class="c">/*
  * The 32-bit mach header appears at the very beginning of the object file for
  * 32-bit architectures.
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mach_header</span> {</span>
-	<span class="hljs-keyword">uint32_t</span>	magic;		<span class="hljs-comment">/* mach magic number identifier */</span>
-	<span class="hljs-keyword">cpu_type_t</span>	cputype;	<span class="hljs-comment">/* cpu specifier */</span>
-	<span class="hljs-keyword">cpu_subtype_t</span>	cpusubtype;	<span class="hljs-comment">/* machine specifier */</span>
-	<span class="hljs-keyword">uint32_t</span>	filetype;	<span class="hljs-comment">/* type of file */</span>
-	<span class="hljs-keyword">uint32_t</span>	ncmds;		<span class="hljs-comment">/* number of load commands */</span>
-	<span class="hljs-keyword">uint32_t</span>	sizeofcmds;	<span class="hljs-comment">/* the size of all the load commands */</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags */</span>
+ */
+struct mach_header {
+    uint32_t    magic;        /* mach magic number identifier */
+    cpu_type_t    cputype;    /* cpu specifier */
+    cpu_subtype_t    cpusubtype;    /* machine specifier */
+    uint32_t    filetype;    /* type of file */
+    uint32_t    ncmds;        /* number of load commands */
+    uint32_t    sizeofcmds;    /* the size of all the load commands */
+    uint32_t    flags;        /* flags */
 };
-<span class="hljs-comment">/* Constant for the magic field of the mach_header (32-bit architectures) */</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	MH_MAGIC	0xfeedface	<span class="hljs-comment">/* the mach magic number */</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MH_CIGAM	0xcefaedfe	<span class="hljs-comment">/* NXSwapInt(MH_MAGIC) */</span></span>
-<span class="hljs-comment">/*
+/* Constant for the magic field of the mach_header (32-bit architectures) */
+#define    MH_MAGIC    0xfeedface    /* the mach magic number */
+#define MH_CIGAM    0xcefaedfe    /* NXSwapInt(MH_MAGIC) */
+/*
  * The 64-bit mach header appears at the very beginning of object files for
  * 64-bit architectures.
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mach_header_64</span> {</span>
-	<span class="hljs-keyword">uint32_t</span>	magic;		<span class="hljs-comment">/* mach magic number identifier */</span>
-	<span class="hljs-keyword">cpu_type_t</span>	cputype;	<span class="hljs-comment">/* cpu specifier */</span>
-	<span class="hljs-keyword">cpu_subtype_t</span>	cpusubtype;	<span class="hljs-comment">/* machine specifier */</span>
-	<span class="hljs-keyword">uint32_t</span>	filetype;	<span class="hljs-comment">/* type of file */</span>
-	<span class="hljs-keyword">uint32_t</span>	ncmds;		<span class="hljs-comment">/* number of load commands */</span>
-	<span class="hljs-keyword">uint32_t</span>	sizeofcmds;	<span class="hljs-comment">/* the size of all the load commands */</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags */</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved;	<span class="hljs-comment">/* reserved */</span>
+ */
+struct mach_header_64 {
+    uint32_t    magic;        /* mach magic number identifier */
+    cpu_type_t    cputype;    /* cpu specifier */
+    cpu_subtype_t    cpusubtype;    /* machine specifier */
+    uint32_t    filetype;    /* type of file */
+    uint32_t    ncmds;        /* number of load commands */
+    uint32_t    sizeofcmds;    /* the size of all the load commands */
+    uint32_t    flags;        /* flags */
+    uint32_t    reserved;    /* reserved */
 };
-<span class="hljs-comment">/* Constant for the magic field of the mach_header_64 (64-bit architectures) */</span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MH_MAGIC_64 0xfeedfacf <span class="hljs-comment">/* the 64-bit mach magic number */</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MH_CIGAM_64 0xcffaedfe <span class="hljs-comment">/* NXSwapInt(MH_MAGIC_64) */</span></span>
+/* Constant for the magic field of the mach_header_64 (64-bit architectures) */
+#define MH_MAGIC_64 0xfeedfacf /* the 64-bit mach magic number */
+#define MH_CIGAM_64 0xcffaedfe /* NXSwapInt(MH_MAGIC_64) */
 </code></pre>
 <p>Header的作用就是让系统能快速的定位其运行环境和文件类型，分析文件头的工具我们使用<code>otool</code>：</p>
-<pre class="highlight"><code class="shell">otool -hv MobileCal
+<pre><code class="shell">otool -hv MobileCal
 </code></pre>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.26.10.png" alt=""></p>
 <p>同时我们也可以看看fat的headers:</p>
-<pre class="highlight"><code class="shell">─[peterpan@panzhenpengdeMacBook-Air] - [~] - [2018-02-08 11:40:43]
+<pre><code class="shell">─[peterpan@panzhenpengdeMacBook-Air] - [~] - [2018-02-08 11:40:43]
 └─[1] otool  -f Bayinotool -f Bayin
 Fat headers
 fat_magic 0xcafebabe
@@ -404,10 +400,9 @@ architecture 1  #核心2
     align 2^14 (16384)
 </code></pre>
 <p>现在我们对于其中的一些参数还不清楚，我们继续往下看，<code>Load Command</code>是跟在头后面的加载命令区，所有的command之和加起来也就是上面的sizeofcmd字段的值，下面是load_command的结构体：</p>
-<h2 id="command"><a class="markdownIt-Anchor" href="#command"></a> Command</h2>
-<pre class="highlight"><code class="c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">load_command</span> {</span>
-    <span class="hljs-keyword">uint32_t</span> cmd;        <span class="hljs-comment">/* type of load command */</span>
-    <span class="hljs-keyword">uint32_t</span> cmdsize;    <span class="hljs-comment">/* total size of command in bytes */</span>
+<h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><pre><code class="c">struct load_command {
+    uint32_t cmd;        /* type of load command */
+    uint32_t cmdsize;    /* total size of command in bytes */
 };
 </code></pre>
 <p>这些命令以LC开头，不同的加载命令有不同的专用结构体，当然上面的两个属性是都有的，命令的名称和长度会告诉系统如何去处理后面的二进制数据，对系统内核加载器和动态链接器起指导作用。如果当前 <code>LC_SEGMENT</code> 包含 <code>section</code>，那么 <code>section</code> 的结构体紧跟在 <code>LC_SEGMENT</code> 的结构体之后，所占字节数由 <code>SEGMENT</code> 的 <code>cmdsize</code> 字段给出：</p>
@@ -472,20 +467,18 @@ architecture 1  #核心2
 <p><strong>补充：LC_DYSYMTAB符号表</strong></p>
 <p><code>LC_DYSYMTAB</code>符号表有非常大的作用，捕获到线上 <code>Crash</code> 或者 卡顿 堆栈的地址信息时，需要进行符号还原，进而确认卡顿、崩溃的具体位置，这个使用就要使用到<code>LC_DYSYMTAB</code>符号表；</p>
 <p>LC_DYSYMTAB符号表定义如下：</p>
-<pre class="highlight"><code class="c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">symtab_command</span> {</span>
-    <span class="hljs-keyword">uint32_t</span>    cmd;        <span class="hljs-comment">/* LC_SYMTAB */</span>
-    <span class="hljs-keyword">uint32_t</span>    cmdsize;    <span class="hljs-comment">/* sizeof(struct symtab_command) */</span>
-    <span class="hljs-keyword">uint32_t</span>    symoff;        <span class="hljs-comment">/* symbol table offset */</span>
-    <span class="hljs-keyword">uint32_t</span>    nsyms;        <span class="hljs-comment">/* number of symbol table entries */</span>
-    <span class="hljs-keyword">uint32_t</span>    stroff;        <span class="hljs-comment">/* string table offset */</span>
-    <span class="hljs-keyword">uint32_t</span>    strsize;    <span class="hljs-comment">/* string table size in bytes */</span>
+<pre><code class="c">struct symtab_command {
+    uint32_t    cmd;        /* LC_SYMTAB */
+    uint32_t    cmdsize;    /* sizeof(struct symtab_command) */
+    uint32_t    symoff;        /* symbol table offset */
+    uint32_t    nsyms;        /* number of symbol table entries */
+    uint32_t    stroff;        /* string table offset */
+    uint32_t    strsize;    /* string table size in bytes */
 };
-
 </code></pre>
 <p>符号表在 <code>Mach-O</code>目标文件中的地址可以通过<code>LC_SYMTAB</code>加载命令指定的 <code>symoff</code>找到，对应的符号名称在<code>stroff</code>，总共有<code>nsyms</code>条符号信息</p>
 <p>根据 <code>Frame Pointer</code>拿到函数调用的地址（<code>address</code>），然后用<code>address</code> 、符号表、字符串表的对应关系找到对应的函数名，这就是符号解析的思路；</p>
-<h2 id="segement"><a class="markdownIt-Anchor" href="#segement"></a> Segement</h2>
-<p><code>Mach-O</code> 文件有多个段（<code>Segment</code>），每个段有不同的功能。然后每个段又分为很多小的 <code>Section</code>。 <code>LC_SEGMENT</code> 意味着这部分文件需要映射到进程的地址空间去。一般有以下段名：</p>
+<h2 id="Segement"><a href="#Segement" class="headerlink" title="Segement"></a>Segement</h2><p><code>Mach-O</code> 文件有多个段（<code>Segment</code>），每个段有不同的功能。然后每个段又分为很多小的 <code>Section</code>。 <code>LC_SEGMENT</code> 意味着这部分文件需要映射到进程的地址空间去。一般有以下段名：</p>
 <ul>
 <li><code>__PAGEZERO</code>:　空指针陷阱段，映射到虚拟内存空间的第一页，用于捕捉对 NULL 指针的引用。</li>
 <li><code>__TEXT</code>:　包含了执行代码以及其他只读数据。该段数据可以 <code>VM_PROT_READ</code>(读)、<code>VM_PROT_EXECUTE</code>(执行)，不能被修改。</li>
@@ -493,70 +486,66 @@ architecture 1  #核心2
 <li><code>__LINKEDIT</code>:　链接器使用的符号以及其他表。</li>
 </ul>
 <p>段的结构体定义为：</p>
-<pre class="highlight"><code class="C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">segment_command</span> {</span> <span class="hljs-comment">/* for 32-bit architectures */</span>
-	<span class="hljs-keyword">uint32_t</span>	cmd;		<span class="hljs-comment">/* LC_SEGMENT */</span>
-	<span class="hljs-keyword">uint32_t</span>	cmdsize;	<span class="hljs-comment">/* includes sizeof section structs */</span>
-	<span class="hljs-keyword">char</span>		segname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* segment name */</span>
-	<span class="hljs-keyword">uint32_t</span>	vmaddr;		<span class="hljs-comment">/* memory address of this segment 段的虚拟内存地址*/</span>
-	<span class="hljs-keyword">uint32_t</span>	vmsize;		<span class="hljs-comment">/* memory size of this segment  段的虚拟内存大小*/</span>
-	<span class="hljs-keyword">uint32_t</span>	fileoff;	<span class="hljs-comment">/* file offset of this segment  段在文件中的偏移量*/</span>
-	<span class="hljs-keyword">uint32_t</span>	filesize;	<span class="hljs-comment">/* amount to map from the file  段在文件中的大小*/</span>
-	<span class="hljs-keyword">vm_prot_t</span>	maxprot;	<span class="hljs-comment">/* maximum VM protection */</span>
-	<span class="hljs-keyword">vm_prot_t</span>	initprot;	<span class="hljs-comment">/* initial VM protection */</span>
-	<span class="hljs-keyword">uint32_t</span>	nsects;		<span class="hljs-comment">/* number of sections in segment */</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags */</span>
+<pre><code class="C">struct segment_command { /* for 32-bit architectures */
+    uint32_t    cmd;        /* LC_SEGMENT */
+    uint32_t    cmdsize;    /* includes sizeof section structs */
+    char        segname[16];    /* segment name */
+    uint32_t    vmaddr;        /* memory address of this segment 段的虚拟内存地址*/
+    uint32_t    vmsize;        /* memory size of this segment  段的虚拟内存大小*/
+    uint32_t    fileoff;    /* file offset of this segment  段在文件中的偏移量*/
+    uint32_t    filesize;    /* amount to map from the file  段在文件中的大小*/
+    vm_prot_t    maxprot;    /* maximum VM protection */
+    vm_prot_t    initprot;    /* initial VM protection */
+    uint32_t    nsects;        /* number of sections in segment */
+    uint32_t    flags;        /* flags */
 };
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">segment_command_64</span> {</span> <span class="hljs-comment">/* for 64-bit architectures */</span>
-	<span class="hljs-keyword">uint32_t</span>	cmd;		<span class="hljs-comment">/* LC_SEGMENT_64 */</span>
-	<span class="hljs-keyword">uint32_t</span>	cmdsize;	<span class="hljs-comment">/* includes sizeof section_64 structs */</span>
-	<span class="hljs-keyword">char</span>		segname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* segment name */</span>
-	<span class="hljs-keyword">uint64_t</span>	vmaddr;		<span class="hljs-comment">/* memory address of this segment */</span>
-	<span class="hljs-keyword">uint64_t</span>	vmsize;		<span class="hljs-comment">/* memory size of this segment */</span>
-	<span class="hljs-keyword">uint64_t</span>	fileoff;	<span class="hljs-comment">/* file offset of this segment */</span>
-	<span class="hljs-keyword">uint64_t</span>	filesize;	<span class="hljs-comment">/* amount to map from the file */</span>
-	<span class="hljs-keyword">vm_prot_t</span>	maxprot;	<span class="hljs-comment">/* maximum VM protection */</span>
-	<span class="hljs-keyword">vm_prot_t</span>	initprot;	<span class="hljs-comment">/* initial VM protection */</span>
-	<span class="hljs-keyword">uint32_t</span>	nsects;		<span class="hljs-comment">/* number of sections in segment */</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags */</span>
+struct segment_command_64 { /* for 64-bit architectures */
+    uint32_t    cmd;        /* LC_SEGMENT_64 */
+    uint32_t    cmdsize;    /* includes sizeof section_64 structs */
+    char        segname[16];    /* segment name */
+    uint64_t    vmaddr;        /* memory address of this segment */
+    uint64_t    vmsize;        /* memory size of this segment */
+    uint64_t    fileoff;    /* file offset of this segment */
+    uint64_t    filesize;    /* amount to map from the file */
+    vm_prot_t    maxprot;    /* maximum VM protection */
+    vm_prot_t    initprot;    /* initial VM protection */
+    uint32_t    nsects;        /* number of sections in segment */
+    uint32_t    flags;        /* flags */
 };
-
 </code></pre>
 <p>其中 <code>nsects</code> 字段就是表明该段中有多少个 <code>section</code>。文件映射的起始位置是由 <code>fileoff</code> 给出，映射到地址空间的 <code>vmaddr</code> 处。</p>
-<h4 id="section"><a class="markdownIt-Anchor" href="#section"></a> Section</h4>
-<p><code>Section</code> 是具体有用的数据存放的地方。它的结构体跟随在 <code>LC_SEGMENT</code> 结构体之后，<code>LC_SEGMENT</code> 又在 <code>Load Commands</code> 中，但是 <code>segment</code> 的数据内容是跟在 <code>Load Commands</code> 之后的。它的结构体为：</p>
-<pre class="highlight"><code class="c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">section</span> {</span> <span class="hljs-comment">/* for 32-bit architectures */</span>
-	<span class="hljs-keyword">char</span>		sectname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* name of this section */</span>
-	<span class="hljs-keyword">char</span>		segname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* segment this section goes in */</span>
-	<span class="hljs-keyword">uint32_t</span>	addr;		<span class="hljs-comment">/* memory address of this section 该节在内存中的起始位置*/</span>
-	<span class="hljs-keyword">uint32_t</span>	size;		<span class="hljs-comment">/* size in bytes of this section 该节的大小*/</span>
-	<span class="hljs-keyword">uint32_t</span>	offset;		<span class="hljs-comment">/* file offset of this section 该节的文件偏移*/</span>
-	<span class="hljs-keyword">uint32_t</span>	align;		<span class="hljs-comment">/* section alignment (power of 2) 字节大小对齐*/</span>
-	<span class="hljs-keyword">uint32_t</span>	reloff;		<span class="hljs-comment">/* file offset of relocation entries 重定位入口的文件偏移*/</span>
-	<span class="hljs-keyword">uint32_t</span>	nreloc;		<span class="hljs-comment">/* number of relocation entries 需要重定位的入口数量*/</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags (section type and attributes) */</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved1;	<span class="hljs-comment">/* reserved (for offset or index) */</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved2;	<span class="hljs-comment">/* reserved (for count or sizeof) */</span>
+<h4 id="Section"><a href="#Section" class="headerlink" title="Section"></a>Section</h4><p><code>Section</code> 是具体有用的数据存放的地方。它的结构体跟随在 <code>LC_SEGMENT</code> 结构体之后，<code>LC_SEGMENT</code> 又在 <code>Load Commands</code> 中，但是 <code>segment</code> 的数据内容是跟在 <code>Load Commands</code> 之后的。它的结构体为：</p>
+<pre><code class="c">struct section { /* for 32-bit architectures */
+    char        sectname[16];    /* name of this section */
+    char        segname[16];    /* segment this section goes in */
+    uint32_t    addr;        /* memory address of this section 该节在内存中的起始位置*/
+    uint32_t    size;        /* size in bytes of this section 该节的大小*/
+    uint32_t    offset;        /* file offset of this section 该节的文件偏移*/
+    uint32_t    align;        /* section alignment (power of 2) 字节大小对齐*/
+    uint32_t    reloff;        /* file offset of relocation entries 重定位入口的文件偏移*/
+    uint32_t    nreloc;        /* number of relocation entries 需要重定位的入口数量*/
+    uint32_t    flags;        /* flags (section type and attributes) */
+    uint32_t    reserved1;    /* reserved (for offset or index) */
+    uint32_t    reserved2;    /* reserved (for count or sizeof) */
 };
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">section_64</span> {</span> <span class="hljs-comment">/* for 64-bit architectures */</span>
-	<span class="hljs-keyword">char</span>		sectname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* name of this section */</span>
-	<span class="hljs-keyword">char</span>		segname[<span class="hljs-number">16</span>];	<span class="hljs-comment">/* segment this section goes in */</span>
-	<span class="hljs-keyword">uint64_t</span>	addr;		<span class="hljs-comment">/* memory address of this section */</span>
-	<span class="hljs-keyword">uint64_t</span>	size;		<span class="hljs-comment">/* size in bytes of this section */</span>
-	<span class="hljs-keyword">uint32_t</span>	offset;		<span class="hljs-comment">/* file offset of this section */</span>
-	<span class="hljs-keyword">uint32_t</span>	align;		<span class="hljs-comment">/* section alignment (power of 2) */</span>
-	<span class="hljs-keyword">uint32_t</span>	reloff;		<span class="hljs-comment">/* file offset of relocation entries */</span>
-	<span class="hljs-keyword">uint32_t</span>	nreloc;		<span class="hljs-comment">/* number of relocation entries */</span>
-	<span class="hljs-keyword">uint32_t</span>	flags;		<span class="hljs-comment">/* flags (section type and attributes)*/</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved1;	<span class="hljs-comment">/* reserved (for offset or index) */</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved2;	<span class="hljs-comment">/* reserved (for count or sizeof) */</span>
-	<span class="hljs-keyword">uint32_t</span>	reserved3;	<span class="hljs-comment">/* reserved */</span>
+struct section_64 { /* for 64-bit architectures */
+    char        sectname[16];    /* name of this section */
+    char        segname[16];    /* segment this section goes in */
+    uint64_t    addr;        /* memory address of this section */
+    uint64_t    size;        /* size in bytes of this section */
+    uint32_t    offset;        /* file offset of this section */
+    uint32_t    align;        /* section alignment (power of 2) */
+    uint32_t    reloff;        /* file offset of relocation entries */
+    uint32_t    nreloc;        /* number of relocation entries */
+    uint32_t    flags;        /* flags (section type and attributes)*/
+    uint32_t    reserved1;    /* reserved (for offset or index) */
+    uint32_t    reserved2;    /* reserved (for count or sizeof) */
+    uint32_t    reserved3;    /* reserved */
 };
-
 </code></pre>
 <p>其中 <code>flag</code> 字段分为两个部分，一个是区域类型（<code>section type</code>），一个是区域属性（<code>section attributes</code>）。其中 <code>type</code> 是互斥的，即只能有一个类型，而 <code>attributes</code> 不是互斥的，可以有多个属性。如果段（segment）中的任何一个 <code>section</code> 拥有属性 <code>S_ATTR_DEBUG</code>，那么该段所有的 <code>section</code> 都必须拥有这个属性。具体的flag字段内容以及意义请参考 <code>/usr/include/mach-o/loader.h</code>。</p>
 <p>但是section的名字我们在此不做深究，还没有到那个程度，多说无益，不然就是完全抄袭了。</p>
-<h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
-<ul>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
 <li><a href="https://www.jianshu.com/p/7c41b03c9eb3" target="_blank" rel="external">镜观的博客</a></li>
 <li><a href="http://iphonedevwiki.net/index.php/Cycript_Tricks" target="_blank" rel="external">Wiki Cycript tricks</a></li>
 <li><a href="https://elliotsomething.github.io/2017/06/01/Mach-O%E5%AD%A6%E4%B9%A0/" target="_blank" rel="external">Mach-O学习</a></li>
@@ -565,7 +554,7 @@ architecture 1  #核心2
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/07/iOS逆向学习-五/" data-id="cjg4spwal005ixubr9fifth89" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/02/07/iOS逆向学习-五/" data-id="cjg66q993005n2nbr4w30jbv4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -633,8 +622,8 @@ architecture 1  #核心2
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

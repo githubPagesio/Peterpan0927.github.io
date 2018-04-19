@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -103,141 +103,134 @@
       
         <p>汇编我认为是一门需要非常小心的语言，在这里我们已经接近了计算机最底层的世界，从原理上来观察我们高级语言中简简单单就能实现的功能，在资源极其有限的情况下编写代码是对我们的大局观和逻辑思维能力一个极大的考验</p>
 <a id="more"></a>
-<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>在探讨汇编语言之前首先我们对CPU中的寄存器关系有一个初步的了解，不然直接看后面的代码会让人眼花缭乱，不知所云，这里展示一个8086微处理器的内部结构：</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在探讨汇编语言之前首先我们对CPU中的寄存器关系有一个初步的了解，不然直接看后面的代码会让人眼花缭乱，不知所云，这里展示一个8086微处理器的内部结构：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.29.16.png" alt=""></p>
 <p>寄存器的用法会因为指令的不同而发生改变，比如在循环中我们可以通过<code>ecx</code>寄存器中的值来作为循环的次数，这个是通过<code>loop</code>指令，其中有些寄存器充当的是高级语言中指针的作用，我们通过下面这张图来观察一下：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.32.44.png" alt=""></p>
 <p>虽然在上面的图中都只有16位的寄存器，但其实已经做了扩展，在32位模式下可以通过如<code>eax</code>这样的形式来访问32位的寄存器，扩展的寄存器和原来的寄存器有着密不可分的关系，相当于是在原来的存储空间上向上增加了一倍，在64位的机器上我们通过如<code>rax</code>这样的形式来访问。在8086中由于历史遗留问题，CPU是16位，地址总线是20位，所以在寻址上会有些特殊，感兴趣的可以自行查阅。</p>
-<h1 id="ds和cs"><a class="markdownIt-Anchor" href="#ds和cs"></a> DS和CS</h1>
-<p>段寄存器属于程序员手动操作的比较少的地方，但是也需要去了解，首先就是CS寄存器，我们都知道CPU是按照某种顺序一条一条的执行指令，这个顺序就存放在我们的CS段寄存器之中，通俗的来说，CS就是告诉CPU去哪个位置找内容当成指令去执行，有指令自然也有有数据，这个数据的位置就是通过DS段寄存器得到，DS是数据开始的段地址，也就是将其作为基址，所以逻辑地址应该是DS*比例因子+偏移地址，比如我们要改变起始地址：</p>
-<pre class="highlight"><code class="assembly">mov		ax, 1000H
-mov		ds, ax
-mov		[0], al
+<h1 id="DS和CS"><a href="#DS和CS" class="headerlink" title="DS和CS"></a>DS和CS</h1><p>段寄存器属于程序员手动操作的比较少的地方，但是也需要去了解，首先就是CS寄存器，我们都知道CPU是按照某种顺序一条一条的执行指令，这个顺序就存放在我们的CS段寄存器之中，通俗的来说，CS就是告诉CPU去哪个位置找内容当成指令去执行，有指令自然也有有数据，这个数据的位置就是通过DS段寄存器得到，DS是数据开始的段地址，也就是将其作为基址，所以逻辑地址应该是DS*比例因子+偏移地址，比如我们要改变起始地址：</p>
+<pre><code class="assembly">mov        ax, 1000H
+mov        ds, ax
+mov        [0], al
 </code></pre>
 <p>如果我们想要向指定的内存地址中传值，就可以使用上面这种写法，但是段寄存器不支持直接将数据送入，所以我们将寄存器作为载体，如果是CS的话，根本就是只读的，所以也不需要管将什么作为载体了。说到这两个就离不开IP，IP是指令指针，在CS段寄存器中保存的是指令的段基址，IP中保存的是CPU将要执行代码所在物理内存的偏移地址，CS只是一个载体，之后说到的<code>call</code>和<code>ret</code>指令本质上也是在操作CS和IP。</p>
 <p>所以也就是说CS和DS段寄存器存储的都是段基址，只不过一个是代码段，一个是数据段。</p>
-<h1 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h1>
-<p>由于前面的内容都是一些基础语法方面的，所以就直接从数组这一块开始好了，当我们使用高级语言的时候，应该也会想想过数组的底层到底是如何去实现的，那么我们首先通过循环读取数据到数组的代码来观察一下：</p>
-<pre class="highlight"><code class="assembly">.CODE
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>由于前面的内容都是一些基础语法方面的，所以就直接从数组这一块开始好了，当我们使用高级语言的时候，应该也会想想过数组的底层到底是如何去实现的，那么我们首先通过循环读取数据到数组的代码来观察一下：</p>
+<pre><code class="assembly">.CODE
 _start:
-			mov	  nbrElts, 0	;初始化数组中的元素的个数
-			lea	  ebx, nbrArray ;取出数组的首地址
-whilepos:	input number, 20	;这是书的作者为了方便我们的输入输出对其做了一个整合
-			atod  number		;转换为整数
-			jng   endwhile		;如果不是正数就退出
-			mov	  [ebx], eax	;存储数组中的数字
-			inc	  nbrElts
-			add	  ebx, 4
-			jmp	  whilepos
+            mov      nbrElts, 0    ;初始化数组中的元素的个数
+            lea      ebx, nbrArray ;取出数组的首地址
+whilepos:    input number, 20    ;这是书的作者为了方便我们的输入输出对其做了一个整合
+            atod  number        ;转换为整数
+            jng   endwhile        ;如果不是正数就退出
+            mov      [ebx], eax    ;存储数组中的数字
+            inc      nbrElts
+            add      ebx, 4
+            jmp      whilepos
 endwhile:
 </code></pre>
 <p>通过上面的代码我们可以发现我们通过一个变量去存放数组的长度，然后通过寄存器间接寻址去得到当前数组最后一个元素的地址，因为数组是在内存中连续存储的，所以我们每读入一次将地址的值累加即可，当然要根据这个数组中存放的是什么类型的数据(字节，单字，双字)。剩下要说的就是对于数组进行一些基本的操作了，比如求和，求平均数等。</p>
-<pre class="highlight"><code class="assembly">; 找出总和和平均值
-			mov		eax, 0
-			lea		ebx, nbrArray	;取得数组首地址
-			mov		ecx, nbrElts
-			jecxz	quit			;不是数字则退出
-forCount1:  add		eax, [ebx]		;循环求和
-			add		ebx, 4			
-			loop	forCount1
-			
-			cdq						;扩展sum到4倍字长
-			idiv	nbrElts			;计算平均数
-			dtoa	outValue, eax
-			output	outValue
+<pre><code class="assembly">; 找出总和和平均值
+            mov        eax, 0
+            lea        ebx, nbrArray    ;取得数组首地址
+            mov        ecx, nbrElts
+            jecxz    quit            ;不是数字则退出
+forCount1:  add        eax, [ebx]        ;循环求和
+            add        ebx, 4            
+            loop    forCount1
+
+            cdq                        ;扩展sum到4倍字长
+            idiv    nbrElts            ;计算平均数
+            dtoa    outValue, eax
+            output    outValue
 </code></pre>
 <p>其实除了上面这种对于地址的累加还有很多有效的方式去访问数组的元素，在这里就先不讨论</p>
-<h1 id="过程"><a class="markdownIt-Anchor" href="#过程"></a> 过程</h1>
-<p>这个概念可能说起来大家会觉得有点奇怪，什么是过程？在汇编语言中的过程就类似于高级过程中的函数，如果我们把所有的功能全部都写在一个主函数里面，毫无疑问就会让程序显得晦涩难懂，并且debug的难度要大大上升，代码阅读性也是极差的。过程就是把我们的汇编代码划分成多个容易处理的任务，介绍过程之前首先要说的就是8086的堆栈：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-26%20%E4%B8%8B%E5%8D%883.05.15.png" alt=""></p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>这个概念可能说起来大家会觉得有点奇怪，什么是过程？在汇编语言中的过程就类似于高级过程中的函数，如果我们把所有的功能全部都写在一个主函数里面，毫无疑问就会让程序显得晦涩难懂，并且debug的难度要大大上升，代码阅读性也是极差的。过程就是把我们的汇编代码划分成多个容易处理的任务，介绍过程之前首先要说的就是8086的堆栈：</p>
+<p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-26%20%E4%B8%8B%E5%8D%883.05.15.png" alt=""></p>
 <p>我们的程序中会有一句话去分配我们的堆栈大小，比如说我们要分配4096字节的未初始化的储存空间：</p>
-<pre class="highlight"><code class="assembly">.STACK	4096
+<pre><code class="assembly">.STACK    4096
 </code></pre>
 <p>我们通过<code>push</code>和<code>pop</code>来对我们的堆栈进行操作，一个是将操作数压栈，一个是弹出。一开始有一个ESP指针，指向堆栈的顶部，当一个字的操作数入栈的时候，堆栈指针ESP就会减2，也就是这个操作数所占的字节数大小。当我们使用<code>pop</code>的时候，如果操作数是字长的，就会复制ESP指针指向的字长的值，将其存放在目的地址中，然后将ESP指针减2.</p>
 <p>之前就会注意到汇编语言在编程的时候，寄存器的资源不是很多，为了保证中间过程值不丢失，就会将变量转移，那么为了避免丢失数据值，我们就会将寄存器存放的值压栈，这也是堆栈的意义所在，比如说我们需要交换两个寄存器之间的值除了可以使用<code>xchg</code>之外还可以通过堆栈实现：</p>
-<pre class="highlight"><code class="assembly">push	eax
-push	ebx
-pop		ebx
-pop		eax
+<pre><code class="assembly">push    eax
+push    ebx
+pop        ebx
+pop        eax
 ;或者使用mov指令
-push	eax
-mov		eax, ebx
-pop		ebx
+push    eax
+mov        eax, ebx
+pop        ebx
 </code></pre>
 <p>了解到了堆栈之后，就可以开始写我们的过程体了，也就是高级语言中所谓的函数部分，其中需要用到一个叫做EBP的寄存器，从名字上来看和我们的栈指针ESP非常的像，ESP是实时的去记录当前的栈顶的栈指针，因此保存当前esp到一个ebp中保持不变，后续用ebp来访问参数和局部变量就很清楚，而且还方便于调试器分析函数调用过程中的堆栈情况。通过一个求最大公约数的程序我们可以很直观的理解：</p>
-<pre class="highlight"><code class="assembly">;GCD是过程体的名字，可以通过call 过程体名来调用
-GCD		PROC	NEAR32
-		push	ebp			;保存当前的ebp
-		mov		ebp, esp	;EBP设为当前的堆栈指针
-		sub		esp, 4		;给GCD临时变量预留4个字节
-		push	ebx			;保存edx
-		pushf				;保存标志位
-		
-		mov		eax, [ebp+8]
-		mov		[ebp-4], eax;第一个数字赋值给临时变量
-		mov		edx, [ebp+8];第二个数字存储在余数部分
-until0: mov		eax, [ebp-4];第一个数字或者上次的除数作为被除数放在eax中 
-		mov		[ebp-4], edx;第二个数字或者上一次的余数放在临时变量
-		mov		edx, 0		;清空余数部分
-		div		DWORD PTR [ebp-4]
-		cmp		edx, 0		;判断余数是否为0
-		jnz		until0
-		
-		mov		eax, [ebp-4];将结果存入eax
-		popf				;恢复标志位
-		pop		edx			;恢复edx
-		mov		esp, ebp	;恢复局部变量
-		pop		ebp			;恢复ebp
-		ret		8			;返回，释放参数
-GCD		ENDP
-		ENDP
+<pre><code class="assembly">;GCD是过程体的名字，可以通过call 过程体名来调用
+GCD        PROC    NEAR32
+        push    ebp            ;保存当前的ebp
+        mov        ebp, esp    ;EBP设为当前的堆栈指针
+        sub        esp, 4        ;给GCD临时变量预留4个字节
+        push    ebx            ;保存edx
+        pushf                ;保存标志位
+
+        mov        eax, [ebp+8]
+        mov        [ebp-4], eax;第一个数字赋值给临时变量
+        mov        edx, [ebp+8];第二个数字存储在余数部分
+until0: mov        eax, [ebp-4];第一个数字或者上次的除数作为被除数放在eax中 
+        mov        [ebp-4], edx;第二个数字或者上一次的余数放在临时变量
+        mov        edx, 0        ;清空余数部分
+        div        DWORD PTR [ebp-4]
+        cmp        edx, 0        ;判断余数是否为0
+        jnz        until0
+
+        mov        eax, [ebp-4];将结果存入eax
+        popf                ;恢复标志位
+        pop        edx            ;恢复edx
+        mov        esp, ebp    ;恢复局部变量
+        pop        ebp            ;恢复ebp
+        ret        8            ;返回，释放参数
+GCD        ENDP
+        ENDP
 </code></pre>
 <p>从上面我们不难看出是通过局部变量来完成的整个程序，而这个局部变量依赖于我们的EBP寄存器，通过偏移量来访问，这也正好验证了我们上面所说，其中第21行代码其实还可以通过改变ESP指针来达到同样的效果：</p>
-<pre class="highlight"><code class="assembly">add		esp, 4
+<pre><code class="assembly">add        esp, 4
 </code></pre>
 <p>同时我们还注意到这里的返回是有参数的，也就是说除了弹出偏移地址之外，相当于还执行了一句</p>
-<pre class="highlight"><code class="assembly">add		esp, 8
+<pre><code class="assembly">add        esp, 8
 </code></pre>
 <p>相当于也清空了之前压入栈求最大公约数的两个参数了，通过这样的详细的讲解相信大家都会清楚这个过程了。那么我们不禁联想到是不是也可以将地址作为参数进行传递呢？比如寻找一个数组中的最小元素：</p>
-<pre class="highlight"><code class="assembly">Minimum		PROC	NEAR32
-			push	ebp
-			mov		ebp, esp
-			pushad				;保存所有寄存器
-			pushf
-			
-			mov		ebx, [ebp+14]
-			mov		ecx, 0
-			mov		cx, [ebp+12]
-			mov		eax, 7fffffffh
-			jecxz	endForCount
-forCount:   	cmp		[ebx], eax
-				jnl		endIfLess
-				mov		eax, [ebx]
-endIfLess:  	add		ebx, 4
-				loop	forCount
-endForCount:	mov		ebx, [ebp+8]
-				mov		[ebx], eax
-				popf
-				popad
-				pop		ebp
-				ret
-Minimum		ENDP
+<pre><code class="assembly">Minimum        PROC    NEAR32
+            push    ebp
+            mov        ebp, esp
+            pushad                ;保存所有寄存器
+            pushf
+
+            mov        ebx, [ebp+14]
+            mov        ecx, 0
+            mov        cx, [ebp+12]
+            mov        eax, 7fffffffh
+            jecxz    endForCount
+forCount:       cmp        [ebx], eax
+                jnl        endIfLess
+                mov        eax, [ebx]
+endIfLess:      add        ebx, 4
+                loop    forCount
+endForCount:    mov        ebx, [ebp+8]
+                mov        [ebx], eax
+                popf
+                popad
+                pop        ebp
+                ret
+Minimum        ENDP
 </code></pre>
-<h1 id="ret和call"><a class="markdownIt-Anchor" href="#ret和call"></a> ret和call</h1>
-<p>结合之前说过的CS和IP，我们可以来推断一下<code>call</code>和<code>ret</code>究竟是做了什么来实现我们在高级语言中的函数功能，call和ret指令都是转移指令，它们都修改IP，或同时修改CS和IP。</p>
-<h2 id="call"><a class="markdownIt-Anchor" href="#call"></a> call</h2>
-<p><code>call</code>我们可以理解成跳转执行函数，事实上这也是它所做的，首先<code>call</code>会将IP寄存器所指向的下一条指令压栈，保存起来，然后通过<code>jmp</code>指令跳转到我们的子程序部分执行，用代码描述就是:</p>
-<pre class="highlight"><code class="assembly">push	ip
+<h1 id="ret和call"><a href="#ret和call" class="headerlink" title="ret和call"></a>ret和call</h1><p>结合之前说过的CS和IP，我们可以来推断一下<code>call</code>和<code>ret</code>究竟是做了什么来实现我们在高级语言中的函数功能，call和ret指令都是转移指令，它们都修改IP，或同时修改CS和IP。</p>
+<h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><p><code>call</code>我们可以理解成跳转执行函数，事实上这也是它所做的，首先<code>call</code>会将IP寄存器所指向的下一条指令压栈，保存起来，然后通过<code>jmp</code>指令跳转到我们的子程序部分执行，用代码描述就是:</p>
+<pre><code class="assembly">push    ip
 jmp near ptr 标号
 </code></pre>
 <p>如果要实现段间转移的时候就要将CS段寄存器也一起保存，这个时候跳转就是使用长跳转，编译过后的机器码已经贴上了跳转点的具体地址，而不是偏移量了(因为参考不同)。用代码描述就是：</p>
-<pre class="highlight"><code class="assembly">push	cs
-push	ip
-jmp	far	ptr	标号
+<pre><code class="assembly">push    cs
+push    ip
+jmp    far    ptr    标号
 </code></pre>
-<h2 id="ret和retf"><a class="markdownIt-Anchor" href="#ret和retf"></a> ret和retf</h2>
-<p>ret指令用栈中的数据，修改IP的内容，从而实现近转移；</p>
+<h2 id="ret和retf"><a href="#ret和retf" class="headerlink" title="ret和retf"></a>ret和retf</h2><p>ret指令用栈中的数据，修改IP的内容，从而实现近转移；</p>
 <p>retf指令用栈中的数据，修改CS和IP的内容，从而实现远转移。</p>
 <p>CPU执行ret指令时，进行下面的两步操作：</p>
 <ol>
@@ -253,17 +246,17 @@ jmp	far	ptr	标号
 </ol>
 <p>用汇编语法来解释ret和retf指令，则：</p>
 <p>CPU执行ret指令时，相当于进行：</p>
-<pre class="highlight"><code class="assembly">pop IP 
+<pre><code class="assembly">pop IP
 </code></pre>
 <p>CPU执行retf指令时，相当于进行：</p>
-<pre class="highlight"><code class="assembly">pop IP
+<pre><code class="assembly">pop IP
 pop CS
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/25/8086汇编小结/" data-id="cjg4spw6q0003xubrmgel6ygv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/25/8086汇编小结/" data-id="cjg66q94x00022nbr6v40xhyw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
@@ -331,8 +324,8 @@ pop CS
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

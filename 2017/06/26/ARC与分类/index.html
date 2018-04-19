@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -101,12 +101,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ARC与分类</p>
-<a id="more"></a>
-<h1 id="arc与分类"><a class="markdownIt-Anchor" href="#arc与分类"></a> ARC与分类</h1>
-<h2 id="自动释放池"><a class="markdownIt-Anchor" href="#自动释放池"></a> 自动释放池</h2>
-<p>自动释放池当中存储着OC对象，在自动释放池销毁的时候，会自动调用存储在该自动释放池中所有对象的release方法。于是我们不需要去手动的release对象了。</p>
-<pre class="highlight"><code class="objective-c">@autoreleasepool{
+        <p>ARC与分类<br><a id="more"></a></p>
+<h1 id="ARC与分类"><a href="#ARC与分类" class="headerlink" title="ARC与分类"></a>ARC与分类</h1><h2 id="自动释放池"><a href="#自动释放池" class="headerlink" title="自动释放池"></a>自动释放池</h2><p>自动释放池当中存储着OC对象，在自动释放池销毁的时候，会自动调用存储在该自动释放池中所有对象的release方法。于是我们不需要去手动的release对象了。</p>
+<pre><code class="objective-c">@autoreleasepool{
   //将对象存储到自动释放池当中去
   //因为autorelease方法返回的是对象本身，所以可以这样写：
   Person *p1 = [[[Person alloc] init] autorelease];
@@ -121,13 +118,12 @@
 <li>将对象存储到自动释放池，并不会使对象的引用计数器加一</li>
 <li>自动释放池可以嵌套，在自动释放池结束的时候发送release消息</li>
 </ul>
-<h2 id="类方法的两点规范"><a class="markdownIt-Anchor" href="#类方法的两点规范"></a> 类方法的两点规范</h2>
-<p><strong>1.第一个规范：</strong></p>
+<h2 id="类方法的两点规范"><a href="#类方法的两点规范" class="headerlink" title="类方法的两点规范"></a>类方法的两点规范</h2><p><strong>1.第一个规范：</strong></p>
 <p>要求提供和自定义构造方法功能相同的类方法：</p>
-<pre class="highlight"><code class="objective-c">- (instancetype)initWithName:(NSString *)name{
-	if(self = [super init]){
+<pre><code class="objective-c">- (instancetype)initWithName:(NSString *)name{
+    if(self = [super init]){
       self.name = name;
-	}
+    }
   return self;
 }
 
@@ -137,12 +133,11 @@
 </code></pre>
 <p><strong>2.第二个规范</strong>:</p>
 <p>一般而言我们写一个类，会为我们的类创造一个和类同名的类方法，要求被创建的对象在类方法内就已经被autorelease过</p>
-<pre class="highlight"><code class="objective-c">+ (instancetype)pig{
+<pre><code class="objective-c">+ (instancetype)pig{
   return [[[self alloc] init] autorelease];
 }
 </code></pre>
-<h2 id="arc机制概述"><a class="markdownIt-Anchor" href="#arc机制概述"></a> ARC机制概述</h2>
-<p><strong>1.什么是ARC</strong></p>
+<h2 id="ARC机制概述"><a href="#ARC机制概述" class="headerlink" title="ARC机制概述"></a>ARC机制概述</h2><p><strong>1.什么是ARC</strong></p>
 <p>系统自动的帮我们计算对象的引用计数器，从此就不需要手动的进行内存管理了，当ARC开启的时候，编译器会自动在合适的地方插入retain,release,autorelease代码，编译器会自动的为对象作引用计数，并且永远不要手动调用dealloc。</p>
 <p>注意：ARC是编译器机制，在编译器编译代码的时候，会在合适的地方加入retain,release,autorelease方法。</p>
 <p><strong>2.ARC下，对象什么时候被释放</strong></p>
@@ -151,12 +146,12 @@
 <p><strong>3.强指针和弱指针</strong></p>
 <p>默认情况下一个指针就是强指针，也可以用<code>__strong</code>来标示一个强指针，而使用<code>__weak</code>标示的就是弱指针。</p>
 <p>无论是强指针还是弱指针，都是指针，可以用来存储地址，唯一不同的是在ARC模式下，他们用来作为回收对象的基准。</p>
-<p>如果一个对象没有任何的强指针指向这个对象的时候，对象就会被<strong>立即</strong>释放。</p>
+<p>如果一个对象没有任何的强指针指向这个对象的时候，对象就会被<strong>立即</strong>释放。 </p>
 <ul>
 <li>指向对象的所有强指针被回收</li>
 <li>指向对象的所有强指针被赋值为nil</li>
 </ul>
-<pre class="highlight"><code class="objective-c">//该对象仍然会在if语句执行完的时候释放，因为只要没有强指针指就会被释放
+<pre><code class="objective-c">//该对象仍然会在if语句执行完的时候释放，因为只要没有强指针指就会被释放
 int main(){
   __weak Person *p2 = nil;
   if(1){
@@ -166,7 +161,7 @@ int main(){
 }
 </code></pre>
 <p>在ARC机制下，当对象被回收的时候，原来指向这个对象的弱指针会自动设置为nil</p>
-<pre class="highlight"><code class="objective-c">Person *p1 = [Person new];
+<pre><code class="objective-c">Person *p1 = [Person new];
 __weak Person *p2 = nil;
 p2 = p1;
 p1 = nil;
@@ -175,27 +170,24 @@ p1 = nil;
 [p2 sayHi];
 </code></pre>
 <p><strong>4.关于参数的问题</strong></p>
-<p>在ARC的机制下，@property的参数就不能使用retain了，因为retain代表的是MRC模式下标准的内存管理代码。我们在ARC机制下setter方法，直接赋值即可，在这个机制下，当一个类的属性是OC对象的时候，我们关注的重点是应该声明的是强类型还是弱类型。</p>
+<p>在ARC的机制下，@property的参数就不能使用retain了，因为retain代表的是MRC模式下标准的内存管理代码。我们在ARC机制下setter方法，直接赋值即可，在这个机制下，当一个类的属性是OC对象的时候，我们关注的重点是应该声明的是强类型还是弱类型。 </p>
 <p>在ARC机制下，如果属性的类型是OC对象类型的，使用strong</p>
 <p>如果属性的类型不是OC对象类型的，使用assign，只有指针才有强弱之分。</p>
-<h2 id="arc机制下的循环引用"><a class="markdownIt-Anchor" href="#arc机制下的循环引用"></a> ARC机制下的循环引用</h2>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%881.50.46.png" alt=""></p>
+<h2 id="ARC机制下的循环引用"><a href="#ARC机制下的循环引用" class="headerlink" title="ARC机制下的循环引用"></a>ARC机制下的循环引用</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%881.50.46.png" alt=""></p>
 <p>当if语句执行完的时候，指针被释放，但是两个对象之间存在着互相的强指针引用，导致无法释放而内存泄漏。</p>
 <p>这个时候只需要把book的那个owner的属性参数改成weak即可。</p>
 <p>所以在ARC机制下，两个对象相互引用的时候如果两方都使用strong，就会导致循环引用</p>
-<h2 id="mrc和arc兼容与转换"><a class="markdownIt-Anchor" href="#mrc和arc兼容与转换"></a> MRC和ARC兼容与转换</h2>
-<p>程序使用的是ARC开发的，但是其中某些类使用的是MRC</p>
+<h2 id="MRC和ARC兼容与转换"><a href="#MRC和ARC兼容与转换" class="headerlink" title="MRC和ARC兼容与转换"></a>MRC和ARC兼容与转换</h2><p>程序使用的是ARC开发的，但是其中某些类使用的是MRC</p>
 <p>使用命令<code>fno-objc-arc</code></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%882.05.27.png" alt=""></p>
 <p>MRC可以转换成ARC，但是不能转换回去了，所以在进行转换之前要进行备份</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-25%20%E4%B8%8B%E5%8D%884.18.53.png" alt=""></p>
-<h2 id="分类的基本使用"><a class="markdownIt-Anchor" href="#分类的基本使用"></a> 分类的基本使用</h2>
-<p>比如写一个学生类的时候，类中有很多的方法，吃喝拉撒玩等等，如果写在同一个类模块中虽然是可以，但是会显得很臃肿，后期难以维护。</p>
+<h2 id="分类的基本使用"><a href="#分类的基本使用" class="headerlink" title="分类的基本使用"></a>分类的基本使用</h2><p>比如写一个学生类的时候，类中有很多的方法，吃喝拉撒玩等等，如果写在同一个类模块中虽然是可以，但是会显得很臃肿，后期难以维护。</p>
 <p>分类就是把一个类分成多个模块，添加分类之后，会生成.h和.m的模块</p>
 <p>1.模块的文件名+分类名.h</p>
 <p>2.模块的文件名+分类名.m</p>
 <p>添加的分类也分声明和实现</p>
-<pre class="highlight"><code class="objective-c">@interface 本类名(分类名)
+<pre><code class="objective-c">@interface 本类名(分类名)
 @end
 //不是代表创建一个新类，而是对一个已有的类添加一个分类，小括弧中是这个分类的名字，一个类可以添加多个分类
 </code></pre>
@@ -206,9 +198,8 @@ p1 = nil;
 <p>2.在分类中可以写@property，但是只会生成getter和setter方法的声明，不会生成私有属性和实现</p>
 <p>3，在分类中的方法不能直接访问本类的真私有属性（定义在本类的@implementation中的），但是可以通过getter和setter方法来访问属性。在其中有一个补充知识点就是关于真私有对象和私有对象，具体参考<a href="http://blog.csdn.net/frank_jb/article/details/49098171" target="_blank" rel="external">博客</a></p>
 <p>4.如果分类和本类中有同名的方法，优先调用分类中的方法，哪怕没有引入分类的头文件，如果多个分类中有相同的方法，优先调用最后编译的分类。</p>
-<h2 id="非正式协议"><a class="markdownIt-Anchor" href="#非正式协议"></a> 非正式协议</h2>
-<p>分类的作用在于我们可以给我们的类分模块，那么同样的，给系统自带的类写分类，这个就叫做非正式协议</p>
-<pre class="highlight"><code class="objective-c">//NSObject的分类
+<h2 id="非正式协议"><a href="#非正式协议" class="headerlink" title="非正式协议"></a>非正式协议</h2><p>分类的作用在于我们可以给我们的类分模块，那么同样的，给系统自带的类写分类，这个就叫做非正式协议</p>
+<pre><code class="objective-c">//NSObject的分类
 - (void)run{
   NSLog(@&quot;我在跑&quot;);
 }
@@ -222,28 +213,26 @@ Person *p1 = [Person new];
 <li>为一个已经存在的类添加方法</li>
 <li>为一个庞大的类分类，便于管理</li>
 </ul>
-<pre class="highlight"><code class="objective-c">//为NSString类型增添一个统计当前字符串有多少个阿拉伯数字的个数的方法
+<pre><code class="objective-c">//为NSString类型增添一个统计当前字符串有多少个阿拉伯数字的个数的方法
 - (int)numberCount{
-  	int count = 0;
-  	for(int i = 0 ; i &lt; self.length ; i++){
-  		unichar ch = [self characterAtIndex:i];
-  		if(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){
-    		count++;
-  		}
-	}
+      int count = 0;
+      for(int i = 0 ; i &lt; self.length ; i++){
+          unichar ch = [self characterAtIndex:i];
+          if(ch &gt;= &#39;0&#39; &amp;&amp; ch &lt;= &#39;9&#39;){
+            count++;
+          }
+    }
   return count;
 }
-
 </code></pre>
-<h2 id="arc机制和垃圾回收机制的区别"><a class="markdownIt-Anchor" href="#arc机制和垃圾回收机制的区别"></a> ARC机制和垃圾回收机制的区别</h2>
-<p>GC：程序在运行的期间，有一个东西叫做垃圾回收器，不断的扫描堆中的对象是否无人使用</p>
-<pre class="highlight"><code class="java">Person *p1 = [Person <span class="hljs-keyword">new</span>];
-p1 = <span class="hljs-keyword">null</span>;
-<span class="hljs-comment">//在指针赋值为空之后，这个对象可能在，可能不在</span>
+<h2 id="ARC机制和垃圾回收机制的区别"><a href="#ARC机制和垃圾回收机制的区别" class="headerlink" title="ARC机制和垃圾回收机制的区别"></a>ARC机制和垃圾回收机制的区别</h2><p>GC：程序在运行的期间，有一个东西叫做垃圾回收器，不断的扫描堆中的对象是否无人使用</p>
+<pre><code class="java">Person *p1 = [Person new];
+p1 = null;
+//在指针赋值为空之后，这个对象可能在，可能不在
 </code></pre>
 <p>ARC：在编译的时候就在合适的地方插入retain，插入的代码足以让对象无人引用的时候，引用计数器为0.</p>
 <p>补充：使用MRC中，在使用构造方法赋值的时候，也要先release旧的，再retain新的</p>
-<pre class="highlight"><code class="objective-c">Car *bmw = [Car new];
+<pre><code class="objective-c">Car *bmw = [Car new];
 Person *p1 = [[Person alloc] initWithCar:bmw];
 //此时通过构造方法赋值，需要在构造方法中调用setter方法
 [p1 release];
@@ -260,7 +249,7 @@ Person *p1 = [[Person alloc] initWithCar:bmw];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/26/ARC与分类/" data-id="cjg4spw76000cxubrf0d9w0tw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/26/ARC与分类/" data-id="cjg66q95h000g2nbrxt98umyi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -328,8 +317,8 @@ Person *p1 = [[Person alloc] initWithCar:bmw];
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

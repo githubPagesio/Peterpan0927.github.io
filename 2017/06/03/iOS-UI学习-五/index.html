@@ -42,8 +42,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -100,14 +100,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UI初步（五）</p>
-<a id="more"></a>
-<h1 id="ui基础day6"><a class="markdownIt-Anchor" href="#ui基础day6"></a> UI基础Day6</h1>
-<h2 id="1tableview基本使用"><a class="markdownIt-Anchor" href="#1tableview基本使用"></a> 1.tableView基本使用</h2>
-<p>仅仅在main.storyboard中加入一个UITableView的控件，可以显示如下的效果：</p>
+        <p>UI初步（五）<br><a id="more"></a></p>
+<h1 id="UI基础Day6"><a href="#UI基础Day6" class="headerlink" title="UI基础Day6"></a>UI基础Day6</h1><h2 id="1-tableView基本使用"><a href="#1-tableView基本使用" class="headerlink" title="1.tableView基本使用"></a>1.tableView基本使用</h2><p>仅仅在main.storyboard中加入一个UITableView的控件，可以显示如下的效果：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/11A23983-B207-46FA-BD95-D941390BFF4A.png" alt=""></p>
 <p>其中每一个小横行被称作cell，我们可以使用代理的方式来添加每一行中的信息和cell的数量，注意，这两个方法在协议中是用@required来修饰的，表示必须实现，否则就会报错：</p>
-<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
+<pre><code class="objective-c">#import &quot;ViewController.h&quot;
 
 @interface ViewController ()&lt;UITableViewDataSource&gt;
 
@@ -121,7 +118,7 @@
 //创建cell的数量
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //根据自定义返回每一节的cell数量和内容
-  	 NSInteger row = 0;
+       NSInteger row = 0;
     switch (section) {
         case 0:
             row = 3;
@@ -140,7 +137,7 @@
 //编辑cell中的文本内容
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    
+
    switch (indexPath.section) {
         case 0:
             switch (indexPath.row) {
@@ -192,17 +189,13 @@
 
 @end
 </code></pre>
-<h3 id="plain"><a class="markdownIt-Anchor" href="#plain"></a> plain:</h3>
-<p>​	如果设置了section的footer 和header上的title，在滚动的时候就会产生悬浮效果</p>
-<h3 id="group"><a class="markdownIt-Anchor" href="#group"></a> group:</h3>
-<p>​	section的头部和底部会默认的有一段间距。</p>
-<h3 id="数据源调用方法顺序"><a class="markdownIt-Anchor" href="#数据源调用方法顺序"></a> 数据源调用方法顺序：</h3>
-<p>1.numberOfSectionsInTableView</p>
+<h3 id="plain"><a href="#plain" class="headerlink" title="plain:"></a>plain:</h3><p>​    如果设置了section的footer 和header上的title，在滚动的时候就会产生悬浮效果</p>
+<h3 id="group"><a href="#group" class="headerlink" title="group:"></a>group:</h3><p>​    section的头部和底部会默认的有一段间距。</p>
+<h3 id="数据源调用方法顺序："><a href="#数据源调用方法顺序：" class="headerlink" title="数据源调用方法顺序："></a>数据源调用方法顺序：</h3><p>1.numberOfSectionsInTableView</p>
 <p>2.numberOfRowsInSection 调用多遍，上面的方法返回多少组久调用多少次</p>
 <p>3.cellForRowAtIndexPath 总共有多少行就调用多少遍</p>
-<h2 id="2headerview的使用"><a class="markdownIt-Anchor" href="#2headerview的使用"></a> 2.headerView的使用</h2>
-<p>tableView和section都可以设置headerView:</p>
-<pre class="highlight"><code class="objective-c">//tableView
+<h2 id="2-headerView的使用"><a href="#2-headerView的使用" class="headerlink" title="2.headerView的使用"></a>2.headerView的使用</h2><p>tableView和section都可以设置headerView:</p>
+<pre><code class="objective-c">//tableView
 UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0,0,100,100)];
 [headerView setBackgroundColor:[UIColor orangeColor]];
 _tableView.tableHeaderView = headerView;
@@ -212,11 +205,9 @@ _tableView.tableHeaderView = headerView;
     [headerView setBackgroundColor:[UIColor redColor]];
     return headerView;
 }
-
 </code></pre>
-<p>效果图：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-01%20%E4%B8%8B%E5%8D%887.52.18.png" alt=""></p>
-<h2 id="3demo展示英雄属性"><a class="markdownIt-Anchor" href="#3demo展示英雄属性"></a> 3.demo展示（英雄属性）</h2>
-<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
+<p>效果图：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-01%20%E4%B8%8B%E5%8D%887.52.18.png" alt=""> </p>
+<h2 id="3-demo展示（英雄属性）"><a href="#3-demo展示（英雄属性）" class="headerlink" title="3.demo展示（英雄属性）"></a>3.demo展示（英雄属性）</h2><pre><code class="objective-c">#import &quot;ViewController.h&quot;
 #import &quot;HeroModel.h&quot;
 
 @interface ViewController ()&lt;UITableViewDataSource,UITableViewDelegate&gt;
@@ -234,58 +225,58 @@ _tableView.tableHeaderView = headerView;
     if (nil == _dataArray) {
         // 1. 路径
         NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;heros.plist&quot; ofType:nil];
-        
+
         // 2. 读取内容
         NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];
-        
+
         // 3. 可变数组
         NSMutableArray *mutable = [NSMutableArray array];
-        
+
         // 4. 字典转模型
         for (NSDictionary *dict in tempArray) {
             HeroModel *model = [HeroModel heroModelWithDict:dict];
-            
+
             [mutable addObject:model];
         }
-        
+
         _dataArray = mutable;
-        
+
     }
     return _dataArray;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // 设置控制器成为tableView的代理
     _tableView.delegate = self;
-    
+
     // 设置分割线颜色的
     _tableView.separatorColor = [UIColor redColor];
-    
+
     // 侵蚀 , 分割线样式
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
+
     // top, left, bottom, right , 上， 下 是没有效果的
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    
+
     // 允许多选
     _tableView.allowsMultipleSelection = YES;
-    
+
     // 设置行高 ,（静态设置） 如果每个cell的高度都一样， 推荐这种设置
 //    _tableView.rowHeight = 100;
-    
-    
+
+
 //    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 //    [headerView setBackgroundColor:[UIColor orangeColor]];
 //    
 //    _tableView.tableHeaderView = headerView;
-    
+
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     [footerView setBackgroundColor:[UIColor yellowColor]];
-    
+
     _tableView.tableFooterView = footerView;
-    
+
 }
 
 // indexPath  可以根据具体的某行显示不同的高度
@@ -316,23 +307,23 @@ _tableView.tableHeaderView = headerView;
      UITableViewCellStyleValue2 ： imageView不再显示， textLabel居左 变蓝色
      UITableViewCellStyleSubtitle ：都显示， detailLabel 在 textLabel下侧
      */
-    
+
     // 设置cell上控件的内容
     HeroModel *model = self.dataArray[indexPath.row];
-    
+
     // 设置imageView
     cell.imageView.image = [UIImage imageNamed:model.icon];
-    
+
     // 设置文本
     cell.textLabel.text = model.name;
-    
+
     // 设置detailTextLabel
     cell.detailTextLabel.text = model.intro;
-    
+
     // 设置右侧箭头
     // accessory : 配件
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+
     // 设置选择样式
     /**
      UITableViewCellSelectionStyleNone,
@@ -341,42 +332,42 @@ _tableView.tableHeaderView = headerView;
      UITableViewCellSelectionStyleDefault
      cell.selectionStyle = UITableViewCellSelectionStyleBlue;
      */
-    
+
     /**
      设置选中的背景view
      UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
      tempView.backgroundColor = [UIColor yellowColor];
-     
+
      cell.selectedBackgroundView = tempView;
      */
-    
+
     // cell.backgroundColor = [UIColor yellowColor];
-    
+
     /**
      accessoryView 自定义控件
      自定义 accessoryView 的时候， frame中的 坐标（x,y)修改后无效
      UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
      tempView.backgroundColor = [UIColor redColor];
-     
+
      cell.accessoryView = tempView;
      */
-    
+
     return cell;
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
+
     return @&quot;英雄&quot;;
 }
 
 // 可以对 section的header 和 footer 设置view
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    
+
+
     UIView *headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor redColor]];
-    
+
     return headerView;
 }
 
@@ -394,7 +385,7 @@ _tableView.tableHeaderView = headerView;
 <p>2.进行判断：如果找到，直接拿过来复用，如果找不到就直接实例化一个对象</p>
 <p>3.把旧的数据覆盖掉</p>
 <p>优化后的代码：</p>
-<pre class="highlight"><code class="objective-c">//避免多次分配内存，先定义重用标识符
+<pre><code class="objective-c">//避免多次分配内存，先定义重用标识符
 static NSString *identifier = &quot;heroCell&quot;; 
 //到缓存池中去寻找cell，将标识符设置为&quot;heroCell&quot;
 UITableView *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -404,8 +395,7 @@ if (nil == cell) {
 }
 //如果找到之后就进行数据的复写，没有找到就是直接赋值
 </code></pre>
-<h2 id="4实现数据模型的嵌套和索引"><a class="markdownIt-Anchor" href="#4实现数据模型的嵌套和索引"></a> 4.实现数据模型的嵌套和索引</h2>
-<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
+<h2 id="4-实现数据模型的嵌套和索引"><a href="#4-实现数据模型的嵌套和索引" class="headerlink" title="4.实现数据模型的嵌套和索引"></a>4.实现数据模型的嵌套和索引</h2><pre><code class="objective-c">#import &quot;ViewController.h&quot;
 #import &quot;CarModel.h&quot;
 #import &quot;InnerCarModel.h&quot;
 
@@ -423,26 +413,26 @@ if (nil == cell) {
 #pragma mark -  懒加载
 - (NSArray *)dataArray {
     if (nil == _dataArray) {
-        
+
         // 1. 路径
         NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;cars_total.plist&quot; ofType:nil];
-        
+
         // 2. 读取
         NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];
-        
+
         // 3. 临时可变数组
         NSMutableArray *mutal = [NSMutableArray array];
-        
+
         // 4. 转模型
         for (NSDictionary *dict in tempArray) {
             CarModel *model = [CarModel carModelWithDict: dict];
-            
+
             [mutal addObject:model];
         }
-        
+
         // 把carModel中title 放入数组， 用作后面的索引返回值
         _indexArray = [mutal valueForKeyPath:@&quot;title&quot;];
-        
+
         _dataArray = mutal;
 
     return _dataArray;
@@ -463,7 +453,7 @@ if (nil == cell) {
 // 多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     CarModel *carModel = self.dataArray[section];
-    
+
     return carModel.cars.count;
 }
 
@@ -471,40 +461,40 @@ if (nil == cell) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 1. 定义一个重用标识符
     static NSString *identifier = @&quot;settingCell&quot;;
-    
+
     // 2. 到缓存池中去找对应的cell， 根据重用标识符
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
+
     // 3. 判断是否找到， 如果找不到， 就重新实例化cell
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    
+
     CGRect
     // 4. 设置数据
     // 先取出该组对应的model
     CarModel *carModel = self.dataArray[indexPath.section];
-    
+
     // 再取出该组中行对应的model
     InnerCarModel *innerCarModel = carModel.cars[indexPath.row];
-    
+
     // 对cell的控件进行赋值
     cell.imageView.image = [UIImage imageNamed:innerCarModel.icon];
-    
+
     cell.textLabel.text = innerCarModel.name;
-    
+
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     // 取出carModel
     CarModel *carModel = self.dataArray[section];
-    
+
     return carModel.title;
 }
 
 - (NSArray&lt;NSString *&gt; *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    
+
     return _indexArray;
 }
 
@@ -517,7 +507,7 @@ if (nil == cell) {
 
 @end
 </code></pre>
-<pre class="highlight"><code class="objective-c">//嵌套在CarModel中的InnerCarModel
+<pre><code class="objective-c">//嵌套在CarModel中的InnerCarModel
 #import &quot;CarModel.h&quot;
 #import &quot;InnerCarModel.h&quot;
 
@@ -525,20 +515,20 @@ if (nil == cell) {
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
-        
+
         [self setValuesForKeysWithDictionary:dict];
         // 经过kvc赋值之后， 现在 cars 这个数组中有值， 而且存放的是 字典
         // 1. 定义一个临时可变数组
         NSMutableArray *mutable = [NSMutableArray array];
-        
+
         // 2. 转
         for (NSDictionary *dict in self.cars) {
             InnerCarModel *innerModel = [InnerCarModel innerCarModelWithDict:dict];
-            
+
             // 添加到可变数组中
             [mutable addObject:innerModel];
         }
-        
+
         // 把可变数组赋值给 self.cars , mutable 数组中装的是 InnerCarModel对象
         self.cars = mutable;
     }
@@ -551,51 +541,50 @@ if (nil == cell) {
 
 @end
 </code></pre>
-<h2 id="5对cell的编辑修改处"><a class="markdownIt-Anchor" href="#5对cell的编辑修改处"></a> 5.对cell的编辑（修改处）</h2>
-<pre class="highlight"><code class="objective-c">@interface ViewController ()&lt;UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate&gt;
+<h2 id="5-对cell的编辑（修改处）"><a href="#5-对cell的编辑（修改处）" class="headerlink" title="5.对cell的编辑（修改处）"></a>5.对cell的编辑（修改处）</h2><pre><code class="objective-c">@interface ViewController ()&lt;UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate&gt;
 //因为要对数据源进行修改，所以要用一个可变数组，同时还要加入新的协议
 - (NSMutableArray *)dataArray {
     if (nil == _dataArray) {
-        
+
         // 实例化 dataArray
 #warning 不要忘记实例化 dataArray数组
         _dataArray = [NSMutableArray array];
-        
+
         // 1. 路径
         NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;heros.plist&quot; ofType:nil];
-        
+
         // 2. 读取内容
         NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];
-        
+
         // 3. 可变数组
 //        NSMutableArray *mutable = [NSMutableArray array];
-        
+
         // 4. 字典转模型
         for (NSDictionary *dict in tempArray) {
             HeroModel *model = [HeroModel heroModelWithDict:dict];
-            
+
             [_dataArray addObject:model];
         }
-        
+
 //        _dataArray = mutable;
-        
+
     }
     return _dataArray;
 }
 
 // 当cell 被选中的时候 ， 就会调用
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     // 取出数组中对应的model
     HeroModel *heroModel = self.dataArray[indexPath.row];
-   
+
     // 弹出提示框
     UIAlertView *alertView = [[UIAlertView alloc]
                               initWithTitle:@&quot;编辑&quot;                                                  message:nil
                                                        delegate:self
                                               cancelButtonTitle:@&quot;取消&quot;
                                               otherButtonTitles:@&quot;确定&quot;, nil];
-    
+
     // 显示输入框
     /**
      UIAlertViewStyleDefault = 0,
@@ -604,85 +593,84 @@ if (nil == cell) {
      UIAlertViewStyleLoginAndPasswordInput
      */
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    
+
+
     // 把英雄的名字赋值给 alertView中textField
     // 取出aletView的 textField
     UITextField *textField = [alertView textFieldAtIndex:0];
-    
+
     textField.text = heroModel.name;
-    
+
     // 点击cell的时候， 把row 设置给alertView的tag属性
     alertView.tag = indexPath.row;
-    
-    
+
+
     // 展示alertView
     [alertView show];
-   
+
 }
 
 #pragma mark -
 #pragma mark -  alertView的代理方法
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
+
     if (buttonIndex == 1) { // 点击了确定按钮
         /**
          修改数据显示， 修改英雄的名字
          */
-        
+
         // 取出 alertView中的文本输入框
         UITextField *textField = [alertView textFieldAtIndex:0];
-        
+
         // 修改过之后的名字
         NSString *newName = textField.text;
-        
+
         // 修改数据源中 的 英雄名字
         // 取出alertView 的tag , 点击的某个行
         NSInteger index = alertView.tag;
-        
+
         // 取出点击行所对应的 数据源中的模型
         HeroModel *model = self.dataArray[index];
-        
+
         // 修改model中的 name属性
         model.name = newName;
-        
-        
+
+
         // 刷新tableView中的数据, 对所有数据进行刷新
 //        [_tableView reloadData];
-        
-        
+
+
         // 对某一行cell的数据进行刷新
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        
+
     }
 }
 </code></pre>
-<h2 id="6实现插入和删除"><a class="markdownIt-Anchor" href="#6实现插入和删除"></a> 6实现插入和删除</h2>
-<pre class="highlight"><code class="objective-c">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+<h2 id="6实现插入和删除"><a href="#6实现插入和删除" class="headerlink" title="6实现插入和删除"></a>6实现插入和删除</h2><pre><code class="objective-c">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
     // 可以对传入的编辑模式进行判断
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
+
         // 1. 在数据源中把row 对应到 dataArray 下标中的对象 给移除掉
         [self.dataArray removeObjectAtIndex:indexPath.row];
-        
+
         // 2. 刷新数据
 //        [_tableView reloadData];
 //        [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        
+
         [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        
+
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        
+
         // 1. 根据点击的indexPath.row 在数据源中插入heroModel 对象
         HeroModel *model = [[HeroModel alloc] init];
         model.name = @&quot;千珏&quot;;
-        
+
         [self.dataArray insertObject:model atIndex:indexPath.row];
-        
+
         // 2. 刷新数据
-        
+
         [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft ];
     }
 }
@@ -700,14 +688,14 @@ if (nil == cell) {
 }
 //当一行cell被选中的时候调用
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
 }
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/03/iOS-UI学习-五/" data-id="cjg4spw9u0049xubr4pes8h54" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/03/iOS-UI学习-五/" data-id="cjg66q98500452nbrk63hqa74" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -775,8 +763,8 @@ if (nil == cell) {
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

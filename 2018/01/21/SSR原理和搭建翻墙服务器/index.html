@@ -52,8 +52,8 @@ It is the mark of an educated mind to be able to entertain a thought without acc
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -110,18 +110,16 @@ It is the mark of an educated mind to be able to entertain a thought without acc
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.17.00.png" alt="">
-<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.18.06.png" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.17.00.png" alt=""></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.18.06.png" alt=""></p>
 <p>终于考完试了，为了防止之前的搭建教程被墙了，也是巩固一下网络知识，重新整理一篇关于利用SSR翻墙的博客</p>
 <p>It is the mark of an educated mind to be able to entertain a thought without accepting it.</p>
 <a id="more"></a>
-<h1 id="ss"><a class="markdownIt-Anchor" href="#ss"></a> SS</h1>
-<h2 id="ss的简单介绍"><a class="markdownIt-Anchor" href="#ss的简单介绍"></a> SS的简单介绍</h2>
-<p>SSR是原版基础上衍生出来的第三方版本，兼容原版协议，比原版多了一些伪装功能（协议和混淆）。要了解SSR，首先看看SS是什么，SS的全称是Shadowsocks，是一位在知乎网站工作的大神开发的一套针对DPI（深度包检测）系统弱点开发的一套网络加密工具。简单理解的话，Shadowsocks是将以前通过SSH创建的Socks5协议拆开成Server端和client端。它通过抹除网络数据通讯的特征，让监测系统无法下手。但是这种方法也不是绝对无法下手的，就好比说，你在一个鱼缸中找到一条鱼很容易，但是如果把这条鱼丢到海里再让你来找，那么就变的很困难了。而SS也正是通过这样将自己的通讯模式变的毫无特征，那么拦截系统在拦截的时候，就需要对每一个水滴进行检测，也就是说在目前各个国家的运算力是无法达到的。</p>
+<h1 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h1><h2 id="SS的简单介绍"><a href="#SS的简单介绍" class="headerlink" title="SS的简单介绍"></a>SS的简单介绍</h2><p>SSR是原版基础上衍生出来的第三方版本，兼容原版协议，比原版多了一些伪装功能（协议和混淆）。要了解SSR，首先看看SS是什么，SS的全称是Shadowsocks，是一位在知乎网站工作的大神开发的一套针对DPI（深度包检测）系统弱点开发的一套网络加密工具。简单理解的话，Shadowsocks是将以前通过SSH创建的Socks5协议拆开成Server端和client端。它通过抹除网络数据通讯的特征，让监测系统无法下手。但是这种方法也不是绝对无法下手的，就好比说，你在一个鱼缸中找到一条鱼很容易，但是如果把这条鱼丢到海里再让你来找，那么就变的很困难了。而SS也正是通过这样将自己的通讯模式变的毫无特征，那么拦截系统在拦截的时候，就需要对每一个水滴进行检测，也就是说在目前各个国家的运算力是无法达到的。</p>
 <p>那么SS是如何做到这样的功能呢？首先看看之前的VPN等。在这之前的VPN之类的都有一个致命的缺陷就是它们虽然通过了无法破解的RSA加密算法来对数据进行加密，但是在交换密钥建立起隧道之前还是在进行明文传输：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%882.40.24.png" alt=""></p>
 <p>那么窃听者正是利用了这一点来进行封锁，因为在交换密钥的这一过程中就可能会被暴力破解(目前GFW已经做到了暴力破解MPPE加密的能力)，那么也就是说你接下来所进行的加密完全没有任何的意义了，如果窃听者想要破坏你的通信，可以直接将你的线路掐掉，或者你们在交换密钥的时候约定好说四川话，窃听者在前面插播两句上海话，对端就会立刻终止加密传输，连接就会断开，从2016春，几乎所有的VPN协议以及网络加密传输协议，均可用不同的方式被破坏，导致整个通讯出现中断。</p>
-<p>那么SS所做的一点就是提前规定好加密方式，换而言之，也就是提前双方商量好，我们要说武汉话，	这样就只有通信双方的人才会听得懂，网络上的语言是无限的，所以只要提前规定好，SS就是如此的神奇，但是还是会有办法的，就是SS的作者被请去喝茶删代码了，但是github上down下来的人不止一份，本着开源的精神分享了出来。下面是原理图</p>
+<p>那么SS所做的一点就是提前规定好加密方式，换而言之，也就是提前双方商量好，我们要说武汉话，    这样就只有通信双方的人才会听得懂，网络上的语言是无限的，所以只要提前规定好，SS就是如此的神奇，但是还是会有办法的，就是SS的作者被请去喝茶删代码了，但是github上down下来的人不止一份，本着开源的精神分享了出来。下面是原理图</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%883.14.11.png" alt=""></p>
 <ol>
 <li>PC客户端（即你的电脑）发出请求基于Socks5协议跟SS-Local端进行通讯，由于这个SS-Local一般是本机或路由器等局域网的其他机器，不经过GFW，所以解决GFW通过特征分析进行干扰的问题。</li>
@@ -129,18 +127,16 @@ It is the mark of an educated mind to be able to entertain a thought without acc
 <li>SS-Server将收到的加密数据进行解密，还原初始请求，再发送到用户需要访问的服务网站，获取响应原路再返回SS-04，返回途中依然使用了加密，使得流量是普通TCP包，并成功穿过GFW防火墙。</li>
 </ol>
 <p>Shadowsocks的优点在于它解决了GFW通过分析<a href="https://tumutanzi.com/archives/11973" target="_blank" rel="external">流量特征</a>从而干扰的问题。之前在<a href="http://peterpan980927.cn/2017/10/07/GFW-%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/" target="_blank" rel="external">GFW和中间人攻击</a>的博客中说过对于VPN的流量特征进行检测方法。</p>
-<h2 id="ss的性能"><a class="markdownIt-Anchor" href="#ss的性能"></a> SS的性能</h2>
-<p>关于SS的性能方面也需要简单的说一下，因为网上的SS实现有很多不同的版本，python啊，php之类的，通常我们在路由中使用的是C的，因为所谓的智能路由，事实上是一个低配版的电脑，普通的i3 CPU大约每秒可以进行70Mbits左右的数据，而这个低配版智能进行5Mbits，所以在上面跑所谓的脚本语言是很吃力的，如果我们需要很快的速度，加密模式和语言都是我们需要考虑的因素。</p>
+<h2 id="SS的性能"><a href="#SS的性能" class="headerlink" title="SS的性能"></a>SS的性能</h2><p>关于SS的性能方面也需要简单的说一下，因为网上的SS实现有很多不同的版本，python啊，php之类的，通常我们在路由中使用的是C的，因为所谓的智能路由，事实上是一个低配版的电脑，普通的i3 CPU大约每秒可以进行70Mbits左右的数据，而这个低配版智能进行5Mbits，所以在上面跑所谓的脚本语言是很吃力的，如果我们需要很快的速度，加密模式和语言都是我们需要考虑的因素。</p>
 <p>如果说只是在自己的PC机上面跑一跑，那么就不需要那么麻烦了，python也是可以的，如果移殖到路由上的话，内存大小和CPU性能都会是我们所需要考虑的因素，我们平时在电脑和手机上跑的流畅的应用移植到路由上都需要我们重新考虑</p>
-<h1 id="搭建过程"><a class="markdownIt-Anchor" href="#搭建过程"></a> 搭建过程</h1>
-<p>首先你需要一台VPS，VPS的提供商我们可以选择Digital Ocean，因为之前推出的一个github学生特权(给github写英文邮件，如果你感动了它，就给你咯)，充值5¥送50¥。大概够我们使用约一年的时间，在之后也就是一个月折合34人民币，如果汇率一直没有发生变化的话，其实也不算贵。</p>
+<h1 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h1><p>首先你需要一台VPS，VPS的提供商我们可以选择Digital Ocean，因为之前推出的一个github学生特权(给github写英文邮件，如果你感动了它，就给你咯)，充值5¥送50¥。大概够我们使用约一年的时间，在之后也就是一个月折合34人民币，如果汇率一直没有发生变化的话，其实也不算贵。</p>
 <p>然后就是创建VPS的过程了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%883.22.24.png" alt=""></p>
 <p>我们选择Cent6.x系列的操作系统，如果你不是一个docker使用者，选择7的话防火墙会使你有些头疼。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%883.24.04.png" alt=""></p>
 <p>然后在下面的IPv6打个勾，虽然有时候我们的ISP并不支持，IPv6连不过去，辣鸡校园网，但是我们可以作为IPv6跳板</p>
 <p>下面就是对于ssr-server端的配置了，直接将下面的代码复制到你的服务器终端中执行即可：</p>
-<pre class="highlight"><code class="shell">yum -y install wget
+<pre><code class="shell">yum -y install wget
 
 wget -N --no-check-certificate https://softs.fun/Bash/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh
 
@@ -151,7 +147,7 @@ yum -y install wget
 wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh
 </code></pre>
 <p>之后我们可以配置一个通过TCP拥塞控制来进行加速的服务：BBR</p>
-<pre class="highlight"><code class="shell">yum -y install wget
+<pre><code class="shell">yum -y install wget
 
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 
@@ -168,15 +164,12 @@ chmod +x bbr.sh
 <p>MAC SSR客户端 <a href="https://github.com/shadowsocksr-backup/ShadowsocksX-NG/releases" target="_blank" rel="external">下载地址</a> <a href="https://nofile.io/f/jgMWFwCBonU#ab0d3c3b6ac54482" target="_blank" rel="external">备用下载地址</a></p>
 <p>Linux客户端一键安装配置 <a href="https://github.com/the0demiurge/CharlesScripts/blob/master/charles/bin/ssr" target="_blank" rel="external">使用脚本</a> (使用方法见注释) 或者采用图形界面的<a href="https://github.com/erguotou520/electron-ssr/releases" target="_blank" rel="external">linux ssr客户端</a></p>
 <p>安卓 SSR客户端 <a href="https://github.com/shadowsocksr-backup/shadowsocksr-android/releases" target="_blank" rel="external">下载地址</a> <a href="https://nofile.io/f/rvTJoj0h5GC/shadowsocksr-release.apk" target="_blank" rel="external">备用下载地址</a></p>
-<h2 id="有趣的事情"><a class="markdownIt-Anchor" href="#有趣的事情"></a> 有趣的事情</h2>
-<p>今天在查看我的服务器的时候，莫名的发现了一个奇怪的IP(我家的出口IP我还是记得很清楚的)，于是乎我就查了查，发现是一个来自江西的联通IP，我一想这还了得，这小子想干什么，我的服务器还是做了一些防护的，目前版本也没什么漏洞新发布出来，怎么就用上了我的SSR呢？难道是瞎猫碰上死耗子，不行，于是我就修改了所有的参数，一看，还在！！！</p>
+<h2 id="有趣的事情"><a href="#有趣的事情" class="headerlink" title="有趣的事情"></a>有趣的事情</h2><p>今天在查看我的服务器的时候，莫名的发现了一个奇怪的IP(我家的出口IP我还是记得很清楚的)，于是乎我就查了查，发现是一个来自江西的联通IP，我一想这还了得，这小子想干什么，我的服务器还是做了一些防护的，目前版本也没什么漏洞新发布出来，怎么就用上了我的SSR呢？难道是瞎猫碰上死耗子，不行，于是我就修改了所有的参数，一看，还在！！！</p>
 <p>那可能是真的在我服务器上留后门了，我干脆重装了一次，然后升级内核，浏览了论坛，好像也没什么发生啊，重新部署之后发现这家伙还在，这尼玛我就很无奈了啊，然后把自己的客户端关了，就不见了，我一想，难道是IP根本就是错的，于是在提点下知乎搜索了一番联通和IP的故事，然后发现了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-21%20%E4%B8%8B%E5%8D%885.01.50.png" alt=""></p>
 <p>好吧，就怪我妈搞得这个长宽吧，还让我虚惊一场…</p>
-<p>长宽租用基础运营商的带宽出口，然后他自己又没有这么多IP地址，于是只能在出口出做NAT，根据目标IP不同有不同的路由方向，所以访问不同的网站是通过不同的出口出去的。这样如果你访问的几个显示IP地址的网站正好不是一个出口，就会发现有多个IP。<br>
-甚至有些网站直接在长宽内网里有服务器，那么也有可能会显示你获取到的内网地址。</p>
-<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
-<ul>
+<p>长宽租用基础运营商的带宽出口，然后他自己又没有这么多IP地址，于是只能在出口出做NAT，根据目标IP不同有不同的路由方向，所以访问不同的网站是通过不同的出口出去的。这样如果你访问的几个显示IP地址的网站正好不是一个出口，就会发现有多个IP。<br>甚至有些网站直接在长宽内网里有服务器，那么也有可能会显示你获取到的内网地址。</p>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
 <li><a href="https://github.com/getlantern/forum/issues/5620" target="_blank" rel="external">GitHub上的issue</a></li>
 <li><a href="https://program-think.blogspot.com" target="_blank" rel="external">编程随想的博客</a></li>
 <li><a href="https://www.zhihu.com/question/29428996/answer/44492283" target="_blank" rel="external">知乎作者</a></li>
@@ -185,7 +178,7 @@ chmod +x bbr.sh
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/21/SSR原理和搭建翻墙服务器/" data-id="cjg4spw9e0038xubr8o9tebw3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/21/SSR原理和搭建翻墙服务器/" data-id="cjg66q97i002x2nbrcr9y317m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -253,8 +246,8 @@ chmod +x bbr.sh
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>87</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
