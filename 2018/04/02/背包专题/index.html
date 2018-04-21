@@ -42,7 +42,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -100,332 +100,340 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
 <p>背包是dp下的一个小分支，普遍层次的背包包括01背包，完全背包，多重背包以及三种混合的背包，已经可以涵盖绝大多数的问题抽象，在这之上又延伸了一些背包问题的变种，进一步泛化了物品的概念，如背包分组等，下面通过HDU上的例题来了解一下这个小专题。(不管在什么时候一定要注意dp数组的初始化以及是否需要预处理)</p>
 <a id="more"></a>
-<h1 id="Bone-Collector"><a href="#Bone-Collector" class="headerlink" title="Bone Collector"></a>Bone Collector</h1><p>一维数组，空间上优化</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-using namespace std;
+<h1 id="bone-collector"><a class="markdownIt-Anchor" href="#bone-collector"></a> Bone Collector</h1>
+<p>一维数组，空间上优化</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int t;
-  cin &gt;&gt; t;
-  while(t--){
-    int n,V,v[1005],val[1005],dp[1005];
-    cin &gt;&gt; n &gt;&gt; V;
-    for(int i=0; i&lt;n; i++)
-        scanf(&quot;%d&quot;,&amp;val[i]);
-    for(int i=0; i&lt;n; i++)
-        scanf(&quot;%d&quot;,&amp;v[i]);
-    memset(dp, 0 , sizeof(dp));
-    for(int i = 0 ; i &lt; n ; i++)
-      for(int j = V ; j &gt;= v[i] ; j--)
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> n,V,v[<span class="hljs-number">1005</span>],val[<span class="hljs-number">1005</span>],dp[<span class="hljs-number">1005</span>];
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; V;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;val[i]);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;v[i]);
+    <span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">0</span> , <span class="hljs-keyword">sizeof</span>(dp));
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++)
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = V ; j &gt;= v[i] ; j--)
         dp[j] = max(dp[j], dp[j-v[i]]+val[i]);
-    cout &lt;&lt; dp[V] &lt;&lt; endl;    
+    <span class="hljs-built_in">cout</span> &lt;&lt; dp[V] &lt;&lt; <span class="hljs-built_in">endl</span>;    
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="Piggy-Bank"><a href="#Piggy-Bank" class="headerlink" title="Piggy Bank"></a>Piggy Bank</h1><p>完全背包</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
+<h1 id="piggy-bank"><a class="markdownIt-Anchor" href="#piggy-bank"></a> Piggy Bank</h1>
+<p>完全背包</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
 
-#define loop(x,t,n) for (int x = t; x &lt; n; ++x)  
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> loop(x,t,n) for (int x = t; x &lt; n; ++x)  </span>
 
-int d[10005],c[505],v[505];
+<span class="hljs-keyword">int</span> d[<span class="hljs-number">10005</span>],c[<span class="hljs-number">505</span>],v[<span class="hljs-number">505</span>];
 
-using namespace std;
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int main(){
-  int t;
-  cin &gt;&gt; t;
-  while(t--){
-    int E,F,n;
-    cin &gt;&gt; E &gt;&gt; F;
-    int V = F-E;
-    cin &gt;&gt; n;
-    loop(i,0,n)
-      cin &gt;&gt; v[i] &gt;&gt; c[i];
-    loop(i,1,V+1)
-      d[i]=5000000;
-    d[0] = 0;
-    loop(i,0,n)
-      loop(j,c[i],V+1)
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> t;
+  <span class="hljs-built_in">cin</span> &gt;&gt; t;
+  <span class="hljs-keyword">while</span>(t--){
+    <span class="hljs-keyword">int</span> E,F,n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; E &gt;&gt; F;
+    <span class="hljs-keyword">int</span> V = F-E;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    loop(i,<span class="hljs-number">0</span>,n)
+      <span class="hljs-built_in">cin</span> &gt;&gt; v[i] &gt;&gt; c[i];
+    loop(i,<span class="hljs-number">1</span>,V+<span class="hljs-number">1</span>)
+      d[i]=<span class="hljs-number">5000000</span>;
+    d[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    loop(i,<span class="hljs-number">0</span>,n)
+      loop(j,c[i],V+<span class="hljs-number">1</span>)
         d[j] = min(d[j-c[i]] + v[i], d[j]);
-    if(d[V] == 5000000)
-      cout &lt;&lt; &quot;This is impossible.&quot; &lt;&lt; endl;
-    else cout &lt;&lt; &quot;The minimum amount of money in the piggy-bank is &quot; &lt;&lt; d[V] &lt;&lt;&quot;.&quot;&lt;&lt; endl;
+    <span class="hljs-keyword">if</span>(d[V] == <span class="hljs-number">5000000</span>)
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"This is impossible."</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The minimum amount of money in the piggy-bank is "</span> &lt;&lt; d[V] &lt;&lt;<span class="hljs-string">"."</span>&lt;&lt; <span class="hljs-built_in">endl</span>;
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="Big-Event-in-HDU"><a href="#Big-Event-in-HDU" class="headerlink" title="Big Event in HDU"></a>Big Event in HDU</h1><p>多重背包，母函数</p>
-<pre><code class="Cpp">#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
+<h1 id="big-event-in-hdu"><a class="markdownIt-Anchor" href="#big-event-in-hdu"></a> Big Event in HDU</h1>
+<p>多重背包，母函数</p>
+<pre class="highlight"><code class="Cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
 
-int bag[333333];
+<span class="hljs-keyword">int</span> bag[<span class="hljs-number">333333</span>];
 
-int main()
-{
-    int n,w[555];
-    while(scanf(&quot;%d&quot;,&amp;n)&amp;&amp;(n&gt;=0))
-    {
-        int i,j,sum=0,size,k=1;;
-        for(i=1;i&lt;=n;i++)
-        {
-            int tmp,v,m;
-            scanf(&quot;%d %d&quot;,&amp;v,&amp;m);
-            sum+=v*m;
-            tmp=1;
-            while(m&gt;tmp)
-            {
-                w[k++]=tmp*v;
-                m-=tmp;
-                tmp&lt;&lt;=1;
-            }
-            w[k++]=m*v;
-        }
-        size=sum/2;
-        memset(bag,0,sizeof(bag));
-        for(i=1;i&lt;k;i++)
-            for(j=size;j&gt;=w[i];j--)
-                if(bag[j]&lt;bag[j-w[i]]+w[i])
-                    bag[j]=bag[j-w[i]]+w[i];
-        printf(&quot;%d %d\n&quot;,sum-bag[size],bag[size]);
-    }
-    return 0;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+	<span class="hljs-keyword">int</span> n,w[<span class="hljs-number">555</span>];
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n)&amp;&amp;(n&gt;=<span class="hljs-number">0</span>))
+	{
+		<span class="hljs-keyword">int</span> i,j,sum=<span class="hljs-number">0</span>,size,k=<span class="hljs-number">1</span>;;
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+		{
+			<span class="hljs-keyword">int</span> tmp,v,m;
+			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>,&amp;v,&amp;m);
+			sum+=v*m;
+			tmp=<span class="hljs-number">1</span>;
+			<span class="hljs-keyword">while</span>(m&gt;tmp)
+			{
+				w[k++]=tmp*v;
+				m-=tmp;
+				tmp&lt;&lt;=<span class="hljs-number">1</span>;
+			}
+			w[k++]=m*v;
+		}
+		size=sum/<span class="hljs-number">2</span>;
+		<span class="hljs-built_in">memset</span>(bag,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(bag));
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;k;i++)
+			<span class="hljs-keyword">for</span>(j=size;j&gt;=w[i];j--)
+				<span class="hljs-keyword">if</span>(bag[j]&lt;bag[j-w[i]]+w[i])
+					bag[j]=bag[j-w[i]]+w[i];
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>,sum-bag[size],bag[size]);
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="Dividing"><a href="#Dividing" class="headerlink" title="Dividing"></a>Dividing</h1><p>一个很好的动归模版，很多的背包都可以直接拿这个模版来用。</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-using namespace std;
+<h1 id="dividing"><a class="markdownIt-Anchor" href="#dividing"></a> Dividing</h1>
+<p>一个很好的动归模版，很多的背包都可以直接拿这个模版来用。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
 
-int a[7];
-int sum;
-int dp[120005];
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">7</span>];
+<span class="hljs-keyword">int</span> sum;
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">120005</span>];
 
-void ZeroOnePack(int cost,int weight){
-  for(int j = sum ; j &gt;= cost ; j--)
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ZeroOnePack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost,<span class="hljs-keyword">int</span> weight)</span></span>{
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = sum ; j &gt;= cost ; j--)
     dp[j] = max(dp[j], dp[j-cost]+weight);
 }
 
-void CompletePack(int cost, int weight){
-  for(int j = cost ; j &lt;= sum ; j++)
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CompletePack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost, <span class="hljs-keyword">int</span> weight)</span></span>{
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = cost ; j &lt;= sum ; j++)
     dp[j] = max(dp[j], dp[j-cost]+weight);
 }
 
-void MutiplyPack(int cost, int weight, int amount){
-  if(cost*amount &gt;= sum){
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MutiplyPack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost, <span class="hljs-keyword">int</span> weight, <span class="hljs-keyword">int</span> amount)</span></span>{
+  <span class="hljs-keyword">if</span>(cost*amount &gt;= sum){
     CompletePack(cost, weight);
-    return;
+    <span class="hljs-keyword">return</span>;
   }
-  int tmp = 1;
-  while(tmp &lt; amount){
+  <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">while</span>(tmp &lt; amount){
     ZeroOnePack(tmp*cost, tmp*weight);
     amount -= tmp;
-    tmp &lt;&lt;= 1;
+    tmp &lt;&lt;= <span class="hljs-number">1</span>;
   }
   ZeroOnePack(amount*cost, amount*weight);
 }
 
-int main(){
-  int i,p=1;
-    while(1)
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> i,p=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
     {
-        sum=0;
-        for(i=1;i&lt;=6;i++)
+        sum=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">6</span>;i++)
         {
-            scanf(&quot;%d&quot;,&amp;a[i]);
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
             sum+=a[i]*i;
         }
-        if(sum==0) return 0;
-        printf(&quot;Collection #%d:\n&quot;,p++);
-        if(sum%2==1)
+        <span class="hljs-keyword">if</span>(sum==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Collection #%d:\n"</span>,p++);
+        <span class="hljs-keyword">if</span>(sum%<span class="hljs-number">2</span>==<span class="hljs-number">1</span>)
         {
-            printf(&quot;Can&#39;t be divided.\n\n&quot;);
-            continue;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Can't be divided.\n\n"</span>);
+            <span class="hljs-keyword">continue</span>;
         }
-        sum /= 2;
-        memset(dp,0,sizeof(dp));
-        for(i=1;i&lt;=6;i++)
+        sum /= <span class="hljs-number">2</span>;
+        <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">6</span>;i++)
           MutiplyPack(i,i,a[i]);
-        if(dp[sum] == sum)
-          printf(&quot;Can be divided.\n\n&quot;);
-        else
-          printf(&quot;Can&#39;t be divided.\n\n&quot;);
+        <span class="hljs-keyword">if</span>(dp[sum] == sum)
+          <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Can be divided.\n\n"</span>);
+        <span class="hljs-keyword">else</span>
+          <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Can't be divided.\n\n"</span>);
     }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="Coins"><a href="#Coins" class="headerlink" title="Coins"></a>Coins</h1><p>多重背包</p>
-<pre><code class="cpp">#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;set&gt;
-using namespace std;
-int max(int a,int b)
-{
-    if(a&gt;b)return a;
-    else return b;
+<h1 id="coins"><a class="markdownIt-Anchor" href="#coins"></a> Coins</h1>
+<p>多重背包</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;set&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span>
+</span>{
+	<span class="hljs-keyword">if</span>(a&gt;b)<span class="hljs-keyword">return</span> a;
+	<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> b;
 }
-int sum,dp[200005];
-void zero(int cost)
-{
-    for(int i=sum;i&gt;=cost;i--)
-    {dp[i]=max(dp[i],dp[i-cost]+cost);
+<span class="hljs-keyword">int</span> sum,dp[<span class="hljs-number">200005</span>];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">zero</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost)</span>
+</span>{
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=sum;i&gt;=cost;i--)
+	{dp[i]=max(dp[i],dp[i-cost]+cost);
 }
 }
-void complet(int cost)
-{
-    for(int i=cost;i&lt;=sum;i++)
-    dp[i]=max(dp[i],dp[i-cost]+cost);
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">complet</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost)</span>
+</span>{
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=cost;i&lt;=sum;i++)
+	dp[i]=max(dp[i],dp[i-cost]+cost);
 }
-void multi(int cost ,int amount)
-{
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">multi</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost ,<span class="hljs-keyword">int</span> amount)</span>
+</span>{
+  
+   	<span class="hljs-keyword">if</span>(cost*amount&gt;=sum)
+   	{
+	   	complet(cost);
+	   	<span class="hljs-keyword">return</span>;
+	   }
+	   <span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;
+	   <span class="hljs-keyword">while</span>(k&lt;amount)
+	   {
+   		zero(k*cost);
+   		amount-=k;
+   		k=k*<span class="hljs-number">2</span>;
+   	}
+   	zero(amount*cost);
+}
 
-       if(cost*amount&gt;=sum)
-       {
-           complet(cost);
-           return;
-       }
-       int k=1;
-       while(k&lt;amount)
-       {
-           zero(k*cost);
-           amount-=k;
-           k=k*2;
-       }
-       zero(amount*cost);
-}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+	<span class="hljs-keyword">int</span> i,j,k,n,m,a[<span class="hljs-number">205</span>],c[<span class="hljs-number">205</span>];
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m)!=EOF)
+	{
+		<span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>&amp;&amp;m==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;
+		se.clear();
+		<span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));
+		sum=<span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+		{
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;c[i]);
+	  sum+=c[i]*a[i];
+	}
+  <span class="hljs-keyword">if</span>(sum&gt;m)sum=m;
+	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+	multi(a[i],c[i]); 
+	<span class="hljs-keyword">int</span> t=<span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=sum;i++)
+	{
+		<span class="hljs-keyword">if</span>(dp[i]==i)t++;
+	}
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,t);
+	}
 
-int main()
-{
-    int i,j,k,n,m,a[205],c[205];
-    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)
-    {
-        if(n==0&amp;&amp;m==0)break;
-        se.clear();
-        memset(dp,0,sizeof(dp));
-        sum=0;
-        for(i=1;i&lt;=n;i++)
-        scanf(&quot;%d&quot;,&amp;a[i]);
-        for(i=1;i&lt;=n;i++)
-        {
-        scanf(&quot;%d&quot;,&amp;c[i]);
-      sum+=c[i]*a[i];
-    }
-  if(sum&gt;m)sum=m;
-    for(i=1;i&lt;=n;i++)
-    multi(a[i],c[i]); 
-    int t=0;
-    for(i=1;i&lt;=sum;i++)
-    {
-        if(dp[i]==i)t++;
-    }
-    printf(&quot;%d\n&quot;,t);
-    }
-
-    return 0;
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="FATE"><a href="#FATE" class="headerlink" title="FATE"></a>FATE</h1><p>二维完全背包</p>
-<pre><code class="cpp">#include &lt;stdio.h&gt;
-#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;string.h&gt;
-using namespace std;
-const int maxn=105;
-const int INF=0x3f3f3f3f;
-int DP[maxn][maxn];//在i疲劳度j杀敌数下获取的最大经验为DP[i][j]
-int N;//所需经验值
-int M;//疲劳度
-int K;//怪物种类
-int S;//最大杀怪数量
-int num_1[maxn];//经验值
-int num_2[maxn];//疲劳度
-int main()
-{
-    while(scanf(&quot;%d%d%d%d&quot;,&amp;N,&amp;M,&amp;K,&amp;S)!=EOF)
+<h1 id="fate"><a class="markdownIt-Anchor" href="#fate"></a> FATE</h1>
+<p>二维完全背包</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">105</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;
+<span class="hljs-keyword">int</span> DP[maxn][maxn];<span class="hljs-comment">//在i疲劳度j杀敌数下获取的最大经验为DP[i][j]</span>
+<span class="hljs-keyword">int</span> N;<span class="hljs-comment">//所需经验值</span>
+<span class="hljs-keyword">int</span> M;<span class="hljs-comment">//疲劳度</span>
+<span class="hljs-keyword">int</span> K;<span class="hljs-comment">//怪物种类</span>
+<span class="hljs-keyword">int</span> S;<span class="hljs-comment">//最大杀怪数量</span>
+<span class="hljs-keyword">int</span> num_1[maxn];<span class="hljs-comment">//经验值</span>
+<span class="hljs-keyword">int</span> num_2[maxn];<span class="hljs-comment">//疲劳度</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>,&amp;N,&amp;M,&amp;K,&amp;S)!=EOF)
     {
-        for(int i=0; i&lt;K; i++)
-            scanf(&quot;%d%d&quot;,&amp;num_1[i],&amp;num_2[i]);
-        memset(DP,0,sizeof(DP));
-        int min_M=INF;//初始化最小疲劳度
-        for(int i=0; i&lt;K; i++) //枚举所有的怪物种类
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;K; i++)
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;num_1[i],&amp;num_2[i]);
+        <span class="hljs-built_in">memset</span>(DP,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(DP));
+        <span class="hljs-keyword">int</span> min_M=INF;<span class="hljs-comment">//初始化最小疲劳度</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;K; i++) <span class="hljs-comment">//枚举所有的怪物种类</span>
         {
-            for(int j=num_2[i]; j&lt;=M; j++) //枚举疲劳度
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=num_2[i]; j&lt;=M; j++) <span class="hljs-comment">//枚举疲劳度</span>
             {
-                for(int k=1; k&lt;=S; k++) //枚举杀怪数量
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>; k&lt;=S; k++) <span class="hljs-comment">//枚举杀怪数量</span>
                 {
-                    DP[j][k]=max(DP[j][k],DP[j-num_2[i]][k-1]+num_1[i]);
-                    if(DP[j][k]&gt;=N&amp;&amp;j&lt;min_M)//经验值满足要求的前提下求最小疲劳度
+                    DP[j][k]=max(DP[j][k],DP[j-num_2[i]][k<span class="hljs-number">-1</span>]+num_1[i]);
+                    <span class="hljs-keyword">if</span>(DP[j][k]&gt;=N&amp;&amp;j&lt;min_M)<span class="hljs-comment">//经验值满足要求的前提下求最小疲劳度</span>
                         min_M=j;
                 }
             }
         }
-        if(min_M==INF)
-            printf(&quot;-1\n&quot;);
-        else
-            printf(&quot;%d\n&quot;,M-min_M);
+        <span class="hljs-keyword">if</span>(min_M==INF)
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"-1\n"</span>);
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,M-min_M);
     }
-    return 0;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="金明的预算方案"><a href="#金明的预算方案" class="headerlink" title="金明的预算方案"></a>金明的预算方案</h1><p>有依赖的背包转换为分组背包，因为每个主件底下可能会有附件，其实我们在选择一个主件和其附属的附件的时候，选择是互斥的，也就是说我们只会有一种选择，于是我们将每一种选择枚举出来，然后通过分组背包的思想就可以解决问题了</p>
-<pre><code class="cpp">#include&lt;cstdio&gt;  
-#include&lt;algorithm&gt;  
-using namespace std;  
-
-const int max_n=3200;  
-const int max_m=60;  
-
-int n,m,s[max_m];  
-int v[max_m+20][4],w[max_m+20][4];  
-int f[max_n+20];  
-
-int main()  
-{  
-  int i,j,k,a,b,c;  
-  scanf(&quot;%d%d&quot;,&amp;n,&amp;m),n/=10;  
-  for(i=1;i&lt;=m;i++)  
+<h1 id="金明的预算方案"><a class="markdownIt-Anchor" href="#金明的预算方案"></a> 金明的预算方案</h1>
+<p>有依赖的背包转换为分组背包，因为每个主件底下可能会有附件，其实我们在选择一个主件和其附属的附件的时候，选择是互斥的，也就是说我们只会有一种选择，于是我们将每一种选择枚举出来，然后通过分组背包的思想就可以解决问题了</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;  </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+  
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> max_n=<span class="hljs-number">3200</span>;  
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> max_m=<span class="hljs-number">60</span>;  
+  
+<span class="hljs-keyword">int</span> n,m,s[max_m];  
+<span class="hljs-keyword">int</span> v[max_m+<span class="hljs-number">20</span>][<span class="hljs-number">4</span>],w[max_m+<span class="hljs-number">20</span>][<span class="hljs-number">4</span>];  
+<span class="hljs-keyword">int</span> f[max_n+<span class="hljs-number">20</span>];  
+  
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+  <span class="hljs-keyword">int</span> i,j,k,a,b,c;  
+  <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m),n/=<span class="hljs-number">10</span>;  
+  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=m;i++)  
     {  
-      scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);  
-      if(c==0)k=s[i],w[i][k]=a*b,v[i][k]=a/10,s[i]++;  
-      else k=s[c],w[c][k]=a*b,v[c][k]=a/10,s[c]++;  
+      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);  
+      <span class="hljs-keyword">if</span>(c==<span class="hljs-number">0</span>)k=s[i],w[i][k]=a*b,v[i][k]=a/<span class="hljs-number">10</span>,s[i]++;  
+      <span class="hljs-keyword">else</span> k=s[c],w[c][k]=a*b,v[c][k]=a/<span class="hljs-number">10</span>,s[c]++;  
     }  
-
-  //预处理
-  for(i=1;i&lt;=m;i++)  
+      
+  <span class="hljs-comment">//预处理</span>
+  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=m;i++)  
     {  
-      if(s[i]==3)  
+      <span class="hljs-keyword">if</span>(s[i]==<span class="hljs-number">3</span>)  
         {  
           s[i]++;  
-          v[i][3]=v[i][1]+v[i][2]+v[i][0];  
-          w[i][3]=w[i][1]+w[i][2]+w[i][0];  
+          v[i][<span class="hljs-number">3</span>]=v[i][<span class="hljs-number">1</span>]+v[i][<span class="hljs-number">2</span>]+v[i][<span class="hljs-number">0</span>];  
+          w[i][<span class="hljs-number">3</span>]=w[i][<span class="hljs-number">1</span>]+w[i][<span class="hljs-number">2</span>]+w[i][<span class="hljs-number">0</span>];  
         }  
-      if(s[i]&gt;=2)v[i][1]+=v[i][0],w[i][1]+=w[i][0];  
-      if(s[i]&gt;=3)v[i][2]+=v[i][0],w[i][2]+=w[i][0];  
+      <span class="hljs-keyword">if</span>(s[i]&gt;=<span class="hljs-number">2</span>)v[i][<span class="hljs-number">1</span>]+=v[i][<span class="hljs-number">0</span>],w[i][<span class="hljs-number">1</span>]+=w[i][<span class="hljs-number">0</span>];  
+      <span class="hljs-keyword">if</span>(s[i]&gt;=<span class="hljs-number">3</span>)v[i][<span class="hljs-number">2</span>]+=v[i][<span class="hljs-number">0</span>],w[i][<span class="hljs-number">2</span>]+=w[i][<span class="hljs-number">0</span>];  
     }  
-      //关键dp
-    for(i=1;i&lt;=m;i++) 
-     //分组背包固定体积枚举组内物品
-     for(k=n;k&gt;=1;k--)  
-       for(j=0;j&lt;s[i];j++)if(k&gt;=v[i][j])  
+  	<span class="hljs-comment">//关键dp</span>
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=m;i++) 
+     <span class="hljs-comment">//分组背包固定体积枚举组内物品</span>
+     <span class="hljs-keyword">for</span>(k=n;k&gt;=<span class="hljs-number">1</span>;k--)  
+       <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;s[i];j++)<span class="hljs-keyword">if</span>(k&gt;=v[i][j])  
          f[k]=max(f[k],f[k-v[i][j]]+w[i][j]);  
-  printf(&quot;%d\n&quot;,f[n]);  
-  return 0;  
-}
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,f[n]);  
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h1 id="搭建双塔"><a href="#搭建双塔" class="headerlink" title="搭建双塔"></a>搭建双塔</h1><p>这是一个01背包加上差值dp的题目，因为要求最大，我们通过一个<code>f[i][j]</code>数组来表示放第i块水晶的时候较高的那座塔的高度，这个时候我们从上一种状态转移过来有四种方式，也就是这一块水晶可能会造成四种不同的状态(不是很会讲算法)，那我们就直接来一个个说明吧：</p>
+<h1 id="搭建双塔"><a class="markdownIt-Anchor" href="#搭建双塔"></a> 搭建双塔</h1>
+<p>这是一个01背包加上差值dp的题目，因为要求最大，我们通过一个<code>f[i][j]</code>数组来表示放第i块水晶的时候较高的那座塔的高度，这个时候我们从上一种状态转移过来有四种方式，也就是这一块水晶可能会造成四种不同的状态(不是很会讲算法)，那我们就直接来一个个说明吧：</p>
 <ol>
 <li>这一个水晶不需要放：<code>f[i-1][j]</code></li>
 <li>放在较矮的那座塔，但是高度没有超过较高的那座塔：<code>f[i-1][j+a[i]]</code></li>
@@ -433,261 +441,267 @@ int main()
 <li>放在较矮的那座塔，高度超过较高的那座塔，更新高度：<code>f[i-1][a[i]-j]+j</code></li>
 </ol>
 <p>所以代码表示就可以得到了：</p>
-<pre><code class="cpp">#include &lt;cstdio&gt;  
-#include &lt;cstring&gt;  
-#include &lt;iostream&gt;  
-#include &lt;algorithm&gt;  
-using namespace std;  
-const int INF=0x3f3f3f3f;  
-int a[110];//水晶高度  
-int f[110][2010];//前i个水晶搭成的两座塔高度差为j时高塔的高度。  
-int main()  
-{  
-    int n,i,j,sum=0;  
-    scanf(&quot;%d&quot;,&amp;n);  
-    for(i=1;i&lt;=n;++i)  
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;  </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;  
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">110</span>];<span class="hljs-comment">//水晶高度  </span>
+<span class="hljs-keyword">int</span> f[<span class="hljs-number">110</span>][<span class="hljs-number">2010</span>];<span class="hljs-comment">//前i个水晶搭成的两座塔高度差为j时高塔的高度。  </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> n,i,j,sum=<span class="hljs-number">0</span>;  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);  
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;++i)  
     {  
-        scanf(&quot;%d&quot;,&amp;a[i]);  
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);  
         sum+=a[i];  
     }  
-    memset(f,-INF,sizeof(f));//初始时候，只有f[0][0]=0是合法的f[0][j]都不合法，要设为负无穷  
-    f[0][0]=0;  
-    for(i=1;i&lt;=n;++i)  
+    <span class="hljs-built_in">memset</span>(f,-INF,<span class="hljs-keyword">sizeof</span>(f));<span class="hljs-comment">//初始时候，只有f[0][0]=0是合法的f[0][j]都不合法，要设为负无穷  </span>
+    f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;  
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;++i)  
     {  
-        for(j=0;j&lt;=sum;++j)  
+        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;=sum;++j)  
         {  
-            f[i][j]=max(f[i-1][j],f[i-1][j+a[i]]);//不放，或者放在矮的塔上，并且不超过高的塔  
-            if(j&gt;=a[i])  
-                f[i][j]=max(f[i][j],f[i-1][j-a[i]]+a[i]);//放高的上
-            else  
-                f[i][j]=max(f[i][j],f[i-1][a[i]-j]+j);//放矮的上且超过了高的  
+            f[i][j]=max(f[i<span class="hljs-number">-1</span>][j],f[i<span class="hljs-number">-1</span>][j+a[i]]);<span class="hljs-comment">//不放，或者放在矮的塔上，并且不超过高的塔  </span>
+            <span class="hljs-keyword">if</span>(j&gt;=a[i])  
+                f[i][j]=max(f[i][j],f[i<span class="hljs-number">-1</span>][j-a[i]]+a[i]);<span class="hljs-comment">//放高的上</span>
+            <span class="hljs-keyword">else</span>  
+                f[i][j]=max(f[i][j],f[i<span class="hljs-number">-1</span>][a[i]-j]+j);<span class="hljs-comment">//放矮的上且超过了高的  </span>
         }  
-
+  
     }  
-    if(f[n][0]&gt;0) printf(&quot;%d&quot;,f[n][0]);  
-    else printf(&quot;Impossible&quot;);  
-    return 0;  
-}
+    <span class="hljs-keyword">if</span>(f[n][<span class="hljs-number">0</span>]&gt;<span class="hljs-number">0</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,f[n][<span class="hljs-number">0</span>]);  
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Impossible"</span>);  
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h1 id="积木城堡"><a href="#积木城堡" class="headerlink" title="积木城堡"></a>积木城堡</h1><pre><code class="cpp">#include &lt;cstdio&gt;  
-#include &lt;cstring&gt;  
-#include &lt;iostream&gt;  
-#include &lt;algorithm&gt;  
-using namespace std;  
-const int INF=0x3f3f3f3f;  
-int n;  
-int a[110];//每块积木的长度  
-int ans[10010];//能达到i高度的城堡有多少座  
-bool hight[10010];//当前城堡能否达到高度i  
-int main()  
-{  
-    int i,t;  
-    scanf(&quot;%d&quot;,&amp;n);  
-    for(t=1;t&lt;=n;++t)  
+<h1 id="积木城堡"><a class="markdownIt-Anchor" href="#积木城堡"></a> 积木城堡</h1>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;  </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;  </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;  
+<span class="hljs-keyword">int</span> n;  
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">110</span>];<span class="hljs-comment">//每块积木的长度  </span>
+<span class="hljs-keyword">int</span> ans[<span class="hljs-number">10010</span>];<span class="hljs-comment">//能达到i高度的城堡有多少座  </span>
+<span class="hljs-keyword">bool</span> hight[<span class="hljs-number">10010</span>];<span class="hljs-comment">//当前城堡能否达到高度i  </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>  
+</span>{  
+    <span class="hljs-keyword">int</span> i,t;  
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);  
+    <span class="hljs-keyword">for</span>(t=<span class="hljs-number">1</span>;t&lt;=n;++t)  
     {  
-        int j,m=0;  
-        int maxhight=0;//这座城堡初始状态下最高多高；  
-        int h;  
-
-        memset(hight,0,sizeof(hight));  
-        hight[0]=1;  
-        scanf(&quot;%d&quot;,&amp;h);  
-
-        while(h!=-1)  
+        <span class="hljs-keyword">int</span> j,m=<span class="hljs-number">0</span>;  
+        <span class="hljs-keyword">int</span> maxhight=<span class="hljs-number">0</span>;<span class="hljs-comment">//这座城堡初始状态下最高多高；  </span>
+        <span class="hljs-keyword">int</span> h;  
+  
+        <span class="hljs-built_in">memset</span>(hight,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(hight));  
+        hight[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;  
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;h);  
+  
+        <span class="hljs-keyword">while</span>(h!=<span class="hljs-number">-1</span>)  
         {  
             a[++m]=h;  
-           // hight[h]=1;//每一块高度都可能达到，错误，已经有的数的会加两次,如1,3,5.不可能使得hight[2]=1但hight[1]=1,执行hight[1+a[1]]=1  
+           <span class="hljs-comment">// hight[h]=1;//每一块高度都可能达到，错误，已经有的数的会加两次,如1,3,5.不可能使得hight[2]=1但hight[1]=1,执行hight[1+a[1]]=1  </span>
             maxhight+=h;  
-            scanf(&quot;%d&quot;,&amp;h);  
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;h);  
         }  
-          //01背包
-        for(i=1;i&lt;=m;++i)  
+  		<span class="hljs-comment">//01背包</span>
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=m;++i)  
         {  
-            for(j=maxhight-a[i];j&gt;=0;--j)  
-                if(hight[j]) hight[j+a[i]]=1;  
+            <span class="hljs-keyword">for</span>(j=maxhight-a[i];j&gt;=<span class="hljs-number">0</span>;--j)  
+                <span class="hljs-keyword">if</span>(hight[j]) hight[j+a[i]]=<span class="hljs-number">1</span>;  
         }  
-        for(i=0;i&lt;=maxhight;++i)  
-            if(hight[i]) ans[i]++;  
+        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;=maxhight;++i)  
+            <span class="hljs-keyword">if</span>(hight[i]) ans[i]++;  
     }  
-    //所有塔都求完了之后  
-    for(i=10005;i&gt;=0;--i)  
-        if(ans[i]==n)  
+    <span class="hljs-comment">//所有塔都求完了之后  </span>
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">10005</span>;i&gt;=<span class="hljs-number">0</span>;--i)  
+        <span class="hljs-keyword">if</span>(ans[i]==n)  
         {  
-            printf(&quot;%d&quot;,i);  
-            break;  
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,i);  
+            <span class="hljs-keyword">break</span>;  
         }  
-    return 0;  
-}
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}  
 </code></pre>
-<h1 id="守望者的逃离"><a href="#守望者的逃离" class="headerlink" title="守望者的逃离"></a>守望者的逃离</h1><p>优化版本，因为有三种选择，所以不可能在一次循环中解决问题，所以我们先一直闪现，然后用跑步来优化其中一部分情况，因为距离很长，所以我们只能通过枚举时间。</p>
-<pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-#define MAXT 300001
-using namespace std;
+<h1 id="守望者的逃离"><a class="markdownIt-Anchor" href="#守望者的逃离"></a> 守望者的逃离</h1>
+<p>优化版本，因为有三种选择，所以不可能在一次循环中解决问题，所以我们先一直闪现，然后用跑步来优化其中一部分情况，因为距离很长，所以我们只能通过枚举时间。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXT 300001</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int magic,dis,tim,ans;
-int f[MAXT];  //f[i]表示当时间为i时的最优解 
-bool flag;    //flag表示能否逃出荒岛 
+<span class="hljs-keyword">int</span> magic,dis,tim,ans;
+<span class="hljs-keyword">int</span> f[MAXT];  <span class="hljs-comment">//f[i]表示当时间为i时的最优解 </span>
+<span class="hljs-keyword">bool</span> flag;    <span class="hljs-comment">//flag表示能否逃出荒岛 </span>
 
-void dp()  //核心代码，dp 
-{
-    for (int i=1;i&lt;=tim;i++){  //这个循环先处理不停闪现的情况，原则是有魔法就闪，没有就停下来补 
-        if (magic&gt;=10){        //够魔法值，进行闪现 
-            f[i]=f[i-1]+60;
-            magic-=10;
-        }else{      //不够魔法值，停下来补充 
-            f[i]=f[i-1];
-            magic+=4;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">()</span>  <span class="hljs-comment">//核心代码，dp </span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){  <span class="hljs-comment">//这个循环先处理不停闪现的情况，原则是有魔法就闪，没有就停下来补 </span>
+        <span class="hljs-keyword">if</span> (magic&gt;=<span class="hljs-number">10</span>){        <span class="hljs-comment">//够魔法值，进行闪现 </span>
+            f[i]=f[i<span class="hljs-number">-1</span>]+<span class="hljs-number">60</span>;
+            magic-=<span class="hljs-number">10</span>;
+        }<span class="hljs-keyword">else</span>{      <span class="hljs-comment">//不够魔法值，停下来补充 </span>
+            f[i]=f[i<span class="hljs-number">-1</span>];
+            magic+=<span class="hljs-number">4</span>;
         }
     }
 
-    for (int i=1;i&lt;=tim;i++){  //对于所有时间，看是否能用普通跑步来优化 
-        f[i]=max(f[i],f[i-1]+17);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){  <span class="hljs-comment">//对于所有时间，看是否能用普通跑步来优化 </span>
+        f[i]=max(f[i],f[i<span class="hljs-number">-1</span>]+<span class="hljs-number">17</span>);
     }
 }
 
-void find_ans()  //找到答案（不重要） 
-{
-    for (int i=1;i&lt;=tim;i++){
-        if (f[i]&gt;=dis){
-            flag=true;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">find_ans</span><span class="hljs-params">()</span>  <span class="hljs-comment">//找到答案（不重要） </span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=tim;i++){
+        <span class="hljs-keyword">if</span> (f[i]&gt;=dis){
+            flag=<span class="hljs-literal">true</span>;
             ans=i;
-            break;
+            <span class="hljs-keyword">break</span>;
         }
-        if (i==tim){
-            flag=false;
+        <span class="hljs-keyword">if</span> (i==tim){
+            flag=<span class="hljs-literal">false</span>;
             ans=f[i];
         }
     }
 
-    if (flag){
-        printf(&quot;Yes\n%d\n&quot;,ans);
-    }else{
-        printf(&quot;No\n%d\n&quot;,ans);
+    <span class="hljs-keyword">if</span> (flag){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Yes\n%d\n"</span>,ans);
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"No\n%d\n"</span>,ans);
     }
 }
 
-int main()
-{
-    memset(f,0,sizeof(f));
-    scanf(&quot;%d %d %d&quot;,&amp;magic,&amp;dis,&amp;tim);
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(f));
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d %d"</span>,&amp;magic,&amp;dis,&amp;tim);
     dp();
     find_ans();
-    return 0;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="朴素的网络游戏"><a href="#朴素的网络游戏" class="headerlink" title="朴素的网络游戏"></a>朴素的网络游戏</h1><p>这个题目的关键所在就是我们需要知道就算有多对夫妻，最优的情况也只会出现在一对夫妻一起住的情况下。</p>
-<pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-using namespace std;
+<h1 id="朴素的网络游戏"><a class="markdownIt-Anchor" href="#朴素的网络游戏"></a> 朴素的网络游戏</h1>
+<p>这个题目的关键所在就是我们需要知道就算有多对夫妻，最优的情况也只会出现在一对夫妻一起住的情况下。</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int dp[310][310][2];
-int b[310];
-int p[310];
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">310</span>][<span class="hljs-number">310</span>][<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> b[<span class="hljs-number">310</span>];
+<span class="hljs-keyword">int</span> p[<span class="hljs-number">310</span>];
 
-int main(){
-    int m,f,r,c;
-    memset(dp, 127, sizeof(dp));
-    cin &gt;&gt; m &gt;&gt; f &gt;&gt; r &gt;&gt; c;
-    for(int i = 1 ; i &lt;= r ;i++)
-        cin &gt;&gt; b[i] &gt;&gt; p[i];
-    dp[0][0][0] = 0;
-    for(int l = 1 ; l &lt;= r ;l++)
-        for(int i = m ; i &gt;= 0 ;i--)
-            for(int j = f ; j &gt;= 0 ;j--){
-                if(b[l] &gt;= 2) dp[i][j][1] = min(dp[i][j][0]+p[l], dp[i][j][1]);
-                  //尽量往这个房间里放，放满取最小
-                for(int o = 1 ; o &lt;= b[l] ;o++){
-                    if(i+o&lt;=m+c&amp;&amp;i&gt;=o) dp[i][j][0]=min(dp[i][j][0],dp[i-o][j][0]+p[l]);
-                    if(j+o&lt;=f+c&amp;&amp;j&gt;=o) dp[i][j][0]=min(dp[i][j][0],dp[i][j-o][0]+p[l]);
-                }
-            }
-    int ans=9999999;
-    if(c&gt;=1) ans=min(dp[m-1][f-1][1],dp[m][f][0]);
-    else ans=min(ans,dp[m][f][0]);
-    if(ans!=9999999)cout&lt;&lt;ans;
-    else cout&lt;&lt;&quot;Impossible&quot;;
-    return 0;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+	<span class="hljs-keyword">int</span> m,f,r,c;
+	<span class="hljs-built_in">memset</span>(dp, <span class="hljs-number">127</span>, <span class="hljs-keyword">sizeof</span>(dp));
+	<span class="hljs-built_in">cin</span> &gt;&gt; m &gt;&gt; f &gt;&gt; r &gt;&gt; c;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= r ;i++)
+		<span class="hljs-built_in">cin</span> &gt;&gt; b[i] &gt;&gt; p[i];
+	dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l = <span class="hljs-number">1</span> ; l &lt;= r ;l++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = m ; i &gt;= <span class="hljs-number">0</span> ;i--)
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = f ; j &gt;= <span class="hljs-number">0</span> ;j--){
+				<span class="hljs-keyword">if</span>(b[l] &gt;= <span class="hljs-number">2</span>) dp[i][j][<span class="hljs-number">1</span>] = min(dp[i][j][<span class="hljs-number">0</span>]+p[l], dp[i][j][<span class="hljs-number">1</span>]);
+              	<span class="hljs-comment">//尽量往这个房间里放，放满取最小</span>
+				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> o = <span class="hljs-number">1</span> ; o &lt;= b[l] ;o++){
+					<span class="hljs-keyword">if</span>(i+o&lt;=m+c&amp;&amp;i&gt;=o) dp[i][j][<span class="hljs-number">0</span>]=min(dp[i][j][<span class="hljs-number">0</span>],dp[i-o][j][<span class="hljs-number">0</span>]+p[l]);
+					<span class="hljs-keyword">if</span>(j+o&lt;=f+c&amp;&amp;j&gt;=o) dp[i][j][<span class="hljs-number">0</span>]=min(dp[i][j][<span class="hljs-number">0</span>],dp[i][j-o][<span class="hljs-number">0</span>]+p[l]);
+				}
+			}
+	<span class="hljs-keyword">int</span> ans=<span class="hljs-number">9999999</span>;
+	<span class="hljs-keyword">if</span>(c&gt;=<span class="hljs-number">1</span>) ans=min(dp[m<span class="hljs-number">-1</span>][f<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>],dp[m][f][<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">else</span> ans=min(ans,dp[m][f][<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">if</span>(ans!=<span class="hljs-number">9999999</span>)<span class="hljs-built_in">cout</span>&lt;&lt;ans;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Impossible"</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="拼拼图的小衫"><a href="#拼拼图的小衫" class="headerlink" title="拼拼图的小衫"></a>拼拼图的小衫</h1><p>这个题目直接使用<code>f[i,j]</code>表示第i个集合还有j的剩余时候可以放入的最大拼图数显然不合理，因为还要满足不交叉，所以我们换一种思路，通过<code>f[j]</code>表示放入第j个数最少需要多少个集合，这个集合中已经放了多少空间：</p>
-<pre><code>f[j] = (t,s)
-</code></pre><pre><code class="cpp">#include&lt;cstdio&gt;
-const int maxn=1000;
-int n,m,T,a[maxn+10];
-struct node{
-    int t,s;
-    bool operator &lt; (const node d) const{
-        if (t&lt;d.t)
-            return 1;
-        if (t&gt;d.t)
-            return 0;
-        return s&lt;d.s;
+<h1 id="拼拼图的小衫"><a class="markdownIt-Anchor" href="#拼拼图的小衫"></a> 拼拼图的小衫</h1>
+<p>这个题目直接使用<code>f[i,j]</code>表示第i个集合还有j的剩余时候可以放入的最大拼图数显然不合理，因为还要满足不交叉，所以我们换一种思路，通过<code>f[j]</code>表示放入第j个数最少需要多少个集合，这个集合中已经放了多少空间：</p>
+<pre class="highlight"><code class="">f[j] = (t,s)
+</code></pre>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">1000</span>;
+<span class="hljs-keyword">int</span> n,m,T,a[maxn+<span class="hljs-number">10</span>];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>{</span>
+    <span class="hljs-keyword">int</span> t,s;
+    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-keyword">const</span> node d) <span class="hljs-keyword">const</span>{
+        <span class="hljs-keyword">if</span> (t&lt;d.t)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (t&gt;d.t)
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> s&lt;d.s;
     }
-    node operator + (const int d) const{
-        if (s+d&lt;=T)
-            return (node){t,s+d};
-        else
-            return (node){t+1,d};
+    node <span class="hljs-keyword">operator</span> + (<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> d) <span class="hljs-keyword">const</span>{
+        <span class="hljs-keyword">if</span> (s+d&lt;=T)
+            <span class="hljs-keyword">return</span> (node){t,s+d};
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> (node){t+<span class="hljs-number">1</span>,d};
     }
 };
-node f[maxn+10];
-int main(){
-    scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;T);
+node f[maxn+<span class="hljs-number">10</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;T);
     node te;
-    for (int i=1;i&lt;=n;i++)
-        scanf(&quot;%d&quot;,&amp;a[i]);
-    f[0].t=1;
-    for (int i=1;i&lt;=n;i++){
-        f[i]=f[i-1]+a[i];
-        for (int j=i-1;j&gt;=1;j--){
-            te=f[j-1]+a[i];
-            if (te&lt;f[j])
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i]);
+    f[<span class="hljs-number">0</span>].t=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++){
+        f[i]=f[i<span class="hljs-number">-1</span>]+a[i];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=i<span class="hljs-number">-1</span>;j&gt;=<span class="hljs-number">1</span>;j--){
+            te=f[j<span class="hljs-number">-1</span>]+a[i];
+            <span class="hljs-keyword">if</span> (te&lt;f[j])
                 f[j]=te;
         }
     }
-    for (int i=n;i&gt;=0;i--)
-        if (f[i].t&lt;=m){
-            printf(&quot;%d\n&quot;,i);
-            return 0;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=n;i&gt;=<span class="hljs-number">0</span>;i--)
+        <span class="hljs-keyword">if</span> (f[i].t&lt;=m){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,i);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
 }
 </code></pre>
-<h1 id="兴奋剂检查"><a href="#兴奋剂检查" class="headerlink" title="兴奋剂检查"></a>兴奋剂检查</h1><p>一开始的时候以为是一个01背包，然后我通过枚举药品的个数还有检测的指标个数，最后再通过药品加成做一次01背包，但是这样只能过一部分数据，最后看答案发现是要将多重条件压缩然后做01背包。因为原来的那种写法相当把所有的限制条件叠到一个背包上了。：</p>
+<h1 id="兴奋剂检查"><a class="markdownIt-Anchor" href="#兴奋剂检查"></a> 兴奋剂检查</h1>
+<p>一开始的时候以为是一个01背包，然后我通过枚举药品的个数还有检测的指标个数，最后再通过药品加成做一次01背包，但是这样只能过一部分数据，最后看答案发现是要将多重条件压缩然后做01背包。因为原来的那种写法相当把所有的限制条件叠到一个背包上了。：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-10%20%E4%B8%8B%E5%8D%882.49.27.png" alt="屏幕快照 2018-04-10 下午2.49.27.png"></p>
-<pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-using namespace std;
-int n, m;
-int p[6], f[6];
-int dp[5001000];
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n, m;
+<span class="hljs-keyword">int</span> p[<span class="hljs-number">6</span>], f[<span class="hljs-number">6</span>];
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">5001000</span>];
 
-//做一次hash
-int h(int a, int b, int c, int d, int e){
-  return a*(p[2]+1)*(p[3]+1)*(p[4]+1)*(p[5]+1) + b*(p[3]+1)*(p[4]+1)*(p[5]+1) + c*(p[4]+1)*(p[5]+1) + d*(p[5]+1) + e;
+<span class="hljs-comment">//做一次hash</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">h</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> d, <span class="hljs-keyword">int</span> e)</span></span>{
+  <span class="hljs-keyword">return</span> a*(p[<span class="hljs-number">2</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + b*(p[<span class="hljs-number">3</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + c*(p[<span class="hljs-number">4</span>]+<span class="hljs-number">1</span>)*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + d*(p[<span class="hljs-number">5</span>]+<span class="hljs-number">1</span>) + e;
 }
 
-int main() {
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-    memset(p, 0, sizeof(p));
-    for (int i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d&quot;, &amp;p[i]);
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;n, &amp;m);
+    <span class="hljs-built_in">memset</span>(p, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(p));
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) {
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;p[i]);
     }
-    int x;
-    int ans = 0;
-    for (int i = 1; i &lt;= n; i++) {
-        scanf(&quot;%d&quot;, &amp;x);
-        memset(f, 0, sizeof(f));
-        for (int j = 1; j &lt;= m; j++) scanf(&quot;%d&quot;, &amp;f[j]);
-        for (int a = p[1]; a &gt;= f[1]; a--) {
-            for (int b = p[2]; b &gt;= f[2]; b--) {
-                for (int c = p[3]; c &gt;= f[3]; c--) {
-                    for (int d = p[4]; d &gt;= f[4]; d--) {
-                        for (int e = p[5]; e &gt;= f[5]; e--) {
-                            int now = h(a, b, c, d, e), pre = h(a-f[1], b-f[2], c-f[3], d-f[4], e-f[5]);
+    <span class="hljs-keyword">int</span> x;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;x);
+        <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(f));
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;f[j]);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = p[<span class="hljs-number">1</span>]; a &gt;= f[<span class="hljs-number">1</span>]; a--) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = p[<span class="hljs-number">2</span>]; b &gt;= f[<span class="hljs-number">2</span>]; b--) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = p[<span class="hljs-number">3</span>]; c &gt;= f[<span class="hljs-number">3</span>]; c--) {
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> d = p[<span class="hljs-number">4</span>]; d &gt;= f[<span class="hljs-number">4</span>]; d--) {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> e = p[<span class="hljs-number">5</span>]; e &gt;= f[<span class="hljs-number">5</span>]; e--) {
+                            <span class="hljs-keyword">int</span> now = h(a, b, c, d, e), pre = h(a-f[<span class="hljs-number">1</span>], b-f[<span class="hljs-number">2</span>], c-f[<span class="hljs-number">3</span>], d-f[<span class="hljs-number">4</span>], e-f[<span class="hljs-number">5</span>]);
                             dp[now] = max(dp[now], dp[pre] + x);
                             ans = max(ans, dp[now]);
                         }
@@ -696,71 +710,73 @@ int main() {
             }
         }
     }
-    printf(&quot;%d\n&quot;, ans);
-    return 0;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="高性能计算机"><a href="#高性能计算机" class="headerlink" title="高性能计算机"></a>高性能计算机</h1><p>算法导论上的一道题，用到二次dp，还有一些高级优化等待进一步看黑书，首先看看low逼的版本怎么做吧:</p>
+<h1 id="高性能计算机"><a class="markdownIt-Anchor" href="#高性能计算机"></a> 高性能计算机</h1>
+<p>算法导论上的一道题，用到二次dp，还有一些高级优化等待进一步看黑书，首先看看low逼的版本怎么做吧:</p>
 <p>首先我们可以划分成两个子问题：</p>
 <ol>
 <li>算出第i个计算节点完成ai个任务A和bi个任务B所需要的最短时间</li>
 <li>算出前i个节点完成ai个任务和bi个任务所需要的最短时间，计算之前需要预处理一下。</li>
 </ol>
 <p>前者很简单，后者的状态转移方程要首先对前i-1个节点的最短时间和第i个节点的最短时间取一个最大值然后比较，因为在操作系统中两个并行任务计算完成时间肯定是取最晚完成的那个。</p>
-<pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-using namespace std;
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int n,na,nb,ta[61],tb[61],ka[61],kb[61];
-int tim[21][61][61],dp[21][61][61];
+<span class="hljs-keyword">int</span> n,na,nb,ta[<span class="hljs-number">61</span>],tb[<span class="hljs-number">61</span>],ka[<span class="hljs-number">61</span>],kb[<span class="hljs-number">61</span>];
+<span class="hljs-keyword">int</span> tim[<span class="hljs-number">21</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>],dp[<span class="hljs-number">21</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>];
 
-inline void calc(int x){
-    int t[2][61][61];
-    memset(t,0x3f,sizeof(t));
-    //初始化
-    t[1][0][0] = t[0][0][0] = 0;
-    for(int i = 0 ; i&lt;= na ;i++){
-        for(int j = 0 ; j &lt;= nb ;j++){
-            for(int k = 1 ; k&lt;=i;k++) t[0][i][j] = min(t[1][i-k][j]+ta[x]+ka[x]*k*k, t[0][i][j]);
-            for(int k = 1 ; k&lt;=j;k++) t[1][i][j] = min(t[1][i][j], t[0][i][j-k]+tb[x]+kb[x]*k*k);
-            tim[x][i][j] = min(t[1][i][j], t[0][i][j]);
-        }
-
-    }
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{
+	<span class="hljs-keyword">int</span> t[<span class="hljs-number">2</span>][<span class="hljs-number">61</span>][<span class="hljs-number">61</span>];
+	<span class="hljs-built_in">memset</span>(t,<span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span>(t));
+	<span class="hljs-comment">//初始化</span>
+	t[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = t[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i&lt;= na ;i++){
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= nb ;j++){
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span> ; k&lt;=i;k++) t[<span class="hljs-number">0</span>][i][j] = min(t[<span class="hljs-number">1</span>][i-k][j]+ta[x]+ka[x]*k*k, t[<span class="hljs-number">0</span>][i][j]);
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span> ; k&lt;=j;k++) t[<span class="hljs-number">1</span>][i][j] = min(t[<span class="hljs-number">1</span>][i][j], t[<span class="hljs-number">0</span>][i][j-k]+tb[x]+kb[x]*k*k);
+			tim[x][i][j] = min(t[<span class="hljs-number">1</span>][i][j], t[<span class="hljs-number">0</span>][i][j]);
+		}
+		
+	}
 }
 
-int main(){
-    cin &gt;&gt; na &gt;&gt; nb;
-    cin &gt;&gt; n;
-    for(int i = 1 ;i &lt;= n ;i++)
-        cin &gt;&gt; ta[i] &gt;&gt; tb[i] &gt;&gt; ka[i] &gt;&gt; kb[i];
-    for(int i = 1 ; i&lt;= n ;i++) calc(i);
-
-    memset(dp , 0x3f,sizeof(dp));
-
-    //预处理
-    for(int i = 0 ; i&lt;=na ;i++)
-        for(int j = 0 ;j &lt;=nb ;j++)
-            dp[1][i][j] = tim[1][i][j];
-
-    for(int x = 2 ; x &lt;= n ; x++)
-        for(int i = 0 ;i &lt;= na ;i++)
-            for(int j = 0 ; j &lt;= nb ;j++ )
-                for(int ki = 0 ; ki &lt;= i ; ki++)
-                    for(int kj = 0 ; kj &lt;= j ;kj++)
-                        dp[x][i][j] = min(dp[x][i][j], max(dp[x-1][i-ki][j-kj], tim[x][ki][kj]));
-    cout &lt;&lt; dp[n][na][nb] &lt;&lt; endl;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+	<span class="hljs-built_in">cin</span> &gt;&gt; na &gt;&gt; nb;
+	<span class="hljs-built_in">cin</span> &gt;&gt; n;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ;i &lt;= n ;i++)
+		<span class="hljs-built_in">cin</span> &gt;&gt; ta[i] &gt;&gt; tb[i] &gt;&gt; ka[i] &gt;&gt; kb[i];
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i&lt;= n ;i++) calc(i);
+	
+	<span class="hljs-built_in">memset</span>(dp , <span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span>(dp));
+	
+	<span class="hljs-comment">//预处理</span>
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i&lt;=na ;i++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ;j &lt;=nb ;j++)
+			dp[<span class="hljs-number">1</span>][i][j] = tim[<span class="hljs-number">1</span>][i][j];
+	
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span> ; x &lt;= n ; x++)
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ;i &lt;= na ;i++)
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt;= nb ;j++ )
+				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> ki = <span class="hljs-number">0</span> ; ki &lt;= i ; ki++)
+					<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> kj = <span class="hljs-number">0</span> ; kj &lt;= j ;kj++)
+						dp[x][i][j] = min(dp[x][i][j], max(dp[x<span class="hljs-number">-1</span>][i-ki][j-kj], tim[x][ki][kj]));
+	<span class="hljs-built_in">cout</span> &lt;&lt; dp[n][na][nb] &lt;&lt; <span class="hljs-built_in">endl</span>;
 }
 </code></pre>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a href="https://www.kancloud.cn/kancloud/pack/70125" target="_blank" rel="external">背包九讲</a></p>
+<h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
+<p><a href="https://www.kancloud.cn/kancloud/pack/70125" target="_blank" rel="external">背包九讲</a></p>
 <p><a href="https://blog.csdn.net/herbertpotter/article/details/77480346" target="_blank" rel="external">专题训练</a></p>
 <p><a href="https://blog.csdn.net/yuyanggo/article/details/48467837" target="_blank" rel="external">代码支持</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjg66q9ab00812nbrgb7jrtmp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/背包专题/" data-id="cjg9k0mfq008a9fbrvai6skt3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -828,7 +844,7 @@ int main(){
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

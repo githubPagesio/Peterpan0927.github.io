@@ -39,7 +39,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -97,9 +97,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>成员变量和属性<br><a id="more"></a></p>
-<h1 id="iOS-成员变量和属性的关系"><a href="#iOS-成员变量和属性的关系" class="headerlink" title="iOS 成员变量和属性的关系"></a>iOS 成员变量和属性的关系</h1><p>@property 和@synthesizer在objective-c 1.0中，我们为interface同时声明了属性和底层实例变量，那时，属性是oc语言的一个新的机制，并且要求你必须声明与之对应的实例变量，例如：</p>
-<pre><code class="objective-c">@interface MyViewController :UIViewController
+        <p>成员变量和属性</p>
+<a id="more"></a>
+<h1 id="ios-成员变量和属性的关系"><a class="markdownIt-Anchor" href="#ios-成员变量和属性的关系"></a> iOS 成员变量和属性的关系</h1>
+<p>@property 和@synthesizer在objective-c 1.0中，我们为interface同时声明了属性和底层实例变量，那时，属性是oc语言的一个新的机制，并且要求你必须声明与之对应的实例变量，例如：</p>
+<pre class="highlight"><code class="objective-c">@interface MyViewController :UIViewController
 {
     UIButton *myButton;
 }
@@ -107,18 +109,18 @@
 @end
 </code></pre>
 <p>在objective-c 2.0中，@property它将自动创建一个以下划线开头的实例变量。因此，在这个版本中，我们不再为interface声明实例变量。变成我们常见的形式</p>
-<pre><code class="objective-c">@interface MyViewController :UIViewController
+<pre class="highlight"><code class="objective-c">@interface MyViewController :UIViewController
 @property (nonatomic, retain) UIButton *myButton;
 @end
 </code></pre>
-<p>在MyViewController.m文件中，编译器也会自动的生成一个实例变量_myButton。那么在.m文件中可以直接的使用_myButton实例变量，也可以通过属性self.myButton.都是一样的。注意这里的self.myButton其实是调用的myButton属性的getter/setter方法。这与C++中点的使用是有区别的，C++中的点可以直接访问成员变量(也就是实例变量)。例如在oc的.h文件中有如下代码</p>
-<pre><code class="objective-c">@interface MyViewController :UIViewController
+<p>在MyViewController.m文件中，编译器也会自动的生成一个实例变量_myButton。那么在.m文件中可以直接的使用_myButton实例变量，也可以通过属性self.myButton.都是一样的。注意这里的self.myButton其实是调用的myButton属性的getter/setter方法。这与C<ins>中点的使用是有区别的，C</ins>中的点可以直接访问成员变量(也就是实例变量)。例如在oc的.h文件中有如下代码</p>
+<pre class="highlight"><code class="objective-c">@interface MyViewController :UIViewController
 {
     NSString *name;
 }
 </code></pre>
-<p>.m文件中，self.name 这样的表达式是错误的。xcode会提示你使用-&gt;,改成self-&gt;name就可以了。因为oc中点表达式是表示调用方法，而上面的代码中没有name这个方法。所以在oc中点表达式其实就是调用对象的setter和getter方法的一种快捷方式。你可能还见过这种写法:</p>
-<pre><code class="objective-c">import &quot;ViewController.h&quot;
+<p>.m文件中，<a href="http://self.name" target="_blank" rel="external">self.name</a> 这样的表达式是错误的。xcode会提示你使用-&gt;,改成self-&gt;name就可以了。因为oc中点表达式是表示调用方法，而上面的代码中没有name这个方法。所以在oc中点表达式其实就是调用对象的setter和getter方法的一种快捷方式。你可能还见过这种写法:</p>
+<pre class="highlight"><code class="objective-c">import &quot;ViewController.h&quot;
 
 @interface ViewController ()
 
@@ -133,14 +135,14 @@
 <p>@synthesize 语句只能被用在 @implementation 代码段中，@synthesize的作用就是让编译器为你自动生成setter与getter方法，@synthesize 还有一个作用，可以指定与属性对应的实例变量，例如@synthesize myButton = xxx；那么self.myButton其实是操作的实例变量xxx，而不是_myButton了。如果.m文件中写了@synthesize myButton;那么生成的实例变量就是myButton；如果没写@synthesize myButton;那么生成的实例变量就是_myButton。所以跟以前的用法还是有点细微的区别。</p>
 <p>二、类别中的属性property</p>
 <p>类与类别中添加的属性要区分开来，因为类别中只能添加方法，不能添加实例变量。经常会在ios的代码中看到在类别中添加属性，这种情况下，是不会自动生成实例变量的。比如在：UINavigationController.h文件中会对UIViewController类进行扩展</p>
-<pre><code class="objective-c">@interface UIViewController (UINavigationControllerItem)
+<pre class="highlight"><code class="objective-c">@interface UIViewController (UINavigationControllerItem)
 @property(nonatomic,readonly,retain) UINavigationItem *navigationItem;
 @property(nonatomic) BOOL hidesBottomBarWhenPushed;
 @property(nonatomic,readonly,retain) UINavigationController *navigationController;
 @end
 </code></pre>
 <p>这里添加的属性，不会自动生成实例变量，这里添加的属性其实是添加的getter与setter方法。注意一点，匿名类别(匿名扩展)是可以添加实例变量的，非匿名类别是不能添加实例变量的，只能添加方法，或者属性（其实也是方法），常用的扩展是在.m文件中声明私有属性和方法。 Category理论上不能添加变量，但是可以使用rRuntime机制来弥补这种不足。</p>
-<pre><code class="objective-c">#import
+<pre class="highlight"><code class="objective-c">#import
 static const void * externVariableKey =&amp;externVariableKey;
 @implementation NSObject (Category)
 @dynamic variable；
@@ -156,31 +158,35 @@ static const void * externVariableKey =&amp;externVariableKey;
 <p>三、@private、@protect、@public</p>
 <p>@protected</p>
 <p>是受保护的，只能在本类及其子类中访问，在{}声明的变量默认是@protect</p>
-<p>  @private</p>
+<p>@private</p>
 <p>是私有的，只能在本类访问</p>
-<p>  @public</p>
+<p>@public</p>
 <p>公开的，可以被在任何地方访问。</p>
 <p>在头文件.h中：</p>
-<pre><code class="objective-c">  @interface ViewController : UIViewController
-  {
-  // 成员变量
-        @public
-            NSString* publicString;
+<pre class="highlight"><code class="objective-c">@interface ViewController : UIViewController
+{
+// 成员变量
+      @public
+          NSString* publicString;
 
-        @protected
-            NSString* protectedString;
+      @protected
+          NSString* protectedString;
 
-        @private
-            NSString* privateString;
-  }
-  //属性变量
-  @property (nonatomic,strong) NSArray *propertyString;
-  @end
+      @private
+          NSString* privateString;
+}
+//属性变量
+@property (nonatomic,strong) NSArray *propertyString;
+@end
 </code></pre>
-<p>成员变量用于类内部，无需与外界接触的变量。根据成员变量的私有性，为了方便访问，所以就有了属性变量。属性变量是用于与其他对象交互的变量。（属性变量的好处就是允许让其他对象访问到该变量。当然，你可以设置只读或者可写等，设置方法也可自定义。）一些建议:<br>  1.如果只是单纯的private变量，最好声明在implementation里.<br>  2.如果是类的public属性，就用property写在.h文件里<br>  3.如果自己内部需要setter和getter来实现一些东西，就在.m文件的类目里用property来声明.h中的interface的大括号{}之间的实例(成员)变量，.m中可以直接使用  .h中的property(属性)变量，.m中需要使用self.propertyVariable的方式使用propertyVariable变量</p>
+<p>成员变量用于类内部，无需与外界接触的变量。根据成员变量的私有性，为了方便访问，所以就有了属性变量。属性变量是用于与其他对象交互的变量。（属性变量的好处就是允许让其他对象访问到该变量。当然，你可以设置只读或者可写等，设置方法也可自定义。）一些建议:<br>
+1.如果只是单纯的private变量，最好声明在implementation里.<br>
+2.如果是类的public属性，就用property写在.h文件里<br>
+3.如果自己内部需要setter和getter来实现一些东西，就在.m文件的类目里用property来声明.h中的interface的大括号{}之间的实例(成员)变量，.m中可以直接使用  .h中的property(属性)变量，.m中需要使用self.propertyVariable的方式使用propertyVariable变量</p>
 <p>四、成员变量和成员属性的关系</p>
-<p>属性对成员变量扩充了存取方法 .属性默认会生成带下划线的成员变量 .但只声明了变量，是不会有属性的，可以通过以下代码证明<br>  在Person.h 头文件中</p>
-<pre><code class="objective-c">@interface Person : NSObject {
+<p>属性对成员变量扩充了存取方法 .属性默认会生成带下划线的成员变量 .但只声明了变量，是不会有属性的，可以通过以下代码证明<br>
+在Person.h 头文件中</p>
+<pre class="highlight"><code class="objective-c">@interface Person : NSObject {
    @private
    //name为私有成员变量
    NSString *name;
@@ -189,7 +195,7 @@ static const void * externVariableKey =&amp;externVariableKey;
   @property (nonatomic ,copy) NSString *age;
 </code></pre>
 <p>在viewController.m 中，通过RunTime机制获得对象的所有成员变量和成员属性。</p>
-<pre><code class="objective-c">   Person *p = [Person new];
+<pre class="highlight"><code class="objective-c">   Person *p = [Person new];
    unsigned int count = 0; //count记录变量的数量
 
  // 获取类的所有成员变量
@@ -210,7 +216,7 @@ static const void * externVariableKey =&amp;externVariableKey;
      NSLog(@&quot;属性名 = %@&quot;,propertyName);
  }
 </code></pre>
-<pre><code class="objective-c">打印结果为
+<pre class="highlight"><code class="objective-c">打印结果为
 
 2016-08-12 11:31:50.225 modifyPrivate[777:143231] 变量名 = name
 
@@ -223,7 +229,7 @@ static const void * externVariableKey =&amp;externVariableKey;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/" data-id="cjg66q98u00502nbr1q6521tp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/26/iOS成员变量和属性的关系/" data-id="cjg9k0mej00549fbr1b5fz0kn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -291,7 +297,7 @@ static const void * externVariableKey =&amp;externVariableKey;
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

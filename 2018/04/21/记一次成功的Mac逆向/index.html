@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>记一次成功的Mac逆向 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次成功的Mac逆向">
+<meta property="og:url" content="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.28.03.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.32.10.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.40.36.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.42.02.png">
+<meta property="og:updated_time" content="2018-04-21T15:42:52.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次成功的Mac逆向">
+<meta name="twitter:description" content="第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-记一次成功的Mac逆向" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/记一次成功的Mac逆向/" class="article-date">
+  <time class="post-time" datetime="2018-04-21T15:10:22.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">21</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记一次成功的Mac逆向
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/实战分享/">实战分享</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh</p>
+<a id="more"></a>
+<h1 id="应用介绍"><a class="markdownIt-Anchor" href="#应用介绍"></a> 应用介绍</h1>
+<p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png" alt="Yummy FTP"></p>
+<p>Yummy FTP 是一款着力于速度、可靠性和效率的 FTP + SFTP + FTPS 文件传输客户端。其结合并改进了其它文件传输方案中最好的功能，添加了大量独特的强大功能，以一个高度可调谐的 FTP 引擎驱动。使它成为一款急速、灵活并且完全可靠的 macOS 下的文件传输工具。</p>
+<p>它具有非常漂亮与符合直觉的高清用户界面，像 Finder 一样的 FTP 浏览器、工具栏和随处可用的拖拽。 无论是要传输几个或者上千个文件，还是计划自动备份，或执行网站维护，Yummy FTP 都能轻松处理。如果您觉得 Yummy FTP  不错，不妨支持一下正版哦！</p>
+<p>之前用了一段时间，感觉不错，最近打开的时候突然发现30天试用已经过了，哇，这种事情，当然搞它一波，网上流传的方法是用机器算它的序列号，这种方法感觉过于暴力，我觉得不行，所以干脆逆向，直接把提示的那个窗口给干掉就好了，这样就不会触发后续的事件了。</p>
+<h1 id="逆向分析"><a class="markdownIt-Anchor" href="#逆向分析"></a> 逆向分析</h1>
+<p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png" alt="屏幕快照 2018-04-21 下午11.18.33.png"></p>
+<p>这一步有点卡手，然后看看其他的，发现都是<code>sub_xxxx</code>什么的，而且还巨多，看完眼睛都瞎掉，想了想之后决定用字符串查找，因为这个是序列号验证的模式，我们就通过序列号英文来查找：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png" alt="屏幕快照 2018-04-21 下午11.25.03.png"></p>
+<p>然后查找这个引用的关系，到这里似乎出现了突破口，继续向上寻找引用，然后发现了有四个调用：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.28.03.png" alt="屏幕快照 2018-04-21 下午11.28.03.png"></p>
+<p>我们首先看看第一个，太长了，跳出来看看第二个，发现离调用的头部很近：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.32.10.png" alt="屏幕快照 2018-04-21 下午11.32.10.png"></p>
+<p>从判断的逻辑关系可以得出，一开始对于日期或者其他的什么进行了一次校验，校验失败之后走左边的路线，也就是你的App认证为是过期的，我们发现开头的右边那条线就直接返回了，所以我们在这里修改判断条件让函数直接返回或者走右边的路线，原来的代码是：</p>
+<pre class="highlight"><code class="assembly">mov	al, byte [esi-0x72b21+0x2f1114]                     ; 0x2f1114
+and	al, 0x0
+jne loc_72d49
+</code></pre>
+<p>那么我们修改判断为一定不为0的即可：</p>
+<pre class="highlight"><code class="assembly">or al, 0x01
+jne	loc_72d49
+</code></pre>
+<p>修改好之后非常开心的打开了应用，然而现实给了我沉重的一巴掌，还是不OK，此时我的心中似乎奔过了千万头草泥马，想到还有几个引用，于是乎又转头回去看了：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="屏幕快照 2018-04-21 下午11.40.36.png"></p>
+<p>除了逻辑变了一下，其他的也没改什么，所以照样改就好了，第四个是一个子调用，应该不需要改，修改完之后重新导出，然后替换原有的可执行文件，重新打开App:</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.42.02.png" alt="屏幕快照 2018-04-21 下午11.42.02.png"></p>
+<p>nice，那个烦人的玩意没了，开始愉悦的使用吧～分享到此结束。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjg9k0mfp00889fbraysrhzb8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/19/iOS加固之混淆-加密/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS加固之混淆/加密</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

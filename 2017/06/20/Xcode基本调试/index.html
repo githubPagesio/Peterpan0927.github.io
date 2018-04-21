@@ -41,7 +41,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -99,20 +99,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Xcode基本调试<br><a id="more"></a></p>
-<h1 id="Xcode基本调试法"><a href="#Xcode基本调试法" class="headerlink" title="Xcode基本调试法"></a>Xcode基本调试法</h1><p><strong>1. 运行时设置断点</strong></p>
+        <p>Xcode基本调试</p>
+<a id="more"></a>
+<h1 id="xcode基本调试法"><a class="markdownIt-Anchor" href="#xcode基本调试法"></a> Xcode基本调试法</h1>
+<p><strong>1. 运行时设置断点</strong></p>
 <p>在XCode中需要观察的变量所在的代码处添加断点，可以让程序运行到这里暂停。这时鼠标悬停在变量名处，XCode会显示出该变量的信息。</p>
 <p>断点的类型分为异常断点（Exception Breakpoint）和符号断点（Symbolic Breakpoint）等，在XCode断点浏览器（Breakpoints Navigator）的左下方可以添加这些断点。</p>
 <p>符号断点中的符号可以指方法名称或函数名称。符号断点可以中断某个函数的调用。用户还可以添加执行断点的条件。</p>
 <p><strong>2.打印到控制台</strong></p>
 <p>控制台位于XCode的底端，用于打印程序运行过程中的输出信息。在代码中调用NSLog函数，可以打印变量值到控制台中显示出来。</p>
-<pre><code class="objective-c">NSLog(@&quot;obj:%@&quot;, obj);
+<pre class="highlight"><code class="objective-c">NSLog(@&quot;obj:%@&quot;, obj);
 </code></pre>
 <p>需要特别注意的是，尽管NSLog可圈可点，但在实际应用中要防备其可能会引起安全问题，因为任何由NSLog输出的内容都会成为应用程序成品代码</p>
 <p>的一部分，也就是说会被任何接触到应用的人看到。只要把设备接入信息管理工具，每个人都能查看控制台信息并查询每一条日志记录。这可能会引发一系列严重后</p>
 <p>果，例如向控制台输出机密逻辑算法或者用户密码等信息。</p>
 <p>我们可以使用宏来解决调用NSLog方法可能导致的安全问题，只在调试版本中调用NSLog。可以采用全局可访问的头文件，把所有日志记录都灌进去，而且不用担心它们会出现在成品代码当中。</p>
-<pre><code class="objective-c">#ifdef DEBUG
+<pre class="highlight"><code class="objective-c">#ifdef DEBUG
 
 #define DMLog(...) NSLog(@&quot;%s %@&quot;, PRETTY_FUNCTION, [NSString stringWithFormat:VA_ARGS])
 
@@ -134,13 +136,13 @@
 <p>help 命令：如果忘记某条命令的语法了，用来获取帮助信息。</p>
 <p>需要注意的是，上述这些都是GDB的调试命令，在LLDB中会有所差异。随着Xcode 5的发布，LLDB调试器已经取代了GDB，成为了Xcode工程中默认的调试器。</p>
 <p>这里需要强调的一个技巧是，通过使用expr 表达式可实现在运行时修改变量的值。<a href="http://m.blog.csdn.net/blog/freeWayWalker/45623433#fn:3" target="_blank" rel="external">2</a></p>
-<p>expr username = @”username”expr password = @”badpassword”</p>
+<p>expr username = @&quot;username&quot;expr password = @“badpassword”</p>
 <p>通过上面的代码段，变量username和password分别被重新赋值。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/20/Xcode基本调试/" data-id="cjg66q97x003p2nbrlbsvgk9e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/20/Xcode基本调试/" data-id="cjg9k0mdp003q9fbrbneik7kk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -208,7 +210,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

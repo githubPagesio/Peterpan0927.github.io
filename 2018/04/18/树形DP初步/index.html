@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/18/树形DP初步/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移">
-<meta property="og:updated_time" content="2018-04-19T05:44:24.049Z">
+<meta property="og:updated_time" content="2018-04-21T06:16:28.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树形DP初步">
 <meta name="twitter:description" content="树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移">
@@ -39,7 +39,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -99,60 +99,113 @@
       
         <p>树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移</p>
 <a id="more"></a>
-<h1 id="POJ-2342"><a href="#POJ-2342" class="headerlink" title="POJ_2342"></a>POJ_2342</h1><p>树形DP入门题，非常经典</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-#define Memset(a,b) memset(a,b,sizeof(a))
-#define maxn 6005
-typedef long long LL;
+<h1 id="poj_2342"><a class="markdownIt-Anchor" href="#poj_2342"></a> POJ_2342</h1>
+<p>树形DP入门题，非常经典</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> Memset(a,b) memset(a,b,sizeof(a))</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> maxn 6005</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
 
-using namespace std;
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
 
-int dp[maxn][2];
-int vis[maxn];
-int father[maxn];
-int n;
+<span class="hljs-keyword">int</span> dp[maxn][<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> vis[maxn];
+<span class="hljs-keyword">int</span> father[maxn];
+<span class="hljs-keyword">int</span> n;
 
-void dfs(int node){
-  int i;
-  vis[node] = 1;
-  for(i=1;i&lt;=n;i++){
-    if(father[i] == node &amp;&amp; !vis[i]){
-      //递归
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> node)</span></span>{
+  <span class="hljs-keyword">int</span> i;
+  vis[node] = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++){
+    <span class="hljs-keyword">if</span>(father[i] == node &amp;&amp; !vis[i]){
+      <span class="hljs-comment">//递归</span>
       dfs(i);
-      dp[node][1] += dp[i][0];
-      dp[node][0] += max(dp[i][0], dp[i][1]);
+      dp[node][<span class="hljs-number">1</span>] += dp[i][<span class="hljs-number">0</span>];
+      dp[node][<span class="hljs-number">0</span>] += max(dp[i][<span class="hljs-number">0</span>], dp[i][<span class="hljs-number">1</span>]);
     }
   }
 }
 
-int main(){
-  int c,f,root;
-  while(cin &gt;&gt; n){
-    Memset(father,0);
-    Memset(vis,0);
-    Memset(dp,0);
-    for(int i = 1 ; i &lt;= n ;i++)
-      scanf(&quot;%d&quot;, &amp;dp[i][1]);
-    root=0;
-    while(cin &gt;&gt; c &gt;&gt; f &amp;&amp; (c || f)){
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">int</span> c,f,root;
+  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n){
+    Memset(father,<span class="hljs-number">0</span>);
+    Memset(vis,<span class="hljs-number">0</span>);
+    Memset(dp,<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= n ;i++)
+      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;dp[i][<span class="hljs-number">1</span>]);
+    root=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; c &gt;&gt; f &amp;&amp; (c || f)){
       father[c] = f;
       root = f;
     }
     dfs(root);
-    int maxx = max(dp[root][0], dp[root][1]);
-    cout &lt;&lt; maxx &lt;&lt; endl;
+    <span class="hljs-keyword">int</span> maxx = max(dp[root][<span class="hljs-number">0</span>], dp[root][<span class="hljs-number">1</span>]);
+    <span class="hljs-built_in">cout</span> &lt;&lt; maxx &lt;&lt; <span class="hljs-built_in">endl</span>;
   }
-  return 0;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h1 id="二叉苹果树"><a href="#二叉苹果树" class="headerlink" title="二叉苹果树"></a>二叉苹果树</h1>
+<h1 id="二叉苹果树"><a class="markdownIt-Anchor" href="#二叉苹果树"></a> 二叉苹果树</h1>
+<p>这个题目就是转换为无向图的思想，将权值转移到边上就行了，网上的写法有的是利用前向星，但是这个太麻烦，所以我们可以直接利用<code>vector</code>数组来实现：</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>{</span>
+    <span class="hljs-keyword">int</span> next;
+    <span class="hljs-keyword">int</span> w;
+};
+
+<span class="hljs-built_in">vector</span>&lt;Node&gt;vec[<span class="hljs-number">110</span>];
+<span class="hljs-keyword">int</span> n,m;
+<span class="hljs-keyword">int</span> dp[<span class="hljs-number">110</span>][<span class="hljs-number">110</span>];
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> father)</span></span>{
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">vector</span>&lt;Node&gt;::iterator it;
+    <span class="hljs-keyword">for</span>(it = vec[u].begin() ; it != vec[u].end() ; it++){
+        Node node = *it;
+        <span class="hljs-keyword">int</span> v = node.next, w = node.w;
+        <span class="hljs-keyword">if</span>(v == father) <span class="hljs-keyword">continue</span>;
+        ans += dfs(v,u)+<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = min(ans,m) ; j &gt;= <span class="hljs-number">1</span>; j--)
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = min(ans, j) ; k &gt;= <span class="hljs-number">1</span> ;k--)
+                dp[u][j] = max(dp[u][j], dp[u][j-k]+dp[v][k<span class="hljs-number">-1</span>]+w);
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> u,v,w;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m){
+        <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ;i++){
+            <span class="hljs-built_in">cin</span> &gt;&gt; u  &gt;&gt; v &gt;&gt; w;
+            Node node1,node2;
+            node1.next=v;
+            node1.w=node2.w=w;
+            node2.next=u;
+            vec[u].push_back(node1);
+            vec[v].push_back(node2);
+        }
+        dfs(<span class="hljs-number">1</span>, <span class="hljs-number">-1</span>);
+        <span class="hljs-built_in">cout</span> &lt;&lt; dp[<span class="hljs-number">1</span>][m] &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/18/树形DP初步/" data-id="cjg66q99y006z2nbr1641iuc2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/18/树形DP初步/" data-id="cjg9k0mfb00739fbrn7lv2ygu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -220,7 +273,7 @@ int main(){
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>

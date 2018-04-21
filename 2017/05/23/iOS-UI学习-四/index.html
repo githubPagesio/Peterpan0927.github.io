@@ -45,7 +45,7 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
@@ -103,20 +103,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UI初步（四）<br><a id="more"></a></p>
-<h2 id="1-自定义一个coverView"><a href="#1-自定义一个coverView" class="headerlink" title="1.自定义一个coverView"></a>1.自定义一个coverView</h2><blockquote>
+        <p>UI初步（四）</p>
+<a id="more"></a>
+<h2 id="1自定义一个coverview"><a class="markdownIt-Anchor" href="#1自定义一个coverview"></a> 1.自定义一个coverView</h2>
+<blockquote>
 <p>首先要创建一个coverView的类</p>
 <p>在这个类当中重写初始化他的方法</p>
 <p>在ViewController里面进行对象的实例化并加入其父控件(注意，最后一定要赋值回去：coverView.model = _model)</p>
 </blockquote>
-<pre><code class="objective-c">#import &quot;CoverView.h&quot;
+<pre class="highlight"><code class="objective-c">#import &quot;CoverView.h&quot;
 
 @implementation CoverView
 
 -(instancetype)initWithFrame:(CGRect)frame{
   if (self == [super initWithFrame:frame]){
-      self.backgroundColor = [UIColor blackColor];
-      self.alpha = 0.6;
+  	self.backgroundColor = [UIColor blackColor];
+  	self.alpha = 0.6;
     CGSize *viewSize = [UIScreen mainScreen].bounds.size;
     UILabel *nameLabel = [UILabel alloc]initWithFrame:CGRectMake(0,0,viewSize.width,20)
       //以下省略对nameLabel的其他设置
@@ -126,28 +128,29 @@
 }
 //注意，在main.storyboard里面，越靠近view离底层越近
 </code></pre>
-<h2 id="2-UIScrollView控件（滚动，缩放）"><a href="#2-UIScrollView控件（滚动，缩放）" class="headerlink" title="2.UIScrollView控件（滚动，缩放）"></a>2.UIScrollView控件（滚动，缩放）</h2><p>可以滚动的控件的父类UIScrollView或者继承自UIScrollView，首先添加一个scrollView，再向其中添加子view，并设置相关属性。</p>
+<h2 id="2uiscrollview控件滚动缩放"><a class="markdownIt-Anchor" href="#2uiscrollview控件滚动缩放"></a> 2.UIScrollView控件（滚动，缩放）</h2>
+<p>可以滚动的控件的父类UIScrollView或者继承自UIScrollView，首先添加一个scrollView，再向其中添加子view，并设置相关属性。</p>
 <p>1.contentSize属性：</p>
-<pre><code class="objective-c">//限定滚动的范围，在设置的时候，一定要比scrollerView的Size大，否则不会产生滚动的效果，如果宽度设置为0，就表示在横向中不能滚动
+<pre class="highlight"><code class="objective-c">//限定滚动的范围，在设置的时候，一定要比scrollerView的Size大，否则不会产生滚动的效果，如果宽度设置为0，就表示在横向中不能滚动
 _scrollView.contentSize = CGSizeMake(1024, 768);
 </code></pre>
 <p>2.滚动指示器属性</p>
-<pre><code class="objective-c">_scrollView.showsVerticalScrollIndicator=YES;//垂直滚动指示器
+<pre class="highlight"><code class="objective-c">_scrollView.showsVerticalScrollIndicator=YES;//垂直滚动指示器
 _scrollView.showsHorizontalScrollIndicator=YES;//水平滚动指示器
 </code></pre>
 <p>3.弹簧效果</p>
-<pre><code class="objective-c">_scrollView.bounces = YES;//弹簧效果，默认是YES，一般不关闭不设置contentSize的时候弹簧效果开启，但是看不到
+<pre class="highlight"><code class="objective-c">_scrollView.bounces = YES;//弹簧效果，默认是YES，一般不关闭不设置contentSize的时候弹簧效果开启，但是看不到
 //设置下面属性后,就算不设置contentSize，也会有弹簧效果,前提是_scrollView.bounces的属性是YES
 _scrollView.alwaysBounceHorizon = YES;
 _scrollView.alwaysBounceVertical = YES;
 </code></pre>
 <p>4.内边界</p>
-<pre><code class="objective-c">//没有设置contentInset的时候，imageView默认会停留在初始位置，contentInset会停留在设置的内边距位置，
+<pre class="highlight"><code class="objective-c">//没有设置contentInset的时候，imageView默认会停留在初始位置，contentInset会停留在设置的内边距位置，
 _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 </code></pre>
 <p>5.偏移量</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/C275B81E-725D-4560-92C8-2FC5C7D40AE2.png" alt=""></p>
-<pre><code class="objective-c">_scrollView.contentOffset = CGPointMake(100, 100);
+<pre class="highlight"><code class="objective-c">_scrollView.contentOffset = CGPointMake(100, 100);
 </code></pre>
 <p>6.不能滚动的原因小结</p>
 <blockquote>
@@ -156,7 +159,7 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 <p>_scrollView.scrollEnabled = NO;禁止滚动</p>
 </blockquote>
 <p>7.手动修改offset</p>
-<pre><code class="objective-c">//通过动画和按钮实现手动的流畅滚动效果
+<pre class="highlight"><code class="objective-c">//通过动画和按钮实现手动的流畅滚动效果
 -(IBAction)didClick:(id)sender{
   CGPoint offset = _scrollView.contentOffset;
   offset.x += 20;
@@ -169,13 +172,14 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
   [_scrollView setContentOffset:offset animated:YES];
 }
 </code></pre>
-<h2 id="3-代理的使用代理设计模式"><a href="#3-代理的使用代理设计模式" class="headerlink" title="3.代理的使用代理设计模式"></a>3.代理的使用<a href="http://www.jianshu.com/p/2113ffe54b30" target="_blank" rel="external">代理设计模式</a></h2><p>使用代理的情况：自己不能做或者不想做</p>
+<h2 id="3代理的使用代理设计模式"><a class="markdownIt-Anchor" href="#3代理的使用代理设计模式"></a> 3.代理的使用<a href="http://www.jianshu.com/p/2113ffe54b30" target="_blank" rel="external">代理设计模式</a></h2>
+<p>使用代理的情况：自己不能做或者不想做</p>
 <p>1.制定协议以及代理方法，定义一个代理的属性</p>
 <p>2.遵守协议，实现对应的代理方法</p>
 <p>3.制定协议者在适当的时候调用代理方法</p>
 <p><strong>协议中的内容一般都是方法列表，当然也可以定义属性，协议是公共的定义，如果只是某个类使用，我们常做的就是写在某个类中。如果是多个类都是用同一个协议，建议创建一个Protocol文件，在这个文件中定义协议。遵循的协议可以被继承，协议只能定义公用的一套接口，类似于一个约束代理双方的作用。但不能提供具体的实现方法，实现方法需要代理对象去实现。协议可以继承其他协议，并且可以继承多个协议，在iOS中对象是不支持多继承的，而协议可以多继承。</strong></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/6234F898-5C33-4E75-8056-84BB36E12A6A.png" alt=""></p>
-<pre><code class="objective-c">//doublehui.h
+<pre class="highlight"><code class="objective-c">//doublehui.h
 #import &lt;UIKit/UIKit.h&gt;
 
 #warning 1. 指定协议及代理方法，当前协议继承了一个协议，所以只继承了来自这一个协议的方法列表
@@ -198,15 +202,15 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-
+        
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
         [button setBackgroundColor:[UIColor redColor]];
-
+        
         // 监听方法
         [button addTarget:self
                    action:@selector(clickButton)
          forControlEvents:UIControlEventTouchUpInside];
-
+        
         [self addSubview:button];
     }
     return self;
@@ -218,7 +222,7 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
     // 通知代理， 调用代理方法
     //[self.delegate needPigMeet];
     // respondsToSelector:@selector 返回一个bool ，如果该对象实现了这个方法， 就返回yes ，如果没有返回NO
-
+    
     #warning 3. 调用代理方法
     if ([self.delegate respondsToSelector:@selector(needPigMeet)]) {
         [self.delegate needPigMeet];
@@ -226,7 +230,7 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 }
 @end
 </code></pre>
-<pre><code class="objective-c">//ViewController.m
+<pre class="highlight"><code class="objective-c">//ViewController.m
 #warning  1. 遵守协议
 @interface ViewController ()&lt;DoubleHuiDelegate&gt;
 
@@ -236,15 +240,15 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     DoubleHui *huiView = [[DoubleHui alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-
+    
     [huiView setBackgroundColor:[UIColor orangeColor]];
      // 设置代理
     #warning  2. 设置代理，赋值回去
     huiView.delegate = self;
-
-
+    
+    
     [self.view addSubview:huiView];
 }
 
@@ -258,8 +262,9 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 <p>代理使用的原理：<img src="http://omunhj2f1.bkt.clouddn.com/44EFD2BE-DB86-4B5D-9F7E-51485E8D816B.png" alt=""></p>
 <p>我对于代理的形象化理解：</p>
 <p>小明要上厕所，告诉老师，老师同意，小明去上厕所，这个事件中，小明作为委托方，上厕所的方法在小明的身上，但是老师如果不同意，小明就无法上厕所，当老师同意的时候，小明才会调用自身的上厕所这个方法。</p>
-<h2 id="4-监听ScrollView的滚动"><a href="#4-监听ScrollView的滚动" class="headerlink" title="4.监听ScrollView的滚动"></a>4.监听ScrollView的滚动</h2><p>可以使用拖拽的方式让scrollView和ViewController关联，然后设置代理</p>
-<pre><code class="objective-c">#import &quot;ViewController.h&quot;
+<h2 id="4监听scrollview的滚动"><a class="markdownIt-Anchor" href="#4监听scrollview的滚动"></a> 4.监听ScrollView的滚动</h2>
+<p>可以使用拖拽的方式让scrollView和ViewController关联，然后设置代理</p>
+<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
 
 @interface ViewController ()&lt;UIScrollViewDelegate&gt;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -272,7 +277,7 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 - (void)viewDidLoad {
     [super viewDidLoad];
     _scrollView.contentSize = _imageView.frame.size;
-
+    
 }
 //当scrollView滚动的时候就会调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -294,13 +299,14 @@ _scrollView.contentInset = UIEdgeInsetsMake(10,10,10,10);
 <p>设置成为代理</p>
 <p>实现对应的方法</p>
 </blockquote>
-<h2 id="5-实现图片的缩放"><a href="#5-实现图片的缩放" class="headerlink" title="5.实现图片的缩放"></a>5.实现图片的缩放</h2><p>放大缩小倍数属性：</p>
-<pre><code class="objective-c">_scrollView.minimumZoomScale  最大的缩小倍数
+<h2 id="5实现图片的缩放"><a class="markdownIt-Anchor" href="#5实现图片的缩放"></a> 5.实现图片的缩放</h2>
+<p>放大缩小倍数属性：</p>
+<pre class="highlight"><code class="objective-c">_scrollView.minimumZoomScale  最大的缩小倍数
 
 _scrollView.maximumZoomScale  最大的放大倍数
 </code></pre>
 <p>同时需要设置代理</p>
-<pre><code class="objective-c">#import &quot;ViewController.h&quot;
+<pre class="highlight"><code class="objective-c">#import &quot;ViewController.h&quot;
 
 @interface ViewController ()&lt;UIScrollViewDelegate&gt;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -317,7 +323,7 @@ _scrollView.maximumZoomScale  最大的放大倍数
     _scrollView.minimumZoomScale = 0.3;
     //设置成为代理,如果没有设置代理属性则不会调用代理方法
     _scrollView.delegate = self;
-
+    
 }
 //实现代理，告诉scrollView哪个图片需要被拉伸或者缩放
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
@@ -335,47 +341,49 @@ _scrollView.maximumZoomScale  最大的放大倍数
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
     NSLog(@&quot;end zooming&quot;);
 }
+
 </code></pre>
-<h2 id="6-图片轮播器"><a href="#6-图片轮播器" class="headerlink" title="6.图片轮播器"></a>6.图片轮播器</h2><p>图片的设置：</p>
-<pre><code class="objective-c">#define kImageCount 5
+<h2 id="6图片轮播器"><a class="markdownIt-Anchor" href="#6图片轮播器"></a> 6.图片轮播器</h2>
+<p>图片的设置：</p>
+<pre class="highlight"><code class="objective-c">#define kImageCount 5
 - (void)setupScrollView {
     // 取出scrollView的size
     CGSize scrollViewSize = _scrollView.frame.size;
-
+    
     for (int i = 0; i &lt; kImageCount; i++) {
         // 计算imageView的x值
         CGFloat imageViewX = i * scrollViewSize.width;
-
+        
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, 0, scrollViewSize.width, scrollViewSize.height)];
-
+        
         // 设置图片
 //        imageView.image =[UIImage imageNamed:@&quot;img_01&quot;];
         // 拼接图片的名称
         NSString *imageName = [NSString stringWithFormat:@&quot;img_%02d&quot;,i + 1];
-
+        
         imageView.image = [UIImage imageNamed:imageName];
-
+        
         // 添加到scrollView
         [_scrollView addSubview:imageView];
     }
-
+    
     // 设置 scrollView的contentSize
     _scrollView.contentSize = CGSizeMake(kImageCount * scrollViewSize.width, 0);
-
+    
     // 隐藏滚动指示器
     _scrollView.showsHorizontalScrollIndicator = NO;
-
+    
 }
 </code></pre>
 <p>设置分页的模式：</p>
-<pre><code class="objective-c">//开启分页效果，根据scrollView的宽度进行分页
+<pre class="highlight"><code class="objective-c">//开启分页效果，根据scrollView的宽度进行分页
 _scrollView.pagingEnabled = YES;
 </code></pre>
 <p>pageControll设置,拖动一个pageControll按钮到main.storyboard中</p>
-<pre><code class="objective-c">- (void)setupPageControll {
+<pre class="highlight"><code class="objective-c">- (void)setupPageControll {
   //根据具体图片的数量来修改
   _pageControl.numberOfPages = kImageCount;
-
+     
     // 设置指示器的颜色
     // 非当前的指示器
   _pageControl.pageIndicatorTintColor = [UIColor grayColor];
@@ -385,20 +393,20 @@ _scrollView.pagingEnabled = YES;
   _pageControl.currentPage = 1;
 }
 </code></pre>
-<p> 将pageControl和scrollView进行关联</p>
+<p>将pageControl和scrollView进行关联</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/4809ED67-267E-490E-B679-69AB2C3A8884.png" alt=""></p>
-<pre><code class="objective-c">//拖动图片的时候移动pageControl
+<pre class="highlight"><code class="objective-c">//拖动图片的时候移动pageControl
 #define kScrollViewSize (_scrollView.frame.size)
 #pragma mark -  当scrollView停止减速的时候调用
 // Decelerating 减速
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // currentPage = scrollView.contentOffset.x / kScrollViewSize.width
-
+    
     _pageControl.currentPage = scrollView.contentOffset.x / kScrollViewSize.width;
 }
 </code></pre>
 <p>点击按钮实现滚动的方法</p>
-<pre><code class="objective-c">- (IBAction)didClickButton {
+<pre class="highlight"><code class="objective-c">- (IBAction)didClickButton {
   CGPoint offset = _scrollView.contentOffset;
   NSInteger currentPage = _pageControl.currentPage;
   if (currentPage == 4){
@@ -413,7 +421,7 @@ _scrollView.pagingEnabled = YES;
 }
 </code></pre>
 <p>通过定时器的实现自动滚动</p>
-<pre><code class="objective-c">  - (void)initImageTimer {
+<pre class="highlight"><code class="objective-c">  - (void)initImageTimer {
     /**
      scheduled 计划，安排
      interval : 间隔
@@ -421,11 +429,11 @@ _scrollView.pagingEnabled = YES;
      selector: 方法
      userInfo : 用户自定义的参数
      repeats: 重复
-
+     
      每隔1秒钟 调用 控制器的  didClickButton： 方法， 传递的参数为nil
-
+     
      一旦创建就会立即生效
-
+     
      在使用timer的时候， 如果调用了 invalidate方法， 那么这个计时器就不会再次生效
      重新创建新的timer
      */
@@ -434,18 +442,18 @@ _scrollView.pagingEnabled = YES;
                                             selector:@selector(didClickButton:)
                                             userInfo:nil
                                              repeats:YES];
-
+    
    // [_timer fire];  调用fire ， 这个计时器会立即执行， 不会等待 interval 设置的时间
    // 设置优先级，使其优先级和UITextView相同，滚动UITextView的同时也执行定时器的方法
     NSRunLoop *mainLoop = [NSRunLoop mainRunLoop];
-
-
+    
+    
     [mainLoop addTimer:_timer forMode:NSRunLoopCommonModes];
-
+    
 }
 /**
  在开始拖拽的时候， 把计时器停止
-
+ 
  invalidate 无效的意思
  */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -459,7 +467,7 @@ _scrollView.pagingEnabled = YES;
  */
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
    [_timer fire];
-
+    
     [self initImageTimer];
 }
 </code></pre>
@@ -472,20 +480,22 @@ _scrollView.pagingEnabled = YES;
 <li>NSRunLoopCommonModes 这是一组可配置的通用模式。将input sources与该模式关联则同时也将input sources与该组中的其它模式进行了关联。</li>
 <li>每次运行一个run loop，你指定（显式或隐式）run loop的运行模式。当相应的模式传递给run loop时，只有与该模式对应的input sources才被监控并允许run loop对事件进行处理（与此类似，也只有与该模式对应的observers才会被通知）</li>
 </ul>
-<h2 id="7-代理使用weak修饰"><a href="#7-代理使用weak修饰" class="headerlink" title="7.代理使用weak修饰"></a>7.代理使用weak修饰</h2><p>设置代理属性的时候，使用weak修饰符，是为了防止循环引用</p>
+<h2 id="7代理使用weak修饰"><a class="markdownIt-Anchor" href="#7代理使用weak修饰"></a> 7.代理使用weak修饰</h2>
+<p>设置代理属性的时候，使用weak修饰符，是为了防止循环引用</p>
 <p>addSubView方法其实是对加入的子控件有一个强引用，所以有两个对象互相饮用的时候，其中一个必须是weak，否则无法释放掉。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E4%BB%A3%E7%90%86%E7%9A%84weak%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt=""></p>
-<h2 id="8-使用代理优化九宫格代码思路"><a href="#8-使用代理优化九宫格代码思路" class="headerlink" title="8.使用代理优化九宫格代码思路"></a>8.使用代理优化九宫格代码思路</h2><p>1.在yellowView.h里面创造一个代理的方法和代理的属性</p>
-<pre><code class="objective-c">- (void)yellowView:(YellowView *)yellowView  didClickButton:(AppModel *)model;
+<h2 id="8使用代理优化九宫格代码思路"><a class="markdownIt-Anchor" href="#8使用代理优化九宫格代码思路"></a> 8.使用代理优化九宫格代码思路</h2>
+<p>1.在yellowView.h里面创造一个代理的方法和代理的属性</p>
+<pre class="highlight"><code class="objective-c">- (void)yellowView:(YellowView *)yellowView  didClickButton:(AppModel *)model;
 </code></pre>
 <p>2.在yellowView.m点击按钮的方法中中调用代理的方法</p>
-<pre><code class="objective-c">//在传递参数的时候，不管别人用不用，首先要把自己传递出去
+<pre class="highlight"><code class="objective-c">//在传递参数的时候，不管别人用不用，首先要把自己传递出去
 if([self.delegate respondsToSelector:@selector(yellowView:didClickButton:)]){
  [self.delegate yellowView:self didClickButton:_appModel]; 
 }
 </code></pre>
 <p>3.在ViewController.m的ViewDidload中创建coverView,并在类扩展中创建一个coverView属性</p>
-<pre><code class="objective-c">//在这之前在循环生成YellowView过程中把self赋值给代理属性
+<pre class="highlight"><code class="objective-c">//在这之前在循环生成YellowView过程中把self赋值给代理属性
 UIView *coverView = [[UIView alloc]initWithFrame:CGRentMake:self.view.size.bounds];
 self.coverView = coverView;
 coverView.backgroundColor = [UIColor blackColor];
@@ -493,7 +503,7 @@ coverView.alpha = 0;
 [self.view addSubView:coverView];
 </code></pre>
 <p>4.在ViewController.m中构造代理方法</p>
-<pre><code class="objective-c">- (void)yellowView:(YellowView *)yellowView  didClickButton:(AppModel *)model{
+<pre class="highlight"><code class="objective-c">- (void)yellowView:(YellowView *)yellowView  didClickButton:(AppModel *)model{
   _coverView.alpha = 0.6;
   _coverView.appModel = model;
 }
@@ -502,7 +512,7 @@ coverView.alpha = 0;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/23/iOS-UI学习-四/" data-id="cjg66q987004c2nbrkblj857i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/23/iOS-UI学习-四/" data-id="cjg9k0me0004d9fbrj43dw2x7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -570,7 +580,7 @@ coverView.alpha = 0;
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>96</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
       <a href="/categories"><div><strong>89</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
