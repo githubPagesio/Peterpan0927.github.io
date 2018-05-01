@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -108,16 +108,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-27%20%E4%B8%8B%E5%8D%884.22.55.png" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-27%20%E4%B8%8B%E5%8D%884.22.55.png" alt=""></p>
 <p>上一次我们说过了ARM32，只是用来过渡，对于iOS来说，从iPhone5之后用的就已经全部都是ARM64了，因为每一种 CPU 的机器指令都是不一样的，因此对应的汇编语言也不一样，那么就来看看过渡之后的ARM有什么区别。</p>
 <a id="more"></a>
-<h1 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h1>
-<p>首先要来扫一扫盲，我们生活中所说的arm64,armv7,i386这些分别对应着我们生活中的哪些设备呢？我以Apple系列来举个例子：</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>首先要来扫一扫盲，我们生活中所说的arm64,armv7,i386这些分别对应着我们生活中的哪些设备呢？我以Apple系列来举个例子：</p>
 <ul>
 <li>armv7｜armv7s｜arm64都是ARM处理器的指令集</li>
 <li>i386｜x86_64 是Mac处理器的指令集</li>
 </ul>
-<pre class="highlight"><code class="">arm64：iPhone6s | iphone6s plus｜iPhone6｜ iPhone6 plus｜iPhone5S | iPad Air｜ iPad mini2(iPad mini with Retina Display)
+<pre><code>arm64：iPhone6s | iphone6s plus｜iPhone6｜ iPhone6 plus｜iPhone5S | iPad Air｜ iPad mini2(iPad mini with Retina Display)
 armv7s：iPhone5｜iPhone5C｜iPad4(iPad with Retina Display)
 armv7：iPhone4｜iPhone4S｜iPad｜iPad2｜iPad3(The New iPad)｜iPad mini｜iPod Touch 3G｜iPod Touch4
 
@@ -128,11 +127,10 @@ x86_64是针对x86架构的64位处理器
 模拟器64位处理器测试需要x86_64架构，
 真机32位处理器需要armv7,或者armv7s架构，
 真机64位处理器需要arm64架构。
-</code></pre>
-<p>比如说我用5s来作为我的工程测试机，那么我在写MakeFile的之后指定其CPU架构的时候就会做一个兼容(ARCHS)：</p>
-<pre class="highlight"><code class="c">THEOS_DEVICE_IP = <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.129</span>
+</code></pre><p>比如说我用5s来作为我的工程测试机，那么我在写MakeFile的之后指定其CPU架构的时候就会做一个兼容(ARCHS)：</p>
+<pre><code class="c">THEOS_DEVICE_IP = 192.168.1.129
 ARCHS = armv7 arm64
-TARGET = iphone:latest:<span class="hljs-number">7.0</span>
+TARGET = iphone:latest:7.0
 
 include /opt/theos/makefiles/common.mk
 
@@ -143,21 +141,19 @@ ios_test_FRAMEWORKS = UIKit
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
-	install.exec <span class="hljs-string">"killall -9 SpringBoard"</span>
+    install.exec &quot;killall -9 SpringBoard&quot;
 </code></pre>
 <p>这其中在第二行的时候指定了是兼容armv7和arm64架构的CPU</p>
-<h1 id="寄存器的变化"><a class="markdownIt-Anchor" href="#寄存器的变化"></a> 寄存器的变化</h1>
-<p>从ARM32到ARM64的过程中，寄存器的变化其实是很大的，在ARM32中，我们使用的是R0～R14和一个PC寄存器：</p>
+<h1 id="寄存器的变化"><a href="#寄存器的变化" class="headerlink" title="寄存器的变化"></a>寄存器的变化</h1><p>从ARM32到ARM64的过程中，寄存器的变化其实是很大的，在ARM32中，我们使用的是R0～R14和一个PC寄存器：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-30%20%E4%B8%8B%E5%8D%881.56.34.png" alt=""></p>
 <p>但是在ARM64中，事情似乎变的不一样了(在ARMv7中使用的仍然还是ARM32)</p>
 <ol>
-<li>arm64有32个64bit长度的通用寄存器x0～x30，sp，可以只使用其中的32bit w0～w30。</li>
+<li>arm64有32个64bit长度的通用寄存器x0～x30，sp，可以只使用其中的32bit w0～w30。 </li>
 <li>arm32只有16个32bit的通用寄存器r0~r12, lr, pc, sp. arm64有32个128bit SIMD寄存器v0～v31，arm32有16个128bit SIMD寄存器Q0～Q15，又可细分为32个64bit SIMD寄存器D0～D31。</li>
 <li>对于函数调用来说，arm64前面8个参数都是通过寄存器来传递x0～x7， arm32前面4个参数通过寄存器来传递r0～r3，其他通过栈传递。</li>
 <li>ARM64模式下，通用寄存器X18、X30不能被使用。而需要被自己写的过程所保护的是：X19、X20、X21、X22、X23、X24、X25、X26、X27、X28、X29寄存器；而SIMD寄存器需要保护的是V8、V9、V10、V11、V12、V13、V14、V15。</li>
 </ol>
-<h1 id="常用的汇编指令"><a class="markdownIt-Anchor" href="#常用的汇编指令"></a> 常用的汇编指令</h1>
-<pre class="highlight"><code class="assembly">MOV X1, X0  ;寄存器X0的值传给X1
+<h1 id="常用的汇编指令"><a href="#常用的汇编指令" class="headerlink" title="常用的汇编指令"></a>常用的汇编指令</h1><pre><code class="assembly">MOV X1, X0  ;寄存器X0的值传给X1
 ADD X0, X1, X2  ;寄存器X1和X2的值相加后给X0
 SUB X0, X1, X2  ;寄存器X1和X2的值相减后给X0
 
@@ -185,20 +181,19 @@ ADRP    用来定位数据段中的数据, 因为ASLR会导致代码及数据的
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-30%20%E4%B8%8B%E5%8D%882.05.00.png" alt=""></p>
 <p>例如在上面的SpringBoard刷新函数中，我们去分析刷新到底干了什么重要的突破口也是跳转。</p>
 <p>还有一个小点也需要注意的就是我们在指令中经常会看到三个操作数，如果是8086中的写法，我们将eax中的值加上20：</p>
-<pre class="highlight"><code class="assembly">add		eax, 20
+<pre><code class="assembly">add        eax, 20
 </code></pre>
 <p>但是在ARM中，我们会采用将<code>eax</code>中的值加上20再赋值给<code>eax</code>这样的思想，所以也就是：</p>
-<pre class="highlight"><code class="assembly">add		X0, X0, 20
+<pre><code class="assembly">add        X0, X0, 20
 </code></pre>
-<h1 id="oc反汇编测试"><a class="markdownIt-Anchor" href="#oc反汇编测试"></a> OC反汇编测试</h1>
-<p>简单的C语言反汇编我们在之前的过程中就已经很熟悉了，基本看到如下的代码开头我们就知道接下来是要干什么了：</p>
-<pre class="highlight"><code class="assembly">push	ebp
-mov		ebp, esp
+<h1 id="OC反汇编测试"><a href="#OC反汇编测试" class="headerlink" title="OC反汇编测试"></a>OC反汇编测试</h1><p>简单的C语言反汇编我们在之前的过程中就已经很熟悉了，基本看到如下的代码开头我们就知道接下来是要干什么了：</p>
+<pre><code class="assembly">push    ebp
+mov        ebp, esp
 ...
-pop 	ebp
+pop     ebp
 </code></pre>
 <p>那么我们在反汇编OC的程序的时候，情况是不是也是类似的呢？我们就来看看一个简单的类声明和实现：</p>
-<pre class="highlight"><code class="objective-c">#import &quot;AppDelegate.h&quot;
+<pre><code class="objective-c">#import &quot;AppDelegate.h&quot;
 
 @interface Person : NSObject
 @property (nonatomic, copy) NSString *name;
@@ -209,7 +204,7 @@ pop 	ebp
 @implementation Person
 
 - (instancetype)initWithName:(NSString *)name age:(NSInteger)age {
-    
+
     if (self = [super init]) {
         _name = name;
         _age = age;
@@ -222,25 +217,25 @@ pop 	ebp
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     [self personTestCode];
     return YES;
 }
 
 - (void)personTestCode {
-    
+
     Person *xiaoming = [[Person alloc] initWithName:@&quot;xiaoming&quot; age:20];
     xiaoming.age = 21;
     Person *zhangfei = [[Person alloc] init];
     zhangfei.name = @&quot;zhangfei&quot;;
     zhangfei.age = 24;
-    
+
 }
 
 @end
 </code></pre>
 <p>上面是一个Person类的简单实例化并赋值的代码，从ARM汇编的角度来分析一下吧，这里我们使用工具是Hopper：</p>
-<pre class="highlight"><code class="assembly">================ B E G I N N I N G   O F   P R O C E D U R E ================
+<pre><code class="assembly">================ B E G I N N I N G   O F   P R O C E D U R E ================
 
 
 
@@ -407,7 +402,7 @@ pop 	ebp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/27/ARM64汇编/" data-id="cjg9k0mc5000r9fbr6h1yl9nk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/27/ARM64汇编/" data-id="cjgnci0qm000p6vbry5ctokhw" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
@@ -419,7 +414,7 @@ pop 	ebp
 <nav id="article-nav">
   
     <a href="/2018/02/02/iOS逆向学习-三/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           iOS逆向学习(三)
@@ -429,7 +424,7 @@ pop 	ebp
   
   
     <a href="/2018/01/25/蓝桥杯java习题解读/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">蓝桥杯java习题解读</div>
     </a>
   
@@ -475,8 +470,8 @@ pop 	ebp
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

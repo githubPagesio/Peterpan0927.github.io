@@ -39,8 +39,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -104,282 +104,279 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>qiniu4blog自动上传</p>
-<a id="more"></a>
-<h2 id="源码部分"><a class="markdownIt-Anchor" href="#源码部分"></a> 源码部分</h2>
-<pre class="highlight"><code class="python"><span class="hljs-comment">#!/usr/bin/env python</span>
-<span class="hljs-comment"># -*- coding: utf-8 -*-</span>
-<span class="hljs-keyword">import</span> os, time, sys, ConfigParser, platform, urllib, qiniu, pyperclip, signal, threading
-<span class="hljs-keyword">from</span> mimetypes <span class="hljs-keyword">import</span> MimeTypes
-<span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> expanduser
-<span class="hljs-keyword">from</span> watchdog.observers <span class="hljs-keyword">import</span> Observer
-<span class="hljs-keyword">from</span> watchdog.events <span class="hljs-keyword">import</span> PatternMatchingEventHandler
+        <p>qiniu4blog自动上传<br><a id="more"></a></p>
+<h2 id="源码部分"><a href="#源码部分" class="headerlink" title="源码部分"></a>源码部分</h2><pre><code class="python">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os, time, sys, ConfigParser, platform, urllib, qiniu, pyperclip, signal, threading
+from mimetypes import MimeTypes
+from os.path import expanduser
+from watchdog.observers import Observer
+from watchdog.events import PatternMatchingEventHandler
 
 
-<span class="hljs-comment"># 使用watchdog 监控文件夹中的图像</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHandler</span><span class="hljs-params">(PatternMatchingEventHandler)</span>:</span>
-    patterns = [<span class="hljs-string">"*.jpeg"</span>, <span class="hljs-string">"*.jpg"</span>, <span class="hljs-string">"*.png"</span>, <span class="hljs-string">"*.bmp"</span>, <span class="hljs-string">"*.gif"</span>,<span class="hljs-string">"*.tiff"</span>]
-    ignore_directories = <span class="hljs-keyword">True</span>
-    case_sensitive = <span class="hljs-keyword">False</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process</span><span class="hljs-params">(self, event)</span>:</span>
-        <span class="hljs-keyword">if</span> event.event_type == <span class="hljs-string">'created'</span><span class="hljs-keyword">or</span> event.event_type == <span class="hljs-string">'modified'</span>: <span class="hljs-comment">#如果是新增文件或修改的文件</span>
-            myThread(event.src_path, <span class="hljs-number">1</span>).start() <span class="hljs-comment"># 开启线程</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">on_modified</span><span class="hljs-params">(self, event)</span>:</span>
+# 使用watchdog 监控文件夹中的图像
+class MyHandler(PatternMatchingEventHandler):
+    patterns = [&quot;*.jpeg&quot;, &quot;*.jpg&quot;, &quot;*.png&quot;, &quot;*.bmp&quot;, &quot;*.gif&quot;,&quot;*.tiff&quot;]
+    ignore_directories = True
+    case_sensitive = False
+    def process(self, event):
+        if event.event_type == &#39;created&#39;or event.event_type == &#39;modified&#39;: #如果是新增文件或修改的文件
+            myThread(event.src_path, 1).start() # 开启线程
+    def on_modified(self, event):
         self.process(event)
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">on_created</span><span class="hljs-params">(self, event)</span>:</span>
+    def on_created(self, event):
         self.process(event)
 
 
-<span class="hljs-comment"># 使用多线程上传</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">myThread</span><span class="hljs-params">(threading.Thread)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filePath, mode)</span>:</span> <span class="hljs-comment">#filePath 文件路径 和 上传模式</span>
+# 使用多线程上传
+class myThread(threading.Thread):
+    def __init__(self, filePath, mode): #filePath 文件路径 和 上传模式
         threading.Thread.__init__(self)
         self.filePath = filePath
         self.mode = mode
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self)</span>:</span>
+    def run(self):
         threadLock.acquire()
         job(self.filePath, self.mode)
         threadLock.release()
 
 
-<span class="hljs-comment"># 上传图像、复制到粘贴板、写到文件</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">job</span><span class="hljs-params">(file, mode)</span>:</span>
-    <span class="hljs-keyword">if</span> mode == <span class="hljs-number">1</span>:
+# 上传图像、复制到粘贴板、写到文件
+def job(file, mode):
+    if mode == 1:
         url = upload_with_full_Path(file)
-    <span class="hljs-keyword">if</span> mode == <span class="hljs-number">2</span>:
+    if mode == 2:
         url = upload_with_full_Path_cmd(file)
     pyperclip.copy(url)
     pyperclip.paste()
-    <span class="hljs-keyword">print</span> url
-    <span class="hljs-keyword">with</span> open(<span class="hljs-string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="hljs-string">'a'</span>) <span class="hljs-keyword">as</span> f:
-        image = <span class="hljs-string">'![]'</span> + <span class="hljs-string">'('</span> + url + <span class="hljs-string">')'</span> + <span class="hljs-string">'\n'</span>
-        f.write(image + <span class="hljs-string">'\n'</span>)
+    print url
+    with open(&#39;MARKDOWN_FORMAT_URLS.txt&#39;, &#39;a&#39;) as f:
+        image = &#39;![]&#39; + &#39;(&#39; + url + &#39;)&#39; + &#39;\n&#39;
+        f.write(image + &#39;\n&#39;)
 
-<span class="hljs-comment">#-----------------配置--------------------</span>
-homedir = expanduser(<span class="hljs-string">"~"</span>)  <span class="hljs-comment"># 获取用户主目录</span>
+#-----------------配置--------------------
+homedir = expanduser(&quot;~&quot;)  # 获取用户主目录
 config = ConfigParser.RawConfigParser()
-config.read(homedir + <span class="hljs-string">'/qiniu.cfg'</span>)  <span class="hljs-comment"># 读取配置文件</span>
+config.read(homedir + &#39;/qiniu.cfg&#39;)  # 读取配置文件
 mime = MimeTypes()
 threadLock = threading.Lock()
 
 
-<span class="hljs-comment"># 优雅退出</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exit_gracefully</span><span class="hljs-params">(signum, frame)</span>:</span>
+# 优雅退出
+def exit_gracefully(signum, frame):
     signal.signal(signal.SIGINT, original_sigint)
-    <span class="hljs-keyword">try</span>:
-        <span class="hljs-keyword">if</span> raw_input(<span class="hljs-string">"\nReally quit? (y/n)&gt; "</span>).lower().startswith(<span class="hljs-string">'y'</span>):
-            sys.exit(<span class="hljs-number">1</span>)
-    <span class="hljs-keyword">except</span> KeyboardInterrupt:
-        print(<span class="hljs-string">"Ok ok, quitting"</span>)
-        sys.exit(<span class="hljs-number">1</span>)
+    try:
+        if raw_input(&quot;\nReally quit? (y/n)&gt; &quot;).lower().startswith(&#39;y&#39;):
+            sys.exit(1)
+    except KeyboardInterrupt:
+        print(&quot;Ok ok, quitting&quot;)
+        sys.exit(1)
     signal.signal(signal.SIGINT, exit_gracefully)
 
 original_sigint = signal.getsignal(signal.SIGINT)
 signal.signal(signal.SIGINT, exit_gracefully)
 
-<span class="hljs-keyword">try</span>:
-    bucket = config.get(<span class="hljs-string">'config'</span>, <span class="hljs-string">'bucket'</span>)  <span class="hljs-comment"># 设置  bucket</span>
-    accessKey = config.get(<span class="hljs-string">'config'</span>, <span class="hljs-string">'accessKey'</span>)  <span class="hljs-comment"># 设置  accessKey</span>
-    secretKey = config.get(<span class="hljs-string">'config'</span>, <span class="hljs-string">'secretKey'</span>)  <span class="hljs-comment"># 设置  secretKey</span>
-    path_to_watch = config.get(<span class="hljs-string">'config'</span>, <span class="hljs-string">'path_to_watch'</span>)  <span class="hljs-comment"># 设置   监控文件夹</span>
-    enable = config.get(<span class="hljs-string">'custom_url'</span>, <span class="hljs-string">'enable'</span>)  <span class="hljs-comment"># 设置自定义使能 custom_url</span>
-    <span class="hljs-keyword">if</span> enable == <span class="hljs-string">'false'</span>:
-        <span class="hljs-keyword">print</span> <span class="hljs-string">'custom_url not set'</span>
-    <span class="hljs-keyword">else</span>:
-        addr = config.get(<span class="hljs-string">'custom_url'</span>, <span class="hljs-string">'addr'</span>)
-<span class="hljs-keyword">except</span> ConfigParser.NoSectionError, err:
-    <span class="hljs-keyword">print</span> <span class="hljs-string">'Error Config File:'</span>, err
+try:
+    bucket = config.get(&#39;config&#39;, &#39;bucket&#39;)  # 设置  bucket
+    accessKey = config.get(&#39;config&#39;, &#39;accessKey&#39;)  # 设置  accessKey
+    secretKey = config.get(&#39;config&#39;, &#39;secretKey&#39;)  # 设置  secretKey
+    path_to_watch = config.get(&#39;config&#39;, &#39;path_to_watch&#39;)  # 设置   监控文件夹
+    enable = config.get(&#39;custom_url&#39;, &#39;enable&#39;)  # 设置自定义使能 custom_url
+    if enable == &#39;false&#39;:
+        print &#39;custom_url not set&#39;
+    else:
+        addr = config.get(&#39;custom_url&#39;, &#39;addr&#39;)
+except ConfigParser.NoSectionError, err:
+    print &#39;Error Config File:&#39;, err
 
 
-<span class="hljs-comment"># 设置编码</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setCodeingByOS</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-string">'cygwin'</span> <span class="hljs-keyword">in</span> platform.system().lower():
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'GBK'</span>
-    <span class="hljs-keyword">elif</span> os.name == <span class="hljs-string">'nt'</span> <span class="hljs-keyword">or</span> platform.system() == <span class="hljs-string">'Windows'</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'GBK'</span>
-    <span class="hljs-keyword">elif</span> os.name == <span class="hljs-string">'mac'</span> <span class="hljs-keyword">or</span> platform.system() == <span class="hljs-string">'Darwin'</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'utf-8'</span>
-    <span class="hljs-keyword">elif</span> os.name == <span class="hljs-string">'posix'</span> <span class="hljs-keyword">or</span> platform.system() == <span class="hljs-string">'Linux'</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'utf-8'</span>
+# 设置编码
+def setCodeingByOS():
+    if &#39;cygwin&#39; in platform.system().lower():
+        return &#39;GBK&#39;
+    elif os.name == &#39;nt&#39; or platform.system() == &#39;Windows&#39;:
+        return &#39;GBK&#39;
+    elif os.name == &#39;mac&#39; or platform.system() == &#39;Darwin&#39;:
+        return &#39;utf-8&#39;
+    elif os.name == &#39;posix&#39; or platform.system() == &#39;Linux&#39;:
+        return &#39;utf-8&#39;
 
 
-<span class="hljs-comment"># 处理七牛返回结果</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parseRet</span><span class="hljs-params">(retData, respInfo)</span>:</span>
-    <span class="hljs-keyword">if</span> retData != <span class="hljs-keyword">None</span>:
-        <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> retData.items():
-            <span class="hljs-keyword">if</span> k[:<span class="hljs-number">2</span>] == <span class="hljs-string">"x:"</span>:
-                print(k + <span class="hljs-string">":"</span> + v)
-        <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> retData.items():
-            <span class="hljs-keyword">if</span> k[:<span class="hljs-number">2</span>] == <span class="hljs-string">"x:"</span> <span class="hljs-keyword">or</span> k == <span class="hljs-string">"hash"</span> <span class="hljs-keyword">or</span> k == <span class="hljs-string">"key"</span>:
-                <span class="hljs-keyword">continue</span>
-            <span class="hljs-keyword">else</span>:
-                print(k + <span class="hljs-string">":"</span> + str(v))
-    <span class="hljs-keyword">else</span>:
-        print(<span class="hljs-string">"Upload file failed!"</span>)
+# 处理七牛返回结果
+def parseRet(retData, respInfo):
+    if retData != None:
+        for k, v in retData.items():
+            if k[:2] == &quot;x:&quot;:
+                print(k + &quot;:&quot; + v)
+        for k, v in retData.items():
+            if k[:2] == &quot;x:&quot; or k == &quot;hash&quot; or k == &quot;key&quot;:
+                continue
+            else:
+                print(k + &quot;:&quot; + str(v))
+    else:
+        print(&quot;Upload file failed!&quot;)
 
-<span class="hljs-comment"># 上传文件方式 1</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_without_key</span><span class="hljs-params">(bucket, filePath, uploadname)</span>:</span>
+# 上传文件方式 1
+def upload_without_key(bucket, filePath, uploadname):
     auth = qiniu.Auth(accessKey, secretKey)
-    upToken = auth.upload_token(bucket, key=<span class="hljs-keyword">None</span>)
+    upToken = auth.upload_token(bucket, key=None)
     key = uploadname
-    retData, respInfo = qiniu.put_file(upToken, key, filePath, mime_type=mime.guess_type(filePath)[<span class="hljs-number">0</span>])
+    retData, respInfo = qiniu.put_file(upToken, key, filePath, mime_type=mime.guess_type(filePath)[0])
     parseRet(retData, respInfo)
 
 
-<span class="hljs-comment"># 上传文件方式 2</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_with_full_Path</span><span class="hljs-params">(filePath)</span>:</span>
-    <span class="hljs-keyword">if</span> platform.system() == <span class="hljs-string">'Windows'</span>:
-        fileName = <span class="hljs-string">"/"</span>.join(<span class="hljs-string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="hljs-number">1</span>:].split(<span class="hljs-string">"\\"</span>))
-    <span class="hljs-keyword">else</span>:
-        fileName = <span class="hljs-string">""</span>.join(filePath.rsplit(path_to_watch))[<span class="hljs-number">1</span>:]
+# 上传文件方式 2
+def upload_with_full_Path(filePath):
+    if platform.system() == &#39;Windows&#39;:
+        fileName = &quot;/&quot;.join(&quot;&quot;.join(filePath.rsplit(path_to_watch))[1:].split(&quot;\\&quot;))
+    else:
+        fileName = &quot;&quot;.join(filePath.rsplit(path_to_watch))[1:]
     upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))
-    <span class="hljs-keyword">if</span> enable == <span class="hljs-string">'true'</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'![]('</span>+addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="hljs-string">'utf-8'</span>))+<span class="hljs-string">')'</span>
-    <span class="hljs-keyword">else</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'http://'</span> + bucket + <span class="hljs-string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="hljs-string">'utf-8'</span>))
+    if enable == &#39;true&#39;:
+        return &#39;![](&#39;+addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(&#39;utf-8&#39;))+&#39;)&#39;
+    else:
+        return &#39;http://&#39; + bucket + &#39;.qiniudn.com/&#39; + urllib.quote(fileName.decode(setCodeingByOS()).encode(&#39;utf-8&#39;))
 
 
-<span class="hljs-comment"># 上传文件方式 3</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload_with_full_Path_cmd</span><span class="hljs-params">(filePath)</span>:</span>
-    <span class="hljs-keyword">if</span> platform.system() == <span class="hljs-string">'Windows'</span>:
-        fileName = os.path.basename(<span class="hljs-string">"/"</span>.join((filePath.split(<span class="hljs-string">"\\"</span>))))
-    <span class="hljs-keyword">else</span>:
+# 上传文件方式 3
+def upload_with_full_Path_cmd(filePath):
+    if platform.system() == &#39;Windows&#39;:
+        fileName = os.path.basename(&quot;/&quot;.join((filePath.split(&quot;\\&quot;))))
+    else:
        fileName = os.path.basename(filePath)
     upload_without_key(bucket, filePath, fileName.decode(setCodeingByOS()))
-    <span class="hljs-keyword">if</span> enable == <span class="hljs-string">'true'</span>:
-        <span class="hljs-keyword">return</span> addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="hljs-string">'utf-8'</span>))
-    <span class="hljs-keyword">else</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'http://'</span> + bucket + <span class="hljs-string">'.qiniudn.com/'</span> + urllib.quote(fileName.decode(setCodeingByOS()).encode(<span class="hljs-string">'utf-8'</span>))
+    if enable == &#39;true&#39;:
+        return addr + urllib.quote(fileName.decode(setCodeingByOS()).encode(&#39;utf-8&#39;))
+    else:
+        return &#39;http://&#39; + bucket + &#39;.qiniudn.com/&#39; + urllib.quote(fileName.decode(setCodeingByOS()).encode(&#39;utf-8&#39;))
 
-<span class="hljs-comment">#-----------------window platform---------------start</span>
-<span class="hljs-comment"># window下的监控文件夹变动方式-获取所有文件路径</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_filepaths</span><span class="hljs-params">(directory)</span>:</span>
-    file_paths = []  <span class="hljs-comment"># List which will store all of the full filepaths.</span>
-    <span class="hljs-keyword">for</span> root, directories, files <span class="hljs-keyword">in</span> os.walk(directory):
-        <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> files:
-            <span class="hljs-comment"># Join the two strings in order to form the full filepath.</span>
+#-----------------window platform---------------start
+# window下的监控文件夹变动方式-获取所有文件路径
+def get_filepaths(directory):
+    file_paths = []  # List which will store all of the full filepaths.
+    for root, directories, files in os.walk(directory):
+        for filename in files:
+            # Join the two strings in order to form the full filepath.
             filepath = os.path.join(root, filename)
-            file_paths.append(filepath)  <span class="hljs-comment"># Add it to the list.</span>
-    <span class="hljs-keyword">return</span> file_paths  <span class="hljs-comment"># Self-explanatory.</span>
+            file_paths.append(filepath)  # Add it to the list.
+    return file_paths  # Self-explanatory.
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_clipboard</span><span class="hljs-params">(url_list)</span>:</span>
-    <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> url_list:
+def set_clipboard(url_list):
+    for url in url_list:
         pyperclip.copy(url)
         spam = pyperclip.paste()
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_filename</span><span class="hljs-params">(url)</span>:</span>
-    <span class="hljs-keyword">return</span> url.split(<span class="hljs-string">"/"</span>)[<span class="hljs-number">-1</span>:][<span class="hljs-number">0</span>].split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>]
+def get_filename(url):
+    return url.split(&quot;/&quot;)[-1:][0].split(&#39;.&#39;)[0]
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">window_main</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">if</span> len(sys.argv) &gt; <span class="hljs-number">1</span>:
+def window_main():
+    if len(sys.argv) &gt; 1:
         url_list = []
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> sys.argv[<span class="hljs-number">1</span>:]:
+        for i in sys.argv[1:]:
             url_list.append(upload_with_full_Path_cmd(i))
-        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="hljs-string">'a'</span>) <span class="hljs-keyword">as</span> f:
-            <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> url_list:
-                image = <span class="hljs-string">'![]'</span> + <span class="hljs-string">'('</span> + url + <span class="hljs-string">')'</span> + <span class="hljs-string">'\n'</span>
-                <span class="hljs-keyword">print</span> url, <span class="hljs-string">'\n'</span>
+        with open(&#39;MARKDOWN_FORMAT_URLS.txt&#39;, &#39;a&#39;) as f:
+            for url in url_list:
+                image = &#39;![]&#39; + &#39;(&#39; + url + &#39;)&#39; + &#39;\n&#39;
+                print url, &#39;\n&#39;
                 f.write(image)
-        <span class="hljs-keyword">print</span> <span class="hljs-string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span>
+        print &quot;\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE&quot;
         set_clipboard(url_list)
-        sys.exit(<span class="hljs-number">-1</span>)
-    <span class="hljs-keyword">print</span> <span class="hljs-string">"running ... ... \nPress Ctr+C to Stop"</span>
+        sys.exit(-1)
+    print &quot;running ... ... \nPress Ctr+C to Stop&quot;
     before = get_filepaths(path_to_watch)
-    <span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:
-        time.sleep(<span class="hljs-number">1</span>)
+    while 1:
+        time.sleep(1)
         after = get_filepaths(path_to_watch)
-        added = [f <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> after <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> f <span class="hljs-keyword">in</span> before]
-        removed = [f <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> before <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> f <span class="hljs-keyword">in</span> after]
-        <span class="hljs-keyword">if</span> added:
+        added = [f for f in after if not f in before]
+        removed = [f for f in before if not f in after]
+        if added:
             url_list = []
-            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> added:
+            for i in added:
                 url_list.append(upload_with_full_Path(i))
-            <span class="hljs-keyword">with</span> open(<span class="hljs-string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="hljs-string">'a'</span>) <span class="hljs-keyword">as</span> f:
-                <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> url_list:
-                    image = <span class="hljs-string">'![]'</span> + <span class="hljs-string">'('</span> + url + <span class="hljs-string">')'</span> + <span class="hljs-string">'\n'</span>
-                    <span class="hljs-keyword">print</span> url, <span class="hljs-string">'\n'</span>
+            with open(&#39;MARKDOWN_FORMAT_URLS.txt&#39;, &#39;a&#39;) as f:
+                for url in url_list:
+                    image = &#39;![]&#39; + &#39;(&#39; + url + &#39;)&#39; + &#39;\n&#39;
+                    print url, &#39;\n&#39;
                     f.write(image)
-            <span class="hljs-keyword">print</span> <span class="hljs-string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span>
+            print &quot;\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE&quot;
             set_clipboard(url_list)
-        <span class="hljs-keyword">if</span> removed:
-            <span class="hljs-keyword">pass</span>
+        if removed:
+            pass
         before = after
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unix_main</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">if</span> len(sys.argv) &gt; <span class="hljs-number">1</span>:
+def unix_main():
+    if len(sys.argv) &gt; 1:
         url_list = []
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> sys.argv[<span class="hljs-number">1</span>:]:
+        for i in sys.argv[1:]:
             url_list.append(upload_with_full_Path_cmd(i))
-            fileFullName = os.path.basename(<span class="hljs-string">"/"</span>.join((i.split(<span class="hljs-string">"\\"</span>))))
-            fileName = os.path.splitext(fileFullName)[<span class="hljs-number">0</span>]
-            myThread(i, <span class="hljs-number">2</span>).start()
-        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="hljs-string">'a'</span>) <span class="hljs-keyword">as</span> f:
-            <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> url_list:
-                image = <span class="hljs-string">'![]'</span> + <span class="hljs-string">'('</span> + url + <span class="hljs-string">')'</span> + <span class="hljs-string">'\n'</span>
-                <span class="hljs-keyword">print</span> <span class="hljs-string">'Url:'</span>+image, <span class="hljs-string">'\nFileName:'</span>+fileFullName
+            fileFullName = os.path.basename(&quot;/&quot;.join((i.split(&quot;\\&quot;))))
+            fileName = os.path.splitext(fileFullName)[0]
+            myThread(i, 2).start()
+        with open(&#39;MARKDOWN_FORMAT_URLS.txt&#39;, &#39;a&#39;) as f:
+            for url in url_list:
+                image = &#39;![]&#39; + &#39;(&#39; + url + &#39;)&#39; + &#39;\n&#39;
+                print &#39;Url:&#39;+image, &#39;\nFileName:&#39;+fileFullName
                 f.write(image)
   set_clipboard(url_list)
-        sys.exit(<span class="hljs-number">-1</span>)
-    <span class="hljs-keyword">print</span> <span class="hljs-string">"running ... ... \nPress Ctr+C to Stop"</span>
+        sys.exit(-1)
+    print &quot;running ... ... \nPress Ctr+C to Stop&quot;
     observer = Observer()
-    observer.schedule(MyHandler(), path=path_to_watch <span class="hljs-keyword">if</span> path_to_watch <span class="hljs-keyword">else</span> <span class="hljs-string">'.'</span>, recursive=<span class="hljs-keyword">True</span>)
+    observer.schedule(MyHandler(), path=path_to_watch if path_to_watch else &#39;.&#39;, recursive=True)
     observer.start()
     before = get_filepaths(path_to_watch)
-    <span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:
-        time.sleep(<span class="hljs-number">1</span>)
+    while 1:
+        time.sleep(1)
         after = get_filepaths(path_to_watch)
-        added = [f <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> after <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> f <span class="hljs-keyword">in</span> before]
-        removed = [f <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> before <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> f <span class="hljs-keyword">in</span> after]
-        <span class="hljs-keyword">if</span> added:
+        added = [f for f in after if not f in before]
+        removed = [f for f in before if not f in after]
+        if added:
             url_list = []
-            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> added:
+            for i in added:
                 url_list.append(upload_with_full_Path(i))
-              fileFullName = os.path.basename(<span class="hljs-string">"/"</span>.join((i.split(<span class="hljs-string">"\\"</span>))))
-                fileName = os.path.splitext(fileFullName)[<span class="hljs-number">0</span>]
-      <span class="hljs-keyword">with</span> open(<span class="hljs-string">'MARKDOWN_FORMAT_URLS.txt'</span>, <span class="hljs-string">'a'</span>) <span class="hljs-keyword">as</span> f:
-                <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> url_list:
-                    image = <span class="hljs-string">'![]'</span> + <span class="hljs-string">'('</span> + url + <span class="hljs-string">')'</span> + <span class="hljs-string">'\n'</span>
-                    <span class="hljs-keyword">print</span> url, <span class="hljs-string">'\n'</span>
+              fileFullName = os.path.basename(&quot;/&quot;.join((i.split(&quot;\\&quot;))))
+                fileName = os.path.splitext(fileFullName)[0]
+      with open(&#39;MARKDOWN_FORMAT_URLS.txt&#39;, &#39;a&#39;) as f:
+                for url in url_list:
+                    image = &#39;![]&#39; + &#39;(&#39; + url + &#39;)&#39; + &#39;\n&#39;
+                    print url, &#39;\n&#39;
                     f.write(image)
-            <span class="hljs-keyword">print</span> <span class="hljs-string">"\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE"</span>
+            print &quot;\nNOTE: THE MARKDOWN FORMAT URLS ALREADY SAVED IN MARKDOWN_FORMAT_URLS.txt FILE&quot;
             set_clipboard(url_list)
-        <span class="hljs-keyword">if</span> removed:
-            <span class="hljs-keyword">pass</span>
+        if removed:
+            pass
         before = after
-    <span class="hljs-keyword">try</span>:
-        <span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-            time.sleep(<span class="hljs-number">0.1</span>)
-    <span class="hljs-keyword">except</span> KeyboardInterrupt:
+    try:
+        while True:
+            time.sleep(0.1)
+    except KeyboardInterrupt:
         observer.stop()
         observer.join()
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
-    <span class="hljs-keyword">if</span> os.name == <span class="hljs-string">'nt'</span> <span class="hljs-keyword">or</span> platform.system() == <span class="hljs-string">'Windows'</span>:
-        window_main()  <span class="hljs-comment">#window 下执行</span>
-    <span class="hljs-keyword">else</span>:
-        unix_main()   <span class="hljs-comment">#mac 下执行</span>
+def main():
+    if os.name == &#39;nt&#39; or platform.system() == &#39;Windows&#39;:
+        window_main()  #window 下执行
+    else:
+        unix_main()   #mac 下执行
 
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
-<h2 id="修改python2的默认编码"><a class="markdownIt-Anchor" href="#修改python2的默认编码"></a> 修改python2的默认编码</h2>
-<p>python2的默认编码是ascii,当程序中出现非ascii编码时，python的处理常常会报这样的错:</p>
+<h2 id="修改python2的默认编码"><a href="#修改python2的默认编码" class="headerlink" title="修改python2的默认编码"></a>修改python2的默认编码</h2><p>python2的默认编码是ascii,当程序中出现非ascii编码时，python的处理常常会报这样的错:</p>
 <p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0x?? in position 1: ordinal not in range(128)</p>
 <p>python没办法处理非ascii编码的，此时需要自己设置将python的默认编码，一般设置为utf8的编码格式。</p>
-<p>解决方案：在路径<code>/Library/Python/2.7/site-packages</code><a href="http://xn--sitecustomize-9z0u6ewtg47usiza.py" target="_blank" rel="external">下新建一个sitecustomize.py</a>，内容为：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># encoding=utf8  </span>
-<span class="hljs-keyword">import</span> sys  
-  
+<p>解决方案：在路径<code>/Library/Python/2.7/site-packages</code>下新建一个sitecustomize.py，内容为：</p>
+<pre><code class="python"># encoding=utf8  
+import sys  
+
 reload(sys)  
-sys.setdefaultencoding(<span class="hljs-string">'utf8'</span>)  
+sys.setdefaultencoding(&#39;utf8&#39;)
 </code></pre>
 <p>这个时候重启python解释器，执行sys.getdefaultencoding()，会发现此时的默认编码已经转换成utf-8了，多次重启之后，效果相同，这是因为系统在python启动的时候，自行调用该文件，设置系统的默认编码，而不需要每次都手动的加上解决代码，属于一劳永逸的解决方法。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/15/七牛图片自动上传/" data-id="cjg9k0mey005z9fbr6mgoc14g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/15/七牛图片自动上传/" data-id="cjgnci0u100646vbrt7edeuex" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -391,7 +388,7 @@ sys.setdefaultencoding(<span class="hljs-string">'utf8'</span>)
 <nav id="article-nav">
   
     <a href="/2017/06/15/iOS-UI基础-七/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           iOS-UI基础(七)
@@ -401,7 +398,7 @@ sys.setdefaultencoding(<span class="hljs-string">'utf8'</span>)
   
   
     <a href="/2017/06/14/CPU对于内存的读写/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">CPU对于内存的读写</div>
     </a>
   
@@ -447,8 +444,8 @@ sys.setdefaultencoding(<span class="hljs-string">'utf8'</span>)
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

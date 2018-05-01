@@ -47,8 +47,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -114,14 +114,12 @@
       
         <p>第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh</p>
 <a id="more"></a>
-<h1 id="应用介绍"><a class="markdownIt-Anchor" href="#应用介绍"></a> 应用介绍</h1>
-<p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
+<h1 id="应用介绍"><a href="#应用介绍" class="headerlink" title="应用介绍"></a>应用介绍</h1><p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png" alt="Yummy FTP"></p>
 <p>Yummy FTP 是一款着力于速度、可靠性和效率的 FTP + SFTP + FTPS 文件传输客户端。其结合并改进了其它文件传输方案中最好的功能，添加了大量独特的强大功能，以一个高度可调谐的 FTP 引擎驱动。使它成为一款急速、灵活并且完全可靠的 macOS 下的文件传输工具。</p>
 <p>它具有非常漂亮与符合直觉的高清用户界面，像 Finder 一样的 FTP 浏览器、工具栏和随处可用的拖拽。 无论是要传输几个或者上千个文件，还是计划自动备份，或执行网站维护，Yummy FTP 都能轻松处理。如果您觉得 Yummy FTP  不错，不妨支持一下正版哦！</p>
 <p>之前用了一段时间，感觉不错，最近打开的时候突然发现30天试用已经过了，哇，这种事情，当然搞它一波，网上流传的方法是用机器算它的序列号，这种方法感觉过于暴力，我觉得不行，所以干脆逆向，直接把提示的那个窗口给干掉就好了，这样就不会触发后续的事件了。</p>
-<h1 id="逆向分析"><a class="markdownIt-Anchor" href="#逆向分析"></a> 逆向分析</h1>
-<p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
+<h1 id="逆向分析"><a href="#逆向分析" class="headerlink" title="逆向分析"></a>逆向分析</h1><p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png" alt="屏幕快照 2018-04-21 下午11.18.33.png"></p>
 <p>这一步有点卡手，然后看看其他的，发现都是<code>sub_xxxx</code>什么的，而且还巨多，看完眼睛都瞎掉，想了想之后决定用字符串查找，因为这个是序列号验证的模式，我们就通过序列号英文来查找：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png" alt="屏幕快照 2018-04-21 下午11.25.03.png"></p>
@@ -130,13 +128,13 @@
 <p>我们首先看看第一个，太长了，跳出来看看第二个，发现离调用的头部很近：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.32.10.png" alt="屏幕快照 2018-04-21 下午11.32.10.png"></p>
 <p>从判断的逻辑关系可以得出，一开始对于日期或者其他的什么进行了一次校验，校验失败之后走左边的路线，也就是你的App认证为是过期的，我们发现开头的右边那条线就直接返回了，所以我们在这里修改判断条件让函数直接返回或者走右边的路线，原来的代码是：</p>
-<pre class="highlight"><code class="assembly">mov	al, byte [esi-0x72b21+0x2f1114]                     ; 0x2f1114
-and	al, 0x0
+<pre><code class="assembly">mov    al, byte [esi-0x72b21+0x2f1114]                     ; 0x2f1114
+and    al, 0x0
 jne loc_72d49
 </code></pre>
 <p>那么我们修改判断为一定不为0的即可：</p>
-<pre class="highlight"><code class="assembly">or al, 0x01
-jne	loc_72d49
+<pre><code class="assembly">or al, 0x01
+jne    loc_72d49
 </code></pre>
 <p>修改好之后非常开心的打开了应用，然而现实给了我沉重的一巴掌，还是不OK，此时我的心中似乎奔过了千万头草泥马，想到还有几个引用，于是乎又转头回去看了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="屏幕快照 2018-04-21 下午11.40.36.png"></p>
@@ -147,7 +145,7 @@ jne	loc_72d49
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjg9k0mfp00889fbraysrhzb8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjgnci0uq00886vbrx6mpf1ct" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -158,9 +156,18 @@ jne	loc_72d49
     
 <nav id="article-nav">
   
+    <a href="/2018/05/01/iOS的降级限制/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          iOS的降级限制
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/04/19/iOS加固之混淆-加密/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">iOS加固之混淆/加密</div>
     </a>
   
@@ -206,8 +213,8 @@ jne	loc_72d49
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

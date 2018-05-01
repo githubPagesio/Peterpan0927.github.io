@@ -43,8 +43,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -108,29 +108,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt=""></p>
 <p>今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。</p>
 <a id="more"></a>
-<h1 id="cisc和risc"><a class="markdownIt-Anchor" href="#cisc和risc"></a> CISC和RISC</h1>
-<p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
-<h3 id="load-store体系结构"><a class="markdownIt-Anchor" href="#load-store体系结构"></a> load-store体系结构</h3>
-<p>RISC使用的是load-store结构。load-store结构的本质，在于RISC技术的CPU只处理（指逻辑，算术运算处理）寄存器中的数据。相反，X86却能够直接处理存储器中的数据。</p>
+<h1 id="CISC和RISC"><a href="#CISC和RISC" class="headerlink" title="CISC和RISC"></a>CISC和RISC</h1><p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
+<h3 id="load-store体系结构"><a href="#load-store体系结构" class="headerlink" title="load-store体系结构"></a>load-store体系结构</h3><p>RISC使用的是load-store结构。load-store结构的本质，在于RISC技术的CPU只处理（指逻辑，算术运算处理）寄存器中的数据。相反，X86却能够直接处理存储器中的数据。</p>
 <p>RISC体系架构的CPU，存储器和寄存器之间的数据交互，由专门的load和store指令负责。存储器是指内存或者Flash（NOR Flash）等可以被CPU直接寻址的存储单元。CPU要将某个地址的数据放入寄存器中，只能够使用load指令；要将寄存器中的值存放到存储器中，只能够使用store指令。</p>
 <p>CISC体系架构的CPU对存储器数据操作则要复杂得多。在X86下，数据的传送都是使用MOV指令。MOV指令既负责寄存器和寄存器之间数据的交互，又负责寄存器和存储器之间的数据交互。X86能够直接处理存储器中的数据，而这一点在RISC体系的CPU中是无法做到的。</p>
 <p>将存储器单元0x00000020中的数加上8，结果存放到该存储单元中。假设存储单元的地址0x00000020已经存放在寄存器reg中，即reg=0x00000020，下文中，(reg)表示reg地址处的值，即存储单元中的值。下面我们看看在X86下和ARM/MIPS下分别是如何操作的。</p>
 <p>X86能够直接处理存储器中的数据， 所以X86直接寻址到存储器地址，将存储器中的值和立即数相加，结果存放到存储器单元中。整个过程使用下面一条指令就可以完成：</p>
-<pre class="highlight"><code class="assembly">add (reg) 0x08		;直接将存储器单元(reg)中的值加0x08，结果仍然存放在该存储器单元中
+<pre><code class="assembly">add (reg) 0x08        ;直接将存储器单元(reg)中的值加0x08，结果仍然存放在该存储器单元中
 </code></pre>
 <p>ARM/MIPS只能够处理寄存器中的数据，所以需要将该存储器中的值用load命令加载到寄存器中，然后对寄存器中的值进行算术运算，最后使用store命令将运算结果送回存储单元中：</p>
-<pre class="highlight"><code class="assembly">ld reg2 (reg)		;将存储器单元(reg)中的值加载到寄存器reg2中 
-add reg2 0x08		;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 
-store (reg) reg2	;将寄存器reg2中的值放回存储器单元(reg)中
+<pre><code class="assembly">ld reg2 (reg)        ;将存储器单元(reg)中的值加载到寄存器reg2中 
+add reg2 0x08        ;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 
+store (reg) reg2    ;将寄存器reg2中的值放回存储器单元(reg)中
 </code></pre>
 <p>硬币有两面，精简指令集也有它的优势和劣势。其中一个重要的优势是指令可以被更快的执行（RISC处理器通过引入流水线机制，减少每个指令的占用的CPU的时钟周期来缩短执行时间）。它的劣势也很明显，较少的指令增加了软件（事实上是编译器）的复杂性。另一个重要的事实是，ARM具有两种运行模式（可以类比x86的实模式和保护模式），ARM模式和Thumb模式。</p>
-<h1 id="初识arm"><a class="markdownIt-Anchor" href="#初识arm"></a> 初识ARM</h1>
-<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
-<p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
-<pre class="highlight"><code class="assembly">ldr =加载字
+<h1 id="初识ARM"><a href="#初识ARM" class="headerlink" title="初识ARM"></a>初识ARM</h1><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
+<pre><code class="assembly">ldr =加载字
 ldr h =加载无符号半字
 ldr sh =加载有符号半字
 ldr b =加载无符号字节
@@ -142,13 +138,11 @@ str sh =存储有符号半字符
 str b =存储未签名的字节
 str sb =存储已签名的字节
 </code></pre>
-<h3 id="大端和小端"><a class="markdownIt-Anchor" href="#大端和小端"></a> 大端和小端</h3>
-<p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
+<h3 id="大端和小端"><a href="#大端和小端" class="headerlink" title="大端和小端"></a>大端和小端</h3><p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8811.53.47.png" alt=""></p>
 <p>以ARMv6为例，指令是固定的小端，数据的访问可以是由程序状态寄存器（CPSR）的第九位来控制的小端或大端。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%888.40.27.png" alt=""></p>
-<h3 id="arm中的寄存器"><a class="markdownIt-Anchor" href="#arm中的寄存器"></a> ARM中的寄存器</h3>
-<p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
+<h3 id="ARM中的寄存器"><a href="#ARM中的寄存器" class="headerlink" title="ARM中的寄存器"></a>ARM中的寄存器</h3><p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
 <table>
 <thead>
 <tr>
@@ -209,14 +203,14 @@ str sb =存储已签名的字节
 <p><strong>R14：LR</strong>（链接寄存器）。当进行函数调用时，链接寄存器将通过引用下一条指令的内存地址进行更新。这样做可以使程序在“子”功能结束后返回到启动“子”功能调用的“父”功能。</p>
 <p><strong>R15：PC</strong>（程序计数器）。程序计数器自动递增执行指令的大小。这个大小在ARM状态下总是4个字节，在THUMB模式下总是2个字节。当执行分支指令时，PC保存目标地址。在执行期间，ARM状态下PC存储当前指令的地址加上8个字节（两个ARM指令），Thumb状态下是当前指令加上4个字节（两个Thumb指令）。这和x86上的PC总是会指向下一条被执行的语句不同</p>
 <p>首先来看看下面这个例子，主函数中大概是:</p>
-<pre class="highlight"><code class="assembly">main:
-	mov r0, pc
- 	mov r1, #2
- 	add r2, r1, r1
- 	bkpt
+<pre><code class="assembly">main:
+    mov r0, pc
+     mov r1, #2
+     add r2, r1, r1
+     bkpt
 </code></pre>
 <p>我们首先在主函数入口处打一个断点，然后查看一下寄存器的信息，发现：</p>
-<pre class="highlight"><code class="assembly">(gdb) break main
+<pre><code class="assembly">(gdb) break main
 Breakpoint 8 at 0x10408: file hello.s, line 27.
 (gdb) r
 The program being debugged has been started already.
@@ -224,53 +218,52 @@ Start it from the beginning? (y or n) y
 Starting program: /home/pi/hello
 
 Breakpoint 8, main () at hello.s:27
-27		mov r0, pc
+27        mov r0, pc
 (gdb) info registers
-r0             0x1	1
-r1             0x7efff344	2130703172
-r2             0x7efff34c	2130703180
-r3             0x10408	66568
-r4             0x1041c	66588
-r5             0x0	0
-r6             0x102e0	66272
-r7             0x0	0
-r8             0x0	0
-r9             0x0	0
-r10            0x76fff000	1996484608
-r11            0x0	0
-r12            0x7efff270	2130702960
-sp             0x7efff1f0	0x7efff1f0
-lr             0x76e7a678	1994892920
-pc             0x10408	0x10408 &lt;main&gt;
-cpsr           0x60000010	1610612752
+r0             0x1    1
+r1             0x7efff344    2130703172
+r2             0x7efff34c    2130703180
+r3             0x10408    66568
+r4             0x1041c    66588
+r5             0x0    0
+r6             0x102e0    66272
+r7             0x0    0
+r8             0x0    0
+r9             0x0    0
+r10            0x76fff000    1996484608
+r11            0x0    0
+r12            0x7efff270    2130702960
+sp             0x7efff1f0    0x7efff1f0
+lr             0x76e7a678    1994892920
+pc             0x10408    0x10408 &lt;main&gt;
+cpsr           0x60000010    1610612752
 </code></pre>
 <p>然后执行下一条之后我们再看看寄存器中的值，r0中是多少，是0x10408么？让我们拭目以待</p>
-<pre class="highlight"><code class="assembly">(gdb) next
+<pre><code class="assembly">(gdb) next
 
 Breakpoint 7, main () at hello.s:28
-28	 	mov r1, #2
+28         mov r1, #2
 (gdb) info registers
-r0             0x10410	66576
-r1             0x7efff344	2130703172
-r2             0x7efff34c	2130703180
-r3             0x10408	66568
-r4             0x1041c	66588
-r5             0x0	0
-r6             0x102e0	66272
-r7             0x0	0
-r8             0x0	0
-r9             0x0	0
-r10            0x76fff000	1996484608
-r11            0x0	0
-r12            0x7efff270	2130702960
-sp             0x7efff1f0	0x7efff1f0
-lr             0x76e7a678	1994892920
-pc             0x1040c	0x1040c &lt;main+4&gt;
-cpsr           0x60000010	1610612752
+r0             0x10410    66576
+r1             0x7efff344    2130703172
+r2             0x7efff34c    2130703180
+r3             0x10408    66568
+r4             0x1041c    66588
+r5             0x0    0
+r6             0x102e0    66272
+r7             0x0    0
+r8             0x0    0
+r9             0x0    0
+r10            0x76fff000    1996484608
+r11            0x0    0
+r12            0x7efff270    2130702960
+sp             0x7efff1f0    0x7efff1f0
+lr             0x76e7a678    1994892920
+pc             0x1040c    0x1040c &lt;main+4&gt;
+cpsr           0x60000010    1610612752
 </code></pre>
 <p>我们发现r0寄存器中的值是main函数入口的地址+8，在我们直接观察pc的时候，它指向的是下一条指令的地址，但是在调试的时候，我们发现是pc中的值+8，那么为什么会有这样的结果呢，这个涉及到CPU流水线的问题，我们放在之后再讨论。</p>
-<h1 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h1>
-<ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li>看雪安全论坛</li>
 <li><a href="https://azeria-labs.com" target="_blank" rel="external">外国友人博客</a></li>
 <li><a href="https://www.anquanke.com/post/id/86536" target="_blank" rel="external">gdb使用方式</a></li>
@@ -279,7 +272,7 @@ cpsr           0x60000010	1610612752
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/23/ARM汇编上手-一/" data-id="cjg9k0mbz000m9fbrhtsu4kpr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/23/ARM汇编上手-一/" data-id="cjgnci0qi000k6vbrxak3yg1a" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
@@ -291,7 +284,7 @@ cpsr           0x60000010	1610612752
 <nav id="article-nav">
   
     <a href="/2018/01/24/玩转树莓派-一/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           玩转树莓派(一)
@@ -301,7 +294,7 @@ cpsr           0x60000010	1610612752
   
   
     <a href="/2018/01/21/SSR原理和搭建翻墙服务器/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">SSR原理和搭建翻墙服务器</div>
     </a>
   
@@ -347,8 +340,8 @@ cpsr           0x60000010	1610612752
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

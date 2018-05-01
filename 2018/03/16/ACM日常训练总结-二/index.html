@@ -44,8 +44,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -109,60 +109,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>多写点DFS对于一个人的智力是有帮助的…</p>
 <a id="more"></a>
-<h1 id="hdu_1007"><a class="markdownIt-Anchor" href="#hdu_1007"></a> HDU_1007</h1>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1007" target="_blank" rel="external">传送门</a></p>
+<h1 id="HDU-1007"><a href="#HDU-1007" class="headerlink" title="HDU_1007"></a>HDU_1007</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1007" target="_blank" rel="external">传送门</a></p>
 <p>为了找出最近的两个点之间的距离的一半，我们可以使用一个结构体去表示我们的坐标点，剩下的就是编写代码的问题了，这份代码还是比较简单的。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> min(a,b) ( ((a)&gt;(b)) ? (b):(a) )</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">point</span>
-{</span>
-	<span class="hljs-keyword">double</span> x,y;
-}a[<span class="hljs-number">100001</span>];
-<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> point &amp;a,<span class="hljs-keyword">const</span> point &amp;b)</span>
-</span>{
-	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(a.x-b.x)&lt;<span class="hljs-number">1e-8</span>)
-    <span class="hljs-comment">//如果两个点的x坐标相等，则对y坐标进行比较</span>
-        <span class="hljs-keyword">return</span> a.y &lt; b.y;
-    <span class="hljs-keyword">return</span> a.x&lt;b.x;
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+#define min(a,b) ( ((a)&gt;(b)) ? (b):(a) )
+struct point
+{
+    double x,y;
+}a[100001];
+bool cmp(const point &amp;a,const point &amp;b)
+{
+    if(fabs(a.x-b.x)&lt;1e-8)
+    //如果两个点的x坐标相等，则对y坐标进行比较
+        return a.y &lt; b.y;
+    return a.x&lt;b.x;
 }
-<span class="hljs-comment">//两点间距离</span>
-<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">dis</span><span class="hljs-params">(point a,point b)</span>
-</span>{
-	<span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>(<span class="hljs-built_in">pow</span>(a.x-b.x,<span class="hljs-number">2</span>)+<span class="hljs-built_in">pow</span>(a.y-b.y,<span class="hljs-number">2</span>));
-}
-
-<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">S</span><span class="hljs-params">(point a[],<span class="hljs-keyword">int</span> n)</span>
-</span>{
-	<span class="hljs-keyword">double</span> m=<span class="hljs-number">1e+10</span>;
-	<span class="hljs-keyword">if</span>(n==<span class="hljs-number">2</span>)
-		<span class="hljs-keyword">return</span> dis(a[<span class="hljs-number">0</span>],a[<span class="hljs-number">1</span>]);
-	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n<span class="hljs-number">-2</span>;i++)
-	{ 
-		m=min(m,min(dis(a[i],a[i+<span class="hljs-number">1</span>]),min(dis(a[i],a[i+<span class="hljs-number">2</span>]),dis(a[i+<span class="hljs-number">1</span>],a[i+<span class="hljs-number">2</span>]))));
-	}
-	<span class="hljs-keyword">return</span> m;
+//两点间距离
+double dis(point a,point b)
+{
+    return sqrt(pow(a.x-b.x,2)+pow(a.y-b.y,2));
 }
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>{
-	<span class="hljs-keyword">int</span> n;
-	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n),n)
-	{
-		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)
-		{
-			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf"</span>,&amp;a[i].x,&amp;a[i].y);
-		}
-		sort(a,a+n,cmp);
-		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf\n"</span>,S(a,n)/<span class="hljs-number">2</span>);
-	}
-	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+double S(point a[],int n)
+{
+    double m=1e+10;
+    if(n==2)
+        return dis(a[0],a[1]);
+    for(int i=0;i&lt;n-2;i++)
+    { 
+        m=min(m,min(dis(a[i],a[i+1]),min(dis(a[i],a[i+2]),dis(a[i+1],a[i+2]))));
+    }
+    return m;
+}
+
+int main()
+{
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;n),n)
+    {
+        for(int i=0;i&lt;n;i++)
+        {
+            scanf(&quot;%lf%lf&quot;,&amp;a[i].x,&amp;a[i].y);
+        }
+        sort(a,a+n,cmp);
+        printf(&quot;%.2lf\n&quot;,S(a,n)/2);
+    }
+    return 0;
 }
 </code></pre>
 <p>唯一一个有疑问的地方可能就是在输入的点大于2的情况下，为什么要比较三个点之间的距离关系取最小值，其实这个也只是为了过题目，因为只比较两个之间的最小值的话出现下面这种情况就不行了：</p>
@@ -170,173 +169,168 @@
 <p>所以为了过题多比较了一次，然后就过了，如果面对特别极端的情况的话还是需要想想其他的思路，如下图：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%881.49.43.png" alt="屏幕快照 2018-03-16 下午1.49.43.png"></p>
 <p>在这种情况下我的解决思路就是如果有x坐标相同的，那么就找到这个点之后第一个与其x坐标不相同的点，然后将二者之间的距离算出来，与当前最小值比较，体现在代码中应该就是：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">if</span>(a[i].x == a[i+<span class="hljs-number">1</span>].x){
-  	<span class="hljs-keyword">int</span> tmp2, tmp1;
-  	tmp1 = tmp2 = i;
-	<span class="hljs-keyword">while</span>(a[tmp1+<span class="hljs-number">1</span>] == x)
+<pre><code class="cpp">if(a[i].x == a[i+1].x){
+      int tmp2, tmp1;
+      tmp1 = tmp2 = i;
+    while(a[tmp1+1] == x)
       tmp1++;
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = tmp2 ; j &lt;= tmp1 ; j++){
+  for(int j = tmp2 ; j &lt;= tmp1 ; j++){
     m = min(m, dis(a[j], a[tmp1]));
   }
-  	i = tmp2;
+      i = tmp2;
 }
 </code></pre>
-<h1 id="hdu_1009"><a class="markdownIt-Anchor" href="#hdu_1009"></a> HDU_1009</h1>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1009" target="_blank" rel="external">传送门</a></p>
+<h1 id="HDU-1009"><a href="#HDU-1009" class="headerlink" title="HDU_1009"></a>HDU_1009</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1009" target="_blank" rel="external">传送门</a></p>
 <p>主要是题目比较长，就是一道简单的贪心，我们将咖啡豆数量除猫粮的数量得到性价比，然后根据性价比对于数组进行排序，然后就是贪心的实现了，尽量的取，按照数组顺序，能拿完就尽量拿完。</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>{</span>
-  <span class="hljs-keyword">int</span> a,b;
-  <span class="hljs-keyword">double</span> c;
-}arr[<span class="hljs-number">1100</span>];
+struct node{
+  int a,b;
+  double c;
+}arr[1100];
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cmp</span><span class="hljs-params">(node x, node y)</span></span>{
-  <span class="hljs-keyword">return</span> x.c &gt; y.c;
+int cmp(node x, node y){
+  return x.c &gt; y.c;
 }
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
- <span class="hljs-keyword">int</span> m,n;
- <span class="hljs-keyword">int</span> i,j;
- <span class="hljs-keyword">double</span> sum;
-  <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;m ,&amp;n)){
-    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span> ; i &lt; n ; i++){
-    	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;arr[i].a, &amp;arr[i].b);
-      	arr[i].c = (<span class="hljs-keyword">double</span>)arr[i].a / arr[i],b;
+int main(){
+ int m,n;
+ int i,j;
+ double sum;
+  while(~scanf(&quot;%d %d&quot;, &amp;m ,&amp;n)){
+    for(i = 0 ; i &lt; n ; i++){
+        scanf(&quot;%d %d&quot;, &amp;arr[i].a, &amp;arr[i].b);
+          arr[i].c = (double)arr[i].a / arr[i],b;
     }
     sort(arr, arr+n, cmp);
-    sum = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span> ; j &lt; n ; j++){
-      <span class="hljs-keyword">if</span>(m &gt;= arr[i].b) sum += arr[i].a;
-      <span class="hljs-keyword">else</span> sum += m*(<span class="hljs-keyword">double</span>)arr[i].a/arr[i].b;
+    sum = 0;
+    for(j = 0 ; j &lt; n ; j++){
+      if(m &gt;= arr[i].b) sum += arr[i].a;
+      else sum += m*(double)arr[i].a/arr[i].b;
       m -= arr[i].b;
-      <span class="hljs-keyword">if</span>(m &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
+      if(m &lt; 0) break;
     }
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.3lf\n"</span>, sum);
+    printf(&quot;%.3lf\n&quot;, sum);
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 </code></pre>
-<h1 id="flooded_uva815"><a class="markdownIt-Anchor" href="#flooded_uva815"></a> Flooded_Uva815</h1>
-<p>算法竞赛书上说可以锻炼思维的一道题，题目的意思就是说有一个n*m的网格，每个网格的面积都是10x10的正方形，现在洪水灌入，输入每个网格的海拔和洪水的体积，算百分之几的网格被淹没，以及水位的海拔高度：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mmax=<span class="hljs-number">35</span>*<span class="hljs-number">35</span>;
-<span class="hljs-keyword">int</span> dp[mmax],n,m;
+<h1 id="Flooded-Uva815"><a href="#Flooded-Uva815" class="headerlink" title="Flooded_Uva815"></a>Flooded_Uva815</h1><p>算法竞赛书上说可以锻炼思维的一道题，题目的意思就是说有一个n*m的网格，每个网格的面积都是10x10的正方形，现在洪水灌入，输入每个网格的海拔和洪水的体积，算百分之几的网格被淹没，以及水位的海拔高度：</p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int mmax=35*35;
+int dp[mmax],n,m;
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
-</span>{
-  <span class="hljs-comment">//这种用法还是真少见</span>
-   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> kase = <span class="hljs-number">1</span>; <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;n, &amp;m), n &amp;&amp; m ; kase++)
+int main()
+{
+  //这种用法还是真少见
+   for (int kase = 1; scanf(&quot;%d%d&quot;, &amp;n, &amp;m), n &amp;&amp; m ; kase++)
    {
       n*=m;
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)
-         <span class="hljs-built_in">cin</span>&gt;&gt;dp[i];
+      for(int i=0;i&lt;n;i++)
+         cin&gt;&gt;dp[i];
       sort(dp,dp+n);
-      dp[n]=<span class="hljs-number">0x7fffffff</span>;
+      dp[n]=0x7fffffff;
 
-      <span class="hljs-keyword">int</span> t;
-      <span class="hljs-keyword">double</span> sum;
-      <span class="hljs-built_in">cin</span> &gt;&gt; sum;
-      sum/=<span class="hljs-number">100</span>;
+      int t;
+      double sum;
+      cin &gt;&gt; sum;
+      sum/=100;
 
-      <span class="hljs-keyword">for</span>(t=<span class="hljs-number">1</span>;t&lt;=n;t++)
+      for(t=1;t&lt;=n;t++)
       {
-         sum += dp[t<span class="hljs-number">-1</span>];
-         <span class="hljs-keyword">if</span>(sum/t&lt;=dp[t])
-            <span class="hljs-keyword">break</span>;
+         sum += dp[t-1];
+         if(sum/t&lt;=dp[t])
+            break;
       }
-      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Region %d\n"</span>, kase);
-      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Water level is %.2lf meters.\n"</span>, sum/t);
-      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf percent of the region is under water.\n\n"</span>, t*<span class="hljs-number">100.0</span>/n);
+      printf(&quot;Region %d\n&quot;, kase);
+      printf(&quot;Water level is %.2lf meters.\n&quot;, sum/t);
+      printf(&quot;%.2lf percent of the region is under water.\n\n&quot;, t*100.0/n);
    }
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+   return 0;
 }
 </code></pre>
 <p>首先我们要对输入的网格海拔排序，因为海水肯定会先淹没高的，所以找到的第一个没有淹没的就OK了，为了防止全淹了，要将数组的最后一个设置为最大，跳出循环。这题的最大难度在于理解题目的意思，一开始我以为是往网格里面填，后来才知道是这个样子的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-23%20%E4%B8%8A%E5%8D%8811.59.59.png" alt="屏幕快照 2018-03-23 上午11.59.59.png"></p>
-<h1 id="uva_136"><a class="markdownIt-Anchor" href="#uva_136"></a> Uva_136</h1>
-<p>丑树是指不能被2，3，5以外的素数整除的数，将丑数从小到达排列起来，求第1500个丑数：</p>
+<h1 id="Uva-136"><a href="#Uva-136" class="headerlink" title="Uva_136"></a>Uva_136</h1><p>丑树是指不能被2，3，5以外的素数整除的数，将丑数从小到达排列起来，求第1500个丑数：</p>
 <p>其实这个题的关键做法就在于想到丑数其实就是一开始的丑数的2、3、5倍，从一个丑数我们可以生成三个丑数，但是我们每次生成丑数的时候要判断这个丑数是否已经生成过了，我们可以用到STL来简单的完成我们的需求：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;set&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;queue&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include&lt;set&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+using namespace std;
 
-<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> LL;
+typedef long long LL;
 
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> coeff[<span class="hljs-number">3</span>] = {<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>};
+const int coeff[3] = {2, 3, 5};
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-  priority_queue&lt;LL , <span class="hljs-built_in">vector</span>&lt;LL&gt;, greater&lt;LL&gt; &gt;pq;
-  <span class="hljs-built_in">set</span>&lt;LL&gt; s;
-  pq.push(<span class="hljs-number">1</span>);
-  s.insert(<span class="hljs-number">1</span>);
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; ; i++){
+int main(){
+  priority_queue&lt;LL , vector&lt;LL&gt;, greater&lt;LL&gt; &gt;pq;
+  set&lt;LL&gt; s;
+  pq.push(1);
+  s.insert(1);
+  for(int i = 1 ; ; i++){
     LL x = pq.top();
     pq.pop();
-    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">1500</span>){
-      <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
-      <span class="hljs-keyword">break</span>;
+    if(i == 1500){
+      cout &lt;&lt; x &lt;&lt; endl;
+      break;
     }
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span> ; j &lt; <span class="hljs-number">3</span> ; j++){
+    for(int j = 0 ; j &lt; 3 ; j++){
       LL x2 = x * coeff[j];
-      <span class="hljs-keyword">if</span>(!s.count(x2)){
+      if(!s.count(x2)){
         s.insert(x2);
         pq.push(x2);
       }
     }
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 </code></pre>
-<h1 id="uva_400"><a class="markdownIt-Anchor" href="#uva_400"></a> UVa_400</h1>
-<p>这个其实就是实现Unix中的ls命令，每一行要求只有60个字符，那么在读入文件名的时候我们就把文件名最长给找到：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<h1 id="UVa-400"><a href="#UVa-400" class="headerlink" title="UVa_400"></a>UVa_400</h1><p>这个其实就是实现Unix中的ls命令，每一行要求只有60个字符，那么在读入文件名的时候我们就把文件名最长给找到：</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+using namespace std;
 
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxcol = <span class="hljs-number">60</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">100</span>+<span class="hljs-number">5</span>;
-<span class="hljs-built_in">string</span> filenames[maxn];
+const int maxcol = 60;
+const int maxn = 100+5;
+string filenames[maxn];
 
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> &amp;s, <span class="hljs-keyword">int</span> len, <span class="hljs-keyword">char</span> extra)</span></span>{
-  <span class="hljs-built_in">cout</span> &lt;&lt; s;
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; len - s.length() ; i++){
-    <span class="hljs-built_in">cout</span> &lt;&lt; extra;
+void print(const string &amp;s, int len, char extra){
+  cout &lt;&lt; s;
+  for(int i = 0 ; i &lt; len - s.length() ; i++){
+    cout &lt;&lt; extra;
   }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-  <span class="hljs-keyword">int</span> n;
-  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; n){
-    <span class="hljs-keyword">int</span> M = <span class="hljs-number">0</span>;;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n ; i++){
-      <span class="hljs-built_in">cin</span> &gt;&gt; filenames[i];
-      M = max(M, (<span class="hljs-keyword">int</span>)filenames[i].length);
+int main(){
+  int n;
+  while(cin &gt;&gt; n){
+    int M = 0;;
+    for(int i = 0 ; i &lt; n ; i++){
+      cin &gt;&gt; filenames[i];
+      M = max(M, (int)filenames[i].length);
     }
-    <span class="hljs-keyword">int</span> cols = (maxcol - M)/(M+<span class="hljs-number">2</span>) + <span class="hljs-number">1</span>;
-    <span class="hljs-keyword">int</span> rows = (n + M - <span class="hljs-number">1</span>)/cols;
-    print(<span class="hljs-string">""</span>, <span class="hljs-number">60</span>, <span class="hljs-string">'-'</span>);
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">'\n'</span>;
-	sort(filenames, filenames+n);
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> r = <span class="hljs-number">0</span> ; r &lt; rows ; r++)
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span> ; c &lt; cols ; c++){
-        <span class="hljs-keyword">int</span> index = c*rows + r;
-        <span class="hljs-keyword">if</span>(index &lt; n)print(filenames[index], c == cols<span class="hljs-number">-1</span> ? M : M+<span class="hljs-number">2</span>, <span class="hljs-string">' '</span>);
+    int cols = (maxcol - M)/(M+2) + 1;
+    int rows = (n + M - 1)/cols;
+    print(&quot;&quot;, 60, &#39;-&#39;);
+    cout &lt;&lt; &#39;\n&#39;;
+    sort(filenames, filenames+n);
+    for(int r = 0 ; r &lt; rows ; r++)
+      for(int c = 0 ; c &lt; cols ; c++){
+        int index = c*rows + r;
+        if(index &lt; n)print(filenames[index], c == cols-1 ? M : M+2, &#39; &#39;);
       }
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+    cout &lt;&lt; &quot;\n&quot;;
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 </code></pre>
-<h1 id="第八届蓝桥_纸牌三角形"><a class="markdownIt-Anchor" href="#第八届蓝桥_纸牌三角形"></a> 第八届蓝桥_纸牌三角形</h1>
-<pre class="highlight"><code class="">标题：纸牌三角形
+<h1 id="第八届蓝桥-纸牌三角形"><a href="#第八届蓝桥-纸牌三角形" class="headerlink" title="第八届蓝桥_纸牌三角形"></a>第八届蓝桥_纸牌三角形</h1><pre><code>标题：纸牌三角形
 A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要求每个边的和相等。
 下图就是一种排法（如有对齐问题，参看p1.png）。
 
@@ -353,126 +347,124 @@ A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要�
 
 
 注意：需要提交的是一个整数，不要提交任何多余内容。
-</code></pre>
-<p>因为翻转和镜像后算一种情况，所以这道题的关键在于查重，那么STL中的set就能帮上我们的忙了，分析完重复的情况之后我们发现每种情况有六个重复的：</p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+</code></pre><p>因为翻转和镜像后算一种情况，所以这道题的关键在于查重，那么STL中的set就能帮上我们的忙了，分析完重复的情况之后我们发现每种情况有六个重复的：</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;set&gt;
+#include&lt;algorithm&gt;
+using namespace std;
 
-<span class="hljs-built_in">set</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; &gt;st;
+set&lt;vector&lt;int&gt; &gt;st;
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-  <span class="hljs-keyword">int</span> arr[<span class="hljs-number">9</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>};
-  <span class="hljs-keyword">do</span>{
-    <span class="hljs-keyword">if</span>(arr[<span class="hljs-number">0</span>] + arr[<span class="hljs-number">1</span>] + arr[<span class="hljs-number">2</span>] + arr[<span class="hljs-number">3</span>] == arr[<span class="hljs-number">3</span>] + arr[<span class="hljs-number">4</span>] + arr[<span class="hljs-number">5</span>] +arr[<span class="hljs-number">6</span>] &amp;&amp; arr[<span class="hljs-number">3</span>] + arr[<span class="hljs-number">4</span>] + arr[<span class="hljs-number">5</span>] +arr[<span class="hljs-number">6</span>] == arr[<span class="hljs-number">6</span>] + arr[<span class="hljs-number">7</span>] + arr[<span class="hljs-number">8</span>] + arr[<span class="hljs-number">0</span>]){
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; a;
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; b;
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; c;
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; d;
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; e;
-      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; f;
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">8</span>;i++){
-		  		a.push_back(arr[i%<span class="hljs-number">9</span>]);		  		
-		  	}
-		  
-	  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">8</span>;i++){
-		  		b.push_back(arr[(i+<span class="hljs-number">3</span>)%<span class="hljs-number">9</span>]);
-		  	}
-		  	
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">8</span>;i++){
-		  		c.push_back(arr[(i+<span class="hljs-number">6</span>)%<span class="hljs-number">9</span>]);
-		  	}
+int main(){
+  int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  do{
+    if(arr[0] + arr[1] + arr[2] + arr[3] == arr[3] + arr[4] + arr[5] +arr[6] &amp;&amp; arr[3] + arr[4] + arr[5] +arr[6] == arr[6] + arr[7] + arr[8] + arr[0]){
+      vector&lt;int&gt; a;
+      vector&lt;int&gt; b;
+      vector&lt;int&gt; c;
+      vector&lt;int&gt; d;
+      vector&lt;int&gt; e;
+      vector&lt;int&gt; f;
+      for(int i=0;i&lt;=8;i++){
+                  a.push_back(arr[i%9]);                  
+              }
 
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">9</span>;i&gt;=<span class="hljs-number">1</span>;i--){
-		  		d.push_back(arr[i%<span class="hljs-number">9</span>]);
-		  	}
-		  	
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">9</span>;i&gt;=<span class="hljs-number">1</span>;i--){
-		  		e.push_back(arr[(i+<span class="hljs-number">3</span>)%<span class="hljs-number">9</span>]);
-		  	}
-		  
-      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">9</span>;i&gt;=<span class="hljs-number">1</span>;i--){
-		  		f.push_back(arr[(i+<span class="hljs-number">6</span>)%<span class="hljs-number">9</span>]);
-		  	}
-		  	
-      <span class="hljs-keyword">if</span>(!st.count(a)&amp;&amp;!st.count(b) &amp;&amp;!st.count(c) &amp;&amp;!st.count(d) 
+      for(int i=0;i&lt;=8;i++){
+                  b.push_back(arr[(i+3)%9]);
+              }
+
+      for(int i=0;i&lt;=8;i++){
+                  c.push_back(arr[(i+6)%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  d.push_back(arr[i%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  e.push_back(arr[(i+3)%9]);
+              }
+
+      for(int i=9;i&gt;=1;i--){
+                  f.push_back(arr[(i+6)%9]);
+              }
+
+      if(!st.count(a)&amp;&amp;!st.count(b) &amp;&amp;!st.count(c) &amp;&amp;!st.count(d) 
          &amp;&amp;!st.count(e) &amp;&amp;!st.count(f)){
         st.insert(a);
       }
     }
-  }<span class="hljs-keyword">while</span>(next_permutation(arr, arr+<span class="hljs-number">9</span>));
-  <span class="hljs-built_in">cout</span> &lt;&lt; st.size() &lt;&lt; <span class="hljs-built_in">endl</span>;
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }while(next_permutation(arr, arr+9));
+  cout &lt;&lt; st.size() &lt;&lt; endl;
+  return 0;
 }
 </code></pre>
-<h1 id="poj-anniversary-cake"><a class="markdownIt-Anchor" href="#poj-anniversary-cake"></a> POJ Anniversary Cake</h1>
-<p><a href="https://blog.csdn.net/lyy289065406/article/details/6683250" target="_blank" rel="external">思路讲解</a></p>
-<pre class="highlight"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<h1 id="POJ-Anniversary-Cake"><a href="#POJ-Anniversary-Cake" class="headerlink" title="POJ Anniversary Cake"></a>POJ Anniversary Cake</h1><p><a href="https://blog.csdn.net/lyy289065406/article/details/6683250" target="_blank" rel="external">思路讲解</a></p>
+<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
 
-<span class="hljs-keyword">int</span> col[<span class="hljs-number">41</span>];
-<span class="hljs-keyword">int</span> s, n;
-<span class="hljs-keyword">int</span> sizenum[<span class="hljs-number">11</span>];
+int col[41];
+int s, n;
+int sizenum[11];
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> dep)</span></span>{
-  <span class="hljs-keyword">if</span>(dep == n) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-  <span class="hljs-keyword">int</span> prow,minn = <span class="hljs-number">50</span>;
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= s ;i++){
-    <span class="hljs-keyword">if</span>(minn &gt; col[i]){
+int dfs(int dep){
+  if(dep == n) return 1;
+  int prow,minn = 50;
+  for(int i = 1 ; i &lt;= s ;i++){
+    if(minn &gt; col[i]){
       minn = col[i];
       prow = i;
     }
   }
-  <span class="hljs-keyword">int</span> size,p;
-  <span class="hljs-keyword">for</span>(size = <span class="hljs-number">10</span> ; size &gt; <span class="hljs-number">0</span> ; size--){
-    <span class="hljs-keyword">if</span>(!sizenum[size]) <span class="hljs-keyword">continue</span>;
-    <span class="hljs-keyword">if</span>(s - col[prow] &gt;= size &amp;&amp; s - prow + <span class="hljs-number">1</span> &gt;= size){
-      <span class="hljs-keyword">for</span>(p = prow ; p &lt;= prow + size <span class="hljs-number">-1</span> ; p++)
-        <span class="hljs-keyword">if</span>(col[p] != col[prow]) <span class="hljs-keyword">break</span>;
-      <span class="hljs-keyword">if</span>(p == prow + size){
-        <span class="hljs-keyword">for</span>(p = prow; p &lt;= prow + size - <span class="hljs-number">1</span>; p++) col[p] += size;
+  int size,p;
+  for(size = 10 ; size &gt; 0 ; size--){
+    if(!sizenum[size]) continue;
+    if(s - col[prow] &gt;= size &amp;&amp; s - prow + 1 &gt;= size){
+      for(p = prow ; p &lt;= prow + size -1 ; p++)
+        if(col[p] != col[prow]) break;
+      if(p == prow + size){
+        for(p = prow; p &lt;= prow + size - 1; p++) col[p] += size;
         sizenum[size]--;
-        <span class="hljs-keyword">if</span>(dfs(dep + <span class="hljs-number">1</span>)) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;  <span class="hljs-comment">//若为假则下面回溯</span>
+        if(dfs(dep + 1)) return 1;  //若为假则下面回溯
         sizenum[size]++;
-        <span class="hljs-keyword">for</span>(p = prow; p &lt;= prow + size - <span class="hljs-number">1</span>; p++) col[p] -= size;  
+        for(p = prow; p &lt;= prow + size - 1; p++) col[p] -= size;  
       }
     } 
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
-  <span class="hljs-keyword">int</span> t;
-  <span class="hljs-built_in">cin</span> &gt;&gt; t;
-  <span class="hljs-keyword">while</span>(t--){
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d %d"</span>, &amp;s, &amp;n);
-    <span class="hljs-built_in">memset</span>(col, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(col));
-    <span class="hljs-built_in">memset</span>(sizenum, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(sizenum));
-    <span class="hljs-keyword">int</span> area = <span class="hljs-number">0</span>,sid;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= n ; i++){
-      <span class="hljs-built_in">cin</span> &gt;&gt; sid;
+int main(){
+  int t;
+  cin &gt;&gt; t;
+  while(t--){
+    scanf(&quot;%d %d&quot;, &amp;s, &amp;n);
+    memset(col, 0, sizeof(col));
+    memset(sizenum, 0, sizeof(sizenum));
+    int area = 0,sid;
+    for(int i = 1 ; i &lt;= n ; i++){
+      cin &gt;&gt; sid;
       sizenum[sid]++;
       area += sid*sid;
     }
-    <span class="hljs-keyword">if</span>(area != s*s){
-      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"HUTUTU!\n"</span>;
-      <span class="hljs-keyword">continue</span>;
+    if(area != s*s){
+      cout &lt;&lt; &quot;HUTUTU!\n&quot;;
+      continue;
     }
-    <span class="hljs-keyword">if</span>(dfs(<span class="hljs-number">0</span>)) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"KHOOOOB!\n"</span>;
-    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"HUTUTU!\n"</span>; 
+    if(dfs(0)) cout &lt;&lt; &quot;KHOOOOB!\n&quot;;
+    else cout &lt;&lt; &quot;HUTUTU!\n&quot;; 
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  return 0;
 }
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjg9k0mbx000k9fbrk83z3afe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/ACM日常训练总结-二/" data-id="cjgnci0qa00096vbr40t3xc9v" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -484,7 +476,7 @@ A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要�
 <nav id="article-nav">
   
     <a href="/2018/03/19/对于PVID和VID的研究/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           对于PVID和VID的研究
@@ -494,7 +486,7 @@ A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要�
   
   
     <a href="/2018/03/13/ACM日常训练总结-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">ACM日常训练总结(一)</div>
     </a>
   
@@ -540,8 +532,8 @@ A,2,3,4,5,6,7,8,9 共9张纸牌排成一个正三角形（A按1计算）。要�
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

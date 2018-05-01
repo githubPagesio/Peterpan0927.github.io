@@ -46,8 +46,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -113,47 +113,33 @@
       
         <p>写这篇博客是因为似乎又要去比赛了，实力依然很重要，但是巧妙地利用一些套路会让自己更轻松。</p>
 <a id="more"></a>
-<h2 id="出题套路"><a class="markdownIt-Anchor" href="#出题套路"></a> 出题套路</h2>
-<ol>
-<li>
-<p>爆破， md5，爆破随机数，验证码识别</p>
+<h2 id="出题套路"><a href="#出题套路" class="headerlink" title="出题套路"></a>出题套路</h2><ol>
+<li><p>爆破， md5，爆破随机数，验证码识别</p>
 </li>
-<li>
-<p>密码题，包括hash长度扩展，异或，移位加密（凯撒密码等）各种变形、三十二位随机数过小</p>
+<li><p>密码题，包括hash长度扩展，异或，移位加密（凯撒密码等）各种变形、三十二位随机数过小</p>
 </li>
-<li>
-<p>各种找源码的技巧，包括git、svn、xxx.php.swp、* www *.(zip|tar.gz|rar|7z)、xxx.php.bak</p>
+<li><p>各种找源码的技巧，包括git、svn、xxx.php.swp、<em> www </em>.(zip|tar.gz|rar|7z)、xxx.php.bak</p>
 </li>
-<li>
-<p>文件上传，包括花式文件后缀.php345、inc、phtml、photo、phps、各种文件内容检测</p>
+<li><p>文件上传，包括花式文件后缀.php345、inc、phtml、photo、phps、各种文件内容检测</p>
 </li>
-<li>
-<p>协议，伪造X-Forwarded-For/X-Client-IP/X-Real_IP/CDX-Src -IP、花式改UA，花式藏flag，花式分析数据包</p>
+<li><p>协议，伪造X-Forwarded-For/X-Client-IP/X-Real_IP/CDX-Src -IP、花式改UA，花式藏flag，花式分析数据包</p>
 </li>
-<li>
-<p>绕WAF，包括花式绕Mysal、绕文件读取关键词检测之类的拦截</p>
+<li><p>绕WAF，包括花式绕Mysal、绕文件读取关键词检测之类的拦截</p>
 </li>
-<li>
-<p>玩弄几个php特性：包括弱类型，strpos和===，反序列化destruct、\0截断、iconv截断</p>
+<li><p>玩弄几个php特性：包括弱类型，strpos和===，反序列化destruct、\0截断、iconv截断</p>
 </li>
-<li>
-<p>Mysql类型差异，包括和php弱类型类似的特性，0x、0b、1e之类，varchar和integer相互转换</p>
+<li><p>Mysql类型差异，包括和php弱类型类似的特性，0x、0b、1e之类，varchar和integer相互转换</p>
 </li>
-<li>
-<p>windows特性，包括短文件名，IIS解析漏洞、NTFS文件系统通配符、::$DATA，冒号截断</p>
+<li><p>windows特性，包括短文件名，IIS解析漏洞、NTFS文件系统通配符、::$DATA，冒号截断</p>
 </li>
-<li>
-<p>SSRF,包括花式探测端口，302跳转、花式协议利用、gochar直接取shell等</p>
+<li><p>SSRF,包括花式探测端口，302跳转、花式协议利用、gochar直接取shell等</p>
 </li>
-<li>
-<p>XSS，各种浏览器的auditor绕过、富文本过滤黑白名单绕过、flash xss、CSP绕过</p>
+<li><p>XSS，各种浏览器的auditor绕过、富文本过滤黑白名单绕过、flash xss、CSP绕过</p>
 </li>
-<li>
-<p>XXE，各种XML存在地方(rss/word/流媒体)、各种XXE利用方法(SSRF、文件读取)</p>
+<li><p>XXE，各种XML存在地方(rss/word/流媒体)、各种XXE利用方法(SSRF、文件读取) </p>
 </li>
 </ol>
-<h2 id="数据包部分"><a class="markdownIt-Anchor" href="#数据包部分"></a> 数据包部分</h2>
-<p>对于数据包的分析我们一般都会借助于抓包工具，常用的抓包工具就是wireshark，其中过滤语法尤为重要，</p>
+<h2 id="数据包部分"><a href="#数据包部分" class="headerlink" title="数据包部分"></a>数据包部分</h2><p>对于数据包的分析我们一般都会借助于抓包工具，常用的抓包工具就是wireshark，其中过滤语法尤为重要，</p>
 <p>可以参考下面几个网站进行初步的了解，剩下的部分就需要熟能生巧和对网络知识的了解了。</p>
 <ul>
 <li><a href="http://www.wireshark.org/download.html" target="_blank" rel="external">wireshark官方下载地址</a></li>
@@ -167,39 +153,28 @@
 <li><a href="http://xkon.github.io/2015/04/15/%E6%94%BB%E5%87%BB%E6%97%A0%E7%BA%BFWiFi/" target="_blank" rel="external">攻击无线wifi(还讲解了WEP加密的WI-FI)</a></li>
 </ul>
 <hr>
-<h2 id="隐写术部分"><a class="markdownIt-Anchor" href="#隐写术部分"></a> 隐写术部分</h2>
-<p>解决稍微复杂一点的隐写术工具是必不可少的，比如数据提取，查看二进制和十六进制等等，完整版在<a href="https://github.com/smartjinyu/ctf-tools" target="_blank" rel="external">GitHub</a>上，因为主要就是做这一部分，所以着重的讲一下：</p>
+<h2 id="隐写术部分"><a href="#隐写术部分" class="headerlink" title="隐写术部分"></a>隐写术部分</h2><p>解决稍微复杂一点的隐写术工具是必不可少的，比如数据提取，查看二进制和十六进制等等，完整版在<a href="https://github.com/smartjinyu/ctf-tools" target="_blank" rel="external">GitHub</a>上，因为主要就是做这一部分，所以着重的讲一下：</p>
 <ul>
 <li><strong>Winhex</strong>、<strong>UltraEdit</strong>: 用于查看文件的二进制\十六进制代码</li>
-<li><strong>StegSolve</strong>: 神器中的神器，能够对常见的图片格式进行偏移、LSB 提取、帧提取、像素偏移、数据提取，对两张图片进行结合等等，覆盖了常见的分析需求。<a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">下载地址</a>，需要 Java 运行环境。</li>
+<li><strong>StegSolve</strong>: 神器中的神器，能够对常见的图片格式进行偏移、LSB 提取、帧提取、像素偏移、数据提取，对两张图片进行结合等等，覆盖了常见的分析需求。<a href="http://www.caesum.com/handbook/Stegsolve.jar" target="_blank" rel="external">下载地址</a>，需要 Java 运行环境。 </li>
 </ul>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-17%20%E4%B8%8B%E5%8D%889.53.04.png" alt=""></p>
 <ul>
-<li>
-<p><strong>Binwalk</strong>: 常用工具，可以进行文件的分析和提取。使用说明可参看<a href="http://www.secbox.cn/hacker/ctf/8078.html" target="_blank" rel="external">这篇博客</a>，在 Linux 下运行 <code>sudo apt-get install binwalk</code> 即可安装。</p>
-</li>
-<li>
-<p><strong>Stegdetect</strong>: 用于检测 <code>JPEG</code> 文件中是否包含隐藏内容并尝试分析隐藏内容通过哪个隐写工具嵌入</p>
-</li>
-<li>
-<p><strong>Outguess</strong>: 用于提取 <code>JPEG</code> 文件中使用 Outguess 算法的加入的隐藏信息</p>
-</li>
-<li>
-<p><strong>JPHS</strong>: 用于对 <code>JPEG</code> 文件进行 Jhide 算法的隐写或提取，详细介绍及软件下载可以参见<a href="http://www.secbox.cn/hacker/ctf/8078.html" target="_blank" rel="external">这篇博客</a>。</p>
-</li>
-<li>
-<p><strong>MP3Stego</strong>: 用于对<code>MP3</code> 音频文件进行隐写、提取等操作，常用命令：</p>
+<li><strong>Binwalk</strong>: 常用工具，可以进行文件的分析和提取。使用说明可参看<a href="http://www.secbox.cn/hacker/ctf/8078.html" target="_blank" rel="external">这篇博客</a>，在 Linux 下运行 <code>sudo apt-get install binwalk</code> 即可安装。 </li>
+<li><strong>Stegdetect</strong>: 用于检测 <code>JPEG</code> 文件中是否包含隐藏内容并尝试分析隐藏内容通过哪个隐写工具嵌入</li>
+<li><strong>Outguess</strong>: 用于提取 <code>JPEG</code> 文件中使用 Outguess 算法的加入的隐藏信息</li>
+<li><strong>JPHS</strong>: 用于对 <code>JPEG</code> 文件进行 Jhide 算法的隐写或提取，详细介绍及软件下载可以参见<a href="http://www.secbox.cn/hacker/ctf/8078.html" target="_blank" rel="external">这篇博客</a>。</li>
+<li><p><strong>MP3Stego</strong>: 用于对<code>MP3</code> 音频文件进行隐写、提取等操作，常用命令：</p>
 <ul>
 <li><code>encode -E hidden_text.txt -P pass svega.wav svega_stego.mp3</code> 用于写入隐藏信息</li>
 <li><code>decode -X -P pass svega_stego.mp3</code> 用于提取隐藏在音频文件中的信息 <a href="http://www.shiyanbar.com/ctf/1926" target="_blank" rel="external">例题</a></li>
 </ul>
 </li>
-<li>
-<p><strong>MSU Stego</strong>: 用于对 AVI 文件进行隐写\提取操作，介绍见<a href="http://www.compression.ru/video/stego_video/index_en.html" target="_blank" rel="external">官网</a></p>
+<li><p><strong>MSU Stego</strong>: 用于对 AVI 文件进行隐写\提取操作，介绍见<a href="http://www.compression.ru/video/stego_video/index_en.html" target="_blank" rel="external">官网</a></p>
 </li>
-<li>
-<p>其他工具</p>
+</ul>
 <ul>
+<li>其他工具<ul>
 <li><strong>QR Reader</strong>: 用于在 Windows 下进行 QR Code 的扫描，可以自定义参数</li>
 <li><strong>Advanced Archive Password Recovery</strong>: 爆破压缩文档密码</li>
 <li><strong>MD5 解密</strong>: 在线工具，用于解密 MD5 字符串</li>
@@ -208,44 +183,38 @@
 </li>
 </ul>
 <p>有时候分析出来的 flag 经过加密，简单的 Base64、MD5 等不再赘述，<a href="http://www.secbox.cn/hacker/ctf/8078.html" target="_blank" rel="external">这篇博客</a>比较全面地总结了隐写术中用到的加密算法，可以参看。文中还提供了各种加密方式的解密工具。</p>
-<h3 id="补充分析"><a class="markdownIt-Anchor" href="#补充分析"></a> 补充分析</h3>
-<p>一般的隐写术都会使用图种的方式来隐藏信息，有时候通过将木马和图片捆绑，用菜刀去链接图片，然后就可以到达使用webshell提权的作用，但是这种形式有时候也是最容易发现的，如果发现是jpg图片的话，观察文件结束符之后的内容，查看是否附加内容，正常图片都会是FF D9结尾的（如果没有winhex使用sublime也是可以的，去掉文件后缀即可）。</p>
+<h3 id="补充分析"><a href="#补充分析" class="headerlink" title="补充分析"></a>补充分析</h3><p>一般的隐写术都会使用图种的方式来隐藏信息，有时候通过将木马和图片捆绑，用菜刀去链接图片，然后就可以到达使用webshell提权的作用，但是这种形式有时候也是最容易发现的，如果发现是jpg图片的话，观察文件结束符之后的内容，查看是否附加内容，正常图片都会是FF D9结尾的（如果没有winhex使用sublime也是可以的，去掉文件后缀即可）。</p>
 <p>还有一种方式就是使用kali下自带命令行工具binwalk，它可以自动化分析图片中附加的其他的文件，其原理就是检索匹配文件头，常用的一些文件头可以被发现，然后利用偏移配合winhex或者是dd分割出隐藏的部分。</p>
-<h3 id="几种常见的文件头格式"><a class="markdownIt-Anchor" href="#几种常见的文件头格式"></a> 几种常见的文件头格式</h3>
-<p>图片的格式很多，一个图片文件的后缀名并不能说明这个图片的真正格式什么，那么如何获取图片的格式呢？我想到了几个简单但有效的方法，那就是读取图片文件的文件头标识。我们知道各种格式的图片的文件头标识识不同的，因此我们可以通过判断文件头的标识来识别图片格式：</p>
+<h3 id="几种常见的文件头格式"><a href="#几种常见的文件头格式" class="headerlink" title="几种常见的文件头格式"></a>几种常见的文件头格式</h3><p>图片的格式很多，一个图片文件的后缀名并不能说明这个图片的真正格式什么，那么如何获取图片的格式呢？我想到了几个简单但有效的方法，那就是读取图片文件的文件头标识。我们知道各种格式的图片的文件头标识识不同的，因此我们可以通过判断文件头的标识来识别图片格式：</p>
 <ol>
 <li>JPEG/JPG 文件头标识 (2 bytes): FF D8 (SOI) (JPEG 文件标识) - 文件结束标识 (2 bytes): FF D9 (EOI) TGA - 未压缩的前5字节   00 00 02 00 00 - RLE压缩的前5字节   00 00 10 00 00</li>
 <li>PNG - 文件头标识 (8 bytes)   89 50 4E 47 0D 0A 1A 0A</li>
-<li>GIF - 文件头标识 (6 bytes)   47 49 46 38 39(37) 61</li>
-<li>BMP - 文件头标识 (2 bytes)   42 4D</li>
+<li>GIF - 文件头标识 (6 bytes)   47 49 46 38 39(37) 61                      </li>
+<li>BMP - 文件头标识 (2 bytes)   42 4D                       </li>
 <li>PCX - 文件头标识 (1 bytes)   0A</li>
 <li>TIFF - 文件头标识 (2 bytes)  4D 4D 或 49 49</li>
-<li>ICO - 文件头标识 (8 bytes)   00 00 01 00 01 00 20 20</li>
+<li>ICO - 文件头标识 (8 bytes)   00 00 01 00 01 00 20 20 </li>
 <li>CUR - 文件头标识 (8 bytes)   00 00 02 00 01 00 20 20</li>
-<li>IFF - 文件头标识 (4 bytes)   46 4F 52 4D</li>
-<li>ANI - 文件头标识 (4 bytes)   52 49 46 46</li>
+<li>IFF - 文件头标识 (4 bytes)   46 4F 52 4D                        </li>
+<li>ANI - 文件头标识 (4 bytes)   52 49 46 46                         </li>
 </ol>
-<h3 id="几种隐写的方法介绍"><a class="markdownIt-Anchor" href="#几种隐写的方法介绍"></a> 几种隐写的方法介绍</h3>
-<ol>
+<h3 id="几种隐写的方法介绍"><a href="#几种隐写的方法介绍" class="headerlink" title="几种隐写的方法介绍"></a>几种隐写的方法介绍</h3><ol>
 <li>EOI：这是利用处理器的一个漏洞，因为处理器当处理到文件结束标识的时候便不会再继续往下处理了，这之后就可以进行隐写，比如说jpg格式的文件结束标识是FF D9，然而如果其中隐写了压缩包，我们就可以通过winhex之类的工具轻易的看到，这也是一种常用的隐写方式。</li>
 <li>LSB算法：利用最低有效位 ，来隐藏我们的有效信息<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.42.11.png" alt=""></li>
 </ol>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%883.44.10.png" alt=""></p>
-<ol start="3">
+<ol>
 <li>还有一些比如F5隐写之类的就并不是特别的常见了，其实隐写一般都会配合着密码学一起</li>
 </ol>
 <p>看起来隐写术是个非常有趣的智力游戏，涉及密码学、文件格式、编程能力等的综合运用，目前我也仅在入门阶段，上述内容是个极简略极浅显的总结，适用于初学者快速入门，很多内容比如编程解法、Photoshop 解法、视频隐写等均未涉及。</p>
 <hr>
-<h2 id="密码学"><a class="markdownIt-Anchor" href="#密码学"></a> 密码学</h2>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.23.41.png" alt=""></p>
+<h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.23.41.png" alt=""></p>
 <p>上图应该比较清晰的表现了在密码学中的所有加密方式及其分类，可以根据这些点在网上自行查找，其中公钥加密和数字签名我们应该都比较熟悉了，在之前的ssh和中间人攻击都会了解的比较多，其中涉及到的就是非对称加密算法—RSA。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-20%20%E4%B8%8A%E5%8D%889.41.01.png" alt=""></p>
 <p>学过网络的朋友都知道计算机之间的通信需要网络协议，同样的我们使用密码学的一些功能时，也会遵从不同的协议，我们平时用的比较多的应该就是密钥分发（ssh的id_rsa）和身份验证（登陆或者其他…）</p>
-<h3 id="密码分类"><a class="markdownIt-Anchor" href="#密码分类"></a> 密码分类</h3>
-<p>一般来说密码学的分类都会按照古典密码和传统密码去分类，但在这里是通过其方式来分类。</p>
+<h3 id="密码分类"><a href="#密码分类" class="headerlink" title="密码分类"></a>密码分类</h3><p>一般来说密码学的分类都会按照古典密码和传统密码去分类，但在这里是通过其方式来分类。</p>
 <ul>
-<li>代换密码：代换时古典密码中用到的最基本处理技巧。代换就是将明文中的一个字母由其他字母、数字或符号替代
-<ul>
+<li>代换密码：代换时古典密码中用到的最基本处理技巧。代换就是将明文中的一个字母由其他字母、数字或符号替代<ul>
 <li>凯撒密码</li>
 <li><a href="https://baike.baidu.com/item/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81" target="_blank" rel="external">仿射密码</a></li>
 <li>单表代换</li>
@@ -257,15 +226,14 @@
 <li>转轮密码：一种根据代替密码的思路发展起来的早期机电密码，其密码核心部件的线路成转轮状，也称圆盘密</li>
 </ul>
 <hr>
-<h2 id="题外话永恒之蓝"><a class="markdownIt-Anchor" href="#题外话永恒之蓝"></a> 题外话—永恒之蓝</h2>
-<p>永恒之蓝在前段之间非常的火，可能说勒索病毒大家会更加熟悉一点，准确来说WannaCry勒索病毒是在永恒之蓝（永恒之蓝是NSA泄漏的一个Windows SMB远程漏洞利用工具）的基础上开发的蠕虫病毒，它可以自我复制传播。该蠕虫病毒先扫描网络上存在SMB漏洞的Windows机器，然后上传勒索软件到该Windows系统，锁定用户的数据并进行勒索，是一个典型的蠕虫和勒索软件的结合体。所以那段时间我们可以看到：</p>
+<h2 id="题外话—永恒之蓝"><a href="#题外话—永恒之蓝" class="headerlink" title="题外话—永恒之蓝"></a>题外话—永恒之蓝</h2><p>永恒之蓝在前段之间非常的火，可能说勒索病毒大家会更加熟悉一点，准确来说WannaCry勒索病毒是在永恒之蓝（永恒之蓝是NSA泄漏的一个Windows SMB远程漏洞利用工具）的基础上开发的蠕虫病毒，它可以自我复制传播。该蠕虫病毒先扫描网络上存在SMB漏洞的Windows机器，然后上传勒索软件到该Windows系统，锁定用户的数据并进行勒索，是一个典型的蠕虫和勒索软件的结合体。所以那段时间我们可以看到：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-21%20%E4%B8%8B%E5%8D%884.25.39.png" alt=""></p>
 <p>可以说是影响非常的大,但是WannaCry病毒却拥有着一个致命的缺陷，那就是病毒的作者无法明确认定哪些受害者支付了赎金，因此很难给相应的解密密钥，所以用户支付了赎金之后，电脑中的文件也是恢复不了的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/23/大话CTF/" data-id="cjg9k0mf6006q9fbrr0kj0v95" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/23/大话CTF/" data-id="cjgnci0u9006v6vbrd1jccod0" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -277,7 +245,7 @@
 <nav id="article-nav">
   
     <a href="/2017/10/28/CTF-密码学/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           CTF-密码学
@@ -287,7 +255,7 @@
   
   
     <a href="/2017/10/15/TCP-IP-四/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">TCP/IP(四)</div>
     </a>
   
@@ -333,8 +301,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 

@@ -5,17 +5,17 @@
   
   <title>Foundation框架 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="才发现居然没有发上来…这个算是必备技能吧">
+  <meta name="description" content="才发现居然没有发上来….这个算是必备技能吧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Foundation框架">
 <meta property="og:url" content="http://yoursite.com/2017/09/14/Foundation框架/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="才发现居然没有发上来…这个算是必备技能吧">
+<meta property="og:description" content="才发现居然没有发上来….这个算是必备技能吧">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
 <meta property="og:updated_time" content="2018-03-13T16:00:22.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Foundation框架">
-<meta name="twitter:description" content="才发现居然没有发上来…这个算是必备技能吧">
+<meta name="twitter:description" content="才发现居然没有发上来….这个算是必备技能吧">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -41,8 +41,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -106,16 +106,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>才发现居然没有发上来…这个算是必备技能吧</p>
+        <p>才发现居然没有发上来….这个算是必备技能吧</p>
 <a id="more"></a>
-<h1 id="foundation"><a class="markdownIt-Anchor" href="#foundation"></a> Foundation</h1>
-<h2 id="框架"><a class="markdownIt-Anchor" href="#框架"></a> 框架</h2>
-<p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
+<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
 <p>核心三大库：字符串(NSString,NSMutableString)，集合(NSArray,NSMutableArray,键值对：NSDictionary,NSMutableDictionary)，文件(NSFileManager)</p>
 <p>推荐一个网站<a href="opensource.apple.com">苹果所有开源项目的托管网站</a></p>
 <p>学习构造方法和其他方法主要分为五类：增、删、改、查、其他</p>
-<h2 id="单例模式"><a class="markdownIt-Anchor" href="#单例模式"></a> 单例模式</h2>
-<p>1.单例的特点</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>1.单例的特点</p>
 <p>1个类的对象无论在何时何地创建，创建出来的都是同一个对象</p>
 <p>2.无论如何创建对象，都会调用alloc方法来创建对象</p>
 <ul>
@@ -123,7 +120,7 @@
 <li>实际上申请空间，创建对象的事allocWithZone在做</li>
 </ul>
 <p>3.要实现单例模式，也就是重写allocWithZone方法</p>
-<pre class="highlight"><code class="objective-c">+ (instancetype)allocWithZone:(struct _NSZone *)zone{
+<pre><code class="objective-c">+ (instancetype)allocWithZone:(struct _NSZone *)zone{
     static id instance = nil;
   //只有第一次才会创建对象，后面的每一次都是把第一次创建的对象返回
     if( instance == nil ){
@@ -135,7 +132,7 @@
 <p>4.单例模式的规范</p>
 <p>如果类是一个单例模式，要求为类提供一个类方法，来返回这个单例对象</p>
 <p>类方法的名称必须以shared类名；default类名；</p>
-<pre class="highlight"><code class="objective-c">//以Person类为例子
+<pre><code class="objective-c">//以Person类为例子
 + (instancetype)sharedPerson;
 + (instancetype)defaultPerson;
 
@@ -149,10 +146,9 @@
 <p>5.什么时候需要让类变成单例</p>
 <p>比如要做一个游戏的面板的尺寸，如果直接写就把程序写死，宏在程序运行的时候无法更改</p>
 <p>如果程序需要被整个程序共享，将数据以属性的方式存储在单例对象中，也就是说在A类中改了尺寸，B类访问的时候就是那个修改过的，因为只有一个对象。</p>
-<h2 id="nsstring字符串"><a class="markdownIt-Anchor" href="#nsstring字符串"></a> NSString字符串</h2>
-<p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
+<h2 id="NSString字符串"><a href="#NSString字符串" class="headerlink" title="NSString字符串"></a>NSString字符串</h2><p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
 <p>1.构造方法：</p>
-<pre class="highlight"><code class="objective-c">initWithUTF8String: //将C语言字符串转换为OC字符串，因为OC没有输入函数，所以如果要读入字符串要用这种方法转换
+<pre><code class="objective-c">initWithUTF8String: //将C语言字符串转换为OC字符串，因为OC没有输入函数，所以如果要读入字符串要用这种方法转换
 initWithFormat:  //
 initWithContentsOfURL: //
 initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息，先使用 nil//从文件中获取字符串
@@ -167,15 +163,15 @@ initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息�
 <blockquote>
 <p>读取文件：</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">int main(){
+<pre><code class="objective-c">int main(){
     NSError *err;
     NSString *file = [[NSString alloc] initWithContentsOfFile:@&quot;/Users/peterpan/Downloads/MARKDOWN_FORMAT_URLS.txt&quot; encoding:NSUTF8StringEncoding error:&amp;err];
   //如果文件不存在，err中存放的的是错误的信息，如果文件存在，err中就没有数据
   //如果正确，err中就是null也就是0
   //如果出现了错误，err中就会被赋值，它就会指向一个错误的对象
-  	if(!err){
+      if(!err){
     NSLog(@&quot;%@&quot;,file);
-	}
+    }
 }
 //函数参数是值传递，那么参数和外界变量之间没有关系
 //函数参数如果是引用传递，函数内和函数外访问的是同一个变量。
@@ -186,7 +182,7 @@ initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息�
 <blockquote>
 <p><strong>读取URL：</strong></p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">NSError *err;
+<pre><code class="objective-c">NSError *err;
 NSString *html = [[NSString alloc] initWithContentsOfURL:[[NSURL alloc]initWithString:@&quot;http://www.douyu.com&quot;] encoding:4 error:&amp;err];
 if(!err){
         NSLog(@&quot;%@&quot;,html);
@@ -196,24 +192,24 @@ if(!err){
 <p><strong>格式化字符串</strong></p>
 </blockquote>
 <p>就是利用格式生成一个字符串并返回，NSLog就是格式化输出，利用格式生成字符串，直接打印出来</p>
-<pre class="highlight"><code class="objective-c">NSString *x = @&quot;hello&quot;;
+<pre><code class="objective-c">NSString *x = @&quot;hello&quot;;
 NSString *str = [[NSString alloc] initWithFormat:@&quot;%@&quot;,x];
 </code></pre>
 <blockquote>
 <p><strong>转换C语言字符串为OC字符串</strong></p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//写一个输入OC字符串的函数
+<pre><code class="objective-c">//写一个输入OC字符串的函数
 NSString *inputString(){
   char arr[256];
   int length = 0;
   //OC中没有输入函数，要调用C语言中的
   //因为scanf不能识别空格，所以要用getchar
   //getchar()函数，是从输入流中获取一个字符，并返回其ASCII码（字符）
-  while((ch = getchar())!='\n'){
-   		arr[length] = ch;
-    	length++;
-  	}
-  arr[length] = '\0';
+  while((ch = getchar())!=&#39;\n&#39;){
+           arr[length] = ch;
+        length++;
+      }
+  arr[length] = &#39;\0&#39;;
   return [[NSString alloc] initWithUTF8String:arr];
 }
 //最后可以把它封装成一个类的类方法
@@ -226,12 +222,12 @@ NSString *inputString(){
 <p>isEqualToString    返回值是BOOL类型</p>
 <p>compare</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//为了让比较的结果更加的形象,封装一个函数
+<pre><code class="objective-c">//为了让比较的结果更加的形象,封装一个函数
 NSString *NSStringFromBOOL(BOOL isTrue){
   return isTrue ? @&quot;YES&quot; : @&quot;NO&quot;
 }
 </code></pre>
-<pre class="highlight"><code class="objective-c">//compare方法返回的是一个枚举类型
+<pre><code class="objective-c">//compare方法返回的是一个枚举类型
 NSString *s1 = @&quot;123&quot;;
 
 NSComparisonResult res = [s1 compare:@&quot;40&quot;];
@@ -244,13 +240,13 @@ NSLog(@&quot;%ld&quot;, res);
 <blockquote>
 <p>字符串开头结尾判断</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">BOOL pre = [str hasPrefix:@&quot;http://&quot;];   //判断前缀，返回值是BOOL类型
+<pre><code class="objective-c">BOOL pre = [str hasPrefix:@&quot;http://&quot;];   //判断前缀，返回值是BOOL类型
 BOOL res = [str hasSuffix:@&quot;.com&quot;];    //判断结尾，也是BOOl类型的返回值
 </code></pre>
 <blockquote>
 <p>在主串中搜寻子串</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//NSRange结构体
+<pre><code class="objective-c">//NSRange结构体
 typedef struct _NSRange {
     NSUInteger location;   //代表子串在主串中出现的下标，如果没有找到就是最大值
     NSUInteger length;     //代表子串在主串中匹配的长度
@@ -261,14 +257,14 @@ NSRange range = [str rangeOfString:@&quot;j&quot;];
 if(range.location == NSNotFound){
   NSLog(@&quot;没有找到&quot;);   //NSNotFound定义为最大值
 }
-//然后可以通过'range.xxx'来输出我们想要的数据
+//然后可以通过&#39;range.xxx&#39;来输出我们想要的数据
 //改变搜索的顺序
 NSRange range = [str rangeOfString:@&quot;sa&quot; options:NSBackwardsSearch];
 </code></pre>
 <blockquote>
 <p>快速声明，打印一个结构体</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//初始化结构体变量,下面这个方法会返回一个指定属性的结构体变量
+<pre><code class="objective-c">//初始化结构体变量,下面这个方法会返回一个指定属性的结构体变量
 NSRange ran = NSMakeRange(3, 7);
 //将结构体变量转换为一个字符串
 NSLog(@&quot;%@&quot;, NSStringFromRange(ran));
@@ -276,7 +272,7 @@ NSLog(@&quot;%@&quot;, NSStringFromRange(ran));
 <blockquote>
 <p>字符串截取</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//从下标为3的字符开始截取一直到最后
+<pre><code class="objective-c">//从下标为3的字符开始截取一直到最后
 NSString *str1 = [str subStringFromIndex:3];
 //从开始字符截取3个
 NSString *str1 = [str subStringToIndex:3];
@@ -286,20 +282,20 @@ NSString *str1 = [str subStringWithRange:NSMakeRange(2,3)];
 <blockquote>
 <p>字符串的替换</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//将str字符串中的123替换为456,原来的指针指向的字符串的内容是不会改变的，而且替换是全部替换，这个还可以做删除，就是替换为空字符串
+<pre><code class="objective-c">//将str字符串中的123替换为456,原来的指针指向的字符串的内容是不会改变的，而且替换是全部替换，这个还可以做删除，就是替换为空字符串
 str = [str stringByReplacingOccurrencesOfString:@&quot;123&quot; withString:@&quot;456&quot;];
 </code></pre>
 <blockquote>
 <p>字符串类型转换</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">NSString *str = @&quot;12&quot;;
+<pre><code class="objective-c">NSString *str = @&quot;12&quot;;
 //转换为整型，当然也可以转换为浮点数等，但是在转换的时候只有数字才能转换，遇到第一个非数字结束转换
 int num = str.intValue;
 </code></pre>
 <blockquote>
 <p>去掉字符串中的特殊字符</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">NSString *str = @&quot;   as   &quot;;
+<pre><code class="objective-c">NSString *str = @&quot;   as   &quot;;
 //去掉空格
 str = [str stringByTrimmingCharactersInSet:[NSCharacterSet   whitespaceCharacterSet]];
 //去掉大写字符
@@ -310,19 +306,18 @@ str = [str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithChara
 <blockquote>
 <p>大小写转换</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">NSSString *str = @&quot;test&quot;;
+<pre><code class="objective-c">NSSString *str = @&quot;test&quot;;
 str = [str uppercaseString];
 str = [str lowercaseString];
 </code></pre>
-<h2 id="nsmutablestring字符串"><a class="markdownIt-Anchor" href="#nsmutablestring字符串"></a> NSMutableString字符串</h2>
-<blockquote>
+<h2 id="NSMutableString字符串"><a href="#NSMutableString字符串" class="headerlink" title="NSMutableString字符串"></a>NSMutableString字符串</h2><blockquote>
 <p>字符串的恒定性</p>
 </blockquote>
 <p>一旦创建一个字符串对象，那么这个字符串对象的内容就无法更改，我们修改字符串的时候，其实是重新创建了一个字符串对象，所以如果需要频繁的修改一个字符串，可以将其定义为NSMutableString，NSMutableString在父类NSString的基础之上做了扩展，存储在其中的字符串具有可变性，不会新创建对象。</p>
 <blockquote>
 <p>NSMutableString用法</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//直接追加字符串
+<pre><code class="objective-c">//直接追加字符串
 NSMutableString *str = [NSMutableString string];
 [str appendString:@&quot;sasa&quot;];
 //以拼接的方式追加内容
@@ -333,12 +328,11 @@ NSMutableString *str = @&quot;hello&quot;;
 //因为@&quot;hello&quot;是一个NSString对象，子类指针指向父类对象，如果调用子类独有的方法就会运行出错。
 //剩下的因为继承的关系，和NSString的方法一致
 </code></pre>
-<h2 id="nsarray数组"><a class="markdownIt-Anchor" href="#nsarray数组"></a> NSArray数组</h2>
-<p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
+<h2 id="NSArray数组"><a href="#NSArray数组" class="headerlink" title="NSArray数组"></a>NSArray数组</h2><p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
 <blockquote>
 <p>初始化方法</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//通过下面方法创建的数组长度为0，没有意义
+<pre><code class="objective-c">//通过下面方法创建的数组长度为0，没有意义
 NSArray *arr1 = [NSArray new];
 NSArray *arr2 = [NSArray array];
 NSArray *arr3 = [[NSArray alloc] init];
@@ -349,7 +343,7 @@ NSArray *arr = @[@&quot;s&quot;, @&quot;s&quot;]; //这种方式就是上面的�
 <blockquote>
 <p>使用方法</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//可以用下标访问数组中所有的元素,如果下标越界会直接报错
+<pre><code class="objective-c">//可以用下标访问数组中所有的元素,如果下标越界会直接报错
 NSLog(@&quot;%@&quot;, arr[0]);
 //得到元素个数
 arr.count
@@ -365,30 +359,29 @@ arr.firstObject
 <blockquote>
 <p>遍历方法</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//通常遍历方法
+<pre><code class="objective-c">//通常遍历方法
 for(int i = 0;i &lt; arr.count;i++)
 //迭代遍历法，迭代变量的类型和数组元素的类型保持一致
 for(NSString *str in arr)
 //使用block遍历,可以在代码块中进行自定义的输出，idx是下标，如果想停止遍历，就将stop指针指向YES
   [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSLog(@&quot;%@&quot;, obj);
-    	if(idx==2)
+        if(idx==2)
           *stop = YES;
     }];
 </code></pre>
 <blockquote>
 <p>字符串与数组</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//将数组元素和字符串连接起来
+<pre><code class="objective-c">//将数组元素和字符串连接起来
 NSString *str =  [arr componentsJoinedByString:@&quot;#&quot;];
 //将字符串转换为数组,以‘,’作为分隔
 NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];
 </code></pre>
-<h2 id="nsmutablearray数组"><a class="markdownIt-Anchor" href="#nsmutablearray数组"></a> NSMutableArray数组</h2>
-<p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
+<h2 id="NSMutableArray数组"><a href="#NSMutableArray数组" class="headerlink" title="NSMutableArray数组"></a>NSMutableArray数组</h2><p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
 <p>数组的创建可以参考NSSMutableArray</p>
 <p>可变数组添加元素的方法</p>
-<pre class="highlight"><code class="objective-c">NSMutableArray *arr = [NSMutableArray new];
+<pre><code class="objective-c">NSMutableArray *arr = [NSMutableArray new];
 [arr addObject:@&quot;test&quot;];
 //将另一个数组作为可变数组的一个元素
 [arr addObject:arr1];
@@ -407,14 +400,13 @@ NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];
 //删除所有元素
 [arr removeAllObjects];
 </code></pre>
-<h2 id="nsnumber"><a class="markdownIt-Anchor" href="#nsnumber"></a> NSNumber</h2>
-<p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
+<h2 id="NSNumber"><a href="#NSNumber" class="headerlink" title="NSNumber"></a>NSNumber</h2><p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
 <blockquote>
 <p>基本数据类型存储到数组中的步骤</p>
 </blockquote>
 <p>1.先将基本数据类型包装到NSNumber对象中</p>
 <p>2.将NSNumber对象存储到NSArray数组中</p>
-<pre class="highlight"><code class="objective-c">NSNumber *number = [NSNumber numberWithFloat:10.1f];
+<pre><code class="objective-c">NSNumber *number = [NSNumber numberWithFloat:10.1f];
 NSArray *arr = @[number];
 //简写方式
 NSNumber *number1 = @10;
@@ -424,22 +416,20 @@ NSArray *arr1 = @[@10,@20,@30];
 int num  = 10;
 NSNumber *number2 = @(num);
 </code></pre>
-<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
-<p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
-<pre class="highlight"><code class="objective-c">NSArray *arr = @[@&quot;test&quot;, @10];
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
+<pre><code class="objective-c">NSArray *arr = @[@&quot;test&quot;, @10];
 [arr writeToFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];
 </code></pre>
 <p>然后下次想要调用的时候就可以直接从plist文件中读取：</p>
-<pre class="highlight"><code class="objective-c">NSArray *arr = [NSArray arrayWithContentsOfFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];
+<pre><code class="objective-c">NSArray *arr = [NSArray arrayWithContentsOfFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];
 </code></pre>
-<h2 id="nsdictionary"><a class="markdownIt-Anchor" href="#nsdictionary"></a> NSDictionary</h2>
-<p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
+<h2 id="NSDictionary"><a href="#NSDictionary" class="headerlink" title="NSDictionary"></a>NSDictionary</h2><p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
 <p>存储数据的时候，要为存储的数据取一个别名，用来确定这个别名对应的数据。</p>
-<p>这种存储数据的方式就叫做键值对的存储方式</p>
+<p>这种存储数据的方式就叫做键值对的存储方式 </p>
 <blockquote>
 <p>创建字典数组</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//如果只是简单初始化，此时字典数组中没有任何元素，没有意义
+<pre><code class="objective-c">//如果只是简单初始化，此时字典数组中没有任何元素，没有意义
 NSDictionary *dict = [NSDictionary new];
 //一般创建方式
 NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;jack&quot;,@&quot;name&quot;,@&quot;北京市&quot;,@&quot;address&quot;, nil];
@@ -452,13 +442,13 @@ NSDictionary *dict = @{@&quot;name&quot;:@&quot;jack&quot;,@&quot;age&quot;:@&qu
 <p>1.以键值对的形式存储数据</p>
 <p>2.字典数组一旦创建，其中的元素不能动态的新增和删除</p>
 <p>3.键：只能是遵守了NSCoping协议的对象,而NSString就是遵守了这个协议</p>
-<p>值：只能是OC对象</p>
+<p>   值：只能是OC对象</p>
 <p>4.当往字典数组中存入一个键值对的时候，并不是按照顺序挨个存储，而是根据键和数组的长度做一个哈希算法算出一个下标，再将这个键值对存入这个下标对应的空间。</p>
 <p>5.取值的时候，也可以通过键做一个哈希算法，算出下标，然后直接找到对应的数据取出即可</p>
 <blockquote>
 <p>字典数组的使用</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//取出存储在字典数组中的数据
+<pre><code class="objective-c">//取出存储在字典数组中的数据
 //使用中括弧的方式
 NSLog(@&quot;%@&quot;,dict[@&quot;name&quot;]);
 //使用字典数组对象的方法,如果给定的key在数组中不存在，取到的值就是nil，不会报错
@@ -470,7 +460,7 @@ dict.count
 <blockquote>
 <p>字典的遍历</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//这样方法遍历出来的是字典中所有的键
+<pre><code class="objective-c">//这样方法遍历出来的是字典中所有的键
 for(id item in dict){
   NSLog(@&quot;%@ = %@&quot;, item, dict[item]);
 }
@@ -480,10 +470,9 @@ for(id item in dict){
     }];
 </code></pre>
 <p><strong>和NSArray对比，存储数据的效率是NSArray更高，不需要进行计算；在取数据的时候，如果是全部取出来，也是NSArray的效率更高，但是如果是取出指定的几个的数据，就是NSDictionary了，因为不需要遍历。</strong></p>
-<h2 id="nsmutabledictionary"><a class="markdownIt-Anchor" href="#nsmutabledictionary"></a> NSMutableDictionary</h2>
-<p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
+<h2 id="NSMutableDictionary"><a href="#NSMutableDictionary" class="headerlink" title="NSMutableDictionary"></a>NSMutableDictionary</h2><p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
 <p>新增和删除键值对</p>
-<pre class="highlight"><code class="objective-c">//新增，如果添加的键有重复，后添加的就会覆盖原有的
+<pre><code class="objective-c">//新增，如果添加的键有重复，后添加的就会覆盖原有的
 [dict setObject:@&quot;jack&quot; forKey:@&quot;name&quot;];
 //删除所有键值对
 [dict removeAllObjects];
@@ -491,20 +480,18 @@ for(id item in dict){
 [dict removeObjectForKey:@&quot;age&quot;];
 </code></pre>
 <p>字典数组的持久化</p>
-<pre class="highlight"><code class="objective-c">[dict writeToFile:@&quot;/Users/peterpan/Downloads/dict.plist&quot; atomically:NO];
+<pre><code class="objective-c">[dict writeToFile:@&quot;/Users/peterpan/Downloads/dict.plist&quot; atomically:NO];
 //从plist文件中读取
 NSDictionary *dict = [NSDictionary dictWithContentsOfFile@&quot;/Users/peterpan/Downloads/dict.plist&quot;];
 </code></pre>
-<h2 id="集合的内存管理"><a class="markdownIt-Anchor" href="#集合的内存管理"></a> 集合的内存管理</h2>
-<p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
+<h2 id="集合的内存管理"><a href="#集合的内存管理" class="headerlink" title="集合的内存管理"></a>集合的内存管理</h2><p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
 <p>2.使用@[]或@{}创建的集合是已经被autorelease过的，直接调用和类同名的类方法创建的对象也是。</p>
 <p>3.在ARC的模式下，集合的元素是一个强类型的指针。</p>
-<h2 id="nsfilemanager"><a class="markdownIt-Anchor" href="#nsfilemanager"></a> NSFileManager</h2>
-<p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
-<pre class="highlight"><code class="objective-c">NSFileManager *manager = [NSFileManager defaultManager];
+<h2 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h2><p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
+<pre><code class="objective-c">NSFileManager *manager = [NSFileManager defaultManager];
 </code></pre>
 <p>常用判断方法：</p>
-<pre class="highlight"><code class="objective-c">//判断文件夹或文件是否存在,返回值为BOOL类型
+<pre><code class="objective-c">//判断文件夹或文件是否存在,返回值为BOOL类型
 [manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot;];
 //判断指定的路径是否真实存储在我们的磁盘上，并且判断这个路径是一个文件夹还是文件
 BOOL flag = NO;
@@ -518,7 +505,7 @@ BOOL flag = NO;
 [manager isDeletableFilePath:@&quot;/Users/peterpan/test.py&quot;];
 </code></pre>
 <p>常用获取信息方法：</p>
-<pre class="highlight"><code class="objective-c">//拿到这个文件的属性信息，可以通过key拿到指定信息
+<pre><code class="objective-c">//拿到这个文件的属性信息，可以通过key拿到指定信息
 [manager attributesOfItemAtPath:@&quot;/Users/peterpan/test.py&quot; error:nil];
 NSLog(@&quot;%@&quot;, dict[NSFileSize]);
 //获取指定目录下所有的文件和目录，包括子目录的子目录...
@@ -527,7 +514,7 @@ NSArray *arr = [manager subpathAtPath:@&quot;/Users/peterpan&quot;];
 NSArray *arr = [manager contentsOfFileAtPath:@&quot;／Users/mac/Desktop&quot;];
 </code></pre>
 <p>常用操控方法：</p>
-<pre class="highlight"><code class="objective-c">//存储在磁盘上的任何文件都是以二进制的形式存储的
+<pre><code class="objective-c">//存储在磁盘上的任何文件都是以二进制的形式存储的
 //第二个参数是文件的内容，要求是文件的二进制内容,第三个参数可以自定义文件的属性
 //NSData对象就是专门用来保护二进制数据的
 NSString *str1 = @&quot;saaasaxas&quot;;
@@ -544,60 +531,55 @@ NSString *str1 = @&quot;saaasaxas&quot;;
 [manager removeItemAtPath:@&quot;xxx&quot; error:nil];
 </code></pre>
 <p>示例：</p>
-<pre class="highlight"><code class="objective-c">while(1){
-	NSFileManager *manager = [NSManager defaultManager];
-	NSString *path = @&quot;/Users/peterpan/Desktop&quot;
-	NSArray *arr = [manager contentsOfFileDirectoryAtPath:path error:nil];
-	if(arr.count &gt; 0){
-		for(NSString *str in arr){
-          	NSString *str1 = [NSString stringWithFormat:@&quot;%@%@&quot;, path,str];
-  			if([manager isDeletableFileAtPath:str])
+<pre><code class="objective-c">while(1){
+    NSFileManager *manager = [NSManager defaultManager];
+    NSString *path = @&quot;/Users/peterpan/Desktop&quot;
+    NSArray *arr = [manager contentsOfFileDirectoryAtPath:path error:nil];
+    if(arr.count &gt; 0){
+        for(NSString *str in arr){
+              NSString *str1 = [NSString stringWithFormat:@&quot;%@%@&quot;, path,str];
+              if([manager isDeletableFileAtPath:str])
               [manager removeItemAtPath:str1 error:nil];
-		}
-	}
+        }
+    }
   NSLog(@&quot;扫描完成&quot;);
   //CPU暂停指定的时间
   [NSThread sleepForTimeInterval:10];
 }
 </code></pre>
-<h2 id="cgpoint"><a class="markdownIt-Anchor" href="#cgpoint"></a> CGPoint</h2>
-<p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
+<h2 id="CGPoint"><a href="#CGPoint" class="headerlink" title="CGPoint"></a>CGPoint</h2><p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
 <p>CGPoint和NSPoint是同一个结构体，只不过定义了两个名字。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//最常用方式
+<pre><code class="objective-c">//最常用方式
 CGPoint p1 = CGPointMake(20, 30);
 </code></pre>
-<h2 id="cgsize"><a class="markdownIt-Anchor" href="#cgsize"></a> CGSize</h2>
-<p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
+<h2 id="CGSize"><a href="#CGSize" class="headerlink" title="CGSize"></a>CGSize</h2><p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
 <p>NSSize和CGSize也是同一个结构体，只不过定义了两个名称</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//最常用方式
+<pre><code class="objective-c">//最常用方式
 CGSize *s1 = CGSizeMake(20,20);
 </code></pre>
-<h2 id="cgrect"><a class="markdownIt-Anchor" href="#cgrect"></a> CGRect</h2>
-<p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
+<h2 id="CGRect"><a href="#CGRect" class="headerlink" title="CGRect"></a>CGRect</h2><p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
 <p>NSRect和CGRect同样也是一个结构体，定义了两个名称。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
-<pre class="highlight"><code class="objective-c">//最常用方式
+<pre><code class="objective-c">//最常用方式
 CGRect *r1 = CGRectMake(10 ,20 ,30 ,40);
 </code></pre>
-<h2 id="nsvalue"><a class="markdownIt-Anchor" href="#nsvalue"></a> NSValue</h2>
-<p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
-<pre class="highlight"><code class="objective-c">CGPoint *p1 = CGPointMake(20, 30);
+<h2 id="NSValue"><a href="#NSValue" class="headerlink" title="NSValue"></a>NSValue</h2><p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
+<pre><code class="objective-c">CGPoint *p1 = CGPointMake(20, 30);
 //下面代码还可以改成valueWithSize等等结构体
 NSValue *v1 = [NSValue valueWithPoint:p1];
 //v1的属性都存放在sizeValue之中
 NSLog(@&quot;%@&quot;, NSStringFromPoint(v1.sizeValue));
 </code></pre>
-<h2 id="字符串和日期转换"><a class="markdownIt-Anchor" href="#字符串和日期转换"></a> 字符串和日期转换</h2>
-<p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
-<pre class="highlight"><code class="objective-c">NSDate *date = [NSDate new];
+<h2 id="字符串和日期转换"><a href="#字符串和日期转换" class="headerlink" title="字符串和日期转换"></a>字符串和日期转换</h2><p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
+<pre><code class="objective-c">NSDate *date = [NSDate new];
 NSDateFormatter *formatter = [NSDateFormatter new];
 //代表显示年月日十分秒
 formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;
@@ -606,22 +588,20 @@ NSString *str = [formatter stringFromDate:date];
 NSLog(@&quot;%@&quot;, str);
 </code></pre>
 <p>将字符串转换为时间</p>
-<pre class="highlight"><code class="objective-c">NSString *str = @&quot;2016-09-27 12:12:12&quot;;
+<pre><code class="objective-c">NSString *str = @&quot;2016-09-27 12:12:12&quot;;
 NSDateFormatter *formatter = [NSDateFormatter new];
 formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;
 NSDate *date = [formatter dateFromString:str];
 </code></pre>
-<h2 id="日期计算"><a class="markdownIt-Anchor" href="#日期计算"></a> 日期计算</h2>
-<p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
-<pre class="highlight"><code class="objective-c">//获取的默认是零时区的时间，到东八区的时间就是加八个小时
+<h2 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h2><p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
+<pre><code class="objective-c">//获取的默认是零时区的时间，到东八区的时间就是加八个小时
 NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5000];
 //求两个时间之差
 NSDate *date1 = [NSDate new];
 NSDate *date2 = [NSDate new];
 double res = [date1 timeIntervalSinceDate:date2];
 </code></pre>
-<h2 id="得到日期对象的各个部分"><a class="markdownIt-Anchor" href="#得到日期对象的各个部分"></a> 得到日期对象的各个部分</h2>
-<pre class="highlight"><code class="objective-c">NSDate *date = [NSDate date];
+<h2 id="得到日期对象的各个部分"><a href="#得到日期对象的各个部分" class="headerlink" title="得到日期对象的各个部分"></a>得到日期对象的各个部分</h2><pre><code class="objective-c">NSDate *date = [NSDate date];
 //创建一个日历对象，可以从日历对象中取到日期的各个部分
 NSCalendar *calendar = [NSCalendar currentCalendar];
 NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];
@@ -632,7 +612,7 @@ NSLog(@&quot;%lu&quot;, com.year);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/14/Foundation框架/" data-id="cjg9k0mco001m9fbr829w6x12" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/14/Foundation框架/" data-id="cjgnci0rg001k6vbr05ly7q0q" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
@@ -644,7 +624,7 @@ NSLog(@&quot;%lu&quot;, com.year);
 <nav id="article-nav">
   
     <a href="/2017/09/17/CTF-隐写术/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           CTF-信息隐藏技术
@@ -654,7 +634,7 @@ NSLog(@&quot;%lu&quot;, com.year);
   
   
     <a href="/2017/09/03/TCP-IP-三/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">TCP/IP(三)</div>
     </a>
   
@@ -700,8 +680,8 @@ NSLog(@&quot;%lu&quot;, com.year);
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>97</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>89</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>98</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>90</strong><br>分类</div></a>
       <a href="/tags"><div><strong>14</strong><br>标签</div></a>
     </div>
 
