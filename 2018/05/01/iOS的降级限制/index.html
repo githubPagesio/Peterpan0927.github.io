@@ -13,7 +13,7 @@
 <meta property="og:description" content="What if we can go back to the past?">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-01%20%E4%B8%8B%E5%8D%882.06.05.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-01%20%E4%B8%8B%E5%8D%882.37.14.png">
-<meta property="og:updated_time" content="2018-05-01T07:22:20.908Z">
+<meta property="og:updated_time" content="2018-05-01T08:33:34.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS的降级限制">
 <meta name="twitter:description" content="What if we can go back to the past?">
@@ -124,11 +124,17 @@
 <p>先上一张图再说，之前说了刷机的一些事情，和这个密切相关的就是iOS的系统完整性校验了，了解的也不是很多，简单的说一下。</p>
 <p>苹果的系统完整性校验主要包括：bootloaders, kernel, kernel extensions, and baseband firmware.Boot ROM先启动，里面内置了Root CA public key，然后验证  Low-Level Bootloader (LLB) ，LLB是苹果签名的.  LLB 又去验证next-stage bootloader, iBoot, iboot验证kernel.如果上述有验证的某个环节没通过，手机会显示 “Connect to iTunes” .越狱的朋友深有体会。其实就是进入了 recovery mode.。如果Boot ROM 加载或者验证LLB都失败了，那就进入了 DFU (Device Firmware Upgrade) mode.</p>
 <p>在这个模式下可以允许你的苹果设备在没有加载操作系统或导入加载程序的情况下连接<code>iTunes</code>。玩越狱的应该都知道如果恢复模式也崩了，就只能祭出DFU了(我之前的手机中文库就崩了…)。</p>
+<h1 id="0x04补充-amp-参考博客"><a href="#0x04补充-amp-参考博客" class="headerlink" title="0x04补充&amp;参考博客"></a>0x04补充&amp;参考博客</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>因为安全知识点比较零散，为了防止之后忘记，但是点又不长不方便开一篇文章，所以就在普通博客中偶尔插播一下，这里补充一个防止<code>tweak</code>依附的方式，之前看到过。</p>
+<p>就是通过<code>__RESTRICT</code>字段来完成的，在这种情况下我们会发现不管是动态调试还是dylib的注入都会失败，破解的方式也很简单，我直接用<code>Hex Friend</code>修改掉里面所有的这种字段，那么就不会忽略掉我们的<code>DYLD_INSERT_LIBRARIES</code>了，但是这样相当于做了一个静态<code>patch</code>，签名失效，所以我们要么逆向修改掉签名校验，要么偷懒直接使用<code>AppSync</code>禁用掉所有App的签名校验。</p>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
+<li><a href="http://iosre.com/t/tweak-app-app-tweak/438" target="_blank" rel="external">snakeninny的技术分享</a></li>
+<li><a href="https://bbs.pediy.com/thread-174935.htm" target="_blank" rel="external">iOS安全团队对iOS安全的认识</a></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/01/iOS的降级限制/" data-id="cjgnci0tl00556vbrnbuoz3fk" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2018/05/01/iOS的降级限制/" data-id="cjgnci0tl00556vbrnbuoz3fk" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -141,7 +147,7 @@
   
   
     <a href="/2018/04/21/记一次成功的Mac逆向/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">记一次成功的Mac逆向</div>
     </a>
   
