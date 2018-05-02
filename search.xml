@@ -3,6 +3,75 @@
   
     
     <entry>
+      <title><![CDATA[Mach-O中的lazy-binding探究]]></title>
+      <url>/2018/05/02/Mach-O%E4%B8%AD%E7%9A%84lazy-binding%E6%8E%A2%E7%A9%B6/</url>
+      <content type="html"><![CDATA[<p>实践出真知，让我自己动手去验证动态库加载的特性吧</p>
+<a id="more"></a>
+<h1 id="一个有趣的现象"><a href="#一个有趣的现象" class="headerlink" title="一个有趣的现象"></a>一个有趣的现象</h1><pre><code class="c">#include&lt;stdio.h&gt;
+int main(){
+  printf(&quot;Hello world!\n&quot;);
+  printf(&quot;2Hello world\n&quot;);
+  return 0;
+}
+</code></pre>
+<p>首先通过IDA找到我们调用打印函数的地址，然后在对应的地方下断点：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.09.38.png" alt="IDA分析"></p>
+<p>接下来我们在命令行中打开lldb，对可执行文件进行分析：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.12.38.png" alt="lldb分析"></p>
+<p>我们看到没有偏移，那么直接根据IDA中的地址下断点即可：</p>
+<pre><code class="shell">br s -a 0000000100000F48
+br s -a 0000000100000F59
+</code></pre>
+<p>然后启动程序，我们发现调用<code>printf</code>函数跳到了一个地方：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.16.14.png" alt="第一次printf"></p>
+<p>这个地方跳转的地址是从我们的Mach-O的<code>_DATA,__la_symbol_ptr</code>中得到的：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.18.08.png" alt="lazy_pointer"></p>
+<p>我们通过查看那个地址也可以得到一样的值：</p>
+<pre><code class="shell">(lldb) x 0x100001010
+0x100001010: 84 0f 00 00 01 00 00 00 00 00 00 00 00 00 00 00  ................
+0x100001020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+</code></pre>
+<p>但是这个其实不是真正的地址，通过第二次调用<code>printf</code>函数的时候我们可以发现，值居然是不同的：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png" alt="第二次printf"></p>
+<p>那么为什么两次调用相同的函数最后实际上是跳转到不同的代码片段呢？这就和我们的延迟绑定有关了，也就是接下来介绍的内容，为什么会有这样的设定。</p>
+<h1 id="lazy-binding"><a href="#lazy-binding" class="headerlink" title="lazy-binding"></a>lazy-binding</h1><p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
+<p>造成这个的主要原因就是动态链接对于全局和静态数据要进行复杂的GOT（全局偏移表）定位，然后间接寻址，模块间的调用也是如此，而且因为这个链接的过程是动态的，动态链接器会寻找并转载所需要的对象，然后进行符号查找和地址重定位，这个技术的实现步骤是：</p>
+<ol>
+<li>建立一个GOT.plt表，该表存放全局函数的实际地址，但在一开始的时候，里面存放的只是一个跳转</li>
+<li>对于每个全局函数，链接器生成一个与之对应的影子函数</li>
+<li>所有对于原函数的调用，都变成对于影子函数的调用，而影子函数形如：</li>
+</ol>
+<pre><code class="assembly">fun@plt:
+jmp *(fun@got.plt)
+push index
+jmp _init
+</code></pre>
+<p>第一条语句去got.plt中去拿函数的真实地址，如果是第一次调用的话，got.plt中存放的就是fun@plt的第二条指令，也就是说第一次调用的时候，第一条语句什么也没做，就是接着往下执行，而第二条指令则是将当前函数在got.plt的编号给push进行，然后再进行重定位，将结果写进got.plt。</p>
+<p>上述的是ELF文件的延迟绑定实现，在Mach-O中也差不多，只是具体的实现不同，原理是一样的，在Mach-O中，是通过<code>__stub_helper</code>来进行延迟绑定的，也可以通过MachOView来观察：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png" alt="_stub_helper"></p>
+<p>同时我们还可以在延迟绑定的info中看到<code>_printf</code>，所以这也解释了上面为什么两次调用相同的函数，跳转的地址却不一样，因为一开始根本计算没有真实函数地址，只是一个跳转罢了。</p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
+<li><a href="https://bbs.pediy.com/thread-208455.htm" target="_blank" rel="external">看雪-动态链接的简单分析</a></li>
+<li><a href="http://yunnigu.dropsec.xyz/2017/02/24/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" target="_blank" rel="external">延迟绑定技术原理</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 特性探究 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Re </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS的降级限制]]></title>
       <url>/2018/05/01/iOS%E7%9A%84%E9%99%8D%E7%BA%A7%E9%99%90%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>What if we can go back to the past?</p>
@@ -23,7 +92,7 @@
 <p>苹果的系统完整性校验主要包括：bootloaders, kernel, kernel extensions, and baseband firmware.Boot ROM先启动，里面内置了Root CA public key，然后验证  Low-Level Bootloader (LLB) ，LLB是苹果签名的.  LLB 又去验证next-stage bootloader, iBoot, iboot验证kernel.如果上述有验证的某个环节没通过，手机会显示 “Connect to iTunes” .越狱的朋友深有体会。其实就是进入了 recovery mode.。如果Boot ROM 加载或者验证LLB都失败了，那就进入了 DFU (Device Firmware Upgrade) mode.</p>
 <p>在这个模式下可以允许你的苹果设备在没有加载操作系统或导入加载程序的情况下连接<code>iTunes</code>。玩越狱的应该都知道如果恢复模式也崩了，就只能祭出DFU了(我之前的手机中文库就崩了…)。</p>
 <h1 id="0x04补充-amp-参考博客"><a href="#0x04补充-amp-参考博客" class="headerlink" title="0x04补充&amp;参考博客"></a>0x04补充&amp;参考博客</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>因为安全知识点比较零散，为了防止之后忘记，但是点又不长不方便开一篇文章，所以就在普通博客中偶尔插播一下，这里补充一个防止<code>tweak</code>依附的方式，之前看到过。</p>
-<p>就是通过<code>__RESTRICT</code>字段来完成的，在这种情况下我们会发现不管是动态调试还是dylib的注入都会失败，破解的方式也很简单，我直接用<code>Hex Friend</code>修改掉里面所有的这种字段，那么就不会忽略掉我们的<code>DYLD_INSERT_LIBRARIES</code>了，但是这样相当于做了一个静态<code>patch</code>，签名失效，所以我们要么逆向修改掉签名校验，要么偷懒直接使用<code>AppSync</code>禁用掉所有App的签名校验。</p>
+<p>就是通过<code>__RESTRICT</code>字段来完成的，在这种情况下我们会发现不管是动态调试还是dylib的注入都会失败，破解的方式也很简单，我直接用<code>Hex Friend</code>修改掉里面所有的这种字段，<code>dyld</code>找不到这种字段，那么动态链接器就不会忽略掉我们的<code>DYLD_INSERT_LIBRARIES</code>了，但是这样相当于做了一个静态<code>patch</code>，签名失效，所以我们要么逆向修改掉签名校验，要么偷懒直接使用<code>AppSync</code>禁用掉所有App的签名校验。</p>
 <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
 <li><a href="http://iosre.com/t/tweak-app-app-tweak/438" target="_blank" rel="external">snakeninny的技术分享</a></li>
 <li><a href="https://bbs.pediy.com/thread-174935.htm" target="_blank" rel="external">iOS安全团队对iOS安全的认识</a></li>
