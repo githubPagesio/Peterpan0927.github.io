@@ -1,119 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Linux运维学习Day1 | Peterpan&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一天首先了解一下Linux命令的基本格式&amp;amp;操作系统和软硬件之间的联系">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux运维学习Day1">
-<meta property="og:url" content="http://yoursite.com/2017/08/15/Linux运维学习Day1/index.html">
-<meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="第一天首先了解一下Linux命令的基本格式&amp;amp;操作系统和软硬件之间的联系">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/98C2E462-1760-4807-95AB-C670BD50E5D7.png">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/42447C4B-1C85-474A-A30A-7455CAB83C5F.png">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/4CD429FD-7601-40BB-9A58-97A3325527F1.png">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/D17B61C5-27E4-4EB8-BC85-CB13DB90C69E.png">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/29C178A5-18B9-4BD9-984F-2734274B6873.png">
-<meta property="og:image" content="http://omg5mjb8v.bkt.clouddn.com/F6B36FE5-F16B-4E20-9A81-AA322D95732A.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%20%E4%B8%8A%E5%8D%889.00.38.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%20%E4%B8%8A%E5%8D%889.14.55.png">
-<meta property="og:updated_time" content="2018-03-13T16:00:22.860Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux运维学习Day1">
-<meta name="twitter:description" content="第一天首先了解一下Linux命令的基本格式&amp;amp;操作系统和软硬件之间的联系">
-<meta name="twitter:image" content="http://omg5mjb8v.bkt.clouddn.com/98C2E462-1760-4807-95AB-C670BD50E5D7.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/p1.png">
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
-  
+	
+	<title>Linux运维学习Day1</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
 
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
-    <h2 class="author">Peter pan</h2>
-    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>99</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>91</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-    </ul>
-  </div>
+
+
+<h2 class="title">Linux运维学习Day1</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年8月15日
+
+
+    <a class="article-category-link" href="/categories/基础预备知识/">基础预备知识</a>
+
+
+
+ </div>
+--->
 </div>
 
-        <section id="main"><article id="post-Linux运维学习Day1" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/15/Linux运维学习Day1/" class="article-date">
-  <time class="post-time" datetime="2017-08-15T11:25:52.000Z" itemprop="datePublished">
-    <span class="post-month">8月</span><br/>
-    <span class="post-day">15</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Linux运维学习Day1
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础预备知识/">基础预备知识</a>
-  </div>
-
-          
-              
-  &nbsp; | &nbsp;
-  <div class="view-box">
-    <span id="/2017/08/15/Linux运维学习Day1/" class="leancloud_visitors" data-flag-title="Linux运维学习Day1">
-      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
-    </span>
-  </div>
-
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一天首先了解一下Linux命令的基本格式&amp;操作系统和软硬件之间的联系</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day1"><span class="toc-text">Linux运维学习Day1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux命令的格式："><span class="toc-text">Linux命令的格式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ls命令-list的简写-：列出当前目录下的文件和文件夹"><span class="toc-text">ls命令(list的简写)：列出当前目录下的文件和文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwd命令"><span class="toc-text">pwd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cd命令"><span class="toc-text">cd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clear命令"><span class="toc-text">clear命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tab命令"><span class="toc-text">tab命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#touch命令"><span class="toc-text">touch命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#more命令"><span class="toc-text">more命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat命令"><span class="toc-text">cat命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建和删除文件夹"><span class="toc-text">创建和删除文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令查询"><span class="toc-text">命令查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通配标识符"><span class="toc-text">通配标识符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#通过通配标识符可以对文件进行快速查找："><span class="toc-text">通过通配标识符可以对文件进行快速查找：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管道"><span class="toc-text">管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软链接和硬链接"><span class="toc-text">软链接和硬链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文本搜索命令"><span class="toc-text">文本搜索命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件搜索命令"><span class="toc-text">文件搜索命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝文件和移动文件"><span class="toc-text">拷贝文件和移动文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重命名"><span class="toc-text">重命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#压缩和解压缩（-gz格式）"><span class="toc-text">压缩和解压缩（.gz格式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如果是-bz2格式的，只需要把参数里面的’z’改成’j’即可，其余不变。"><span class="toc-text">如果是.bz2格式的，只需要把参数里面的’z’改成’j’即可，其余不变。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果是zip格式的："><span class="toc-text">如果是zip格式的：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索命令"><span class="toc-text">搜索命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与系统相关的命令"><span class="toc-text">与系统相关的命令</span></a></li></ol></li></ol>
+<p>第一天首先了解一下Linux命令的基本格式&amp;操作系统和软硬件之间的联系</p>
 <a id="more"></a>
 <h1 id="Linux运维学习Day1"><a href="#Linux运维学习Day1" class="headerlink" title="Linux运维学习Day1"></a>Linux运维学习Day1</h1><h2 id="Linux命令的格式："><a href="#Linux命令的格式：" class="headerlink" title="Linux命令的格式："></a>Linux命令的格式：</h2><pre><code class="shell">  command [-option] [parameters] ...
   e.g-&gt;mike@mike:~$ ls -a /home/mike
@@ -246,304 +180,30 @@ unzip -d 解压缩后目录（如果没有则创建） 压缩文件  #解压文�
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%20%E4%B8%8A%E5%8D%889.00.38.png" alt=""></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%20%E4%B8%8A%E5%8D%889.14.55.png" alt=""></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/15/Linux运维学习Day1/" data-id="cjgopnnqz001r99br3gwswyli" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/08/15/Linux运维学习Day2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux运维学习Day2
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/08/13/缓存服务器和一致性哈希/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">缓存服务器和一致性哈希</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
-    <h2 class="blog-subtitle">Mind over muscle.</h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
-    <h2 class="author">Peter pan</h2>
-    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>99</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>91</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>14</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>友情链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
-          Jin
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
-          Yinwang(English)
-        </a>
-      
-        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
-          Yinwang(Chinese)
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2017 - 2018 Peter pan<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-  <script src="/plugin/galmenu/GalMenu.js"></script>
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/about" title="" class="menuItem">音乐</a>
-          
-            <a href="/archives" title="" class="menuItem">归档</a>
-          
-            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
-          
-            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
+<!--<a href="http://yoursite.com/2017/08/15/Linux运维学习Day1/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-<script src="/js/script.js"></script>
-
-
-
-
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz", "xDGMWtxNt0aReJDVkuYmSqBd");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.article-title').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
 
 
 
-  </div>
+
 </body>
 </html>
