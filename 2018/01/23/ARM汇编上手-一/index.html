@@ -1,53 +1,190 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>ARM汇编上手</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/01/23/ARM汇编上手-一/">
+    
+    
+    <title>ARM汇编上手 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="汇编">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>ARM汇编上手</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">ARM汇编上手</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-23T03:35:13.000Z" itemprop="datePublished" class="page-time">
+  2018-01-23
+</time>
 
 
-<h2 class="title">ARM汇编上手</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2018年1月23日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/汇编语言/">汇编语言</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/汇编语言/">汇编语言</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CISC和RISC"><span class="toc-text">CISC和RISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load-store体系结构"><span class="toc-text">load-store体系结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初识ARM"><span class="toc-text">初识ARM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大端和小端"><span class="toc-text">大端和小端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARM中的寄存器"><span class="toc-text">ARM中的寄存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt=""></p>
+
+<div class="container body-wrap">
+    <article id="post-ARM汇编上手-一"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">ARM汇编上手</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-23 11:35:13" datetime="2018-01-23T03:35:13.000Z"  itemprop="datePublished">2018-01-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/汇编语言/">汇编语言</a></li></ul>
+
+
+
+            
+	<span id="/2018/01/23/ARM汇编上手-一/" class="leancloud_visitors" data-flag-title="ARM汇编上手" title="ARM汇编上手">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/01/23/ARM汇编上手-一/#comment">
+            <span class="valine-comment-count" data-xid="/2018/01/23/ARM汇编上手-一/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt=""></p>
 <p>今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。</p>
 <a id="more"></a>
 <h1 id="CISC和RISC"><a href="#CISC和RISC" class="headerlink" title="CISC和RISC"></a>CISC和RISC</h1><p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
@@ -56,31 +193,22 @@
 <p>CISC体系架构的CPU对存储器数据操作则要复杂得多。在X86下，数据的传送都是使用MOV指令。MOV指令既负责寄存器和寄存器之间数据的交互，又负责寄存器和存储器之间的数据交互。X86能够直接处理存储器中的数据，而这一点在RISC体系的CPU中是无法做到的。</p>
 <p>将存储器单元0x00000020中的数加上8，结果存放到该存储单元中。假设存储单元的地址0x00000020已经存放在寄存器reg中，即reg=0x00000020，下文中，(reg)表示reg地址处的值，即存储单元中的值。下面我们看看在X86下和ARM/MIPS下分别是如何操作的。</p>
 <p>X86能够直接处理存储器中的数据， 所以X86直接寻址到存储器地址，将存储器中的值和立即数相加，结果存放到存储器单元中。整个过程使用下面一条指令就可以完成：</p>
-<pre><code class="assembly">add (reg) 0x08        ;直接将存储器单元(reg)中的值加0x08，结果仍然存放在该存储器单元中
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add (reg) 0x08		;直接将存储器单元(reg)中的值加0x08，结果仍然存放在该存储器单元中</div></pre></td></tr></table></figure>
 <p>ARM/MIPS只能够处理寄存器中的数据，所以需要将该存储器中的值用load命令加载到寄存器中，然后对寄存器中的值进行算术运算，最后使用store命令将运算结果送回存储单元中：</p>
-<pre><code class="assembly">ld reg2 (reg)        ;将存储器单元(reg)中的值加载到寄存器reg2中 
-add reg2 0x08        ;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 
-store (reg) reg2    ;将寄存器reg2中的值放回存储器单元(reg)中
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ld reg2 (reg)		;将存储器单元(reg)中的值加载到寄存器reg2中 </div><div class="line">add reg2 0x08		;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 </div><div class="line">store (reg) reg2	;将寄存器reg2中的值放回存储器单元(reg)中</div></pre></td></tr></table></figure>
 <p>硬币有两面，精简指令集也有它的优势和劣势。其中一个重要的优势是指令可以被更快的执行（RISC处理器通过引入流水线机制，减少每个指令的占用的CPU的时钟周期来缩短执行时间）。它的劣势也很明显，较少的指令增加了软件（事实上是编译器）的复杂性。另一个重要的事实是，ARM具有两种运行模式（可以类比x86的实模式和保护模式），ARM模式和Thumb模式。</p>
 <h1 id="初识ARM"><a href="#初识ARM" class="headerlink" title="初识ARM"></a>初识ARM</h1><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
-<pre><code class="assembly">ldr =加载字
-ldr h =加载无符号半字
-ldr sh =加载有符号半字
-ldr b =加载无符号字节
-ldr sb =加载有符号字节
-
-str =存储字符
-str h =存储无符号半字符
-str sh =存储有符号半字符
-str b =存储未签名的字节
-str sb =存储已签名的字节
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ldr =加载字</div><div class="line">ldr h =加载无符号半字</div><div class="line">ldr sh =加载有符号半字</div><div class="line">ldr b =加载无符号字节</div><div class="line">ldr sb =加载有符号字节</div><div class="line"></div><div class="line">str =存储字符</div><div class="line">str h =存储无符号半字符</div><div class="line">str sh =存储有符号半字符</div><div class="line">str b =存储未签名的字节</div><div class="line">str sb =存储已签名的字节</div></pre></td></tr></table></figure>
 <h3 id="大端和小端"><a href="#大端和小端" class="headerlink" title="大端和小端"></a>大端和小端</h3><p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8811.53.47.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8811.53.47.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>以ARMv6为例，指令是固定的小端，数据的访问可以是由程序状态寄存器（CPSR）的第九位来控制的小端或大端。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%888.40.27.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%888.40.27.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <h3 id="ARM中的寄存器"><a href="#ARM中的寄存器" class="headerlink" title="ARM中的寄存器"></a>ARM中的寄存器</h3><p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
 <table>
 <thead>
@@ -142,65 +270,11 @@ str sb =存储已签名的字节
 <p><strong>R14：LR</strong>（链接寄存器）。当进行函数调用时，链接寄存器将通过引用下一条指令的内存地址进行更新。这样做可以使程序在“子”功能结束后返回到启动“子”功能调用的“父”功能。</p>
 <p><strong>R15：PC</strong>（程序计数器）。程序计数器自动递增执行指令的大小。这个大小在ARM状态下总是4个字节，在THUMB模式下总是2个字节。当执行分支指令时，PC保存目标地址。在执行期间，ARM状态下PC存储当前指令的地址加上8个字节（两个ARM指令），Thumb状态下是当前指令加上4个字节（两个Thumb指令）。这和x86上的PC总是会指向下一条被执行的语句不同</p>
 <p>首先来看看下面这个例子，主函数中大概是:</p>
-<pre><code class="assembly">main:
-    mov r0, pc
-     mov r1, #2
-     add r2, r1, r1
-     bkpt
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">main:</div><div class="line">	mov r0, pc</div><div class="line"> 	mov r1, #2</div><div class="line"> 	add r2, r1, r1</div><div class="line"> 	bkpt</div></pre></td></tr></table></figure>
 <p>我们首先在主函数入口处打一个断点，然后查看一下寄存器的信息，发现：</p>
-<pre><code class="assembly">(gdb) break main
-Breakpoint 8 at 0x10408: file hello.s, line 27.
-(gdb) r
-The program being debugged has been started already.
-Start it from the beginning? (y or n) y
-Starting program: /home/pi/hello
-
-Breakpoint 8, main () at hello.s:27
-27        mov r0, pc
-(gdb) info registers
-r0             0x1    1
-r1             0x7efff344    2130703172
-r2             0x7efff34c    2130703180
-r3             0x10408    66568
-r4             0x1041c    66588
-r5             0x0    0
-r6             0x102e0    66272
-r7             0x0    0
-r8             0x0    0
-r9             0x0    0
-r10            0x76fff000    1996484608
-r11            0x0    0
-r12            0x7efff270    2130702960
-sp             0x7efff1f0    0x7efff1f0
-lr             0x76e7a678    1994892920
-pc             0x10408    0x10408 &lt;main&gt;
-cpsr           0x60000010    1610612752
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">(gdb) break main</div><div class="line">Breakpoint 8 at 0x10408: file hello.s, line 27.</div><div class="line">(gdb) r</div><div class="line">The program being debugged has been started already.</div><div class="line">Start it from the beginning? (y or n) y</div><div class="line">Starting program: /home/pi/hello</div><div class="line"></div><div class="line">Breakpoint 8, main () at hello.s:27</div><div class="line">27		mov r0, pc</div><div class="line">(gdb) info registers</div><div class="line">r0             0x1	1</div><div class="line">r1             0x7efff344	2130703172</div><div class="line">r2             0x7efff34c	2130703180</div><div class="line">r3             0x10408	66568</div><div class="line">r4             0x1041c	66588</div><div class="line">r5             0x0	0</div><div class="line">r6             0x102e0	66272</div><div class="line">r7             0x0	0</div><div class="line">r8             0x0	0</div><div class="line">r9             0x0	0</div><div class="line">r10            0x76fff000	1996484608</div><div class="line">r11            0x0	0</div><div class="line">r12            0x7efff270	2130702960</div><div class="line">sp             0x7efff1f0	0x7efff1f0</div><div class="line">lr             0x76e7a678	1994892920</div><div class="line">pc             0x10408	0x10408 &lt;main&gt;</div><div class="line">cpsr           0x60000010	1610612752</div></pre></td></tr></table></figure>
 <p>然后执行下一条之后我们再看看寄存器中的值，r0中是多少，是0x10408么？让我们拭目以待</p>
-<pre><code class="assembly">(gdb) next
-
-Breakpoint 7, main () at hello.s:28
-28         mov r1, #2
-(gdb) info registers
-r0             0x10410    66576
-r1             0x7efff344    2130703172
-r2             0x7efff34c    2130703180
-r3             0x10408    66568
-r4             0x1041c    66588
-r5             0x0    0
-r6             0x102e0    66272
-r7             0x0    0
-r8             0x0    0
-r9             0x0    0
-r10            0x76fff000    1996484608
-r11            0x0    0
-r12            0x7efff270    2130702960
-sp             0x7efff1f0    0x7efff1f0
-lr             0x76e7a678    1994892920
-pc             0x1040c    0x1040c &lt;main+4&gt;
-cpsr           0x60000010    1610612752
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">(gdb) next</div><div class="line"></div><div class="line">Breakpoint 7, main () at hello.s:28</div><div class="line">28	 	mov r1, #2</div><div class="line">(gdb) info registers</div><div class="line">r0             0x10410	66576</div><div class="line">r1             0x7efff344	2130703172</div><div class="line">r2             0x7efff34c	2130703180</div><div class="line">r3             0x10408	66568</div><div class="line">r4             0x1041c	66588</div><div class="line">r5             0x0	0</div><div class="line">r6             0x102e0	66272</div><div class="line">r7             0x0	0</div><div class="line">r8             0x0	0</div><div class="line">r9             0x0	0</div><div class="line">r10            0x76fff000	1996484608</div><div class="line">r11            0x0	0</div><div class="line">r12            0x7efff270	2130702960</div><div class="line">sp             0x7efff1f0	0x7efff1f0</div><div class="line">lr             0x76e7a678	1994892920</div><div class="line">pc             0x1040c	0x1040c &lt;main+4&gt;</div><div class="line">cpsr           0x60000010	1610612752</div></pre></td></tr></table></figure>
 <p>我们发现r0寄存器中的值是main函数入口的地址+8，在我们直接观察pc的时候，它指向的是下一条指令的地址，但是在调试的时候，我们发现是pc中的值+8，那么为什么会有这样的结果呢，这个涉及到CPU流水线的问题，我们放在之后再讨论。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li>看雪安全论坛</li>
@@ -208,30 +282,309 @@ cpsr           0x60000010    1610612752
 <li><a href="https://www.anquanke.com/post/id/86536" target="_blank" rel="external">gdb使用方式</a></li>
 </ul>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.787Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2018/01/23/ARM汇编上手-一/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2018/01/23/ARM汇编上手-一/" target="_blank" rel="external">http://yoursite.com/2018/01/23/ARM汇编上手-一/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=《ARM汇编上手》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=《ARM汇编上手》 — Peterpan's Blog&source=
+今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/24/玩转树莓派-一/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">玩转树莓派(一)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/21/SSR原理和搭建翻墙服务器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SSR原理和搭建翻墙服务器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CISC和RISC"><span class="post-toc-number">1.</span> <span class="post-toc-text">CISC和RISC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#load-store体系结构"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">load-store体系结构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#初识ARM"><span class="post-toc-number">2.</span> <span class="post-toc-text">初识ARM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大端和小端"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">大端和小端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ARM中的寄存器"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">ARM中的寄存器</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=《ARM汇编上手》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=《ARM汇编上手》 — Peterpan's Blog&source=
+今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3awW7rMAwEwPz/T7fAuxZWdqnXApHGpyCILY0PDEXy9Yqvr3/X0zc/Pz/9/umXP6/Xb1wYGBgfy0get370etNP9+brRlQMDIwLGOvNJSF1fW9yrdd9s2cMDAyMOIDOPifPwcDAwGgf1x5B86QTAwMDY+cQu/4+Oe6uV2zTSgwMjHsYbWPgLz//Yn8DAwPjQxhfo2u/2TlrAzzei4GBcTQjL/SvxyaSLbYlvDrpxMDAuIzRbqhNLtsEtC63YWBgHMrIy/dtuW1nzKJ4WRgYGEcz2sJ9kiAmW2mbDXVJDgMD4whGO+bV8nbe6LAHi4GBcRxjdpjcL6Xt/D8UJAwMjCMYbRrXhs7kneVh9/F7DAyMCxj74w5t4WyY6j3BMDAwjmbMHjo7iM6KenmRDgMD4x5G3sjcSQHbIt36LgwMjLMZOwMNeUFtRspLexgYGGcz2pDXhtc2cLdlOAwMjHsYs+JXfgRthzaSEPzm3wMDA+Noxmy7/2sIbDZygYGBcQ9jJ8jm7cm2lFYfXzEwMI5mtFucLbkzZoGBgXEzI08Q803nh9vZmAUGBsY9jNlwap7kJQF3NniBgYFxD2OWkOWbbgcv2rVqGAYGxscy9tuKs1GMvKgX7QEDA+MCRh5kZ+Ww2XhZ0ijFwMDAyEtpSaBsD8kFFQMDAyNePi+utefsqLOBgYFxNGM2ZrEfUvPk782Lw8DAOJoxawy0SWHeNG1XxMDAOJrxDaiwIuCqpl8CAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

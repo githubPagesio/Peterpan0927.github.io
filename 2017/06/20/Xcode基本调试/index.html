@@ -1,77 +1,209 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>Xcode基本调试</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/06/20/Xcode基本调试/">
+    
+    
+    <title>Xcode基本调试 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="iOS开发">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Xcode基本调试</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">Xcode基本调试</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T09:30:49.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
 
 
-<h2 class="title">Xcode基本调试</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年6月20日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bug调试/">bug调试</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/bug调试/">bug调试</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Xcode基本调试法"><span class="toc-text">Xcode基本调试法</span></a></li></ol>
-<p>Xcode基本调试<br><a id="more"></a></p>
+
+<div class="container body-wrap">
+    <article id="post-Xcode基本调试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Xcode基本调试</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 17:30:49" datetime="2017-06-20T09:30:49.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/bug调试/">bug调试</a></li></ul>
+
+
+
+            
+	<span id="/2017/06/20/Xcode基本调试/" class="leancloud_visitors" data-flag-title="Xcode基本调试" title="Xcode基本调试">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/06/20/Xcode基本调试/#comment">
+            <span class="valine-comment-count" data-xid="/2017/06/20/Xcode基本调试/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Xcode基本调试<br><a id="more"></a></p>
 <h1 id="Xcode基本调试法"><a href="#Xcode基本调试法" class="headerlink" title="Xcode基本调试法"></a>Xcode基本调试法</h1><p><strong>1. 运行时设置断点</strong></p>
 <p>在XCode中需要观察的变量所在的代码处添加断点，可以让程序运行到这里暂停。这时鼠标悬停在变量名处，XCode会显示出该变量的信息。</p>
 <p>断点的类型分为异常断点（Exception Breakpoint）和符号断点（Symbolic Breakpoint）等，在XCode断点浏览器（Breakpoints Navigator）的左下方可以添加这些断点。</p>
 <p>符号断点中的符号可以指方法名称或函数名称。符号断点可以中断某个函数的调用。用户还可以添加执行断点的条件。</p>
 <p><strong>2.打印到控制台</strong></p>
 <p>控制台位于XCode的底端，用于打印程序运行过程中的输出信息。在代码中调用NSLog函数，可以打印变量值到控制台中显示出来。</p>
-<pre><code class="objective-c">NSLog(@&quot;obj:%@&quot;, obj);
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSLog(@&quot;obj:%@&quot;, obj);</div></pre></td></tr></table></figure>
 <p>需要特别注意的是，尽管NSLog可圈可点，但在实际应用中要防备其可能会引起安全问题，因为任何由NSLog输出的内容都会成为应用程序成品代码</p>
 <p>的一部分，也就是说会被任何接触到应用的人看到。只要把设备接入信息管理工具，每个人都能查看控制台信息并查询每一条日志记录。这可能会引发一系列严重后</p>
 <p>果，例如向控制台输出机密逻辑算法或者用户密码等信息。</p>
 <p>我们可以使用宏来解决调用NSLog方法可能导致的安全问题，只在调试版本中调用NSLog。可以采用全局可访问的头文件，把所有日志记录都灌进去，而且不用担心它们会出现在成品代码当中。</p>
-<pre><code class="objective-c">#ifdef DEBUG
-
-#define DMLog(...) NSLog(@&quot;%s %@&quot;, PRETTY_FUNCTION, [NSString stringWithFormat:VA_ARGS])
-
-#else
-
-#define DMLog(...) do { } while (0)
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#ifdef DEBUG</div><div class="line"></div><div class="line">#define DMLog(...) NSLog(@&quot;%s %@&quot;, PRETTY_FUNCTION, [NSString stringWithFormat:VA_ARGS])</div><div class="line"></div><div class="line">#else</div><div class="line"></div><div class="line">#define DMLog(...) do &#123; &#125; while (0)</div></pre></td></tr></table></figure>
 <p>现在如果我们使用DMLog（这个名称可以随便起），它将只向调试版本输出结果，任何成品代码都不会受到影响。<em>PRETTY_FUNCTION</em>也帮上了大忙，它会根据日志信息来源为函数命名。</p>
 <p><strong>3.在控制台端手写命令打印</strong></p>
 <p>如果我们在应用的特定点进行中断，一般来说是为了检查对象的当前状态。Xcode为我们提供了一套“variables view（变量视图）”，该视图位于Xcode底部，与控制台相邻的左方区域。理论上讲它的作用是显示与当前环境相关的所有值的实时状态，但在实践中有时无法列出值，或者是并未将值更新为中断时的最新状态。幸运的是，我们可以利用一些非常实用的控制台（console）命令自己进行对象检查工作。<a href="http://m.blog.csdn.net/blog/freeWayWalker/45623433#fn:1" target="_blank" rel="external">1</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/965192-fc1595085f81354f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-box">
+                <img src="http://upload-images.jianshu.io/upload_images/965192-fc1595085f81354f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>po 命令：为 print object 的缩写，显示对象的文本描述。使用p 命令来处理纯量值，即原生类型（boolean、integer、float等）。</p>
 <p>print 命令：有点类似于格式化输出，可以输出对象的不同信息。</p>
 <p>expr 表达式：打印表达式。</p>
@@ -85,30 +217,307 @@
 <p>expr username = @”username”expr password = @”badpassword”</p>
 <p>通过上面的代码段，变量username和password分别被重新赋值。</p>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.767Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2017/06/20/Xcode基本调试/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2017/06/20/Xcode基本调试/" target="_blank" rel="external">http://yoursite.com/2017/06/20/Xcode基本调试/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/Xcode基本调试/&title=《Xcode基本调试》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/Xcode基本调试/&title=《Xcode基本调试》 — Peterpan's Blog&source=Xcode基本调试" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/21/OC特有语法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">OC特有语法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/15/iOS-UI基础-七/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS-UI基础(七)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Xcode基本调试法"><span class="post-toc-number">1.</span> <span class="post-toc-text">Xcode基本调试法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/Xcode基本调试/&title=《Xcode基本调试》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/Xcode基本调试/&title=《Xcode基本调试》 — Peterpan's Blog&source=Xcode基本调试" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOUlEQVR42u3aS3KDQAxF0ex/005Vpgnd90ltVxCXEWUT4Hig6Pf1hY/Xz/H7/Orbq2vWn19dc+yQIUPGbRmv5bF+CXKH9M5X326oMmTIeACDB9n17fjn6yv5u8mQIUNGJ6QG4RIEXxkyZMjgjDQ08zD60YArQ4aMGzJIqblut62Tv1pL7i21uAwZMm7I6AwG3n3+ofmGDBky/jGjX4KSUJgOL+M3kSFDxmhGv+mfDg9qbNSGkyFDxlBGWjSSXyVtlpFEcFMAy5AhYzTj1B/X2m3p0JQMM2TIkDGVwZv+6QDy7KB083QZMmQMZXQWtnhyWStfD8xgZciQMYiRNtTe0eKvBXcZMmQ8h5GGy342euqnkSFDxhMYJOzyxLHfgOMtuc2yhQwZMgYxanODNPieHQP8cS5DhoyHMfiyFx8SpAsZcUoqQ4aM0Yx0SStuhAFeyiguW8iQIePmDJR+4Zfr4HkLLw67MmTIGMHohNH+0litVJYhQ8YTGKeWJ0jTv8/Y1OIyZMgYyuCJV22BrD/OTIcNMmTImMdIi8Y48IHiNl0vC1JDGTJkjGDUHs8Dbu2azlvJkCFjHqNWrPLhYppc8pTx8v+GDBkyxjE6rX++sMXDLk/+iqseMmTIuC0jbfqTAMqvT1t+m+mrDBkyRjN4kOWR+2xit0lYZciQIaNUyq4TyjRl3OBlyJAho/SAWqIZA2TIkPEYBi9i+cCAr3al3cHL1FCGDBlDGbUVB/4StZFAmqTKkCFjKOMb8Dk84n78lOQAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

@@ -1,181 +1,231 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>8086汇编小结</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/12/25/8086汇编小结/">
+    
+    
+    <title>8086汇编小结 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="汇编">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>8086汇编小结</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">8086汇编小结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-25T12:58:01.000Z" itemprop="datePublished" class="page-time">
+  2017-12-25
+</time>
 
 
-<h2 class="title">8086汇编小结</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年12月25日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Intel/">Intel</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/Intel/">Intel</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DS和CS"><span class="toc-text">DS和CS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#过程"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ret和call"><span class="toc-text">ret和call</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#call"><span class="toc-text">call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ret和retf"><span class="toc-text">ret和retf</span></a></li></ol></li></ol>
-<p>汇编我认为是一门需要非常小心的语言，在这里我们已经接近了计算机最底层的世界，从原理上来观察我们高级语言中简简单单就能实现的功能，在资源极其有限的情况下编写代码是对我们的大局观和逻辑思维能力一个极大的考验</p>
+
+<div class="container body-wrap">
+    <article id="post-8086汇编小结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">8086汇编小结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-25 20:58:01" datetime="2017-12-25T12:58:01.000Z"  itemprop="datePublished">2017-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Intel/">Intel</a></li></ul>
+
+
+
+            
+	<span id="/2017/12/25/8086汇编小结/" class="leancloud_visitors" data-flag-title="8086汇编小结" title="8086汇编小结">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/12/25/8086汇编小结/#comment">
+            <span class="valine-comment-count" data-xid="/2017/12/25/8086汇编小结/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>汇编我认为是一门需要非常小心的语言，在这里我们已经接近了计算机最底层的世界，从原理上来观察我们高级语言中简简单单就能实现的功能，在资源极其有限的情况下编写代码是对我们的大局观和逻辑思维能力一个极大的考验</p>
 <a id="more"></a>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在探讨汇编语言之前首先我们对CPU中的寄存器关系有一个初步的了解，不然直接看后面的代码会让人眼花缭乱，不知所云，这里展示一个8086微处理器的内部结构：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.29.16.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.29.16.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>寄存器的用法会因为指令的不同而发生改变，比如在循环中我们可以通过<code>ecx</code>寄存器中的值来作为循环的次数，这个是通过<code>loop</code>指令，其中有些寄存器充当的是高级语言中指针的作用，我们通过下面这张图来观察一下：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.32.44.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-27%20%E4%B8%8B%E5%8D%884.32.44.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>虽然在上面的图中都只有16位的寄存器，但其实已经做了扩展，在32位模式下可以通过如<code>eax</code>这样的形式来访问32位的寄存器，扩展的寄存器和原来的寄存器有着密不可分的关系，相当于是在原来的存储空间上向上增加了一倍，在64位的机器上我们通过如<code>rax</code>这样的形式来访问。在8086中由于历史遗留问题，CPU是16位，地址总线是20位，所以在寻址上会有些特殊，感兴趣的可以自行查阅。</p>
 <h1 id="DS和CS"><a href="#DS和CS" class="headerlink" title="DS和CS"></a>DS和CS</h1><p>段寄存器属于程序员手动操作的比较少的地方，但是也需要去了解，首先就是CS寄存器，我们都知道CPU是按照某种顺序一条一条的执行指令，这个顺序就存放在我们的CS段寄存器之中，通俗的来说，CS就是告诉CPU去哪个位置找内容当成指令去执行，有指令自然也有有数据，这个数据的位置就是通过DS段寄存器得到，DS是数据开始的段地址，也就是将其作为基址，所以逻辑地址应该是DS*比例因子+偏移地址，比如我们要改变起始地址：</p>
-<pre><code class="assembly">mov        ax, 1000H
-mov        ds, ax
-mov        [0], al
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mov		ax, 1000H</div><div class="line">mov		ds, ax</div><div class="line">mov		[0], al</div></pre></td></tr></table></figure>
 <p>如果我们想要向指定的内存地址中传值，就可以使用上面这种写法，但是段寄存器不支持直接将数据送入，所以我们将寄存器作为载体，如果是CS的话，根本就是只读的，所以也不需要管将什么作为载体了。说到这两个就离不开IP，IP是指令指针，在CS段寄存器中保存的是指令的段基址，IP中保存的是CPU将要执行代码所在物理内存的偏移地址，CS只是一个载体，之后说到的<code>call</code>和<code>ret</code>指令本质上也是在操作CS和IP。</p>
 <p>所以也就是说CS和DS段寄存器存储的都是段基址，只不过一个是代码段，一个是数据段。</p>
 <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>由于前面的内容都是一些基础语法方面的，所以就直接从数组这一块开始好了，当我们使用高级语言的时候，应该也会想想过数组的底层到底是如何去实现的，那么我们首先通过循环读取数据到数组的代码来观察一下：</p>
-<pre><code class="assembly">.CODE
-_start:
-            mov      nbrElts, 0    ;初始化数组中的元素的个数
-            lea      ebx, nbrArray ;取出数组的首地址
-whilepos:    input number, 20    ;这是书的作者为了方便我们的输入输出对其做了一个整合
-            atod  number        ;转换为整数
-            jng   endwhile        ;如果不是正数就退出
-            mov      [ebx], eax    ;存储数组中的数字
-            inc      nbrElts
-            add      ebx, 4
-            jmp      whilepos
-endwhile:
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.CODE</div><div class="line">_start:</div><div class="line">			mov	  nbrElts, 0	;初始化数组中的元素的个数</div><div class="line">			lea	  ebx, nbrArray ;取出数组的首地址</div><div class="line">whilepos:	input number, 20	;这是书的作者为了方便我们的输入输出对其做了一个整合</div><div class="line">			atod  number		;转换为整数</div><div class="line">			jng   endwhile		;如果不是正数就退出</div><div class="line">			mov	  [ebx], eax	;存储数组中的数字</div><div class="line">			inc	  nbrElts</div><div class="line">			add	  ebx, 4</div><div class="line">			jmp	  whilepos</div><div class="line">endwhile:</div></pre></td></tr></table></figure>
 <p>通过上面的代码我们可以发现我们通过一个变量去存放数组的长度，然后通过寄存器间接寻址去得到当前数组最后一个元素的地址，因为数组是在内存中连续存储的，所以我们每读入一次将地址的值累加即可，当然要根据这个数组中存放的是什么类型的数据(字节，单字，双字)。剩下要说的就是对于数组进行一些基本的操作了，比如求和，求平均数等。</p>
-<pre><code class="assembly">; 找出总和和平均值
-            mov        eax, 0
-            lea        ebx, nbrArray    ;取得数组首地址
-            mov        ecx, nbrElts
-            jecxz    quit            ;不是数字则退出
-forCount1:  add        eax, [ebx]        ;循环求和
-            add        ebx, 4            
-            loop    forCount1
-
-            cdq                        ;扩展sum到4倍字长
-            idiv    nbrElts            ;计算平均数
-            dtoa    outValue, eax
-            output    outValue
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">; 找出总和和平均值</div><div class="line">			mov		eax, 0</div><div class="line">			lea		ebx, nbrArray	;取得数组首地址</div><div class="line">			mov		ecx, nbrElts</div><div class="line">			jecxz	quit			;不是数字则退出</div><div class="line">forCount1:  add		eax, [ebx]		;循环求和</div><div class="line">			add		ebx, 4			</div><div class="line">			loop	forCount1</div><div class="line">			</div><div class="line">			cdq						;扩展sum到4倍字长</div><div class="line">			idiv	nbrElts			;计算平均数</div><div class="line">			dtoa	outValue, eax</div><div class="line">			output	outValue</div></pre></td></tr></table></figure>
 <p>其实除了上面这种对于地址的累加还有很多有效的方式去访问数组的元素，在这里就先不讨论</p>
 <h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>这个概念可能说起来大家会觉得有点奇怪，什么是过程？在汇编语言中的过程就类似于高级过程中的函数，如果我们把所有的功能全部都写在一个主函数里面，毫无疑问就会让程序显得晦涩难懂，并且debug的难度要大大上升，代码阅读性也是极差的。过程就是把我们的汇编代码划分成多个容易处理的任务，介绍过程之前首先要说的就是8086的堆栈：</p>
 <p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-26%20%E4%B8%8B%E5%8D%883.05.15.png" alt=""></p>
 <p>我们的程序中会有一句话去分配我们的堆栈大小，比如说我们要分配4096字节的未初始化的储存空间：</p>
-<pre><code class="assembly">.STACK    4096
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.STACK	4096</div></pre></td></tr></table></figure>
 <p>我们通过<code>push</code>和<code>pop</code>来对我们的堆栈进行操作，一个是将操作数压栈，一个是弹出。一开始有一个ESP指针，指向堆栈的顶部，当一个字的操作数入栈的时候，堆栈指针ESP就会减2，也就是这个操作数所占的字节数大小。当我们使用<code>pop</code>的时候，如果操作数是字长的，就会复制ESP指针指向的字长的值，将其存放在目的地址中，然后将ESP指针减2.</p>
 <p>之前就会注意到汇编语言在编程的时候，寄存器的资源不是很多，为了保证中间过程值不丢失，就会将变量转移，那么为了避免丢失数据值，我们就会将寄存器存放的值压栈，这也是堆栈的意义所在，比如说我们需要交换两个寄存器之间的值除了可以使用<code>xchg</code>之外还可以通过堆栈实现：</p>
-<pre><code class="assembly">push    eax
-push    ebx
-pop        ebx
-pop        eax
-;或者使用mov指令
-push    eax
-mov        eax, ebx
-pop        ebx
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">push	eax</div><div class="line">push	ebx</div><div class="line">pop		ebx</div><div class="line">pop		eax</div><div class="line">;或者使用mov指令</div><div class="line">push	eax</div><div class="line">mov		eax, ebx</div><div class="line">pop		ebx</div></pre></td></tr></table></figure>
 <p>了解到了堆栈之后，就可以开始写我们的过程体了，也就是高级语言中所谓的函数部分，其中需要用到一个叫做EBP的寄存器，从名字上来看和我们的栈指针ESP非常的像，ESP是实时的去记录当前的栈顶的栈指针，因此保存当前esp到一个ebp中保持不变，后续用ebp来访问参数和局部变量就很清楚，而且还方便于调试器分析函数调用过程中的堆栈情况。通过一个求最大公约数的程序我们可以很直观的理解：</p>
-<pre><code class="assembly">;GCD是过程体的名字，可以通过call 过程体名来调用
-GCD        PROC    NEAR32
-        push    ebp            ;保存当前的ebp
-        mov        ebp, esp    ;EBP设为当前的堆栈指针
-        sub        esp, 4        ;给GCD临时变量预留4个字节
-        push    ebx            ;保存edx
-        pushf                ;保存标志位
-
-        mov        eax, [ebp+8]
-        mov        [ebp-4], eax;第一个数字赋值给临时变量
-        mov        edx, [ebp+8];第二个数字存储在余数部分
-until0: mov        eax, [ebp-4];第一个数字或者上次的除数作为被除数放在eax中 
-        mov        [ebp-4], edx;第二个数字或者上一次的余数放在临时变量
-        mov        edx, 0        ;清空余数部分
-        div        DWORD PTR [ebp-4]
-        cmp        edx, 0        ;判断余数是否为0
-        jnz        until0
-
-        mov        eax, [ebp-4];将结果存入eax
-        popf                ;恢复标志位
-        pop        edx            ;恢复edx
-        mov        esp, ebp    ;恢复局部变量
-        pop        ebp            ;恢复ebp
-        ret        8            ;返回，释放参数
-GCD        ENDP
-        ENDP
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">;GCD是过程体的名字，可以通过call 过程体名来调用</div><div class="line">GCD		PROC	NEAR32</div><div class="line">		push	ebp			;保存当前的ebp</div><div class="line">		mov		ebp, esp	;EBP设为当前的堆栈指针</div><div class="line">		sub		esp, 4		;给GCD临时变量预留4个字节</div><div class="line">		push	ebx			;保存edx</div><div class="line">		pushf				;保存标志位</div><div class="line">		</div><div class="line">		mov		eax, [ebp+8]</div><div class="line">		mov		[ebp-4], eax;第一个数字赋值给临时变量</div><div class="line">		mov		edx, [ebp+8];第二个数字存储在余数部分</div><div class="line">until0: mov		eax, [ebp-4];第一个数字或者上次的除数作为被除数放在eax中 </div><div class="line">		mov		[ebp-4], edx;第二个数字或者上一次的余数放在临时变量</div><div class="line">		mov		edx, 0		;清空余数部分</div><div class="line">		div		DWORD PTR [ebp-4]</div><div class="line">		cmp		edx, 0		;判断余数是否为0</div><div class="line">		jnz		until0</div><div class="line">		</div><div class="line">		mov		eax, [ebp-4];将结果存入eax</div><div class="line">		popf				;恢复标志位</div><div class="line">		pop		edx			;恢复edx</div><div class="line">		mov		esp, ebp	;恢复局部变量</div><div class="line">		pop		ebp			;恢复ebp</div><div class="line">		ret		8			;返回，释放参数</div><div class="line">GCD		ENDP</div><div class="line">		ENDP</div></pre></td></tr></table></figure>
 <p>从上面我们不难看出是通过局部变量来完成的整个程序，而这个局部变量依赖于我们的EBP寄存器，通过偏移量来访问，这也正好验证了我们上面所说，其中第21行代码其实还可以通过改变ESP指针来达到同样的效果：</p>
-<pre><code class="assembly">add        esp, 4
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add		esp, 4</div></pre></td></tr></table></figure>
 <p>同时我们还注意到这里的返回是有参数的，也就是说除了弹出偏移地址之外，相当于还执行了一句</p>
-<pre><code class="assembly">add        esp, 8
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">add		esp, 8</div></pre></td></tr></table></figure>
 <p>相当于也清空了之前压入栈求最大公约数的两个参数了，通过这样的详细的讲解相信大家都会清楚这个过程了。那么我们不禁联想到是不是也可以将地址作为参数进行传递呢？比如寻找一个数组中的最小元素：</p>
-<pre><code class="assembly">Minimum        PROC    NEAR32
-            push    ebp
-            mov        ebp, esp
-            pushad                ;保存所有寄存器
-            pushf
-
-            mov        ebx, [ebp+14]
-            mov        ecx, 0
-            mov        cx, [ebp+12]
-            mov        eax, 7fffffffh
-            jecxz    endForCount
-forCount:       cmp        [ebx], eax
-                jnl        endIfLess
-                mov        eax, [ebx]
-endIfLess:      add        ebx, 4
-                loop    forCount
-endForCount:    mov        ebx, [ebp+8]
-                mov        [ebx], eax
-                popf
-                popad
-                pop        ebp
-                ret
-Minimum        ENDP
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Minimum		PROC	NEAR32</div><div class="line">			push	ebp</div><div class="line">			mov		ebp, esp</div><div class="line">			pushad				;保存所有寄存器</div><div class="line">			pushf</div><div class="line">			</div><div class="line">			mov		ebx, [ebp+14]</div><div class="line">			mov		ecx, 0</div><div class="line">			mov		cx, [ebp+12]</div><div class="line">			mov		eax, 7fffffffh</div><div class="line">			jecxz	endForCount</div><div class="line">forCount:   	cmp		[ebx], eax</div><div class="line">				jnl		endIfLess</div><div class="line">				mov		eax, [ebx]</div><div class="line">endIfLess:  	add		ebx, 4</div><div class="line">				loop	forCount</div><div class="line">endForCount:	mov		ebx, [ebp+8]</div><div class="line">				mov		[ebx], eax</div><div class="line">				popf</div><div class="line">				popad</div><div class="line">				pop		ebp</div><div class="line">				ret</div><div class="line">Minimum		ENDP</div></pre></td></tr></table></figure>
 <h1 id="ret和call"><a href="#ret和call" class="headerlink" title="ret和call"></a>ret和call</h1><p>结合之前说过的CS和IP，我们可以来推断一下<code>call</code>和<code>ret</code>究竟是做了什么来实现我们在高级语言中的函数功能，call和ret指令都是转移指令，它们都修改IP，或同时修改CS和IP。</p>
 <h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><p><code>call</code>我们可以理解成跳转执行函数，事实上这也是它所做的，首先<code>call</code>会将IP寄存器所指向的下一条指令压栈，保存起来，然后通过<code>jmp</code>指令跳转到我们的子程序部分执行，用代码描述就是:</p>
-<pre><code class="assembly">push    ip
-jmp near ptr 标号
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">push	ip</div><div class="line">jmp near ptr 标号</div></pre></td></tr></table></figure>
 <p>如果要实现段间转移的时候就要将CS段寄存器也一起保存，这个时候跳转就是使用长跳转，编译过后的机器码已经贴上了跳转点的具体地址，而不是偏移量了(因为参考不同)。用代码描述就是：</p>
-<pre><code class="assembly">push    cs
-push    ip
-jmp    far    ptr    标号
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">push	cs</div><div class="line">push	ip</div><div class="line">jmp	far	ptr	标号</div></pre></td></tr></table></figure>
 <h2 id="ret和retf"><a href="#ret和retf" class="headerlink" title="ret和retf"></a>ret和retf</h2><p>ret指令用栈中的数据，修改IP的内容，从而实现近转移；</p>
 <p>retf指令用栈中的数据，修改CS和IP的内容，从而实现远转移。</p>
 <p>CPU执行ret指令时，进行下面的两步操作：</p>
@@ -192,37 +242,311 @@ jmp    far    ptr    标号
 </ol>
 <p>用汇编语法来解释ret和retf指令，则：</p>
 <p>CPU执行ret指令时，相当于进行：</p>
-<pre><code class="assembly">pop IP
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pop IP</div></pre></td></tr></table></figure>
 <p>CPU执行retf指令时，相当于进行：</p>
-<pre><code class="assembly">pop IP
-pop CS
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pop IP</div><div class="line">pop CS</div></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.761Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
 
-<!--<a href="http://yoursite.com/2017/12/25/8086汇编小结/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
+        
+        转载注明出处，原文地址：<a href="/2017/12/25/8086汇编小结/" target="_blank" rel="external">http://yoursite.com/2017/12/25/8086汇编小结/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/25/8086汇编小结/&title=《8086汇编小结》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/25/8086汇编小结/&title=《8086汇编小结》 — Peterpan's Blog&source=汇编我认为是一门需要非常小心的语言，在这里我们已经接近了计算机最底层的世界，从原理上来观察我们高级语言中简简单单就能实现的功能，在资源极其有限的情况下编写..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/29/java学习笔记-一/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">java学习笔记(一)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/18/Linux进程调度/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux进程调度</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DS和CS"><span class="post-toc-number">2.</span> <span class="post-toc-text">DS和CS</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数组"><span class="post-toc-number">3.</span> <span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#过程"><span class="post-toc-number">4.</span> <span class="post-toc-text">过程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ret和call"><span class="post-toc-number">5.</span> <span class="post-toc-text">ret和call</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#call"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">call</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ret和retf"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">ret和retf</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/25/8086汇编小结/&title=《8086汇编小结》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/25/8086汇编小结/&title=《8086汇编小结》 — Peterpan's Blog&source=汇编我认为是一门需要非常小心的语言，在这里我们已经接近了计算机最底层的世界，从原理上来观察我们高级语言中简简单单就能实现的功能，在资源极其有限的情况下编写..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aO3ICQQwFQO5/aZw4cGCWJwmoQtMTUQV4pwlk/W63+Nz/nEfvXn/+0ev8KS84GBgYX8u4X54e49HVk7+ffOufJ2JgYBzASC5x/cjk3Wo4LvxwGBgYGOPP5EEcAwMD4x2M/KKTQIyBgYGRXGiexl230j5Ui2NgYHwhI++6f/71W+YbGBgYX8W4F0814cu/27vP73cxMDBWM/IAl48wk+SvXKAm98HAwFjK6K07vDYru4ZFJSsGBsZqxnWYy1O63kiyl4A+4WFgYKxj5Ctc+fJE/svlKWCUGmJgYCxlVBv01YQvD8G9MScGBgZGtYxMgmO1xRZltRgYGAcwkiK2t7bVSwqr/wAwMDB2M+YN/UkRWy2VC+02DAyMRYwkmPZStyQRzH+UQqqKgYGxlDEZJfaaaO8YIWBgYOxm9ArLahMtXw6rLmpgYGDsZiRNsepIYNJoq/IwMDBOYPRGAjkvSfjmyxkYGBgnMKqhsxpe52ll9V0MDIx9jGorrdcaS9p2vUEmBgbGyYzeukO+NDZpuj0pYjEwMJYy8iSvN+DM083eqBUDA2Mr41481SSv3NzvUTEwMFYz8jO/Vq9gLu+MYGBgLGXkQbZ6rfnIsxBwMTAwDmDkgS9fHXvZ8kQy2sTAwMCIx41JGK0+/TbxYWBgHMnIg2xvmayXvGJgYJzA6K1EvCr56w0bMDAwzmGMSsfxykVeEuelNQYGxiLGD/VTslAc25wBAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

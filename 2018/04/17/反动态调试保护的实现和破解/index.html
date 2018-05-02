@@ -1,356 +1,534 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>反动态调试保护的实现和破解</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/04/17/反动态调试保护的实现和破解/">
+    
+    
+    <title>反动态调试保护的实现和破解 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="Re">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>反动态调试保护的实现和破解</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">反动态调试保护的实现和破解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-17T04:38:17.000Z" itemprop="datePublished" class="page-time">
+  2018-04-17
+</time>
 
 
-<h2 class="title">反动态调试保护的实现和破解</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2018年4月17日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/crack/">crack</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/crack/">crack</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#反调试"><span class="toc-text">反调试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打破反调试"><span class="toc-text">打破反调试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
-<p>之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是<code>ptrace</code>系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。</p>
+
+<div class="container body-wrap">
+    <article id="post-反动态调试保护的实现和破解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">反动态调试保护的实现和破解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-17 12:38:17" datetime="2018-04-17T04:38:17.000Z"  itemprop="datePublished">2018-04-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/crack/">crack</a></li></ul>
+
+
+
+            
+	<span id="/2018/04/17/反动态调试保护的实现和破解/" class="leancloud_visitors" data-flag-title="反动态调试保护的实现和破解" title="反动态调试保护的实现和破解">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/04/17/反动态调试保护的实现和破解/#comment">
+            <span class="valine-comment-count" data-xid="/2018/04/17/反动态调试保护的实现和破解/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是<code>ptrace</code>系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。</p>
 <a id="more"></a>
 <h1 id="反调试"><a href="#反调试" class="headerlink" title="反调试"></a>反调试</h1><ol>
 <li>ptrace</li>
 </ol>
 <p>我们知道<code>ptrace</code>是一个可以对运行中的进程进行跟踪和控制的手段，但是还有一个参数大部分人都没有注意，那就是<code>PT_DENY_ATTACH</code>，这个参数的意义就是告诉系统阻止调试器的调试，所以最常见的方法就是这种，这次我们的绕开示例也是从这个角度来下手：</p>
-<pre><code class="c">#import&lt;mach-o/dyld.h&gt;
-#import&lt;dlfcn.h&gt;
-
-#ifndef PT_DENY_ATTACH
-    #define PT_DENY_ATTACH 31
-#endif
-
-typedef int (*ptrace_ptr_t)(int _request, pid_t _pid,caddr_t _addr, int _data);
-
-void disable_gdb(){
-      void *handle = dlopen(0, RTLD_GLOBAL | RTLD_NOW);
-    ptrace_ptr_t ptrace_ptr = (ptrace_ptr_t)dlsym(handle, &quot;ptrace&quot;);
-    ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);
-      dlclose(handle);
-}
-
-int main(){
-  @autoreleasepool{
-    //DEBUG代表是测试版而不是发行版，所以不需要开启反调试
-    #ifdef DEBUG
-    //do nothing 
-    #else
-    disable_gdb();
-    #endif
-  }
-}
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import<span class="meta-string">&lt;mach-o/dyld.h&gt;</span></span></div><div class="line"><span class="meta">#import<span class="meta-string">&lt;dlfcn.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PT_DENY_ATTACH</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> PT_DENY_ATTACH 31</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*<span class="keyword">ptrace_ptr_t</span>)</span><span class="params">(<span class="keyword">int</span> _request, <span class="keyword">pid_t</span> _pid,<span class="keyword">caddr_t</span> _addr, <span class="keyword">int</span> _data)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">disable_gdb</span><span class="params">()</span></span>&#123;</div><div class="line">  	<span class="keyword">void</span> *handle = dlopen(<span class="number">0</span>, RTLD_GLOBAL | RTLD_NOW);</div><div class="line">	<span class="keyword">ptrace_ptr_t</span> ptrace_ptr = (<span class="keyword">ptrace_ptr_t</span>)dlsym(handle, <span class="string">"ptrace"</span>);</div><div class="line">	ptrace_ptr(PT_DENY_ATTACH, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">  	dlclose(handle);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  @autoreleasepool&#123;</div><div class="line">    <span class="comment">//DEBUG代表是测试版而不是发行版，所以不需要开启反调试</span></div><div class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></div><div class="line">    <span class="comment">//do nothing </span></div><div class="line">    <span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">    disable_gdb();</div><div class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>   我们可以将这个写在main函数中，用来防止我们的程序被调试，相当于向<code>ptrace</code>它的父进程发送消息说不要再跟踪我了，如果对这里有什么不明白的可以参考它的前置章节<a href="https://peterpan980927.cn/2017/12/14/%E5%8F%8D%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E4%BF%9D%E6%8A%A4/#more" target="_blank" rel="external">ptrace基础</a></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png" alt="屏幕快照 2018-04-17 下午3.32.23.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-17%20%E4%B8%8B%E5%8D%883.32.23.png" alt="屏幕快照 2018-04-17 下午3.32.23.png" title="" class="">
+                <p>屏幕快照 2018-04-17 下午3.32.23.png</p>
+            </figure>
 <p>从man手册中我们看到，使用<code>PT_DENY_ATTACH</code>的时候，其他的参数都会被忽略，因为这个是由被追踪进程发送的信号</p>
 <p>还有一个我们会发现就是我们没有直接使用ptrace，而是通过另一种方式，这是因为在iPhone的真实运行环境中是没有<code>sys/ptrace</code>抛出的，所以我们可以使用<code>dlopen</code>去拿到他，然后再操作</p>
 <p>在我们做了反调试之后再使用gdb的时候就会发生段错误了：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8A%E5%8D%8811.52.57.png" alt="屏幕快照 2018-04-19 上午11.52.57.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8A%E5%8D%8811.52.57.png" alt="屏幕快照 2018-04-19 上午11.52.57.png" title="" class="">
+                <p>屏幕快照 2018-04-19 上午11.52.57.png</p>
+            </figure>
 <p>说明我的操作已经成功。</p>
 <ol>
 <li>sysctl</li>
 </ol>
 <p>这本来是一个在内核运行时动态修改内核的运行参数的命令，我们可以用它来查看进程的信息，也就是说我们可以发现这个进程是否处于调试状态。当进程处于调试状态的时候<code>info.kp_proc.p_flag</code>就会变成1，所以就可以通过<code>sysctl</code>查询进程的<code>kinfo_proc</code>信息就可以判断了：</p>
-<pre><code class="c">include &lt;assert.h&gt;
- #include &lt;stdbool.h&gt;
- #include &lt;sys/types.h&gt;
- #include &lt;unistd.h&gt;
- #include &lt;sys/sysctl.h&gt;
-
-static bool AmIBeingDebugged(void)
-    // Returns true if the current process is being debugged (either
-    // running under the debugger or has a debugger attached post facto).
-{
-    int                 junk;
-    int                 mib[4];
-    struct kinfo_proc   info;
-    size_t              size;
-
-    // Initialize the flags so that, if sysctl fails for some bizarre
-    // reason, we get a predictable result.
-
-    info.kp_proc.p_flag = 0;
-
-    // Initialize mib, which tells sysctl the info we want, in this case
-    // we&#39;re looking for information about a specific process ID.
-
-    mib[0] = CTL_KERN;
-    mib[1] = KERN_PROC;
-    mib[2] = KERN_PROC_PID;
-    mib[3] = getpid();
-
-    // Call sysctl.
-
-    size = sizeof(info);
-    junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &amp;info, &amp;size, NULL, 0);
-    assert(junk == 0);
-
-    // We&#39;re being debugged if the P_TRACED flag is set.
-
-    return ( (info.kp_proc.p_flag &amp; P_TRACED) != 0 );
-}
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">include &lt;assert.h&gt;</div><div class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></div><div class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">AmIBeingDebugged</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">    <span class="comment">// Returns true if the current process is being debugged (either</span></div><div class="line">    <span class="comment">// running under the debugger or has a debugger attached post facto).</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span>                 junk;</div><div class="line">    <span class="keyword">int</span>                 mib[<span class="number">4</span>];</div><div class="line">    <span class="keyword">struct</span> kinfo_proc   info;</div><div class="line">    <span class="keyword">size_t</span>              size;</div><div class="line"></div><div class="line">    <span class="comment">// Initialize the flags so that, if sysctl fails for some bizarre</span></div><div class="line">    <span class="comment">// reason, we get a predictable result.</span></div><div class="line"></div><div class="line">    info.kp_proc.p_flag = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Initialize mib, which tells sysctl the info we want, in this case</span></div><div class="line">    <span class="comment">// we're looking for information about a specific process ID.</span></div><div class="line"></div><div class="line">    mib[<span class="number">0</span>] = CTL_KERN;</div><div class="line">    mib[<span class="number">1</span>] = KERN_PROC;</div><div class="line">    mib[<span class="number">2</span>] = KERN_PROC_PID;</div><div class="line">    mib[<span class="number">3</span>] = getpid();</div><div class="line"></div><div class="line">    <span class="comment">// Call sysctl.</span></div><div class="line"></div><div class="line">    size = <span class="keyword">sizeof</span>(info);</div><div class="line">    junk = sysctl(mib, <span class="keyword">sizeof</span>(mib) / <span class="keyword">sizeof</span>(*mib), &amp;info, &amp;size, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line">    assert(junk == <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="comment">// We're being debugged if the P_TRACED flag is set.</span></div><div class="line">	</div><div class="line">    <span class="keyword">return</span> ( (info.kp_proc.p_flag &amp; P_TRACED) != <span class="number">0</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ol>
 <li>syscall</li>
 </ol>
 <p>这个是利用一个内核调用表找到<code>ptrace</code>所对应的编号，然后直接将编号作为参数使用系统调用，效果等同于ptrace:</p>
-<pre><code>syscall(26,31,0,0)
-</code></pre><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">syscall(26,31,0,0)</div></pre></td></tr></table></figure>
+<ol>
 <li>arm</li>
 </ol>
 <p>直接使用汇编来实现：</p>
-<pre><code class="assembly">#ifdef __arm__
-    asm volatile(
-      &quot;mov r0,#31\n&quot;
-      &quot;mov r1,#0\n&quot;
-      &quot;mov r2,#26\n&quot;
-      &quot;mov r12,#26\n&quot;
-      &quot;svc #80\n&quot;
-    );
-#endif
-#ifdef __arm64__
-    asm volatile(
-        &quot;mov x0,#26\n&quot;
-        &quot;mov x1,#31\n&quot;
-        &quot;mov x2,#0\n&quot;
-        &quot;mov x3,#0\n&quot;
-        &quot;mov x16,#0\n&quot;
-        &quot;svc #128\n&quot;
-    );
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#ifdef __arm__</div><div class="line">	asm volatile(</div><div class="line">      &quot;mov r0,#31\n&quot;</div><div class="line">      &quot;mov r1,#0\n&quot;</div><div class="line">      &quot;mov r2,#26\n&quot;</div><div class="line">      &quot;mov r12,#26\n&quot;</div><div class="line">      &quot;svc #80\n&quot;</div><div class="line">	);</div><div class="line">#endif</div><div class="line">#ifdef __arm64__</div><div class="line">	asm volatile(</div><div class="line">		&quot;mov x0,#26\n&quot;</div><div class="line">		&quot;mov x1,#31\n&quot;</div><div class="line">		&quot;mov x2,#0\n&quot;</div><div class="line">		&quot;mov x3,#0\n&quot;</div><div class="line">		&quot;mov x16,#0\n&quot;</div><div class="line">		&quot;svc #128\n&quot;</div><div class="line">	);</div></pre></td></tr></table></figure>
 <p>剩下的不太常见就不介绍了，可以看看下面参考的那位仁兄写的</p>
 <h1 id="打破反调试"><a href="#打破反调试" class="headerlink" title="打破反调试"></a>打破反调试</h1><p>其实只要对对应的方法进行hook就好了，在这里我们使用<code>MSHookFunction</code>而不采用封装好的上层<code>Logos</code>语法：</p>
-<pre><code class="c">#import &lt;substrate.h&gt;
-#import &lt;sys/sysctl.h&gt;
-
-static int (*orig_ptrace)(int request, pid_t pid, caddr_t addr, int data);
-static int my_ptrace(int request, pid_t pid, caddr_t addr, int data){
-  if(request == 31){
-    NSLog(@&quot;[AntiAntiDebug] - ptrace is PT_DENY_ATTACH&quot;);
-    return 0;
-  }
-  return orig_ptrace(request,pid,addr,data);
-}
-
-static void* (*orig_dlsym)(void* handle, const char* symbol);
-static void* my_dlsym(void* handle, const char* symbol){
-    if(strcmp(symbol, &quot;ptrace&quot;) == 0){
-        NSLog(@&quot;[AntiAntiDebug] - dlsym get ptrace symbol&quot;);
-        return (void*)my_ptrace;
-    }
-       return orig_dlsym(handle, symbol);
-}
-
-static int (*orig_sysctl)(int * name, u_int namelen, void * info, size_t * infosize, void * newinfo, size_t newinfosize);
-static int my_sysctl(int * name, u_int namelen, void * info, size_t * infosize, void * newinfo, size_t newinfosize){
-    int ret = orig_sysctl(name,namelen,info,infosize,newinfo,newinfosize);
-    if(namelen == 4 &amp;&amp; name[0] == 1 &amp;&amp; name[1] == 14 &amp;&amp; name[2] == 1){
-        struct kinfo_proc *info_ptr = (struct kinfo_proc *)info;
-        if(info_ptr &amp;&amp; (info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) != 0){
-            NSLog(@&quot;[AntiAntiDebug] - sysctl query trace status.&quot;);
-            info_ptr-&gt;kp_proc.p_flag ^= P_TRACED;
-            if((info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) == 0){
-                NSLog(@&quot;[AntiAntiDebug] trace status reomve success!&quot;);
-            }
-        }
-    }
-    return ret;
-}
-
-static void* (*orig_syscall)(int code, va_list args);
-static void* my_syscall(int code, va_list args){
-    int request;
-    va_list newArgs;
-    va_copy(newArgs, args);
-    if(code == 26){
-        request = (long)args;
-        if(request == 31){
-            NSLog(@&quot;[AntiAntiDebug] - syscall call ptrace, and request is PT_DENY_ATTACH&quot;);
-            return nil;
-        }
-    }
-    return (void*)orig_syscall(code, newArgs);
-}
-
-%ctor{
-    MSHookFunction((void *)MSFindSymbol(NULL,&quot;_ptrace&quot;),(void*)my_ptrace,(void**)&amp;orig_ptrace);
-    MSHookFunction((void *)dlsym,(void*)my_dlsym,(void**)&amp;orig_dlsym);
-    MSHookFunction((void *)sysctl,(void*)my_sysctl,(void**)&amp;orig_sysctl);
-    MSHookFunction((void *)syscall,(void*)my_syscall,(void**)&amp;orig_syscall);
-
-    NSLog(@&quot;[AntiAntiDebug] Module loaded!!!&quot;);
-}
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;substrate.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="title">int</span> <span class="params">(*orig_ptrace)</span><span class="params">(<span class="keyword">int</span> request, <span class="keyword">pid_t</span> pid, <span class="keyword">caddr_t</span> addr, <span class="keyword">int</span> data)</span></span>;</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">my_ptrace</span><span class="params">(<span class="keyword">int</span> request, <span class="keyword">pid_t</span> pid, <span class="keyword">caddr_t</span> addr, <span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(request == <span class="number">31</span>)&#123;</div><div class="line">    NSLog(@<span class="string">"[AntiAntiDebug] - ptrace is PT_DENY_ATTACH"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> orig_ptrace(request,pid,addr,data);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span>* (*orig_dlsym)(<span class="keyword">void</span>* handle, <span class="keyword">const</span> <span class="keyword">char</span>* symbol);</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span>* <span class="title">my_dlsym</span><span class="params">(<span class="keyword">void</span>* handle, <span class="keyword">const</span> <span class="keyword">char</span>* symbol)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">strcmp</span>(symbol, <span class="string">"ptrace"</span>) == <span class="number">0</span>)&#123;</div><div class="line">		NSLog(@<span class="string">"[AntiAntiDebug] - dlsym get ptrace symbol"</span>);</div><div class="line">		<span class="keyword">return</span> (<span class="keyword">void</span>*)my_ptrace;</div><div class="line">    &#125;</div><div class="line">   	<span class="keyword">return</span> orig_dlsym(handle, symbol);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="title">int</span> <span class="params">(*orig_sysctl)</span><span class="params">(<span class="keyword">int</span> * name, u_int namelen, <span class="keyword">void</span> * info, <span class="keyword">size_t</span> * infosize, <span class="keyword">void</span> * newinfo, <span class="keyword">size_t</span> newinfosize)</span></span>;</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">my_sysctl</span><span class="params">(<span class="keyword">int</span> * name, u_int namelen, <span class="keyword">void</span> * info, <span class="keyword">size_t</span> * infosize, <span class="keyword">void</span> * newinfo, <span class="keyword">size_t</span> newinfosize)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> ret = orig_sysctl(name,namelen,info,infosize,newinfo,newinfosize);</div><div class="line">	<span class="keyword">if</span>(namelen == <span class="number">4</span> &amp;&amp; name[<span class="number">0</span>] == <span class="number">1</span> &amp;&amp; name[<span class="number">1</span>] == <span class="number">14</span> &amp;&amp; name[<span class="number">2</span>] == <span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">struct</span> kinfo_proc *info_ptr = (<span class="keyword">struct</span> kinfo_proc *)info;</div><div class="line">        <span class="keyword">if</span>(info_ptr &amp;&amp; (info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) != <span class="number">0</span>)&#123;</div><div class="line">            NSLog(@<span class="string">"[AntiAntiDebug] - sysctl query trace status."</span>);</div><div class="line">            info_ptr-&gt;kp_proc.p_flag ^= P_TRACED;</div><div class="line">            <span class="keyword">if</span>((info_ptr-&gt;kp_proc.p_flag &amp; P_TRACED) == <span class="number">0</span>)&#123;</div><div class="line">                NSLog(@<span class="string">"[AntiAntiDebug] trace status reomve success!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span>* (*orig_syscall)(<span class="keyword">int</span> code, va_list args);</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span>* <span class="title">my_syscall</span><span class="params">(<span class="keyword">int</span> code, va_list args)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> request;</div><div class="line">    va_list newArgs;</div><div class="line">    va_copy(newArgs, args);</div><div class="line">    <span class="keyword">if</span>(code == <span class="number">26</span>)&#123;</div><div class="line">        request = (<span class="keyword">long</span>)args;</div><div class="line">        <span class="keyword">if</span>(request == <span class="number">31</span>)&#123;</div><div class="line">            NSLog(@<span class="string">"[AntiAntiDebug] - syscall call ptrace, and request is PT_DENY_ATTACH"</span>);</div><div class="line">            <span class="keyword">return</span> nil;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">void</span>*)orig_syscall(code, newArgs);</div><div class="line">&#125;</div><div class="line"></div><div class="line">%ctor&#123;</div><div class="line">	MSHookFunction((<span class="keyword">void</span> *)MSFindSymbol(<span class="literal">NULL</span>,<span class="string">"_ptrace"</span>),(<span class="keyword">void</span>*)my_ptrace,(<span class="keyword">void</span>**)&amp;orig_ptrace);</div><div class="line">	MSHookFunction((<span class="keyword">void</span> *)dlsym,(<span class="keyword">void</span>*)my_dlsym,(<span class="keyword">void</span>**)&amp;orig_dlsym);</div><div class="line">	MSHookFunction((<span class="keyword">void</span> *)sysctl,(<span class="keyword">void</span>*)my_sysctl,(<span class="keyword">void</span>**)&amp;orig_sysctl);</div><div class="line">	MSHookFunction((<span class="keyword">void</span> *)syscall,(<span class="keyword">void</span>*)my_syscall,(<span class="keyword">void</span>**)&amp;orig_syscall);</div><div class="line"></div><div class="line">	NSLog(@<span class="string">"[AntiAntiDebug] Module loaded!!!"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们去看日志就知道到底是什么保护了。</p>
 <p>除了编写tweak之外我们还可以通过lldb下断点的情况来解决这个问题，我们可以通过debugserver连接然后找到ptrace(或者是其他的方法)调用的位置，然后在汇编代码中找到对应的位置，然后直接返回或者修改都可以，但是每次都这样子太麻烦了，所以我们可以用python的自动化脚本来封装一下：</p>
-<pre><code class="python">#!/usr/bin/python
-# -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-反反调试脚本，过了反调试后记得:
-aadebug -d
-否则会很卡，如果有定时器定时检测，建议写tweak
-&quot;&quot;&quot;
-import lldb
-import fblldbbase as fb
-import fblldbobjcruntimehelpers as objc
-def lldbcommands():
-    return [
-        AMAntiAntiDebug()
-    ]
-
-class AMAntiAntiDebug(fb.FBCommand):
-    def name(self):
-        return &#39;aadebug&#39;
-    def description(self):
-        return &quot;anti anti debug ptrace syscall sysctl&quot;
-    def options(self):
-        return [
-            fb.FBCommandArgument(short=&#39;-d&#39;, long=&#39;--disable&#39;, arg=&#39;disable&#39;, boolean=True, default=False, help=&#39;disable anti anti debug.&#39;)
-        ]
-    def run(self, arguments, options):
-        if options.disable:
-            target = lldb.debugger.GetSelectedTarget()
-            target.BreakpointDelete(self.ptrace.id)
-            target.BreakpointDelete(self.syscall.id)
-            target.BreakpointDelete(self.sysctl.id)
-            print &quot;anti anti debug is disabled!!!&quot;
-        else:
-            self.antiPtrace()
-            self.antiSyscall()
-            self.antiSysctl()
-            print &quot;anti anti debug finished!!!&quot;
-    def antiPtrace(self):
-        ptrace = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(&quot;ptrace&quot;)
-        if is64Bit():
-            ptrace.SetCondition(&#39;$x0==31&#39;)
-        else:
-            ptrace.SetCondition(&#39;$r0==31&#39;)
-        ptrace.SetScriptCallbackFunction(&#39;sys.modules[\&#39;&#39; + __name__ + &#39;\&#39;].ptrace_callback&#39;)
-        self.ptrace = ptrace
-    def antiSyscall(self):
-        syscall = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(&quot;syscall&quot;)
-        if is64Bit():
-            syscall.SetCondition(&#39;$x0==26 &amp;&amp; *(int *)$sp==31&#39;)
-        else:
-            syscall.SetCondition(&#39;$r0==26 &amp;&amp; $r1==31&#39;)
-        syscall.SetScriptCallbackFunction(&#39;sys.modules[\&#39;&#39; + __name__ + &#39;\&#39;].syscall_callback&#39;)
-        self.syscall = syscall
-    def antiSysctl(self):
-        sysctl = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(&quot;sysctl&quot;)
-        if is64Bit():
-            sysctl.SetCondition(&#39;$x1==4 &amp;&amp; *(int *)$x0==1 &amp;&amp; *(int *)($x0+4)==14 &amp;&amp; *(int *)($x0+8)==1&#39;)
-        else:
-            sysctl.SetCondition(&#39;$r1==4 &amp;&amp; *(int *)$r0==1 &amp;&amp; *(int *)($r0+4)==14 &amp;&amp; *(int *)($r0+8)==1&#39;)
-        sysctl.SetScriptCallbackFunction(&#39;sys.modules[\&#39;&#39; + __name__ + &#39;\&#39;].sysctl_callback&#39;)
-        self.sysctl = sysctl
-    def antiExit(self):
-        self.exit = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(&quot;exit&quot;)
-        exit.SetScriptCallbackFunction(&#39;sys.modules[\&#39;&#39; + __name__ + &#39;\&#39;].exit_callback&#39;)
-#暂时只考虑armv7和arm64
-def is64Bit():
-    arch = objc.currentArch()
-    if arch == &quot;arm64&quot;:
-        return True
-    return False
-def ptrace_callback(frame, bp_loc, internal_dict):
-    print &quot;find ptrace&quot;
-    register = &quot;x0&quot;
-    if not is64Bit():
-        register = &quot;r0&quot;
-    frame.FindRegister(register).value = &quot;0&quot;
-    lldb.debugger.HandleCommand(&#39;continue&#39;)
-def syscall_callback(frame, bp_loc, internal_dict):
-    print &quot;find syscall&quot;
-    #不知道怎么用api修改sp指向的内容QAQ
-    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())
-    if is64Bit():
-        lldb.debugger.HandleCommand(&#39;memory write &quot;$sp&quot; 0&#39;)
-    else:
-        lldb.debugger.HandleCommand(&#39;register write $r1 0&#39;)
-    lldb.debugger.HandleCommand(&#39;continue&#39;)
-def sysctl_callback(frame, bp_loc, internal_dict):
-    module = frame.GetThread().GetFrameAtIndex(1).GetModule()
-    currentModule = lldb.debugger.GetSelectedTarget().GetModuleAtIndex(0)
-    if module == currentModule:
-        print &quot;find sysctl&quot;
-        register = &quot;x2&quot;
-        if not is64Bit():
-            register = &quot;r2&quot;
-        frame.FindRegister(register).value = &quot;0&quot;
-    lldb.debugger.HandleCommand(&#39;continue&#39;)
-def exit_callback(frame, bp_loc, internal_dict):
-    print &quot;find exit&quot;
-    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())
-    lldb.debugger.HandleCommand(&#39;thread return&#39;)
-    lldb.debugger.HandleCommand(&#39;continue&#39;)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">反反调试脚本，过了反调试后记得:</div><div class="line">aadebug -d</div><div class="line">否则会很卡，如果有定时器定时检测，建议写tweak</div><div class="line">"""</div><div class="line"><span class="keyword">import</span> lldb</div><div class="line"><span class="keyword">import</span> fblldbbase <span class="keyword">as</span> fb</div><div class="line"><span class="keyword">import</span> fblldbobjcruntimehelpers <span class="keyword">as</span> objc</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lldbcommands</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        AMAntiAntiDebug()</div><div class="line">    ]</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AMAntiAntiDebug</span><span class="params">(fb.FBCommand)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">name</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'aadebug'</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">description</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"anti anti debug ptrace syscall sysctl"</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">options</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            fb.FBCommandArgument(short=<span class="string">'-d'</span>, long=<span class="string">'--disable'</span>, arg=<span class="string">'disable'</span>, boolean=<span class="keyword">True</span>, default=<span class="keyword">False</span>, help=<span class="string">'disable anti anti debug.'</span>)</div><div class="line">        ]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, arguments, options)</span>:</span></div><div class="line">        <span class="keyword">if</span> options.disable:</div><div class="line">            target = lldb.debugger.GetSelectedTarget()</div><div class="line">            target.BreakpointDelete(self.ptrace.id)</div><div class="line">            target.BreakpointDelete(self.syscall.id)</div><div class="line">            target.BreakpointDelete(self.sysctl.id)</div><div class="line">            <span class="keyword">print</span> <span class="string">"anti anti debug is disabled!!!"</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.antiPtrace()</div><div class="line">            self.antiSyscall()</div><div class="line">            self.antiSysctl()</div><div class="line">            <span class="keyword">print</span> <span class="string">"anti anti debug finished!!!"</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">antiPtrace</span><span class="params">(self)</span>:</span></div><div class="line">        ptrace = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="string">"ptrace"</span>)</div><div class="line">        <span class="keyword">if</span> is64Bit():</div><div class="line">            ptrace.SetCondition(<span class="string">'$x0==31'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            ptrace.SetCondition(<span class="string">'$r0==31'</span>)</div><div class="line">        ptrace.SetScriptCallbackFunction(<span class="string">'sys.modules[\''</span> + __name__ + <span class="string">'\'].ptrace_callback'</span>)</div><div class="line">        self.ptrace = ptrace</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">antiSyscall</span><span class="params">(self)</span>:</span></div><div class="line">        syscall = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="string">"syscall"</span>)</div><div class="line">        <span class="keyword">if</span> is64Bit():</div><div class="line">            syscall.SetCondition(<span class="string">'$x0==26 &amp;&amp; *(int *)$sp==31'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            syscall.SetCondition(<span class="string">'$r0==26 &amp;&amp; $r1==31'</span>)</div><div class="line">        syscall.SetScriptCallbackFunction(<span class="string">'sys.modules[\''</span> + __name__ + <span class="string">'\'].syscall_callback'</span>)</div><div class="line">        self.syscall = syscall</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">antiSysctl</span><span class="params">(self)</span>:</span></div><div class="line">        sysctl = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="string">"sysctl"</span>)</div><div class="line">        <span class="keyword">if</span> is64Bit():</div><div class="line">            sysctl.SetCondition(<span class="string">'$x1==4 &amp;&amp; *(int *)$x0==1 &amp;&amp; *(int *)($x0+4)==14 &amp;&amp; *(int *)($x0+8)==1'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            sysctl.SetCondition(<span class="string">'$r1==4 &amp;&amp; *(int *)$r0==1 &amp;&amp; *(int *)($r0+4)==14 &amp;&amp; *(int *)($r0+8)==1'</span>)</div><div class="line">        sysctl.SetScriptCallbackFunction(<span class="string">'sys.modules[\''</span> + __name__ + <span class="string">'\'].sysctl_callback'</span>)</div><div class="line">        self.sysctl = sysctl</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">antiExit</span><span class="params">(self)</span>:</span></div><div class="line">        self.exit = lldb.debugger.GetSelectedTarget().BreakpointCreateByName(<span class="string">"exit"</span>)</div><div class="line">        exit.SetScriptCallbackFunction(<span class="string">'sys.modules[\''</span> + __name__ + <span class="string">'\'].exit_callback'</span>)</div><div class="line"><span class="comment">#暂时只考虑armv7和arm64</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is64Bit</span><span class="params">()</span>:</span></div><div class="line">    arch = objc.currentArch()</div><div class="line">    <span class="keyword">if</span> arch == <span class="string">"arm64"</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ptrace_callback</span><span class="params">(frame, bp_loc, internal_dict)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"find ptrace"</span></div><div class="line">    register = <span class="string">"x0"</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is64Bit():</div><div class="line">        register = <span class="string">"r0"</span></div><div class="line">    frame.FindRegister(register).value = <span class="string">"0"</span></div><div class="line">    lldb.debugger.HandleCommand(<span class="string">'continue'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">syscall_callback</span><span class="params">(frame, bp_loc, internal_dict)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"find syscall"</span></div><div class="line">    <span class="comment">#不知道怎么用api修改sp指向的内容QAQ</span></div><div class="line">    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())</div><div class="line">    <span class="keyword">if</span> is64Bit():</div><div class="line">        lldb.debugger.HandleCommand(<span class="string">'memory write "$sp" 0'</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        lldb.debugger.HandleCommand(<span class="string">'register write $r1 0'</span>)</div><div class="line">    lldb.debugger.HandleCommand(<span class="string">'continue'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sysctl_callback</span><span class="params">(frame, bp_loc, internal_dict)</span>:</span></div><div class="line">    module = frame.GetThread().GetFrameAtIndex(<span class="number">1</span>).GetModule()</div><div class="line">    currentModule = lldb.debugger.GetSelectedTarget().GetModuleAtIndex(<span class="number">0</span>)</div><div class="line">    <span class="keyword">if</span> module == currentModule:</div><div class="line">        <span class="keyword">print</span> <span class="string">"find sysctl"</span></div><div class="line">        register = <span class="string">"x2"</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is64Bit():</div><div class="line">            register = <span class="string">"r2"</span></div><div class="line">        frame.FindRegister(register).value = <span class="string">"0"</span></div><div class="line">    lldb.debugger.HandleCommand(<span class="string">'continue'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exit_callback</span><span class="params">(frame, bp_loc, internal_dict)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"find exit"</span></div><div class="line">    lldb.debugger.GetSelectedTarget().GetProcess().SetSelectedThread(frame.GetThread())</div><div class="line">    lldb.debugger.HandleCommand(<span class="string">'thread return'</span>)</div><div class="line">    lldb.debugger.HandleCommand(<span class="string">'continue'</span>)</div></pre></td></tr></table></figure>
 <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a href="http://bbs.iosre.com/t/topic/8179" target="_blank" rel="external">关于反调试那些事</a></p>
 <p>大部分代码参考自<code>aloneMonkey</code>，做了一些小的修改和自己的理解注释</p>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-19T03:53:40.852Z" itemprop="dateUpdated">2018-04-19 11:53:40</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2018/04/17/反动态调试保护的实现和破解/" target="_blank" rel="external">http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/&title=《反动态调试保护的实现和破解》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/&title=《反动态调试保护的实现和破解》 — Peterpan's Blog&source=之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/18/树形DP初步/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">树形DP初步</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/16/黑书动态规划习题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">黑书动态规划习题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#反调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">反调试</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#打破反调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">打破反调试</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考博客</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/&title=《反动态调试保护的实现和破解》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/&title=《反动态调试保护的实现和破解》 — Peterpan's Blog&source=之前在一章博客中提到了关于反动态调试保护的一些基础知识，也就是ptrace系统调用，那么我们就用实力来看看是如何实现还有如何去绕开的。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQW4jMQwEQP//07vXAFnb3aKYeIGak2E4M6o5iEyLj0d8/flyff3m++dn3zy7z/yvLlx4eHh4g6V/v14/IAe3T0zun9wBDw8Pb4/3eptONvSzV/N60UlZemPBw8PD+xhesrj8N2dgPDw8vP+Ll4QFtzISPDw8vM/kJVt2HQSUxaANJi5nLXh4eHjdGqKt+XM+r5zv4eHh4Y1P1ScHY+0ry0cHihXi4eHhLfDyf/XbMYK7k1Gj5h4PDw/vKm9+fHWrQU8YbbuPh4eHt8Gb3OisFU5eU1KWilKEh4eHt8abL/GsbExijmhYAQ8PD2+Nlww5JaHAZFiqLVF13cPDw8Nb4+UBa974tu11/sQ3SDw8PLw13hwwSQPaGKI4isPDw8Nb4M0b7uSX89+3/wDg4eHhbfDOQoR8K29j4iTmKIoQHh4e3jKvPcpKHty+oHYlb9aJh4eHt8A7Ozk6O/o6KwlnxQYPDw/vZ3htAcjD03Z8Ki8Ar7/Hw8PD2+DNR6CS9rd9EWfBLh4eHt7P8No4IK827bFZUn4O4108PDy8q7z2aD9pspMwN2nQzwrS09EBPDw8vDVee7WxxdlR1uEcGR4eHt4arz34zxvldjCrDSbevDg8PDy8Nd58sz4rFe2hV9v64+Hh4W3w2oa13poHz8onqeqZCDw8PLwBL9/ck8e00e1jcEWxLx4eHt4C72xBefSQxxl7LwIPDw/vLu/suGvCbuPdPBz5x1Pw8PDwFniTPTbf+pM7tM19EpTg4eHh7fHaYjCBnR3C5YXhaeKCh4eHt8DLY4L5oOoEXLfReHh4eL/KuxXpTuLjJMI4LAx4eHh4C7x8oz8rHmd3vjBlgIeHhzeOaBPMWQlJmun25b5pr/Hw8PAWeJORrHahedlYKRJ4eHh4U95f0RbkKVQww5MAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

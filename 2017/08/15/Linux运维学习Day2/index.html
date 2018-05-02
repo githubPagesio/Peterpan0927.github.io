@@ -1,53 +1,190 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>Linux运维学习Day2</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/08/15/Linux运维学习Day2/">
+    
+    
+    <title>Linux运维学习Day2 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="Linux">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Linux运维学习Day2</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">Linux运维学习Day2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-15T11:26:11.000Z" itemprop="datePublished" class="page-time">
+  2017-08-15
+</time>
 
 
-<h2 class="title">Linux运维学习Day2</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年8月15日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/命令帮助-终端、虚拟机使用/">命令帮助 终端、虚拟机使用</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/命令帮助-终端、虚拟机使用/">命令帮助 终端、虚拟机使用</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day2"><span class="toc-text">Linux运维学习Day2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机基础知识"><span class="toc-text">计算机基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机基础知识（二）"><span class="toc-text">计算机基础知识（二）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux命令"><span class="toc-text">Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><span class="toc-text">工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来就是一些基础的命令讲解"><span class="toc-text">接下来就是一些基础的命令讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#然后进入到系统管理类命令"><span class="toc-text">然后进入到系统管理类命令</span></a></li></ol></li></ol></li></ol>
-<p>接着第一天的继续完善基础的知识吧！</p>
+
+<div class="container body-wrap">
+    <article id="post-Linux运维学习Day2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Linux运维学习Day2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-15 19:26:11" datetime="2017-08-15T11:26:11.000Z"  itemprop="datePublished">2017-08-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/命令帮助-终端、虚拟机使用/">命令帮助 终端、虚拟机使用</a></li></ul>
+
+
+
+            
+	<span id="/2017/08/15/Linux运维学习Day2/" class="leancloud_visitors" data-flag-title="Linux运维学习Day2" title="Linux运维学习Day2">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/08/15/Linux运维学习Day2/#comment">
+            <span class="valine-comment-count" data-xid="/2017/08/15/Linux运维学习Day2/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>接着第一天的继续完善基础的知识吧！</p>
 <a id="more"></a>
 <h1 id="Linux运维学习Day2"><a href="#Linux运维学习Day2" class="headerlink" title="Linux运维学习Day2"></a>Linux运维学习Day2</h1><h2 id="计算机基础知识"><a href="#计算机基础知识" class="headerlink" title="计算机基础知识"></a>计算机基础知识</h2><blockquote>
 <p>CPU、Memory、I/O</p>
@@ -91,7 +228,10 @@
 <p>Centos:兼容rhel的格式，除了界面不一样</p>
 </blockquote>
 </blockquote>
-<p>可以参考,还有一些非主流发行版比如说Gentoo、LFS(Linux From scratch)，Android也能算是linux的发行版本，就是kernel+<a href="https://zh.wikipedia.org/wiki/BusyBox" target="_blank" rel="external"> busybox</a>+java虚拟机。<img src="http://omunhj2f1.bkt.clouddn.com/gldt1210.png" alt=""></p>
+<p>可以参考,还有一些非主流发行版比如说Gentoo、LFS(Linux From scratch)，Android也能算是linux的发行版本，就是kernel+<a href="https://zh.wikipedia.org/wiki/BusyBox" target="_blank" rel="external"> busybox</a>+java虚拟机。<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/gldt1210.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p><a href="http://www.ha97.com/833.html" target="_blank" rel="external">开源协议及其比较</a></p>
 <p>程序包管理器:</p>
 <p>​        rpm:rhel fedora suse centos</p>
@@ -111,11 +251,9 @@
 </blockquote>
 <p>查看当前的终端设备:tty命令</p>
 <p>从图形化切换到命令行，可以使用:</p>
-<pre><code class="shell">init 2/3
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init 2/3</div></pre></td></tr></table></figure>
 <p>转换回图形化的时候使用命令：</p>
-<pre><code class="shell">init 5
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init 5</div></pre></td></tr></table></figure>
 <p>交互式接口：启动终端后，在终端设备附加一个交互式应用程序</p>
 <p>GUI:</p>
 <blockquote>
@@ -129,11 +267,9 @@
 <p>Shell程序：sh、bash(遵从GPL协议)、csh(接近于C语言风格的shell)、ksh、zsh</p>
 </blockquote>
 <p>使用当前使用的shell</p>
-<pre><code class="shell">echo $SHELL
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $SHELL</div></pre></td></tr></table></figure>
 <p>显示当前系统支持的所有shell</p>
-<pre><code class="shell">cat /etc/shells
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/shells</div></pre></td></tr></table></figure>
 <p>在shell中的可执行命令有两类：</p>
 <blockquote>
 <p>内建命令：通过某命令形式提供</p>
@@ -194,13 +330,22 @@
 </tr>
 </tbody>
 </table>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/6B77F5F6-E55D-4963-A2E1-B9C185FBC40E.png" alt=""></p>
 <p>程序自身的帮助文档：/usr/share/doc/COMMAND-VERSION,或者查看官方文档</p>
 <p>推荐一个网站，<a href="https://www.slideshare.net/" target="_blank" rel="external">需先翻墙再使用</a></p>
 <h3 id="接下来就是一些基础的命令讲解"><a href="#接下来就是一些基础的命令讲解" class="headerlink" title="接下来就是一些基础的命令讲解"></a>接下来就是一些基础的命令讲解</h3><p><code>date</code>命令使用：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg" alt=""></p>
-<p>e.g.-&gt;:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
+<p>e.g.-&gt;:<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p>Linux的两种时钟：</p>
 <blockquote>
 <p>系统时钟：由Linux内核通过CPU工作频率进行的计时</p>
@@ -222,13 +367,21 @@
 </tbody>
 </table>
 <p>关于ls命令：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>获取指定文件的元数据信息可用<code>stat</code>命令：</p>
-<pre><code class="shell">stat test
-</code></pre>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stat test</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>文件查看命令：<code>cat</code>、<code>tac</code></p>
-<p>cat命令是通过你键入的文件路径来显示文件，事实上文件是以文件流的方式存储的，一个换行符是$，一个空格是$$，如果你的cat命令后面没有键入任何的路径，那么默认就会读取你之后输入的信息输出，就像一个复读机一样，是不是突然变的有意思了么？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png" alt=""></p>
+<p>cat命令是通过你键入的文件路径来显示文件，事实上文件是以文件流的方式存储的，一个换行符是$，一个空格是$$，如果你的cat命令后面没有键入任何的路径，那么默认就会读取你之后输入的信息输出，就像一个复读机一样，是不是突然变的有意思了么？<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <table>
 <thead>
 <tr>
@@ -251,30 +404,307 @@
 <p>重启命令：<code>reboot</code>、 <code>shutdown</code>、 <code>init 6</code></p>
 <p>用户登录相关：<code>whoami</code>、 <code>who</code>、 <code>w</code></p>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.768Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2017/08/15/Linux运维学习Day2/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2017/08/15/Linux运维学习Day2/" target="_blank" rel="external">http://yoursite.com/2017/08/15/Linux运维学习Day2/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/15/Linux运维学习Day2/&title=《Linux运维学习Day2》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/Linux运维学习Day2/&title=《Linux运维学习Day2》 — Peterpan's Blog&source=接着第一天的继续完善基础的知识吧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/08/15/Linux运维学习Day3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux运维学习Day3</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/15/Linux运维学习Day1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux运维学习Day1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux运维学习Day2"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux运维学习Day2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">计算机基础知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识（二）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">计算机基础知识（二）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux命令"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Linux命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接下来就是一些基础的命令讲解"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">接下来就是一些基础的命令讲解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#然后进入到系统管理类命令"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">然后进入到系统管理类命令</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/15/Linux运维学习Day2/&title=《Linux运维学习Day2》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/Linux运维学习Day2/&title=《Linux运维学习Day2》 — Peterpan's Blog&source=接着第一天的继续完善基础的知识吧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aSXKEMBAEQP//0+MXwFS1wGFEcprwIpRz6Ojt5yd+PuVzdMLRmUc/ufjBwMB4LCO5UHLd5Fr5OfndMDAw3sM4D5HnvPPPyW/bv8TAwMA4Z7T/lZ82ewsGBgZGUl7m4ORMDAwMjJUiNiflbbg2Jb2gFsfAwHggY3b033y+Zb6BgYHxKMZn4ZmVqXm7rbgJBgbG1oy8lXZHQduWshgYGBizVYk8RLYLGflyBgYGxt6Mq5YnzpHtCLNewsDAwNiacR58c0DOzkviNpXEwMDYlZEncHekksl1o7djYGBszZi145P/aoeg+VsuG2diYGA8kNE26/Mm/vrK12wUioGBsQcjT7+SYJekgLNliy/nY2BgbM1YHyuuBNzkK8uDLwYGxt6MlXlCi2mbesMMFwMDYztGntK1o8oZLy+qh5kpBgbGoxh5Q3+WCLaNuXZF48skFgMDYyNGfvWklV8PGsv09HDBAgMD4wWMlTWLPA9dSRMxMDDeyWjrwTaYznY92vULDAyMvRltmGsHmbNWWltUY2Bg7M24amzZrlYME767p68YGBj/kvEpnzsC6Oyr+TLfwMDA2IjRlqMrCxmzVDJ/CwYGxt6MNsjmgXh9wFCkkhgYGC9g3DFunAXc4XQSAwMDIw58K2F61ubDwMDAaC+djzxXyuYLUkMMDIwHMtpLzJbG8iK2HjZgYGBszWhXHPKEb2WZbBh2MTAwdmP8AkUpN/WRVwB/AAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

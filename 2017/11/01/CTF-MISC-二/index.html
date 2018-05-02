@@ -1,314 +1,623 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>CTF-MISC(二)</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/11/01/CTF-MISC-二/">
+    
+    
+    <title>CTF-MISC(二) | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="CTF">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>CTF-MISC(二)</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">CTF-MISC(二)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-01T15:33:26.000Z" itemprop="datePublished" class="page-time">
+  2017-11-01
+</time>
 
 
-<h2 class="title">CTF-MISC(二)</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年11月1日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/爆破-脚本/">爆破 脚本</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/爆破-脚本/">爆破 脚本</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-女神"><span class="toc-text">0X00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-有趣的文件"><span class="toc-text">0X01-有趣的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-保险箱"><span class="toc-text">0X02-保险箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X03-64格"><span class="toc-text">0X03-64格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X04-这就是一个坑"><span class="toc-text">0X04-这就是一个坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X05-妹子的陌陌"><span class="toc-text">0X05-妹子的陌陌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X06-破解wifi密码"><span class="toc-text">0X06-破解wifi密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X07-听首音乐吧"><span class="toc-text">0X07-听首音乐吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X08-图穷匕见"><span class="toc-text">0X08-图穷匕见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X09-convert"><span class="toc-text">0X09-convert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X0A-细心的大象"><span class="toc-text">0X0A-细心的大象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X0B-ROT13变身了"><span class="toc-text">0X0B-ROT13变身了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X0C-NSCTF250"><span class="toc-text">0X0C-NSCTF250</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X0D-sssssss"><span class="toc-text">0X0D-sssssss</span></a></li></ol>
-<p>安全领域博大精深，今天我们来继续领略其中的奥妙吧～</p>
+
+<div class="container body-wrap">
+    <article id="post-CTF-MISC-二"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">CTF-MISC(二)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-01 23:33:26" datetime="2017-11-01T15:33:26.000Z"  itemprop="datePublished">2017-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/爆破-脚本/">爆破 脚本</a></li></ul>
+
+
+
+            
+	<span id="/2017/11/01/CTF-MISC-二/" class="leancloud_visitors" data-flag-title="CTF-MISC(二)" title="CTF-MISC(二)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/11/01/CTF-MISC-二/#comment">
+            <span class="valine-comment-count" data-xid="/2017/11/01/CTF-MISC-二/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>安全领域博大精深，今天我们来继续领略其中的奥妙吧～</p>
 <a id="more"></a>
-<h2 id="0X00-女神"><a href="#0X00-女神" class="headerlink" title="0X00-女神"></a>0X00-女神</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8A%E5%8D%8810.11.47.png" alt=""></p>
+<h2 id="0X00-女神"><a href="#0X00-女神" class="headerlink" title="0X00-女神"></a>0X00-女神</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8A%E5%8D%8810.11.47.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>压缩包中是一个txt文件，其中是base64编码过的文件，解码之后发现是png文件，丢去识图一下就找出来了，如果用python来进行操作的话其实更快，下面就是一句话搞定:</p>
-<pre><code class="python">&gt;&gt;&gt; open(&#39;nvshen.png&#39;, &#39;wb&#39;).write((open(&#39;nvshen.txt&#39;, &#39;rb&#39;).read().decode(&#39;base64&#39;))
-</code></pre>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8A%E5%8D%8810.05.09.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>open(<span class="string">'nvshen.png'</span>, <span class="string">'wb'</span>).write((open(<span class="string">'nvshen.txt'</span>, <span class="string">'rb'</span>).read().decode(<span class="string">'base64'</span>))</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8A%E5%8D%8810.05.09.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>接下来google识图or百度识图都OK，查出来居然还是个满族皇室，emmm，吾不言。</p>
 <p>其实在这种地方推荐使用python的内置函数，这样不仅方便还不容易出错，在网上bae64解码很多时候都会出问题，保存图片的时候也不好使用二进制形式保存，造成png图片无法显示，给我们造成不必要的时间浪费。这个时候推荐使用python2，python3上面的编码方面有些麻烦</p>
 <h2 id="0X01-有趣的文件"><a href="#0X01-有趣的文件" class="headerlink" title="0X01-有趣的文件"></a>0X01-有趣的文件</h2><p>打开之后发现是如下图所示的十六进制文件，前面的地址显然是不想要的，我们要把后面的字符串连在一起：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%881.28.18.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%881.28.18.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>文件头afbc 1c27很明显没见过，联想以前gif图片总是缺少gif头，这次的文件很大可能就是缺少了部分文件头。经过一番搜索之后发现这个应该是缺少了7z压缩包的文件头，而且需要将十六进制的前后反序一下，因为7z的文件头是<code>377a bcaf 271c</code>,知道了之后我们就可以开始写程序了，需要注意的一点是保存文件需要以二进制文件的形式保存：</p>
-<pre><code class="python"># -*- coding: utf8 -*-
-
-def revStr(s):
-    news=&quot;&quot;
-    for i in xrange(0,len(s),4):
-        news+=s[i+2:i+4]
-        news+=s[i:i+2]
-    return news
-
-def foo():
-    f=open(&#39;funfile&#39;)
-    s=&quot;377a&quot; #7z的意思
-    for line in f:
-        s+=revStr(line.strip()[8:].replace(&#39; &#39;,&#39;&#39;))
-    fsave=open(&#39;funsave.7z&#39;,&#39;wb&#39;) #必须有个b,表示以二进制保存
-    fsave.write(s.decode(&#39;hex&#39;))
-    fsave.close()
-    pass
-
-if __name__ == &#39;__main__&#39;:
-    foo()
-    print &#39;ok&#39;
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf8 -*-</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">revStr</span><span class="params">(s)</span>:</span></div><div class="line">	news=<span class="string">""</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>,len(s),<span class="number">4</span>):</div><div class="line">		news+=s[i+<span class="number">2</span>:i+<span class="number">4</span>]</div><div class="line">		news+=s[i:i+<span class="number">2</span>]</div><div class="line">	<span class="keyword">return</span> news</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">	f=open(<span class="string">'funfile'</span>)</div><div class="line">	s=<span class="string">"377a"</span> <span class="comment">#7z的意思</span></div><div class="line">	<span class="keyword">for</span> line <span class="keyword">in</span> f:</div><div class="line">		s+=revStr(line.strip()[<span class="number">8</span>:].replace(<span class="string">' '</span>,<span class="string">''</span>))</div><div class="line">	fsave=open(<span class="string">'funsave.7z'</span>,<span class="string">'wb'</span>) <span class="comment">#必须有个b,表示以二进制保存</span></div><div class="line">	fsave.write(s.decode(<span class="string">'hex'</span>))</div><div class="line">	fsave.close()</div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">	foo()</div><div class="line">	<span class="keyword">print</span> <span class="string">'ok'</span></div></pre></td></tr></table></figure>
 <p>运行后，就会生成一个7z文件，解压出来是一张阿狸的图片，用winhex等工具打开，flag就在开头，然后将其base64解码即可得到本题的flag。</p>
 <h2 id="0X02-保险箱"><a href="#0X02-保险箱" class="headerlink" title="0X02-保险箱"></a>0X02-保险箱</h2><p>下载下来一张图片，这个就是我的老本行了，先从简单的连招打过去，然后就爆了一个压缩包出来，压缩包被加密了，并不能打开，使用<code>rarcrack</code>跑了半天也没个结果，速度慢得要死，后来去网上查了一下，使用了名为ARPR的压缩包爆破工具，如果单纯暴力破解的话，显然从效率上也是不可取的，所以我们用python生成了一个四位数字典去爆破(因为题目的名字叫保险箱，所以先猜测是四位纯数字密码)，这里丢个脚本：</p>
-<pre><code class="python">#! /usr/bin/env python
-#-*- coding:utf-8 -*-
-import sys
-
-def max(a):
-    ji=1;
-    while(a&gt;0):
-        ji=ji*10
-        a=a-1
-    return ji
-if len(sys.argv)!=2:
-    print &quot;two argument&quot;
-else:
-    f=open(&quot;m.txt&quot;,&quot;w&quot;)
-    a=int(sys.argv[1])
-    for i in range(0,max(a)):
-        char=str(i).zfill(a)
-        f.write(char+&quot;\r&quot;)
-    f.close()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">max</span><span class="params">(a)</span>:</span></div><div class="line">    ji=<span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(a&gt;<span class="number">0</span>):</div><div class="line">        ji=ji*<span class="number">10</span></div><div class="line">        a=a<span class="number">-1</span></div><div class="line">    <span class="keyword">return</span> ji</div><div class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"two argument"</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    f=open(<span class="string">"m.txt"</span>,<span class="string">"w"</span>)</div><div class="line">    a=int(sys.argv[<span class="number">1</span>])</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,max(a)):</div><div class="line">        char=str(i).zfill(a)</div><div class="line">        f.write(char+<span class="string">"\r"</span>)</div><div class="line">    f.close()</div></pre></td></tr></table></figure>
 <p>然后将这个选中为字典，在ARPR中进行爆破，基本不到一分钟即可以爆破出来，可以节省我们很多的效率。</p>
 <h2 id="0X03-64格"><a href="#0X03-64格" class="headerlink" title="0X03-64格"></a>0X03-64格</h2><p>一个rar包，在Mac可以直接命令行解压，7z格式的也是，这里为使用Mac的同学稍微普及一下：</p>
-<pre><code class="shell">#rar解压
-unrar x xx.rar
-#7z解压
-7z e xx.7z
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#rar解压</div><div class="line">unrar x xx.rar</div><div class="line">#7z解压</div><div class="line">7z e xx.7z</div></pre></td></tr></table></figure>
 <p>解压缩之后是一个GIF图片，点击表示打不开，这个点小事直接丢进Hex Friend中看一下，补齐文件头之后看到19帧的图片，小黄人分别站在8x8的格子不同位置上，将它们的位置统计出来应该是：</p>
 <blockquote>
 <p>16 53 17 06 30 54 05 34 24 53 61 36 25 22 25 31 25 55 52</p>
 </blockquote>
 <p>这玩意看起来也不能转换成ASCII码，那么搜索一下64相关的，然后发现了一个64索引表：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%887.58.29.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%887.58.29.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>对应一一解码之后发现是一个base64字符串，丢到python内置函数中居然没有接出来，后来弄了个在线的接出来才提交flag。这个就涉及到占位符的问题，python的内置函数如果缺少了必须的占位符就会报错，所以只要加上即可。</p>
-<h2 id="0X04-这就是一个坑"><a href="#0X04-这就是一个坑" class="headerlink" title="0X04-这就是一个坑"></a>0X04-这就是一个坑</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.25.48.png" alt=""></p>
+<h2 id="0X04-这就是一个坑"><a href="#0X04-这就是一个坑" class="headerlink" title="0X04-这就是一个坑"></a>0X04-这就是一个坑</h2><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.25.48.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>打开了这个压缩包之后有一个加密压缩包和一个tips.txt，说的就是题目中的提示内容</p>
 <p>题目中说密码有十位，包含了大小写字母还有特殊符号，然而刚刚爆完上一个的我决定把它也爆掉（显然这是不可能的）</p>
 <p>看到我的上面显示的时间需要一个世纪我就果断放弃了，还是从别的地方看看吧，从我的快压中打开加密压缩包之后发现</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.29.18.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.29.18.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>感觉这里应该就是突破点所在了，可能这两个txt文件是同样的txt文件，所以可以利用它做一次明文攻击（明文攻击使用条件是我们有一个加密压缩包中的一个文件），所以我们对tips.txt压缩一次：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.31.42.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-01%20%E4%B8%8B%E5%8D%8811.31.42.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>丢到这个里面跑个十分钟左右应该就OK了，应该考察的是观察能力和工具的利用吧。</p>
 <h2 id="0X05-妹子的陌陌"><a href="#0X05-妹子的陌陌" class="headerlink" title="0X05-妹子的陌陌"></a>0X05-妹子的陌陌</h2><p>下载下来一张图片之后使用binwalk一扫果然内有乾坤，然后使用<code>foremost</code>分离之后有一个压缩包，然而需要密码，回头找密码应该就在图片找，一开始想的是这是一个jpg文件，那么很可能有jhide之类的隐藏算法，就用<code>stegdetect</code>测试了一下，结果通过修改敏感度居然检测到了jhide，于是我非常兴奋的开始寻找密码（以下省略一万字…）</p>
 <p>最好搞了半天也搞不出来，肯定是遗忘了什么东西，回到图，发现上面有”喜欢我么.”这样的字符，题目从来不会出没有必要的东西，那么显然这个应该是密码，尝试了一波还是不对，接着又试了一波压缩包的密码，压缩包就解压了…难道是一开始就想错了方向么？？？</p>
 <p>然后就出来下面所示的文本文件，我们打开看看：</p>
-<pre><code class="python">嘟嘟嘟嘟
-士兵：报告首长！已截获纳粹的加密电报！
-首长：拿来看看
-
-电报内容：
-..../-/-/.--./---.../-..-./-..-././-./-.-./---/-.././.-.-.-/-.-./..../.-/..../..-/---/.-.-.-/-.-./---/--/-..-.
-
-首长：我操你在逗我吗？你确定是他们纳粹发的吗？
-士兵：难道我弄错了？哦。。。等等是这一条
-
-内容：http://c.bugku.com/U2FsdGVkX18tl8Yi7FaGiv6jK1SBxKD30eYb52onYe0=
-      AES Key：@#@#¥%⋯⋯¥¥%%⋯⋯&amp;¥
-
-士兵：二维码真的扫不出来吗？？肯定可以扫出来
-</code></pre>
-<p>既然都说了是AES算法，接下来就很简单了，直接解出来是一个图片的url，下载之后发现扫不出来，定睛一看，诶这个二维码似乎有点不对啊：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%885.38.00.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">嘟嘟嘟嘟</div><div class="line">士兵：报告首长！已截获纳粹的加密电报！</div><div class="line">首长：拿来看看</div><div class="line"></div><div class="line">电报内容：</div><div class="line">..../-/-/.--./---.../-..-./-..-././-./-.-./---/-.././.-.-.-/-.-./..../.-/..../..-/---/.-.-.-/-.-./---/--/-..-.</div><div class="line"></div><div class="line">首长：我操你在逗我吗？你确定是他们纳粹发的吗？</div><div class="line">士兵：难道我弄错了？哦。。。等等是这一条</div><div class="line"></div><div class="line">内容：http://c.bugku.com/U2FsdGVkX18tl8Yi7FaGiv6jK1SBxKD30eYb52onYe0=</div><div class="line">      AES Key：@<span class="comment">#@#¥%⋯⋯¥¥%%⋯⋯&amp;¥</span></div><div class="line"></div><div class="line">士兵：二维码真的扫不出来吗？？肯定可以扫出来</div></pre></td></tr></table></figure>
+<p>既然都说了是AES算法，接下来就很简单了，直接解出来是一个图片的url，下载之后发现扫不出来，定睛一看，诶这个二维码似乎有点不对啊：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%885.38.00.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p>可以直接通过Mac上的预览中的工具反色，为了锻炼自己的脚本能力，我决定自己写一个脚本：</p>
-<pre><code class="python">#! /usr/bin/env python
-#-*- coding:utf-8 -*-
-
-import sys
-from PIL import Image
-
-imagePath = sys.argv[1]
-im = Image.open(imagePath)
-im1 = Image.new(&#39;RGB&#39;, (im.size[0], im.size[1]), &#39;#ffffff&#39;)
-for i in range(im.size[0]):
-  for j in range(im.size[1]):
-    if im.getpixel((i, j)) == (255, 255, 255, 255):
-      im1.putpixel([i, j], (0, 0, 0, 0))
-    else:
-      im1.putpixel([i, j], (255, 255, 255, 255))
-im1.show()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">imagePath = sys.argv[<span class="number">1</span>]</div><div class="line">im = Image.open(imagePath)</div><div class="line">im1 = Image.new(<span class="string">'RGB'</span>, (im.size[<span class="number">0</span>], im.size[<span class="number">1</span>]), <span class="string">'#ffffff'</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(im.size[<span class="number">0</span>]):</div><div class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> range(im.size[<span class="number">1</span>]):</div><div class="line">    <span class="keyword">if</span> im.getpixel((i, j)) == (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>):</div><div class="line">      im1.putpixel([i, j], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      im1.putpixel([i, j], (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</div><div class="line">im1.show()</div></pre></td></tr></table></figure>
 <h2 id="0X06-破解wifi密码"><a href="#0X06-破解wifi密码" class="headerlink" title="0X06-破解wifi密码"></a>0X06-破解wifi密码</h2><p>题目的提示想要蹭网的话就来破解wifi的密码吧，tips：密码为手机号，为了不为难你，大佬特地让我悄悄地把前七位告诉你：1391040，Goodluck!!下载下来是一个数据包，接下来就开始我们的破解环节了：</p>
 <p>我们都知道wifi认证的过程重点就是在WPA的四次握手包，也就是eapol协议的包，所以就可以使用wireshark先过滤一波</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.12.46.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.12.46.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>接下来就直接手写一个脚本生成上面所有情况的电话号码，使用aircrack-ng即可，这里丢一个python的脚本：</p>
-<pre><code class="python">#! /usr/bin/env python
-import sys
-
-def getNumber(a):
-    s=1
-    while(a&gt;0):
-        s *= 10
-        a = a-1
-    return s
-
-if len(sys.argv) != 2:
-    print (&quot;we need the number&quot;)
-else:
-    f=open(&quot;m.txt&quot;,&#39;w&#39;)
-    a=int(sys.argv[1])
-    print(a)
-    for i in range(0, getNumber(a)):
-        char=&#39;1391040&#39; + str(i).zfill(a)
-        f.write(char+&quot;\n&quot;)
-    f.close()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNumber</span><span class="params">(a)</span>:</span></div><div class="line">    s=<span class="number">1</span></div><div class="line">    <span class="keyword">while</span>(a&gt;<span class="number">0</span>):</div><div class="line">        s *= <span class="number">10</span></div><div class="line">        a = a<span class="number">-1</span></div><div class="line">    <span class="keyword">return</span> s</div><div class="line"></div><div class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">2</span>:</div><div class="line">    <span class="keyword">print</span> (<span class="string">"we need the number"</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    f=open(<span class="string">"m.txt"</span>,<span class="string">'w'</span>)</div><div class="line">    a=int(sys.argv[<span class="number">1</span>])</div><div class="line">    print(a)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, getNumber(a)):</div><div class="line">        char=<span class="string">'1391040'</span> + str(i).zfill(a)</div><div class="line">        f.write(char+<span class="string">"\n"</span>)</div><div class="line">    f.close()</div></pre></td></tr></table></figure>
 <p>三秒就爆出我们所需要的wifi密码，字典写的好，爆破爆的早：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.19.58.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%889.19.58.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>然后就可以直接提交我们的key了，这题是不是特别简单。</p>
 <h2 id="0X07-听首音乐吧"><a href="#0X07-听首音乐吧" class="headerlink" title="0X07-听首音乐吧"></a>0X07-听首音乐吧</h2><p>下载下来是wav格式的音乐，第一时间想到的就是MP3Stego去解决，但是重点是密码是多少呢，压缩包解压之后之后一个音乐，那么首先试试弱密码，不对。那么回头想想，会不会答案藏在音乐中呢？</p>
-<pre><code class="shell">strings stego100.wav | grep &#39;KEY&#39;
-strings stego100.wav | grep &#39;flag&#39;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">strings stego100.wav | grep &apos;KEY&apos;</div><div class="line">strings stego100.wav | grep &apos;flag&apos;</div></pre></td></tr></table></figure>
 <p>但是依旧一无所获，没办法，听听音乐吧，结果在大概几十秒的时候听到了嘀嗒的声音，猜测可能是摩斯电码，即使凭借我超常的听力记录下来了摩斯code：</p>
-<pre><code class="number">..... -... -.-. ----. ..--- ..... -.... ....- ----. -.-. -... ----- .---- ---.. ---.. ..-. ..... ..--- . -.... .---- --... -.. --... ----- ----. ..--- ----. .---- ----. .---- -.-.
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">..... -... -.-. ----. ..--- ..... -.... ....- ----. -.-. -... ----- .---- ---.. ---.. ..-. ..... ..--- . -.... .---- --... -.. --... ----- ----. ..--- ----. .---- ----. .---- -.-.</div></pre></td></tr></table></figure>
 <p>接下来就是对它解密了，解密成功之后得到字符串，立马就使用了MP3Stego去decode，这个密码还真长哈，结果发现还是不对，这不可能！再次回到开头，难道是md5？尝试后失败，于是我干脆就直接拿这个提交了，然后就成功了，看来做人有时候不要想太多，脑洞要懂得收放自如才是真理。</p>
 <h2 id="0X08-图穷匕见"><a href="#0X08-图穷匕见" class="headerlink" title="0X08-图穷匕见"></a>0X08-图穷匕见</h2><p>下载图片之后首先使用HexFriend分析其十六进制下的情况，然后就发现了一些异常，中间有着大量的0，然后结尾都是一些字符串，然后我就顺便搜了一下jpg的结束标志FFD9：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.18.20.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.18.20.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>这说明后面的都是附加部分，于是我们可以将后面的部分拷贝出来观察一下，发现它的十六进制转换成文本之后同样是十六进制，然后我们在进行一次十六进制转换之后可以发现这时候的文本变成了坐标：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.23.15.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.23.15.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>将其中的信息导出我们可以写一个python的脚本去还原，基本可以猜测这是一个二维码：</p>
-<pre><code class="python">from PIL import Image
-from ast import literal_eval as make_tuple
-
-f = open(&#39;paintpaintpaint&#39;, &#39;r&#39;)
-points = [make_tuple(line) for line in f.readlines()]
-f.close()
-im = Image.new(&#39;RGB&#39;, (272, 272), &#39;#ffffff&#39;)
-for i in points:
-  im.putpixel([i[0], i[1]], (0, 0, 0))
-im.show()
-</code></pre>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.41.58.png" alt="">这样就是自己动手丰衣足食了，不然可以练脚本小子的称号都没有的</p>
-<h2 id="0X09-convert"><a href="#0X09-convert" class="headerlink" title="0X09-convert"></a>0X09-convert</h2><p>打开网址后看到全屏的二进制01串，首先要转换成十六进制，然后我们使用HexFriend打开之后看到的是个压缩包文件：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%888.44.13.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval <span class="keyword">as</span> make_tuple</div><div class="line"></div><div class="line">f = open(<span class="string">'paintpaintpaint'</span>, <span class="string">'r'</span>)</div><div class="line">points = [make_tuple(line) <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</div><div class="line">f.close()</div><div class="line">im = Image.new(<span class="string">'RGB'</span>, (<span class="number">272</span>, <span class="number">272</span>), <span class="string">'#ffffff'</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> points:</div><div class="line">  im.putpixel([i[<span class="number">0</span>], i[<span class="number">1</span>]], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</div><div class="line">im.show()</div></pre></td></tr></table></figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%887.41.58.png" alt="" title="" class="">
+                <p></p>
+            </figure>这样就是自己动手丰衣足食了，不然可以练脚本小子的称号都没有的<br><br><br><br>## 0X09-convert<br><br>打开网址后看到全屏的二进制01串，首先要转换成十六进制，然后我们使用HexFriend打开之后看到的是个压缩包文件：<br><br><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%888.44.13.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>然后另存为之后解压看到一张图片。这个时候就应该由浅入深分析了，jpg格式的图片中不可能是LSB隐藏算法，所以就用binwalk扫一下有没有压缩包，Mac上可以打开，说明CRC也没有问题，然后右键看图片的详细信息，发现有base64编码的字符串（windows下），解码之后成功得到flag，下面丢出脚本：</p>
-<pre><code class="python">#! /usr/bin/env python
-#-*- coding:utf-8 -*-
-
-f=open(&#39;convert.txt&#39;)
-a=f.read()
-i=0
-str=&#39;&#39;
-while i &lt;= len(a)-4:
-    h = a[i:i+4]
-    i += 4
-    h = hex(int(h, 2))
-    str += h[-1:]
-print(str)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line">f=open(<span class="string">'convert.txt'</span>)</div><div class="line">a=f.read()</div><div class="line">i=<span class="number">0</span></div><div class="line">str=<span class="string">''</span></div><div class="line"><span class="keyword">while</span> i &lt;= len(a)<span class="number">-4</span>:</div><div class="line">    h = a[i:i+<span class="number">4</span>]</div><div class="line">    i += <span class="number">4</span></div><div class="line">    h = hex(int(h, <span class="number">2</span>))</div><div class="line">    str += h[<span class="number">-1</span>:]</div><div class="line">print(str)</div></pre></td></tr></table></figure>
 <p>整个解决问题的核心其实就在于脚本的编写了。很多网上的十六进制转换工具是不支持这样转换的。</p>
 <h2 id="0X0A-细心的大象"><a href="#0X0A-细心的大象" class="headerlink" title="0X0A-细心的大象"></a>0X0A-细心的大象</h2><p>通过网址下载图片，通过binwalk发现了其中的隐藏文件，直接提取出来即可，其中就是一个大象的图片和一个加密的的压缩包，进行各种排查之后发现没有什么问题，所以考虑一下是不是系统的问题，然后丢到了虚拟机中发现：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%8811.44.48.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8B%E5%8D%8811.44.48.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>解码字符串得到密码，通过密码解开rar压缩包，发现和之前一题的图片蕾丝，windows上可以显示，Mac/Linux下不行，所以还是修改一下高度即可。</p>
 <h2 id="0X0B-ROT13变身了"><a href="#0X0B-ROT13变身了" class="headerlink" title="0X0B-ROT13变身了"></a>0X0B-ROT13变身了</h2><p>首先先按照ROT13将所给的字符串左移13个ASCII码，看看会有什么样的提示，在这里我们写个脚本：</p>
-<pre><code class="python">buf=[83,89,78,84,45,86,96,45,115,121,110,116,136,132,132,132,108,128,117,118,134,110,123,111,110,127,108,112,124,122,108,118,128,108,131,114,127,134,108,116,124,124,113,108,76,76,76,76,138,23,90,81,66,71,64,69,114,65,112,64,66,63,69,61,70,114,62,66,61,62,69,67,70,63,61,110,110,112,64,68,62,70,61,112,111,112]
-buf=[chr(i-13) for i in buf]
-print &quot;&quot;.join(buf)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buf=[<span class="number">83</span>,<span class="number">89</span>,<span class="number">78</span>,<span class="number">84</span>,<span class="number">45</span>,<span class="number">86</span>,<span class="number">96</span>,<span class="number">45</span>,<span class="number">115</span>,<span class="number">121</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">136</span>,<span class="number">132</span>,<span class="number">132</span>,<span class="number">132</span>,<span class="number">108</span>,<span class="number">128</span>,<span class="number">117</span>,<span class="number">118</span>,<span class="number">134</span>,<span class="number">110</span>,<span class="number">123</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">127</span>,<span class="number">108</span>,<span class="number">112</span>,<span class="number">124</span>,<span class="number">122</span>,<span class="number">108</span>,<span class="number">118</span>,<span class="number">128</span>,<span class="number">108</span>,<span class="number">131</span>,<span class="number">114</span>,<span class="number">127</span>,<span class="number">134</span>,<span class="number">108</span>,<span class="number">116</span>,<span class="number">124</span>,<span class="number">124</span>,<span class="number">113</span>,<span class="number">108</span>,<span class="number">76</span>,<span class="number">76</span>,<span class="number">76</span>,<span class="number">76</span>,<span class="number">138</span>,<span class="number">23</span>,<span class="number">90</span>,<span class="number">81</span>,<span class="number">66</span>,<span class="number">71</span>,<span class="number">64</span>,<span class="number">69</span>,<span class="number">114</span>,<span class="number">65</span>,<span class="number">112</span>,<span class="number">64</span>,<span class="number">66</span>,<span class="number">63</span>,<span class="number">69</span>,<span class="number">61</span>,<span class="number">70</span>,<span class="number">114</span>,<span class="number">62</span>,<span class="number">66</span>,<span class="number">61</span>,<span class="number">62</span>,<span class="number">69</span>,<span class="number">67</span>,<span class="number">70</span>,<span class="number">63</span>,<span class="number">61</span>,<span class="number">110</span>,<span class="number">110</span>,<span class="number">112</span>,<span class="number">64</span>,<span class="number">68</span>,<span class="number">62</span>,<span class="number">70</span>,<span class="number">61</span>,<span class="number">112</span>,<span class="number">111</span>,<span class="number">112</span>]</div><div class="line">buf=[chr(i<span class="number">-13</span>) <span class="keyword">for</span> i <span class="keyword">in</span> buf]</div><div class="line"><span class="keyword">print</span> <span class="string">""</span>.join(buf)</div></pre></td></tr></table></figure>
 <p>于是乎我们得到了一个不完整的flag和一个md5的值，很容易我们就可以的值这应该是爆破，对flagmd5加密之后和这个值做一次对比，因为可见字符的个数是95，而这里有4位未知，所以我们就用python的内置函数写个脚本跑一下：</p>
-<pre><code class="python">import hashlib
-
-a = &#39;38e4c352809e150186920aac37190cbc&#39;
-
-dic = r&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&amp;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~ &quot;
-
-for i1 in dic:
-    for i2 in dic:
-        for i3 in dic:
-            for i4 in dic:
-                md5 = hashlib.md5()
-                b = &#39;flag{www_shiyanbar_com_is_very_good_&#39; +i1+i2+i3+i4+&#39;}&#39;
-                md5.update(b)
-                if md5.hexdigest() == a:
-                    print &#39;%s  %s&#39; %(md5.hexdigest(),b)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> hashlib</div><div class="line"></div><div class="line">a = <span class="string">'38e4c352809e150186920aac37190cbc'</span></div><div class="line"></div><div class="line">dic = <span class="string">r"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&amp;()*+,-./:;&lt;=&gt;?@[\]^_`&#123;|&#125;~ "</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i1 <span class="keyword">in</span> dic:</div><div class="line">	<span class="keyword">for</span> i2 <span class="keyword">in</span> dic:</div><div class="line">		<span class="keyword">for</span> i3 <span class="keyword">in</span> dic:</div><div class="line">			<span class="keyword">for</span> i4 <span class="keyword">in</span> dic:</div><div class="line">				md5 = hashlib.md5()</div><div class="line">				b = <span class="string">'flag&#123;www_shiyanbar_com_is_very_good_'</span> +i1+i2+i3+i4+<span class="string">'&#125;'</span></div><div class="line">				md5.update(b)</div><div class="line">				<span class="keyword">if</span> md5.hexdigest() == a:</div><div class="line">					<span class="keyword">print</span> <span class="string">'%s  %s'</span> %(md5.hexdigest(),b)</div></pre></td></tr></table></figure>
 <p>这样应该就是比较快的做法了，其中字符串前面加个<code>r</code>是指这是个raw string，不会转义<code>\</code>，也就是说<code>\n</code>是两个字符。</p>
 <h2 id="0X0C-NSCTF250"><a href="#0X0C-NSCTF250" class="headerlink" title="0X0C-NSCTF250"></a>0X0C-NSCTF250</h2><p>一看显然这是一个流量包分析的题目，因为题目说了是下载文件，所以问题应该就处在下载文件上</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-09%20%E4%B8%8A%E5%8D%8811.53.24.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-09%20%E4%B8%8A%E5%8D%8811.53.24.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>我们通过wireshark分离出下载文件之后发现有一个压缩包和一个网页，打开网页，网页上写着：</p>
-<pre><code class="shell">密码是nsfocus+5位数字，生成字典爆破
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">密码是nsfocus+5位数字，生成字典爆破</div></pre></td></tr></table></figure>
 <p>那么我们就可以直接生成字典进行爆破了，但是感觉跑的时间有点久，可能是姿势不对(学会算法)，而且还下了很多毒：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-09%20%E4%B8%8B%E5%8D%8812.39.14.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-09%20%E4%B8%8B%E5%8D%8812.39.14.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>爆破出密码之后直接解开压缩包就找到flag了。</p>
 <h2 id="0X0D-sssssss"><a href="#0X0D-sssssss" class="headerlink" title="0X0D-sssssss"></a>0X0D-sssssss</h2><p>首先下载一个文件无法打开，十六进制下看不出什么结果，然后根据题目描述中说的文件内容和标题有奸情，而文件内容中又有很多的s，所以猜测可能是需要将文件和<code>s</code>异或，那么首先要注意的一点就是要以二进制格式打开、保存文件：</p>
-<pre><code class="python">#!/usr/bin/env python
-
-resouce = open(&#39;misc&#39;, &#39;rb&#39;)
-result = open(&#39;key.png&#39;, &#39;wb+&#39;)
-
-for c in resouce.read():
-    data = ord(c)
-    data ^= 0x73
-    c = chr(data)
-    result.write(c)
-
-resouce.close()
-result.close()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"></div><div class="line">resouce = open(<span class="string">'misc'</span>, <span class="string">'rb'</span>)</div><div class="line">result = open(<span class="string">'key.png'</span>, <span class="string">'wb+'</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> resouce.read():</div><div class="line">    data = ord(c)</div><div class="line">    data ^= <span class="number">0x73</span></div><div class="line">    c = chr(data)</div><div class="line">    result.write(c)</div><div class="line"></div><div class="line">resouce.close()</div><div class="line">result.close()</div></pre></td></tr></table></figure>
 <p>然后我们打开生成的key.png文件就可以看到我们所需要的flag了。</p>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.817Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2017/11/01/CTF-MISC-二/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2017/11/01/CTF-MISC-二/" target="_blank" rel="external">http://yoursite.com/2017/11/01/CTF-MISC-二/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/01/CTF-MISC-二/&title=《CTF-MISC(二)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/01/CTF-MISC-二/&title=《CTF-MISC(二)》 — Peterpan's Blog&source=安全领域博大精深，今天我们来继续领略其中的奥妙吧～" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/05/iOS第三方和权限问题/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">iOS第三方和权限问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/31/Python-Review/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python3-Review</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X00-女神"><span class="post-toc-number">1.</span> <span class="post-toc-text">0X00-女神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X01-有趣的文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">0X01-有趣的文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X02-保险箱"><span class="post-toc-number">3.</span> <span class="post-toc-text">0X02-保险箱</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X03-64格"><span class="post-toc-number">4.</span> <span class="post-toc-text">0X03-64格</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X04-这就是一个坑"><span class="post-toc-number">5.</span> <span class="post-toc-text">0X04-这就是一个坑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X05-妹子的陌陌"><span class="post-toc-number">6.</span> <span class="post-toc-text">0X05-妹子的陌陌</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X06-破解wifi密码"><span class="post-toc-number">7.</span> <span class="post-toc-text">0X06-破解wifi密码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X07-听首音乐吧"><span class="post-toc-number">8.</span> <span class="post-toc-text">0X07-听首音乐吧</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X08-图穷匕见"><span class="post-toc-number">9.</span> <span class="post-toc-text">0X08-图穷匕见</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X0A-细心的大象"><span class="post-toc-number">10.</span> <span class="post-toc-text">0X0A-细心的大象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X0B-ROT13变身了"><span class="post-toc-number">11.</span> <span class="post-toc-text">0X0B-ROT13变身了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X0C-NSCTF250"><span class="post-toc-number">12.</span> <span class="post-toc-text">0X0C-NSCTF250</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0X0D-sssssss"><span class="post-toc-number">13.</span> <span class="post-toc-text">0X0D-sssssss</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/01/CTF-MISC-二/&title=《CTF-MISC(二)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/01/CTF-MISC-二/&title=《CTF-MISC(二)》 — Peterpan's Blog&source=安全领域博大精深，今天我们来继续领略其中的奥妙吧～" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aS47CMBAFwNz/0ow0W5TwXhsWccorhMC4smjcn+OI1+t/vb9zvc4+mexw/GJhYGDcltEe5R12jczfP3sdUTEwMB7AuA6yCWm2T/75D2fGwMDAGF37Wsb1PhgYGBjrjF8kzBgYGBhtEtuW3r4VlL+ci2NgYNyQsRIEf/36h/0NDAyMmzBeo9UW4PI9h9/FwMDYmpEnq/mlrW1k5u3SD0EZAwPjAYzrwlabxLaM9mJ6GnAxMDA2ZVwfbvbDdVl/NF525FtgYGDcnDFrAyy1G4Od89oaBgbG3ow8UcxLbzPSrP5/5JU/DAyM7RjrAXfWqszLfMP5NQwMjBsy1gF5iW0Wmov9MTAwNmXkgxRtQa29Jq6MXGBgYOzNWDl028hMXrdXQwwMjCcw8jGL9eSzfRxF0wIDA+MBjLb0n4+rJoloO94a/WNgYGBszbgOu235fvatugmKgYGxNWNWMpslurOLZt5ywMDA2JWxEhDbQ+fXxCQZLqbbMDAwbs5Iwlx76DZ0tqkvBgbG0xgf7oxtsPsSIPn105kRDAyM7RhJGzI/eh6I8xCfPCYMDIy9Ga9yzYbA8pbnMFhjYGBszWgD3Erwza+bS41MDAyMTRlt+T4v/c+um0udWAwMjK0Z6+loO4oxC/qnDwgDAwMjDqAr4NmDw8DAwJgFypXhiXw4DAMD42mMlVGtpAHQXhPbtgEGBsbejG+V+PPHcV3CaxsJGBgYWzP+AGsI1ixUQbmhAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

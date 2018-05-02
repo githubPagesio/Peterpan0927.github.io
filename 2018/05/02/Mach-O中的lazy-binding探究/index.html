@@ -1,80 +1,221 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>Mach-O中的lazy-binding探究</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/05/02/Mach-O中的lazy-binding探究/">
+    
+    
+    <title>Mach-O中的lazy-binding探究 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="Re">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Mach-O中的lazy-binding探究</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">Mach-O中的lazy-binding探究</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-02T04:08:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-02
+</time>
 
 
-<h2 class="title">Mach-O中的lazy-binding探究</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2018年5月2日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/特性探究/">特性探究</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/特性探究/">特性探究</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-一个有趣的现象"><span class="toc-text">0x00.一个有趣的现象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-lazy-binding"><span class="toc-text">0x01.lazy-binding</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-补充-amp-参考博客"><span class="toc-text">0x03.补充&参考博客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol></li></ol>
-<p>实践出真知，让我自己动手去验证动态库加载的特性吧</p>
+
+<div class="container body-wrap">
+    <article id="post-Mach-O中的lazy-binding探究"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Mach-O中的lazy-binding探究</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-02 12:08:00" datetime="2018-05-02T04:08:00.000Z"  itemprop="datePublished">2018-05-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/特性探究/">特性探究</a></li></ul>
+
+
+
+            
+	<span id="/2018/05/02/Mach-O中的lazy-binding探究/" class="leancloud_visitors" data-flag-title="Mach-O中的lazy-binding探究" title="Mach-O中的lazy-binding探究">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/05/02/Mach-O中的lazy-binding探究/#comment">
+            <span class="valine-comment-count" data-xid="/2018/05/02/Mach-O中的lazy-binding探究/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>实践出真知，让我自己动手去验证动态库加载的特性吧</p>
 <a id="more"></a>
-<h1 id="0x00-一个有趣的现象"><a href="#0x00-一个有趣的现象" class="headerlink" title="0x00.一个有趣的现象"></a>0x00.一个有趣的现象</h1><pre><code class="c">#include&lt;stdio.h&gt;
-int main(){
-  printf(&quot;Hello world!\n&quot;);
-  printf(&quot;2Hello world\n&quot;);
-  return 0;
-}
-</code></pre>
+<h1 id="0x00-一个有趣的现象"><a href="#0x00-一个有趣的现象" class="headerlink" title="0x00.一个有趣的现象"></a>0x00.一个有趣的现象</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"Hello world!\n"</span>);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"2Hello world\n"</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>首先通过IDA找到我们调用打印函数的地址，然后在对应的地方下断点：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.09.38.png" alt="IDA分析"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.09.38.png" alt="IDA分析" title="" class="">
+                <p>IDA分析</p>
+            </figure>
 <p>接下来我们在命令行中打开lldb，对可执行文件进行分析：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.12.38.png" alt="lldb分析"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.12.38.png" alt="lldb分析" title="" class="">
+                <p>lldb分析</p>
+            </figure>
 <p>我们看到没有偏移，那么直接根据IDA中的地址下断点即可：</p>
-<pre><code class="shell">br s -a 0000000100000F48
-br s -a 0000000100000F59
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">br s -a 0000000100000F48</div><div class="line">br s -a 0000000100000F59</div></pre></td></tr></table></figure>
 <p>然后启动程序，我们发现调用<code>printf</code>函数跳到了一个地方：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.16.14.png" alt="第一次printf"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.16.14.png" alt="第一次printf" title="" class="">
+                <p>第一次printf</p>
+            </figure>
 <p>这个地方跳转的地址是从我们的Mach-O的<code>_DATA,__la_symbol_ptr</code>中得到的：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.18.08.png" alt="lazy_pointer"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.18.08.png" alt="lazy_pointer" title="" class="">
+                <p>lazy_pointer</p>
+            </figure>
 <p>我们通过查看那个地址也可以得到一样的值：</p>
-<pre><code class="shell">(lldb) x 0x100001010
-0x100001010: 84 0f 00 00 01 00 00 00 00 00 00 00 00 00 00 00  ................
-0x100001020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(lldb) x 0x100001010</div><div class="line">0x100001010: 84 0f 00 00 01 00 00 00 00 00 00 00 00 00 00 00  ................</div><div class="line">0x100001020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................</div></pre></td></tr></table></figure>
 <p>但是这个其实不是真正的地址，通过第二次调用<code>printf</code>函数的时候我们可以发现，值居然是不同的：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png" alt="第二次printf"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png" alt="第二次printf" title="" class="">
+                <p>第二次printf</p>
+            </figure>
 <p>那么为什么两次调用相同的函数最后实际上是跳转到不同的代码片段呢？这就和我们的延迟绑定有关了，也就是接下来介绍的内容，为什么会有这样的设定。</p>
 <h1 id="0x01-lazy-binding"><a href="#0x01-lazy-binding" class="headerlink" title="0x01.lazy-binding"></a>0x01.lazy-binding</h1><p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
 <p>造成这个的主要原因就是动态链接对于全局和静态数据要进行复杂的GOT（全局偏移表）定位，然后间接寻址，模块间的调用也是如此，而且因为这个链接的过程是动态的，动态链接器会寻找并转载所需要的对象，然后进行符号查找和地址重定位，这个技术的实现步骤是：</p>
@@ -83,102 +224,328 @@ br s -a 0000000100000F59
 <li>对于每个全局函数，链接器生成一个与之对应的影子函数</li>
 <li>所有对于原函数的调用，都变成对于影子函数的调用，而影子函数形如：</li>
 </ol>
-<pre><code class="assembly">fun@plt:
-jmp *(fun@got.plt)
-push index
-jmp _init
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fun@plt:</div><div class="line">jmp *(fun@got.plt)</div><div class="line">push index</div><div class="line">jmp _init</div></pre></td></tr></table></figure>
 <p>第一条语句去got.plt中去拿函数的真实地址，如果是第一次调用的话，got.plt中存放的就是fun@plt的第二条指令，也就是说第一次调用的时候，第一条语句什么也没做，就是接着往下执行，而第二条指令则是将当前函数在got.plt的编号给push进行，然后再进行重定位，将结果写进got.plt。</p>
 <p>上述的是ELF文件的延迟绑定实现，在Mach-O中也差不多，只是具体的实现不同，原理是一样的，在Mach-O中，是通过<code>__stub_helper</code>来进行延迟绑定的，也可以通过MachOView来观察：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png" alt="_stub_helper"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png" alt="_stub_helper" title="" class="">
+                <p>_stub_helper</p>
+            </figure>
 <p>同时我们还可以在延迟绑定的info中看到<code>_printf</code>，所以这也解释了上面为什么两次调用相同的函数，跳转的地址却不一样，因为一开始根本计算没有真实函数地址，只是一个跳转罢了。</p>
 <h1 id="0x03-补充-amp-参考博客"><a href="#0x03-补充-amp-参考博客" class="headerlink" title="0x03.补充&amp;参考博客"></a>0x03.补充&amp;参考博客</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>之前在重探OC篇中提到过在OC中的方法的本质就是发送消息，变成了<code>objc_msgSend</code>,在这里进行补充的就是在二进制下的方法查找过程，更加方便对于OC的底层理解：</p>
 <p>我们都知道在OC中的函数分<code>+</code>和<code>-</code>开头的，一个是类方法，一个是实例方法，所以+号函数是基类调用的，-号函数是实例类调用的。我们知道发送消息的时候是根据对象找到它的类，然后在方法列表中一层层的寻找有没有对应的方法，找到之后再根据对应的IMP去执行，那么在二进制下，我们的列表长什么样子呢？</p>
-<pre><code class="objective-c">- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-
-    [CMyClass testClassFun ]; // +号函数
-
-        // 后面都是-号函数
-    CMyClass *pTest = [[CMyClass alloc] init1];
-    [pTest Hello:4];
-    [pTest World:&quot;Test&quot; Num:5];
-}
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">  </div><div class="line">    [CMyClass testClassFun ]; // +号函数</div><div class="line"></div><div class="line">        // 后面都是-号函数</div><div class="line">    CMyClass *pTest = [[CMyClass alloc] init1];</div><div class="line">    [pTest Hello:4];</div><div class="line">    [pTest World:&quot;Test&quot; Num:5];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在lldb中进行调试，在<code>pTest</code>执行<code>Hello:</code>的地方打个断点，查看寄存器，r0寄存器中的值是我们的对象指针pTest：</p>
-<pre><code class="shell">
-(lldb) memory read -s4 -fx -c16 0x1668b600    // 0x1668b600为实例类指针 pTest
-0x1668b600: 0x00097760 0x00000001 0x00000002 0x6c6c6568
-0x1668b610: 0x0000006f 0x00000000 0x00000000 0x00000000
-0x1668b620: 0x3348bd3c 0x3aecba4d 0x3348b284 0x3058e665
-0x1668b630: 0x00000000 0x00000000 0x00000000 0x00000000
-
-(lldb) memory read -s4 -fx -c16 0x00097760  // 0x00097760为isa指针
-0x00097760: 0x0009774c 0x3d3d1050 0x1659c110 0x00010003  // 0x1659c110为实例类的函数结构体数组
-0x00097770: 0x1659b3a0 0x00097788 0x3bb0a1e4 0x16c08200
-0x00097780: 0x000e007f 0x16599490 0x3d3d1064 0x3bb0a1d0
-0x00097790: 0x1659a760 0x00030007 0x16599330 0x3d3d1064
-
-(lldb) memory read -s4 -fx -c16 0x0009774c  // 基类指针
-0x0009774c: 0x3d3d1064 0x3d3d1064 0x1668bd80 0x00020003  // 0x1668bd80为基类的函数结构体数组
-0x0009775c: 0x1659b290 0x0009774c 0x3d3d1050 0x1659c110
-0x0009776c: 0x00010003 0x1659b3a0 0x00097788 0x3bb0a1e4
-0x0009777c: 0x16c08200 0x000e007f 0x16599490 0x3d3d1064
-
-(lldb) memory read -s4 -fx -c16 0x1668bd80  // 基类的函数结构体数组
-0x1668bd80: 0x00000000 0x00000000 0x000960dd 0x00095b49 // 0x000960dd为函数名
-0x1668bd90: 0x00000000 0x00000000 0x3348b603 0x3aecba95
-0x1668bda0: 0x00000001 0x1668bd78 0x00000000 0x00000000
-0x1668bdb0: 0x90000000 0x90000000 0x73730007 0x286e7546
-
-(lldb) memory read -s4 -fx -c16 0x1659c110 // 实例类的函数结构体数组
-0x1659c110: 0x00000000 0x00000000 0x00000000 0x00000000
-0x1659c120: 0x000960ea 0x00095a5d 0x00000000 0x00000000 // 0x000960ea为函数名
-0x1659c130: 0x00000001 0x1659c108 0x00000000 0x00000000
-0x1659c140: 0x1659bfb0 0x00000000 0x1659bad0 0x00000000
-
-(lldb) memory read 0x000960dd
-0x000960dd: 74 65 73 74 43 6c 61 73 73 46 75 6e 00 69 6e 69  testClassFun.ini
-0x000960ed: 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72 6c 64 3a  t1.Hello:.World:
-
-(lldb) memory read 0x000960ea
-0x000960ea: 69 6e 69 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72  init1.Hello:.Wor
-0x000960fa: 6c 64 3a 4e 75 6d 3a 00 6d 5f 6e 4c 65 6e 00 6d  ld:Num:.m_nLen.m
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(lldb) memory read -s4 -fx -c16 0x1668b600    // 0x1668b600为实例类指针 pTest</div><div class="line">0x1668b600: 0x00097760 0x00000001 0x00000002 0x6c6c6568</div><div class="line">0x1668b610: 0x0000006f 0x00000000 0x00000000 0x00000000</div><div class="line">0x1668b620: 0x3348bd3c 0x3aecba4d 0x3348b284 0x3058e665</div><div class="line">0x1668b630: 0x00000000 0x00000000 0x00000000 0x00000000</div><div class="line"></div><div class="line">(lldb) memory read -s4 -fx -c16 0x00097760  // 0x00097760为isa指针</div><div class="line">0x00097760: 0x0009774c 0x3d3d1050 0x1659c110 0x00010003  // 0x1659c110为实例类的函数结构体数组</div><div class="line">0x00097770: 0x1659b3a0 0x00097788 0x3bb0a1e4 0x16c08200</div><div class="line">0x00097780: 0x000e007f 0x16599490 0x3d3d1064 0x3bb0a1d0</div><div class="line">0x00097790: 0x1659a760 0x00030007 0x16599330 0x3d3d1064</div><div class="line"></div><div class="line">(lldb) memory read -s4 -fx -c16 0x0009774c  // 基类指针</div><div class="line">0x0009774c: 0x3d3d1064 0x3d3d1064 0x1668bd80 0x00020003  // 0x1668bd80为基类的函数结构体数组</div><div class="line">0x0009775c: 0x1659b290 0x0009774c 0x3d3d1050 0x1659c110</div><div class="line">0x0009776c: 0x00010003 0x1659b3a0 0x00097788 0x3bb0a1e4</div><div class="line">0x0009777c: 0x16c08200 0x000e007f 0x16599490 0x3d3d1064</div><div class="line"></div><div class="line">(lldb) memory read -s4 -fx -c16 0x1668bd80  // 基类的函数结构体数组</div><div class="line">0x1668bd80: 0x00000000 0x00000000 0x000960dd 0x00095b49 // 0x000960dd为函数名</div><div class="line">0x1668bd90: 0x00000000 0x00000000 0x3348b603 0x3aecba95</div><div class="line">0x1668bda0: 0x00000001 0x1668bd78 0x00000000 0x00000000</div><div class="line">0x1668bdb0: 0x90000000 0x90000000 0x73730007 0x286e7546</div><div class="line"></div><div class="line">(lldb) memory read -s4 -fx -c16 0x1659c110 // 实例类的函数结构体数组</div><div class="line">0x1659c110: 0x00000000 0x00000000 0x00000000 0x00000000</div><div class="line">0x1659c120: 0x000960ea 0x00095a5d 0x00000000 0x00000000 // 0x000960ea为函数名</div><div class="line">0x1659c130: 0x00000001 0x1659c108 0x00000000 0x00000000</div><div class="line">0x1659c140: 0x1659bfb0 0x00000000 0x1659bad0 0x00000000</div><div class="line"></div><div class="line">(lldb) memory read 0x000960dd</div><div class="line">0x000960dd: 74 65 73 74 43 6c 61 73 73 46 75 6e 00 69 6e 69  testClassFun.ini</div><div class="line">0x000960ed: 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72 6c 64 3a  t1.Hello:.World:</div><div class="line"></div><div class="line">(lldb) memory read 0x000960ea</div><div class="line">0x000960ea: 69 6e 69 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72  init1.Hello:.Wor</div><div class="line">0x000960fa: 6c 64 3a 4e 75 6d 3a 00 6d 5f 6e 4c 65 6e 00 6d  ld:Num:.m_nLen.m</div></pre></td></tr></table></figure>
 <p>如果是我们第一次去调用方法的时候，还没有被缓存，我们的函数结构体数组中的函数名为空，最后会进入<code>__objc_msgSend_uncached</code>，查找并缓存函数地址。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.25.27.png" alt="obj_msgSend实现"></p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.26.52.png" alt="objc_msgSend缓存"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.25.27.png" alt="obj_msgSend实现" title="" class="">
+                <p>obj_msgSend实现</p>
+            </figure>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.26.52.png" alt="objc_msgSend缓存" title="" class="">
+                <p>objc_msgSend缓存</p>
+            </figure>
 <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
 <li><a href="https://bbs.pediy.com/thread-208455.htm" target="_blank" rel="external">看雪-动态链接的简单分析</a></li>
 <li><a href="http://yunnigu.dropsec.xyz/2017/02/24/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" target="_blank" rel="external">延迟绑定技术原理</a></li>
 <li><a href="https://bbs.pediy.cpm/thread-199803.htm" target="_blank" rel="external">对于objc_msgSend的探究</a></li>
 </ul>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-02T08:39:52.903Z" itemprop="dateUpdated">2018-05-02 16:39:52</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2018/05/02/Mach-O中的lazy-binding探究/" target="_blank" rel="external">http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/&title=《Mach-O中的lazy-binding探究》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/&title=《Mach-O中的lazy-binding探究》 — Peterpan's Blog&source=实践出真知，让我自己动手去验证动态库加载的特性吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/01/iOS的降级限制/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS的降级限制</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x00-一个有趣的现象"><span class="post-toc-number">1.</span> <span class="post-toc-text">0x00.一个有趣的现象</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x01-lazy-binding"><span class="post-toc-number">2.</span> <span class="post-toc-text">0x01.lazy-binding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x03-补充-amp-参考博客"><span class="post-toc-number">3.</span> <span class="post-toc-text">0x03.补充&参考博客</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">参考博客</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/&title=《Mach-O中的lazy-binding探究》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/&title=《Mach-O中的lazy-binding探究》 — Peterpan's Blog&source=实践出真知，让我自己动手去验证动态库加载的特性吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACP0lEQVR42u3awW6DQAxFUf7/p6nUVSsEuc+GqnjurCKSwJwsHHvsbcNr/14/Xx+vXL97vH727vEzty0ZMmS8lrFfruNGO/epPRfdU4YMGQswSJDlAZeH1PRup9dlyJAhAzz+bOvXn7++IkOGDBmdgJuyydZ5SipDhow1GbUELg2XpBx9vBaXIUPGCxm1xsDfvH68vyFDhox/z9jbK0317nrurzvLkCFjNIMUnLUhDHLP2oHdVrudDBkyXstIi9VOGcnHNcjnT/83ZMiQMY5Bgma6oVoiWAvZQeyXIUPGaxmdUpO3AWpHeEETQoYMGaMZaUnJy0sSxHkRG4RgGTJkjGOkJWunPcCzOPJjBbW4DBkyBjHIUdddB3M87KKKVYYMGQsw+gMTnaSwdkb4oSUgQ4aMcQxyfBZPcDwxFUL+N2TIkDGO0Wk6puldLbjzJoQMGTKmMjobrQ1PpCNfqHkpQ4aMBRjpsT4fmKgdsfEEUYYMGesweKrX31yaAqKnyJAhYzSjP1XFkZ2fA+1BhgwZyzD4Fklorh2r1YYwZMiQsQKDNwb4cT9vQPKmwm39DRkyZLyKkY6C8dEKUqzWBsI+fEuGDBmDGHu4ePJXgxWDsgwZMkYz+Eo3xxuTtbZoXOLKkCHj5Qw+4NUJo2kCmo56yJAhYwUGCbKcVDtE4+WrDBkyZNSyy1r7s9+ckCFDhgySDqaHbp2faUvjtwwZMgYxSBFL3u0PWBSbATJkyBjN6DQG0jSRt07TMQ4ZMmQMZXwBCUDHZbFEnccAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

@@ -1,55 +1,195 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>CTF-密码学</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/10/28/CTF-密码学/">
+    
+    
+    <title>CTF-密码学 | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="CTF">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>CTF-密码学</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">CTF-密码学</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-27T17:13:47.000Z" itemprop="datePublished" class="page-time">
+  2017-10-28
+</time>
 
 
-<h2 class="title">CTF-密码学</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年10月28日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#密码学概述与发展历程"><span class="toc-text">密码学概述与发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码的璀璨"><span class="toc-text">古典密码的璀璨</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#近代密码的发展"><span class="toc-text">近代密码的发展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现公钥密码学"><span class="toc-text">出现公钥密码学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码学基本概念"><span class="toc-text">密码学基本概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#古典密码的发展"><span class="toc-text">古典密码的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#困在栅栏里的凯撒"><span class="toc-text">困在栅栏里的凯撒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统知识加古典密码"><span class="toc-text">传统知识加古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#古典密码"><span class="toc-text">古典密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杯酒人生"><span class="toc-text">杯酒人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#他的情书"><span class="toc-text">他的情书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#凯撒和某某加密"><span class="toc-text">凯撒和某某加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zip伪加密"><span class="toc-text">zip伪加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件数据区："><span class="toc-text">压缩源文件数据区：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件目录区："><span class="toc-text">压缩源文件目录区：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩源文件目录结束标志："><span class="toc-text">压缩源文件目录结束标志：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ook-和Brainfuck"><span class="toc-text">Ook!和Brainfuck</span></a></li></ol></li></ol>
-<p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
+
+<div class="container body-wrap">
+    <article id="post-CTF-密码学"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">CTF-密码学</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-28 01:13:47" datetime="2017-10-27T17:13:47.000Z"  itemprop="datePublished">2017-10-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/密码学的前生今生-实战讲解/">密码学的前生今生 实战讲解</a></li></ul>
+
+
+
+            
+	<span id="/2017/10/28/CTF-密码学/" class="leancloud_visitors" data-flag-title="CTF-密码学" title="CTF-密码学">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/10/28/CTF-密码学/#comment">
+            <span class="valine-comment-count" data-xid="/2017/10/28/CTF-密码学/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
 <a id="more"></a>
-<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><h3 id="古典密码的璀璨"><a href="#古典密码的璀璨" class="headerlink" title="古典密码的璀璨"></a>古典密码的璀璨</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt=""></p>
+<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><h3 id="古典密码的璀璨"><a href="#古典密码的璀璨" class="headerlink" title="古典密码的璀璨"></a>古典密码的璀璨</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：</p>
 <ol>
 <li>爱丽丝使用纸飞机告诉兔子，红皇后要对他不利</li>
@@ -58,16 +198,31 @@
 </ol>
 <p>通过这个例子我们可以看到，如果爱丽丝和兔子之间使用只有她们知道的语言交流的话，那么这样的悲剧就不会发生了，这就是密码学的作用所在了，只有通信双方（或者多方）才会知道通信的具体内容。</p>
 <p>密码学从古代时期就已经得到了发展，在军事、文化领域等得到了广泛的应用（<a href="https://baike.baidu.com/item/%E8%B4%B9%E6%96%AF%E6%89%98%E6%96%AF%E5%9C%86%E7%9B%98" target="_blank" rel="external">菲斯托斯圆盘</a>、<a href="https://baike.baidu.com/item/%E5%AF%86%E7%A0%81%E6%A3%92" target="_blank" rel="external">斯巴达棒</a>）：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>在中国的古代也有类似的例子，比如说藏头诗就是其中的一种，这既可以称作隐写术也可以称作古典密码的起源：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <h4 id="近代密码的发展"><a href="#近代密码的发展" class="headerlink" title="近代密码的发展"></a>近代密码的发展</h4><p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>正是因为这个机械密码机德军在二战时期才成为了通信强国，还有一点不得不提的就是降服恩尼格玛机的图灵炸弹，我们都知道图灵被称作计算机之父，因为他的理论才奠定了现代计算机的基础，在当时为了对付德军的恩尼格玛机，图灵制作了图灵炸弹来破解德军的密文，从下图中可以看到齿轮数远多于德军的机械密码机：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>之后在二十世纪四十年代美国终于造出了第一台计算机，并凭借其精密的计算使日本在中途岛海战中一败涂地，从此密码学也迈入了一个新的领域。人们可以使用更加复杂的加密方式了。同时也因为军事机密对于其要求很高，所以密码学在战争中得到了飞速的发展。</p>
 <h3 id="出现公钥密码学"><a href="#出现公钥密码学" class="headerlink" title="出现公钥密码学"></a>出现公钥密码学</h3><p>1976年Diffie$Hellman提出了不对称密码（公钥密码）1977年Rivest,Shamir&amp;Aleman提出了RSA公钥算法，1977年DES正式成为了标准，纵观密码学的发展，我们可以发现：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.58.05.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.58.05.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <h3 id="密码学基本概念"><a href="#密码学基本概念" class="headerlink" title="密码学基本概念"></a>密码学基本概念</h3><ul>
 <li>明文（消息）（PlainText）:被隐蔽消息。</li>
 <li>密文（Ciphertext）或密报（Cryptogram）:明文经密码变换成的一种隐蔽形式</li>
@@ -78,11 +233,20 @@
 <li>密钥：控制加密和解密算法操作的数据处理，分别称作加密密钥和解密密钥</li>
 </ul>
 <h2 id="古典密码的发展"><a href="#古典密码的发展" class="headerlink" title="古典密码的发展"></a>古典密码的发展</h2><p>之前我们曾经说过凯撒密码，栅栏密码，培根密码，甚至将其按类划分成了置换密码，代换密码等。还有一个很重要的点就是维吉尼亚密码，在这里出现了密钥的雏形：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.16.12.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.16.12.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>至于置换密码之前没有多做讲解，在这里举一个列置换的例子就比较好理解了，这个是根据数字列的顺序对明文重新排序</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.18.05.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.18.05.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>说了这么多，接下来来几个案例来演示一下吧！</p>
-<h3 id="困在栅栏里的凯撒"><a href="#困在栅栏里的凯撒" class="headerlink" title="困在栅栏里的凯撒"></a>困在栅栏里的凯撒</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png" alt=""></p>
+<h3 id="困在栅栏里的凯撒"><a href="#困在栅栏里的凯撒" class="headerlink" title="困在栅栏里的凯撒"></a>困在栅栏里的凯撒</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>这道题的题干中首先说了是困在栅栏中的凯撒，所以我们首先应该解决的应该就是栅栏，在比赛中我们为了追求效率，一般都不会自己重新去造轮子，所以直接用CTFCrackTools这个工具就好(github中自寻)。首先跑一次栅栏：</p>
 <blockquote>
 <p>1：NEQ{etlydsf}</p>
@@ -91,13 +255,28 @@
 <p>4：N{lsEeyfQtd}</p>
 </blockquote>
 <p>根据题目中说的很六的字符，有两种可能，一种是分了六个栅栏，或者是一个栅栏有6个字符，这一题显然是后者，果断的选择第一个之后，再跑一次凯撒：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png" alt=""></p>
-<h3 id="传统知识加古典密码"><a href="#传统知识加古典密码" class="headerlink" title="传统知识加古典密码"></a>传统知识加古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<h3 id="传统知识加古典密码"><a href="#传统知识加古典密码" class="headerlink" title="传统知识加古典密码"></a>传统知识加古典密码</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>传统知识应该指的就是天干地址所代表的数字，至于古典密码经典的凯撒和栅栏感觉应该是没跑的，通过查询资料得到了天干地址对应的数字，再加上60（一甲子）之后进行ASCII码转换得到了XZSDMFLZ</p>
-<p>emm，首先使用凯撒发现不通，再使用栅栏：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.37.27.png" alt=""></p>
-<p>解出来两个，第一个代换之后并没有规律。接着试试第二个，果断跑通：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.40.36.png" alt=""></p>
+<p>emm，首先使用凯撒发现不通，再使用栅栏：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.37.27.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
+<p>解出来两个，第一个代换之后并没有规律。接着试试第二个，果断跑通：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p>ps:绕是如此，找这个破玩意还是花费了我不少时间。</p>
-<h3 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png" alt=""></p>
+<h3 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>第一反应就是十进制转ASCII码，不要问我为什么，这都做不到就可以卸甲归田了。然后得到一串字符串：</p>
 <blockquote>
 <p>OCU{CFTELXOUYDECTNGAHOHRNFIENM}IOTA</p>
@@ -112,90 +291,365 @@
 <p>NM}IOTA</p>
 </blockquote>
 <p>按照2，7，6，4，5，1，3重新排列一下，也就是CTF{xx}的形式，至于中间xx两列的顺序都尝试一下，最后发现有规律的就是flag了：CTF{COULDYOUEXCHANGETHEINFORMATION}</p>
-<h3 id="杯酒人生"><a href="#杯酒人生" class="headerlink" title="杯酒人生"></a>杯酒人生</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png" alt=""></p>
+<h3 id="杯酒人生"><a href="#杯酒人生" class="headerlink" title="杯酒人生"></a>杯酒人生</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>在古典密码中涉及到密钥的应该就是维吉尼亚密码了，首先这里有一个自己加密过的密钥，使用凯撒和栅栏试一次之后得到了密钥：COMPUTER，那么接下来就是对密码进行加密就完成了，可以参照上面的对照表，也可以直接使用工具。</p>
 <p>有一点需要注意的是，实验吧上的题目格式并不统一，所以提交的时候如果不对转换一下格式就好。</p>
-<h3 id="他的情书"><a href="#他的情书" class="headerlink" title="他的情书"></a>他的情书</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png" alt=""></p>
+<h3 id="他的情书"><a href="#他的情书" class="headerlink" title="他的情书"></a>他的情书</h3><figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>做完题目之后才发现这个出题者似乎是个超级英雄（原谅绿帽侠、或者单思狂魔），这里有一个解题链接，点进去之后跳转到一个网站，点击是没有用的，上面写着不要相信眼睛相信爱，然后我选择了<code>view-source</code>:</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>那么我们就选择相信眼睛吧，通过escape解码之后得到了一串代码：</p>
-<pre><code class="javascript">&lt;!--function zhegejiamiyidiandoubuku(){var pass=document.form.passwd.value;var cry=&quot;Rm9yM0re354v5E4FUg5FasDboooo==&quot;;var addr=&#39;soroki.php?passwd=&#39;;var locatie=location.href;var out=&#39;&#39;;var pass2=cry.substring(15,4*4)+cry.substring(24,5*5)+cry.substring(0,1)+cry.substr(7,1)+cry.substr(11,1)+cry.substr(13,1)+cry.substring(3+3,7);pass=locatie.substr(locatie.indexOf(&#39;?&#39;)+1);addr=addr.substring(0,addr.indexOf(&#39;?&#39;)+1)+&#39;l0vau=&#39;;for(i=0;i&lt;pass.Len;i++){if(pass.charAt(i)==pass2.charAt(i)){document.write(pass.charAt(i))}}location=addr+pass}--&gt;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!--<span class="function"><span class="keyword">function</span> <span class="title">zhegejiamiyidiandoubuku</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> pass=<span class="built_in">document</span>.form.passwd.value;<span class="keyword">var</span> cry=<span class="string">"Rm9yM0re354v5E4FUg5FasDboooo=="</span>;<span class="keyword">var</span> addr=<span class="string">'soroki.php?passwd='</span>;<span class="keyword">var</span> locatie=location.href;<span class="keyword">var</span> out=<span class="string">''</span>;<span class="keyword">var</span> pass2=cry.substring(<span class="number">15</span>,<span class="number">4</span>*<span class="number">4</span>)+cry.substring(<span class="number">24</span>,<span class="number">5</span>*<span class="number">5</span>)+cry.substring(<span class="number">0</span>,<span class="number">1</span>)+cry.substr(<span class="number">7</span>,<span class="number">1</span>)+cry.substr(<span class="number">11</span>,<span class="number">1</span>)+cry.substr(<span class="number">13</span>,<span class="number">1</span>)+cry.substring(<span class="number">3</span>+<span class="number">3</span>,<span class="number">7</span>);pass=locatie.substr(locatie.indexOf(<span class="string">'?'</span>)+<span class="number">1</span>);addr=addr.substring(<span class="number">0</span>,addr.indexOf(<span class="string">'?'</span>)+<span class="number">1</span>)+<span class="string">'l0vau='</span>;<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;pass.Len;i++)&#123;<span class="keyword">if</span>(pass.charAt(i)==pass2.charAt(i))&#123;<span class="built_in">document</span>.write(pass.charAt(i))&#125;&#125;location=addr+pass&#125;--&gt;</div></pre></td></tr></table></figure>
 <p>在看懂了代码的意思之后，不会js的我选择了python:</p>
-<pre><code class="python">#-*- coding:utf-8 -*-
-import requests
-cry=&quot;Rm9yM0re354v5E4FUg5FasDboooo==&quot;
-addr=&#39;soroki.php?passwd=&#39;
-locatie=&quot;http://ctf4.shiyanbar.com/crypto/4/&quot;
-pass2=cry[15:16]+cry[24:25]+cry[0:1]+cry[7:8]+cry[11:12]+cry[13:14]+cry[6:7]
-addr=addr[:addr.index(&#39;?&#39;)+1]+&#39;l0vau=&#39;
-location=locatie+addr+pass2
-print location
-html=requests.get(location)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#-*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">cry=<span class="string">"Rm9yM0re354v5E4FUg5FasDboooo=="</span></div><div class="line">addr=<span class="string">'soroki.php?passwd='</span></div><div class="line">locatie=<span class="string">"http://ctf4.shiyanbar.com/crypto/4/"</span></div><div class="line">pass2=cry[<span class="number">15</span>:<span class="number">16</span>]+cry[<span class="number">24</span>:<span class="number">25</span>]+cry[<span class="number">0</span>:<span class="number">1</span>]+cry[<span class="number">7</span>:<span class="number">8</span>]+cry[<span class="number">11</span>:<span class="number">12</span>]+cry[<span class="number">13</span>:<span class="number">14</span>]+cry[<span class="number">6</span>:<span class="number">7</span>]</div><div class="line">addr=addr[:addr.index(<span class="string">'?'</span>)+<span class="number">1</span>]+<span class="string">'l0vau='</span></div><div class="line">location=locatie+addr+pass2</div><div class="line"><span class="keyword">print</span> location</div><div class="line">html=requests.get(location)</div></pre></td></tr></table></figure>
 <p>跑一次之后得到了一串网址，链接过去发现了一串base64字符串，解码之后得到：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>因为最后的答案是ctf{}的格式，最后再跑一次凯撒/栅栏吧–ctf{intwo_is_big_sb}(题主节哀)</p>
 <h3 id="凯撒和某某加密"><a href="#凯撒和某某加密" class="headerlink" title="凯撒和某某加密"></a>凯撒和某某加密</h3><p>先看题目提示是“凯撒和某某加密”，首先确定一下有凯撒加密(ps:你这不是说废话麼)，然后还有一种加密方式是未知的。</p>
 <p>看下密文：aZZg/x\ZbavpZiEZp+n)o+ 密文中有很多的符号/+)+根据这些可以确定，首先另外一种加密方式不是MD5和base64，原因就是：字母过多，而没有数字，并且通过移位以后符号也不能全部变成字母或者数字。</p>
 <p>到这里觉得要不先解决一下凯撒加密，看看结果字符串是一个什么样的格式吧。这么多的符号，应该不是按照字母序来移动字母了，并且里面也没有代表flag{}格式的字符，可能是按照ascii码表来移动的，并且字母和符号都进行移动。那应该移动多少位呢？既然是ascii码表移动的，那就先把字符转化成ascii码吧。（其实是先用工具试了一波）</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>可以看出，其中ascii最大的是120，对应的字符是X，ascii最大是126，那如果向ascii增加的方向移动的话，移动的位数应该是小于6的；其中最小的是41，如果向ascii减小的方向去移动的话，移动位数应该小于9。</p>
 <p>这里先选择向ascii增加的方向移动，因为我看到了”X”移动5位会变成”}”，那么写一个C语言就可以实现了：</p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-int main()
-{
-    char a[1000];
-    while(scanf(&quot;%s&quot;,a)!=EOF){
-        int i;
-        for(i=0;i&lt;strlen(a);i++)
-        {
-            a[i]=a[i]+5;
-        }
-        printf(&quot;%s&quot;,a);
-    }
-    return 0;
- }
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> a[<span class="number">1000</span>];</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,a)!=EOF)&#123;</div><div class="line">		<span class="keyword">int</span> i;</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(a);i++)</div><div class="line">		&#123;</div><div class="line">			a[i]=a[i]+<span class="number">5</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s"</span>,a);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>然后得到了一串类似栅栏的密码：<code>f__14}a_ggf{u_nJ_u0s.t0</code>，用栅栏密码解不出来，后来发现其实这是一个变异版的栅栏，三三两两而不是每个栅栏都同样的。</p>
 <p>所以从这道题中我们可以学到要发散自己的思维，不能总是停留在常规的加密方式，有时候要大胆的去猜想一下。</p>
 <h3 id="zip伪加密"><a href="#zip伪加密" class="headerlink" title="zip伪加密"></a>zip伪加密</h3><p>下载下来一个压缩包，根据题目名去查找了一下相关资料，在这里就讲一下zip文件的组成，一个zip文件由三个部分组成：压缩源文件数据区、压缩源文件目录区、压缩源文件目录结束标志。下面通过一个实例讲解：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.24.21.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.24.21.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <h4 id="压缩源文件数据区："><a href="#压缩源文件数据区：" class="headerlink" title="压缩源文件数据区："></a><strong>压缩源文件数据区：</strong></h4><p>50 4B 03 04：这是头文件标记（0x04034b50）<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>00 00：扩展记录长度<br>6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500 </p>
 <h4 id="压缩源文件目录区："><a href="#压缩源文件目录区：" class="headerlink" title="压缩源文件目录区："></a><strong>压缩源文件目录区：</strong></h4><p>50 4B 01 02：目录中文件文件头标记(0x02014b50)<br>3F 00：压缩使用的 pkware 版本<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>24 00：扩展字段长度<br>00 00：文件注释长度<br>00 00：磁盘开始号<br>00 00：内部文件属性<br>20 00 00 00：外部文件属性<br>00 00 00 00：局部头部偏移量 6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001 </p>
 <h4 id="压缩源文件目录结束标志："><a href="#压缩源文件目录结束标志：" class="headerlink" title="压缩源文件目录结束标志："></a><strong>压缩源文件目录结束标志：</strong></h4><p>50 4B 05 06：目录结束标记<br>00 00：当前磁盘编号<br>00 00：目录区开始磁盘编号<br>01 00：本磁盘上纪录总数<br>01 00：目录区中纪录总数<br>59 00 00 00：目录区尺寸大小<br>3E 00 00 00：目录区对第一张磁盘的偏移量<br>00 00：ZIP 文件注释长度</p>
 <p>根据以上的知识我们可以合理的猜想如果把一个zip文件的文件头或者加密标志位进行适当修改，那就可能会改变文件的可读性，比如下面这个例子中，我们就可以将一个无密码压缩包修改为一个有密码压缩包：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.30.22.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.30.22.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>于是这样就达到了zip伪加密的目的，可是这里又有一个疑问了，你可能会问，为什么改成09，而不是其他的数呢，其实改成09只是举的一个例子，只要末位是奇数，就代表加密，反之，末位是偶数代表未加密(这是一个经过验证的猜想)。但是如果想要修改头文件标志位的朋友时肯定会报错的。</p>
 <h3 id="Ook-和Brainfuck"><a href="#Ook-和Brainfuck" class="headerlink" title="Ook!和Brainfuck"></a>Ook!和Brainfuck</h3><p>题目中丢出了一些不知所谓的符号，看起来没有什么很大的规律，使用移位、栅栏、列置换都没有很清晰的结果，后来我就去搜索了一下这些奇怪的字符组合，然后在Wiki上找到了答案：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.49.30.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.49.30.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>原来这两个是两种计算机编程语言的语法，这种语言被统称为esolang，旨在尝试各种奇怪的想法，难以编程，一般不会做为实际使用，所以这里只需要去搜索对应的网站进行解密即可。这里丢个<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="external">传送门</a></p>
 
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-13T16:00:22.849Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+</span><br>
 
-<!--<a href="http://yoursite.com/2017/10/28/CTF-密码学/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+        
+        转载注明出处，原文地址：<a href="/2017/10/28/CTF-密码学/" target="_blank" rel="external">http://yoursite.com/2017/10/28/CTF-密码学/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&source=由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/10/29/PNG在隐写中的应用/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PNG在隐写中的应用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/23/大话CTF/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">大话CTF</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密码学概述与发展历程"><span class="post-toc-number">1.</span> <span class="post-toc-text">密码学概述与发展历程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#古典密码的璀璨"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">古典密码的璀璨</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#近代密码的发展"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">近代密码的发展</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#出现公钥密码学"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">出现公钥密码学</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#密码学基本概念"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">密码学基本概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#古典密码的发展"><span class="post-toc-number">2.</span> <span class="post-toc-text">古典密码的发展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#困在栅栏里的凯撒"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">困在栅栏里的凯撒</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传统知识加古典密码"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">传统知识加古典密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#古典密码"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">古典密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#杯酒人生"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">杯酒人生</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#他的情书"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">他的情书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#凯撒和某某加密"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">凯撒和某某加密</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#zip伪加密"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">zip伪加密</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件数据区："><span class="post-toc-number">2.7.1.</span> <span class="post-toc-text">压缩源文件数据区：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件目录区："><span class="post-toc-number">2.7.2.</span> <span class="post-toc-text">压缩源文件目录区：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩源文件目录结束标志："><span class="post-toc-number">2.7.3.</span> <span class="post-toc-text">压缩源文件目录结束标志：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ook-和Brainfuck"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">Ook!和Brainfuck</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/28/CTF-密码学/&title=《CTF-密码学》 — Peterpan's Blog&source=由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACQUlEQVR42u3a207DMBBF0f7/TweJJ6Rid59xgvB4+6miIfEK0jAXv154Xd9r9POf375/fl/zp8yvWVoyZMjYlnFN13y7hEe2RZ774Z4yZMg4gDEPsnzT83uO7pzeR4YMGTLSh62H4HnAlSFDhowagySXJK0c3U2GDBkyakVs2hojzTge3G+rxWXIkLEhIx0M/OXnB+cbMmTI2IRxhYsE07QcTYPsL/eXIUNGa0at1ZUeyCAJJX9WkOHKkCGjKYM312pX8mviFypDhoxjGOnxrPUXlI48hzwZMmS0ZqQteL65dFTJh6NLUw4ZMmRsxQiOMuBBZrqVdEQ6bLTJkCGjKYM3+mvHtnjylzbv4qabDBkyWjDQ13jrteSPtO0QVYYMGU0ZtUNa6TCSN/15WStDhowTGLzRz1PJdHhQC9kyZMg4gZEWmenBCD4W5feP/w4yZMhoweCtNN70XymP+QhhOMKUIUPGMYw0caxdc5VWXEnLkCGjEaPWVkvTQZ78ofacDBkyWjPSVn5agqbDgJXXJ0OGjK6Mu9I+TlopfYuDARkyZDRikPQuTeDSsSgP9zJkyDiHwdtqtUKUB27+u6j1JkOGjEaMpXb8clLIE0fUaJMhQ0ZTRpqizbdy18EvfuAjhsmQIWNbBj+MdVdQXkk3i/89ZMiQ0YLBC9daSscPYRQbcDJkyJCB0z7egEsD8YcYK0OGDBlhgZo241L24wFXhgwZ/5KRFrHrY8i7hgcyZMg4gfHEYKA2bqwNEmTIkNGa8QWj1Y50NzdpiwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>

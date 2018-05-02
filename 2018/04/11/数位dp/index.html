@@ -1,370 +1,510 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>数位dp</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2018/04/11/数位dp/">
+    
+    
+    <title>数位dp | Peterpan&#39;s Blog | Mind over muscle.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
-
+    <meta name="keywords" content="ACM">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>数位dp</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">数位dp</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-11T05:46:59.000Z" itemprop="datePublished" class="page-time">
+  2018-04-11
+</time>
 
 
-<h2 class="title">数位dp</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2018年4月11日
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/dp模版/">dp模版</a></li></ul>
 
+            
+        </h5>
+        
+    </div>
+    
 
-    <a class="article-category-link" href="/categories/dp模版/">dp模版</a>
+</header>
 
-
-
- </div>
---->
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#思想介绍"><span class="toc-text">思想介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDU-3555"><span class="toc-text">HDU_3555</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDU-2089"><span class="toc-text">HDU_2089</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDU-3652"><span class="toc-text">HDU_3652</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDU-3709"><span class="toc-text">HDU_3709</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#POJ-3252"><span class="toc-text">POJ_3252</span></a></li></ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+
+<div class="container body-wrap">
+    <article id="post-数位dp"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">数位dp</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-11 13:46:59" datetime="2018-04-11T05:46:59.000Z"  itemprop="datePublished">2018-04-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/dp模版/">dp模版</a></li></ul>
+
+
+
+            
+	<span id="/2018/04/11/数位dp/" class="leancloud_visitors" data-flag-title="数位dp" title="数位dp">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2018/04/11/数位dp/#comment">
+            <span class="valine-comment-count" data-xid="/2018/04/11/数位dp/"></span>
+        </a>
+    </span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>通常数位dp和记忆化dfs是不分家的，如果dfs还没有写会还是先练练dfs吧</p>
 <a id="more"></a>
 <h1 id="思想介绍"><a href="#思想介绍" class="headerlink" title="思想介绍"></a>思想介绍</h1><p>其实所谓的数位dp就是基于数字的每一位的状态来转移的dp，经历过之前的题目的同学说到这里其实就比较好理解了，通常的数位dp可以写成记忆化搜索的模版的形式：</p>
-<pre><code class="cpp">int dfs(int i, int s, bool e){
-  if(i==-1) return s==target_s;
-  if(!e &amp;&amp; f[i][s]!=-1) return f[i][s];
-  int res = 0;
-  int u = e ? num[i] : 9;
-  for(int d = first?1:0 ; d&lt;=u ; d++)
-    res += dfs(i-1, new_s(s,d),e&amp;&amp;d==u);
-  return e?res:f[i][s]=res;
-}
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> s, <span class="keyword">bool</span> e)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(i==<span class="number">-1</span>) <span class="keyword">return</span> s==target_s;</div><div class="line">  <span class="keyword">if</span>(!e &amp;&amp; f[i][s]!=<span class="number">-1</span>) <span class="keyword">return</span> f[i][s];</div><div class="line">  <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> u = e ? num[i] : <span class="number">9</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> d = first?<span class="number">1</span>:<span class="number">0</span> ; d&lt;=u ; d++)</div><div class="line">    res += dfs(i<span class="number">-1</span>, new_s(s,d),e&amp;&amp;d==u);</div><div class="line">  <span class="keyword">return</span> e?res:f[i][s]=res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其中的f是记忆化数组，初始化为-1，i 为当前处理串的第i位，表示还有i+1位等待处理，s是之前数字的状态，如果有其他限制条件就继续往上加，e表示之前的数是否是上界的前缀(也就是后面的数是不是可以随便填)。因为这就是个模版，所以直接上题来体验一下就好了。</p>
-<h1 id="HDU-3555"><a href="#HDU-3555" class="headerlink" title="HDU_3555"></a>HDU_3555</h1><pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-
-typedef long long LL;
-LL n;
-LL f[31][2][2];
-int digit[35];
-
-LL dfs(int len,int have,int s,int e){
-  if(len == -1) return have;
-  if(!e &amp;&amp; f[len][have][s] != -1) return f[len][have][s];
-
-  LL ans = 0;
-  int u = e ? digit[len] : 9;
-  for(int d = 0 ; d &lt;= u ;d++){
-    if(s &amp;&amp; d == 9) ans += dfs(len-1, 1, d==4, e &amp;&amp; d == u);
-    else ans += dfs(len-1,have,d==4, e &amp;&amp; d == u);
-  } 
-  return e ? ans : f[len][have][s] = ans;
-}
-
-LL solve(LL x){
-  memset(digit, 0, sizeof(digit));
-  int i = 0;
-  while(x){
-    digit[i++]=x%10;
-    x /= 10;
-  }
-  return dfs(i-1,0,0,1);
-}
-
-int main(){
-  int t;
-  cin &gt;&gt; t;
-  while(t--){
-    cin &gt;&gt; n;
-    memset(f,-1,sizeof(f));
-    cout &lt;&lt; solve(n) &lt;&lt; endl;
-  }
-  return 0;
-}
-</code></pre>
-<h1 id="HDU-2089"><a href="#HDU-2089" class="headerlink" title="HDU_2089"></a>HDU_2089</h1><pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-using namespace std;
-
-int n,m;
-int f[8][2];
-int digit[10];
-
-int cal_len(int x){
-  int sum = 0;
-  while(x){
-    sum += 1;
-    x /= 10;
-  }
-  return sum;
-}
-
-void cal_digit(int x, int len){
-  memset(digit,0,sizeof(digit));
-  for(int i = 1 ; i &lt;= len ;i++){
-    digit[i] = x%10;
-    x /= 10; 
-  }
-}
-
-int dfs(int len, int s, int e){
-  if(len == 0) return 1;
-  if(!e &amp;&amp; f[len][s]!=-1) return f[len][s];
-
-  int ans = 0;
-  int u = e ? digit[len] : 9;
-  //因为车子牌号不是数字，首位可以是0
-  for(int i = 0 ;  i&lt;= u ;i++){
-    if(i == 4 || (s &amp;&amp; i == 2)) continue;
-    ans += dfs(len-1, i == 6, e &amp;&amp; i == u);
-  }
-  return e ? ans : f[len][s] = ans;
-}
-
-int solve(int x){
-  int len  = cal_len(x);
-  cal_digit(x, len);
-
-  int res = dfs(len,0,1);
-  return res;
-}
-
-
-int main(){
-  memset(f,-1,sizeof(f));
-  while(cin &gt;&gt; n &gt;&gt; m &amp;&amp; n+m){
-    cout &lt;&lt; solve(m) - solve(n-1) &lt;&lt; endl;
-  }
-  return 0;
-}
-</code></pre>
+<h1 id="HDU-3555"><a href="#HDU-3555" class="headerlink" title="HDU_3555"></a>HDU_3555</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line">LL n;</div><div class="line">LL f[<span class="number">31</span>][<span class="number">2</span>][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> digit[<span class="number">35</span>];</div><div class="line"></div><div class="line"><span class="function">LL <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> have,<span class="keyword">int</span> s,<span class="keyword">int</span> e)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(len == <span class="number">-1</span>) <span class="keyword">return</span> have;</div><div class="line">  <span class="keyword">if</span>(!e &amp;&amp; f[len][have][s] != <span class="number">-1</span>) <span class="keyword">return</span> f[len][have][s];</div><div class="line"></div><div class="line">  LL ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> u = e ? digit[len] : <span class="number">9</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span> ; d &lt;= u ;d++)&#123;</div><div class="line">    <span class="keyword">if</span>(s &amp;&amp; d == <span class="number">9</span>) ans += dfs(len<span class="number">-1</span>, <span class="number">1</span>, d==<span class="number">4</span>, e &amp;&amp; d == u);</div><div class="line">    <span class="keyword">else</span> ans += dfs(len<span class="number">-1</span>,have,d==<span class="number">4</span>, e &amp;&amp; d == u);</div><div class="line">  &#125; </div><div class="line">  <span class="keyword">return</span> e ? ans : f[len][have][s] = ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">LL <span class="title">solve</span><span class="params">(LL x)</span></span>&#123;</div><div class="line">  <span class="built_in">memset</span>(digit, <span class="number">0</span>, <span class="keyword">sizeof</span>(digit));</div><div class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(x)&#123;</div><div class="line">    digit[i++]=x%<span class="number">10</span>;</div><div class="line">    x /= <span class="number">10</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> dfs(i<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> t;</div><div class="line">  <span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">  <span class="keyword">while</span>(t--)&#123;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; solve(n) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="HDU-2089"><a href="#HDU-2089" class="headerlink" title="HDU_2089"></a>HDU_2089</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> n,m;</div><div class="line"><span class="keyword">int</span> f[<span class="number">8</span>][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> digit[<span class="number">10</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cal_len</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(x)&#123;</div><div class="line">    sum += <span class="number">1</span>;</div><div class="line">    x /= <span class="number">10</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal_digit</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> len)</span></span>&#123;</div><div class="line">  <span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= len ;i++)&#123;</div><div class="line">    digit[i] = x%<span class="number">10</span>;</div><div class="line">    x /= <span class="number">10</span>; </div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> s, <span class="keyword">int</span> e)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">if</span>(!e &amp;&amp; f[len][s]!=<span class="number">-1</span>) <span class="keyword">return</span> f[len][s];</div><div class="line"></div><div class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> u = e ? digit[len] : <span class="number">9</span>;</div><div class="line">  <span class="comment">//因为车子牌号不是数字，首位可以是0</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;  i&lt;= u ;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">4</span> || (s &amp;&amp; i == <span class="number">2</span>)) <span class="keyword">continue</span>;</div><div class="line">    ans += dfs(len<span class="number">-1</span>, i == <span class="number">6</span>, e &amp;&amp; i == u);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> e ? ans : f[len][s] = ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> len  = cal_len(x);</div><div class="line">  cal_digit(x, len);</div><div class="line"></div><div class="line">  <span class="keyword">int</span> res = dfs(len,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; n+m)&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; solve(m) - solve(n<span class="number">-1</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="HDU-3652"><a href="#HDU-3652" class="headerlink" title="HDU_3652"></a>HDU_3652</h1><p>因为有两个判断条件，所以加一维</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-
-#define Memset(a,b) memset(a,b,sizeof(a));
-
-using namespace std;
-
-int digit[16];
-int f[16][16][3];
-
-
-int dfs(int len,int mod, int s ,int e){
-    if(len == 0) return s == 2 &amp;&amp; mod == 0;
-    if(!e &amp;&amp; f[len][mod][s] != -1) return f[len][mod][s];
-    int u = e ? digit[len] : 9;
-    int ans = 0;
-    for(int d = 0; d &lt;= u ; d++){
-        int _mod = (mod*10 + d)%13;
-        int _s = s;
-        if(s == 0 &amp;&amp; d == 1) _s = 1;
-        if(s == 1 &amp;&amp; d != 1) _s = 0;
-        if(s == 1 &amp;&amp;  d == 3) _s = 2;
-        ans += dfs(len-1, _mod, _s ,e &amp;&amp; u==d);
-    }
-    return e ? ans : f[len][mod][s] = ans;
-}
-
-int solve(int x){
-    int len = 0;
-    memset(digit,0,sizeof(digit));
-    while(x){
-          len += 1;
-        digit[len] = x%10;
-        x /= 10;
-    }
-    dfs(len,0,0,1);
-}
-
-
-int main(){
-    int t;
-    while(cin &gt;&gt;t){
-        memset(f,-1,sizeof(f));
-        cout &lt;&lt; solve(t) &lt;&lt; endl; 
-    }
-}
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Memset(a,b) memset(a,b,sizeof(a));</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> digit[<span class="number">16</span>];</div><div class="line"><span class="keyword">int</span> f[<span class="number">16</span>][<span class="number">16</span>][<span class="number">3</span>];</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> mod, <span class="keyword">int</span> s ,<span class="keyword">int</span> e)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> s == <span class="number">2</span> &amp;&amp; mod == <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(!e &amp;&amp; f[len][mod][s] != <span class="number">-1</span>) <span class="keyword">return</span> f[len][mod][s];</div><div class="line">    <span class="keyword">int</span> u = e ? digit[len] : <span class="number">9</span>;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span>; d &lt;= u ; d++)&#123;</div><div class="line">        <span class="keyword">int</span> _mod = (mod*<span class="number">10</span> + d)%<span class="number">13</span>;</div><div class="line">        <span class="keyword">int</span> _s = s;</div><div class="line">        <span class="keyword">if</span>(s == <span class="number">0</span> &amp;&amp; d == <span class="number">1</span>) _s = <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span>(s == <span class="number">1</span> &amp;&amp; d != <span class="number">1</span>) _s = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(s == <span class="number">1</span> &amp;&amp;  d == <span class="number">3</span>) _s = <span class="number">2</span>;</div><div class="line">        ans += dfs(len<span class="number">-1</span>, _mod, _s ,e &amp;&amp; u==d);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> e ? ans : f[len][mod][s] = ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">    <span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</div><div class="line">    <span class="keyword">while</span>(x)&#123;</div><div class="line">      	len += <span class="number">1</span>;</div><div class="line">        digit[len] = x%<span class="number">10</span>;</div><div class="line">        x /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    dfs(len,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> t;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt;t)&#123;</div><div class="line">        <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; solve(t) &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>那么经过这个之后我们是不是就可以想到对于第一题在于空间上进行一次优化，因为判断条件是可以叠加的，所有我们只需要修改关键地方的代码即可：</p>
-<pre><code class="cpp">LL dfs(int len,int s,int e){
-  if(len == 0) return s == 2;
-  if(!e &amp;&amp; f[len][s] != -1) return f[len][s];
-
-  LL ans = 0;
-  int u = e ? digit[len] : 9;
-  for(int d = 0 ; d &lt;= u ;d++){
-    int _s = s;
-    if(s == 0 &amp;&amp; d == 4) _s = 1;
-    if(s == 1 &amp;&amp; d != 4) _s = 0;
-    if(s == 1 &amp;&amp; d == 9) _s = 2;
-    ans += dfs(len-1, _s , e &amp;&amp; u==d);
-  }
-  return e ? ans : f[len][s] = ans;
-}
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function">LL <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> s,<span class="keyword">int</span> e)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> s == <span class="number">2</span>;</div><div class="line">  <span class="keyword">if</span>(!e &amp;&amp; f[len][s] != <span class="number">-1</span>) <span class="keyword">return</span> f[len][s];</div><div class="line"></div><div class="line">  LL ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> u = e ? digit[len] : <span class="number">9</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span> ; d &lt;= u ;d++)&#123;</div><div class="line">    <span class="keyword">int</span> _s = s;</div><div class="line">    <span class="keyword">if</span>(s == <span class="number">0</span> &amp;&amp; d == <span class="number">4</span>) _s = <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(s == <span class="number">1</span> &amp;&amp; d != <span class="number">4</span>) _s = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(s == <span class="number">1</span> &amp;&amp; d == <span class="number">9</span>) _s = <span class="number">2</span>;</div><div class="line">    ans += dfs(len<span class="number">-1</span>, _s , e &amp;&amp; u==d);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> e ? ans : f[len][s] = ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当然这都只是简单题，下面就上一点难度吧。</p>
 <h1 id="HDU-3709"><a href="#HDU-3709" class="headerlink" title="HDU_3709"></a>HDU_3709</h1><p>因为支点不好在数位dp里面进行枚举，所以我们在外层通过一个循环来枚举，dfs中固定支点</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;cstring&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-
-#define MAXN 20
-typedef long long LL;
-int t;
-LL n,m;
-int digit[MAXN];
-LL f[MAXN][MAXN][2005];
-
-LL dfs(int len, int o, int s,int e){
-  if(len &lt;= 0) return s == 0;
-  if(s &lt; 0) return 0;
-  if(!e &amp;&amp; f[len][o][s] != -1) return f[len][o][s];
-  int u = e ? digit[len] : 9;
-  LL ans = 0;
-  for(int d = 0 ; d &lt;= u ; d++){
-    int next = s+(len-o)*d;
-    ans += dfs(len-1,o,next,e&amp;&amp;(u==d));
-  }
-  if(!e) f[len][o][s] = ans;
-  return ans;
-}
-
-LL solve(LL x){
-  memset(digit,0,sizeof(digit));
-  int len = 0;
-  while(x){
-    len += 1;
-    digit[len] = x%10;
-    x /= 10;
-  }
-  LL ans = 0;
-  for(int i = 1 ; i &lt;= len ; i++)
-    ans += dfs(len,i,0,1);
-  return ans - (len-1);
-}
-
-int main(){
-  scanf(&quot;%d&quot;, &amp;t);
-  while(t--){
-    memset(f,-1,sizeof(f));
-    scanf(&quot;%lld%lld&quot;, &amp;n, &amp;m);
-    LL ans = solve(m) - solve(n-1);
-    printf(&quot;%lld\n&quot;, ans);
-  }
-  return 0;
-}
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 20</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"><span class="keyword">int</span> t;</div><div class="line">LL n,m;</div><div class="line"><span class="keyword">int</span> digit[MAXN];</div><div class="line">LL f[MAXN][MAXN][<span class="number">2005</span>];</div><div class="line"></div><div class="line"><span class="function">LL <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> o, <span class="keyword">int</span> s,<span class="keyword">int</span> e)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>(len &lt;= <span class="number">0</span>) <span class="keyword">return</span> s == <span class="number">0</span>;</div><div class="line">  <span class="keyword">if</span>(s &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  <span class="keyword">if</span>(!e &amp;&amp; f[len][o][s] != <span class="number">-1</span>) <span class="keyword">return</span> f[len][o][s];</div><div class="line">  <span class="keyword">int</span> u = e ? digit[len] : <span class="number">9</span>;</div><div class="line">  LL ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span> ; d &lt;= u ; d++)&#123;</div><div class="line">    <span class="keyword">int</span> next = s+(len-o)*d;</div><div class="line">    ans += dfs(len<span class="number">-1</span>,o,next,e&amp;&amp;(u==d));</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span>(!e) f[len][o][s] = ans;</div><div class="line">  <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">LL <span class="title">solve</span><span class="params">(LL x)</span></span>&#123;</div><div class="line">  <span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</div><div class="line">  <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(x)&#123;</div><div class="line">    len += <span class="number">1</span>;</div><div class="line">    digit[len] = x%<span class="number">10</span>;</div><div class="line">    x /= <span class="number">10</span>;</div><div class="line">  &#125;</div><div class="line">  LL ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= len ; i++)</div><div class="line">    ans += dfs(len,i,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> ans - (len<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</div><div class="line">  <span class="keyword">while</span>(t--)&#123;</div><div class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>, &amp;n, &amp;m);</div><div class="line">    LL ans = solve(m) - solve(n<span class="number">-1</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="POJ-3252"><a href="#POJ-3252" class="headerlink" title="POJ_3252"></a>POJ_3252</h1><p>主要的难度在于前导0的处理上，对于回归条件的判断。</p>
-<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> digit[<span class="number">50</span>];</div><div class="line">LL f[<span class="number">50</span>][<span class="number">50</span>][<span class="number">50</span>];</div><div class="line"></div><div class="line"></div><div class="line"><span class="function">LL <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> zero, <span class="keyword">int</span> one ,<span class="keyword">int</span> e,<span class="keyword">int</span> fi)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(fi) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span>(zero &gt;= one) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(!e &amp;&amp; !fi &amp;&amp; f[len][zero][one] != <span class="number">-1</span>) <span class="keyword">return</span> f[len][zero][one];</div><div class="line">    <span class="keyword">int</span> u = e ? digit[len] : <span class="number">1</span>;</div><div class="line">    LL ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span>; d &lt;= u ; d++)&#123;</div><div class="line">        <span class="keyword">if</span>(fi)&#123;</div><div class="line">            <span class="keyword">if</span>(d==<span class="number">0</span>) ans+=dfs(len<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>,e&amp;&amp;(u==d),<span class="number">1</span>);</div><div class="line">            <span class="keyword">else</span> ans+=dfs(len<span class="number">-1</span>,zero,one+<span class="number">1</span>,e&amp;&amp;(u==d),<span class="number">0</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span>(d==<span class="number">0</span>)  </div><div class="line">                ans+=dfs(len<span class="number">-1</span>,zero+<span class="number">1</span>,one,e&amp;&amp;u==d,<span class="number">0</span>);<span class="comment">//在二进制后面放0  </span></div><div class="line">            <span class="keyword">else</span>  </div><div class="line">                ans+=dfs(len<span class="number">-1</span>,zero,one+<span class="number">1</span>,e&amp;&amp;u==d,<span class="number">0</span>);<span class="comment">//放1  </span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> (e&amp;&amp;fi) ? ans : f[len][zero][one] = ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">LL <span class="title">solve</span><span class="params">(LL x)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">    <span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</div><div class="line">    <span class="keyword">while</span>(x)&#123;</div><div class="line">        digit[++len] = x &amp; <span class="number">1</span>;</div><div class="line">        x &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dfs(len,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    LL n,m;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</div><div class="line">        <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; solve(m)-solve(n<span class="number">-1</span>) &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-typedef long long LL;
-
-using namespace std;
-
-int digit[50];
-LL f[50][50][50];
-
-
-LL dfs(int len,int zero, int one ,int e,int fi){
-    if(len == 0){
-        if(fi) return 1;
-        if(zero &gt;= one) return 1;
-        return 0;
-    }
-    if(!e &amp;&amp; !fi &amp;&amp; f[len][zero][one] != -1) return f[len][zero][one];
-    int u = e ? digit[len] : 1;
-    LL ans = 0;
-    for(int d = 0; d &lt;= u ; d++){
-        if(fi){
-            if(d==0) ans+=dfs(len-1,0,0,e&amp;&amp;(u==d),1);
-            else ans+=dfs(len-1,zero,one+1,e&amp;&amp;(u==d),0);
-        }else{
-            if(d==0)  
-                ans+=dfs(len-1,zero+1,one,e&amp;&amp;u==d,0);//在二进制后面放0  
-            else  
-                ans+=dfs(len-1,zero,one+1,e&amp;&amp;u==d,0);//放1  
-        }
-    }
-    return (e&amp;&amp;fi) ? ans : f[len][zero][one] = ans;
-}
-
-LL solve(LL x){
-    int len = 0;
-    memset(digit,0,sizeof(digit));
-    while(x){
-        digit[++len] = x &amp; 1;
-        x &gt;&gt;= 1;
-    }
-    return dfs(len,0,0,1,1);
-}
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-13T02:19:01.480Z" itemprop="dateUpdated">2018-04-13 10:19:01</time>
+</span><br>
 
 
-int main(){
-    LL n,m;
-    while(cin &gt;&gt; n &gt;&gt; m){
-        memset(f,-1,sizeof(f));
-        cout &lt;&lt; solve(m)-solve(n-1) &lt;&lt; endl; 
-    }
-    return 0;
-}
-</code></pre>
+        
+        转载注明出处，原文地址：<a href="/2018/04/11/数位dp/" target="_blank" rel="external">http://yoursite.com/2018/04/11/数位dp/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/11/数位dp/&title=《数位dp》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/11/数位dp/&title=《数位dp》 — Peterpan's Blog&source=
+通常数位dp和记忆化dfs是不分家的，如果dfs还没有写会还是先练练dfs吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
 
 
-<!--<a href="http://yoursite.com/2018/04/11/数位dp/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/13/重探OC之诞生篇/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">重探OC之诞生篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/07/状态压缩专题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">状态压缩专题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思想介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">思想介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HDU-3555"><span class="post-toc-number">2.</span> <span class="post-toc-text">HDU_3555</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HDU-2089"><span class="post-toc-number">3.</span> <span class="post-toc-text">HDU_2089</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HDU-3652"><span class="post-toc-number">4.</span> <span class="post-toc-text">HDU_3652</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HDU-3709"><span class="post-toc-number">5.</span> <span class="post-toc-text">HDU_3709</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#POJ-3252"><span class="post-toc-number">6.</span> <span class="post-toc-text">POJ_3252</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/11/数位dp/&title=《数位dp》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/11/数位dp/&title=《数位dp》 — Peterpan's Blog&source=
+通常数位dp和记忆化dfs是不分家的，如果dfs还没有写会还是先练练dfs吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvklEQVR42u3aQU7EMBAEwP3/p0HihIRIuu14WKTyaQWLU+YwGvfk9YrXx9e6/vzbb7+vnz9/nVi4uLjb3I/LlbASxPWeiQEXF3eemxSvm40u/wU5/caGi4v7ZtykxdnfExcX939x28tM0vTg4uK+MzcH5Q3KdUNz/K6Gi4u7wX0qMN35/Af5Li4u7tJUYifaaAPW6Om4uLgj3HzrtfFqwm0jVFxc3BlufkXZOUyyQzKGwcXFneeu1Y22Ddpvj3Bxcc9x28iy/U47Mrkpo7i4uIPcvLlpG522ibkphbi4uCPcxW6oZO1MSYqpDi4u7jFuHl+239kJSnBxcSe5Oy9JPDuAia5PuLi4I9ynBqjJgXcCEVxc3EluvlESg7Zjknqsi4uLO8It6lz5Qsba0CV6Ii4u7mFu23ysRR55Obs5Ei4u7iC3TlgDbjQuLZ+Ci4s7yc1XXoby6KQ4Bi4u7gi3LShPDV2eimhxcXHPcdeKV3LutghGBQ4XF3eQm7cjbXtUv4CV11RcXNw34OblKR/JHCxkuLi4f8rdGZDkf4WLizvPbV+VyOPR5EJVFERcXNwR7lpgulae9lsoXFzcw9xPXbJ2nZII9xYAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+    
 </body>
 </html>
