@@ -17,7 +17,9 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.18.08.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png">
-<meta property="og:updated_time" content="2018-05-02T06:06:58.146Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.25.27.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.26.52.png">
+<meta property="og:updated_time" content="2018-05-02T08:36:42.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mach-O中的lazy-binding探究">
 <meta name="twitter:description" content="实践出真知，让我自己动手去验证动态库加载的特性吧">
@@ -113,11 +115,12 @@
       
         <p>实践出真知，让我自己动手去验证动态库加载的特性吧</p>
 <a id="more"></a>
-<h1 id="一个有趣的现象"><a href="#一个有趣的现象" class="headerlink" title="一个有趣的现象"></a>一个有趣的现象</h1><pre><code class="c">#include&lt;stdio.h&gt;
-int main(){
-  printf(&quot;Hello world!\n&quot;);
-  printf(&quot;2Hello world\n&quot;);
-  return 0;
+<h1 id="一个有趣的现象"><a class="markdownIt-Anchor" href="#一个有趣的现象"></a> 一个有趣的现象</h1>
+<pre class="highlight"><code class="c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello world!\n"</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"2Hello world\n"</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
 </code></pre>
 <p>首先通过IDA找到我们调用打印函数的地址，然后在对应的地方下断点：</p>
@@ -125,29 +128,30 @@ int main(){
 <p>接下来我们在命令行中打开lldb，对可执行文件进行分析：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.12.38.png" alt="lldb分析"></p>
 <p>我们看到没有偏移，那么直接根据IDA中的地址下断点即可：</p>
-<pre><code class="shell">br s -a 0000000100000F48
-br s -a 0000000100000F59
+<pre class="highlight"><code class="shell">br s -a 0000000100000F48
+br s -a 0000000100000F59 
 </code></pre>
 <p>然后启动程序，我们发现调用<code>printf</code>函数跳到了一个地方：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.16.14.png" alt="第一次printf"></p>
 <p>这个地方跳转的地址是从我们的Mach-O的<code>_DATA,__la_symbol_ptr</code>中得到的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.18.08.png" alt="lazy_pointer"></p>
 <p>我们通过查看那个地址也可以得到一样的值：</p>
-<pre><code class="shell">(lldb) x 0x100001010
+<pre class="highlight"><code class="shell">(lldb) x 0x100001010
 0x100001010: 84 0f 00 00 01 00 00 00 00 00 00 00 00 00 00 00  ................
 0x100001020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
 </code></pre>
 <p>但是这个其实不是真正的地址，通过第二次调用<code>printf</code>函数的时候我们可以发现，值居然是不同的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png" alt="第二次printf"></p>
 <p>那么为什么两次调用相同的函数最后实际上是跳转到不同的代码片段呢？这就和我们的延迟绑定有关了，也就是接下来介绍的内容，为什么会有这样的设定。</p>
-<h1 id="lazy-binding"><a href="#lazy-binding" class="headerlink" title="lazy-binding"></a>lazy-binding</h1><p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
+<h1 id="lazy-binding"><a class="markdownIt-Anchor" href="#lazy-binding"></a> lazy-binding</h1>
+<p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
 <p>造成这个的主要原因就是动态链接对于全局和静态数据要进行复杂的GOT（全局偏移表）定位，然后间接寻址，模块间的调用也是如此，而且因为这个链接的过程是动态的，动态链接器会寻找并转载所需要的对象，然后进行符号查找和地址重定位，这个技术的实现步骤是：</p>
 <ol>
 <li>建立一个GOT.plt表，该表存放全局函数的实际地址，但在一开始的时候，里面存放的只是一个跳转</li>
 <li>对于每个全局函数，链接器生成一个与之对应的影子函数</li>
 <li>所有对于原函数的调用，都变成对于影子函数的调用，而影子函数形如：</li>
 </ol>
-<pre><code class="assembly">fun@plt:
+<pre class="highlight"><code class="assembly">fun@plt:
 jmp *(fun@got.plt)
 push index
 jmp _init
@@ -156,15 +160,76 @@ jmp _init
 <p>上述的是ELF文件的延迟绑定实现，在Mach-O中也差不多，只是具体的实现不同，原理是一样的，在Mach-O中，是通过<code>__stub_helper</code>来进行延迟绑定的，也可以通过MachOView来观察：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png" alt="_stub_helper"></p>
 <p>同时我们还可以在延迟绑定的info中看到<code>_printf</code>，所以这也解释了上面为什么两次调用相同的函数，跳转的地址却不一样，因为一开始根本计算没有真实函数地址，只是一个跳转罢了。</p>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
+<h1 id="补充参考博客"><a class="markdownIt-Anchor" href="#补充参考博客"></a> 补充&amp;参考博客</h1>
+<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
+<p>之前在重探OC篇中提到过在OC中的方法的本质就是发送消息，变成了<code>objc_msgSend</code>,在这里进行补充的就是在二进制下的方法查找过程，更加方便对于OC的底层理解：</p>
+<p>我们都知道在OC中的函数分<code>+</code>和<code>-</code>开头的，一个是类方法，一个是实例方法，所以+号函数是基类调用的，-号函数是实例类调用的。我们知道发送消息的时候是根据对象找到它的类，然后在方法列表中一层层的寻找有没有对应的方法，找到之后再根据对应的IMP去执行，那么在二进制下，我们的列表长什么样子呢？</p>
+<pre class="highlight"><code class="objective-c">- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+  
+    [CMyClass testClassFun ]; // +号函数
+
+        // 后面都是-号函数
+    CMyClass *pTest = [[CMyClass alloc] init1];
+    [pTest Hello:4];
+    [pTest World:&quot;Test&quot; Num:5];
+}
+</code></pre>
+<p>在lldb中进行调试，在<code>pTest</code>执行<code>Hello:</code>的地方打个断点，查看寄存器，r0寄存器中的值是我们的对象指针pTest：</p>
+<pre class="highlight"><code class="shell">
+(lldb) memory read -s4 -fx -c16 0x1668b600    // 0x1668b600为实例类指针 pTest
+0x1668b600: 0x00097760 0x00000001 0x00000002 0x6c6c6568
+0x1668b610: 0x0000006f 0x00000000 0x00000000 0x00000000
+0x1668b620: 0x3348bd3c 0x3aecba4d 0x3348b284 0x3058e665
+0x1668b630: 0x00000000 0x00000000 0x00000000 0x00000000
+
+(lldb) memory read -s4 -fx -c16 0x00097760  // 0x00097760为isa指针
+0x00097760: 0x0009774c 0x3d3d1050 0x1659c110 0x00010003  // 0x1659c110为实例类的函数结构体数组
+0x00097770: 0x1659b3a0 0x00097788 0x3bb0a1e4 0x16c08200
+0x00097780: 0x000e007f 0x16599490 0x3d3d1064 0x3bb0a1d0
+0x00097790: 0x1659a760 0x00030007 0x16599330 0x3d3d1064
+
+(lldb) memory read -s4 -fx -c16 0x0009774c  // 基类指针
+0x0009774c: 0x3d3d1064 0x3d3d1064 0x1668bd80 0x00020003  // 0x1668bd80为基类的函数结构体数组
+0x0009775c: 0x1659b290 0x0009774c 0x3d3d1050 0x1659c110
+0x0009776c: 0x00010003 0x1659b3a0 0x00097788 0x3bb0a1e4
+0x0009777c: 0x16c08200 0x000e007f 0x16599490 0x3d3d1064
+
+(lldb) memory read -s4 -fx -c16 0x1668bd80  // 基类的函数结构体数组
+0x1668bd80: 0x00000000 0x00000000 0x000960dd 0x00095b49 // 0x000960dd为函数名
+0x1668bd90: 0x00000000 0x00000000 0x3348b603 0x3aecba95
+0x1668bda0: 0x00000001 0x1668bd78 0x00000000 0x00000000
+0x1668bdb0: 0x90000000 0x90000000 0x73730007 0x286e7546
+
+(lldb) memory read -s4 -fx -c16 0x1659c110 // 实例类的函数结构体数组
+0x1659c110: 0x00000000 0x00000000 0x00000000 0x00000000
+0x1659c120: 0x000960ea 0x00095a5d 0x00000000 0x00000000 // 0x000960ea为函数名
+0x1659c130: 0x00000001 0x1659c108 0x00000000 0x00000000
+0x1659c140: 0x1659bfb0 0x00000000 0x1659bad0 0x00000000
+
+(lldb) memory read 0x000960dd
+0x000960dd: 74 65 73 74 43 6c 61 73 73 46 75 6e 00 69 6e 69  testClassFun.ini
+0x000960ed: 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72 6c 64 3a  t1.Hello:.World:
+
+(lldb) memory read 0x000960ea
+0x000960ea: 69 6e 69 74 31 00 48 65 6c 6c 6f 3a 00 57 6f 72  init1.Hello:.Wor
+0x000960fa: 6c 64 3a 4e 75 6d 3a 00 6d 5f 6e 4c 65 6e 00 6d  ld:Num:.m_nLen.m
+</code></pre>
+<p>如果是我们第一次去调用方法的时候，还没有被缓存，我们的函数结构体数组中的函数名为空，最后会进入<code>__objc_msgSend_uncached</code>，查找并缓存函数地址。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.25.27.png" alt="obj_msgSend实现"></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.26.52.png" alt="objc_msgSend缓存"></p>
+<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
+<ul>
 <li><a href="https://bbs.pediy.com/thread-208455.htm" target="_blank" rel="external">看雪-动态链接的简单分析</a></li>
 <li><a href="http://yunnigu.dropsec.xyz/2017/02/24/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" target="_blank" rel="external">延迟绑定技术原理</a></li>
+<li><a href="https://bbs.pediy.cpm/thread-199803.htm" target="_blank" rel="external">对于objc_msgSend的探究</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjgopnnrw002l99br4za3ixn2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjgopnnrw002l99br4za3ixn2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -177,7 +242,7 @@ jmp _init
   
   
     <a href="/2018/05/01/iOS的降级限制/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">iOS的降级限制</div>
     </a>
   
