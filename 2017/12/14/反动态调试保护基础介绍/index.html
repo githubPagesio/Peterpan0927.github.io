@@ -1,190 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/12/14/反动态调试保护基础介绍/">
-    
-    
-    <title>反动态调试保护基础介绍 | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>反动态调试保护基础介绍</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="Re">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>反动态调试保护基础介绍</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">反动态调试保护基础介绍</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-12-14T05:05:21.000Z" itemprop="datePublished" class="page-time">
-  2017-12-14
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ptrace/">ptrace</a></li></ul>
+<h2 class="title">反动态调试保护基础介绍</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年12月14日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/ptrace/">ptrace</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-反动态调试保护基础介绍"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">反动态调试保护基础介绍</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-12-14 13:05:21" datetime="2017-12-14T05:05:21.000Z"  itemprop="datePublished">2017-12-14</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ptrace/">ptrace</a></li></ul>
-
-
-
-            
-	<span id="/2017/12/14/反动态调试保护基础介绍/" class="leancloud_visitors" data-flag-title="反动态调试保护基础介绍" title="反动态调试保护基础介绍">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/12/14/反动态调试保护基础介绍/#comment">
-            <span class="valine-comment-count" data-xid="/2017/12/14/反动态调试保护基础介绍/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>今天在社区中看到snakeninny大神写的一个干掉高德地图iOS客户端的反动态调试保护，之前只知道通过加壳的方式去干扰逆向的我心生好奇，决定看看这个保护是如何去实现的（首先声明，下面所做实验全都是在32位的机器下）</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0X00基础知识"><span class="toc-text">0X00基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0X01寄存器读写"><span class="toc-text">0X01寄存器读写</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0X02进程追踪"><span class="toc-text">0X02进程追踪</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0X03参考博客"><span class="toc-text">0X03参考博客</span></a></li></ol>
+<p>今天在社区中看到snakeninny大神写的一个干掉高德地图iOS客户端的反动态调试保护，之前只知道通过加壳的方式去干扰逆向的我心生好奇，决定看看这个保护是如何去实现的（首先声明，下面所做实验全都是在32位的机器下）</p>
 <a id="more"></a>
 <h1 id="0X00基础知识"><a href="#0X00基础知识" class="headerlink" title="0X00基础知识"></a>0X00基础知识</h1><p>你想过怎么实现对系统调用的拦截吗？你尝试过通过改变系统调用的参数来愚弄你的系统kernel吗？你想过调试器是如何使运行中的进程暂停并且控制它吗？</p>
 <p>你可能会开始考虑怎么使用复杂的kernel编程来达到目的，那么，你错了。实际上Linux提供了一种优雅的机制来完成这些：ptrace系统函数。 ptrace提供了一种使父进程得以监视和控制其它进程的方式，它还能够改变子进程中的寄存器和内核映像，因而可以实现断点调试和系统调用的跟踪。使用ptrace，你可以在用户层拦截和修改系统调用(sys call)。那么我们的反动态调试保护的机制也是基于这个ptrace函数，而且这个也是目前公开的反动态调试保护的方法。</p>
@@ -192,17 +55,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">; Write(2, &quot;Hello&quot;, 5)这个调用的汇编形式</div><div class="line">movl $4, %eax ;系统调用号</div><div class="line">movl $2, %ebx</div><div class="line">movl $hello, %ecx</div><div class="line">movl $5, %edx</div><div class="line">int  $0x80 ;软中断</div></pre></td></tr></table></figure>
 <p>那么，我们的ptrace是在什么时候出现的呢，操作系统在执行系统调用之前，内核会首先检查当前进程是否处于<code>traced</code>的状态。如果是的话，内核就会暂停当前进程并将控制权交给跟踪进程，让跟踪进程得以查看或者修改被跟踪进程的寄存器，下面用一段代码来演示这个跟踪程序的过程:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/reg.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">pid_t</span> child;</div><div class="line">  <span class="keyword">long</span> orig_eax;</div><div class="line">  child = fork();</div><div class="line">  <span class="keyword">if</span>(child == <span class="number">0</span>)&#123;</div><div class="line">    ptrace(PTRACE_TRACEME, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    execl(<span class="string">"/bin/ls"</span>, <span class="string">"ls"</span>, <span class="literal">NULL</span>;</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    orig_eax = ptrace(PTRACE_PEEKUSER, child, <span class="number">4</span> * ORIG_EAX, <span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The child made a system call %ld \n"</span>, orig_eax);</div><div class="line">    ptrace(PTRACE_CONT, child, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在上面的代码中，是我在Ubuntu上可以运行的一段代码,执行之后的结果如下图所示：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8810.24.47.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<p>在上面的代码中，是我在Ubuntu上可以运行的一段代码,执行之后的结果如下图所示：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8810.24.47.png" alt=""></p>
 <p>这个例子其实是父进程<code>fork</code>出了一个子进程，然后跟踪它，在调用<code>exec</code>函数之前，子进程用PTRACE_TRACEME作为第一个参数调用了ptrace函数，意思就是告诉内核来跟踪我吧。然后在子进程调用了<code>exec</code>之后，它将控制权交还给父进程。当时的父进程正使用<code>wait()</code>函数等待来自内核的通知，得到了通知之后，他就可以去查看子进程干了什么事情，观察一下寄存器的值。</p>
 <h1 id="0X01寄存器读写"><a href="#0X01寄存器读写" class="headerlink" title="0X01寄存器读写"></a>0X01寄存器读写</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">ptrace</span><span class="params">(<span class="keyword">enum</span> __ptrace_request request, <span class="keyword">pid_t</span> pid,</span></span></div><div class="line">                   <span class="keyword">void</span> *addr, <span class="keyword">void</span> *data);</div></pre></td></tr></table></figure>
 <p>根据man手册中的内容我们可以看到<code>ptrace</code>函数的定义以及需要引入的头文件，第一个参数就决定了<code>ptrace</code>的行为和其他的参数的使用方法，我通过头文件中的内容大概了解到这些枚举值的功能，至于头文件位置可以在通过<code>gcc</code>编译的时候查看相关的参数即可。在系统调用追踪时，常见的流程如下图所示：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/676200-20160220161141175-432928373.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/676200-20160220161141175-432928373.png" alt=""></p>
 <p>接下来我们就以write系统调用来看看是如何去读取寄存器的值的：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/reg.h&gt;   /* For constants ORIG_EAX etc */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/user.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/syscall.h&gt; /* SYS_write */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">pid_t</span> child;</div><div class="line">    <span class="keyword">long</span> orig_eax;</div><div class="line">    <span class="keyword">int</span> status;</div><div class="line">    <span class="keyword">int</span> iscalling = <span class="number">0</span>;</div><div class="line">    <span class="keyword">struct</span> user_regs_struct regs;</div><div class="line"></div><div class="line">    child = fork();</div><div class="line">    <span class="keyword">if</span>(child == <span class="number">0</span>) &#123;</div><div class="line">        ptrace(PTRACE_TRACEME, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">        execl(<span class="string">"/bin/ls"</span>, <span class="string">"ls"</span>, <span class="string">"-l"</span>, <span class="string">"-h"</span>, <span class="literal">NULL</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</div><div class="line">            wait(&amp;status);</div><div class="line">            <span class="keyword">if</span>(WIFEXITED(status))</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            orig_eax = ptrace(PTRACE_PEEKUSER,</div><div class="line">                              child, <span class="number">4</span> * ORIG_EAX,</div><div class="line">                              <span class="literal">NULL</span>);</div><div class="line">            <span class="keyword">if</span>(orig_eax == SYS_write) &#123;</div><div class="line">                ptrace(PTRACE_GETREGS, child, <span class="literal">NULL</span>, &amp;regs);</div><div class="line">                <span class="keyword">if</span>(!iscalling) &#123;</div><div class="line">                    iscalling = <span class="number">1</span>;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"SYS_write call with %ld, %ld, %ld\n"</span>,</div><div class="line">                            regs.edi, regs.esi, regs.edx);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"SYS_write call return %ld\n"</span>, regs.eax);</div><div class="line">                    iscalling = <span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            ptrace(PTRACE_SYSCALL, child, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>编译运行之后有如下输出：</p>
@@ -210,10 +67,7 @@
 <p>可以看到我们的<code>ls -l -h</code>命令中，发生了8次<code>write</code>系统调用，这里读取寄存器的时候可以使用之前的<code>PTRACE_PEEKUSER</code>，也可以直接使用<code>PTRACE_GETREGS</code>将寄存器的值读取到结构体<code>user_regs_struct</code>中，这个结构体的定义在<code>sys/user.h</code>中，下面贴一下在32的系统中的定义方式:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> user_regs_struct</div><div class="line">&#123;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ebx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ecx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> edx;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> esi;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> edi;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> ebp;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eax;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xds;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xes;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xfs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xgs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> orig_eax;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eip;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xcs;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> eflags;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> esp;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">int</span> xss;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>程序中的<code>WIFEXITED</code>宏是用来检查子进程是被<code>ptrace</code>暂停还是准备退出:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8811.57.17.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8A%E5%8D%8811.57.17.png" alt=""></p>
 <p>另外还有一点就是<code>PTRACE_SYSCALL</code>参数，其作用就是使内核在子进程进入和退出系统系统调用的时候将其暂停，等价于<code>PTRACE_CONT</code>并且在下一个<code>entry/exit</code>系统调用之前暂停。</p>
 <h1 id="0X02进程追踪"><a href="#0X02进程追踪" class="headerlink" title="0X02进程追踪"></a>0X02进程追踪</h1><p>上面的例子都是追踪并修改声明了<code>PTRACE_TRACEME</code>的子进程的，对于<code>ptrace</code>有了一个基本的了解之后接下来就可以看看追踪其他程序的进程，这个时候需要使用的就是<code>PTACRE_ATTACH</code>了。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ptrace(PTRACE_ATTACH, pid, <span class="literal">NULL</span>, <span class="literal">NULL</span>)</div></pre></td></tr></table></figure>
@@ -224,10 +78,7 @@
 <p>程序每隔两秒就会打印一个值到终端，接下来我们另外编写一个程序：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ptrace.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/user.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> long_size = <span class="keyword">sizeof</span>(<span class="keyword">long</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getdata</span><span class="params">(<span class="keyword">pid_t</span> child, <span class="keyword">long</span> addr,</span></span></div><div class="line">             <span class="keyword">char</span> *str, <span class="keyword">int</span> len)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *laddr;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    <span class="keyword">union</span> u &#123;</div><div class="line">            <span class="keyword">long</span> val;</div><div class="line">            <span class="keyword">char</span> chars[long_size];</div><div class="line">    &#125;data;</div><div class="line"></div><div class="line">    i = <span class="number">0</span>;</div><div class="line">    j = len / long_size;</div><div class="line">    laddr = str;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        data.val = ptrace(PTRACE_PEEKDATA, child,</div><div class="line">                          addr + i * <span class="number">4</span>, <span class="literal">NULL</span>);</div><div class="line">        <span class="built_in">memcpy</span>(laddr, data.chars, long_size);</div><div class="line">        ++i;</div><div class="line">        laddr += long_size;</div><div class="line">    &#125;</div><div class="line">    j = len % long_size;</div><div class="line">    <span class="keyword">if</span>(j != <span class="number">0</span>) &#123;</div><div class="line">        data.val = ptrace(PTRACE_PEEKDATA, child,</div><div class="line">                          addr + i * <span class="number">4</span>, <span class="literal">NULL</span>);</div><div class="line">        <span class="built_in">memcpy</span>(laddr, data.chars, j);</div><div class="line">    &#125;</div><div class="line">    str[len] = <span class="string">'\0'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">putdata</span><span class="params">(<span class="keyword">pid_t</span> child, <span class="keyword">long</span> addr,</span></span></div><div class="line">             <span class="keyword">char</span> *str, <span class="keyword">int</span> len)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *laddr;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    <span class="keyword">union</span> u &#123;</div><div class="line">            <span class="keyword">long</span> val;</div><div class="line">            <span class="keyword">char</span> chars[long_size];</div><div class="line">    &#125;data;</div><div class="line"></div><div class="line">    i = <span class="number">0</span>;</div><div class="line">    j = len / long_size;</div><div class="line">    laddr = str;</div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        <span class="built_in">memcpy</span>(data.chars, laddr, long_size);</div><div class="line">        ptrace(PTRACE_POKEDATA, child,</div><div class="line">               addr + i * <span class="number">4</span>, data.val);</div><div class="line">        ++i;</div><div class="line">        laddr += long_size;</div><div class="line">    &#125;</div><div class="line">    j = len % long_size;</div><div class="line">    <span class="keyword">if</span>(j != <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">memcpy</span>(data.chars, laddr, j);</div><div class="line">        ptrace(PTRACE_POKEDATA, child,</div><div class="line">               addr + i * <span class="number">4</span>, data.val);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//attach.c</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(argc!=<span class="number">2</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Usage: %s pid\n"</span>, argv[<span class="number">0</span>]);</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">pid_t</span> victim = atoi(argv[<span class="number">1</span>]);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, victim);</div><div class="line">    <span class="keyword">struct</span> user_regs_struct regs;</div><div class="line">    <span class="comment">/* int 0x80, int3 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> code[] = &#123;<span class="number">0xcd</span>,<span class="number">0x80</span>,<span class="number">0xcc</span>,<span class="number">0x00</span>&#125;;</div><div class="line">    <span class="keyword">char</span> backup[<span class="number">4</span>];</div><div class="line">    ptrace(PTRACE_ATTACH, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    <span class="keyword">long</span> inst;</div><div class="line"></div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    ptrace(PTRACE_GETREGS, victim, <span class="literal">NULL</span>, &amp;regs);</div><div class="line">    inst = ptrace(PTRACE_PEEKTEXT, victim, regs.eip, <span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Victim: EIP:0x%lx INST: 0x%lx\n"</span>, regs.eip, inst);</div><div class="line"></div><div class="line">    <span class="comment">/* Copy instructions into a backup variable */</span></div><div class="line">    getdata(victim, regs.eip, backup, <span class="number">3</span>);</div><div class="line">    <span class="comment">/* Put the breakpoint */</span></div><div class="line">    putdata(victim, regs.eip, code, <span class="number">3</span>);</div><div class="line">    <span class="comment">/* Let the process continue and execute the int 3 instruction */</span></div><div class="line">    ptrace(PTRACE_CONT, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line">    wait(<span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Press Enter to continue ptraced process.\n"</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ;i &lt; <span class="number">4</span> ; i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%c"</span>, backup[i]);</div><div class="line">    &#125;</div><div class="line">    getchar();</div><div class="line">    putdata(victim, regs.eip, backup, <span class="number">3</span>);</div><div class="line">    ptrace(PTRACE_SETREGS, victim, <span class="literal">NULL</span>, &amp;regs);</div><div class="line"></div><div class="line">    ptrace(PTRACE_CONT, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    ptrace(PTRACE_DETACH, victim, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面这段代码也就是在打印的那个程序运行的时候，通过它的pid号追踪这个程序，读取到它的指令寄存器的内容，备份之后换成我们的中断指令，按下回车之后再使其继续运行，这就是我们动态注入，这个程序我在32位的Ubuntu上运行成功了，但是中断之后再返回进程就会被杀死，返回给我一个<code>Segmentation fault (core dumped)</code>，暂时还没有解决，因为涉及到很多种情况，但是<code>ptrace</code>的这种动态追踪已经实现了，由于这次的注入代码长度只有四个字节，所以直接用<code>shell</code>注入的，实际上应该是在目标进程中动态加载库文件(.so)，就和我们的iOS程序需要动态加载(.dylib)一样。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8B%E5%8D%884.26.49.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-15%20%E4%B8%8B%E5%8D%884.26.49.png" alt=""></p>
 <p>至于ptrace是如何实现反动态调试和如何破解，下一次的博客再详细的说一下</p>
 <h1 id="0X03参考博客"><a href="#0X03参考博客" class="headerlink" title="0X03参考博客"></a>0X03参考博客</h1><ul>
 <li><a href="http://www.cnblogs.com/pannengzhi/p/5203467.html" target="_blank" rel="external">LinuxHook笔记</a></li>
@@ -235,307 +86,30 @@
 <li><a href="https://www.cnblogs.com/zlingh/p/4409002.html" target="_blank" rel="external">Linux进程状态</a></li>
 </ul>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-04-17T04:36:30.721Z" itemprop="dateUpdated">2018-04-17 12:36:30</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/12/14/反动态调试保护基础介绍/" target="_blank" rel="external">http://yoursite.com/2017/12/14/反动态调试保护基础介绍/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/14/反动态调试保护基础介绍/&title=《反动态调试保护基础介绍》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/14/反动态调试保护基础介绍/&title=《反动态调试保护基础介绍》 — Peterpan's Blog&source=今天在社区中看到snakeninny大神写的一个干掉高德地图iOS客户端的反动态调试保护，之前只知道通过加壳的方式去干扰逆向的我心生好奇，决定看看这个保护..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/12/18/Linux进程调度/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Linux进程调度</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/12/11/iOS逆向学习-二/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">iOS逆向学习(二)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0X00基础知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">0X00基础知识</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0X01寄存器读写"><span class="post-toc-number">2.</span> <span class="post-toc-text">0X01寄存器读写</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0X02进程追踪"><span class="post-toc-number">3.</span> <span class="post-toc-text">0X02进程追踪</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0X03参考博客"><span class="post-toc-number">4.</span> <span class="post-toc-text">0X03参考博客</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/14/反动态调试保护基础介绍/&title=《反动态调试保护基础介绍》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/14/反动态调试保护基础介绍/&title=《反动态调试保护基础介绍》 — Peterpan's Blog&source=今天在社区中看到snakeninny大神写的一个干掉高德地图iOS客户端的反动态调试保护，之前只知道通过加壳的方式去干扰逆向的我心生好奇，决定看看这个保护..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awW7bMBAEUP//T6dATy1cyzO7YuICTydDckw+HsTNLB+P+Pr6ff35+flO8s3n+6+eJt+87cLDw8MbTf3V9TzkZjle/U4y+vVvvvx9PDw8vGO8ZIr5xnC9GeT3k/m8seDh4eH9KK8tgpNRrjFJ4Y6Hh4f3ybzNhJLNJl9WPDw8vE/g5XFAsknkwWsbOhzMWvDw8PBi3iyW/dnPx/t7eHh4eKOu+n4baFtr+dNonnh4eHgHeNfB62yTaOPX5KBAG3k8kg4bHh4e3pqXvO43G8bmpZ8fzPqHCA8PD+8wLw9e2yI7ud8eX4g2CTw8PLxbeddTnDX49znqrGR/09nDw8PDu4mXH6hqg4Ak4MjL5c0xLzw8PLwTvLbzftdgSRmdL9z10uDh4eGd47Uv9ByWt7XyObSj4OHh4d3Fa4PUu0rtWQstj1Hw8PDwvodX/Fm5EG3EsC/u8fDw8E7wkhK2bXrt22abgPivp3h4eHgHeLOiOU+Ck6MA7VGDVX8PDw8Pb81Lmvdtkb2PGG5rnuHh4eEd420OAeQlcovfBxZ4eHh4J3jJ4/z1vWpTrQPiN0uMh4eHdyuvLWqH6xdHsXkZff0vAR4eHt5pXvK630QVLWa23Hh4eHjfw5s17PMjUG3MkS9c25DDw8PDu4s3GyzZPOqWVbyF5MuNh4eHd4KXxwTtK7s9ZND+Zl2m4+Hh4d3Ey1/3sw0jL4hnh1OHJTUeHh7eTbx288jxyeQ25fX0MR4eHl43/6/yui5n2+0hZ+f38fDw8E7zNgeeZtOdbTyzYh0PDw/vHC/fDJLGVRIQzJ62GwYeHh7eaV4b7+b9pnaxZiUyHh4e3v/La5tqbbSRNMPw8PDwPoeXBATJVGbRwyykwMPDwzvHmzWlEuQGlo8+PECAh4eHN+K1DbBNb22zfLO4GQ8PD+9W3i94V5KX8xqQrQAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/12/14/反动态调试保护基础介绍/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

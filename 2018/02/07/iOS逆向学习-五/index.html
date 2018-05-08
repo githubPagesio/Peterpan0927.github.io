@@ -1,198 +1,58 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2018/02/07/iOS逆向学习-五/">
-    
-    
-    <title>iOS逆向学习(五) | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>iOS逆向学习(五)</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="Re">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>iOS逆向学习(五)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">iOS逆向学习(五)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-02-07T08:27:27.000Z" itemprop="datePublished" class="page-time">
-  2018-02-07
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/踩坑-Mach-O/">踩坑 Mach-O</a></li></ul>
+<h2 class="title">iOS逆向学习(五)</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2018年2月7日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/踩坑-Mach-O/">踩坑 Mach-O</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-iOS逆向学习-五"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">iOS逆向学习(五)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-02-07 16:27:27" datetime="2018-02-07T08:27:27.000Z"  itemprop="datePublished">2018-02-07</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/踩坑-Mach-O/">踩坑 Mach-O</a></li></ul>
-
-
-
-            
-	<span id="/2018/02/07/iOS逆向学习-五/" class="leancloud_visitors" data-flag-title="iOS逆向学习(五)" title="iOS逆向学习(五)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/02/07/iOS逆向学习-五/#comment">
-            <span class="valine-comment-count" data-xid="/2018/02/07/iOS逆向学习-五/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt=""></p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关于Reveal调试无法显示"><span class="toc-text">关于Reveal调试无法显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cycript语法总结"><span class="toc-text">Cycript语法总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mach-O简介和判断壳"><span class="toc-text">Mach-O简介和判断壳</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command"><span class="toc-text">Command</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Segement"><span class="toc-text">Segement</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Section"><span class="toc-text">Section</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%8811.35.55.png" height="350" width="600" alt=""></p>
 <p>这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。</p>
 <a id="more"></a>
 <h1 id="关于Reveal调试无法显示"><a href="#关于Reveal调试无法显示" class="headerlink" title="关于Reveal调试无法显示"></a>关于Reveal调试无法显示</h1><p>之前在论坛上发了一个帖子说我在注入照相机的时候，调用对应的拍照函数没有被系统日志记录，后来snakeninny大神在下面留言说可能是这个函数并没有被调用，之后我又追问了一番，决定使用Reveal进行分析一下，但是正在外面，用手机开了个热点，然后发现相机怎么也无法显示，当时也没有多想，等会去之后还是这个问题，于是我在系统日志中去寻找了一下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/syslog | grep Camera</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%885.16.34.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%885.16.34.png" alt=""></p>
 <p>那么看起来应该是权限问题了，通过报错信息搜索并没有找到答案，后来通过一下搜索技巧在StackOverFlow上找到了一个<a href="https://stackoverflow.com/questions/27126315/cannot-bind-a-socket-inside-apple-calendar-dylib-injection" target="_blank" rel="external">回答</a>，从上面的回答来看遇到了和我一样问题，但他很敏锐的注意到了这个可执行文件的路径下还有一个Entitlements.plist文件，而在其他的包中没有发现。</p>
 <p>下面的回答说是因为沙盒机制，除了系统的App，还有很多系统组件也使用着这些沙盒，在那个plist文件中我们可以看到，更加确切的说是从<code>seatbelt-profiles</code>key来看，一开始是二进制plist，我们先转换成xml格式方便观察：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plutil -convert xml1 Entitlements.plist</div></pre></td></tr></table></figure>
@@ -211,10 +71,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ldid -Sentitlements.xml Camera</div></pre></td></tr></table></figure>
 <p>这里注意千万不要走入歧路，一定要cd到那个App的目录底下进行，不要拷出来或者scp到Mac上，看到xml如果不是像上面的话，基本上就失败了。</p>
 <p>这个时候我们打开Reveal的时候就连上了，我们如果想要看拍照的那个按钮的类就直接通过UI分析即可，就像snakeninny大神说的，要善于将多种工具结合起来使用：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%886.19.35.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-07%20%E4%B8%8B%E5%8D%886.19.35.png" alt=""></p>
 <p>但是这样也会造成一个问题就是Camera照相就会闪退，所以注意做好备份，运行的时候再把原来的放回去</p>
 <h1 id="Cycript语法总结"><a href="#Cycript语法总结" class="headerlink" title="Cycript语法总结"></a>Cycript语法总结</h1><p>之前简单的说了一下语法，但是最近一直使用这个踩了一些坑，那么如何快速的定位到我们所需要的地方呢，下面就是精髓所在了：</p>
 <ol>
@@ -254,27 +111,18 @@
 <h1 id="Mach-O简介和判断壳"><a href="#Mach-O简介和判断壳" class="headerlink" title="Mach-O简介和判断壳"></a>Mach-O简介和判断壳</h1><p>书中我们学到了一个砸壳的工具叫做<code>dumpdecrypted</code>，那么我们如何简单而又快速的判断一个App到底有没有壳呢？在这里先卖个关子，介绍一下Mach-O先：</p>
 <p><code>Mach-O</code> 是 <code>Mach object</code> 文件格式的缩写，它是一种用于记录可执行文件、对象代码、共享库、动态加载代码和内存转储的文件格式。作为 a.out 格式的替代品，Mach-O 提供了更好的扩展性，并提升了符号表中信息的访问速度。</p>
 <p>大多数基于 Mach 内核的操作系统都使用 <code>Mach-O</code>。<code>NeXTSTEP</code>、<code>OS X</code>和 <code>iOS</code> 是使用这种格式作为本地可执行文件、库和对象代码的例子。这种可执行文件的格式如下图所示（图是盗来的）：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.17.41.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.17.41.png" alt=""></p>
 <p>文件由三部分组成：<code>Header</code>、<code>Load Commands</code>、<code>Data</code>，下面一一介绍：</p>
 <h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * The 32-bit mach header appears at the very beginning of the object file for</div><div class="line"> * 32-bit architectures.</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> mach_header &#123;</div><div class="line">	<span class="keyword">uint32_t</span>	magic;		<span class="comment">/* mach magic number identifier */</span></div><div class="line">	<span class="keyword">cpu_type_t</span>	cputype;	<span class="comment">/* cpu specifier */</span></div><div class="line">	<span class="keyword">cpu_subtype_t</span>	cpusubtype;	<span class="comment">/* machine specifier */</span></div><div class="line">	<span class="keyword">uint32_t</span>	filetype;	<span class="comment">/* type of file */</span></div><div class="line">	<span class="keyword">uint32_t</span>	ncmds;		<span class="comment">/* number of load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	sizeofcmds;	<span class="comment">/* the size of all the load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/* Constant for the magic field of the mach_header (32-bit architectures) */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	MH_MAGIC	0xfeedface	<span class="comment">/* the mach magic number */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_CIGAM	0xcefaedfe	<span class="comment">/* NXSwapInt(MH_MAGIC) */</span></span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * The 64-bit mach header appears at the very beginning of object files for</div><div class="line"> * 64-bit architectures.</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> mach_header_64 &#123;</div><div class="line">	<span class="keyword">uint32_t</span>	magic;		<span class="comment">/* mach magic number identifier */</span></div><div class="line">	<span class="keyword">cpu_type_t</span>	cputype;	<span class="comment">/* cpu specifier */</span></div><div class="line">	<span class="keyword">cpu_subtype_t</span>	cpusubtype;	<span class="comment">/* machine specifier */</span></div><div class="line">	<span class="keyword">uint32_t</span>	filetype;	<span class="comment">/* type of file */</span></div><div class="line">	<span class="keyword">uint32_t</span>	ncmds;		<span class="comment">/* number of load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	sizeofcmds;	<span class="comment">/* the size of all the load commands */</span></div><div class="line">	<span class="keyword">uint32_t</span>	flags;		<span class="comment">/* flags */</span></div><div class="line">	<span class="keyword">uint32_t</span>	reserved;	<span class="comment">/* reserved */</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">/* Constant for the magic field of the mach_header_64 (64-bit architectures) */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_MAGIC_64 0xfeedfacf <span class="comment">/* the 64-bit mach magic number */</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MH_CIGAM_64 0xcffaedfe <span class="comment">/* NXSwapInt(MH_MAGIC_64) */</span></span></div></pre></td></tr></table></figure>
 <p>Header的作用就是让系统能快速的定位其运行环境和文件类型，分析文件头的工具我们使用<code>otool</code>：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -hv MobileCal</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.26.10.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8A%E5%8D%8811.26.10.png" alt=""></p>
 <p>同时我们也可以看看fat的headers:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">─[peterpan@panzhenpengdeMacBook-Air] - [~] - [2018-02-08 11:40:43]</div><div class="line">└─[1] otool  -f Bayinotool -f Bayin</div><div class="line">Fat headers</div><div class="line">fat_magic 0xcafebabe</div><div class="line">nfat_arch 2</div><div class="line">architecture 0  #核心1</div><div class="line">    cputype 12</div><div class="line">    cpusubtype 9</div><div class="line">    capabilities 0x0</div><div class="line">    offset 16384</div><div class="line">    size 26107984</div><div class="line">    align 2^14 (16384)</div><div class="line">architecture 1  #核心2</div><div class="line">    cputype 16777228</div><div class="line">    cpusubtype 0</div><div class="line">    capabilities 0x0</div><div class="line">    offset 26132480</div><div class="line">    size 29527600</div><div class="line">    align 2^14 (16384)</div></pre></td></tr></table></figure>
 <p>现在我们对于其中的一些参数还不清楚，我们继续往下看，<code>Load Command</code>是跟在头后面的加载命令区，所有的command之和加起来也就是上面的sizeofcmd字段的值，下面是load_command的结构体：</p>
 <h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> load_command &#123;</div><div class="line">    <span class="keyword">uint32_t</span> cmd;        <span class="comment">/* type of load command */</span></div><div class="line">    <span class="keyword">uint32_t</span> cmdsize;    <span class="comment">/* total size of command in bytes */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>这些命令以LC开头，不同的加载命令有不同的专用结构体，当然上面的两个属性是都有的，命令的名称和长度会告诉系统如何去处理后面的二进制数据，对系统内核加载器和动态链接器起指导作用。如果当前 <code>LC_SEGMENT</code> 包含 <code>section</code>，那么 <code>section</code> 的结构体紧跟在 <code>LC_SEGMENT</code> 的结构体之后，所占字节数由 <code>SEGMENT</code> 的 <code>cmdsize</code> 字段给出：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8B%E5%8D%8812.09.25.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-08%20%E4%B8%8B%E5%8D%8812.09.25.png" alt=""></p>
 <p>这个里面所展现的segement和section也是一开始的图中第三阶段需要加载的数据</p>
 <p>接下来是不同Cmd的作用：</p>
 <table>
@@ -358,309 +206,30 @@
 <li><a href="https://elliotsomething.github.io/2017/06/01/Mach-O%E5%AD%A6%E4%B9%A0/" target="_blank" rel="external">Mach-O学习</a></li>
 </ul>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.885Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2018/02/07/iOS逆向学习-五/" target="_blank" rel="external">http://yoursite.com/2018/02/07/iOS逆向学习-五/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/07/iOS逆向学习-五/&title=《iOS逆向学习(五)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/07/iOS逆向学习-五/&title=《iOS逆向学习(五)》 — Peterpan's Blog&source=
-这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/02/10/在Debian上搭建MC服务器/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">在Debian上搭建MC服务器</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/02/06/KubeMark用户指南-英译/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">KubeMark用户指南(英译)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于Reveal调试无法显示"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于Reveal调试无法显示</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Cycript语法总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">Cycript语法总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Mach-O简介和判断壳"><span class="post-toc-number">3.</span> <span class="post-toc-text">Mach-O简介和判断壳</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Header"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Header</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Command"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Command</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Segement"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Segement</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Section"><span class="post-toc-number">3.3.0.1.</span> <span class="post-toc-text">Section</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考博客</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/07/iOS逆向学习-五/&title=《iOS逆向学习(五)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/07/iOS逆向学习-五/&title=《iOS逆向学习(五)》 — Peterpan's Blog&source=
-这篇博客中主要是杂谈，说到一些在学习中遇到的问题和觉得有用的东西，进行一些总结和分享。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aQW7CQAwFUO5/aSp11aoifNtJRWberBAtJC8L4/GfxyNez+/18/Xfd1799fhTr9bjioWBgXFbRvJ1+fuTdfxQ3lAxMDA2YCRFtlqa84JbvS4GBgZG3g5Oiu+rq2NgYGCcy5i/rv4nBgbGzoxeWTwekCVb39NGchgYGEszesHA/7y+PN/AwMD4eMZkfD8ZtJ0bNmBgYKzNSCLDvB2cRJ7VCOHNXhwDA2MhRtKEVbeO+bBs/p2/fjcwMDA2Y+SN4OQwWdJcJsUdAwNjB0b18nkYWb3FPGwo5w8YGBi3ZZQPNBSHa+X9dCvOxMDAwKgGA2eFDfkRDQwMjB0YvdAxGa4lpXxyRAwDA2MHRnUoPymyk9bzDRIDA2NpRrUe56W296n8GEchHsDAwLg544rNZN72JQ1l1CBiYGBsz0iK4xVHx044bIGBgbEEIy+X+fRuHltWR3UYGBhrM3rby95W9opIAAMDYx9GdRM7T0qPH0T5FwMDA2NpRlJSe7eYF99kM1xoMTEwMJZjJMqkHew9gtMeDQYGxtKMJACoBo3VY2HlW8TAwNiM8SyuvChXR3ijAo2BgbE04+pCXG0ue0EmBgbGDozJwKt3czk7jw0wMDB2YOQHI5KGrzeY6+1VMTAwMCbxQC9CyEv8qOBiYGAsyqheIB/bFW53ss/GwMC4OaNaLpsN3AWHPDAwMHZgTIpyXgPnhfvCfAMDA+NzGV/A6zziIb6mAAAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2018/02/07/iOS逆向学习-五/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

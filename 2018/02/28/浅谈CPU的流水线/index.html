@@ -1,193 +1,55 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2018/02/28/浅谈CPU的流水线/">
-    
-    
-    <title>浅谈CPU的流水线 | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>浅谈CPU的流水线</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>浅谈CPU的流水线</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">浅谈CPU的流水线</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-02-28T07:49:49.000Z" itemprop="datePublished" class="page-time">
-  2018-02-28
-</time>
 
 
-            
-        </h5>
-        
-    </div>
-    
+<h2 class="title">浅谈CPU的流水线</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2018年2月28日
 
-</header>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-浅谈CPU的流水线"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">浅谈CPU的流水线</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-02-28 15:49:49" datetime="2018-02-28T07:49:49.000Z"  itemprop="datePublished">2018-02-28</time>
-
-            
-
-
-            
-	<span id="/2018/02/28/浅谈CPU的流水线/" class="leancloud_visitors" data-flag-title="浅谈CPU的流水线" title="浅谈CPU的流水线">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/02/28/浅谈CPU的流水线/#comment">
-            <span class="valine-comment-count" data-xid="/2018/02/28/浅谈CPU的流水线/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt=""></p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU的发展"><span class="toc-text">CPU的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU指令流水线"><span class="toc-text">CPU指令流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#乱序执行流水线"><span class="toc-text">乱序执行流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#猜测执行"><span class="toc-text">猜测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt=""></p>
 <p>在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。</p>
 <a id="more"></a>
 <h1 id="CPU的发展"><a href="#CPU的发展" class="headerlink" title="CPU的发展"></a>CPU的发展</h1><p>因为是讲Intel的CPU架构，那么就不得不从8086开始说起，虽然这一代的CPU由于过渡的原因，存在着一些问题(计算地址偏移需要移位)，但是仍然是经典的一款。至今为止Intel推出了很多代的CPU架构，从早期的80386，到第奔腾，第酷睿，和最新的一代Haswell，性能上的上升也是很明显的：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.08.02.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.08.02.png" alt=""></p>
 <p>经历了近四十年的风风雨雨，我们会发现其实在微机上，元器件所做的改变并不大，或者说CPU的主频并没有发生很大的变化，有时候甚至不生反降，但是处理器的多线程计算能力却是一直在上升，这其中的奥妙就要归功于我们的计算机系统结构的不断迭代了。</p>
 <p>一开始的处理器设计太过于简单，就好比我们的单道批处理系统一样，根本不涉及到任何的调度算法，我们只需要把作业提交，就会串行的去执行。最初的8086处理器执行过程可以简述为从当前指令指针(IP)取到指令，通过译码，然后执行退出。站在早期的角度来考虑我们可能会考虑消除内存和处理器来回的时间消耗，事实也正是如此，在82年的时候指令缓存被加入到处理器中，通过指令缓存处理器可以一次性从内存读取更多指令并放在指令缓存中，而不用每条指令都从内存中取。指令缓存仅有几个字节大小，只能容纳数条指令，但是因为消除了之后每次取指往返内存和处理器的时间，极大的提高的效率。</p>
 <p>1985年的386处理器引入了数据缓存，而且扩展了指令缓存的设计。数据访存请求通过一次性读取更多的数据放在数据缓存中，从而提升了性能。而且，数据缓存和指令缓存都从几个字节扩大到几千字节。</p>
@@ -199,18 +61,12 @@
 <p>上文中的流水线和乱序执行部件搞得人眼花缭乱，但这并不是大事，接下来我们会做讲解。</p>
 <h1 id="CPU指令流水线"><a href="#CPU指令流水线" class="headerlink" title="CPU指令流水线"></a>CPU指令流水线</h1><p>根据之前描述的基础，指令进入流水线，通过流水线处理，从流水线出来的过程，对于我们程序员来说，是比较直观的。</p>
 <p>I486拥有五级流水线。分别是：取指(Fetch)，译码(D1, main decode)，转址(D2, translate)，执行(EX, execute)，写回(WB)。某个指令可以在流水线的任何一级。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.38.37.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.38.37.png" alt=""></p>
 <p>8086到386都没有流水线，所以就算执行有依赖关系的代码也是没有问题的，但是对于上图中的流水线来说，就有一个明显的缺陷，如果顺序执行的代码之间有依赖关系，也就是说前者完成后后者才能执行，举个例子就是说后者用到了前者计算的数据，这样就形成了一个必须的等待，这种情况下我们称作是流水线阻塞或者流水线气泡。</p>
 <p>这样子的问题在奔腾处理器的双流水线架构下更加明显了，有的指令执行的快，有的指令要慢，如果形成上述的阻塞效果，会严重的影响执行的速度，所以Intel推出了完全不同的流水线设计——乱序执行部件(Out-of-Order core)，接下来再来看看Intel为此做出的改变。</p>
 <h1 id="乱序执行流水线"><a href="#乱序执行流水线" class="headerlink" title="乱序执行流水线"></a>乱序执行流水线</h1><p>能够快速完成的指令需要等待前面执行慢的指令即使在并行流水线中也仍然是一个问题。流水线仍然是线性的，导致处理器面临性能瓶颈难以逾越。</p>
 <p>于是我们引入了乱序执行流水线，乱序执行部件和之前处理器设计中的线性通路有很大不同，它增加了一些复杂度，引入了非线性的通路。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.03.56.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.03.56.png" alt=""></p>
 <p>不同于之前的取指、译码、执行等过程，乱序执行从一开始就做了一些改变：</p>
 <ol>
 <li>首先改变的是指令从内存中取到处理器的指令缓存的过程。现代处理器能够检测何时会产生一个大的分支跳转（比如函数调用），然后提前将跳转目的地的指令加载到指令缓存中。</li>
@@ -270,10 +126,7 @@
 <h1 id="猜测执行"><a href="#猜测执行" class="headerlink" title="猜测执行"></a>猜测执行</h1><p>我们会注意到乱序执行对于取指部分做的改变是将跳转指令加入到指令缓存中，那么我们遇到跳转的时候会发生什么呢？对于老式的CPU来说，这可算是<code>生命不可承受之重</code>了，它会清空你的流水线，等待新的跳转目的指令的取指执行。当指令队列中存储了超过100条指令的时候，发生流水线阻塞对于性能损失是极为严重的，所有指令都被阻塞等待跳转目的指令的fetch然后重启流水线，这种情况的频繁发生对于处理器肯定是吃不消的，于是我们需要乱序执行部件的另外一个功能就是猜测执行。</p>
 <p>猜测执行意味着当遇到一个分支指令后，乱序执行部件会将所有分支的指令都执行一遍。一旦分支指令的跳转方向确定后，错误跳转方向的指令都将被丢弃。通过同时执行两个跳转方向的指令，避免了由于分支跳转导致的阻塞。处理器设计者还发明了分支预测缓存，当面临多个分支时进行预测，进一步提高了性能。虽然CPU阻塞仍然会发生，但是这个解决方案将CPU发生阻塞的概率降到了一个可以接受的范围。</p>
 <p>最后，拥有超线程的处理器将两个虚拟的处理器暴露给共享的乱序执行部件。它们共享一个重排序缓存和乱序执行部件，让操作系统认为它们是两个独立的处理器，看上去就像这样：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-01%20%E4%B8%8A%E5%8D%8812.11.18.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-01%20%E4%B8%8A%E5%8D%8812.11.18.png" alt=""></p>
 <h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>例子参考的是一篇博客上的，觉得说的比较好就转载过来了，文章的地址是<a href="http://blog.jobbole.com/40844/" target="_blank" rel="external">CPU流水线的探索之谜</a>：</p>
 <p>这一切看上去有点令人感到困惑，那么我们举一个例子来让这一切变得清晰起来。</p>
 <p>从应用程序的角度来看，我们仍然是运行在指令流水线上，就想老的8086处理器那样。处理器就是一个黑盒子。黑盒子会处理指令指针指向的指令，当处理完之后，会在内存里找到处理的结果。</p>
@@ -293,309 +146,30 @@
 <p>当你到达标有“退出”的门的时候，你会发现这里要排一个队列。你进入后发现你刚好站在你前面进来指令的后面，即使执行中的顺序可能已经不同，但你们退出的顺序继续保持一致。看来乱序执行部件真正知道自己做了什么。</p>
 <p>每条指令最终离开CPU，每次一条指令，就和指令指针指向的顺序一样！</p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.777Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2018/02/28/浅谈CPU的流水线/" target="_blank" rel="external">http://yoursite.com/2018/02/28/浅谈CPU的流水线/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=《浅谈CPU的流水线》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=《浅谈CPU的流水线》 — Peterpan's Blog&source=
-在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/03/12/ACM之神奇的位运算/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">ACM之神奇的位运算</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/02/10/在Debian上搭建MC服务器/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">在Debian上搭建MC服务器</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CPU的发展"><span class="post-toc-number">1.</span> <span class="post-toc-text">CPU的发展</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CPU指令流水线"><span class="post-toc-number">2.</span> <span class="post-toc-text">CPU指令流水线</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#乱序执行流水线"><span class="post-toc-number">3.</span> <span class="post-toc-text">乱序执行流水线</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#猜测执行"><span class="post-toc-number">4.</span> <span class="post-toc-text">猜测执行</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#例子"><span class="post-toc-number">5.</span> <span class="post-toc-text">例子</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=《浅谈CPU的流水线》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=《浅谈CPU的流水线》 — Peterpan's Blog&source=
-在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3aQW7DMAxE0dz/0inQVYFC6h9SLWrqa2UkdqDnBUNp9Hrh8f4cX6+/f0KuV9+u7jk8ZMiQ8VjGeztW96ymkk6a/P5+bjJkyLiHwYssv5/XRo5ffi5DhgwZ2zaOI1f3kOZShgwZMmqMPSld1sqQIUPGnsGnQpo/MtFaS3pgLS5DhowHMmrBwN9c/3q+IUOGjH/PeIej9gt8A644KxkyZIxmdOJJHhjwZjGtrkHaIEOGjMcyOkci0snxwDIt1jJkyLiBkR6PQNv04eEJ0m7+UHBlyJAxmkGOQZxagnZ2yZYvRYYMGaMZnUNgPNrkpE57KkOGjNmMtCDyaHPPRm0feDUyZMi4h8HDgNpTHJx+K0OGjNkMXhbTBq52yCx9cTJkyLiB0Ykqa0FC2oCSVlKGDBmzGZ3Ner4Zx8NIsgxe/m/IkCFjKCM9HNZJHk4xgmBAhgwZgxjpY2kAkAYJvPTLkCHjBkZsDY+68pfSaShlyJAxm9GfVm2rrhMDoCRWhgwZgxhpUSPN39mDrai5lCFDxmWMNAzgZbcWeaIlsQwZMkYzDjwQFuL+QKVZhgwZgxi1gluLENIlMf81GTJkzGakZS6o3GE53kebranLkCFjBCMtsrW2km/epYtnGTJk3MPoL03TVrJTvpdLWRkyZFzPqB3qQpMI20QZMmTI6ESStSNi6WELGTJk3MlIF7H9sJPHAKihlCFDxmhGurkfl8LS0jSFyZAhYyjjA1Kw9Rtr9x+xAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2018/02/28/浅谈CPU的流水线/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

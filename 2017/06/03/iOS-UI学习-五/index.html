@@ -1,195 +1,55 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/06/03/iOS-UI学习-五/">
-    
-    
-    <title>iOS-UI学习(五) | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>iOS-UI学习(五)</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="iOS开发">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>iOS-UI学习(五)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">iOS-UI学习(五)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-06-02T16:48:11.000Z" itemprop="datePublished" class="page-time">
-  2017-06-03
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/多种代理方法-cell重用-数据模型嵌套/">多种代理方法 cell重用 数据模型嵌套</a></li></ul>
+<h2 class="title">iOS-UI学习(五)</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年6月3日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/多种代理方法-cell重用-数据模型嵌套/">多种代理方法 cell重用 数据模型嵌套</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-iOS-UI学习-五"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">iOS-UI学习(五)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-06-03 00:48:11" datetime="2017-06-02T16:48:11.000Z"  itemprop="datePublished">2017-06-03</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/多种代理方法-cell重用-数据模型嵌套/">多种代理方法 cell重用 数据模型嵌套</a></li></ul>
-
-
-
-            
-	<span id="/2017/06/03/iOS-UI学习-五/" class="leancloud_visitors" data-flag-title="iOS-UI学习(五)" title="iOS-UI学习(五)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/06/03/iOS-UI学习-五/#comment">
-            <span class="valine-comment-count" data-xid="/2017/06/03/iOS-UI学习-五/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>UI初步（五）<br><a id="more"></a></p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UI基础Day6"><span class="toc-text">UI基础Day6</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-tableView基本使用"><span class="toc-text">1.tableView基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#plain"><span class="toc-text">plain:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#group"><span class="toc-text">group:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据源调用方法顺序："><span class="toc-text">数据源调用方法顺序：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-headerView的使用"><span class="toc-text">2.headerView的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-demo展示（英雄属性）"><span class="toc-text">3.demo展示（英雄属性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-实现数据模型的嵌套和索引"><span class="toc-text">4.实现数据模型的嵌套和索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-对cell的编辑（修改处）"><span class="toc-text">5.对cell的编辑（修改处）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6实现插入和删除"><span class="toc-text">6实现插入和删除</span></a></li></ol></li></ol>
+<p>UI初步（五）<br><a id="more"></a></p>
 <h1 id="UI基础Day6"><a href="#UI基础Day6" class="headerlink" title="UI基础Day6"></a>UI基础Day6</h1><h2 id="1-tableView基本使用"><a href="#1-tableView基本使用" class="headerlink" title="1.tableView基本使用"></a>1.tableView基本使用</h2><p>仅仅在main.storyboard中加入一个UITableView的控件，可以显示如下的效果：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/11A23983-B207-46FA-BD95-D941390BFF4A.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/11A23983-B207-46FA-BD95-D941390BFF4A.png" alt=""></p>
 <p>其中每一个小横行被称作cell，我们可以使用代理的方式来添加每一行中的信息和cell的数量，注意，这两个方法在协议中是用@required来修饰的，表示必须实现，否则就会报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()&lt;UITableViewDataSource&gt;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">&#125;</div><div class="line">//创建cell的数量</div><div class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section&#123;</div><div class="line">    //根据自定义返回每一节的cell数量和内容</div><div class="line">  	 NSInteger row = 0;</div><div class="line">    switch (section) &#123;</div><div class="line">        case 0:</div><div class="line">            row = 3;</div><div class="line">            break;</div><div class="line">        case 1:</div><div class="line">            row = 2;</div><div class="line">            break;</div><div class="line">        case 2:</div><div class="line">            row = 1;</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line">    return row;</div><div class="line">&#125;</div><div class="line">//编辑cell中的文本内容</div><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath&#123;</div><div class="line">    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];</div><div class="line">    </div><div class="line">   switch (indexPath.section) &#123;</div><div class="line">        case 0:</div><div class="line">            switch (indexPath.row) &#123;</div><div class="line">                case 0:</div><div class="line">                    cell.textLabel.text = @&quot;Linux&quot;;</div><div class="line">                    break;</div><div class="line">                case 1:</div><div class="line">                    cell.textLabel.text = @&quot;Mac&quot;;</div><div class="line">                    break;</div><div class="line">                case 2:</div><div class="line">                    cell.textLabel.text = @&quot;Windows&quot;;</div><div class="line">                    break;</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        case 1:</div><div class="line">            switch (indexPath.row) &#123;</div><div class="line">                case 0:</div><div class="line">                    cell.textLabel.text = @&quot;QQ&quot;;</div><div class="line">                    break;</div><div class="line">                case 1:</div><div class="line">                    cell.textLabel.text = @&quot;WeChat&quot;;</div><div class="line">                    break;</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        case 2:</div><div class="line">            switch (indexPath.row) &#123;</div><div class="line">                case 0:</div><div class="line">                    cell.textLabel.text = @&quot;Baidu&quot;;</div><div class="line">                    break;</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">   &#125;</div><div class="line">    return cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//创建cell的节数</div><div class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView&#123;</div><div class="line">    return 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//添加头部和尾部的信息</div><div class="line">- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section&#123;</div><div class="line">    return @&quot;fuck you&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section&#123;</div><div class="line">    return @&quot;我是Van&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <h3 id="plain"><a href="#plain" class="headerlink" title="plain:"></a>plain:</h3><p>​    如果设置了section的footer 和header上的title，在滚动的时候就会产生悬浮效果</p>
@@ -199,10 +59,7 @@
 <p>3.cellForRowAtIndexPath 总共有多少行就调用多少遍</p>
 <h2 id="2-headerView的使用"><a href="#2-headerView的使用" class="headerlink" title="2.headerView的使用"></a>2.headerView的使用</h2><p>tableView和section都可以设置headerView:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//tableView</div><div class="line">UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0,0,100,100)];</div><div class="line">[headerView setBackgroundColor:[UIColor orangeColor]];</div><div class="line">_tableView.tableHeaderView = headerView;</div><div class="line">//section</div><div class="line">- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section&#123;</div><div class="line">    UIView *headerView = [[UIView alloc]init];</div><div class="line">    [headerView setBackgroundColor:[UIColor redColor]];</div><div class="line">    return headerView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果图：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-01%20%E4%B8%8B%E5%8D%887.52.18.png" alt="" title="" class="">
-                <p></p>
-            </figure> </p>
+<p>效果图：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-01%20%E4%B8%8B%E5%8D%887.52.18.png" alt=""> </p>
 <h2 id="3-demo展示（英雄属性）"><a href="#3-demo展示（英雄属性）" class="headerlink" title="3.demo展示（英雄属性）"></a>3.demo展示（英雄属性）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &quot;HeroModel.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()&lt;UITableViewDataSource,UITableViewDelegate&gt;</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSArray *dataArray;</div><div class="line">@property (weak, nonatomic) IBOutlet UITableView *tableView;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">#pragma mark -</div><div class="line">#pragma mark -  懒加载</div><div class="line">- (NSArray *)dataArray &#123;</div><div class="line">    if (nil == _dataArray) &#123;</div><div class="line">        // 1. 路径</div><div class="line">        NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;heros.plist&quot; ofType:nil];</div><div class="line">        </div><div class="line">        // 2. 读取内容</div><div class="line">        NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];</div><div class="line">        </div><div class="line">        // 3. 可变数组</div><div class="line">        NSMutableArray *mutable = [NSMutableArray array];</div><div class="line">        </div><div class="line">        // 4. 字典转模型</div><div class="line">        for (NSDictionary *dict in tempArray) &#123;</div><div class="line">            HeroModel *model = [HeroModel heroModelWithDict:dict];</div><div class="line">            </div><div class="line">            [mutable addObject:model];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        _dataArray = mutable;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    return _dataArray;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    </div><div class="line">    // 设置控制器成为tableView的代理</div><div class="line">    _tableView.delegate = self;</div><div class="line">    </div><div class="line">    // 设置分割线颜色的</div><div class="line">    _tableView.separatorColor = [UIColor redColor];</div><div class="line">    </div><div class="line">    // 侵蚀 , 分割线样式</div><div class="line">    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;</div><div class="line">    </div><div class="line">    // top, left, bottom, right , 上， 下 是没有效果的</div><div class="line">    _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);</div><div class="line">    </div><div class="line">    // 允许多选</div><div class="line">    _tableView.allowsMultipleSelection = YES;</div><div class="line">    </div><div class="line">    // 设置行高 ,（静态设置） 如果每个cell的高度都一样， 推荐这种设置</div><div class="line">//    _tableView.rowHeight = 100;</div><div class="line">    </div><div class="line">    </div><div class="line">//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];</div><div class="line">//    [headerView setBackgroundColor:[UIColor orangeColor]];</div><div class="line">//    </div><div class="line">//    _tableView.tableHeaderView = headerView;</div><div class="line">    </div><div class="line">    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];</div><div class="line">    [footerView setBackgroundColor:[UIColor yellowColor]];</div><div class="line">    </div><div class="line">    _tableView.tableFooterView = footerView;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">// indexPath  可以根据具体的某行显示不同的高度</div><div class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    // 反回不同的高度</div><div class="line">    return 55;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 多少组</div><div class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView &#123;</div><div class="line">    return 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 多少行</div><div class="line"></div><div class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</div><div class="line">    return self.dataArray.count;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 每一行显示的内容</div><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    // 实例化tableViewcell</div><div class="line">    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];</div><div class="line">    /**</div><div class="line">     UITableViewCellStyleDefault : 不显示detailTextLabel</div><div class="line">     UITableViewCellStyleValue1 ： detailLabel 显示在 textLabel 右侧</div><div class="line">     UITableViewCellStyleValue2 ： imageView不再显示， textLabel居左 变蓝色</div><div class="line">     UITableViewCellStyleSubtitle ：都显示， detailLabel 在 textLabel下侧</div><div class="line">     */</div><div class="line">    </div><div class="line">    // 设置cell上控件的内容</div><div class="line">    HeroModel *model = self.dataArray[indexPath.row];</div><div class="line">    </div><div class="line">    // 设置imageView</div><div class="line">    cell.imageView.image = [UIImage imageNamed:model.icon];</div><div class="line">    </div><div class="line">    // 设置文本</div><div class="line">    cell.textLabel.text = model.name;</div><div class="line">    </div><div class="line">    // 设置detailTextLabel</div><div class="line">    cell.detailTextLabel.text = model.intro;</div><div class="line">    </div><div class="line">    // 设置右侧箭头</div><div class="line">    // accessory : 配件</div><div class="line">    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;</div><div class="line">    </div><div class="line">    // 设置选择样式</div><div class="line">    /**</div><div class="line">     UITableViewCellSelectionStyleNone,</div><div class="line">     UITableViewCellSelectionStyleBlue,  用灰色来代替了</div><div class="line">     UITableViewCellSelectionStyleGray,</div><div class="line">     UITableViewCellSelectionStyleDefault</div><div class="line">     cell.selectionStyle = UITableViewCellSelectionStyleBlue;</div><div class="line">     */</div><div class="line">    </div><div class="line">    /**</div><div class="line">     设置选中的背景view</div><div class="line">     UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];</div><div class="line">     tempView.backgroundColor = [UIColor yellowColor];</div><div class="line">     </div><div class="line">     cell.selectedBackgroundView = tempView;</div><div class="line">     */</div><div class="line">    </div><div class="line">    // cell.backgroundColor = [UIColor yellowColor];</div><div class="line">    </div><div class="line">    /**</div><div class="line">     accessoryView 自定义控件</div><div class="line">     自定义 accessoryView 的时候， frame中的 坐标（x,y)修改后无效</div><div class="line">     UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];</div><div class="line">     tempView.backgroundColor = [UIColor redColor];</div><div class="line">     </div><div class="line">     cell.accessoryView = tempView;</div><div class="line">     */</div><div class="line">    </div><div class="line">    return cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section &#123;</div><div class="line">    </div><div class="line">    return @&quot;英雄&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 可以对 section的header 和 footer 设置view</div><div class="line">- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section &#123;</div><div class="line">    </div><div class="line">    </div><div class="line">    UIView *headerView = [[UIView alloc] init];</div><div class="line">    [headerView setBackgroundColor:[UIColor redColor]];</div><div class="line">    </div><div class="line">    return headerView;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (BOOL)prefersStatusBarHidden &#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>上述代码虽然能实现基本的功能，但是有一个很大的弊端，就是在拖动tableView的时候，每一次都在不停的创建新的cell，意思就是，当最上方的cell超出屏幕的时候，再一次往上拖动的时候就会重新实例化一个对象。</p>
 <p>cell重用机制：</p>
@@ -216,307 +73,30 @@
 <h2 id="5-对cell的编辑（修改处）"><a href="#5-对cell的编辑（修改处）" class="headerlink" title="5.对cell的编辑（修改处）"></a>5.对cell的编辑（修改处）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()&lt;UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate&gt;</div><div class="line">//因为要对数据源进行修改，所以要用一个可变数组，同时还要加入新的协议</div><div class="line">- (NSMutableArray *)dataArray &#123;</div><div class="line">    if (nil == _dataArray) &#123;</div><div class="line">        </div><div class="line">        // 实例化 dataArray</div><div class="line">#warning 不要忘记实例化 dataArray数组</div><div class="line">        _dataArray = [NSMutableArray array];</div><div class="line">        </div><div class="line">        // 1. 路径</div><div class="line">        NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;heros.plist&quot; ofType:nil];</div><div class="line">        </div><div class="line">        // 2. 读取内容</div><div class="line">        NSArray *tempArray = [NSArray arrayWithContentsOfFile:path];</div><div class="line">        </div><div class="line">        // 3. 可变数组</div><div class="line">//        NSMutableArray *mutable = [NSMutableArray array];</div><div class="line">        </div><div class="line">        // 4. 字典转模型</div><div class="line">        for (NSDictionary *dict in tempArray) &#123;</div><div class="line">            HeroModel *model = [HeroModel heroModelWithDict:dict];</div><div class="line">            </div><div class="line">            [_dataArray addObject:model];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">//        _dataArray = mutable;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    return _dataArray;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 当cell 被选中的时候 ， 就会调用</div><div class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    </div><div class="line">    // 取出数组中对应的model</div><div class="line">    HeroModel *heroModel = self.dataArray[indexPath.row];</div><div class="line">   </div><div class="line">    // 弹出提示框</div><div class="line">    UIAlertView *alertView = [[UIAlertView alloc]</div><div class="line">                              initWithTitle:@&quot;编辑&quot;                                                  message:nil</div><div class="line">                                                       delegate:self</div><div class="line">                                              cancelButtonTitle:@&quot;取消&quot;</div><div class="line">                                              otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">    </div><div class="line">    // 显示输入框</div><div class="line">    /**</div><div class="line">     UIAlertViewStyleDefault = 0,</div><div class="line">     UIAlertViewStyleSecureTextInput,</div><div class="line">     UIAlertViewStylePlainTextInput,</div><div class="line">     UIAlertViewStyleLoginAndPasswordInput</div><div class="line">     */</div><div class="line">    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;</div><div class="line">    </div><div class="line">    </div><div class="line">    // 把英雄的名字赋值给 alertView中textField</div><div class="line">    // 取出aletView的 textField</div><div class="line">    UITextField *textField = [alertView textFieldAtIndex:0];</div><div class="line">    </div><div class="line">    textField.text = heroModel.name;</div><div class="line">    </div><div class="line">    // 点击cell的时候， 把row 设置给alertView的tag属性</div><div class="line">    alertView.tag = indexPath.row;</div><div class="line">    </div><div class="line">    </div><div class="line">    // 展示alertView</div><div class="line">    [alertView show];</div><div class="line">   </div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark -</div><div class="line">#pragma mark -  alertView的代理方法</div><div class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex &#123;</div><div class="line">    </div><div class="line">    if (buttonIndex == 1) &#123; // 点击了确定按钮</div><div class="line">        /**</div><div class="line">         修改数据显示， 修改英雄的名字</div><div class="line">         */</div><div class="line">        </div><div class="line">        // 取出 alertView中的文本输入框</div><div class="line">        UITextField *textField = [alertView textFieldAtIndex:0];</div><div class="line">        </div><div class="line">        // 修改过之后的名字</div><div class="line">        NSString *newName = textField.text;</div><div class="line">        </div><div class="line">        // 修改数据源中 的 英雄名字</div><div class="line">        // 取出alertView 的tag , 点击的某个行</div><div class="line">        NSInteger index = alertView.tag;</div><div class="line">        </div><div class="line">        // 取出点击行所对应的 数据源中的模型</div><div class="line">        HeroModel *model = self.dataArray[index];</div><div class="line">        </div><div class="line">        // 修改model中的 name属性</div><div class="line">        model.name = newName;</div><div class="line">        </div><div class="line">        </div><div class="line">        // 刷新tableView中的数据, 对所有数据进行刷新</div><div class="line">//        [_tableView reloadData];</div><div class="line">        </div><div class="line">        </div><div class="line">        // 对某一行cell的数据进行刷新</div><div class="line">        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];</div><div class="line">        [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="6实现插入和删除"><a href="#6实现插入和删除" class="headerlink" title="6实现插入和删除"></a>6实现插入和删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    </div><div class="line">    // 可以对传入的编辑模式进行判断</div><div class="line">    if (editingStyle == UITableViewCellEditingStyleDelete) &#123;</div><div class="line">        </div><div class="line">        // 1. 在数据源中把row 对应到 dataArray 下标中的对象 给移除掉</div><div class="line">        [self.dataArray removeObjectAtIndex:indexPath.row];</div><div class="line">        </div><div class="line">        // 2. 刷新数据</div><div class="line">//        [_tableView reloadData];</div><div class="line">//        [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];</div><div class="line">        </div><div class="line">        [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];</div><div class="line">        </div><div class="line">    &#125; else if (editingStyle == UITableViewCellEditingStyleInsert) &#123;</div><div class="line">        </div><div class="line">        // 1. 根据点击的indexPath.row 在数据源中插入heroModel 对象</div><div class="line">        HeroModel *model = [[HeroModel alloc] init];</div><div class="line">        model.name = @&quot;千珏&quot;;</div><div class="line">        </div><div class="line">        [self.dataArray insertObject:model atIndex:indexPath.row];</div><div class="line">        </div><div class="line">        // 2. 刷新数据</div><div class="line">        </div><div class="line">        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft ];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    //可以通过按钮来改变编辑的模式</div><div class="line">    return UITableViewCellEditingStyleInsert;</div><div class="line">&#125;</div><div class="line">//自定义删除按钮上显示的文本</div><div class="line">- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    return @&quot;咔嚓掉&quot;;</div><div class="line">&#125;</div><div class="line">//当一行cell被取消选中的时候待用</div><div class="line">- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    NSLog(@&quot;调用了--- %ld&quot;, indexPath.row);</div><div class="line">&#125;</div><div class="line">//当一行cell被选中的时候调用</div><div class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.801Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/06/03/iOS-UI学习-五/" target="_blank" rel="external">http://yoursite.com/2017/06/03/iOS-UI学习-五/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/03/iOS-UI学习-五/&title=《iOS-UI学习(五)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/03/iOS-UI学习-五/&title=《iOS-UI学习(五)》 — Peterpan's Blog&source=UI初步（五）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/06/11/iOS-UI学习-六/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">iOS-UI学习(六)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/05/26/Web基础/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Web基础</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UI基础Day6"><span class="post-toc-number">1.</span> <span class="post-toc-text">UI基础Day6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-tableView基本使用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.tableView基本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#plain"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">plain:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#group"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">group:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据源调用方法顺序："><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">数据源调用方法顺序：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-headerView的使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.headerView的使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-demo展示（英雄属性）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.demo展示（英雄属性）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-实现数据模型的嵌套和索引"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4.实现数据模型的嵌套和索引</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-对cell的编辑（修改处）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5.对cell的编辑（修改处）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6实现插入和删除"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6实现插入和删除</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/03/iOS-UI学习-五/&title=《iOS-UI学习(五)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/03/iOS-UI学习-五/&title=《iOS-UI学习(五)》 — Peterpan's Blog&source=UI初步（五）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3azW6EMAxFYd7/panUVSsEc64dqcU5WY1oh/Cx8MQ/x4HX+b3I55/r+frdX6//s2zJkCHjtYzzcV0f9/ot8kB3d0hfwS1VhgwZGzB4kO2ES4Lk+8qQIUPGXeAjoZCs9BgqQ4YMGbXb3SHJcTANxDJkyJBBUtDnK7y4Vtt3WS4uQ4aMFzLWNgbWfv6z/oYMGTL+DaOffHZakueiJUOGjNmM50NeJ+J1Ut/nw+hRu50MGTJezqgNddVKabUD6LI3KkOGjNcyyMhXrQ2QDmeQcp4MGTJ2ZvBCf9ok4MdEPuohQ4aMfRj8IMjZ8ZAEPiaiqqEMGTKGMvjX+gMT/HcgODjKkCFjA8aqIBtvjxPmD08iQ4aM0QxeREvbBmmzYVnbQIYMGUMZRJmW4dIg3mktyJAhYzYjDYg8reV1ez7SESSxMmTIGMdIG4rpyEWNHewiQ4aM0QySA9aCaWeCqzacIUOGjKkMfqO0DFdrhfIQjCqFMmTIGMHgLYFaCyF4iFITFIVdGTJkDGXwtmKtkVkrwH14HhkyZGzG4O2BPqb2goq/GzJkyHgtI01c+/kjL7rxApwMGTKmMmqjXbXjHW8kkGT41xUZMmSMZvCFxrOWhul0XxkyZMxm8CDLxyDSUtqCgCtDhowNGJ1hi/6IWNp+kCFDhgx+LOu3LTtjZ+h9yJAhYzNG7cCXMkhyK0OGjD0ZtWZAmtbyMF3svsqQIWMoo98Y4CMUaaOUh3sZMmQMZXwBCGXHZU2HzUYAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/06/03/iOS-UI学习-五/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

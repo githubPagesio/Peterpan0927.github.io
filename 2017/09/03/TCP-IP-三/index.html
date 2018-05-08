@@ -1,197 +1,57 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/09/03/TCP-IP-三/">
-    
-    
-    <title>TCP/IP(三) | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>TCP/IP(三)</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>TCP/IP(三)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">TCP/IP(三)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-09-03T12:56:33.000Z" itemprop="datePublished" class="page-time">
-  2017-09-03
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/路由控制表-公私IP-CIDR与VLSM/">路由控制表 公私IP CIDR与VLSM</a></li></ul>
+<h2 class="title">TCP/IP(三)</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年9月3日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/路由控制表-公私IP-CIDR与VLSM/">路由控制表 公私IP CIDR与VLSM</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-TCP-IP-三"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">TCP/IP(三)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-09-03 20:56:33" datetime="2017-09-03T12:56:33.000Z"  itemprop="datePublished">2017-09-03</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/路由控制表-公私IP-CIDR与VLSM/">路由控制表 公私IP CIDR与VLSM</a></li></ul>
-
-
-
-            
-	<span id="/2017/09/03/TCP-IP-三/" class="leancloud_visitors" data-flag-title="TCP/IP(三)" title="TCP/IP(三)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/09/03/TCP-IP-三/#comment">
-            <span class="valine-comment-count" data-xid="/2017/09/03/TCP-IP-三/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-三"><span class="toc-text">TCP/IP(三)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP即网际协议"><span class="toc-text">IP即网际协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP初探"><span class="toc-text">IP初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层与数据链路层的关系"><span class="toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP基础知识"><span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制"><span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP地址基础知识"><span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的分类"><span class="toc-text">IP地址的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播和多播"><span class="toc-text">广播和多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码"><span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIDR和VLSM"><span class="toc-text">CIDR和VLSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局地址和私有地址"><span class="toc-text">全局地址和私有地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制-1"><span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP分割与再构成处理"><span class="toc-text">IP分割与再构成处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP报文分片与重组"><span class="toc-text">IP报文分片与重组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU发现"><span class="toc-text">路径MTU发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU工作原理"><span class="toc-text">路径MTU工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6特点"><span class="toc-text">IPv6特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6地址结构"><span class="toc-text">IPv6地址结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局单播地址"><span class="toc-text">全局单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#链路单播地址"><span class="toc-text">链路单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#唯一本地地址"><span class="toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4、IPv6首部"><span class="toc-text">IPv4、IPv6首部</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-text">IPv4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6-1"><span class="toc-text">IPv6</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码的算法"><span class="toc-text">子网掩码的算法</span></a></li></ol></li></ol></li></ol>
+<p>接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）</p>
 <a id="more"></a>
 <h1 id="TCP-IP-三"><a href="#TCP-IP-三" class="headerlink" title="TCP/IP(三)"></a>TCP/IP(三)</h1><h2 id="IP即网际协议"><a href="#IP即网际协议" class="headerlink" title="IP即网际协议"></a>IP即网际协议</h2><h3 id="IP初探"><a href="#IP初探" class="headerlink" title="IP初探"></a>IP初探</h3><p>TCP/IP的心脏是网络层，这一层主要由IP和ICMP两个协议组成，鉴于目前的IP协议已经无法满足互联网的需求，所以出现了更高级的IP协议（也就是IPv6协议）。</p>
 <p>IP协议处于OSI模型中的网络层，网络层的主要作用是实现端对端之间的通信，而它的上一层数据链路层是用来实现同一种数据链路相连的节点之间通信，如果是要在不同的数据节点之间进行通信，就必须要经过网络层，下面用一张图作例子：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png" alt=""></p>
 <p>Tips:在这里补充一下节点和主机的联系，一般我们将配有IP地址但不进行路由控制的设备称作主机，两者都有的称作路由器，而这两个又统称为节点。</p>
 <h3 id="网络层与数据链路层的关系"><a href="#网络层与数据链路层的关系" class="headerlink" title="网络层与数据链路层的关系"></a>网络层与数据链路层的关系</h3><p>数据链路层提供直连两个设备之间的通信功能,而网络层是负责在没有直连的两个网络之间进行数据传输。那么为什么一定需要这样的两个网络层次呢？</p>
 <p>我们可以通过一个简单的例子来说明这个问题。比如说有一个从湖南出发，要去西双版纳。但是碍于路途遥远，它需要乘坐飞机，火车再转大巴才能到达目的地。</p>
@@ -225,10 +85,7 @@
 <li>C类IP地址是前三位为”110”的地址。从第一位到第二十四位是网络标识，也就是192.0.0.0～239.255.255.0</li>
 <li>D类地址是前四位为”1110”的地址。从第一位到第三十二位都是网络标识，没有主机标识，常被用作多播</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt=""></p>
 <p>Tips:在分配IP地址的时候关于<strong>主机标识</strong>有一点需要注意。即要使用比特位表示主机地址时，不可以全部为0或全部为1。因为全部为0表示对应的网络地址不可获知，而全部为1的主机地址通常作为广播地址。</p>
 <h3 id="广播和多播"><a href="#广播和多播" class="headerlink" title="广播和多播"></a>广播和多播</h3><p>将IP地址中的主机地址部分全部设置为1，就成为了广播地址。如172.16.0.0/16将主机部分修改为1就成为了172.16.255.255。</p>
 <ul>
@@ -242,10 +99,7 @@
 </ul>
 <p>多播用于将包发送给组内特定的主机，因为随着多媒体应用的发展，对于向多台主机同时发送数据包，在效率上的要求需要提高。人们一直使用广播的方式，将数据发送给所有的终端主机，再由这些主机IP上一层去判断是否接受，对那些无关的主机造成了影响，而且造成流量损失。</p>
 <p>多播不仅可以实现1对N，N对N通信，还可以穿透路由器，成为了我们的首选。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png" alt=""></p>
 <p>多播使用D类地址，前四位是”1110”，后28位可以成为多播的组编号，多播的更多细节可以参考<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%92%AD" target="_blank" rel="external">维基百科</a></p>
 <h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><p>一个IP地址只要确定了他的分类，也就确定了他的网络标识和主机标识。网络标识相同的计算机必须属于同一个链路。例如，架构B类IP网路的时候，理论上一个链路内允许6万多台计算机连接，但是实际上，是不会有一个链路上连接这么多台计算机的情况的。</p>
 <p>所以当我们直接使用A类，B类网的时候，随着互联网的增大，事实上是相当的浪费的，所以有一种新的组合方式来减少这种浪费。</p>
@@ -276,16 +130,10 @@
 </tr>
 </tbody>
 </table>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png" alt=""></p>
 <h3 id="CIDR和VLSM"><a href="#CIDR和VLSM" class="headerlink" title="CIDR和VLSM"></a>CIDR和VLSM</h3><p>正如前面所说，人们逐渐放弃了IP地址的分类，而是采用任意长度分割IP地址的网络标识和主机标识。这种方式叫做CIDR，意为无间隙域间选路。由于BGP对应了CIDR，所有不受IP地址分类的限制自由分类。</p>
 <p>根据CIDR，就可以将连续多个C类地址划分到一个较大的网络中，有效利用IPv4地址，通过路由集中降低路由器的负担。以下面一张图为例子：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png" alt=""></p>
 <p>至于VSLM，是为了可以随机修改组织内各个部门的子网掩码长度的机制。它可以通过域间路由协议转换为RIP2以及OSPF实现，它可以提高IP地址的利用率。</p>
 <p>举个例子就是一个公司有五个部门，各个部门的PC数量为100/50/10/10/10，公司的公网IP为199.1.1.0/24</p>
 <p>199.1.1.0/24取该地址和掩码的二进制数分别为：</p>
@@ -331,20 +179,14 @@
 <li>LAN：接内部 IP 地址用，LAN 内部是交换机。</li>
 </ul>
 <p>这里，我们简化这个过程，我们把运营商当做一个 NAT 设备。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png" alt=""></p>
 <p>通过这样的层层端口映射，最终保证地址(IP + 端口)的唯一性。A 和 B 访问百度服务器，尽管它们的局域网 IP 是一样的，但是最终它们访问百度的地址(IP + 端口)是唯一的，所以，百度服务器回复时，原路返回时能够区分到底给谁回。</p>
 <p>Tips：为了安全问题，我们必须通过IP地址和主机找到管理人，可以使用<code>whois</code>命令来查看IP来源</p>
 <h3 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h3><p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
 <p>路由表的形成方式有两种，一种是管理员手动设置，叫做静态路由控制，还有一种是路由器和其他路由器相互交换信息的时候自动刷新，叫做动态路由控制。为了让动态路由及时刷新路由表，在网络互连的路由器之间都必须设置好路由协议，保证正常的读取路由控制信息。这个表是根据路由协议制作而成的。</p>
 <p>发送IP包的时候，首先要确定IP包首部中的目标地址，根据该记录转发给下一个路由器。当然也会出现路由控制表中存在多条相同网络地址的记录,这时候选择相同位数最长的：</p>
 <p>比如172.20.100.52的网络地址与172.20.100/24和172.20/16网络地址相同，这时候选择前者。话不多说，直接上图方便理解：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png" alt=""></p>
 <h2 id="IP分割与再构成处理"><a href="#IP分割与再构成处理" class="headerlink" title="IP分割与再构成处理"></a>IP分割与再构成处理</h2><h3 id="IP报文分片与重组"><a href="#IP报文分片与重组" class="headerlink" title="IP报文分片与重组"></a>IP报文分片与重组</h3><p>因为每种数据链路的最大传输单元（MTU）都不尽相同。因为每种数据链路的使用目的不同，可承载的MTU自然也就不同了。</p>
 <p>任何一台主机都有必要对IP包进行分片的处理，往往是因为碰到较大的报文无法一次发出去。因为IP包的大小超过了MTU，所以需要将IP数据包划分成若干个片段进行传输，这种操作只要路由器认为有必要，就会周而复始地进行。</p>
 <p>经过分片之后的IP数据报只会由目标主机重组，因为无法保证IP数据报是否通过同一个路径传送。此外，经过下一站的时候需不需要重新再分片，所以如果每一次重新组装就会加重路由器的负担。</p>
@@ -353,15 +195,9 @@
 <p>这样一来，不仅可以避免路由器上进行分片处理，还可以在TCP中发送更大的包。</p>
 <h3 id="路径MTU工作原理"><a href="#路径MTU工作原理" class="headerlink" title="路径MTU工作原理"></a>路径MTU工作原理</h3><p>首先将发送端主机发送IP数据报的时候将其首部的禁止标志位设为1。根据这个标志位，图中的路由器即使遇到分片才能处理的大包也不会进行分片，而是丢弃。然后通过一个ICMP的不可达消息将该数据链路的MTU发送给发送端主机。</p>
 <p>发送端主机获取了这个MTU值之后，将其设置为当前的MTU值，根据这个MTU值进行分片处理。然后再次发送IP数据报，如此循环往复，直到被发送到目标主机没有再受到任何的ICMP，就认为最后一次通知的MTU值是一个合适的MTU值，当然这个值也有一个缓存的时间，过了之后就要根据链路上的MTU重新做一次路径MTU发现。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png" alt=""></p>
 <p>上图中是UDP的例子，如果是TCP的话，会根据路径MTU计算出最大段的长度(MSS)，根据这个信息再进行数据报的发送，IP层则不会再进行分片处理，而且到达目标端在IP层也不需要重组，直接发送给目标主机的TCP层：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png" alt=""></p>
 <h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><h3 id="IPv6特点"><a href="#IPv6特点" class="headerlink" title="IPv6特点"></a>IPv6特点</h3><p>IPv6是为了从根本解决IPv4地址耗尽而被标准化的一种网际协议，IPv4长度是32位，IPv6则是128位，一般写成8个16位的格式。IPv6不仅可以解决IPv4地址被耗尽的问题，还可以弥补一些在IPv4中缺陷，因为有些功能在IPv4中并未完全实现，需要管理员介入或者根本无法实现，而这些在IPv6中都作为了必要功能：</p>
 <ul>
 <li>IP地址扩大和路由控制表聚合</li>
@@ -387,30 +223,18 @@
 <p>如FEDC:BA98:7654:3210:FEDC:BA98:7654:3210，每组用冒号隔开，如果中间有连续的0可以用两个连续的冒号来替代，但是一个IP地址中只允许出现一次两个连续的冒号。</p>
 <p>接下来再说一下IPv6中的一些地址的结构：</p>
 <h4 id="全局单播地址"><a href="#全局单播地址" class="headerlink" title="全局单播地址"></a>全局单播地址</h4><p>全局单播地址是互联网通信和各个域内部通信最常用的一个IPv6地址，格式如下：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png" alt=""></p>
 <p>现在的IPv6网络中所用的格式，n=48,m=16，即前64位是网络标识，后六十四位是主机标识。</p>
 <p>通常接口ID中保存的是64比特版的MAC地址值，但是有时不想让对端知道这种设备固有的属性，所以就可以在接口ID设置一个随机产生，定时更新的与MAC地址没有关系的”临时地址”。这个由操作系统的具体装置来决定。</p>
 <h4 id="链路单播地址"><a href="#链路单播地址" class="headerlink" title="链路单播地址"></a>链路单播地址</h4><p>链路单播地址是指在同一个数据链路内唯一的IP地址。用于不经过路由器，在同一个链路中的通信。通常接口ID保存64位的MAC地址：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png" alt=""></p>
 <p>举个简单的例子就是一个企业内市场部内部之间交流用的链路单播地址。</p>
 <h4 id="唯一本地地址"><a href="#唯一本地地址" class="headerlink" title="唯一本地地址"></a>唯一本地地址</h4><p>唯一本地地址是不进行互联网通信的时候所使用的地址，设备控制的限制型网络和一些核心网会和互联网隔离，这些企业在和互联网通信的时候通常会使用NAT以及代理联网。唯一本地地址就是在这种不联网或者通过NAT或者代理上网的环境下准备的。</p>
 <p>虽然唯一本地地址不会连接互联网，但是还是需要分配一个全局ID，这是为了在用唯一本地地址进行网络连接的时候人们可以不改动IP地址实现网络统一。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png" alt=""></p>
 <p>举个例子就是在企业内市场部和营销部之间通信用的是唯一本地地址，有点类似于IPv4的私有地址。</p>
 <h2 id="IPv4、IPv6首部"><a href="#IPv4、IPv6首部" class="headerlink" title="IPv4、IPv6首部"></a>IPv4、IPv6首部</h2><h3 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h3><p>从之前的知识我们了解到IP数据包的首部包含了源地址和目标地址的信息，那么其中还包含了什么呢？</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png" alt=""></p>
 <p>没错上面这张图就是IPv4首部中所包含的信息，下面就来详细的解释其中每个部分的意义,emmm，太长了，还是不想说了，自己看<a href="http://blog.csdn.net/ce123_zhouwei/article/details/17453033" target="_blank" rel="external">博客</a>。</p>
 <h3 id="IPv6-1"><a href="#IPv6-1" class="headerlink" title="IPv6"></a>IPv6</h3><p>至于IPv6的首部相比于IPv4已经发生了巨大变化</p>
 <p>IPv6中为了减轻路由器的负担，省略了首部校验和字段。因此路由器不需要再计算首部校验和，从而提高了包的转发效率。</p>
@@ -424,307 +248,30 @@
 <p>故事中的小鱼，换成主机，故事中的池子，换成网段，就是网络掩码与网段的故事。<br>养鱼场有 32 位养鱼人，每个养鱼人养了 256 条鱼，对于养鱼场的营业者来说，只关心养鱼人鱼塘的编号即可：<br>1.1.0.0/24 老张<br>1.1.1.0/24 老王<br>1.1.2.0/24 老李<br>1.1.3.0/24 老黄<br>……<br>1.1.31.0/24 老某<br>至于老王、老张将鱼塘划分成若干鱼池，虹桥养鱼场并不关心，那不过是老王他们用来编号的方法，所以虹桥养鱼场只需要以上 32 行就可以区分彼此，而不需要更加明晰化区分 1.1.1.64/26 、1.1.1.128/26 是谁的。</p>
 <p>这个具体可以参考车小胖的—<a href="https://read.douban.com/reader/ebook/33499415/" target="_blank" rel="external">计算机是如何聊天的</a></p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.844Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/09/03/TCP-IP-三/" target="_blank" rel="external">http://yoursite.com/2017/09/03/TCP-IP-三/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/03/TCP-IP-三/&title=《TCP/IP(三)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/03/TCP-IP-三/&title=《TCP/IP(三)》 — Peterpan's Blog&source=接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/14/Foundation框架/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Foundation框架</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/31/iOS沙盒与模态/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">iOS沙盒与模态</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP-IP-三"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP/IP(三)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP即网际协议"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">IP即网际协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP初探"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">IP初探</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络层与数据链路层的关系"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP基础知识"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IP基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP地址基础知识"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IP地址基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址的分类"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">IP地址的分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#广播和多播"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">广播和多播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">子网掩码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CIDR和VLSM"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">CIDR和VLSM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局地址和私有地址"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">全局地址和私有地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制-1"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP分割与再构成处理"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">IP分割与再构成处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP报文分片与重组"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">IP报文分片与重组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径MTU发现"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">路径MTU发现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径MTU工作原理"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">路径MTU工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv6"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">IPv6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6特点"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">IPv6特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6地址结构"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">IPv6地址结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局单播地址"><span class="post-toc-number">1.5.2.1.</span> <span class="post-toc-text">全局单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#链路单播地址"><span class="post-toc-number">1.5.2.2.</span> <span class="post-toc-text">链路单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#唯一本地地址"><span class="post-toc-number">1.5.2.3.</span> <span class="post-toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv4、IPv6首部"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">IPv4、IPv6首部</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv4"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">IPv4</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6-1"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">IPv6</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">补充</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码的算法"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">子网掩码的算法</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/03/TCP-IP-三/&title=《TCP/IP(三)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/03/TCP-IP-三/&title=《TCP/IP(三)》 — Peterpan's Blog&source=接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aS2rFMBAFUe9/08o0ECzXbUltE0qjwHPEsQdN/64Ln/HrrP86f37DkStX7jJ3TM/8mbtf/94/f5IY5MqV28+9ixh3z5DwNMDhBrly5X6fm4aq+Z1y5cr9H1wCSkOeXLlyv8atpSC8zVErruTKlfsWl3cpz/19pL8rV67cEneEZ9cYZpSOXLlye7g8oKSvkbZFguRJrly5h7m8qcGbofxl+KdBOLly5R7grjQ+0sWLYriUK1duOzcOK2Aokga+hzvlypXbyK2tWPEkiX+Ch88hV67cFi5fs0hXLtL1i6B1Ileu3MPclWWL2sukKxdB3JUrV+5hLm9k8NYGT2Li4keuXLnHuDyL4IGMNFh50SVXrtwebvrPPHFJB6sknZIrV+5bXJKIpIEsLZZQw1SuXLktXN624CNY0i5JB7dy5crt5BIWH7dcC+fhBrly5R7mjvCsFD/p2pZcuXLf4u4akNTCU9palStXbieXr0HUhqm1wqmY6MiVK3crlw9Lai+wqzSSK1fuN7l8fMLbqUH+JVeu3E9y14scchua/MiVK/cwlxQzaXjiq59BE1auXLkt3PWKI706vU2uXLmN3B8VA3uKjzyC8gAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/09/03/TCP-IP-三/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

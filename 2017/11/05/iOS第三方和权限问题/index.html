@@ -1,212 +1,66 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/11/05/iOS第三方和权限问题/">
-    
-    
-    <title>iOS第三方和权限问题 | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>iOS第三方和权限问题</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="iOS开发">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>iOS第三方和权限问题</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">iOS第三方和权限问题</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-11-04T17:25:06.000Z" itemprop="datePublished" class="page-time">
-  2017-11-05
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/第三方库管理-证书和描述文件/">第三方库管理 证书和描述文件</a></li></ul>
+<h2 class="title">iOS第三方和权限问题</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年11月5日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/第三方库管理-证书和描述文件/">第三方库管理 证书和描述文件</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-iOS第三方和权限问题"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">iOS第三方和权限问题</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-11-05 01:25:06" datetime="2017-11-04T17:25:06.000Z"  itemprop="datePublished">2017-11-05</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/第三方库管理-证书和描述文件/">第三方库管理 证书和描述文件</a></li></ul>
-
-
-
-            
-	<span id="/2017/11/05/iOS第三方和权限问题/" class="leancloud_visitors" data-flag-title="iOS第三方和权限问题" title="iOS第三方和权限问题">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/11/05/iOS第三方和权限问题/#comment">
-            <span class="valine-comment-count" data-xid="/2017/11/05/iOS第三方和权限问题/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理</p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS第三方和权限问题"><span class="toc-text">iOS第三方和权限问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cocoapods"><span class="toc-text">Cocoapods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xcworkspace"><span class="toc-text">xcworkspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#账号管理和配置ID"><span class="toc-text">账号管理和配置ID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#账号管理"><span class="toc-text">账号管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bundle-ID配置"><span class="toc-text">bundle ID配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#证书"><span class="toc-text">证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#描述文件"><span class="toc-text">描述文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xcode项目分配"><span class="toc-text">Xcode项目分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol></li></ol>
+<p>开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理</p>
 <a id="more"></a>
 <h1 id="iOS第三方和权限问题"><a href="#iOS第三方和权限问题" class="headerlink" title="iOS第三方和权限问题"></a>iOS第三方和权限问题</h1><p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt=""></p>
 <p>这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。</p>
 <h2 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h2><p>CocoaPods是OS X和iOS下的一个第三类库管理工具，通过CocoaPods工具我们可以为项目添加被称为<code>Pods</code>的依赖库（这些类库必须是CocoaPods本身所支持的），并且可以轻松管理其版本。比如说我们会经常使用的SDWebImage之类的框架，都可以使用它来进行管理。</p>
 <p>那么这个工具究竟该如何的去使用呢？下面就来简单的介绍一下，安装的过程就不说了。在Mac上非常的简单。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#首先来搜索一下第三方的库吧</div><div class="line">pod search AFNetworking</div></pre></td></tr></table></figure>
 <p>如果这个时候出现：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.39.21.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.39.21.png" alt=""></p>
 <p>这个是因为之前<code>pod search</code>的时候生成了缓存文件search_index.json，这个时候执行命令来删除该文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm ~/Library/Caches/CocoaPods/search_index.json</div></pre></td></tr></table></figure>
 <p>那么我们这个时候在搜索一次吧，出现下面这种情况就是正常的了，我们只是尝试一，退出就好：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.41.55.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.41.55.png" alt=""></p>
 <p>如果我们需要在工程中导入第三方的库应该怎么做呢？首先创建一个Podfile吧</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /Users/xxx/xxx/TestProject</div><div class="line">touch Podfile</div></pre></td></tr></table></figure>
 <p>然后我们就可以打开我们的vim去编辑这个Podfile文件了：</p>
@@ -227,10 +81,7 @@
 </ol>
 <p>在Cocoapods安装后，项目文件里都会多一个后缀为.xcworkspace的文件，打开这个文件就相当于打开最初常见的项目。这个文件也就是用来管理项目的，它包含你创建的项目和Cocoapods项目。</p>
 <p>.xcworkspace文件可以是我们在<code>pod install</code>之后生成的新文件也可以是我们手动去创建的，这个文件在我们的项目根目录下，接下来就是使用.xcworkspace去打开我们的文件而不是.xcodeproj了，从中可以看到类似下面的目录结构：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png" alt=""></p>
 <p>其中红色部分就是我们通过pods下载的类库了，以AFNetworking类库为例，可以通过<code>#import AFNetworking.h</code>引入下载后的类库。<br>另外CocoaPods支持搜索命令，例如在终端中输入命令<code>pod search AFNetworking</code>，便可以获得AFNetworking类库的各版本信息，这一点和命令<code>npm search</code>功能相同。</p>
 <ol>
 <li>使用总结</li>
@@ -241,10 +92,7 @@
 <p>账号的添加删除操作都是在Xcode的Preference中进行的，这一部分的操作太简单就不说了。</p>
 <h3 id="bundle-ID配置"><a href="#bundle-ID配置" class="headerlink" title="bundle ID配置"></a>bundle ID配置</h3><p>接下来就是关于配置Xcode项目中的Bundle ID的问题了，bundle ID可以精确的识别单个app，用于在开发过程中提供设备和在操作系统分发app给客户。</p>
 <p>bundle ID必须是一个统一类型标识符(UTI)的字符串，只包含字母数字字符(a -z、a - z、0 - 9)、连字符(-)和点(.)。在开发过程中，我们会有很多地方都会用到它去识别app:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png" alt=""></p>
 <p>具体来说，bundleID的位置和使用如下：</p>
 <ol>
 <li>在Xcode项目,包ID存储在信息属性列表文件(Info.plist)。 这个文件是以后当你构建项目时复制到应用程序的包中。·</li>
@@ -275,10 +123,7 @@
 </ol>
 <h3 id="Xcode项目分配"><a href="#Xcode项目分配" class="headerlink" title="Xcode项目分配"></a>Xcode项目分配</h3><p>每个Xcode项目与一个单独团队关联。如果你注册作为个人开发者,你被看做一个单人团队。团队账户用于存储应用程序需要的证书,标识符,和描述文件。所有的应用程序在设备上运行和使用某些应用程序服务都需要代码签名。Xcode会在需要的时候为你创建这些资产，但是你现在设置团队可以以后的避免警告对话框。</p>
 <p>所有的iOS、watchOS之类的应用程序在设备上启动都需要代码签名，在进行Xcode项目分配的时候，Xcode将会使用你的信息去创建一个团队描述文件。例如Xcode会自动创建你的开发证书和注册一个链接设备或者你的Mac。Xcode使用这些信息来创建一个最终安装在设备上描述文件。如果设备在描述文件中，Xcode在这个设备上运行app。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt=""></p>
 <p>如果代码签名和描述文件都有了，那么在真机运行的时候很快就好了，不然为了解决代码签名的问题可能会报一堆的警告</p>
 <p>还有一个小点需要注意一下的就是还要对文件夹分配权限，有时候从别人U盘中读取的文件由于权限设置的不同会导致有些文件没有可执行权限。</p>
 <p>所以当我们从github上下载代码之后，还需要对团队和bundle ID进行更改，创建了新的描述文件之后我们才能在自己的电脑上去运行这些程序。讲到这里，基本上一些普遍的问题也都包括了，之后遇到别的问题会继续补充。</p>
@@ -288,307 +133,30 @@
 <li><a href="http://www.jianshu.com/p/21ebca8cadf6" target="_blank" rel="external">huangman的博客</a></li>
 </ol>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.784Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/11/05/iOS第三方和权限问题/" target="_blank" rel="external">http://yoursite.com/2017/11/05/iOS第三方和权限问题/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/05/iOS第三方和权限问题/&title=《iOS第三方和权限问题》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/05/iOS第三方和权限问题/&title=《iOS第三方和权限问题》 — Peterpan's Blog&source=开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/11/06/Python-函数式编程/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Python-函数式编程</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/11/01/CTF-MISC-二/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">CTF-MISC(二)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS第三方和权限问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">iOS第三方和权限问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cocoapods"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Cocoapods</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xcworkspace"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">xcworkspace</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#账号管理和配置ID"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">账号管理和配置ID</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#账号管理"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">账号管理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bundle-ID配置"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">bundle ID配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#证书"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">证书</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#描述文件"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">描述文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Xcode项目分配"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">Xcode项目分配</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">参考博客</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/05/iOS第三方和权限问题/&title=《iOS第三方和权限问题》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/05/iOS第三方和权限问题/&title=《iOS第三方和权限问题》 — Peterpan's Blog&source=开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3ayw4CIRBE0fn/nx63JgpWVaOG5rIyE8NwXLT94Lrkdb8s/fnzk9fPo7dc31gwYMDYlnFP1/y480Mo+7jvHZ4BBgwYBzBGxxp9x32iHM4NzTBgwIDhJnNuwJ3zYMCAAaPCWFua/i3gwoABY0NGJV1zi96sDF5Wi8OAAWNDht51//3nr8w3YMCAsRXjNteqI2ajguGpYMCA0ZqhB7hs6FgP3Mp5YMCAcQ6jfgGifnVDKY+HxTAMGDCaMiqjRLf5pY8H3DYfDBgwTmBkYdFNDfVgag8AYMCA0ZqhX3pQrjvopWyloP0AgwEDRlOGHvKyJpqedGZXNGDAgNGbkZWgWRM/y+ukcAwDBoxjGG5wdEOwG0yN0hoGDBitGXqStyp01scA0p8EDBgwGjEUn36RQgnfbtErDRVgwIDRmlFp67sRvQIz/gBgwIDRjpE1y5RLEvUxpzEEhQEDRmtGvTR108osWNtJIQwYMNox3Aa9/p2sre9e74ABA8YJjCylywaZlUD/YU8YMGAczMiuQSiB2KVKFyxgwIBxAMMFKAd1f7hw/AADBoymjPqxsjJVHzDYSSEMGDDaMfRVp7qBdW0ZDAMGjN0ZlVJTGRhkTTo7fYQBA8YBjEqgdOO30UTT3wUDBgwYZrs/SwQrz2HAgAFj3hRTwqiygztIeFPEwoABozXDvXiqDwwqA0t9TxgwYPRmZKVjfWzp7pD9HDBgwNic8QDQx7JQFkrYsQAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/11/05/iOS第三方和权限问题/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>

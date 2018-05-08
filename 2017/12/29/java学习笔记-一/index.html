@@ -1,199 +1,59 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    
-    <link rel="canonical" href="www.peterpan980927.cn/2017/12/29/java学习笔记-一/">
-    
-    
-    <title>java学习笔记(一) | Peterpan&#39;s Blog | Mind over muscle.</title>
+	
+	<title>java学习笔记(一)</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     
-    <meta name="keywords" content="java">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
+    
+
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>java学习笔记(一)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">java学习笔记(一)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-12-29T09:04:17.000Z" itemprop="datePublished" class="page-time">
-  2017-12-29
-</time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/语法学习/">语法学习</a></li></ul>
+<h2 class="title">java学习笔记(一)</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年12月29日
 
-            
-        </h5>
-        
-    </div>
-    
 
-</header>
+    <a class="article-category-link" href="/categories/语法学习/">语法学习</a>
 
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+
+
+ </div>
+--->
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-java学习笔记-一"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">java学习笔记(一)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-12-29 17:04:17" datetime="2017-12-29T09:04:17.000Z"  itemprop="datePublished">2017-12-29</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/语法学习/">语法学习</a></li></ul>
-
-
-
-            
-	<span id="/2017/12/29/java学习笔记-一/" class="leancloud_visitors" data-flag-title="java学习笔记(一)" title="java学习笔记(一)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/12/29/java学习笔记-一/#comment">
-            <span class="valine-comment-count" data-xid="/2017/12/29/java学习笔记-一/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" alt=""></p>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java的基础特性"><span class="toc-text">Java的基础特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强转和溢出"><span class="toc-text">强转和溢出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面向对象编程和类"><span class="toc-text">面向对象编程和类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#从具体到抽象"><span class="toc-text">从具体到抽象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#颠倒的世界"><span class="toc-text">颠倒的世界</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考来源"><span class="toc-text">参考来源</span></a></li></ol>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" alt=""></p>
 <p>Java是一门很悠久的语言了，虽然一直被黑，说它老气，庞大，臃肿，但是这种盲目的否认会忽视掉Java的很多优点，甚至许多的Python的程序员也加入了鄙视Java的队伍中，虽然气势上占据着上风，但是显然Python作为一个编程语言是完全无法和Java抗衡的。</p>
 <a id="more"></a>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>学习一门语言之前必定要有所了解，盲目跟风的人虽不知几何，但终有成就者甚少，其实就算Java中有很多的不好，其实许多的脚本程序员是没有资格去评判的，属于盲目的鄙视范畴。也许这种仇恨感是来自于长期的教学或者废话连篇的设计模式吧。其实Java已经可以解决大部分的问题，除非有着非常强大的性能需求和资源需求。</p>
 <p>所以有些黑Java其实是有些不着边际的，但是没办法，现在的人们就是喜欢人云亦云，看到大多数的人站在一起抵制一个对象的时候，就会不自觉地加入进去，仿佛获得了巨大的快感，在我看来，相较于Java，<code>JavaScript</code>这种东西不是会更加吸引仇恨么，虽然他们的社区更新换代的非常快，但是其实并没有什么根本性的改变，甚至还有越来越火的趋势，真是让鸡摸不着头脑:p</p>
 <h1 id="Java的基础特性"><a href="#Java的基础特性" class="headerlink" title="Java的基础特性"></a>Java的基础特性</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p> java的程序都是定义在类中，而类的形式其实就是一个字节码文件最终体现，java是一个强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间，在java中数据类型主要可以分为基本数据类型和引用数据类型，引用中存放的是指向真实数据的地址，类、接口、数组就属于引用数据类型。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/969969978B91E6105DD88EAFCA1FDC3D.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/969969978B91E6105DD88EAFCA1FDC3D.png" alt=""></p>
 <h2 id="强转和溢出"><a href="#强转和溢出" class="headerlink" title="强转和溢出"></a>强转和溢出</h2><p>我们发现java中有一个不是在C/C++中出现过的基础类型<code>byte</code>，这个作为整型也就是说只能存储一个字节的整数，有符号整数最大只能到128，所以我们要注意不要超过数据类型的上限，下面演示一段基础的语法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">add</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    <span class="keyword">byte</span> b = <span class="number">3</span>;</div><div class="line">    b = (<span class="keyword">byte</span>)(b+<span class="number">126</span>);</div><div class="line">    System.out.println(b);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们就会发现输出的结果是-127，这个倒是没什么，因为溢出了，但我发现一个问题，就是如果执行：</p>
@@ -220,10 +80,7 @@
 <li>栈内存(局部变量)</li>
 <li>堆内存(存储的是数组和对象，凡是new的都在堆中，在内存管理上和C++不同)</li>
 </ol>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-04%20%E4%B8%8B%E5%8D%884.49.47.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-04%20%E4%B8%8B%E5%8D%884.49.47.png" alt=""></p>
 <p>在java中如果访问数组超过了下标的时候就会报一个空指针错误，在java中，引用型变量没有任何实体指向的时候，还在用其操作实体，就会发生异常。那么我们直接打印数组下标会发生什么后果呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[peterpan@panzhenpengdeMacBook-Air] - [~/java] - [2018-01-04 05:08:59]</div><div class="line">└─[0] &lt;&gt; java Array</div><div class="line">[I@7852e922</div></pre></td></tr></table></figure>
 <p>我们可以看到打印出来的是一串奇怪的字符，首先以<code>@</code>作为分界线，左边的代表的是类型，<code>[</code>代表数组，<code>I</code>代表是整型，分界右边的是数组实体的一个hash值，可以简单的理解为地址值（冲突会继续往下算）。</p>
@@ -241,309 +98,30 @@
 <p><a href="http://blog.csdn.net/yqj2065/article/details/46825467" target="_blank" rel="external">严千钧-编程导论</a></p>
 <p><a href="">毕向东JAVA</a></p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.863Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
 
-
-        
-        转载注明出处，原文地址：<a href="/2017/12/29/java学习笔记-一/" target="_blank" rel="external">http://yoursite.com/2017/12/29/java学习笔记-一/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/29/java学习笔记-一/&title=《java学习笔记(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/29/java学习笔记-一/&title=《java学习笔记(一)》 — Peterpan's Blog&source=
-Java是一门很悠久的语言了，虽然一直被黑，说它老气，庞大，臃肿，但是这种盲目的否认会忽视掉Java的很多优点，甚至许多的Python的程序员也加入了鄙..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/12/31/2017年度总结/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">2017年度总结</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/12/25/8086汇编小结/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">8086汇编小结</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java的基础特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java的基础特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强转和溢出"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">强转和溢出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">引用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">数组</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#面向对象编程和类"><span class="post-toc-number">3.</span> <span class="post-toc-text">面向对象编程和类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从具体到抽象"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">从具体到抽象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#颠倒的世界"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">颠倒的世界</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考来源"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考来源</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/12/29/java学习笔记-一/&title=《java学习笔记(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/12/29/java学习笔记-一/&title=《java学习笔记(一)》 — Peterpan's Blog&source=
-Java是一门很悠久的语言了，虽然一直被黑，说它老气，庞大，臃肿，但是这种盲目的否认会忽视掉Java的很多优点，甚至许多的Python的程序员也加入了鄙..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACPUlEQVR42u3aQW7DMAwFUd//0i7QVYHA0nzKKSBqtApiN/LzgqVIXhde9+8aX/27Pv/q8+r4d65vLBkyZGzLuIfraYMbr6cXke77dI8MGTLOYYyDbI3Hvxnfif4ByJAhQ0YpCJIgy5NLGTJkyOAM8s0kjQtDswwZMmTUjqAkySNhN01JXziLy5AhY0NG2hj4z89f7G/IkCFjE8YdrloKmD5c/FQyZMhozaiVusabraeSHBlPfMiQIWNbRu0R04IaP+6mgxoyZMjozeBjEGkzgF/lr+DxuCtDhozWDN5WJI/CHzFtAMTJqwwZMhoxxulaGkzTl1J7EZNTuAwZMtoxVgIfL4elSV5tFxkyZJzDeKusXwusaZCVIUPGCQySGqZ9BvJAK2nlZGZEhgwZ7RjjM2At4PJxjbdaCzJkyDiBwQ+xtUbCSgkvaKnKkCHjAAYPjuTONJS/0JCQIUNGa0baSuRJZBo60xbFlU6TyZAhY0NGmtitHz5JAS4+MMuQIaM1gyR8vEkQlO9L7dJJa1OGDBlNGeMtVxqQPJjygtrj7jJkyDiYURunqBXsauFehgwZJzB4QZ8nkbwMR74nJBkyZPRm3OGqYdIJtTRVlSFDRm/GysBEGnbT1JM3JGTIkHECIw2y6eBFmuqRQzX6ORkyZLRjpKEzLf3Xym3xUVaGDBnHM0hoTtuftRxWhgwZMgijdk9KCkY0ZMiQcQAjPcSSQMkDMS/ATQKuDBkymjLWBy+Weg4YuTKOJkOGjG0ZP624W9E8BztcAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
+<!--<a href="http://yoursite.com/2017/12/29/java学习笔记-一/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
 
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+</div>
 
 
-    
+
+
+
+
 </body>
 </html>
