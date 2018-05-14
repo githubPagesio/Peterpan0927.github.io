@@ -1,53 +1,118 @@
+<!DOCTYPE html>
 <html>
 <head>
-	
-	<title>iOS-UI学习(四)</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/p1.png?v=3"/>
-    
+  <meta charset="utf-8">
+  
+  <title>iOS-UI学习(四) | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UI初步（四）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS-UI学习(四)">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/iOS-UI学习-四/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="UI初步（四）">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/C275B81E-725D-4560-92C8-2FC5C7D40AE2.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/6234F898-5C33-4E75-8056-84BB36E12A6A.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/44EFD2BE-DB86-4B5D-9F7E-51485E8D816B.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/4809ED67-267E-490E-B679-69AB2C3A8884.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E4%BB%A3%E7%90%86%E7%9A%84weak%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS-UI学习(四)">
+<meta name="twitter:description" content="UI初步（四）">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/C275B81E-725D-4560-92C8-2FC5C7D40AE2.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
 
 </head>
 
 <body>
-
-
-<h2 class="title">iOS-UI学习(四)</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年5月23日
-
-
-    <a class="article-category-link" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
-
-
-
- </div>
---->
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
 </div>
 
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-自定义一个coverView"><span class="toc-text">1.自定义一个coverView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-UIScrollView控件（滚动，缩放）"><span class="toc-text">2.UIScrollView控件（滚动，缩放）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-代理的使用代理设计模式"><span class="toc-text">3.代理的使用代理设计模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-监听ScrollView的滚动"><span class="toc-text">4.监听ScrollView的滚动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-实现图片的缩放"><span class="toc-text">5.实现图片的缩放</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-图片轮播器"><span class="toc-text">6.图片轮播器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-代理使用weak修饰"><span class="toc-text">7.代理使用weak修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-使用代理优化九宫格代码思路"><span class="toc-text">8.使用代理优化九宫格代码思路</span></a></li></ol>
-<p>UI初步（四）<br><a id="more"></a></p>
+        <section id="main"><article id="post-iOS-UI学习-四" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/23/iOS-UI学习-四/" class="article-date">
+  <time class="post-time" datetime="2017-05-23T15:28:30.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">23</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS-UI学习(四)
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
+  </div>
+
+          
+              
+  &nbsp; | &nbsp;
+  <div class="view-box">
+    <span id="/2017/05/23/iOS-UI学习-四/" class="leancloud_visitors" data-flag-title="iOS-UI学习(四)">
+      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
+    </span>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UI初步（四）<br><a id="more"></a></p>
 <h2 id="1-自定义一个coverView"><a href="#1-自定义一个coverView" class="headerlink" title="1.自定义一个coverView"></a>1.自定义一个coverView</h2><blockquote>
 <p>首先要创建一个coverView的类</p>
 <p>在这个类当中重写初始化他的方法</p>
@@ -131,30 +196,308 @@
 <p>4.在ViewController.m中构造代理方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)yellowView:(YellowView *)yellowView  didClickButton:(AppModel *)model&#123;</div><div class="line">  _coverView.alpha = 0.6;</div><div class="line">  _coverView.appModel = model;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/23/iOS-UI学习-四/" data-id="cjh6b5gz5004kz4brpz6088hi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
 
-<!--<a href="http://yoursite.com/2017/05/23/iOS-UI学习-四/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'undefined'; // required: replace example with your forum shortname
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/26/Web基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Web基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/22/Linux进程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux进程管理</div>
+    </a>
+  
+</nav>
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>script>
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
 </div>
 
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://gloxec.github.io/" target="_blank" title="gloxec">
+          gloxec
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz", "xDGMWtxNt0aReJDVkuYmSqBd");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.article-title').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
 
 
+  </div>
 </body>
 </html>

