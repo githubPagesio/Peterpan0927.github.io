@@ -50,9 +50,13 @@
 <p>首先给x1赋值，为了让x1的值还是等于之前的值，所以要让<code>x0+0x98</code>就等于在内存中<code>x1</code>的值，所以之前的值加起来应该是十六进制<code>0x98</code>这么大，之后还有一个给<code>x0</code>赋值，也就是让<code>x0</code>之前的内存加起来为十六进制<code>0x70</code>，也就是意味：</p>
 <ol>
 <li>sizeof(pad1)+8=0x70</li>
-<li>sizeof(pad2+pad1)+8=0x98</li>
+<li>sizeof(pad2+pad1)+8+8=0x98</li>
 </ol>
 <p>所以结构体中的填充数组大小由此得来。 </p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>相信认真看完的人肯定会对那个缓存文件有疑问，今天了解到了相关知识之后顺手来填个坑，共享库缓存是dyld支持的另外一个机制，指的是一些库经过预先链接，然后保存在磁盘的一个文件中。在iOS中大部分的常用库都被缓存了，可以类比一下安卓中的<code>prelink-map</code>。</p>
+<p>虽然所有的二进制文件都依赖于<code>libSystem</code>这个库，但是这个库在文件系统上是找不到的，在系统上搜索完全就是浪费时间。为了节省库的加载时间，iOS的dyld采用了一个共享库预链接缓存。</p>
+<p>在OS X中，这个缓存在目录<code>/private/var/db/dyld</code>下，还有一个辅助性的map文件，但是在iOS中没有，iOS中的缓存目录在<code>/System/Library/Caches/com.apple.dyld</code>下。</p>
+<p>为了方便理解就拿上面的举个例子，我们要利用gadgets做ROP的时候要拿到这个<code>gadget</code>在内存中的地址，这个偏移的计算是通过对应框架的<code>ASLR</code>偏移加上那一段<code>gadget</code>在框架内的偏移。因为这个框架的加载过程是<code>dyld</code>从这个缓存文件中取到的，再进行<code>ASLR</code>。</p>
 ]]></content>
       
         <categories>
@@ -6216,6 +6220,29 @@
 <p>但是在控制器中间放一个按钮始终感觉非常的奇怪，所以我们一般在使用的时候可以把要显示的控制器包装在一个导航控制器中。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (IBAction)btnClick:(id)sender&#123;</div><div class="line">    NewViewController *new = [[NewViewController alloc] init];</div><div class="line"></div><div class="line">  	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: new];</div><div class="line">  	//创建导航栏最左侧按钮</div><div class="line">  	new.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissClick)];</div><div class="line">  </div><div class="line">  	[self presentViewController:nav animated:YES completion:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>想用storyboard来实现当然也是可以的，只不过把之前的show换成Present-Modaily，转场效果可以自己设置哦～，个人觉得旋转的比较炫酷一点。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>之前是作为一个开发人员对于沙盒进行的解释，这次是从更底层的角度来说一说，首先丢两张图：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-17%20%E4%B8%8B%E5%8D%885.24.16.png" alt="沙盒大致工作流程"></p>
+<ul>
+<li><code>1</code>进程尝试进行一次系统调用（system call），调用内核功能。</li>
+<li><code>2、3</code>MAC层需要根据该进程的安全策略判断此次系统调用是否可以执行。</li>
+<li><code>4、5、6、7、8、9</code>如果存在策略的话，通过<code>sandbox.kext</code>（hook函数）和<code>AppleMatch.kext</code>（沙盒的profile解析）两个内核扩展实现权限的检查。</li>
+<li><code>10</code>返回调用结果</li>
+</ul>
+<p>与沙盒系统相关的模块大致如下：</p>
+<ul>
+<li>libSystem.dylib: 提供<code>sandbox_init</code>、<code>sandbox_free_error</code>等函数。</li>
+<li>libSandbox.dylib: 提供解析，编译，生成<code>*.sb</code>的沙盒<code>profile</code>的函数。</li>
+<li>sandbox.kext：提供了system call的hook函数</li>
+<li>AppleMatch.kext：提供了解析<code>profile</code>的函数</li>
+</ul>
+<p>结构图大致如下：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-17%20%E4%B8%8B%E5%8D%885.25.32.png" alt="沙盒结构图"></p>
+<p> 沙盒的工作流程大致可以总结为：</p>
+<ol>
+<li>通过<code>sandbox_init</code>初始化某沙盒策略脚本并编译为二进制文件</li>
+<li>在进程进行<code>system call</code>时，通过<code>TrustedBSD</code>提供的<code>hook</code>模块，利用<code>Sandbox.kext</code>提供的<code>system call hook</code>函数，结合沙盒策略进行判断，该进程是否有权限执行该<code>system call</code>。</li>
+</ol>
+<p>参考博客<a href="http://turingh.github.io/2016/04/18/apple%E6%B2%99%E7%9B%92%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_blank" rel="external">mrh</a></p>
 ]]></content>
       
         <categories>

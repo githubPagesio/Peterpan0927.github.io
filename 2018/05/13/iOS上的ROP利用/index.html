@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%882.13.51.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.45.39.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-14%20%E4%B8%8B%E5%8D%889.19.41.png">
-<meta property="og:updated_time" content="2018-05-14T13:51:17.312Z">
+<meta property="og:updated_time" content="2018-05-23T15:06:09.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS上的ROP利用">
 <meta name="twitter:description" content="由于之前没怎么接触过pwn，对于堆栈溢出更是一脸懵逼，所以只能部分的去复现了，三个实验参照iOS冰与火之歌第一章">
@@ -158,9 +158,13 @@
 <p>首先给x1赋值，为了让x1的值还是等于之前的值，所以要让<code>x0+0x98</code>就等于在内存中<code>x1</code>的值，所以之前的值加起来应该是十六进制<code>0x98</code>这么大，之后还有一个给<code>x0</code>赋值，也就是让<code>x0</code>之前的内存加起来为十六进制<code>0x70</code>，也就是意味：</p>
 <ol>
 <li>sizeof(pad1)+8=0x70</li>
-<li>sizeof(pad2+pad1)+8=0x98</li>
+<li>sizeof(pad2+pad1)+8+8=0x98</li>
 </ol>
 <p>所以结构体中的填充数组大小由此得来。 </p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>相信认真看完的人肯定会对那个缓存文件有疑问，今天了解到了相关知识之后顺手来填个坑，共享库缓存是dyld支持的另外一个机制，指的是一些库经过预先链接，然后保存在磁盘的一个文件中。在iOS中大部分的常用库都被缓存了，可以类比一下安卓中的<code>prelink-map</code>。</p>
+<p>虽然所有的二进制文件都依赖于<code>libSystem</code>这个库，但是这个库在文件系统上是找不到的，在系统上搜索完全就是浪费时间。为了节省库的加载时间，iOS的dyld采用了一个共享库预链接缓存。</p>
+<p>在OS X中，这个缓存在目录<code>/private/var/db/dyld</code>下，还有一个辅助性的map文件，但是在iOS中没有，iOS中的缓存目录在<code>/System/Library/Caches/com.apple.dyld</code>下。</p>
+<p>为了方便理解就拿上面的举个例子，我们要利用gadgets做ROP的时候要拿到这个<code>gadget</code>在内存中的地址，这个偏移的计算是通过对应框架的<code>ASLR</code>偏移加上那一段<code>gadget</code>在框架内的偏移。因为这个框架的加载过程是<code>dyld</code>从这个缓存文件中取到的，再进行<code>ASLR</code>。</p>
 
       
     </div>
