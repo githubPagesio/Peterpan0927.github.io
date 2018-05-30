@@ -40,8 +40,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -63,6 +63,105 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-格式化字符串漏洞小解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/30/格式化字符串漏洞小解/" class="article-date">
+  <time class="post-time" datetime="2018-05-30T12:18:40.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">30</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/30/格式化字符串漏洞小解/">格式化字符串漏洞小解</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/漏洞/">漏洞</a>
+  </div>
+
+          
+              
+  &nbsp; | &nbsp;
+  <div class="view-box">
+    <span id="/2018/05/30/格式化字符串漏洞小解/" class="leancloud_visitors" data-flag-title="格式化字符串漏洞小解">
+      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
+    </span>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="0x00介绍"><a class="markdownIt-Anchor" href="#0x00介绍"></a> 0x00.介绍</h1>
+<p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
+<p>此时我们可以发现我们并没有提供参数，那么程序会如何运行呢？程序照样会运行，会将栈上存储格式化字符串地址上面的三个变量分别解析为</p>
+<ol>
+<li>解析其地址对应的字符串</li>
+<li>解析其内容对应的整形值</li>
+<li>解析其内容对应的浮点值</li>
+</ol>
+<p>对于2，3来说倒还无妨，但是对于对于1来说，如果提供了一个不可访问地址，比如0，那么程序就会因此而崩溃。</p>
+<p>这基本就是格式化字符串漏洞的基本原理了。</p>
+<h1 id="0x01漏洞利用"><a class="markdownIt-Anchor" href="#0x01漏洞利用"></a> 0x01.漏洞利用</h1>
+<h2 id="泄露栈内存"><a class="markdownIt-Anchor" href="#泄露栈内存"></a> 泄露栈内存</h2>
+<h3 id="获取栈变量数值"><a class="markdownIt-Anchor" href="#获取栈变量数值"></a> 获取栈变量数值</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后我们通过命令编译一下，关掉栈保护和PIE：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -fno-stack-protector -no-pie -o leakmemory leakmemory.c</div></pre></td></tr></table></figure>
+<p>然后我们用gdb来追踪调试看看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">(gdb) b printf</div><div class="line">Breakpoint 1 at 0x8048330</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/ubuntu/leakmemory</div><div class="line">%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0x8048563 &quot;%08x.%08x.%08x.%s\n&quot;) at printf.c:28</div><div class="line">28	printf.c: No such file or directory.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">00000001.22222222.ffffffff.%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0xbffff570 &quot;%p.%p.%p&quot;) at printf.c:28</div><div class="line">28	in printf.c</div></pre></td></tr></table></figure>
+<p>这个时候我们看看栈上的值：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png" alt="泄漏栈内存"></p>
+<p>格式化字符串的地址<code>0xbffff570</code>，然后就是格式化字符串上面的三个变量的地址，正好就是打印出来的值，我们可以通过这种方式获得栈中的任意参数，通过<code>%n$x</code>，对于打印函数来说是第<code>n+1</code>个参数。</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png" alt="获得栈中第n个参数"></p>
+<p><strong>小技巧总结</strong></p>
+<blockquote>
+<ol>
+<li>利用%x来获取对应栈的内存，但建议使用%p，可以不用考虑位数的区别。</li>
+<li>利用%s来获取变量所对应地址的内容，只不过有零截断。</li>
+<li>利用%orderx来获取指定参数的值，利用%orders来获取指定参数对应地址的内容。</li>
+</ol>
+</blockquote>
+<h3 id="获取栈变量对应的字符串"><a class="markdownIt-Anchor" href="#获取栈变量对应的字符串"></a> 获取栈变量对应的字符串</h3>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
+<p>解析到<code>%s</code>的时候，就会以字符串的形式去解析栈上的第一个变量的值，而这个值就是格式化字符串本身的地址，所以<code>%s</code>就被解析成了<code>%speterpan</code>，剩下的就是输出<code>peterpan</code>了</p>
+<h2 id="泄漏任意地址内存"><a class="markdownIt-Anchor" href="#泄漏任意地址内存"></a> 泄漏任意地址内存</h2>
+<blockquote>
+<p>待更新</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/30/格式化字符串漏洞小解/" data-id="cjht56cxz0074ulbrdje1ih6j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞挖掘/">漏洞挖掘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-iOS上的ROP利用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -116,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/13/iOS上的ROP利用/" data-id="cjh6b5gz7004pz4brr1mk6v3f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/13/iOS上的ROP利用/" data-id="cjht56cx2004tulbrrolpu0ux" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞挖掘/">漏洞挖掘</a></li></ul>
@@ -182,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/对于LL1文法的算法分析/" data-id="cjh6b5h020075z4br0qp4lgqm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/对于LL1文法的算法分析/" data-id="cjht56cy00077ulbrpy8p6t6z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
@@ -248,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjh6b5gxx002hz4brbfjklvuw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjht56cvy002wulbr8z89gd54" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -314,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/01/iOS的降级限制/" data-id="cjh6b5gzi005fz4bru7nrj2l5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/01/iOS的降级限制/" data-id="cjht56cxa005culbrfja0lzoj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -380,7 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjh6b5h0i008hz4bruddzguk7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjht56cz500b2ulbrceuop5bi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -446,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/19/iOS加固之混淆-加密/" data-id="cjh6b5gzd0055z4brqacqpznp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/19/iOS加固之混淆-加密/" data-id="cjht56cx4004wulbrp6qtqt44" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -512,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/18/树形DP初步/" data-id="cjh6b5h04007bz4bre2sw0bmq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/18/树形DP初步/" data-id="cjht56cy1007aulbrv90s8ufg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
@@ -578,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/" data-id="cjh6b5gzv006fz4brtria0xl2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/17/反动态调试保护的实现和破解/" data-id="cjht56cxu006oulbr7tmo3bu6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
@@ -645,76 +744,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/黑书动态规划习题/" data-id="cjh6b5h0l008qz4brveb22uxa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/16/黑书动态规划习题/" data-id="cjht56cz600b5ulbrx94ynxgl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-重探OC之Type-Value篇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/15/重探OC之Type-Value篇/" class="article-date">
-  <time class="post-time" datetime="2018-04-15T00:42:58.000Z" itemprop="datePublished">
-    <span class="post-month">4月</span><br/>
-    <span class="post-day">15</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/重探OC之Type-Value篇/">重探OC之Type&amp;Value篇</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/OC中的类型本质/">OC中的类型本质</a>
-  </div>
-
-          
-              
-  &nbsp; | &nbsp;
-  <div class="view-box">
-    <span id="/2018/04/15/重探OC之Type-Value篇/" class="leancloud_visitors" data-flag-title="重探OC之Type&amp;Value篇">
-      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
-    </span>
-  </div>
-
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/04/15/重探OC之Type-Value篇/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/重探OC之Type-Value篇/" data-id="cjh6b5h0j008lz4bro06kjju9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
 
     </footer>
   </div>
@@ -765,8 +798,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
 

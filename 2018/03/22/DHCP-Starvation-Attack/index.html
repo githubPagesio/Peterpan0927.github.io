@@ -49,8 +49,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -116,7 +116,8 @@
       
         <p>我们在上网的时候需要IP地址，而这些IP地址是由DHCP服务器从IP池中为我们动态分配的，基于最小信任原则，我们信任DHCP为我们分配的地址和网关，那么当这个信任不再可靠会如何呢？</p>
 <a id="more"></a>
-<h1 id="DHCP请求过程"><a href="#DHCP请求过程" class="headerlink" title="DHCP请求过程"></a>DHCP请求过程</h1><p>我们首先从DHCP为我们的PC分配IP的过程开始说起吧，通过wire-shark抓包我们可以看到从client请求到分配的过程：</p>
+<h1 id="dhcp请求过程"><a class="markdownIt-Anchor" href="#dhcp请求过程"></a> DHCP请求过程</h1>
+<p>我们首先从DHCP为我们的PC分配IP的过程开始说起吧，通过wire-shark抓包我们可以看到从client请求到分配的过程：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8A%E5%8D%8811.52.23.png" alt="屏幕快照 2018-03-22 上午11.52.23.png"></p>
 <ol>
 <li>客户端发出一个DHCP Discovery的广播包来寻找DHCP server</li>
@@ -125,7 +126,8 @@
 <li>Server收到表示接受，于是Client就可以使用这个IP地址上网了</li>
 </ol>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8812.02.16.png" alt="屏幕快照 2018-03-22 下午12.02.16.png"></p>
-<h1 id="展开攻势"><a href="#展开攻势" class="headerlink" title="展开攻势"></a>展开攻势</h1><p>在确认了这个机制之后我们不禁联想到，我们能不能瞬间发出大量的DHCP Discovery请求，将原本的DHCP服务器的IP池请求完，然后自己就变成了一个坐拥IP池的大佬，然后自立门户，架设一个DHCP服务器，这个时候的网关和DNS因为都是由我们来指定，所以我们甚至可以伪造一个DNS服务器来进行钓鱼，或者在网关上开启抓包，获取大家的账号密码，这都是十分轻松的事情了。</p>
+<h1 id="展开攻势"><a class="markdownIt-Anchor" href="#展开攻势"></a> 展开攻势</h1>
+<p>在确认了这个机制之后我们不禁联想到，我们能不能瞬间发出大量的DHCP Discovery请求，将原本的DHCP服务器的IP池请求完，然后自己就变成了一个坐拥IP池的大佬，然后自立门户，架设一个DHCP服务器，这个时候的网关和DNS因为都是由我们来指定，所以我们甚至可以伪造一个DNS服务器来进行钓鱼，或者在网关上开启抓包，获取大家的账号密码，这都是十分轻松的事情了。</p>
 <p>首先我们需要一个烧入Kali系统的树莓派和Yersinia工具来配合我们展开攻势，因为在请求IP的时候是需要Mac地址的，DHCP服务器也不会那么傻，所以需要工具来伪造大量的Mac地址，然后将我们的树莓派偷偷插到交换机上面去：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8812.08.34.png" alt="屏幕快照 2018-03-22 下午12.08.34.png"></p>
 <p>然后通过SSH连接到树莓派，进入我们的<code>Yersinia</code>，应该是安装了XWindow的，然后我们先看看现在的DHCP的IP池是怎么样的：</p>
@@ -143,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjh6b5gx6001jz4br70klgebr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/DHCP-Starvation-Attack/" data-id="cjht56cuu001julbrze6cfby0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
@@ -211,8 +213,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
 

@@ -45,8 +45,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -110,30 +110,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.46.21.png" alt="">
 <p>Java是一门很悠久的语言了，虽然一直被黑，说它老气，庞大，臃肿，但是这种盲目的否认会忽视掉Java的很多优点，甚至许多的Python的程序员也加入了鄙视Java的队伍中，虽然气势上占据着上风，但是显然Python作为一个编程语言是完全无法和Java抗衡的。</p>
 <a id="more"></a>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>学习一门语言之前必定要有所了解，盲目跟风的人虽不知几何，但终有成就者甚少，其实就算Java中有很多的不好，其实许多的脚本程序员是没有资格去评判的，属于盲目的鄙视范畴。也许这种仇恨感是来自于长期的教学或者废话连篇的设计模式吧。其实Java已经可以解决大部分的问题，除非有着非常强大的性能需求和资源需求。</p>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>学习一门语言之前必定要有所了解，盲目跟风的人虽不知几何，但终有成就者甚少，其实就算Java中有很多的不好，其实许多的脚本程序员是没有资格去评判的，属于盲目的鄙视范畴。也许这种仇恨感是来自于长期的教学或者废话连篇的设计模式吧。其实Java已经可以解决大部分的问题，除非有着非常强大的性能需求和资源需求。</p>
 <p>所以有些黑Java其实是有些不着边际的，但是没办法，现在的人们就是喜欢人云亦云，看到大多数的人站在一起抵制一个对象的时候，就会不自觉地加入进去，仿佛获得了巨大的快感，在我看来，相较于Java，<code>JavaScript</code>这种东西不是会更加吸引仇恨么，虽然他们的社区更新换代的非常快，但是其实并没有什么根本性的改变，甚至还有越来越火的趋势，真是让鸡摸不着头脑:p</p>
-<h1 id="Java的基础特性"><a href="#Java的基础特性" class="headerlink" title="Java的基础特性"></a>Java的基础特性</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p> java的程序都是定义在类中，而类的形式其实就是一个字节码文件最终体现，java是一个强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间，在java中数据类型主要可以分为基本数据类型和引用数据类型，引用中存放的是指向真实数据的地址，类、接口、数组就属于引用数据类型。</p>
+<h1 id="java的基础特性"><a class="markdownIt-Anchor" href="#java的基础特性"></a> Java的基础特性</h1>
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
+<p>java的程序都是定义在类中，而类的形式其实就是一个字节码文件最终体现，java是一个强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间，在java中数据类型主要可以分为基本数据类型和引用数据类型，引用中存放的是指向真实数据的地址，类、接口、数组就属于引用数据类型。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/969969978B91E6105DD88EAFCA1FDC3D.png" alt=""></p>
-<h2 id="强转和溢出"><a href="#强转和溢出" class="headerlink" title="强转和溢出"></a>强转和溢出</h2><p>我们发现java中有一个不是在C/C++中出现过的基础类型<code>byte</code>，这个作为整型也就是说只能存储一个字节的整数，有符号整数最大只能到128，所以我们要注意不要超过数据类型的上限，下面演示一段基础的语法：</p>
+<h2 id="强转和溢出"><a class="markdownIt-Anchor" href="#强转和溢出"></a> 强转和溢出</h2>
+<p>我们发现java中有一个不是在C/C++中出现过的基础类型<code>byte</code>，这个作为整型也就是说只能存储一个字节的整数，有符号整数最大只能到128，所以我们要注意不要超过数据类型的上限，下面演示一段基础的语法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">add</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    <span class="keyword">byte</span> b = <span class="number">3</span>;</div><div class="line">    b = (<span class="keyword">byte</span>)(b+<span class="number">126</span>);</div><div class="line">    System.out.println(b);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们就会发现输出的结果是-127，这个倒是没什么，因为溢出了，但我发现一个问题，就是如果执行：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b = b + <span class="number">3</span></div></pre></td></tr></table></figure>
 <p>的时候就会报错，一开始的时候并没有明白它到底是什么意思：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[peterpan@panzhenpengdeMacBook-Air java ]$ javac add.java</div><div class="line">add.java:5: 错误: 不兼容的类型: 从int转换到byte可能会有损失</div><div class="line">    b = b + b;</div><div class="line">          ^</div><div class="line">1 个错误</div></pre></td></tr></table></figure>
 <p>想了一想之后这应该是java语言的一个特性，在进行加法运算的时候，会把操作数隐式的转换为int类型，所以最后赋值的时候会说转换导致精度丢失。</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>学过C/C++之后再学java总会纠结指针这个东西到底有没有呢，准确来说，应该是不能算是有的，虽然java中也有引用，但是其实和C++中的引用完全是两码事，首先说一下C++中的引用，它是同一块内存的不同名字，而java中的引用是指向了一个对象，而且这个引用本身也会占用内存，这样一来的话，与其说这个是引用，倒不如说比较像指针，但不同的是，这个引用无法指向一个基本变量，而且我们无法获取引用存的地址，我们同样也无法删除，所以说在java中的引用可以看作是一个阉割版本的指针。</p>
+<h2 id="引用"><a class="markdownIt-Anchor" href="#引用"></a> 引用</h2>
+<p>学过C/C<ins>之后再学java总会纠结指针这个东西到底有没有呢，准确来说，应该是不能算是有的，虽然java中也有引用，但是其实和C</ins>中的引用完全是两码事，首先说一下C++中的引用，它是同一块内存的不同名字，而java中的引用是指向了一个对象，而且这个引用本身也会占用内存，这样一来的话，与其说这个是引用，倒不如说比较像指针，但不同的是，这个引用无法指向一个基本变量，而且我们无法获取引用存的地址，我们同样也无法删除，所以说在java中的引用可以看作是一个阉割版本的指针。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object *a = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
 <p>在C++中，动态分配了内存空间之后将地址返回给指针变量</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object a = <span class="keyword">new</span> Object();</div></pre></td></tr></table></figure>
 <p>相较之下，也许我们可以叫它对象变量？反正不管怎么说，说java中有指针这种说法严格意义上来说是不准确的，所以我们还是保持着引用这种说法吧。</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>每个语言中都有函数的概念，基础的使用上其实都差不多，要关注的只是其中的底层运行是什么，我们在终端下运行java程序的时候，会执行下面几个步骤：</p>
+<h2 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h2>
+<p>每个语言中都有函数的概念，基础的使用上其实都差不多，要关注的只是其中的底层运行是什么，我们在终端下运行java程序的时候，会执行下面几个步骤：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#编译</div><div class="line">javac Demo.java --&gt; Demo.class</div><div class="line">#启动虚拟机运行java应用程序</div><div class="line">java Demo</div></pre></td></tr></table></figure>
 <p>在这之后的运行过程就是找到main函数，也就是入口，然后顺序执行，底层执行压栈。说到函数这里，也就不得不提一下重载，几乎面向对象的语言中都会有这个特性，只不过含义不同，在java中的重载指的是在一个类中允许存在一个以上的同名函数，只要他们的参数个数或者参数类型不同即可，重载的特点就是和返回值的类型无关，只会看参数列表，比如说我们做加法的参数不同就可以利用重载：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回两个整数和</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;<span class="keyword">return</span> x+y;&#125;</div><div class="line"><span class="comment">//返回三个整数和</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span>&#123;<span class="keyword">return</span> x+y+z;&#125;</div><div class="line"><span class="comment">//返回两个小数和</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>&#123;<span class="keyword">return</span> x+y;&#125;</div></pre></td></tr></table></figure>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>在Java中声明一个数组的形式与我们传统的学习有所不同，习惯C/C++的人会觉得略微有些怪异：</p>
+<h2 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h2>
+<p>在Java中声明一个数组的形式与我们传统的学习有所不同，习惯C/C++的人会觉得略微有些怪异：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//元素类型[] 数组名 = new 元素类型[元素个数或数组长度]</span></div><div class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</div><div class="line">arr[<span class="number">0</span>] = <span class="number">89</span>;</div><div class="line">arr = <span class="keyword">null</span>;</div></pre></td></tr></table></figure>
 <p>数组肯定需要开辟一段内存空间，其实在这个方面静态语言说起来都差不多，java的内存被划分为：</p>
 <ol>
@@ -147,24 +154,28 @@
 <p>在java中如果访问数组超过了下标的时候就会报一个空指针错误，在java中，引用型变量没有任何实体指向的时候，还在用其操作实体，就会发生异常。那么我们直接打印数组下标会发生什么后果呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">┌─[peterpan@panzhenpengdeMacBook-Air] - [~/java] - [2018-01-04 05:08:59]</div><div class="line">└─[0] &lt;&gt; java Array</div><div class="line">[I@7852e922</div></pre></td></tr></table></figure>
 <p>我们可以看到打印出来的是一串奇怪的字符，首先以<code>@</code>作为分界线，左边的代表的是类型，<code>[</code>代表数组，<code>I</code>代表是整型，分界右边的是数组实体的一个hash值，可以简单的理解为地址值（冲突会继续往下算）。</p>
-<h1 id="面向对象编程和类"><a href="#面向对象编程和类" class="headerlink" title="面向对象编程和类"></a>面向对象编程和类</h1><p>在接触了面向对象、函数、过程三种编程范式之后，对于OOP也有了一些具体的理解，在看了严千钧老师的编程导论之后，体会也更加具体形象。那么究竟我们在面向对象的过程中，什么是类，什么是对象，什么是抽象和具体，首先我们从哲学的领域作为入口来探讨一下这个问题。</p>
-<h2 id="从具体到抽象"><a href="#从具体到抽象" class="headerlink" title="从具体到抽象"></a>从具体到抽象</h2><p>古希腊的哲学家们把具有主观意识的自我称为主体(subject)，而被主体所观察和研究的一个个客观的物体称为对象或者客体。所以对象这个词其实具有很浓郁的哲学味道，在我们的日常生活中的一个朋友，一辆奔驰，一栋房子，这些我们通过视觉和触觉感受到的都是一个个具体的object，我们所生存的世界就是由对象所组成的。</p>
+<h1 id="面向对象编程和类"><a class="markdownIt-Anchor" href="#面向对象编程和类"></a> 面向对象编程和类</h1>
+<p>在接触了面向对象、函数、过程三种编程范式之后，对于OOP也有了一些具体的理解，在看了严千钧老师的编程导论之后，体会也更加具体形象。那么究竟我们在面向对象的过程中，什么是类，什么是对象，什么是抽象和具体，首先我们从哲学的领域作为入口来探讨一下这个问题。</p>
+<h2 id="从具体到抽象"><a class="markdownIt-Anchor" href="#从具体到抽象"></a> 从具体到抽象</h2>
+<p>古希腊的哲学家们把具有主观意识的自我称为主体(subject)，而被主体所观察和研究的一个个客观的物体称为对象或者客体。所以对象这个词其实具有很浓郁的哲学味道，在我们的日常生活中的一个朋友，一辆奔驰，一栋房子，这些我们通过视觉和触觉感受到的都是一个个具体的object，我们所生存的世界就是由对象所组成的。</p>
 <p>在我们变成的时候，抽象这个概念我们会经常碰到，一个抽象类，抽象数据类型。其实在我们的生活中，也有这种概念，比如说我们通过一个个具体的对象提炼出了人、车这样的概念，甚至于我们可以抽象出生活中完全没有的对应物———圆，几何中的圆在现实生活中没有一个对象可以完全的满足，我们使用的圆规同样也不能。</p>
 <p>客体和概念之间的关系使得早期的哲学家们十分的困惑。亚里士多德就曾经说过<code>事物总是个别存在的</code>，比如说我们对于人的概念指存在于想象中，真实的世界中没有人，只有这个高大的黑人John，那么会功夫的中国人Lee。因此抽象是无法作为单独的存在物的，抽象只能通过具体/个别从而存在。</p>
-<h2 id="颠倒的世界"><a href="#颠倒的世界" class="headerlink" title="颠倒的世界"></a>颠倒的世界</h2><p>在我们讨论面向对象技术的时候，其实和现实世界是相反的，我们遵循的是柏拉图的唯心论，在柏拉图的理解中，人、狗、计算机等具体事物理念、几何知识中的圆、运动是较为高级的理念，世界是由<code>理念世界</code>和<code>现象世界</code>组成的。理念的世界是真实的，脱离个别事物而独立存在的东西，而人类感官所感受到的现象世界只是理念世界的微弱影子。</p>
+<h2 id="颠倒的世界"><a class="markdownIt-Anchor" href="#颠倒的世界"></a> 颠倒的世界</h2>
+<p>在我们讨论面向对象技术的时候，其实和现实世界是相反的，我们遵循的是柏拉图的唯心论，在柏拉图的理解中，人、狗、计算机等具体事物理念、几何知识中的圆、运动是较为高级的理念，世界是由<code>理念世界</code>和<code>现象世界</code>组成的。理念的世界是真实的，脱离个别事物而独立存在的东西，而人类感官所感受到的现象世界只是理念世界的微弱影子。</p>
 <p>暂且不论这师徒两个在哲学领域的探讨，但只在软件领域上来说，柏拉图的理念论其实正好适用于软件的解域，因而可以将该观点改造成面向对象的基石性原理</p>
 <blockquote>
 <p>柏拉图法则：类的世界独立存在，对象的世界由类创建而来</p>
 </blockquote>
 <p>类先于对象存在，类可以独立存在，也就是说我们如果有一个Dog.class，它是可以静态的存在于硬盘上，而不需要关心外部的世界中到底有没有可以活动的狗。</p>
-<h1 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h1><p><a href="yinwang.org">王垠的博客（失效中）</a></p>
+<h1 id="参考来源"><a class="markdownIt-Anchor" href="#参考来源"></a> 参考来源</h1>
+<p><a href="yinwang.org">王垠的博客（失效中）</a></p>
 <p><a href="http://blog.csdn.net/yqj2065/article/details/46825467" target="_blank" rel="external">严千钧-编程导论</a></p>
 <p><a href="">毕向东JAVA</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/29/java学习笔记-一/" data-id="cjh6b5gzq005zz4br1xbe49s6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/29/java学习笔记-一/" data-id="cjht56cxm0062ulbr7e5gv438" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -232,8 +243,8 @@
     <h2 class="author">Peter pan</h2>
     <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>92</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>102</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>93</strong><br>分类</div></a>
       <a href="/tags"><div><strong>15</strong><br>标签</div></a>
     </div>
 
