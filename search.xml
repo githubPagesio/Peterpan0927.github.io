@@ -5,8 +5,9 @@
     <entry>
       <title><![CDATA[格式化字符串漏洞小解]]></title>
       <url>/2018/05/30/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%B0%8F%E8%A7%A3/</url>
-      <content type="html"><![CDATA[<h1 id="0x00介绍"><a class="markdownIt-Anchor" href="#0x00介绍"></a> 0x00.介绍</h1>
-<p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
+      <content type="html"><![CDATA[<p>漏洞挖掘知识填坑和MOXil学习同步进行ing…</p>
+<a id="more"></a>
+<h1 id="0x00-介绍"><a href="#0x00-介绍" class="headerlink" title="0x00.介绍"></a>0x00.介绍</h1><p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
 <p>此时我们可以发现我们并没有提供参数，那么程序会如何运行呢？程序照样会运行，会将栈上存储格式化字符串地址上面的三个变量分别解析为</p>
 <ol>
@@ -16,10 +17,7 @@
 </ol>
 <p>对于2，3来说倒还无妨，但是对于对于1来说，如果提供了一个不可访问地址，比如0，那么程序就会因此而崩溃。</p>
 <p>这基本就是格式化字符串漏洞的基本原理了。</p>
-<h1 id="0x01漏洞利用"><a class="markdownIt-Anchor" href="#0x01漏洞利用"></a> 0x01.漏洞利用</h1>
-<h2 id="泄露栈内存"><a class="markdownIt-Anchor" href="#泄露栈内存"></a> 泄露栈内存</h2>
-<h3 id="获取栈变量数值"><a class="markdownIt-Anchor" href="#获取栈变量数值"></a> 获取栈变量数值</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="0x01-漏洞利用"><a href="#0x01-漏洞利用" class="headerlink" title="0x01.漏洞利用"></a>0x01.漏洞利用</h1><h2 id="泄露栈内存"><a href="#泄露栈内存" class="headerlink" title="泄露栈内存"></a>泄露栈内存</h2><h3 id="获取栈变量数值"><a href="#获取栈变量数值" class="headerlink" title="获取栈变量数值"></a>获取栈变量数值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们通过命令编译一下，关掉栈保护和PIE：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -fno-stack-protector -no-pie -o leakmemory leakmemory.c</div></pre></td></tr></table></figure>
 <p>然后我们用gdb来追踪调试看看：</p>
@@ -33,14 +31,12 @@
 <ol>
 <li>利用%x来获取对应栈的内存，但建议使用%p，可以不用考虑位数的区别。</li>
 <li>利用%s来获取变量所对应地址的内容，只不过有零截断。</li>
-<li>利用%orderx来获取指定参数的值，利用%orders来获取指定参数对应地址的内容。</li>
+<li>利用%order$x来获取指定参数的值，利用%order$s来获取指定参数对应地址的内容。</li>
 </ol>
 </blockquote>
-<h3 id="获取栈变量对应的字符串"><a class="markdownIt-Anchor" href="#获取栈变量对应的字符串"></a> 获取栈变量对应的字符串</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
+<h3 id="获取栈变量对应的字符串"><a href="#获取栈变量对应的字符串" class="headerlink" title="获取栈变量对应的字符串"></a>获取栈变量对应的字符串</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
 <p>解析到<code>%s</code>的时候，就会以字符串的形式去解析栈上的第一个变量的值，而这个值就是格式化字符串本身的地址，所以<code>%s</code>就被解析成了<code>%speterpan</code>，剩下的就是输出<code>peterpan</code>了</p>
-<h2 id="泄漏任意地址内存"><a class="markdownIt-Anchor" href="#泄漏任意地址内存"></a> 泄漏任意地址内存</h2>
-<blockquote>
+<h2 id="泄漏任意地址内存"><a href="#泄漏任意地址内存" class="headerlink" title="泄漏任意地址内存"></a>泄漏任意地址内存</h2><blockquote>
 <p>待更新</p>
 </blockquote>
 ]]></content>

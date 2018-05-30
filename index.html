@@ -107,45 +107,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="0x00介绍"><a class="markdownIt-Anchor" href="#0x00介绍"></a> 0x00.介绍</h1>
-<p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
-<p>此时我们可以发现我们并没有提供参数，那么程序会如何运行呢？程序照样会运行，会将栈上存储格式化字符串地址上面的三个变量分别解析为</p>
-<ol>
-<li>解析其地址对应的字符串</li>
-<li>解析其内容对应的整形值</li>
-<li>解析其内容对应的浮点值</li>
-</ol>
-<p>对于2，3来说倒还无妨，但是对于对于1来说，如果提供了一个不可访问地址，比如0，那么程序就会因此而崩溃。</p>
-<p>这基本就是格式化字符串漏洞的基本原理了。</p>
-<h1 id="0x01漏洞利用"><a class="markdownIt-Anchor" href="#0x01漏洞利用"></a> 0x01.漏洞利用</h1>
-<h2 id="泄露栈内存"><a class="markdownIt-Anchor" href="#泄露栈内存"></a> 泄露栈内存</h2>
-<h3 id="获取栈变量数值"><a class="markdownIt-Anchor" href="#获取栈变量数值"></a> 获取栈变量数值</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后我们通过命令编译一下，关掉栈保护和PIE：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -fno-stack-protector -no-pie -o leakmemory leakmemory.c</div></pre></td></tr></table></figure>
-<p>然后我们用gdb来追踪调试看看：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">(gdb) b printf</div><div class="line">Breakpoint 1 at 0x8048330</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/ubuntu/leakmemory</div><div class="line">%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0x8048563 &quot;%08x.%08x.%08x.%s\n&quot;) at printf.c:28</div><div class="line">28	printf.c: No such file or directory.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">00000001.22222222.ffffffff.%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0xbffff570 &quot;%p.%p.%p&quot;) at printf.c:28</div><div class="line">28	in printf.c</div></pre></td></tr></table></figure>
-<p>这个时候我们看看栈上的值：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png" alt="泄漏栈内存"></p>
-<p>格式化字符串的地址<code>0xbffff570</code>，然后就是格式化字符串上面的三个变量的地址，正好就是打印出来的值，我们可以通过这种方式获得栈中的任意参数，通过<code>%n$x</code>，对于打印函数来说是第<code>n+1</code>个参数。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png" alt="获得栈中第n个参数"></p>
-<p><strong>小技巧总结</strong></p>
-<blockquote>
-<ol>
-<li>利用%x来获取对应栈的内存，但建议使用%p，可以不用考虑位数的区别。</li>
-<li>利用%s来获取变量所对应地址的内容，只不过有零截断。</li>
-<li>利用%orderx来获取指定参数的值，利用%orders来获取指定参数对应地址的内容。</li>
-</ol>
-</blockquote>
-<h3 id="获取栈变量对应的字符串"><a class="markdownIt-Anchor" href="#获取栈变量对应的字符串"></a> 获取栈变量对应的字符串</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
-<p>解析到<code>%s</code>的时候，就会以字符串的形式去解析栈上的第一个变量的值，而这个值就是格式化字符串本身的地址，所以<code>%s</code>就被解析成了<code>%speterpan</code>，剩下的就是输出<code>peterpan</code>了</p>
-<h2 id="泄漏任意地址内存"><a class="markdownIt-Anchor" href="#泄漏任意地址内存"></a> 泄漏任意地址内存</h2>
-<blockquote>
-<p>待更新</p>
-</blockquote>
-
+        <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/05/30/格式化字符串漏洞小解/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
