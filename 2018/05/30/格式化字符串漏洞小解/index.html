@@ -5,19 +5,20 @@
   
   <title>格式化字符串漏洞小解 | Peterpan&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…">
+  <meta name="description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
 <meta property="og:type" content="article">
 <meta property="og:title" content="格式化字符串漏洞小解">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/格式化字符串漏洞小解/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…">
+<meta property="og:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png">
-<meta property="og:updated_time" content="2018-05-30T13:27:16.578Z">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png">
+<meta property="og:updated_time" content="2018-06-02T15:45:35.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="格式化字符串漏洞小解">
-<meta name="twitter:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…">
+<meta name="twitter:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
 <meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png">
   
     <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
@@ -110,7 +111,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…</p>
+        <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张</p>
 <a id="more"></a>
 <h1 id="0x00-介绍"><a href="#0x00-介绍" class="headerlink" title="0x00.介绍"></a>0x00.介绍</h1><p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
@@ -144,11 +145,13 @@
 <h2 id="泄漏任意地址内存"><a href="#泄漏任意地址内存" class="headerlink" title="泄漏任意地址内存"></a>泄漏任意地址内存</h2><blockquote>
 <p>待更新</p>
 </blockquote>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>在intel平台上XNU对于<code>trap</code>和<code>interrupt</code>的描述</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png" alt="公共分发器"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/30/格式化字符串漏洞小解/" data-id="cjht56cxz0074ulbrdje1ih6j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/30/格式化字符串漏洞小解/" data-id="cjhxkkdvg0074wkbr85quuuog" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞挖掘/">漏洞挖掘</a></li></ul>

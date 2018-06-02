@@ -116,14 +116,12 @@
       
         <p>第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh</p>
 <a id="more"></a>
-<h1 id="0x00应用介绍"><a class="markdownIt-Anchor" href="#0x00应用介绍"></a> 0x00.应用介绍</h1>
-<p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
+<h1 id="0x00-应用介绍"><a href="#0x00-应用介绍" class="headerlink" title="0x00.应用介绍"></a>0x00.应用介绍</h1><p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png" alt="Yummy FTP"></p>
 <p>Yummy FTP 是一款着力于速度、可靠性和效率的 FTP + SFTP + FTPS 文件传输客户端。其结合并改进了其它文件传输方案中最好的功能，添加了大量独特的强大功能，以一个高度可调谐的 FTP 引擎驱动。使它成为一款急速、灵活并且完全可靠的 macOS 下的文件传输工具。</p>
 <p>它具有非常漂亮与符合直觉的高清用户界面，像 Finder 一样的 FTP 浏览器、工具栏和随处可用的拖拽。 无论是要传输几个或者上千个文件，还是计划自动备份，或执行网站维护，Yummy FTP 都能轻松处理。如果您觉得 Yummy FTP  不错，不妨支持一下正版哦！</p>
 <p>之前用了一段时间，感觉不错，最近打开的时候突然发现30天试用已经过了，哇，这种事情，当然搞它一波，网上流传的方法是用机器算它的序列号，这种方法感觉过于暴力，我觉得不行，所以干脆逆向，直接把提示的那个窗口给干掉就好了，这样就不会触发后续的事件了。</p>
-<h1 id="0x01逆向分析"><a class="markdownIt-Anchor" href="#0x01逆向分析"></a> 0x01.逆向分析</h1>
-<p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
+<h1 id="0x01-逆向分析"><a href="#0x01-逆向分析" class="headerlink" title="0x01.逆向分析"></a>0x01.逆向分析</h1><p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png" alt="屏幕快照 2018-04-21 下午11.18.33.png"></p>
 <p>这一步有点卡手，然后看看其他的，发现都是<code>sub_xxxx</code>什么的，而且还巨多，看完眼睛都瞎掉，想了想之后决定用字符串查找，因为这个是序列号验证的模式，我们就通过序列号英文来查找：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png" alt="屏幕快照 2018-04-21 下午11.25.03.png"></p>
@@ -144,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjht56cz500b2ulbrceuop5bi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/记一次成功的Mac逆向/" data-id="cjhxkkdwz00b7wkbrmqzwtn45" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>

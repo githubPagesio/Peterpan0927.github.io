@@ -117,8 +117,7 @@
       
         <p>实践出真知，让我自己动手去验证动态库加载的特性吧</p>
 <a id="more"></a>
-<h1 id="0x00一个有趣的现象"><a class="markdownIt-Anchor" href="#0x00一个有趣的现象"></a> 0x00.一个有趣的现象</h1>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"Hello world!\n"</span>);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"2Hello world\n"</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="0x00-一个有趣的现象"><a href="#0x00-一个有趣的现象" class="headerlink" title="0x00.一个有趣的现象"></a>0x00.一个有趣的现象</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"Hello world!\n"</span>);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"2Hello world\n"</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>首先通过IDA找到我们调用打印函数的地址，然后在对应的地方下断点：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.09.38.png" alt="IDA分析"></p>
 <p>接下来我们在命令行中打开lldb，对可执行文件进行分析：</p>
@@ -134,8 +133,7 @@
 <p>但是这个其实不是真正的地址，通过第二次调用<code>printf</code>函数的时候我们可以发现，值居然是不同的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%8812.21.11.png" alt="第二次printf"></p>
 <p>那么为什么两次调用相同的函数最后实际上是跳转到不同的代码片段呢？这就和我们的延迟绑定有关了，也就是接下来介绍的内容，为什么会有这样的设定。</p>
-<h1 id="0x01lazy-binding"><a class="markdownIt-Anchor" href="#0x01lazy-binding"></a> 0x01.lazy-binding</h1>
-<p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
+<h1 id="0x01-lazy-binding"><a href="#0x01-lazy-binding" class="headerlink" title="0x01.lazy-binding"></a>0x01.lazy-binding</h1><p>虽然我们的动态链接比静态链接要灵活一些，但是代价就是性能上要略逊一筹。</p>
 <p>造成这个的主要原因就是动态链接对于全局和静态数据要进行复杂的GOT（全局偏移表）定位，然后间接寻址，模块间的调用也是如此，而且因为这个链接的过程是动态的，动态链接器会寻找并转载所需要的对象，然后进行符号查找和地址重定位，这个技术的实现步骤是：</p>
 <ol>
 <li>建立一个GOT.plt表，该表存放全局函数的实际地址，但在一开始的时候，里面存放的只是一个跳转</li>
@@ -147,9 +145,7 @@
 <p>上述的是ELF文件的延迟绑定实现，在Mach-O中也差不多，只是具体的实现不同，原理是一样的，在Mach-O中，是通过<code>__stub_helper</code>来进行延迟绑定的，也可以通过MachOView来观察：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%881.57.48.png" alt="_stub_helper"></p>
 <p>同时我们还可以在延迟绑定的info中看到<code>_printf</code>，所以这也解释了上面为什么两次调用相同的函数，跳转的地址却不一样，因为一开始根本计算没有真实函数地址，只是一个跳转罢了。</p>
-<h1 id="0x03补充参考博客"><a class="markdownIt-Anchor" href="#0x03补充参考博客"></a> 0x03.补充&amp;参考博客</h1>
-<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
-<p>之前在重探OC篇中提到过在OC中的方法的本质就是发送消息，变成了<code>objc_msgSend</code>,在这里进行补充的就是在二进制下的方法查找过程，更加方便对于OC的底层理解：</p>
+<h1 id="0x03-补充-amp-参考博客"><a href="#0x03-补充-amp-参考博客" class="headerlink" title="0x03.补充&amp;参考博客"></a>0x03.补充&amp;参考博客</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>之前在重探OC篇中提到过在OC中的方法的本质就是发送消息，变成了<code>objc_msgSend</code>,在这里进行补充的就是在二进制下的方法查找过程，更加方便对于OC的底层理解：</p>
 <p>我们都知道在OC中的函数分<code>+</code>和<code>-</code>开头的，一个是类方法，一个是实例方法，所以+号函数是基类调用的，-号函数是实例类调用的。我们知道发送消息的时候是根据对象找到它的类，然后在方法列表中一层层的寻找有没有对应的方法，找到之后再根据对应的IMP去执行，那么在二进制下，我们的列表长什么样子呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">  </div><div class="line">    [CMyClass testClassFun ]; // +号函数</div><div class="line"></div><div class="line">        // 后面都是-号函数</div><div class="line">    CMyClass *pTest = [[CMyClass alloc] init1];</div><div class="line">    [pTest Hello:4];</div><div class="line">    [pTest World:&quot;Test&quot; Num:5];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在lldb中进行调试，在<code>pTest</code>执行<code>Hello:</code>的地方打个断点，查看寄存器，r0寄存器中的值是我们的对象指针pTest：</p>
@@ -157,8 +153,7 @@
 <p>如果是我们第一次去调用方法的时候，还没有被缓存，我们的函数结构体数组中的函数名为空，最后会进入<code>__objc_msgSend_uncached</code>，查找并缓存函数地址。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.25.27.png" alt="obj_msgSend实现"></p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-02%20%E4%B8%8B%E5%8D%884.26.52.png" alt="objc_msgSend缓存"></p>
-<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
-<ul>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
 <li><a href="https://bbs.pediy.com/thread-208455.htm" target="_blank" rel="external">看雪-动态链接的简单分析</a></li>
 <li><a href="http://yunnigu.dropsec.xyz/2017/02/24/%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" target="_blank" rel="external">延迟绑定技术原理</a></li>
 <li><a href="https://bbs.pediy.cpm/thread-199803.htm" target="_blank" rel="external">对于objc_msgSend的探究</a></li>
@@ -167,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjht56cvy002wulbr8z89gd54" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/02/Mach-O中的lazy-binding探究/" data-id="cjhxkkdt8002mwkbrxyn9cd2z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>

@@ -113,8 +113,7 @@
       
         <p>如果在逆向基本上手之后我们的步骤应该就是UI分析，头文件分析，动态分析，静态分析，最后去写tweak这样的一个步骤，但是随着这种破解技术的进步，基本反调试，壳，加密和混淆已经成了一个安全的App的标配，所以我们需要去了解这些技术的实现并想办法破解。</p>
 <a id="more"></a>
-<h1 id="不加密又如何"><a class="markdownIt-Anchor" href="#不加密又如何"></a> 不加密？又如何</h1>
-<p>这里拿360涅槃团队的一个技术博客上的一个关于进程通信安全的作为例子，比如我们现在手机上有一个腾讯的手机管家，我们的隐私短信，隐私照片，隐私App都是通过<code>dylib</code>实现的，我们在输入密码的时候如果判断正确就对对应的<code>dylib</code>发送消息，这里用到的IPC手段就是消息通知，那么如果我们能够找到发送的消息内容，那么就意味着我们可以编写<code>tweak</code>在任意的一个应用中发送消息来破解，首先我们看看转换为伪代码的消息通知部分：</p>
+<h1 id="不加密？又如何"><a href="#不加密？又如何" class="headerlink" title="不加密？又如何"></a>不加密？又如何</h1><p>这里拿360涅槃团队的一个技术博客上的一个关于进程通信安全的作为例子，比如我们现在手机上有一个腾讯的手机管家，我们的隐私短信，隐私照片，隐私App都是通过<code>dylib</code>实现的，我们在输入密码的时候如果判断正确就对对应的<code>dylib</code>发送消息，这里用到的IPC手段就是消息通知，那么如果我们能够找到发送的消息内容，那么就意味着我们可以编写<code>tweak</code>在任意的一个应用中发送消息来破解，首先我们看看转换为伪代码的消息通知部分：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8B%E5%8D%881.54.20.png" alt="屏幕快照 2018-04-19 下午1.54.20.png"></p>
 <p>那么我们直接用theos创建一个最简单的应用，在里面加上：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;notify.h&gt;</span></span></div><div class="line">notify_post(<span class="string">"DarwinPrivacyManagerUnHiddingNotification"</span>);</div></pre></td></tr></table></figure>
@@ -122,22 +121,19 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8B%E5%8D%881.54.20.png" alt="屏幕快照 2018-04-19 下午1.54.20.png"></p>
 <p>从这里就可以看出来字符串加密有多么的重要，这就可以让那些以为找到宝藏的大多数hacker们在此折戟沉沙。</p>
 <p><code>Distributed Notifications</code>为系统级通讯，接收端监听消息无法判断消息来源是否合法。测试了其他进程通讯如Mach Message，XPC，由于所有进程通讯方式均会创建服务名或端口等唯一标示符号，而发送消息函数固定，提取唯一标识符后均可伪造消息。所以在越狱环境下所有进程通讯都是不安全的。</p>
-<h1 id="加密或者方法名混淆"><a class="markdownIt-Anchor" href="#加密或者方法名混淆"></a> 加密或者方法名混淆？</h1>
-<p>逆向分析人员在砸壳之后有一条重要的线索就是被硬编码的明文字符串，然后直接通过一层层的引用关系找到当前模块的攻破关键点所在，所以对于这一步的方法，需要做的就是对硬编码的明文进行加密或者混淆。</p>
+<h1 id="加密或者方法名混淆？"><a href="#加密或者方法名混淆？" class="headerlink" title="加密或者方法名混淆？"></a>加密或者方法名混淆？</h1><p>逆向分析人员在砸壳之后有一条重要的线索就是被硬编码的明文字符串，然后直接通过一层层的引用关系找到当前模块的攻破关键点所在，所以对于这一步的方法，需要做的就是对硬编码的明文进行加密或者混淆。</p>
 <p>我们可以使用这个<a href="https://github.com/pjebs/Obfuscator-iOS" target="_blank" rel="external">开源项目</a>来做加密</p>
 <p>需要加密的部分就是特殊字符串提示信息，网络接口等方面，插入加密和解密算法的地方就是正向开发者所做的事情了，除了字符串加密之外，我们甚至可以在头文件分析的时候就先防一手。</p>
 <p>如果二进制文件中含有<code>swift</code>的二进制文件，那么我们直接用<code>class-dump</code>可能就会崩溃掉，在越狱开源社区解决这个问题之前，这也是一种加固的手段。</p>
 <p>除此之外我们还可以混淆我们的类名和方法名，逆向了之后也不知道我们的方法到底是用作什么的，这个的常见方法有用宏定义去替换的，或者简单一点的直接用脚本加入工程中去替换，把我们的混淆头文件加到pch文件中，至于具体的操作在网上搜一搜应该就会有了，就不当搬运工了，看看效果就知道：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8B%E5%8D%883.06.38.png" alt="屏幕快照 2018-04-19 下午3.06.38.png"></p>
-<h1 id="程序代码中的指令混淆"><a class="markdownIt-Anchor" href="#程序代码中的指令混淆"></a> 程序代码中的指令混淆？</h1>
-<p>上面的方法都非常的基础，对于那些强大的逆向工程师来说，把你的文件拖进IDA或者Hopper里面一看，你的代码逻辑就已经出来了，所以我们可以基于<code>clang</code>做中间层的混淆处理，比如说<a href="https://legacy.gitbook.com/book/naville/hikaricn" target="_blank" rel="external">Hikari</a>，但是这个因为之前和看雪的冲突貌似已经不再更新，只有商业版使用了。</p>
+<h1 id="程序代码中的指令混淆？"><a href="#程序代码中的指令混淆？" class="headerlink" title="程序代码中的指令混淆？"></a>程序代码中的指令混淆？</h1><p>上面的方法都非常的基础，对于那些强大的逆向工程师来说，把你的文件拖进IDA或者Hopper里面一看，你的代码逻辑就已经出来了，所以我们可以基于<code>clang</code>做中间层的混淆处理，比如说<a href="https://legacy.gitbook.com/book/naville/hikaricn" target="_blank" rel="external">Hikari</a>，但是这个因为之前和看雪的冲突貌似已经不再更新，只有商业版使用了。</p>
 <p>本来一个简单的部分代码逻辑可以变得非常的复杂，至于怎么复杂看图体会一下吧：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-19%20%E4%B8%8B%E5%8D%883.01.53.png" alt="屏幕快照 2018-04-19 下午3.01.53.png"></p>
 <p>在实现代码变形，膨胀，逻辑混淆之后，原本清楚的逻辑就像一个油腻的中年发福男子让人无法直视。</p>
 <p>再说回Hikari这个项目，其中做到了反<code>class-dump</code>、字符串加密、伪控制流等功能，总而言之还是非常好用的(看评论)。</p>
 <p>说个题外话就是，现在拥有开源精神的越来越少了，总想着学点微末伎俩就想着拿去变现，最后搞得真正有技术的开源贡献者都会被这种臭虫恶心到…不过除了站在道德上去谴责也没什么别的方式了</p>
-<h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
-<ul>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
 <li><a href="http://nirvan.360.cn/blog/?p=723" target="_blank" rel="external">360Nirvan</a></li>
 <li><a href="https://my.oschina.net/u/3535066/blog/919262" target="_blank" rel="external">几维盾牌</a></li>
 </ul>
@@ -145,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/19/iOS加固之混淆-加密/" data-id="cjht56cx4004wulbrp6qtqt44" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/19/iOS加固之混淆-加密/" data-id="cjhxkkdus005ewkbrj9bvle2l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Re/">Re</a></li></ul>
