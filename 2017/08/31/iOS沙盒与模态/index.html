@@ -1,119 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>iOS沙盒与模态 | Peterpan&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS沙盒与模态">
-<meta property="og:url" content="http://yoursite.com/2017/08/31/iOS沙盒与模态/index.html">
-<meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/891D21A5B819BE4CF04B2C9C607C0950.jpg">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/FCEFA1AAE0F65D78D5706A12306E39A6.jpg">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/30299C863BC1649EE7158C41B0B2E559.jpg">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-17%20%E4%B8%8B%E5%8D%885.24.16.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-17%20%E4%B8%8B%E5%8D%885.25.32.png">
-<meta property="og:updated_time" content="2018-05-17T09:26:32.904Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS沙盒与模态">
-<meta name="twitter:description" content="ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~">
-<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-29%20%E4%B8%8B%E5%8D%8811.23.23.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Peterpan&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/p1.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
-  
-
+    <meta charset="utf-8">
+    
+    <link rel="canonical" href="www.peterpan980927.cn/2017/08/31/iOS沙盒与模态/">
+    
+    
+    <title>iOS沙盒与模态 | Peterpan&#39;s Blog | Mind over muscle.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="iOS开发">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
+            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
 </head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
-    <h2 class="author">Peter pan</h2>
-    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>103</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>94</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/miao_icon.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Peter pan</h5>
+          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/Peterpan0927" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
     </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                HOME
+              </a>
+            </li>
         
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                TAGS
+              </a>
+            </li>
         
-    </ul>
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                ARCHIVES
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                ABOUT
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Peterpan0927" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>iOS沙盒与模态</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">iOS沙盒与模态</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-31T07:49:54.000Z" itemprop="datePublished" class="page-time">
+  2017-08-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
 </div>
 
-        <section id="main"><article id="post-iOS沙盒与模态" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/31/iOS沙盒与模态/" class="article-date">
-  <time class="post-time" datetime="2017-08-31T07:49:54.000Z" itemprop="datePublished">
-    <span class="post-month">8月</span><br/>
-    <span class="post-day">31</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS沙盒与模态
-    </h1>
-  
 
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a>
-  </div>
+<div class="container body-wrap">
+    <article id="post-iOS沙盒与模态"
+  class="post-article article-type-post fade" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">iOS沙盒与模态</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-31 15:49:54" datetime="2017-08-31T07:49:54.000Z"  itemprop="datePublished">2017-08-31</time>
 
-          
-              
-  &nbsp; | &nbsp;
-  <div class="view-box">
-    <span id="/2017/08/31/iOS沙盒与模态/" class="leancloud_visitors" data-flag-title="iOS沙盒与模态">
-      &nbsp;阅读次数<span class="leancloud-visitors-count"></span>
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/沙盒结构-数据持久化-模态控制器/">沙盒结构 数据持久化 模态控制器</a></li></ul>
+
+
+
+            
+	<span id="/2017/08/31/iOS沙盒与模态/" class="leancloud_visitors" data-flag-title="iOS沙盒与模态" title="iOS沙盒与模态">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+    <span>
+        <i class="icon icon-comment-o"></i>
+        <a href="/2017/08/31/iOS沙盒与模态/#comment">
+            <span class="valine-comment-count" data-xid="/2017/08/31/iOS沙盒与模态/"></span>
+        </a>
     </span>
-  </div>
 
 
-          
+            
         </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~<br><a id="more"></a></p>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~<br><a id="more"></a></p>
 <h1 id="iOS沙盒与模态"><a href="#iOS沙盒与模态" class="headerlink" title="iOS沙盒与模态"></a>iOS沙盒与模态</h1><h2 id="iOS应用存储数据常用方式"><a href="#iOS应用存储数据常用方式" class="headerlink" title="iOS应用存储数据常用方式"></a>iOS应用存储数据常用方式</h2><ul>
 <li><p>XML属性列表（plist）归档</p>
 </li>
@@ -212,308 +283,307 @@
 </ol>
 <p>参考博客<a href="http://turingh.github.io/2016/04/18/apple%E6%B2%99%E7%9B%92%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_blank" rel="external">mrh</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/31/iOS沙盒与模态/" data-id="cji1kbvv6005cnzbrgwdxjkgc" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
+        </div>
+        
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-17T09:26:32.904Z" itemprop="dateUpdated">2018-05-17 17:26:32</time>
+</span><br>
 
+
+        
+        转载注明出处，原文地址：<a href="/2017/08/31/iOS沙盒与模态/" target="_blank" rel="external">http://yoursite.com/2017/08/31/iOS沙盒与模态/</a>
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/miao_icon.jpg" alt="Peter pan">
+            Peter pan
+        </a>
     </footer>
-  </div>
-  
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
+
+            <div class="page-share-wrap">
     
-<nav id="article-nav">
-  
-    <a href="/2017/09/03/TCP-IP-三/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
-      <div class="article-nav-title">
-        
-          TCP/IP(三)
-        
-      </div>
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&source=ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
     </a>
+</div>
+
+        </div>
+        
+            
+    <div id="comment"></div>
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
   
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/03/TCP-IP-三/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">TCP/IP(三)</h4>
+      </a>
+    </div>
   
-    <a href="/2017/08/28/Linux运维学习Day6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">Linux运维学习Day6</div>
-    </a>
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/28/Linux运维学习Day6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux运维学习Day6</h4>
+      </a>
+    </div>
   
 </nav>
 
-  
+
 </article>
 
-
-
-</section>
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        我们一起来让这个世界有趣一点
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
         
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Peterpan&#39;s Blog</h1>
-    <h2 class="blog-subtitle">Mind over muscle.</h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-22%20%E4%B8%8B%E5%8D%8811.42.23.png">
-    <h2 class="author">Peter pan</h2>
-    <h3 class="description">the mark of an educated mind is to be able to entertain a thought without accepting it</h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>103</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>94</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>15</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="http://github.com/Peterpan0927" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>友情链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://www.imbajin.com" target="_blank" title="Jin">
-          Jin
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://yinwang0.wordpress.com" target="_blank" title="Yinwang(English)">
-          Yinwang(English)
-        </a>
-      
-        <a class="hvr-bounce-in" href="http://www.yinwang.org" target="_blank" title="Yinwang(Chinese)">
-          Yinwang(Chinese)
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://gloxec.github.io/" target="_blank" title="gloxec">
-          gloxec
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2017 - 2018 Peter pan<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-  <script src="/plugin/galmenu/GalMenu.js"></script>
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/about" title="" class="menuItem">音乐</a>
-          
-            <a href="/archives" title="" class="menuItem">归档</a>
-          
-            <a href="https://github.com/Peterpan0927" title="" class="menuItem">Github</a>
-          
-            <a href="ftp://118.89.38.168" title="" class="menuItem">FTP</a>
-          
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
         </div>
         
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wc.png" data-alipay="/img/123.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
         
-      </div> 
+    </div>
 </div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
+
+    
+
+</div>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS沙盒与模态"><span class="post-toc-number">1.</span> <span class="post-toc-text">iOS沙盒与模态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#iOS应用存储数据常用方式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">iOS应用存储数据常用方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用沙盒结构分析"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">应用沙盒结构分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#沙盒目录结构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">沙盒目录结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打开应用沙盒"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">打开应用沙盒</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#沙盒机制的好处"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">沙盒机制的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取路径"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">获取路径</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-沙盒路径"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">1.沙盒路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Documents路径"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">2.Documents路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Tmp路径"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">3.Tmp路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Library路径"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">4.Library路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-应用程序包路径"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">5.应用程序包路径</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#plist文件存储"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">plist文件存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#归档和反归档"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">归档和反归档</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UITabBarController"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">UITabBarController</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#纯代码创建方式"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">纯代码创建方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过Storyboard加载tabBarController"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">通过Storyboard加载tabBarController</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#App主流框架结构"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">App主流框架结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模态出控制器"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">模态出控制器</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#补充"><span class="post-toc-number">2.</span> <span class="post-toc-text">补充</span></a></li></ol>
+        </nav>
+    </aside>
+    
+        <footer class="footer">
+    
+    <div class="top">
+        
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.coding.net" target="_blank">coding</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                Peter pan &copy; 2017 - 2018
+            </span>
+        		
+           	
+            
+            
+            <span>
+	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
+            </span>
+            
+            
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/31/iOS沙盒与模态/&title=《iOS沙盒与模态》 — Peterpan's Blog&source=ios为何安全？数据是如何存储？控制器在频繁地切换间生命周期是怎样的？欢迎观看今日说ios~" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3ay26DMBAF0Pz/T6dSV5XawJ2xSYN9vIoSAhwWwzz8eMTr+b1+fk7Wq+OT8zyuWBgYGLdl5Lfy+/jj87x6ENXrRlQMDIwNGEmQrca65MjjayX3hoGBgZEH0+rK01AMDAyMXsCd+82/vTcwMDBuxei1zKoJYt6Gu7AWx8DAuCGjNxh4z+fL5xsYGBgfz3gOr1mtt6FiGAMDY2nG8UgyD8FJOZoPCXpnw8DAWJWRF6758fljSkrcodQQAwNjCcZIC6wXsnvNNQwMDIx8VJk3/avDyDyJxMDA2JlR3fhV3VRx/FBGmnEYGBhrM6qFa/Vi+Q3lieMfR2JgYCzN6LXD5l6+mhSWR5gYGBg3Z4w0v6rFZ7WpVyhoMTAwNmNUW2PVG+1tIDt5NBgYGJsxqkleb8DZC8ETanEMDIwbMqqBLw/NzXp6YEsZBgbGqoz8RHmBmo8T8mHnya8YGBhLM0Y2fvVadfmZq2wMDIy1GdXkr5pEVsNrMjA4eVVgYGAsx+htAsvHkLP+1XxvYGBgLMQYH0/m6d2sVh0GBsY+jLx0rLbeqoVueUMYBgbGBoxncY2PB/LWW54+YmBgrM3IV7lvN3Cx5rYwDAyMpRnj7bDxRv+EgIuBgbEBY2QM2dvaVQ3HJzAMDAyMIikJ370RZvl5YGBgbMbopYwjA4NCgMbAwNiA0QuRSWl6PADIk79omwUGBsaijLmDgd7gs7fJ7ML5BgYGxqcwvgA9mKh23Abf8gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
+
+<!-- third-party -->
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
 </script>
 
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-<script src="/js/script.js"></script>
+
+
+    
+        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
+    
 
 
 
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
 
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz", "xDGMWtxNt0aReJDVkuYmSqBd");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
 
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.article-title').length > 1) {
-        showTime(Counter);
-      }
     });
-  </script>
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
 
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '思维失去连接...';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
 
-  </div>
+
+    
 </body>
 </html>
