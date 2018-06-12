@@ -186,27 +186,50 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>第一次上手Mac上的破解，然后花了四个小时…终于成功了，异常兴奋呢hhh</p>
 <a id="more"></a>
-<h1 id="0x00-应用介绍"><a href="#0x00-应用介绍" class="headerlink" title="0x00.应用介绍"></a>0x00.应用介绍</h1><p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png" alt="Yummy FTP"></p>
+<h1 id="0x00应用介绍"><a class="markdownIt-Anchor" href="#0x00应用介绍"></a> 0x00.应用介绍</h1>
+<p>首先看看这个工具是什么吧，它的名字叫做<code>Yummy FTP</code>，这里搬运一下介绍：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.14.12.png" alt="Yummy FTP" title="" class="">
+                <p>Yummy FTP</p>
+            </figure>
 <p>Yummy FTP 是一款着力于速度、可靠性和效率的 FTP + SFTP + FTPS 文件传输客户端。其结合并改进了其它文件传输方案中最好的功能，添加了大量独特的强大功能，以一个高度可调谐的 FTP 引擎驱动。使它成为一款急速、灵活并且完全可靠的 macOS 下的文件传输工具。</p>
 <p>它具有非常漂亮与符合直觉的高清用户界面，像 Finder 一样的 FTP 浏览器、工具栏和随处可用的拖拽。 无论是要传输几个或者上千个文件，还是计划自动备份，或执行网站维护，Yummy FTP 都能轻松处理。如果您觉得 Yummy FTP  不错，不妨支持一下正版哦！</p>
 <p>之前用了一段时间，感觉不错，最近打开的时候突然发现30天试用已经过了，哇，这种事情，当然搞它一波，网上流传的方法是用机器算它的序列号，这种方法感觉过于暴力，我觉得不行，所以干脆逆向，直接把提示的那个窗口给干掉就好了，这样就不会触发后续的事件了。</p>
-<h1 id="0x01-逆向分析"><a href="#0x01-逆向分析" class="headerlink" title="0x01.逆向分析"></a>0x01.逆向分析</h1><p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png" alt="屏幕快照 2018-04-21 下午11.18.33.png"></p>
+<h1 id="0x01逆向分析"><a class="markdownIt-Anchor" href="#0x01逆向分析"></a> 0x01.逆向分析</h1>
+<p>首先我们用<code>Hopper</code>来搞一手，但是这个过程中发现逆向出来的函数名中似乎没有我们需要的呀:</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.18.33.png" alt="屏幕快照 2018-04-21 下午11.18.33.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.18.33.png</p>
+            </figure>
 <p>这一步有点卡手，然后看看其他的，发现都是<code>sub_xxxx</code>什么的，而且还巨多，看完眼睛都瞎掉，想了想之后决定用字符串查找，因为这个是序列号验证的模式，我们就通过序列号英文来查找：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png" alt="屏幕快照 2018-04-21 下午11.25.03.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.25.03.png" alt="屏幕快照 2018-04-21 下午11.25.03.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.25.03.png</p>
+            </figure>
 <p>然后查找这个引用的关系，到这里似乎出现了突破口，继续向上寻找引用，然后发现了有四个调用：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.28.03.png" alt="屏幕快照 2018-04-21 下午11.28.03.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.28.03.png" alt="屏幕快照 2018-04-21 下午11.28.03.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.28.03.png</p>
+            </figure>
 <p>我们首先看看第一个，太长了，跳出来看看第二个，发现离调用的头部很近：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.32.10.png" alt="屏幕快照 2018-04-21 下午11.32.10.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.32.10.png" alt="屏幕快照 2018-04-21 下午11.32.10.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.32.10.png</p>
+            </figure>
 <p>从判断的逻辑关系可以得出，一开始对于日期或者其他的什么进行了一次校验，校验失败之后走左边的路线，也就是你的App认证为是过期的，我们发现开头的右边那条线就直接返回了，所以我们在这里修改判断条件让函数直接返回或者走右边的路线，原来的代码是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mov	al, byte [esi-0x72b21+0x2f1114]                     ; 0x2f1114</div><div class="line">and	al, 0x0</div><div class="line">jne loc_72d49</div></pre></td></tr></table></figure>
 <p>那么我们修改判断为一定不为0的即可：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">or al, 0x01</div><div class="line">jne	loc_72d49</div></pre></td></tr></table></figure>
 <p>修改好之后非常开心的打开了应用，然而现实给了我沉重的一巴掌，还是不OK，此时我的心中似乎奔过了千万头草泥马，想到还有几个引用，于是乎又转头回去看了：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="屏幕快照 2018-04-21 下午11.40.36.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.40.36.png" alt="屏幕快照 2018-04-21 下午11.40.36.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.40.36.png</p>
+            </figure>
 <p>除了逻辑变了一下，其他的也没改什么，所以照样改就好了，第四个是一个子调用，应该不需要改，修改完之后重新导出，然后替换原有的可执行文件，重新打开App:</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.42.02.png" alt="屏幕快照 2018-04-21 下午11.42.02.png"></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-21%20%E4%B8%8B%E5%8D%8811.42.02.png" alt="屏幕快照 2018-04-21 下午11.42.02.png" title="" class="">
+                <p>屏幕快照 2018-04-21 下午11.42.02.png</p>
+            </figure>
 <p>nice，那个烦人的玩意没了，开始愉悦的使用吧～分享到此结束。</p>
 
         </div>
@@ -216,7 +239,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-05-02T08:41:10.692Z" itemprop="dateUpdated">2018-05-02 16:41:10</time>
+    最後更新時間：<time datetime="2018-05-02T08:41:10.692Z" itemprop="dateUpdated">2018-05-02 16:41:10</time>
 </span><br>
 
 
@@ -342,7 +365,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x00-应用介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">0x00.应用介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x01-逆向分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">0x01.逆向分析</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x00应用介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 0x00.应用介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x01逆向分析"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 0x01.逆向分析</span></a></li></ol>
         </nav>
     </aside>
     

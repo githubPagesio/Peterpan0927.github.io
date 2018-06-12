@@ -186,20 +186,29 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）</p>
 <a id="more"></a>
-<h1 id="TCP-IP-三"><a href="#TCP-IP-三" class="headerlink" title="TCP/IP(三)"></a>TCP/IP(三)</h1><h2 id="IP即网际协议"><a href="#IP即网际协议" class="headerlink" title="IP即网际协议"></a>IP即网际协议</h2><h3 id="IP初探"><a href="#IP初探" class="headerlink" title="IP初探"></a>IP初探</h3><p>TCP/IP的心脏是网络层，这一层主要由IP和ICMP两个协议组成，鉴于目前的IP协议已经无法满足互联网的需求，所以出现了更高级的IP协议（也就是IPv6协议）。</p>
+<h1 id="tcpip三"><a class="markdownIt-Anchor" href="#tcpip三"></a> TCP/IP(三)</h1>
+<h2 id="ip即网际协议"><a class="markdownIt-Anchor" href="#ip即网际协议"></a> IP即网际协议</h2>
+<h3 id="ip初探"><a class="markdownIt-Anchor" href="#ip初探"></a> IP初探</h3>
+<p>TCP/IP的心脏是网络层，这一层主要由IP和ICMP两个协议组成，鉴于目前的IP协议已经无法满足互联网的需求，所以出现了更高级的IP协议（也就是IPv6协议）。</p>
 <p>IP协议处于OSI模型中的网络层，网络层的主要作用是实现端对端之间的通信，而它的上一层数据链路层是用来实现同一种数据链路相连的节点之间通信，如果是要在不同的数据节点之间进行通信，就必须要经过网络层，下面用一张图作例子：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>Tips:在这里补充一下节点和主机的联系，一般我们将配有IP地址但不进行路由控制的设备称作主机，两者都有的称作路由器，而这两个又统称为节点。</p>
-<h3 id="网络层与数据链路层的关系"><a href="#网络层与数据链路层的关系" class="headerlink" title="网络层与数据链路层的关系"></a>网络层与数据链路层的关系</h3><p>数据链路层提供直连两个设备之间的通信功能,而网络层是负责在没有直连的两个网络之间进行数据传输。那么为什么一定需要这样的两个网络层次呢？</p>
+<h3 id="网络层与数据链路层的关系"><a class="markdownIt-Anchor" href="#网络层与数据链路层的关系"></a> 网络层与数据链路层的关系</h3>
+<p>数据链路层提供直连两个设备之间的通信功能,而网络层是负责在没有直连的两个网络之间进行数据传输。那么为什么一定需要这样的两个网络层次呢？</p>
 <p>我们可以通过一个简单的例子来说明这个问题。比如说有一个从湖南出发，要去西双版纳。但是碍于路途遥远，它需要乘坐飞机，火车再转大巴才能到达目的地。</p>
 <p>那么整个行程中，这个人需要的东西有两个：行程表和车票。</p>
 <p>1.行程表：作用相当于网络层，有出发地址和目标地址还有之间经过的地方（路由控制表决定）</p>
 <p>2.车票：作用相当于数据链路层，因为每张票只能让这个人通过一部分的路程（一个数据链路）</p>
 <p>所以从这个角度来说，网络层和数据链路层都是必须的，就像人需要行程表和每张车票一样。</p>
-<h2 id="IP基础知识"><a href="#IP基础知识" class="headerlink" title="IP基础知识"></a>IP基础知识</h2><h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><ul>
+<h2 id="ip基础知识"><a class="markdownIt-Anchor" href="#ip基础知识"></a> IP基础知识</h2>
+<h3 id="路由控制"><a class="markdownIt-Anchor" href="#路由控制"></a> 路由控制</h3>
+<ul>
 <li>作用</li>
 </ul>
-<p>路由控制是指将分组数据发送到最终目标地址的功能。即使网络非常复杂，也可以通过路由控制确定到达目标地址的通路。一旦这个路由控制的运行出现了异常，那么分组数据极有可能”迷失”</p>
+<p>路由控制是指将分组数据发送到最终目标地址的功能。即使网络非常复杂，也可以通过路由控制确定到达目标地址的通路。一旦这个路由控制的运行出现了异常，那么分组数据极有可能&quot;迷失&quot;</p>
 <ul>
 <li>发送数据到最终目标地址</li>
 </ul>
@@ -215,35 +224,45 @@
 <li>Tips</li>
 </ul>
 <p>IP协议属于面向无连接型的协议，IP采用面向无连接主要有两点原因：一是为了简化，而是为了提速。在建立连接断开连接的过程中会降低处理的速度，这样的功能可以交给上一层协议来完成，由TCP来提高通信的可靠性。可能会有人问，为什么不让IP协议和TCP协议合并，这就在于如果让一个协议规定多个功能，协议的具体实施和编程就会变的复杂，就像我们在写程序的时候都会尽量的去做到功能单一化，方便排错。</p>
-<h2 id="IP地址基础知识"><a href="#IP地址基础知识" class="headerlink" title="IP地址基础知识"></a>IP地址基础知识</h2><h3 id="IP地址的分类"><a href="#IP地址的分类" class="headerlink" title="IP地址的分类"></a>IP地址的分类</h3><p>IP地址分为四个级别，分别为A类，B类，C类，D类。它根据IP地址中从第一位到第四位的比特列对其网络标识和主机标识进行区分。</p>
+<h2 id="ip地址基础知识"><a class="markdownIt-Anchor" href="#ip地址基础知识"></a> IP地址基础知识</h2>
+<h3 id="ip地址的分类"><a class="markdownIt-Anchor" href="#ip地址的分类"></a> IP地址的分类</h3>
+<p>IP地址分为四个级别，分别为A类，B类，C类，D类。它根据IP地址中从第一位到第四位的比特列对其网络标识和主机标识进行区分。</p>
 <ul>
-<li>A类IP地址首位以”0”开头，从第一位到第八位是网络标识，也就是从0.0.0.0～127.0.0.0</li>
-<li>B类前两位是”10”,从1-16位是网络标识，也就是128.0.0.0～191.255.0.0。</li>
-<li>C类IP地址是前三位为”110”的地址。从第一位到第二十四位是网络标识，也就是192.0.0.0～239.255.255.0</li>
-<li>D类地址是前四位为”1110”的地址。从第一位到第三十二位都是网络标识，没有主机标识，常被用作多播</li>
+<li>A类IP地址首位以&quot;0&quot;开头，从第一位到第八位是网络标识，也就是从0.0.0.0～127.0.0.0</li>
+<li>B类前两位是&quot;10&quot;,从1-16位是网络标识，也就是128.0.0.0～191.255.0.0。</li>
+<li>C类IP地址是前三位为&quot;110&quot;的地址。从第一位到第二十四位是网络标识，也就是192.0.0.0～239.255.255.0</li>
+<li>D类地址是前四位为&quot;1110&quot;的地址。从第一位到第三十二位都是网络标识，没有主机标识，常被用作多播</li>
 </ul>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>Tips:在分配IP地址的时候关于<strong>主机标识</strong>有一点需要注意。即要使用比特位表示主机地址时，不可以全部为0或全部为1。因为全部为0表示对应的网络地址不可获知，而全部为1的主机地址通常作为广播地址。</p>
-<h3 id="广播和多播"><a href="#广播和多播" class="headerlink" title="广播和多播"></a>广播和多播</h3><p>将IP地址中的主机地址部分全部设置为1，就成为了广播地址。如172.16.0.0/16将主机部分修改为1就成为了172.16.255.255。</p>
+<h3 id="广播和多播"><a class="markdownIt-Anchor" href="#广播和多播"></a> 广播和多播</h3>
+<p>将IP地址中的主机地址部分全部设置为1，就成为了广播地址。如172.16.0.0/16将主机部分修改为1就成为了172.16.255.255。</p>
 <ul>
 <li>两种广播</li>
 </ul>
 <p>广播分为本地广播和直接广播两种</p>
 <p>在本网络内的广播叫做本地广播，例如网络地址为192.168.0.0/24，广播地址为192.168.0.255.因为这个广播地址的IP包会被路由器屏蔽，所以不会到达192.168.0.0/24以外的其他链路上。</p>
-<p>在不同网络之间的广播叫作直接广播。例如网络地址为192.168.0.0/24的主机向192.168.1.255/24    的目标地址发送IP包。收到这个包的路由器就会将数据转发给192.168.1.0/24，使这个数据链路上的所有主机都能收到这个包。</p>
+<p>在不同网络之间的广播叫作直接广播。例如网络地址为192.168.0.0/24的主机向192.168.1.255/24	的目标地址发送IP包。收到这个包的路由器就会将数据转发给192.168.1.0/24，使这个数据链路上的所有主机都能收到这个包。</p>
 <ul>
 <li>IP多播</li>
 </ul>
 <p>多播用于将包发送给组内特定的主机，因为随着多媒体应用的发展，对于向多台主机同时发送数据包，在效率上的要求需要提高。人们一直使用广播的方式，将数据发送给所有的终端主机，再由这些主机IP上一层去判断是否接受，对那些无关的主机造成了影响，而且造成流量损失。</p>
 <p>多播不仅可以实现1对N，N对N通信，还可以穿透路由器，成为了我们的首选。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png" alt=""></p>
-<p>多播使用D类地址，前四位是”1110”，后28位可以成为多播的组编号，多播的更多细节可以参考<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%92%AD" target="_blank" rel="external">维基百科</a></p>
-<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><p>一个IP地址只要确定了他的分类，也就确定了他的网络标识和主机标识。网络标识相同的计算机必须属于同一个链路。例如，架构B类IP网路的时候，理论上一个链路内允许6万多台计算机连接，但是实际上，是不会有一个链路上连接这么多台计算机的情况的。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<p>多播使用D类地址，前四位是&quot;1110&quot;，后28位可以成为多播的组编号，多播的更多细节可以参考<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E6%92%AD" target="_blank" rel="external">维基百科</a></p>
+<h3 id="子网掩码"><a class="markdownIt-Anchor" href="#子网掩码"></a> 子网掩码</h3>
+<p>一个IP地址只要确定了他的分类，也就确定了他的网络标识和主机标识。网络标识相同的计算机必须属于同一个链路。例如，架构B类IP网路的时候，理论上一个链路内允许6万多台计算机连接，但是实际上，是不会有一个链路上连接这么多台计算机的情况的。</p>
 <p>所以当我们直接使用A类，B类网的时候，随着互联网的增大，事实上是相当的浪费的，所以有一种新的组合方式来减少这种浪费。</p>
 <ul>
 <li>子网和子网掩码</li>
 </ul>
-<p>现在一个IP地址的网络和主机标识不再受限于该地址的类别，而是由一个叫做”子网掩码”的识别码通过子网网络地址细分出比A、B、C、D类更小的网络。 </p>
+<p>现在一个IP地址的网络和主机标识不再受限于该地址的类别，而是由一个叫做&quot;子网掩码&quot;的识别码通过子网网络地址细分出比A、B、C、D类更小的网络。</p>
 <p>自从引入了子网之后，一个IP地址就拥有了两种识别码。一个是IP地址本身，另一个就是子网掩码，用二进制表示话也是一个32位的数字，它对应的网络标识位全为1，主机标识位全为0。所以自此以后，一个IP不必在首先与网络的类型，而是可以自由的定位自己的网络标识长度。</p>
 <table>
 <thead>
@@ -267,10 +286,17 @@
 </tr>
 </tbody>
 </table>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png" alt=""></p>
-<h3 id="CIDR和VLSM"><a href="#CIDR和VLSM" class="headerlink" title="CIDR和VLSM"></a>CIDR和VLSM</h3><p>正如前面所说，人们逐渐放弃了IP地址的分类，而是采用任意长度分割IP地址的网络标识和主机标识。这种方式叫做CIDR，意为无间隙域间选路。由于BGP对应了CIDR，所有不受IP地址分类的限制自由分类。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<h3 id="cidr和vlsm"><a class="markdownIt-Anchor" href="#cidr和vlsm"></a> CIDR和VLSM</h3>
+<p>正如前面所说，人们逐渐放弃了IP地址的分类，而是采用任意长度分割IP地址的网络标识和主机标识。这种方式叫做CIDR，意为无间隙域间选路。由于BGP对应了CIDR，所有不受IP地址分类的限制自由分类。</p>
 <p>根据CIDR，就可以将连续多个C类地址划分到一个较大的网络中，有效利用IPv4地址，通过路由集中降低路由器的负担。以下面一张图为例子：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>至于VSLM，是为了可以随机修改组织内各个部门的子网掩码长度的机制。它可以通过域间路由协议转换为RIP2以及OSPF实现，它可以提高IP地址的利用率。</p>
 <p>举个例子就是一个公司有五个部门，各个部门的PC数量为100/50/10/10/10，公司的公网IP为199.1.1.0/24</p>
 <p>199.1.1.0/24取该地址和掩码的二进制数分别为：</p>
@@ -298,7 +324,8 @@
 <p>11000111.00000001.00000001.1|1|00|0000               199.1.1.192/2811000111.00000001.00000001.1|1|01|0000               199.1.1.208/2811000111.00000001.00000001.1|1|10|0000               199.1.1.224/2811000111.00000001.00000001.1|1|11|0000               199.1.1.240/28</p>
 </blockquote>
 <p>三个10台PC的部门在以上四个网络中任意选取三个，余的一个留作备用或再进行划分应用在网络设备的点对点的IP的配置上。</p>
-<h3 id="全局地址和私有地址"><a href="#全局地址和私有地址" class="headerlink" title="全局地址和私有地址"></a>全局地址和私有地址</h3><p>起初的时候，互联网中的每一台电脑都需要配有唯一的IP地址。一旦出现IP地址冲突，就会导致发送端无法判断到底应该发给哪个地址。但是随着IP地址越来越少，如果还是按照这样的方法，IP地址就会有耗尽的危险。所以就出现了一种新的技术，不要求为每一台主机或路由器分配IP，只需要在必要的时候为相应的设备分配唯一的IP。</p>
+<h3 id="全局地址和私有地址"><a class="markdownIt-Anchor" href="#全局地址和私有地址"></a> 全局地址和私有地址</h3>
+<p>起初的时候，互联网中的每一台电脑都需要配有唯一的IP地址。一旦出现IP地址冲突，就会导致发送端无法判断到底应该发给哪个地址。但是随着IP地址越来越少，如果还是按照这样的方法，IP地址就会有耗尽的危险。所以就出现了一种新的技术，不要求为每一台主机或路由器分配IP，只需要在必要的时候为相应的设备分配唯一的IP。</p>
 <p>对于那些没有连接互联网的独立网络中的主机，只需要保证在这个网络内的地址唯一即可，也就是私有IP，他的规范如下：</p>
 <blockquote>
 <p>10.0.0.0～10.255.255.255 （10/8）A类</p>
@@ -316,26 +343,45 @@
 <li>LAN：接内部 IP 地址用，LAN 内部是交换机。</li>
 </ul>
 <p>这里，我们简化这个过程，我们把运营商当做一个 NAT 设备。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>通过这样的层层端口映射，最终保证地址(IP + 端口)的唯一性。A 和 B 访问百度服务器，尽管它们的局域网 IP 是一样的，但是最终它们访问百度的地址(IP + 端口)是唯一的，所以，百度服务器回复时，原路返回时能够区分到底给谁回。</p>
 <p>Tips：为了安全问题，我们必须通过IP地址和主机找到管理人，可以使用<code>whois</code>命令来查看IP来源</p>
-<h3 id="路由控制-1"><a href="#路由控制-1" class="headerlink" title="路由控制"></a>路由控制</h3><p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
+<h3 id="路由控制-2"><a class="markdownIt-Anchor" href="#路由控制-2"></a> 路由控制</h3>
+<p>在前面我们了解路由控制的基本之后，现在我们再来看看路由控制表是如何形成的呢？</p>
 <p>路由表的形成方式有两种，一种是管理员手动设置，叫做静态路由控制，还有一种是路由器和其他路由器相互交换信息的时候自动刷新，叫做动态路由控制。为了让动态路由及时刷新路由表，在网络互连的路由器之间都必须设置好路由协议，保证正常的读取路由控制信息。这个表是根据路由协议制作而成的。</p>
 <p>发送IP包的时候，首先要确定IP包首部中的目标地址，根据该记录转发给下一个路由器。当然也会出现路由控制表中存在多条相同网络地址的记录,这时候选择相同位数最长的：</p>
 <p>比如172.20.100.52的网络地址与172.20.100/24和172.20/16网络地址相同，这时候选择前者。话不多说，直接上图方便理解：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png" alt=""></p>
-<h2 id="IP分割与再构成处理"><a href="#IP分割与再构成处理" class="headerlink" title="IP分割与再构成处理"></a>IP分割与再构成处理</h2><h3 id="IP报文分片与重组"><a href="#IP报文分片与重组" class="headerlink" title="IP报文分片与重组"></a>IP报文分片与重组</h3><p>因为每种数据链路的最大传输单元（MTU）都不尽相同。因为每种数据链路的使用目的不同，可承载的MTU自然也就不同了。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<h2 id="ip分割与再构成处理"><a class="markdownIt-Anchor" href="#ip分割与再构成处理"></a> IP分割与再构成处理</h2>
+<h3 id="ip报文分片与重组"><a class="markdownIt-Anchor" href="#ip报文分片与重组"></a> IP报文分片与重组</h3>
+<p>因为每种数据链路的最大传输单元（MTU）都不尽相同。因为每种数据链路的使用目的不同，可承载的MTU自然也就不同了。</p>
 <p>任何一台主机都有必要对IP包进行分片的处理，往往是因为碰到较大的报文无法一次发出去。因为IP包的大小超过了MTU，所以需要将IP数据包划分成若干个片段进行传输，这种操作只要路由器认为有必要，就会周而复始地进行。</p>
 <p>经过分片之后的IP数据报只会由目标主机重组，因为无法保证IP数据报是否通过同一个路径传送。此外，经过下一站的时候需不需要重新再分片，所以如果每一次重新组装就会加重路由器的负担。</p>
-<h3 id="路径MTU发现"><a href="#路径MTU发现" class="headerlink" title="路径MTU发现"></a>路径MTU发现</h3><p>同时分片机制也有它的不足。首先这会加重路由器的负担，因为现下路由器需要做的其他处理越来越多，如果网络过滤(指带有一定参数的IP数据报才能通过路由器)等，所以不希望让路由器去做IP分片的工作。</p>
+<h3 id="路径mtu发现"><a class="markdownIt-Anchor" href="#路径mtu发现"></a> 路径MTU发现</h3>
+<p>同时分片机制也有它的不足。首先这会加重路由器的负担，因为现下路由器需要做的其他处理越来越多，如果网络过滤(指带有一定参数的IP数据报才能通过路由器)等，所以不希望让路由器去做IP分片的工作。</p>
 <p>其次，在分片的处理中，只要丢失一个分片，整个IP数据报都会废掉。所以为了应对这种情况，出现了一种新的技术叫做路径MTU发现。路径MTU是指从发送端到接收端主机之间不需要分片的最大MTU大小，也就是途中经过的数据链路中最小的MTU。而路径MTU发现就是根据这个路径MTU的大小从发送主机将IP数据报分片之后进行传输。</p>
 <p>这样一来，不仅可以避免路由器上进行分片处理，还可以在TCP中发送更大的包。</p>
-<h3 id="路径MTU工作原理"><a href="#路径MTU工作原理" class="headerlink" title="路径MTU工作原理"></a>路径MTU工作原理</h3><p>首先将发送端主机发送IP数据报的时候将其首部的禁止标志位设为1。根据这个标志位，图中的路由器即使遇到分片才能处理的大包也不会进行分片，而是丢弃。然后通过一个ICMP的不可达消息将该数据链路的MTU发送给发送端主机。</p>
+<h3 id="路径mtu工作原理"><a class="markdownIt-Anchor" href="#路径mtu工作原理"></a> 路径MTU工作原理</h3>
+<p>首先将发送端主机发送IP数据报的时候将其首部的禁止标志位设为1。根据这个标志位，图中的路由器即使遇到分片才能处理的大包也不会进行分片，而是丢弃。然后通过一个ICMP的不可达消息将该数据链路的MTU发送给发送端主机。</p>
 <p>发送端主机获取了这个MTU值之后，将其设置为当前的MTU值，根据这个MTU值进行分片处理。然后再次发送IP数据报，如此循环往复，直到被发送到目标主机没有再受到任何的ICMP，就认为最后一次通知的MTU值是一个合适的MTU值，当然这个值也有一个缓存的时间，过了之后就要根据链路上的MTU重新做一次路径MTU发现。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>上图中是UDP的例子，如果是TCP的话，会根据路径MTU计算出最大段的长度(MSS)，根据这个信息再进行数据报的发送，IP层则不会再进行分片处理，而且到达目标端在IP层也不需要重组，直接发送给目标主机的TCP层：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png" alt=""></p>
-<h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><h3 id="IPv6特点"><a href="#IPv6特点" class="headerlink" title="IPv6特点"></a>IPv6特点</h3><p>IPv6是为了从根本解决IPv4地址耗尽而被标准化的一种网际协议，IPv4长度是32位，IPv6则是128位，一般写成8个16位的格式。IPv6不仅可以解决IPv4地址被耗尽的问题，还可以弥补一些在IPv4中缺陷，因为有些功能在IPv4中并未完全实现，需要管理员介入或者根本无法实现，而这些在IPv6中都作为了必要功能：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<h2 id="ipv6"><a class="markdownIt-Anchor" href="#ipv6"></a> IPv6</h2>
+<h3 id="ipv6特点"><a class="markdownIt-Anchor" href="#ipv6特点"></a> IPv6特点</h3>
+<p>IPv6是为了从根本解决IPv4地址耗尽而被标准化的一种网际协议，IPv4长度是32位，IPv6则是128位，一般写成8个16位的格式。IPv6不仅可以解决IPv4地址被耗尽的问题，还可以弥补一些在IPv4中缺陷，因为有些功能在IPv4中并未完全实现，需要管理员介入或者根本无法实现，而这些在IPv6中都作为了必要功能：</p>
 <ul>
 <li>IP地址扩大和路由控制表聚合</li>
 </ul>
@@ -356,33 +402,67 @@
 <li>多播、Mobile IP成为扩展功能</li>
 </ul>
 <p>被定义为IPv6的扩展功能。由此可见，在IPv4中难以应用的和两个功能在IPv6中能够顺利使用</p>
-<h3 id="IPv6地址结构"><a href="#IPv6地址结构" class="headerlink" title="IPv6地址结构"></a>IPv6地址结构</h3><p>IPv6地址因为太长，所以就算以十进制数来表示的时候还是不方便，所以采用的是十六进制</p>
+<h3 id="ipv6地址结构"><a class="markdownIt-Anchor" href="#ipv6地址结构"></a> IPv6地址结构</h3>
+<p>IPv6地址因为太长，所以就算以十进制数来表示的时候还是不方便，所以采用的是十六进制</p>
 <p>如FEDC:BA98:7654:3210:FEDC:BA98:7654:3210，每组用冒号隔开，如果中间有连续的0可以用两个连续的冒号来替代，但是一个IP地址中只允许出现一次两个连续的冒号。</p>
 <p>接下来再说一下IPv6中的一些地址的结构：</p>
-<h4 id="全局单播地址"><a href="#全局单播地址" class="headerlink" title="全局单播地址"></a>全局单播地址</h4><p>全局单播地址是互联网通信和各个域内部通信最常用的一个IPv6地址，格式如下：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png" alt=""></p>
+<h4 id="全局单播地址"><a class="markdownIt-Anchor" href="#全局单播地址"></a> 全局单播地址</h4>
+<p>全局单播地址是互联网通信和各个域内部通信最常用的一个IPv6地址，格式如下：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>现在的IPv6网络中所用的格式，n=48,m=16，即前64位是网络标识，后六十四位是主机标识。</p>
-<p>通常接口ID中保存的是64比特版的MAC地址值，但是有时不想让对端知道这种设备固有的属性，所以就可以在接口ID设置一个随机产生，定时更新的与MAC地址没有关系的”临时地址”。这个由操作系统的具体装置来决定。</p>
-<h4 id="链路单播地址"><a href="#链路单播地址" class="headerlink" title="链路单播地址"></a>链路单播地址</h4><p>链路单播地址是指在同一个数据链路内唯一的IP地址。用于不经过路由器，在同一个链路中的通信。通常接口ID保存64位的MAC地址：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png" alt=""></p>
+<p>通常接口ID中保存的是64比特版的MAC地址值，但是有时不想让对端知道这种设备固有的属性，所以就可以在接口ID设置一个随机产生，定时更新的与MAC地址没有关系的&quot;临时地址&quot;。这个由操作系统的具体装置来决定。</p>
+<h4 id="链路单播地址"><a class="markdownIt-Anchor" href="#链路单播地址"></a> 链路单播地址</h4>
+<p>链路单播地址是指在同一个数据链路内唯一的IP地址。用于不经过路由器，在同一个链路中的通信。通常接口ID保存64位的MAC地址：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>举个简单的例子就是一个企业内市场部内部之间交流用的链路单播地址。</p>
-<h4 id="唯一本地地址"><a href="#唯一本地地址" class="headerlink" title="唯一本地地址"></a>唯一本地地址</h4><p>唯一本地地址是不进行互联网通信的时候所使用的地址，设备控制的限制型网络和一些核心网会和互联网隔离，这些企业在和互联网通信的时候通常会使用NAT以及代理联网。唯一本地地址就是在这种不联网或者通过NAT或者代理上网的环境下准备的。</p>
+<h4 id="唯一本地地址"><a class="markdownIt-Anchor" href="#唯一本地地址"></a> 唯一本地地址</h4>
+<p>唯一本地地址是不进行互联网通信的时候所使用的地址，设备控制的限制型网络和一些核心网会和互联网隔离，这些企业在和互联网通信的时候通常会使用NAT以及代理联网。唯一本地地址就是在这种不联网或者通过NAT或者代理上网的环境下准备的。</p>
 <p>虽然唯一本地地址不会连接互联网，但是还是需要分配一个全局ID，这是为了在用唯一本地地址进行网络连接的时候人们可以不改动IP地址实现网络统一。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>举个例子就是在企业内市场部和营销部之间通信用的是唯一本地地址，有点类似于IPv4的私有地址。</p>
-<h2 id="IPv4、IPv6首部"><a href="#IPv4、IPv6首部" class="headerlink" title="IPv4、IPv6首部"></a>IPv4、IPv6首部</h2><h3 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h3><p>从之前的知识我们了解到IP数据包的首部包含了源地址和目标地址的信息，那么其中还包含了什么呢？</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png" alt=""></p>
+<h2 id="ipv4-ipv6首部"><a class="markdownIt-Anchor" href="#ipv4-ipv6首部"></a> IPv4、IPv6首部</h2>
+<h3 id="ipv4"><a class="markdownIt-Anchor" href="#ipv4"></a> IPv4</h3>
+<p>从之前的知识我们了解到IP数据包的首部包含了源地址和目标地址的信息，那么其中还包含了什么呢？</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>没错上面这张图就是IPv4首部中所包含的信息，下面就来详细的解释其中每个部分的意义,emmm，太长了，还是不想说了，自己看<a href="http://blog.csdn.net/ce123_zhouwei/article/details/17453033" target="_blank" rel="external">博客</a>。</p>
-<h3 id="IPv6-1"><a href="#IPv6-1" class="headerlink" title="IPv6"></a>IPv6</h3><p>至于IPv6的首部相比于IPv4已经发生了巨大变化</p>
+<h3 id="ipv6-2"><a class="markdownIt-Anchor" href="#ipv6-2"></a> IPv6</h3>
+<p>至于IPv6的首部相比于IPv4已经发生了巨大变化</p>
 <p>IPv6中为了减轻路由器的负担，省略了首部校验和字段。因此路由器不需要再计算首部校验和，从而提高了包的转发效率。</p>
 <p>此外，分片处理所使用的识别码称为可选项为了让64位计算机处理起来更方便，IPv6首部和可选项都由8字节构成。</p>
 <p>虽然IPv6首部长度固定，无法将可选项加入其中，取而代之的是通过扩展首部对功能进行有效的扩展。</p>
 <p>IPv4以及IPv6都可以参考<a href="http://blog.csdn.net/frank_jb/article/details/45093615" target="_blank" rel="external">博客</a></p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="子网掩码的算法"><a href="#子网掩码的算法" class="headerlink" title="子网掩码的算法"></a>子网掩码的算法</h3><p>古语云：授人以鱼不如授人以渔。<br>现在用池塘和鱼的例子来做类比，无论鱼儿怎么变化，同学们都可以快速、高效地捉住它们。</p>
+<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
+<h3 id="子网掩码的算法"><a class="markdownIt-Anchor" href="#子网掩码的算法"></a> 子网掩码的算法</h3>
+<p>古语云：授人以鱼不如授人以渔。<br>
+现在用池塘和鱼的例子来做类比，无论鱼儿怎么变化，同学们都可以快速、高效地捉住它们。</p>
 <p>公式：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1.m.1.1/n 其中 0≤m≤255，8≤n≤16，试问小鱼甲在哪个小池子？这个小池子有多少只小鱼？</div><div class="line"></div><div class="line">x=16-n，这个小池子有 2^x 只小鱼</div><div class="line"></div><div class="line">y=n-8，一共有 2^y 个小池子</div><div class="line"></div><div class="line">z= mod（m,2^x）* 2^x，小鱼位于编号为 1.z/n 的小池子里。</div><div class="line"></div><div class="line">#注：mod()为模运算，比如 mod(129,16)=8，就是 129 除以 16 所得的整数，即为模。</div></pre></td></tr></table></figure>
-<p>例子一：小鱼甲的IP= 1.233.1.1/11<br>m = 233，n =11<br>x=16-11=5，这个小池子有 2^5= 32 只小鱼<br>y=11-8=3，一共有 2^3=8 个小池子<br>z= mod（233,32）<em> 32= 7</em>32= 224，小鱼甲位于编号为 1.224/11 的小池子里，由于传统习惯，将余下的两个字节补零为 1.224.0.0/11。</p>
-<p>故事中的小鱼，换成主机，故事中的池子，换成网段，就是网络掩码与网段的故事。<br>养鱼场有 32 位养鱼人，每个养鱼人养了 256 条鱼，对于养鱼场的营业者来说，只关心养鱼人鱼塘的编号即可：<br>1.1.0.0/24 老张<br>1.1.1.0/24 老王<br>1.1.2.0/24 老李<br>1.1.3.0/24 老黄<br>……<br>1.1.31.0/24 老某<br>至于老王、老张将鱼塘划分成若干鱼池，虹桥养鱼场并不关心，那不过是老王他们用来编号的方法，所以虹桥养鱼场只需要以上 32 行就可以区分彼此，而不需要更加明晰化区分 1.1.1.64/26 、1.1.1.128/26 是谁的。</p>
+<p>例子一：小鱼甲的IP= 1.233.1.1/11<br>
+m = 233，n =11<br>
+x=16-11=5，这个小池子有 2^5= 32 只小鱼<br>
+y=11-8=3，一共有 2^3=8 个小池子<br>
+z= mod（233,32）* 32= 7*32= 224，小鱼甲位于编号为 1.224/11 的小池子里，由于传统习惯，将余下的两个字节补零为 1.224.0.0/11。</p>
+<p>故事中的小鱼，换成主机，故事中的池子，换成网段，就是网络掩码与网段的故事。<br>
+养鱼场有 32 位养鱼人，每个养鱼人养了 256 条鱼，对于养鱼场的营业者来说，只关心养鱼人鱼塘的编号即可：<br>
+1.1.0.0/24 老张<br>
+1.1.1.0/24 老王<br>
+1.1.2.0/24 老李<br>
+1.1.3.0/24 老黄<br>
+……<br>
+1.1.31.0/24 老某<br>
+至于老王、老张将鱼塘划分成若干鱼池，虹桥养鱼场并不关心，那不过是老王他们用来编号的方法，所以虹桥养鱼场只需要以上 32 行就可以区分彼此，而不需要更加明晰化区分 1.1.1.64/26 、1.1.1.128/26 是谁的。</p>
 <p>这个具体可以参考车小胖的—<a href="https://read.douban.com/reader/ebook/33499415/" target="_blank" rel="external">计算机是如何聊天的</a></p>
 
         </div>
@@ -392,7 +472,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.844Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.844Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -518,7 +598,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP-IP-三"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP/IP(三)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP即网际协议"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">IP即网际协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP初探"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">IP初探</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络层与数据链路层的关系"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP基础知识"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IP基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP地址基础知识"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IP地址基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP地址的分类"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">IP地址的分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#广播和多播"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">广播和多播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">子网掩码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CIDR和VLSM"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">CIDR和VLSM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局地址和私有地址"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">全局地址和私有地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制-1"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP分割与再构成处理"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">IP分割与再构成处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP报文分片与重组"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">IP报文分片与重组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径MTU发现"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">路径MTU发现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径MTU工作原理"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">路径MTU工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv6"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">IPv6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6特点"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">IPv6特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6地址结构"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">IPv6地址结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局单播地址"><span class="post-toc-number">1.5.2.1.</span> <span class="post-toc-text">全局单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#链路单播地址"><span class="post-toc-number">1.5.2.2.</span> <span class="post-toc-text">链路单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#唯一本地地址"><span class="post-toc-number">1.5.2.3.</span> <span class="post-toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IPv4、IPv6首部"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">IPv4、IPv6首部</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv4"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">IPv4</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IPv6-1"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">IPv6</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">补充</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码的算法"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">子网掩码的算法</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tcpip三"><span class="post-toc-number">1.</span> <span class="post-toc-text"> TCP/IP(三)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ip即网际协议"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> IP即网际协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ip初探"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"> IP初探</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络层与数据链路层的关系"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"> 网络层与数据链路层的关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ip基础知识"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> IP基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"> 路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ip地址基础知识"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> IP地址基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ip地址的分类"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text"> IP地址的分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#广播和多播"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text"> 广播和多播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text"> 子网掩码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cidr和vlsm"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text"> CIDR和VLSM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局地址和私有地址"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text"> 全局地址和私有地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由控制-2"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text"> 路由控制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ip分割与再构成处理"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> IP分割与再构成处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ip报文分片与重组"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text"> IP报文分片与重组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径mtu发现"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text"> 路径MTU发现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路径mtu工作原理"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text"> 路径MTU工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ipv6"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"> IPv6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ipv6特点"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text"> IPv6特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ipv6地址结构"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text"> IPv6地址结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局单播地址"><span class="post-toc-number">1.5.2.1.</span> <span class="post-toc-text"> 全局单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#链路单播地址"><span class="post-toc-number">1.5.2.2.</span> <span class="post-toc-text"> 链路单播地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#唯一本地地址"><span class="post-toc-number">1.5.2.3.</span> <span class="post-toc-text"> 唯一本地地址</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ipv4-ipv6首部"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"> IPv4、IPv6首部</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ipv4"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text"> IPv4</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ipv6-2"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text"> IPv6</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"> 补充</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子网掩码的算法"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text"> 子网掩码的算法</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     

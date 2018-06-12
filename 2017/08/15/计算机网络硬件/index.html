@@ -184,36 +184,59 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>emmmm…..先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解<br><a id="more"></a></p>
-<h1 id="计算机网络硬件-待补充"><a href="#计算机网络硬件-待补充" class="headerlink" title="计算机网络硬件(待补充)"></a>计算机网络硬件(待补充)</h1><h2 id="中继器和网桥"><a href="#中继器和网桥" class="headerlink" title="中继器和网桥"></a>中继器和网桥</h2><p>数据链路层中多个网段互联的功能实体称作桥或者网桥。通过网桥进行的数据发送则称为桥接过程。</p>
-<h3 id="中继器："><a href="#中继器：" class="headerlink" title="中继器："></a><a href="https://baike.baidu.com/item/%E4%B8%AD%E7%BB%A7%E5%99%A8" target="_blank" rel="external">中继器</a>：</h3><p>中继器是一种信号增强装置，在OSI第一层模型上运行，也就是物理层，因此中继器无法辨别数据链路层中的MAC地址以及网络层中的IP地址。中继器将由电缆传过来的电信号和光信号经由中继器的波形调整和放大之后再传给另一个电缆，这中间，中继器只是在0、1比特流之间的替换，并不判断数据是否有错误。</p>
+            <p>emmmm…先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解</p>
+<a id="more"></a>
+<h1 id="计算机网络硬件待补充"><a class="markdownIt-Anchor" href="#计算机网络硬件待补充"></a> 计算机网络硬件(待补充)</h1>
+<h2 id="中继器和网桥"><a class="markdownIt-Anchor" href="#中继器和网桥"></a> 中继器和网桥</h2>
+<p>数据链路层中多个网段互联的功能实体称作桥或者网桥。通过网桥进行的数据发送则称为桥接过程。</p>
+<h3 id="中继器"><a class="markdownIt-Anchor" href="#中继器"></a> <a href="https://baike.baidu.com/item/%E4%B8%AD%E7%BB%A7%E5%99%A8" target="_blank" rel="external">中继器</a>：</h3>
+<p>中继器是一种信号增强装置，在OSI第一层模型上运行，也就是物理层，因此中继器无法辨别数据链路层中的MAC地址以及网络层中的IP地址。中继器将由电缆传过来的电信号和光信号经由中继器的波形调整和放大之后再传给另一个电缆，这中间，中继器只是在0、1比特流之间的替换，并不判断数据是否有错误。</p>
 <p>有的中继器可以提供多个端口，这样的中继器被称作中继集线器或者集线器。</p>
-<h3 id="网桥"><a href="#网桥" class="headerlink" title="网桥"></a><a href="https://baike.baidu.com/item/%E7%BD%91%E6%A1%A5" target="_blank" rel="external">网桥</a></h3><p>通过两个接口连接两个冲突域的装置称作网桥。网桥的作用相当于OSI模型中的数据链路层，目前经常使用的交换机也就是多端口透明网桥。</p>
-<h3 id="共享式集线器"><a href="#共享式集线器" class="headerlink" title="共享式集线器"></a>共享式集线器</h3><p>带有中继器功能的集线器也可以称作共享式集线器，在OSI模型中处于数据链路层，价格便宜是他最大的优势，但由于集线器属于共享型设备，导致在网络中效率比较低下。</p>
+<h3 id="网桥"><a class="markdownIt-Anchor" href="#网桥"></a> <a href="https://baike.baidu.com/item/%E7%BD%91%E6%A1%A5" target="_blank" rel="external">网桥</a></h3>
+<p>通过两个接口连接两个冲突域的装置称作网桥。网桥的作用相当于OSI模型中的数据链路层，目前经常使用的交换机也就是多端口透明网桥。</p>
+<h3 id="共享式集线器"><a class="markdownIt-Anchor" href="#共享式集线器"></a> 共享式集线器</h3>
+<p>带有中继器功能的集线器也可以称作共享式集线器，在OSI模型中处于数据链路层，价格便宜是他最大的优势，但由于集线器属于共享型设备，导致在网络中效率比较低下。</p>
 <p>在共享带宽的时候，网络中每一个终端能否发送数据都将采用CSMA/CD方式来决定。这个决定方式首先判断的是在通信链路上有没有别的终端在发送数据，如果数据链路空闲，就开始发送数据，如果在使用，则需要继续等待，因此通信效率很低。</p>
-<h3 id="交换式集线器"><a href="#交换式集线器" class="headerlink" title="交换式集线器"></a>交换式集线器</h3><p>交换式集线器是指将两个通信终端在两个端口在装置内部绑定，使其他端口的信号无法介入，从而防止发生冲突，弥补了共享式集线器的不足点，在共享式集线器，从发送方接收到的数据会直接转发到所有的非发送方端口，也就是单纯的复制电气信号。</p>
+<h3 id="交换式集线器"><a class="markdownIt-Anchor" href="#交换式集线器"></a> 交换式集线器</h3>
+<p>交换式集线器是指将两个通信终端在两个端口在装置内部绑定，使其他端口的信号无法介入，从而防止发生冲突，弥补了共享式集线器的不足点，在共享式集线器，从发送方接收到的数据会直接转发到所有的非发送方端口，也就是单纯的复制电气信号。</p>
 <p>但是交换式集线器则通过学习连接到每个终端的MAC地址，将数据仅发送到发送方所期望的目标终端上去，避免了将数据发送到无关端口，提高了网络利用率。</p>
 <p>如果在学习MAC地址之前遇到的发送目的地不明，或者想对网段内所有的终端进行通信的时候，就会采用广播的方式，就像共享式集线器一样，将数据发送到所有非发送方的端口。</p>
-<h3 id="学习MAC地址交换机"><a href="#学习MAC地址交换机" class="headerlink" title="学习MAC地址交换机"></a>学习MAC地址交换机</h3><p>通过确认以太网数据帧的发送源MAC地址，习得交换机端口号和该端口所连硬件的MAC地址配对信息，并将该信息注册到其内部的MAC地址表中。　</p>
+<h3 id="学习mac地址交换机"><a class="markdownIt-Anchor" href="#学习mac地址交换机"></a> 学习MAC地址交换机</h3>
+<p>通过确认以太网数据帧的发送源MAC地址，习得交换机端口号和该端口所连硬件的MAC地址配对信息，并将该信息注册到其内部的MAC地址表中。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/EF3193095D5EAD01A4B7CDE9CFDEF961.png" alt=""></p>
 <p>这个时候就有一个问题，如果MAC地址表的记录信息一直保留的话，当连接端口的设备发生变化时，就会出现实际情况和表中的数据无法对应的情况，因此就会给MAC地址表的表项设置一个超时值，也称作MAC地址的老化时间，在思科公司的交换机中这个值默认是5分钟，交换机会根据该值对MAC地址表中的记录项进行老化消去。</p>
-<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><h3 id="第一台交换机的诞生"><a href="#第一台交换机的诞生" class="headerlink" title="第一台交换机的诞生"></a>第一台交换机的诞生</h3><p>在20世纪80年代，很多企业开始察觉到使用共享集线器构成的LAN性能很差，便逐步开始使用能够分割冲突域的以太网网桥设备。</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/E388BB28527BFF9AA4EFC930BC4182AE.png" alt=""></p>
+<h2 id="交换机"><a class="markdownIt-Anchor" href="#交换机"></a> 交换机</h2>
+<h3 id="第一台交换机的诞生"><a class="markdownIt-Anchor" href="#第一台交换机的诞生"></a> 第一台交换机的诞生</h3>
+<p>在20世纪80年代，很多企业开始察觉到使用共享集线器构成的LAN性能很差，便逐步开始使用能够分割冲突域的以太网网桥设备。</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/E388BB28527BFF9AA4EFC930BC4182AE.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>1990年，Kalpana公司发售了世界上首台交换机产品EthertSwitch(上图)，在此之前，普通的<a href="https://zh.wikipedia.org/wiki/%E6%A9%8B%E6%8E%A5%E5%99%A8" target="_blank" rel="external">存储转发型网桥装置</a>只有两个端口，而EtherSwitch拥有7个端口。在此之后，拥有多个端口的以太网交换机这个概念才逐渐被人们所接受。由于当时的EtherSwitch没有实现IEEE规定的相关标准，不能称之为网桥，所以使用了交换机一词。</p>
 <p>后来随着发展。这类技术使网桥内部的部分组处理的通信延迟降低了10微秒左右，而且可以在性能无损的前提下桥接多个端口。这个时候也是以太网交换机作为网络技术术语被推广起来的时候。</p>
-<h3 id="交换机使用的数据帧及其传输方式"><a href="#交换机使用的数据帧及其传输方式" class="headerlink" title="交换机使用的数据帧及其传输方式"></a>交换机使用的数据帧及其传输方式</h3><p>1.交换机使用的数据帧类型：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/B26A7AC70B5AC1CEA230F50194A18FBF.png" alt=""></p>
+<h3 id="交换机使用的数据帧及其传输方式"><a class="markdownIt-Anchor" href="#交换机使用的数据帧及其传输方式"></a> 交换机使用的数据帧及其传输方式</h3>
+<p>1.交换机使用的数据帧类型：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/B26A7AC70B5AC1CEA230F50194A18FBF.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>2.交换机数据帧的传输方式</p>
 <p>交换机从接受以太网数据帧到发送新的以太网数据帧，这之间有三种处理方式：直通转发、碎片隔离、存储转发</p>
 <blockquote>
 <p>直通转发</p>
 </blockquote>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/061ADA965889BF9EED07A85A2B8BAB80.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/061ADA965889BF9EED07A85A2B8BAB80.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>交换设备只需要读取数据帧的前14个字节，便可将数据帧发送至目的地，这样尽管延时很低， 但是通信的发送方和接收方要求以一致的速度来完成数据帧的发送和接收，这会导致无法将普通的以太网桥接到不同速率的快速以太网。另外接收方在瘦到数据帧的时候，只读取了前14个字节，跳过了数据帧尾部的FCS域，无法检测并<code>及时</code>的丢弃发生CRC校验错误的数据帧。（直通转发很少单独使用，有时会和碎片隔离交换等结合使用）</p>
 <blockquote>
 <p>碎片隔离</p>
 </blockquote>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/1E6C28E94D18919F0B9A7597C32EAB13.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/1E6C28E94D18919F0B9A7597C32EAB13.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>这种方法就防止了冲突时转发残帧，在以太网中发生的通信错误大多由于冲突产生，因此碎片隔离缺失可以回避大多数错误，但是这种方式也不会读取到FCS域，所以数据帧出现CRC校验错误时，就只能想直通转发的方式一样去处理。碎片隔离和直通转发一样都是采用先进先出的方式处理数据帧，但同样通信速度不同的以太网之间无法进行桥接，目前也几乎不再使用。</p>
 <blockquote>
 <p>存储转发</p>
@@ -222,18 +245,26 @@
 <blockquote>
 <p>交换机数据帧交换方式比较</p>
 </blockquote>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/197F80A2DC28C4EE68995E2F81EB0B45.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/197F80A2DC28C4EE68995E2F81EB0B45.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <blockquote>
 <p>自适应交换</p>
 </blockquote>
 <p>根据用户的设置，当残帧和CRC错误帧的数量超过一定值的时候，能够自动变更为其他传输数据帧方式的方式，叫做自适应交换或自适应直通转发。</p>
 <p>使用该方式时，通常采用直通转发传输数据帧，当错误帧累计至一定数目的时候，就转换为存储转发，错误帧的数量减少后，再切换回直通转发，这样做的目的是将传输的错误帧数量和通信时延降到最低。</p>
-<h3 id="全双工和半双工"><a href="#全双工和半双工" class="headerlink" title="全双工和半双工"></a>全双工和半双工</h3><p> 半双工是只发送或只接受的通信方式。它类似于无线电收发器，若两端同时说话，是听不到对方说话的。而全双工不同，它允许在同一时间既可以发送数据也可以接受数据。类似于电话。</p>
-<h4 id="半双工"><a href="#半双工" class="headerlink" title="半双工"></a>半双工</h4><p>采用CSMA/CD（载波监听多路访问，共享介质型网络的一种控制方式–争用方式，还有一种为令牌传递）方式的以太网，首先要判断是否可以通信，如果可以就独占整个通信线路。因此，就像无线收发器一样，不能同时传输和接收数据</p>
-<h4 id="全双工"><a href="#全双工" class="headerlink" title="全双工"></a>全双工</h4><p>同样是以太网，在使用交换机和双绞线电缆（或者光纤）的情况下，既可以通过交换机的端口与计算机之间进行一对一的连接，也可以通过相连电缆内部的收发线路分别进行接收和发送数据。因此。交换机端口和计算机之间可以进行全双工通信。</p>
-<h3 id="路由器-三层交换机"><a href="#路由器-三层交换机" class="headerlink" title="路由器/三层交换机"></a>路由器/三层交换机</h3><p>路由器是在OSI模型的第三层上—网络层面连接两个网络，并对分组报文进行转发的设备，网桥是根据MAC地址进行处理，而路由器是根据IP地址进行处理。</p>
+<h3 id="全双工和半双工"><a class="markdownIt-Anchor" href="#全双工和半双工"></a> 全双工和半双工</h3>
+<p>半双工是只发送或只接受的通信方式。它类似于无线电收发器，若两端同时说话，是听不到对方说话的。而全双工不同，它允许在同一时间既可以发送数据也可以接受数据。类似于电话。</p>
+<h4 id="半双工"><a class="markdownIt-Anchor" href="#半双工"></a> 半双工</h4>
+<p>采用CSMA/CD（载波监听多路访问，共享介质型网络的一种控制方式–争用方式，还有一种为令牌传递）方式的以太网，首先要判断是否可以通信，如果可以就独占整个通信线路。因此，就像无线收发器一样，不能同时传输和接收数据</p>
+<h4 id="全双工"><a class="markdownIt-Anchor" href="#全双工"></a> 全双工</h4>
+<p>同样是以太网，在使用交换机和双绞线电缆（或者光纤）的情况下，既可以通过交换机的端口与计算机之间进行一对一的连接，也可以通过相连电缆内部的收发线路分别进行接收和发送数据。因此。交换机端口和计算机之间可以进行全双工通信。</p>
+<h3 id="路由器三层交换机"><a class="markdownIt-Anchor" href="#路由器三层交换机"></a> 路由器/三层交换机</h3>
+<p>路由器是在OSI模型的第三层上—网络层面连接两个网络，并对分组报文进行转发的设备，网桥是根据MAC地址进行处理，而路由器是根据IP地址进行处理。</p>
 <p>路由器可以连接不同的数据链路，连接两个以太网或者一个以太网和一个FDDI。除此之外，路由器还有分担网络负荷的作用，有些路由器甚至具备一定的网络安全功能。</p>
-<h3 id="4～7层交换机"><a href="#4～7层交换机" class="headerlink" title="4～7层交换机"></a>4～7层交换机</h3><p>4～7层交换机负责处理OSI模型中从传输层到应用层的数据。</p>
+<h3 id="4~7层交换机"><a class="markdownIt-Anchor" href="#4~7层交换机"></a> 4～7层交换机</h3>
+<p>4～7层交换机负责处理OSI模型中从传输层到应用层的数据。</p>
 <p>如果是从协议的角度上来说的话，就是从TCP协议往上的到邮件互发协议，远程登录协议等等。</p>
 <p>而其用途也是十分的广泛，比如对于一个并发访问量非常大的企业级站点，使用一台服务器不足以满足前端的需求，通常会架设多台服务器来分担。这些服务器前端访问的入口只有一个，所以为了把通过同一个url的访问分发到后台的多个服务器上，可以在这些服务器的前端加在一个负载均衡器。这种负载均衡器就是4～7层交换机的一种，当然也可以通过循环复用DNS的方式来实现。</p>
 <p>同时它还有一个重要的功能就是带宽控制，比如有时候我们需要优先处理语音这种紧急通信请求，而邮件这种稍有延迟也并无大碍。</p>
@@ -246,7 +277,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.806Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.806Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -292,7 +323,7 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/计算机网络硬件/&title=《计算机网络硬件》 — Peterpan's Blog&source=emmmm…..先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/计算机网络硬件/&title=《计算机网络硬件》 — Peterpan's Blog&source=emmmm…先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -372,7 +403,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#计算机网络硬件-待补充"><span class="post-toc-number">1.</span> <span class="post-toc-text">计算机网络硬件(待补充)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中继器和网桥"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">中继器和网桥</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中继器："><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">中继器：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网桥"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">网桥</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共享式集线器"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">共享式集线器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交换式集线器"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">交换式集线器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#学习MAC地址交换机"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">学习MAC地址交换机</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交换机"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">交换机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一台交换机的诞生"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">第一台交换机的诞生</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交换机使用的数据帧及其传输方式"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">交换机使用的数据帧及其传输方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全双工和半双工"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">全双工和半双工</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#半双工"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">半双工</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全双工"><span class="post-toc-number">1.2.3.2.</span> <span class="post-toc-text">全双工</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由器-三层交换机"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">路由器/三层交换机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4～7层交换机"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">4～7层交换机</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#计算机网络硬件待补充"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 计算机网络硬件(待补充)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中继器和网桥"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 中继器和网桥</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中继器"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"> 中继器：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网桥"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"> 网桥</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共享式集线器"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text"> 共享式集线器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交换式集线器"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text"> 交换式集线器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#学习mac地址交换机"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text"> 学习MAC地址交换机</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交换机"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 交换机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一台交换机的诞生"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"> 第一台交换机的诞生</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交换机使用的数据帧及其传输方式"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text"> 交换机使用的数据帧及其传输方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全双工和半双工"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text"> 全双工和半双工</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#半双工"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text"> 半双工</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全双工"><span class="post-toc-number">1.2.3.2.</span> <span class="post-toc-text"> 全双工</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由器三层交换机"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text"> 路由器/三层交换机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4~7层交换机"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text"> 4～7层交换机</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -442,7 +473,7 @@
       </li>
       
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/计算机网络硬件/&title=《计算机网络硬件》 — Peterpan's Blog&source=emmmm…..先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/计算机网络硬件/&title=《计算机网络硬件》 — Peterpan's Blog&source=emmmm…先写这么多，有兴趣以后再写，作为开发人员对于网络层以下只是了解" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

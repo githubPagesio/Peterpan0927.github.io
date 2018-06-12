@@ -184,8 +184,11 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>要了解一个操作系统首先就要了解它的文件系统<br><a id="more"></a></p>
-<h1 id="Linux运维学习Day3"><a href="#Linux运维学习Day3" class="headerlink" title="Linux运维学习Day3"></a>Linux运维学习Day3</h1><h2 id="Linux上的文件系统"><a href="#Linux上的文件系统" class="headerlink" title="Linux上的文件系统"></a>Linux上的文件系统</h2><p>根文件系统（rootfs）：</p>
+            <p>要了解一个操作系统首先就要了解它的文件系统</p>
+<a id="more"></a>
+<h1 id="linux运维学习day3"><a class="markdownIt-Anchor" href="#linux运维学习day3"></a> Linux运维学习Day3</h1>
+<h2 id="linux上的文件系统"><a class="markdownIt-Anchor" href="#linux上的文件系统"></a> Linux上的文件系统</h2>
+<p>根文件系统（rootfs）：</p>
 <p>正常的Linux文件系统都会遵从LSB，FHS（FileSystem Heirachy Standard）</p>
 <p>文件系统分析：</p>
 <p>/boot:引导文件的存放目录，内核文件（vmlinuz）、引导加载器（boot loader ,grub）都存放于此目录（只是在根上创建一个boot，然后把这个boot关联到一个独立的分区上）</p>
@@ -211,7 +214,7 @@
 <p>include:存放C程序头文件，头文件就是描述库的打开方式</p>
 <p>lib/lib64:同上，存放库的位置</p>
 <p>share:结构化独立的数据，例如doc、man等</p>
-<p>local:第三方应用程序的安装位置：bin,sbin,lib,lib64,etc,share….</p>
+<p>local:第三方应用程序的安装位置：bin,sbin,lib,lib64,etc,share…</p>
 </blockquote>
 <p>/var:variable data files（经常修改的文件存放位置）</p>
 <blockquote>
@@ -228,26 +231,34 @@
 <p>/proc:用于输出内核和进程信息相关的虚拟文件系统（将本来不是文件的输出成文件的样子，如进程文件只有一个参数）</p>
 <p>/sys:用于输出当前系统上硬件设备相关信息的虚拟文件系统</p>
 <p>/selinux:selinux相关的安全策略等信息的存储位置</p>
-<h4 id="Linux下的文件类型"><a href="#Linux下的文件类型" class="headerlink" title="Linux下的文件类型"></a>Linux下的文件类型</h4><p>-（f）:普通文件</p>
+<h4 id="linux下的文件类型"><a class="markdownIt-Anchor" href="#linux下的文件类型"></a> Linux下的文件类型</h4>
+<p>-（f）:普通文件</p>
 <p>d:目录文件</p>
 <p>b:块设备</p>
 <p>c:字符设备</p>
 <p>l:符号链接文件（软链接）</p>
 <p>p:管道文件</p>
 <p>s:套接字文件，socket,实现主机内的通信</p>
-<h2 id="bash基础特性"><a href="#bash基础特性" class="headerlink" title="bash基础特性"></a>bash基础特性</h2><p>1.命令历史</p>
+<h2 id="bash基础特性"><a class="markdownIt-Anchor" href="#bash基础特性"></a> bash基础特性</h2>
+<p>1.命令历史</p>
 <blockquote>
 <p>history：</p>
-<p>—–环境变量：</p>
-<p>———–HISTSIZE：命令历史记录的条数</p>
-<p>———–HISTFILE：~/.bash_history</p>
-<p>———–HISTFILESIZE: 命令历史<em>文件</em>记录历史条数</p>
+<p>-----环境变量：</p>
+<p>-----------HISTSIZE：命令历史记录的条数</p>
+<p>-----------HISTFILE：~/.bash_history</p>
+<p>-----------HISTFILESIZE: 命令历史<em>文件</em>记录历史条数</p>
 </blockquote>
 <p>调用上一条命令的最后一个参数（比较常用）</p>
 <p>!$、ESC+.、Alt+.</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-21%20%E4%B8%8A%E5%8D%8811.55.49.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-21%20%E4%B8%8A%E5%8D%8811.55.49.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>控制命令历史的记录方式：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/EA941CB006CF15B6E71144131A294AFE.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/EA941CB006CF15B6E71144131A294AFE.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>比如修改命令历史为忽略空格开头的命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export HISTCONTROL=&quot;ignorespace&quot;;   #这样修改只对当前shell和它的子shell有效</div></pre></td></tr></table></figure>
 <p>2.命令行展开</p>
@@ -261,7 +272,10 @@
 <p>1-255:失败</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo $?   #通过打印来判断结果</div></pre></td></tr></table></figure>
 <p>目录管理类命令：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/CE96188AB44DE3ED6B7F8D0DED5871BC.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/CE96188AB44DE3ED6B7F8D0DED5871BC.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>文本文件查看类命令：</p>
 <p>cat,more,less,tail,head</p>
 <p>其中cat除了不能翻页，其他的功能和more,less类似，但是cat可以将多个文件合并成一个文件</p>
@@ -277,7 +291,10 @@
 <p>change time: 改变时间，ctime， 元数据发生改变</p>
 </blockquote>
 <p>使用touch命令可以修改时间戳的信息和选择修改哪一项，但是最后一项是无法修改的</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/71E63EACCC43D61DD775979F71B4F853.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/71E63EACCC43D61DD775979F71B4F853.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 
         </div>
         
@@ -286,7 +303,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.776Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.776Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -412,7 +429,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux运维学习Day3"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux运维学习Day3</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux上的文件系统"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Linux上的文件系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Linux下的文件类型"><span class="post-toc-number">1.1.0.1.</span> <span class="post-toc-text">Linux下的文件类型</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash基础特性"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">bash基础特性</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#linux运维学习day3"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Linux运维学习Day3</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux上的文件系统"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> Linux上的文件系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#linux下的文件类型"><span class="post-toc-number">1.1.0.1.</span> <span class="post-toc-text"> Linux下的文件类型</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bash基础特性"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> bash基础特性</span></a></li></ol></li></ol>
         </nav>
     </aside>
     

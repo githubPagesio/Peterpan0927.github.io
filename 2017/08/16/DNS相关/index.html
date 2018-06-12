@@ -184,39 +184,58 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下<br><a id="more"></a></p>
-<h1 id="DNS相关"><a href="#DNS相关" class="headerlink" title="DNS相关"></a>DNS相关</h1><h2 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h2><p>网域名称系统（Domain Name System）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够让人更方便访问互联网。DNS使用TCP、UDP，端口53.当前对于每一级域名长度的限制是63的字符，总长不能超过253个字符。</p>
-<h2 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h2><ul>
+            <p>为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下</p>
+<a id="more"></a>
+<h1 id="dns相关"><a class="markdownIt-Anchor" href="#dns相关"></a> DNS相关</h1>
+<h2 id="什么是dns"><a class="markdownIt-Anchor" href="#什么是dns"></a> 什么是DNS？</h2>
+<p>网域名称系统（Domain Name System）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够让人更方便访问互联网。DNS使用TCP、UDP，端口53.当前对于每一级域名长度的限制是63的字符，总长不能超过253个字符。</p>
+<h2 id="记录类型"><a class="markdownIt-Anchor" href="#记录类型"></a> 记录类型</h2>
+<ul>
 <li>主机记录（A记录）：用来指定主机名对应的IP地址记录，用户可以将该域名下的网站服务器指向到自己的web server上。同时也可以设置您域名的二级域名。</li>
 <li>别名记录（CNAME）：这种记录允许你将多个名字映射到同一台计算机，通常用于同时提供WWW和MAIL服务的计算机。同样也可以应用到多个域名指向同一个服务器的IP，此时将一个域名做A记录指向服务器，其他的域名作别名（CNAME）到A记录的域名上，当服务器IP变更时，只需要修改A记录即可。</li>
 <li>IPv6主机记录（AAAA记录）：将特定的主机名映射到一个主机的IPv6地址</li>
 <li>服务位置记录（SRV记录）：用于定义提供特定服务的服务器的位置，如主机（hostname），端口（port number）等。</li>
 <li>NAPTR记录：NAPTR是以<a href="https://zh.wikipedia.org/wiki/%E4%BC%9A%E8%AF%9D%E5%8F%91%E8%B5%B7%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">SIP</a>为基础，泛化了对传输协议有要求的服务,它提供了正则表达式的方式去映射一个域名</li>
 </ul>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>DNS的查询有两种方式：递归、迭代。DNS客户端设置使用的DNS服务器一般都是递归服务器，它负责全权处理客户端的DNS查询请求，直到返回最终结果。DNS服务器之间一般采用的都是迭代查询的方式。</p>
-<p>如果小明在浏览器中输入一段网址回车，域名解析过程如下： </p>
+<h2 id="域名解析"><a class="markdownIt-Anchor" href="#域名解析"></a> 域名解析</h2>
+<p>DNS的查询有两种方式：递归、迭代。DNS客户端设置使用的DNS服务器一般都是递归服务器，它负责全权处理客户端的DNS查询请求，直到返回最终结果。DNS服务器之间一般采用的都是迭代查询的方式。</p>
+<p>如果小明在浏览器中输入一段网址回车，域名解析过程如下：</p>
 <ol>
-<li>DNS 进程先检查自己的程序缓存（Cache），如果有”xxxx.com”所对应的 IP，则直接告诉浏览器。如果缓存没有找到，进入下一步；</li>
+<li>DNS 进程先检查自己的程序缓存（Cache），如果有&quot;<a href="http://xxxx.com" target="_blank" rel="external">xxxx.com</a>&quot;所对应的 IP，则直接告诉浏览器。如果缓存没有找到，进入下一步；</li>
 <li>检查本地 Host 文件，看看有没有，有则告诉浏览器。如果 Host 没有找到，进入下一步；</li>
 <li>检查本地的 DNS 服务器配置，得到 DNS Server = 10.10.10.10，发个消息给它，让 DNS 服务器帮助查找。此消息为 UDP 格式，目的 IP=10.10.10.10，小明电脑发现和自己不在一个网段，于是使用上一节提到的不同网段的通信，将 IP 包发给 DNS Server = 10.10.1 […]</li>
-<li>DNS Server （10.10.10.10）在自己的缓存里也没有发现，于是向互联网的上级 DNS Server （8.8.8.8）发送协查请求；DNS Server （8.8.8.8）发现了匹配项：HTTP://www.myorange.com2.2.2.2，于是将协查结果返回给小明公司 DNS 服务器（10.10.10.10），然后再返回到小明电脑（10.1.1.2）DNS 进程。（如果上层服务器也没有找到，就继续向上迭代查找）</li>
+<li>DNS Server （10.10.10.10）在自己的缓存里也没有发现，于是向互联网的上级 DNS Server （8.8.8.8）发送协查请求；DNS Server （8.8.8.8）发现了匹配项：<a href="HTTP://www.myorange.com2.2.2.2" target="_blank" rel="external">HTTP://www.myorange.com2.2.2.2</a>，于是将协查结果返回给小明公司 DNS 服务器（10.10.10.10），然后再返回到小明电脑（10.1.1.2）DNS 进程。（如果上层服务器也没有找到，就继续向上迭代查找）</li>
 </ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>这个时候，整个DNS解析的过程就完毕了,小明可以将访问服务器的请求打包成http格式之后告诉TCP进程，同时告诉TCP进程的还有该域名的IP地址。</p>
-<h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><h3 id="国际化域名"><a href="#国际化域名" class="headerlink" title="国际化域名"></a>国际化域名</h3><p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
-<h3 id="TTL值"><a href="#TTL值" class="headerlink" title="TTL值"></a>TTL值</h3><p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了,这个值其实并不是固定的，在不同情况下是不同的。</p>
-<h3 id="关于hexo博客重新关联域名"><a href="#关于hexo博客重新关联域名" class="headerlink" title="关于hexo博客重新关联域名"></a>关于hexo博客重新关联域名</h3><p>相信大部分初次搭建hexo博客的人都会选择使用github的那个免费域名,但是时间一久真的很丑的说….所以一定拥有一个自己的个性域名啊，那么基本上分为下面的三步就可以搞定了（以腾讯云为例，默默为被嫌弃的github默哀3秒）</p>
+<h2 id="其他相关"><a class="markdownIt-Anchor" href="#其他相关"></a> 其他相关</h2>
+<h3 id="国际化域名"><a class="markdownIt-Anchor" href="#国际化域名"></a> 国际化域名</h3>
+<p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
+<h3 id="ttl值"><a class="markdownIt-Anchor" href="#ttl值"></a> TTL值</h3>
+<p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了,这个值其实并不是固定的，在不同情况下是不同的。</p>
+<h3 id="关于hexo博客重新关联域名"><a class="markdownIt-Anchor" href="#关于hexo博客重新关联域名"></a> 关于hexo博客重新关联域名</h3>
+<p>相信大部分初次搭建hexo博客的人都会选择使用github的那个免费域名,但是时间一久真的很丑的说…所以一定拥有一个自己的个性域名啊，那么基本上分为下面的三步就可以搞定了（以腾讯云为例，默默为被嫌弃的github默哀3秒）</p>
 <ul>
 <li>购买一个域名，可以使用GoDaddy或者国内一些信得过的，我是因为优惠劵的缘故所以选了腾讯云…并且免费选了大天朝的cn域名，虽然审核很麻烦🐸的说。</li>
 <li>然后在云解析界面将我们的github添加到CNAME中去，将新买的域名指向原来的github域名，主机记录选择@，也就是直接解析主机名,如下图所示：</li>
 </ul>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <ul>
 <li>这个时候还没有结束，只在域名商处修改CNAME之后，输入的域名会被重定向到Github pages的页面，但是由于你这个域名github不知道，所以直接就果断拒绝并且给一你巴掌，上面写着404，所以还是乖乖的把名字告诉他：在<code>你博客的本地目录/source/</code>目录下创建一个CNAME文件，里面写上你买的域名，然后就可以推送了：</li>
 </ul>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
-<h4 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h4><ul>
+<h4 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h4>
+<ul>
 <li><a href="http://blog.zfan.me/2015/09/03/%E4%B8%BA%E9%83%A8%E7%BD%B2%E5%9C%A8Github%E4%B8%8A%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D/" target="_blank" rel="external">参考博客</a></li>
 </ul>
 
@@ -227,7 +246,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.862Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.862Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -353,7 +372,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DNS相关"><span class="post-toc-number">1.</span> <span class="post-toc-text">DNS相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是DNS？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是DNS？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#记录类型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">记录类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#域名解析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">域名解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他相关"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">其他相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#国际化域名"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">国际化域名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TTL值"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">TTL值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于hexo博客重新关联域名"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">关于hexo博客重新关联域名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">1.4.3.1.</span> <span class="post-toc-text">参考博客</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#dns相关"><span class="post-toc-number">1.</span> <span class="post-toc-text"> DNS相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是dns"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 什么是DNS？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#记录类型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 记录类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#域名解析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> 域名解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他相关"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> 其他相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#国际化域名"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text"> 国际化域名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ttl值"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text"> TTL值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于hexo博客重新关联域名"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text"> 关于hexo博客重新关联域名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">1.4.3.1.</span> <span class="post-toc-text"> 参考博客</span></a></li></ol></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     

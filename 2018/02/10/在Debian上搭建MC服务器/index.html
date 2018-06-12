@@ -184,10 +184,11 @@
             
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" height="350" width="600" alt=""></p>
+            <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.27.16.png" height="350" width="600" alt="">
 <p>大家都玩过我的世界这个经典的游戏，号称世界上第一款的沙盒游戏，虽然他的画质(呵呵)，但是他的自由度让我们都为之着迷，可以享受到真正作为一个上帝的乐趣，话说我在两年前的暑假还在这个游戏上建造过山车之类的，将世界打造成游乐场(当时还不会任何的技术)，<code>make a real world!</code></p>
 <a id="more"></a>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>直到昨天的时候我突然又不小心看到了这个游戏，于是已经学了一些技术的我自然就想做一些DIY了，不是那种借用第三方的作弊器，that’s too boring。我想要搭建一个多人在线的MC服务器，当自己一个人的神还不够爽，之前看网上的各种花式玩法还是很羡慕的，虽然电脑是Mac的，但是依然不妨碍我们玩游戏的心，那么接下来我们就开始吧，我把整个构成分成几个环节：</p>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>直到昨天的时候我突然又不小心看到了这个游戏，于是已经学了一些技术的我自然就想做一些DIY了，不是那种借用第三方的作弊器，that’s too boring。我想要搭建一个多人在线的MC服务器，当自己一个人的神还不够爽，之前看网上的各种花式玩法还是很羡慕的，虽然电脑是Mac的，但是依然不妨碍我们玩游戏的心，那么接下来我们就开始吧，我把整个构成分成几个环节：</p>
 <ol>
 <li>服务器上安装java环境，jre即可</li>
 <li>可以选择性的安装<code>screen</code>(可选)</li>
@@ -195,12 +196,16 @@
 <li>本地获得对应服务端的客户端，然后连上去</li>
 </ol>
 <p>整个过程看起来十分的简单，但是其中还有一些问题我在第一次折腾的时候还是会有些蛋疼的，接下来就一步一步的走一波，从服务器端开始，希望没有计算机基础的游戏爱好者也可以学会。</p>
-<h1 id="Debian安装java环境"><a href="#Debian安装java环境" class="headerlink" title="Debian安装java环境"></a>Debian安装java环境</h1><p>由于我们的服务器是debian的系统，所以我们介绍的是Debian上的安装方法，当然这种东西最好使用Docker去跑，但是本博主的docker水平停留在学习一天的水平，只能用容器跑个网站，玩这个到时候把我系统网卡都跑崩了就不好了，毕竟docker和K8这玩意太蛋疼，废话不多说，开始安装：</p>
+<h1 id="debian安装java环境"><a class="markdownIt-Anchor" href="#debian安装java环境"></a> Debian安装java环境</h1>
+<p>由于我们的服务器是debian的系统，所以我们介绍的是Debian上的安装方法，当然这种东西最好使用Docker去跑，但是本博主的docker水平停留在学习一天的水平，只能用容器跑个网站，玩这个到时候把我系统网卡都跑崩了就不好了，毕竟docker和K8这玩意太蛋疼，废话不多说，开始安装：</p>
 <p>Debian官方没有维护专门的Java软件包，所以不能直接用apt-get工具来安装。在Debian系统中要安装Java，有两种方式，一种是用传统方式，一种是Debian方式。</p>
 <p>后面一种方法我们不讲，就说前一种，没装wget的朋友看下面：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install wget</div></pre></td></tr></table></figure>
 <p>然后我们去官网上找一下我们需要下载的地址，可以直接输<code>sun.com</code>，然后跳转到<code>Oracle</code>的官网，找到java下载所在的页面，然后右键复制下载的地址：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.45.03.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-10%20%E4%B8%8B%E5%8D%889.45.03.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>在服务器中输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://javadl.oracle.com/webapps/download/AutoDL?BundleId=230532_2f38c3b165be4555a1fa6e98c45e0808</div></pre></td></tr></table></figure>
 <p>然后获得一个AutoDLxxx的文件，这个文件首先要改个名字，叫做java.tar.gz，直接用<code>mv</code>就好，然后解压：</p>
@@ -209,37 +214,63 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export CLASSPATH=/usr/local/jrexxx/lib</div><div class="line">export JAVA_HOME=/usr/local/jrexxx</div><div class="line">export PATH=$JAVA_HOME/bin:$PATH</div></pre></td></tr></table></figure>
 <p>然后就用<code>java -version</code>测试一下了，应该到这里就成功了。</p>
 <p>第一步到此搞定，第二部想安装的一个<code>apt-get</code>就搞定。</p>
-<h1 id="下载MC服务端"><a href="#下载MC服务端" class="headerlink" title="下载MC服务端"></a>下载MC服务端</h1><p>这一步其实相对来说非常的简单，但是有一点要注意就是你的客户端和服务端必须版本对应，不然是连接不上的，初次之外，还有一些配置文件的修改问题需要注意：</p>
+<h1 id="下载mc服务端"><a class="markdownIt-Anchor" href="#下载mc服务端"></a> 下载MC服务端</h1>
+<p>这一步其实相对来说非常的简单，但是有一点要注意就是你的客户端和服务端必须版本对应，不然是连接不上的，初次之外，还有一些配置文件的修改问题需要注意：</p>
 <p>首先就是下载的地址了，同样可以通过wget去下载：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar</div></pre></td></tr></table></figure>
 <p>网址中的<code>1.12.2</code>是我们的版本号，需要和客户端一一对应，下载之后我们要对两个文件进行配置，首先ls看一下：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8A%E5%8D%8811.35.00.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8A%E5%8D%8811.35.00.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>一个就是eula.txt这个文件，将其中的值改为true，用来同意eula协议，也就是一个最终用户许可协议</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8A%E5%8D%8811.35.55.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8A%E5%8D%8811.35.55.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>这个修改完成以后下面是一个可选修改项，如果你是买了MC的玩家，可以跳过，如果是crack的玩家，就需要进行这一步，因为在联机的时候，客户端向服务端请求的参数有一个id属性，对于crack的玩家，这个属性值是null，所以在客户端请求的时候，虽然服务器成功开起来，版本号也对应的上，但是会报java空指针的错误，那么这种情况下就需要去修改<code>server.properties</code>这个文件了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">online-mode=false   #是否开启正版验证，需用我的世界官方启动器才能进入</div></pre></td></tr></table></figure>
 <p>这个值我们修改为false之后就可以正常的登陆了（其他值的配置参考<a href="https://jingyan.baidu.com/article/8ebacdf074bc0049f75cd550.html" target="_blank" rel="external">百度教程</a>），当然这个是后话，先要把服务器跑起来：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#开启一个新窗口运行</div><div class="line">screen -S &quot;mc&quot;</div><div class="line">#开启服务器并限制参数</div><div class="line">java  -Xmx256M -Xms1M -jar mc.jar nogui</div></pre></td></tr></table></figure>
 <p>这样我们的服务器端的所有工作就基本搞定了，剩下的DIY工作就是各路玩家做的事情了，还有一个重点当然不能忽视，就是服务端的OP指令，这里当个搬运工吧—<a href="https://tieba.baidu.com/p/2646365811?red_tag=2929703202" target="_blank" rel="external">我的世界常用op指令</a>。</p>
-<h1 id="配置客户端"><a href="#配置客户端" class="headerlink" title="配置客户端"></a>配置客户端</h1><p>在windows上的破解手段太多就不说了，在这里就以Mac版的作为例子，首先我们去官网上注册一个账号然后下载游戏，等待游戏下好之后，我们登陆刚刚注册的账号，选择试玩版，进入世界之后退出，然后下载我们的crack工具，同样放在了<a href="ftp://118.89.38.168/pic/test/Minecraft+MAC.jar" target="_blank" rel="external">ftp</a>上：</p>
+<h1 id="配置客户端"><a class="markdownIt-Anchor" href="#配置客户端"></a> 配置客户端</h1>
+<p>在windows上的破解手段太多就不说了，在这里就以Mac版的作为例子，首先我们去官网上注册一个账号然后下载游戏，等待游戏下好之后，我们登陆刚刚注册的账号，选择试玩版，进入世界之后退出，然后下载我们的crack工具，同样放在了<a href="ftp://118.89.38.168/pic/test/Minecraft+MAC.jar" target="_blank" rel="external">ftp</a>上：</p>
 <p>下载完了之后我们打开这个java，本地的java环境搭建我就不多说了，最后再说一次，注意和服务端的版本好一致，接下来你有一个前提条件就是需要掌握科学上网方式:</p>
 <ol>
 <li>打开.jar文件，选择OK：</li>
 </ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.13.22.png" alt=""></p>
-<ol>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.13.22.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<ol start="2">
 <li>等待着右下方出现需要你输入用户名的地方，这个username随便输就好，如果你没有掌握科学上网的方式，右下角就会一直卡在<code>Loding versions</code>的地方了：</li>
 </ol>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.13.59.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.13.59.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>如果科学上网成功出现的username界面如下：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.17.18.png" alt=""></p>
-<ol>
-<li>第二步成功了之后，就选择合适的profile，选择我的世界版本，然后点击play开始游戏，进度条加载完之后，你就可以进入游戏了，然后就是选择多人游戏，连接到自己搭建的服务器，那么整个过程就大功告成了：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.18.43.png" alt=""></li>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.17.18.png" alt="" title="" class="">
+                <p></p>
+            </figure>
+<ol start="3">
+<li>第二步成功了之后，就选择合适的profile，选择我的世界版本，然后点击play开始游戏，进度条加载完之后，你就可以进入游戏了，然后就是选择多人游戏，连接到自己搭建的服务器，那么整个过程就大功告成了：<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.18.43.png" alt="" title="" class="">
+                <p></p>
+            </figure></li>
 </ol>
 <p>连接上去之后就来展示一下我们的op指令吧：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.31.16.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.31.16.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>调整一下游戏时间，来看看，然后调整一下天气:</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.33.15.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-12%20%E4%B8%8B%E5%8D%881.33.15.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>那么我的世界傻瓜教程就到此结束了，有问题的可以提问哟，回不回复就看缘分了。</p>
 
         </div>
@@ -249,7 +280,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.771Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.771Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -376,7 +407,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Debian安装java环境"><span class="post-toc-number">2.</span> <span class="post-toc-text">Debian安装java环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#下载MC服务端"><span class="post-toc-number">3.</span> <span class="post-toc-text">下载MC服务端</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置客户端"><span class="post-toc-number">4.</span> <span class="post-toc-text">配置客户端</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#debian安装java环境"><span class="post-toc-number">2.</span> <span class="post-toc-text"> Debian安装java环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#下载mc服务端"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 下载MC服务端</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置客户端"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 配置客户端</span></a></li></ol>
         </nav>
     </aside>
     

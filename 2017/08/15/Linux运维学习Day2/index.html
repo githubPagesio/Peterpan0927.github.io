@@ -186,7 +186,9 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>接着第一天的继续完善基础的知识吧！</p>
 <a id="more"></a>
-<h1 id="Linux运维学习Day2"><a href="#Linux运维学习Day2" class="headerlink" title="Linux运维学习Day2"></a>Linux运维学习Day2</h1><h2 id="计算机基础知识"><a href="#计算机基础知识" class="headerlink" title="计算机基础知识"></a>计算机基础知识</h2><blockquote>
+<h1 id="linux运维学习day2"><a class="markdownIt-Anchor" href="#linux运维学习day2"></a> Linux运维学习Day2</h1>
+<h2 id="计算机基础知识"><a class="markdownIt-Anchor" href="#计算机基础知识"></a> 计算机基础知识</h2>
+<blockquote>
 <p>CPU、Memory、I/O</p>
 <p>— |程序运行模式：</p>
 <p>—— |用户空间：user space ,us</p>
@@ -210,6 +212,8 @@
 <p><code>slackware</code></p>
 <blockquote>
 <p>suse</p>
+</blockquote>
+<blockquote>
 <blockquote>
 <p>Opensuse</p>
 </blockquote>
@@ -228,18 +232,22 @@
 <p>Centos:兼容rhel的格式，除了界面不一样</p>
 </blockquote>
 </blockquote>
-<p>可以参考,还有一些非主流发行版比如说Gentoo、LFS(Linux From scratch)，Android也能算是linux的发行版本，就是kernel+<a href="https://zh.wikipedia.org/wiki/BusyBox" target="_blank" rel="external"> busybox</a>+java虚拟机。<img src="http://omunhj2f1.bkt.clouddn.com/gldt1210.png" alt=""></p>
+<p>可以参考,还有一些非主流发行版比如说Gentoo、LFS(Linux From scratch)，Android也能算是linux的发行版本，就是kernel+<a href="https://zh.wikipedia.org/wiki/BusyBox" target="_blank" rel="external"> busybox</a>+java虚拟机。<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/gldt1210.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p><a href="http://www.ha97.com/833.html" target="_blank" rel="external">开源协议及其比较</a></p>
 <p>程序包管理器:</p>
-<p>​        rpm:rhel fedora suse centos</p>
-<p>​    dpt(debian packge tool): Debian ubuntu</p>
+<p>​    	rpm:rhel fedora suse centos</p>
+<p>​	dpt(debian packge tool): Debian ubuntu</p>
 <p>Linux的哲学思想：</p>
 <p>1.一切皆文件，把几乎所有的资源，包括硬件设备都组织为文件格式</p>
 <p>2.有众多的单一目的的小程序组成，一个程序只实现一个功能，而且要做好，组合小程序完成复杂任务</p>
 <p>3.尽量避免跟用户交互，目标：实现脚本编程，自动完成某些功能</p>
 <p>4.使用纯文本文件保存配置信息，目标：使用文本编辑器即能完成系统配置工作</p>
 <p>镜像站点推荐<a href="http://mirrors.aliyun.com/" target="_blank" rel="external">阿里云</a>、<a href="http://mirrors.souhu.com" target="_blank" rel="external">搜狐</a></p>
-<h2 id="计算机基础知识（二）"><a href="#计算机基础知识（二）" class="headerlink" title="计算机基础知识（二）"></a>计算机基础知识（二）</h2><p>终端：用户与主机交互，必然用到的设备</p>
+<h2 id="计算机基础知识二"><a class="markdownIt-Anchor" href="#计算机基础知识二"></a> 计算机基础知识（二）</h2>
+<p>终端：用户与主机交互，必然用到的设备</p>
 <blockquote>
 <p>物理终端：直接接入本机的显示器和键盘设备：console</p>
 <p>虚拟终端：附加在物理终端之上的以软件方式虚拟实现的终端，centos默认6个终端</p>
@@ -283,13 +291,15 @@
 </blockquote>
 <p>参数：命令的作用对象，向命令提供数据</p>
 </blockquote>
-<h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><h3 id="工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><a href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧" class="headerlink" title="工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"></a>工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</h3><p>文件系统：</p>
+<h2 id="linux命令"><a class="markdownIt-Anchor" href="#linux命令"></a> Linux命令</h2>
+<h3 id="工欲善其事必先利其器首先就来看看怎么更快的上手命令吧"><a class="markdownIt-Anchor" href="#工欲善其事必先利其器首先就来看看怎么更快的上手命令吧"></a> 工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</h3>
+<p>文件系统：</p>
 <p>文件有两类数据，一种叫做元数据：metadata（存放在索引中），数据：data（文件真正包含的内容）</p>
 <p>命令获取帮助</p>
 <p>内部命令：<code>help command</code></p>
 <p>外部命令：<code>command --help</code>、<code>man command</code>、<code>info command</code></p>
 <p>hash命令：shell搜寻到的外部命令会缓存至kv(key-value)存储中</p>
-<p>history命令：登陆shell时，会读取命令历史文件中记录下的命令：~/.bash_history，登陆进shell后执行的命令只会记录在缓存中，这些命令会在用户退出的时候”追加”到命令历史文件中</p>
+<p>history命令：登陆shell时，会读取命令历史文件中记录下的命令：~/.bash_history，登陆进shell后执行的命令只会记录在缓存中，这些命令会在用户退出的时候&quot;追加&quot;到命令历史文件中</p>
 <table>
 <thead>
 <tr>
@@ -327,13 +337,23 @@
 </tr>
 </tbody>
 </table>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/2CD6B9BF918F0F2CA30546E568B8F2BE.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/6B77F5F6-E55D-4963-A2E1-B9C185FBC40E.png" alt=""></p>
 <p>程序自身的帮助文档：/usr/share/doc/COMMAND-VERSION,或者查看官方文档</p>
 <p>推荐一个网站，<a href="https://www.slideshare.net/" target="_blank" rel="external">需先翻墙再使用</a></p>
-<h3 id="接下来就是一些基础的命令讲解"><a href="#接下来就是一些基础的命令讲解" class="headerlink" title="接下来就是一些基础的命令讲解"></a>接下来就是一些基础的命令讲解</h3><p><code>date</code>命令使用：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg" alt=""></p>
-<p>e.g.-&gt;:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png" alt=""></p>
+<h3 id="接下来就是一些基础的命令讲解"><a class="markdownIt-Anchor" href="#接下来就是一些基础的命令讲解"></a> 接下来就是一些基础的命令讲解</h3>
+<p><code>date</code>命令使用：</p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/D8911B61C1A277643C894624ECB1A171.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
+<p>e.g.-&gt;:<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%8812.34.54.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <p>Linux的两种时钟：</p>
 <blockquote>
 <p>系统时钟：由Linux内核通过CPU工作频率进行的计时</p>
@@ -355,12 +375,21 @@
 </tbody>
 </table>
 <p>关于ls命令：</p>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/E2F2AAF76EE99590341C80F28AF90A07.jpg" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>获取指定文件的元数据信息可用<code>stat</code>命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stat test</div></pre></td></tr></table></figure>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png" alt=""></p>
+<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.27.39.png" alt="" title="" class="">
+                <p></p>
+            </figure>
 <p>文件查看命令：<code>cat</code>、<code>tac</code></p>
-<p>cat命令是通过你键入的文件路径来显示文件，事实上文件是以文件流的方式存储的，一个换行符是$，一个空格是$$，如果你的cat命令后面没有键入任何的路径，那么默认就会读取你之后输入的信息输出，就像一个复读机一样，是不是突然变的有意思了么？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png" alt=""></p>
+<p>cat命令是通过你键入的文件路径来显示文件，事实上文件是以文件流的方式存储的，一个换行符是，一个空格是$，如果你的cat命令后面没有键入任何的路径，那么默认就会读取你之后输入的信息输出，就像一个复读机一样，是不是突然变的有意思了么？<figure class="image-box">
+                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-19%20%E4%B8%8B%E5%8D%881.43.40.png" alt="" title="" class="">
+                <p></p>
+            </figure></p>
 <table>
 <thead>
 <tr>
@@ -379,7 +408,8 @@
 <p><code>which</code>:显示命令对应的程序文件路径</p>
 <p><code>whereis</code>：显示的比which更加详细，包括手册的位置等</p>
 <p><code>whatis</code> :使用<code>mkwhatis</code>命令可以将当前系统上所有的帮助手册和与之对应的关键字创建为一个数据库：</p>
-<h3 id="然后进入到系统管理类命令"><a href="#然后进入到系统管理类命令" class="headerlink" title="然后进入到系统管理类命令"></a>然后进入到系统管理类命令</h3><p>关机命令：<code>shutdown</code>、<code>halt(关机且不会重启)</code>、<code>poweroff</code>、<code>init 0</code></p>
+<h3 id="然后进入到系统管理类命令"><a class="markdownIt-Anchor" href="#然后进入到系统管理类命令"></a> 然后进入到系统管理类命令</h3>
+<p>关机命令：<code>shutdown</code>、<code>halt(关机且不会重启)</code>、<code>poweroff</code>、<code>init 0</code></p>
 <p>重启命令：<code>reboot</code>、 <code>shutdown</code>、 <code>init 6</code></p>
 <p>用户登录相关：<code>whoami</code>、 <code>who</code>、 <code>w</code></p>
 
@@ -390,7 +420,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.768Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
+    最後更新時間：<time datetime="2018-03-13T16:00:22.768Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
 </span><br>
 
 
@@ -516,7 +546,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux运维学习Day2"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux运维学习Day2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">计算机基础知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识（二）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">计算机基础知识（二）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux命令"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Linux命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接下来就是一些基础的命令讲解"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">接下来就是一些基础的命令讲解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#然后进入到系统管理类命令"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">然后进入到系统管理类命令</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#linux运维学习day2"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Linux运维学习Day2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 计算机基础知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算机基础知识二"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 计算机基础知识（二）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux命令"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> Linux命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工欲善其事必先利其器首先就来看看怎么更快的上手命令吧"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text"> 工欲善其事，必先利其器，首先就来看看怎么更快的上手命令吧</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接下来就是一些基础的命令讲解"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text"> 接下来就是一些基础的命令讲解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#然后进入到系统管理类命令"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text"> 然后进入到系统管理类命令</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
