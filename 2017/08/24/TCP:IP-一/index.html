@@ -1,212 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP/IP(一)">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/TCP:IP-一/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/osi1-5.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/osi4-1.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/osi%E6%A8%A1%E5%9E%8B%E5%8F%82%E8%80%83%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/697D6930A9BFC709E63475EDB8C2AB4E.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/22E392D96C18B8E857BDC0D431FCC14C.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/8728D70860794E71410D42FE4A2709F4.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/280123794EEFF716EF4A094084DE7FB5.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/33D1998EBE60340EE0E2CB4067AC6F57.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/F541EB6888B188542B78B59340633E86.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP/IP(一)">
+<meta name="twitter:description" content="日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/osi1-5.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/08/24/TCP:IP-一/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>TCP/IP(一)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>TCP/IP(一) | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>TCP/IP(一)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">TCP/IP(一)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-08-23T16:10:01.000Z" itemprop="datePublished" class="page-time">
-  2017-08-24
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OSI模型-网络构成要素-地址/">OSI模型 网络构成要素 地址</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-TCP:IP-一"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">TCP/IP(一)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-08-24 00:10:01" datetime="2017-08-23T16:10:01.000Z"  itemprop="datePublished">2017-08-24</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OSI模型-网络构成要素-地址/">OSI模型 网络构成要素 地址</a></li></ul>
-
-
-
-            
-	<span id="/2017/08/24/TCP:IP-一/" class="leancloud_visitors" data-flag-title="TCP/IP(一)" title="TCP/IP(一)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/08/24/TCP:IP-一/#comment">
-            <span class="valine-comment-count" data-xid="/2017/08/24/TCP:IP-一/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/24/地狱少女/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/16/DNS相关/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/24/TCP:IP-一/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/24/TCP:IP-一/&text=TCP/IP(一)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/24/TCP:IP-一/&is_video=false&description=TCP/IP(一)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TCP/IP(一)&body=Check out this article: http://yoursite.com/2017/08/24/TCP:IP-一/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/24/TCP:IP-一/&name=TCP/IP(一)&description=&lt;p&gt;日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？&lt;br&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-一"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(一)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP的意义"><span class="toc-number">1.1.</span> <span class="toc-text">TCP/IP的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">1.2.</span> <span class="toc-text">OSI七层模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI参考模型通信处理举例"><span class="toc-number">1.3.</span> <span class="toc-text">OSI参考模型通信处理举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输方式的分类"><span class="toc-number">1.4.</span> <span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向有连接型和面向无连接型"><span class="toc-number">1.4.1.</span> <span class="toc-text">面向有连接型和面向无连接型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#电路交换和分组交换"><span class="toc-number">1.4.2.</span> <span class="toc-text">电路交换和分组交换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址"><span class="toc-number">1.5.</span> <span class="toc-text">地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#地址的唯一性"><span class="toc-number">1.5.1.</span> <span class="toc-text">地址的唯一性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地址的层次性"><span class="toc-number">1.5.2.</span> <span class="toc-text">地址的层次性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络的构成要素"><span class="toc-number">1.6.</span> <span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#互联网通信"><span class="toc-number">1.6.1.</span> <span class="toc-text">互联网通信</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        TCP/IP(一)
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？</p>
-<a id="more"></a>
-<h1 id="tcpip一"><a class="markdownIt-Anchor" href="#tcpip一"></a> TCP/IP(一)</h1>
-<p>Unix只针对大型主机或服务器，而Linux适用于x86的个人计算机</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-23T16:10:01.000Z" itemprop="datePublished">2017-08-24</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/程序员的自我修养/">程序员的自我修养</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？<br><a id="more"></a></p>
+<h1 id="TCP-IP-一"><a href="#TCP-IP-一" class="headerlink" title="TCP/IP(一)"></a>TCP/IP(一)</h1><p>Unix只针对大型主机或服务器，而Linux适用于x86的个人计算机</p>
 <p>Linux的内核是运行程序和管理像磁盘和打印机等硬件设备的核心程序，它提供了一个在裸设备和应用程序之间的抽象层,简单来说如同心脏之于人，发动机之于汽车，CPU之于计算机，最后附上一个内核源码的<a href="https://www.kernel.org/" target="_blank" rel="external">下载地址</a>。</p>
 <p>Linux在服务器领域的应用是其重要分支，其免费，稳定，高效等特点得到了很好的体验。</p>
-<h2 id="tcpip的意义"><a class="markdownIt-Anchor" href="#tcpip的意义"></a> TCP/IP的意义</h2>
-<p>不同硬件，操作系统之间的通信都需要一种规则，我们把这种规则称作协议，而其中的TCP/IP协议则是互联网相关的各类协议族的总称。</p>
-<h2 id="osi七层模型"><a class="markdownIt-Anchor" href="#osi七层模型"></a> OSI七层模型</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/osi1-5.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/osi4-1.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="TCP-IP的意义"><a href="#TCP-IP的意义" class="headerlink" title="TCP/IP的意义"></a>TCP/IP的意义</h2><p>不同硬件，操作系统之间的通信都需要一种规则，我们把这种规则称作协议，而其中的TCP/IP协议则是互联网相关的各类协议族的总称。</p>
+<h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/osi1-5.png" alt=""></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/osi4-1.png" alt=""></p>
 <p>因为计算机不像人一样拥有随机应变的能力，所以我们需要应对各种异常情况并进行处理，其中OSI模型对通信中的必要功能进行了很好的归纳，但是由于没有对协议和接口进行详细的定义，对于学习协议只能起一个引导作用。</p>
-<h2 id="osi参考模型通信处理举例"><a class="markdownIt-Anchor" href="#osi参考模型通信处理举例"></a> OSI参考模型通信处理举例</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/osi%E6%A8%A1%E5%9E%8B%E5%8F%82%E8%80%83%E4%B8%BE%E4%BE%8B.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="OSI参考模型通信处理举例"><a href="#OSI参考模型通信处理举例" class="headerlink" title="OSI参考模型通信处理举例"></a>OSI参考模型通信处理举例</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/osi%E6%A8%A1%E5%9E%8B%E5%8F%82%E8%80%83%E4%B8%BE%E4%BE%8B.png" alt=""></p>
 <p>为了方便理解，我们举一个例子，如上图所示，A向B发一个邮件问好：</p>
 <ul>
 <li>应用层</li>
@@ -224,7 +206,7 @@
 <li>传输层</li>
 </ul>
 <p>如果说会话层是负责建立什么样的连接，那么传输层就是建立连接和断开连接，在两个主机之间创建逻辑的通信连接，为了确保数据到达目标地址，会在通信两端的计算机进行确认，如果数据没有送达，它会负责重发。</p>
-<p>比如某种原因，B只收到&quot;早上&quot;，没有收到&quot;好&quot;,然后就会把这个数据返回给A，A的之后再把&quot;好&quot;发送过去，并再次确认是否收到。就好比我们日常生活中有人问<code>你刚才说什么？</code></p>
+<p>比如某种原因，B只收到”早上”，没有收到”好”,然后就会把这个数据返回给A，A的之后再把”好”发送过去，并再次确认是否收到。就好比我们日常生活中有人问<code>你刚才说什么？</code></p>
 <ul>
 <li>网络层</li>
 </ul>
@@ -233,18 +215,13 @@
 <li>数据链路层</li>
 </ul>
 <p>数据链路层的作用是在通过传输介质互联的设备之间进行数据处理，和上层的关系可以用一张图来表示：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/697D6930A9BFC709E63475EDB8C2AB4E.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/697D6930A9BFC709E63475EDB8C2AB4E.png" alt=""></p>
 <p>相互连接的设备之间使用地址实现传输。这种地址被称为MAC地址。</p>
 <ul>
 <li>物理层</li>
 </ul>
 <p>将数据的0、1转换为电压和脉冲光传输给物理的传输介质，传输到别的设备然后再通过自下而上的方式对信息解析。</p>
-<h2 id="传输方式的分类"><a class="markdownIt-Anchor" href="#传输方式的分类"></a> 传输方式的分类</h2>
-<h3 id="面向有连接型和面向无连接型"><a class="markdownIt-Anchor" href="#面向有连接型和面向无连接型"></a> 面向有连接型和面向无连接型</h3>
-<ul>
+<h2 id="传输方式的分类"><a href="#传输方式的分类" class="headerlink" title="传输方式的分类"></a>传输方式的分类</h2><h3 id="面向有连接型和面向无连接型"><a href="#面向有连接型和面向无连接型" class="headerlink" title="面向有连接型和面向无连接型"></a>面向有连接型和面向无连接型</h3><ul>
 <li>面向有连接型</li>
 </ul>
 <p>在发送数据之前，要在收发主机之间连接一条通信线路。就好像给别人打电话需要对方接通后才能进行通话。需要在通信传输的前后，专门进行建立和断开连接的处理，如果对端无法通信，可以避免发送无谓的数据。</p>
@@ -252,8 +229,7 @@
 <li>面向无连接型</li>
 </ul>
 <p>不要求建立和断开连接。发送端可以在任何时候对接收端发送数据，在这种情况下，是接收方需要时常确认是否受到数据。就像人们去邮局寄包裹的时候，不需要管收件人的地址是否存在，只需要写上这个地址即可以办理邮寄包裹的业务。</p>
-<h3 id="电路交换和分组交换"><a class="markdownIt-Anchor" href="#电路交换和分组交换"></a> 电路交换和分组交换</h3>
-<p>目前网络通信方式大致分为两种—电路交换和分组交换.电路交换技术相对来说比较久远，主要用于过去的电话网。而分组交换技术从上世纪60年代才逐渐被人们所认可，TCP/IP也正是采用了分组交换技术。</p>
+<h3 id="电路交换和分组交换"><a href="#电路交换和分组交换" class="headerlink" title="电路交换和分组交换"></a>电路交换和分组交换</h3><p>目前网络通信方式大致分为两种—电路交换和分组交换.电路交换技术相对来说比较久远，主要用于过去的电话网。而分组交换技术从上世纪60年代才逐渐被人们所认可，TCP/IP也正是采用了分组交换技术。</p>
 <ul>
 <li>电路交换</li>
 </ul>
@@ -263,13 +239,8 @@
 </ul>
 <p>聪明的人类想到了一个方法来解决这个问题～：将连接到通信电路的计算机所要发送的数据分成多个数据包，按照一定的顺序排列之后再发送，因为在包的首部写入发送端和接收端的地址，所以可以唯一确认。</p>
 <p>发送端计算机将数据分组发送给路由器，路由器接收到数据以后会按照顺序缓存到相应的队列中，再以先进先出的原则发送出去。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/22E392D96C18B8E857BDC0D431FCC14C.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<h2 id="地址"><a class="markdownIt-Anchor" href="#地址"></a> 地址</h2>
-<h3 id="地址的唯一性"><a class="markdownIt-Anchor" href="#地址的唯一性"></a> 地址的唯一性</h3>
-<p>如果要让地址在通信中发挥作用，通信的主体也就是是信息收发端必须是唯一的表示一个对象。同一个</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/22E392D96C18B8E857BDC0D431FCC14C.png" alt=""></p>
+<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><h3 id="地址的唯一性"><a href="#地址的唯一性" class="headerlink" title="地址的唯一性"></a>地址的唯一性</h3><p>如果要让地址在通信中发挥作用，通信的主体也就是是信息收发端必须是唯一的表示一个对象。同一个</p>
 <p>通信网络中不能有两个地址相同的通信主体存在,这也就是地址的唯一性。</p>
 <p>这里可能会有一个疑问，对于单播还比较好理解，在多播、广播中是怎么保证地址的唯一行的呢？</p>
 <p>在这种接收端设备不止一个的情况下，可以对这些由多个设备组成的一组通信赋予同一个具有唯一特性的地址：</p>
@@ -286,21 +257,13 @@
 <li>任播</li>
 </ul>
 <p>在领取教材的时候，主任说七班任意来一位同学拿名册，任意一位同学就是这次任播的目标地址</p>
-<h3 id="地址的层次性"><a class="markdownIt-Anchor" href="#地址的层次性"></a> 地址的层次性</h3>
-<p>当地址不是很多的时候，有唯一地址就可以确定通信主体，但是在当今庞大的互联网中，地址除了具有唯一性还需要具有层次性。其实在电话号码中就已经有这种设定了，电话号码包括国家区号和国内区号，这样就可以更加快速的定位；</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/8728D70860794E71410D42FE4A2709F4.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h3 id="地址的层次性"><a href="#地址的层次性" class="headerlink" title="地址的层次性"></a>地址的层次性</h3><p>当地址不是很多的时候，有唯一地址就可以确定通信主体，但是在当今庞大的互联网中，地址除了具有唯一性还需要具有层次性。其实在电话号码中就已经有这种设定了，电话号码包括国家区号和国内区号，这样就可以更加快速的定位；</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/8728D70860794E71410D42FE4A2709F4.png" alt=""></p>
 <p>MAC地址和IP地址在标识一个通信主体时虽然都具有唯一性，但只有IP地址具有层次性。</p>
 <p>MAC地址由设备的制造厂商对每块网卡进行分别的指定，而IP地址通过网络号和主机号两部分组成。主机号不同，网络号相同，说明他们处于同一个网段。另一方面，网络号相同的主机在提供商类型，地域分布上都比较集中。这也是为什么说IP地址具有层次性。</p>
 <p>网络传输中，每个节点会根据分组数据的地址信息，来判断报文应该从哪个网卡发出去。为此，各个地址都会参考一个发出接口列表。这一点上MAC寻址和IP寻址是一样的。只不过MAC寻址所参考的这个表叫做地址转发表，而IP寻址中所参考的叫做路由控制表。一个记录的是实际的MAC地址，一个是集中后的网络号。比如下面这个例子：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/280123794EEFF716EF4A094084DE7FB5.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<h2 id="网络的构成要素"><a class="markdownIt-Anchor" href="#网络的构成要素"></a> 网络的构成要素</h2>
-<table>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/280123794EEFF716EF4A094084DE7FB5.png" alt=""></p>
+<h2 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h2><table>
 <thead>
 <tr>
 <th style="text-align:center">设备</th>
@@ -337,324 +300,101 @@
 <p>这里中继器和交换机方面的知识之前已经提过，就不多赘述，那么来说说网关吧</p>
 <p>网关是负责将OSI模型中从传输层到应用层的数据进行转换和转发的设备。它和4～7层交换机一样都是处理传输层以上的数据，网关不仅转发数据还会对数据进行转换，它通常会使用一个表示层或者应用层网关，在两个不能直接进行通信的协议之间进行翻译，最终实现两者之间的通信。</p>
 <p>就好比说手机的邮件有时会和互联网的邮件不兼容，这是由于它们在表示层和应用层之间的电子应用协议互不相同所导致。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/33D1998EBE60340EE0E2CB4067AC6F57.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/33D1998EBE60340EE0E2CB4067AC6F57.png" alt=""></p>
 <p>其中代理服务器也算是网关，被称作应用网关，在我大天朝也是应用广泛，应用方面自行体会～</p>
-<h3 id="互联网通信"><a class="markdownIt-Anchor" href="#互联网通信"></a> 互联网通信</h3>
-<p>人们在家或公司一般都会使用互联网接入服务，汇集到无限局域网路由器和最近交换机的通信会被连接到所谓的&quot;接入层&quot;，甚至通过边缘网络或主干网实现与目标地址进行通信。</p>
+<h3 id="互联网通信"><a href="#互联网通信" class="headerlink" title="互联网通信"></a>互联网通信</h3><p>人们在家或公司一般都会使用互联网接入服务，汇集到无限局域网路由器和最近交换机的通信会被连接到所谓的”接入层”，甚至通过边缘网络或主干网实现与目标地址进行通信。</p>
 <p>如果是移动通信，手机一开机，就会自动和距离最近的基站发生无线通信。基站设有特定的手机基站天线，本身相当于网络的接入层。</p>
 <p>基站收集的通信请求被汇集到控制中心（“边缘网络”），之后再被接入到主干网。</p>
 <p>如果是从一个信息发布者的角度来看的话，对于那些巨大的访问量，会采用数据中心的模式，也就是托管主机服务，集合多个存储一起，通过连接高速网络减少网络延迟来提高响应的速度。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/F541EB6888B188542B78B59340633E86.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/F541EB6888B188542B78B59340633E86.png" alt=""></p>
 <p>数据中心由大型服务器、存储和计算机网络构成，有些大型数据中心会直接连接主干网，就算小规模的议案也会连接到边缘网络。</p>
 <p>数据中心的内部分布着三层交换机和高速路由器。</p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.845Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/08/24/TCP:IP-一/" target="_blank" rel="external">http://yoursite.com/2017/08/24/TCP:IP-一/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=《TCP/IP(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=《TCP/IP(一)》 — Peterpan's Blog&source=日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/08/24/地狱少女/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">地獄少女</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/16/DNS相关/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">DNS相关</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-一"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(一)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP的意义"><span class="toc-number">1.1.</span> <span class="toc-text">TCP/IP的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">1.2.</span> <span class="toc-text">OSI七层模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSI参考模型通信处理举例"><span class="toc-number">1.3.</span> <span class="toc-text">OSI参考模型通信处理举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传输方式的分类"><span class="toc-number">1.4.</span> <span class="toc-text">传输方式的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向有连接型和面向无连接型"><span class="toc-number">1.4.1.</span> <span class="toc-text">面向有连接型和面向无连接型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#电路交换和分组交换"><span class="toc-number">1.4.2.</span> <span class="toc-text">电路交换和分组交换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址"><span class="toc-number">1.5.</span> <span class="toc-text">地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#地址的唯一性"><span class="toc-number">1.5.1.</span> <span class="toc-text">地址的唯一性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地址的层次性"><span class="toc-number">1.5.2.</span> <span class="toc-text">地址的层次性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络的构成要素"><span class="toc-number">1.6.</span> <span class="toc-text">网络的构成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#互联网通信"><span class="toc-number">1.6.1.</span> <span class="toc-text">互联网通信</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/24/TCP:IP-一/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/24/TCP:IP-一/&text=TCP/IP(一)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/24/TCP:IP-一/&is_video=false&description=TCP/IP(一)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TCP/IP(一)&body=Check out this article: http://yoursite.com/2017/08/24/TCP:IP-一/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=TCP/IP(一)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/24/TCP:IP-一/&name=TCP/IP(一)&description=&lt;p&gt;日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？&lt;br&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tcpip一"><span class="post-toc-number">1.</span> <span class="post-toc-text"> TCP/IP(一)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tcpip的意义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> TCP/IP的意义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#osi七层模型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> OSI七层模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#osi参考模型通信处理举例"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> OSI参考模型通信处理举例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#传输方式的分类"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> 传输方式的分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向有连接型和面向无连接型"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text"> 面向有连接型和面向无连接型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#电路交换和分组交换"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text"> 电路交换和分组交换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"> 地址</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址的唯一性"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text"> 地址的唯一性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址的层次性"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text"> 地址的层次性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络的构成要素"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"> 网络的构成要素</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#互联网通信"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text"> 互联网通信</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=《TCP/IP(一)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/24/TCP:IP-一/&title=《TCP/IP(一)》 — Peterpan's Blog&source=日常的生活中，我们无时不刻都在进行着互联网上的数据交互，那么数据如何进行传输的呢？" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABy0lEQVR42u3aO27EMAwFwL3/pR0gVRo5j9QnCjCqgt21PU5BSHz8fOL1fK/RJ8+PNbo2//2ChYuLO819XtcIN7r2/fXy+wxfCRcX9yD3vXiNLq6y8t8MP8fFxb2Mm7zGexlK7omLi/u/uElJer9nQsfFxb2Hmxx+qhudpLOx8ayGi4s7wa02THf8vbG/i4uLW+Q+xZUffqrlLHo6Li7uEW51g5K3OXrfRq+Ki4t7hFvdV1SLUdTsiJ+Ii4t7hlttf/RWPq7xS2HFxcXdzM1HJZJC06MkLdTyZAcuLu4i7qoYI49XyyNcuLi4B7kzgxH5QEYvJWnOieDi4k5ze+FHLyCZKX+4uLhnuPkhp1fgypuY/J+Ii4u7mfu+WenVlmqsgouLew+3OnpVfXxv5CKKUnBxcbdxexFINUTJ7xMdt3BxcTdzZ4Yheoec6mYIFxf3r7j5YWamSTofseDi4p7k5qtapKqtk2YSi4uLu5S7KtMs5zbxRmpLBIuLixt8Wy1eeehSbcVGMQwuLu5Bbm87Ug1WF2xlcHFxL+NGyUyxwOXBDC4u7s3cPBztlUVcXNx7uNUgpDdWNRPE4uLinuTOnzjystUrlLi4uAe5XxxdBhzraQZIAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

@@ -1,205 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="开始学习繁琐的文本处理工具和头疼的正则表达式了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux运维学习Day5">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/Linux运维学习Day5/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="开始学习繁琐的文本处理工具和头疼的正则表达式了">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-01%20%E4%B8%8B%E5%8D%888.01.32.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux运维学习Day5">
+<meta name="twitter:description" content="开始学习繁琐的文本处理工具和头疼的正则表达式了">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/08/15/Linux运维学习Day5/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Linux运维学习Day5</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>Linux运维学习Day5 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="Linux">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>Linux运维学习Day5</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">Linux运维学习Day5</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-08-15T11:26:22.000Z" itemprop="datePublished" class="page-time">
-  2017-08-15
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux下的文本处理三剑客/">Linux下的文本处理三剑客</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-Linux运维学习Day5"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">Linux运维学习Day5</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-08-15 19:26:22" datetime="2017-08-15T11:26:22.000Z"  itemprop="datePublished">2017-08-15</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux下的文本处理三剑客/">Linux下的文本处理三剑客</a></li></ul>
-
-
-
-            
-	<span id="/2017/08/15/Linux运维学习Day5/" class="leancloud_visitors" data-flag-title="Linux运维学习Day5" title="Linux运维学习Day5">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/08/15/Linux运维学习Day5/#comment">
-            <span class="valine-comment-count" data-xid="/2017/08/15/Linux运维学习Day5/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/15/计算机网络硬件/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/15/Linux运维学习Day4/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/15/Linux运维学习Day5/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&text=Linux运维学习Day5"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&is_video=false&description=Linux运维学习Day5"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux运维学习Day5&body=Check out this article: http://yoursite.com/2017/08/15/Linux运维学习Day5/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&name=Linux运维学习Day5&description=&lt;p&gt;开始学习繁琐的文本处理工具和头疼的正则表达式了&lt;br&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day5"><span class="toc-number">1.</span> <span class="toc-text">Linux运维学习Day5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SHEll编程"><span class="toc-number">1.1.</span> <span class="toc-text">SHEll编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-提供了编程环境"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.提供了编程环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-短路运算"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.短路运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的文本处理三剑客"><span class="toc-number">1.2.</span> <span class="toc-text">Linux上的文本处理三剑客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#grep："><span class="toc-number">1.2.1.</span> <span class="toc-text">grep：</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Linux运维学习Day5
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>开始学习繁琐的文本处理工具和头疼的正则表达式了</p>
-<a id="more"></a>
-<h1 id="linux运维学习day5"><a class="markdownIt-Anchor" href="#linux运维学习day5"></a> Linux运维学习Day5</h1>
-<h2 id="shell编程"><a class="markdownIt-Anchor" href="#shell编程"></a> SHEll编程</h2>
-<h3 id="1提供了编程环境"><a class="markdownIt-Anchor" href="#1提供了编程环境"></a> 1.提供了编程环境</h3>
-<p>程序设计风格：</p>
-<p>​	过程式：以指令为中心，数据服务于指令</p>
-<p>​	对象式：以数据为中心，指令服务于数据</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-15T11:26:22.000Z" itemprop="datePublished">2017-08-15</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>开始学习繁琐的文本处理工具和头疼的正则表达式了<br><a id="more"></a></p>
+<h1 id="Linux运维学习Day5"><a href="#Linux运维学习Day5" class="headerlink" title="Linux运维学习Day5"></a>Linux运维学习Day5</h1><h2 id="SHEll编程"><a href="#SHEll编程" class="headerlink" title="SHEll编程"></a>SHEll编程</h2><h3 id="1-提供了编程环境"><a href="#1-提供了编程环境" class="headerlink" title="1.提供了编程环境"></a>1.提供了编程环境</h3><p>程序设计风格：</p>
+<p>​    过程式：以指令为中心，数据服务于指令</p>
+<p>​    对象式：以数据为中心，指令服务于数据</p>
 <p>shell程序：提供了编程能力，解释执行</p>
 <p>程序的执行方式：</p>
-<p>​	低级：汇编</p>
-<p>​	高级：</p>
-<p>​		编译：高级语言—》编译器—》目标代码</p>
-<p>​		C，C++，java</p>
-<p>​		解释：高级语言—》解释器—》机器代码</p>
-<p>​		shell, perl,python</p>
+<p>​    低级：汇编</p>
+<p>​    高级：</p>
+<p>​        编译：高级语言—》编译器—》目标代码</p>
+<p>​        C，C++，java</p>
+<p>​        解释：高级语言—》解释器—》机器代码</p>
+<p>​        shell, perl,python</p>
 <p>shell脚本，文本文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#! /bin/zsh</div><div class="line"></div><div class="line">cat /etc/fstab</div><div class="line"></div><div class="line">wc -l /etc/fstab</div></pre></td></tr></table></figure>
 <p>运行脚本的方式：</p>
@@ -208,35 +193,29 @@
 <p>2.直接运行解释器，将脚本作为解释器程序的参数运行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zsh first.sh</div></pre></td></tr></table></figure>
 <p>在bash中，把所有要存储的数据统统当作字符进行，不支持浮点数。</p>
-<h3 id="2短路运算"><a class="markdownIt-Anchor" href="#2短路运算"></a> 2.短路运算</h3>
-<p>与：</p>
-<p>​	第一个为0，结果必定为0</p>
-<p>​	第一个为1，第二个必须要参与运算</p>
+<h3 id="2-短路运算"><a href="#2-短路运算" class="headerlink" title="2.短路运算"></a>2.短路运算</h3><p>与：</p>
+<p>​    第一个为0，结果必定为0</p>
+<p>​    第一个为1，第二个必须要参与运算</p>
 <p>或：</p>
-<p>​	第一个为1，结果必定为1</p>
-<p>​	第一个为0，第二个必须要参与运算</p>
+<p>​    第一个为1，结果必定为1</p>
+<p>​    第一个为0，第二个必须要参与运算</p>
 <p>可以通过命令的执行状态码来举个例子：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-31%20%E4%B8%8B%E5%8D%883.40.18.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#可以通过下面这种方式来模拟判断命令的输出成功与否</div><div class="line">ls /var &amp;&amp; echo &quot;success&quot; || echo &quot;failed&quot;</div><div class="line">id root &amp;&gt; /dev/null &amp;&amp; echo &quot;exist&quot; || echo &quot;no such user&quot;</div></pre></td></tr></table></figure>
-<h2 id="linux上的文本处理三剑客"><a class="markdownIt-Anchor" href="#linux上的文本处理三剑客"></a> Linux上的文本处理三剑客</h2>
-<p>1.grep:文本过滤（模式：pattern）工具</p>
-<p>​	grep、egrep、fgrep</p>
+<h2 id="Linux上的文本处理三剑客"><a href="#Linux上的文本处理三剑客" class="headerlink" title="Linux上的文本处理三剑客"></a>Linux上的文本处理三剑客</h2><p>1.grep:文本过滤（模式：pattern）工具</p>
+<p>​    grep、egrep、fgrep</p>
 <p>2.sed:stream editor ,文本编辑工具</p>
 <p>3.awk:Linux上的实现gawk,文本报告生成器</p>
-<h3 id="grep"><a class="markdownIt-Anchor" href="#grep"></a> grep：</h3>
-<p>全称是（Global search Regular expression and Print out the line）</p>
+<h3 id="grep："><a href="#grep：" class="headerlink" title="grep："></a>grep：</h3><p>全称是（Global search Regular expression and Print out the line）</p>
 <p>作用：文本搜索工具，根据用户指定的模式对目标文本进行逐行匹配检查，打印匹配到的行</p>
-<p>​	模式：由正则表达式字符及文本字符所编写的过滤条件</p>
-<p>​	REGEXP:有一类特殊字符及文本字符所编写的模式，其中有些字符不代表字符字面意思，而表示控制或通配的功能</p>
-<p>​		基本正则表达式（BRE）</p>
-<p>​		扩展正则表达式（ERE）</p>
-<p>​			grep -E 、egrep</p>
+<p>​    模式：由正则表达式字符及文本字符所编写的过滤条件</p>
+<p>​    REGEXP:有一类特殊字符及文本字符所编写的模式，其中有些字符不代表字符字面意思，而表示控制或通配的功能    </p>
+<p>​        基本正则表达式（BRE）</p>
+<p>​        扩展正则表达式（ERE）</p>
+<p>​            grep -E 、egrep    </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">grep root /etc/passwd</div><div class="line">grep --color=auto root /etc/passwd #表示对匹配到的文本着色显示</div><div class="line">fgrep root /etc/passwd.   #固化表达式的搜索，其中的$...没有转义的意义，只是匹配原字符串</div><div class="line">grep -v root /etc/passwd  #显示无法被匹配到的行</div><div class="line">grep -i root /etc/passwd  #忽略字符的大小写</div><div class="line">grep -o root /etc/passed  #仅显示匹配到的字符串</div><div class="line">grep -q root /etc/passwd  #没有回显，被称作静默模式</div><div class="line">#此外还有-A/B/C + n，除匹配到的信息之外，还显示匹配到的信息的后／前／前后n行</div></pre></td></tr></table></figure>
-<p>基本正则表达式元字符：</p>
-<p>​	字符匹配：</p>
+<p> 基本正则表达式元字符：</p>
+<p>​    字符匹配：</p>
 <table>
 <thead>
 <tr>
@@ -259,7 +238,7 @@
 </tr>
 </tbody>
 </table>
-<p>​	匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数（使用的时候加引号）</p>
+<p>​    匹配次数：用在要指定次数的字符后面，用于指定前面的字符要出现的次数（使用的时候加引号）</p>
 <table>
 <thead>
 <tr>
@@ -273,7 +252,7 @@
 <td>任意长度的任意字符，和glob中的*具有相同的意义</td>
 </tr>
 <tr>
-<td>?</td>
+<td>\?</td>
 <td>匹配前面的字符0或1次，即前面的可有可无</td>
 </tr>
 <tr>
@@ -290,7 +269,7 @@
 </tr>
 </tbody>
 </table>
-<p>​	位置锁定：</p>
+<p>​    位置锁定：</p>
 <table>
 <thead>
 <tr>
@@ -321,11 +300,8 @@
 </tr>
 </tbody>
 </table>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-01%20%E4%B8%8B%E5%8D%888.01.32.png" alt="" title="" class="">
-                <p></p>
-            </figure> 
-<p>​	分组：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-01%20%E4%B8%8B%E5%8D%888.01.32.png" alt=""> </p>
+<p>​    分组：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\(\):将一个或多个字符捆绑在一起，当作一个整体进行处理</div><div class="line">#分组括号中的模式匹配到的内容会被正则表达式引擎记录于内部的变量后，这些变量的命名方式为：\1,\2</div><div class="line"> \1:从左侧起，第一个左括号以及与之匹配右括号之间的模式所匹配到的字符,剩下的依次类推：</div><div class="line"> 	\(ab\+\(xy\)*\):</div><div class="line"> 	\1:ab\+(xy\)*\</div><div class="line"> 	\2:xy</div><div class="line">#后向引用：引用前面的分组括号中的模式所匹配字符（而非模式本身）</div></pre></td></tr></table></figure>
 <p>例题训练：</p>
 <p>1.如果用户root存在，显示其默认的shell</p>
@@ -338,307 +314,91 @@
 <p>如果user1存在，就显示其存在，否则就添加，并显示添加用户的id号</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#! /bin/bash</div><div class="line">id user1 &amp;&gt; /dev/null &amp;&amp; echo &apos;user1 exist&apos; || useradd user1 &amp;&amp; id user1</div></pre></td></tr></table></figure>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.852Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/08/15/Linux运维学习Day5/" target="_blank" rel="external">http://yoursite.com/2017/08/15/Linux运维学习Day5/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=《Linux运维学习Day5》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=《Linux运维学习Day5》 — Peterpan's Blog&source=开始学习繁琐的文本处理工具和头疼的正则表达式了" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/08/15/计算机网络硬件/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">计算机网络硬件</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/15/Linux运维学习Day4/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Linux运维学习Day4</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux运维学习Day5"><span class="toc-number">1.</span> <span class="toc-text">Linux运维学习Day5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SHEll编程"><span class="toc-number">1.1.</span> <span class="toc-text">SHEll编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-提供了编程环境"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.提供了编程环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-短路运算"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.短路运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的文本处理三剑客"><span class="toc-number">1.2.</span> <span class="toc-text">Linux上的文本处理三剑客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#grep："><span class="toc-number">1.2.1.</span> <span class="toc-text">grep：</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/15/Linux运维学习Day5/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&text=Linux运维学习Day5"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&is_video=false&description=Linux运维学习Day5"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux运维学习Day5&body=Check out this article: http://yoursite.com/2017/08/15/Linux运维学习Day5/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=Linux运维学习Day5"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&name=Linux运维学习Day5&description=&lt;p&gt;开始学习繁琐的文本处理工具和头疼的正则表达式了&lt;br&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#linux运维学习day5"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Linux运维学习Day5</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#shell编程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> SHEll编程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1提供了编程环境"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"> 1.提供了编程环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2短路运算"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"> 2.短路运算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux上的文本处理三剑客"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> Linux上的文本处理三剑客</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#grep"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"> grep：</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=《Linux运维学习Day5》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/15/Linux运维学习Day5/&title=《Linux运维学习Day5》 — Peterpan's Blog&source=开始学习繁琐的文本处理工具和头疼的正则表达式了" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQW7DMAwFUd//0u62het0PmkVMDVaGQkS6XlBkCKPA6/zsvjn3z+5Pt/tcqxYMmTIeC3j/LhSBjli//9/2UWGDBkbMO42vnu+/urukxTPQ7MMGTJkkL8m6SAJrGRfGTJkyOgw+LHIQWXIkCGjU8Q+VfSSG7OFtbgMGTJeyOC37v//vKS/IUOGjFcxznDxYMqPeLaXDBkyZjN4gOMJ2ZKrNLKLDBkyhjJq4w6kkbkiHN9SZciQsQGjPzyRVpppHfpHC0GGDBmjGXxIK034Okkkf1kyZMjYgZEeupPw1Y6LUlIZMmRsxiDpWm3kgl+oxd/KkCFjNKP2406pWRsLI9/KkCFjNoNszC/X0qAcpIBpJ1aGDBmDGGkimJapT7UB0GuVIUPGOAYPhXwYIi1ua69DhgwZ+zBIYsdTxjRM87ZBjJEhQ8YgRq2JSFK32sUcv+f/8W8yZMgYzeCrVuKmLdI06MdLhgwZr2XUGgM85HWSv3hyRIYMGaMZ/QuyTmuhkyDKkCFjH8ZTZSSn8iQSnU2GDBkbMNJ+Aj9oWrjyo8uQIWMHxhmuFQH0c8hGg2gyZMgYzeg0BvrDGbWw3up1yJAh47UMHmTTzdYF3KDLKkOGjEGMoOoNG5npS6k1CWTIkCHjqbSv2J4kr0yGDBky8IBFJwFNQzbqxMqQIWMQIx3qIm2ADjW9+JMhQ8ZsRq107IfOtCXZGdGQIUPGaxlfKHtBz38Y3SkAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

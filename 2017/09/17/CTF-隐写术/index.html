@@ -1,210 +1,223 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF-信息隐藏技术">
+<meta property="og:url" content="http://yoursite.com/2017/09/17/CTF-隐写术/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.52.54.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.07.24.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.11.37.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.03.27.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.21.40.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%889.46.07.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.07.41.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.08.15.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.08.36.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.10.58.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%888.30.48.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%8810.09.19.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.26.58.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.33.44.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%8810.24.12.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.08.25.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.17.09.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%881.54.23.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.05.36.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF-信息隐藏技术">
+<meta name="twitter:description" content="表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/09/17/CTF-隐写术/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CTF-信息隐藏技术</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>CTF-信息隐藏技术 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="CTF">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>CTF-信息隐藏技术</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">CTF-信息隐藏技术</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-09-17T08:59:58.000Z" itemprop="datePublished" class="page-time">
-  2017-09-17
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/隐写术-kali工具/">隐写术 kali工具</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-CTF-隐写术"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">CTF-信息隐藏技术</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-09-17 16:59:58" datetime="2017-09-17T08:59:58.000Z"  itemprop="datePublished">2017-09-17</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/隐写术-kali工具/">隐写术 kali工具</a></li></ul>
-
-
-
-            
-	<span id="/2017/09/17/CTF-隐写术/" class="leancloud_visitors" data-flag-title="CTF-信息隐藏技术" title="CTF-信息隐藏技术">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/09/17/CTF-隐写术/#comment">
-            <span class="valine-comment-count" data-xid="/2017/09/17/CTF-隐写术/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/18/CTF-安全杂项/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/14/Foundation框架/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/09/17/CTF-隐写术/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/09/17/CTF-隐写术/&text=CTF-信息隐藏技术"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/09/17/CTF-隐写术/&is_video=false&description=CTF-信息隐藏技术"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CTF-信息隐藏技术&body=Check out this article: http://yoursite.com/2017/09/17/CTF-隐写术/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/09/17/CTF-隐写术/&name=CTF-信息隐藏技术&description=&lt;p&gt;表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#信息隐藏概述"><span class="toc-number">1.</span> <span class="toc-text">信息隐藏概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-女神"><span class="toc-number">1.1.</span> <span class="toc-text">0x00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-愤怒的小鸟"><span class="toc-number">1.2.</span> <span class="toc-text">0x01-愤怒的小鸟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LSB介绍"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">LSB介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始实战"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">开始实战</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-缺失的文件头"><span class="toc-number">1.3.</span> <span class="toc-text">0x03-缺失的文件头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-快刷新"><span class="toc-number">1.4.</span> <span class="toc-text">0x04-快刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-最低位的亲吻"><span class="toc-number">1.5.</span> <span class="toc-text">0x05-最低位的亲吻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-低调的男神"><span class="toc-number">1.6.</span> <span class="toc-text">0x06-低调的男神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ox07-大雄与多啦"><span class="toc-number">1.7.</span> <span class="toc-text">ox07-大雄与多啦</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-小苹果"><span class="toc-number">1.8.</span> <span class="toc-text">0x08-小苹果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-我就是flag"><span class="toc-number">1.9.</span> <span class="toc-text">0x09-我就是flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0A-黑与白"><span class="toc-number">1.10.</span> <span class="toc-text">0x0A-黑与白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0B-word隐写"><span class="toc-number">1.11.</span> <span class="toc-text">0x0B-word隐写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0C-Dark-star"><span class="toc-number">1.12.</span> <span class="toc-text">0x0C-Dark star</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.12.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x13烦人DE皮卡丘"><span class="toc-number">1.13.</span> <span class="toc-text">0x13烦人DE皮卡丘</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CTF-信息隐藏技术
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-09-17T08:59:58.000Z" itemprop="datePublished">2017-09-17</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CTF/">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）</p>
 <a id="more"></a>
-<h1 id="信息隐藏概述"><a class="markdownIt-Anchor" href="#信息隐藏概述"></a> 信息隐藏概述</h1>
-<ol>
+<h1 id="信息隐藏概述"><a href="#信息隐藏概述" class="headerlink" title="信息隐藏概述"></a>信息隐藏概述</h1><ol>
 <li>什么是信息隐藏技术</li>
 </ol>
 <p>隐写术也可以称作信息隐藏或者信息伪装技术，它利用了人类感觉器官对于数字信号的感觉冗余，将一个消息隐藏在另一个消息中，实现隐蔽通信或者隐蔽标识。</p>
 <p>信息隐藏技术隐藏了秘密信息的存在（与传统密码技术有明显的区别），表面上看起来和其他地方没有什么两样，比较容易跳过攻击者的攻击。</p>
-<ol start="2">
+<ol>
 <li>加密技术和信息隐藏技术的比较</li>
 </ol>
 <p>经典的以密码学为基础的加密技术，是过去主要的信息安全手段。但是传统的加密技术存在着这样一种问题：保护秘密信息时容易遭受攻击（破译），因此传统的加密技术只能满足有限的需求。</p>
-<p>信息隐藏作为近些年来信息安全和多媒体领域中提出的一种解决媒体信息安全的新方法。它通过把秘密信息永久的隐藏在可公开的媒体信息中，达到<code>证实该媒体信息的所有权归属和数据的完整性</code>或<code>传递秘密信息</code>的目的</p>
-<ol start="3">
+<p>信息隐藏作为近些年来信息安全和多媒体领域中提出的一种解决媒体信息安全的新方法。它通过把秘密信息永久的隐藏在可公开的媒体信息中，达到<code>证实该媒体信息的所有权归属和数据的完整性</code>或<code>传递秘密信息</code>的目的   </p>
+<ol>
 <li>信息隐藏技术的原理和应用</li>
 </ol>
 <p>下面是一张信息隐藏技术的原理图：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-24%20%E4%B8%8B%E5%8D%884.15.35.png" alt=""></p>
 <p>由上图可知，在密钥的控制下，通过嵌入算法将秘密信息隐藏在公开信息中，掩蔽宿主则通过通信信道进行传递，接收方的检测器利用密钥从掩蔽宿主中再恢复秘密信息。</p>
 <p>信息隐藏技术的特点有五点：</p>
 <ol>
@@ -216,88 +229,37 @@
 </ol>
 <p>上述这些特点，会随着信息隐藏目的和应用而有着不同的侧重，接下来要说的是信息隐藏技术中的一部分—隐写术</p>
 <p>隐写术可以使用图片作为载体，这也是常用的隐写方式，还有一些隐写的方式是通过word或者pdf的方式进行隐藏、还有HTML问津啊、windows的交换数据流甚至还有VMware的镜像中。</p>
-<h2 id="0x00-女神"><a class="markdownIt-Anchor" href="#0x00-女神"></a> 0x00-女神</h2>
-<p>现在有一张图片，如果从其中找到隐藏的信息呢？<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<h2 id="0x00-女神"><a href="#0x00-女神" class="headerlink" title="0x00-女神"></a>0x00-女神</h2><p>现在有一张图片，如果从其中找到隐藏的信息呢？<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.50.08.png" alt=""></p>
 <p>首先我们可以使用notepad++来打开这个图像，然后我们意外的发现：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.51.00.png" alt=""></p>
 <p>其中似乎包含着一个txt文件，那么想一想是不是可以将图像转换成压缩包，再解压缩就可以看到这个txt了呢</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png" alt="" title="" class="">
-                <p></p>
-            </figure>想到就去做，果然不出我们所料，找到了这个隐藏信息
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8A%E5%8D%8810.52.51.png" alt="">想到就去做，果然不出我们所料，找到了这个隐藏信息</p>
 <p>找到了隐藏的信息之后，我们发现这是一个md5加密的信息，再进行反向解密即可。</p>
 <p>更简单的方式就是先使用binwalk进行一次图片的分析：binwalk是kali自带的图片分析和提取工具：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.52.54.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.52.54.png" alt=""></p>
 <p>显然图片中隐藏着一个压缩包，<code>binwalk -e sim.jpg</code>是提取其中的压缩包，也可以使用foremost来提取。</p>
-<h2 id="0x01-愤怒的小鸟"><a class="markdownIt-Anchor" href="#0x01-愤怒的小鸟"></a> 0x01-愤怒的小鸟</h2>
-<h4 id="lsb介绍"><a class="markdownIt-Anchor" href="#lsb介绍"></a> LSB介绍</h4>
-<p>这里我们会需要用到的知识是信息隐藏算法之LSB算法,LSB算法也就是最低有效位</p>
-<p>在讲算法之前，我们先了解两个概念：<br>
-1.bmp图片是无损图片，每个像素点都用三个0-255的值来表示red，green，blue。<br>
-（注意：bmp图片的前14比特是头信息，最好不要用于该算法）。<br>
-而JPG图片是经过了DCT变换的，不能使用该算法。</p>
+<h2 id="0x01-愤怒的小鸟"><a href="#0x01-愤怒的小鸟" class="headerlink" title="0x01-愤怒的小鸟"></a>0x01-愤怒的小鸟</h2><h4 id="LSB介绍"><a href="#LSB介绍" class="headerlink" title="LSB介绍"></a>LSB介绍</h4><p>这里我们会需要用到的知识是信息隐藏算法之LSB算法,LSB算法也就是最低有效位</p>
+<p>在讲算法之前，我们先了解两个概念：<br>1.bmp图片是无损图片，每个像素点都用三个0-255的值来表示red，green，blue。<br>（注意：bmp图片的前14比特是头信息，最好不要用于该算法）。<br>而JPG图片是经过了DCT变换的，不能使用该算法。</p>
 <p>2.这里为了算法简单起见，我们使用灰度图像：每个像素点用0-255的值来表示黑白颜色深度。</p>
-<p>3.二值图像：每个像素点用0代表黑色，1代表白色<br>
-现在有一张宿主图片，我们要在宿主图片里面嵌入要隐藏的图片（当然可以是其它字符串），算法的思想是这样的：<br>
-1.将宿主图像变成灰度图像，将要隐藏的图像变成二值图像。<br>
-2.利用Matlab的bitget和bitset函数获得宿主图像中每个像素点的最低比特位（每个像素点总共有8位，2^8 = 256）将最低比特位与二值图像的位进行异或。如果结果为0，则不变；如果结果为1,如果设置宿主图像的最低比特位为1，则变成0；最低比特位是0，则变成1。<br>
-⚠️：这里必须保证宿主图片的大小必须大于要隐藏图片的大小。<br>
-3.因为改变最低比特位对0-255的像素点来说只改变 +1 或 -1的大小，对于整个像素点的变化几乎很小看不到。所以可以用该算法来做信息隐藏。</p>
-<h4 id="开始实战"><a class="markdownIt-Anchor" href="#开始实战"></a> 开始实战</h4>
-<p>了解到这些知识之后，我们就来看一张图片吧：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.07.24.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p>3.二值图像：每个像素点用0代表黑色，1代表白色<br>现在有一张宿主图片，我们要在宿主图片里面嵌入要隐藏的图片（当然可以是其它字符串），算法的思想是这样的：<br>1.将宿主图像变成灰度图像，将要隐藏的图像变成二值图像。<br>2.利用Matlab的bitget和bitset函数获得宿主图像中每个像素点的最低比特位（每个像素点总共有8位，2^8 = 256）将最低比特位与二值图像的位进行异或。如果结果为0，则不变；如果结果为1,如果设置宿主图像的最低比特位为1，则变成0；最低比特位是0，则变成1。<br>⚠️：这里必须保证宿主图片的大小必须大于要隐藏图片的大小。<br>3.因为改变最低比特位对0-255的像素点来说只改变 +1 或 -1的大小，对于整个像素点的变化几乎很小看不到。所以可以用该算法来做信息隐藏。</p>
+<h4 id="开始实战"><a href="#开始实战" class="headerlink" title="开始实战"></a>开始实战</h4><p>了解到这些知识之后，我们就来看一张图片吧：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.07.24.png" alt=""></p>
 <p>这张图片看起来平平无奇，就算使用notepad++打开的时候也没有发现什么关键的信息，但是我们可以继续想想，会不会有图片隐藏在这个图片中呢，我们使用工具StegSolve来打开这张图片，通过上面的箭头切换逐渐寻找其隐藏图像，终于被我们找到了！：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.11.37.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<h2 id="0x03-缺失的文件头"><a class="markdownIt-Anchor" href="#0x03-缺失的文件头"></a> 0x03-缺失的文件头</h2>
-<p>当我们下载了一个图片，但是无法打开的时候，这个时候该怎么办呢？看起来就是黑呼呼的一团…</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.03.27.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%8812.11.37.png" alt=""></p>
+<h2 id="0x03-缺失的文件头"><a href="#0x03-缺失的文件头" class="headerlink" title="0x03-缺失的文件头"></a>0x03-缺失的文件头</h2><p>当我们下载了一个图片，但是无法打开的时候，这个时候该怎么办呢？看起来就是黑呼呼的一团…</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.03.27.png" alt=""></p>
 <p>我们猜想可能是因为缺少了对应的头部，我们将这个图片的扩展名去掉了之后,使用sublime打开，就是一串十六进制，一看果然发现了缺少了对应的png文件头部,加上之后如下所示:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<p>接下来加上对应的后缀名之后，这道题目就AC了！！！:<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
-<h2 id="0x04-快刷新"><a class="markdownIt-Anchor" href="#0x04-快刷新"></a> 0x04-快刷新</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.21.40.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.06.02.png" alt=""></p>
+<p>接下来加上对应的后缀名之后，这道题目就AC了！！！:<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%881.07.10.png" alt=""> </p>
+<h2 id="0x04-快刷新"><a href="#0x04-快刷新" class="headerlink" title="0x04-快刷新"></a>0x04-快刷新</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.21.40.png" alt=""></p>
 <p>一开始试着使用StegSolve去寻找是不是LSB算法隐藏了什么东西，但是失败了。之后想到是不是有base64或者md5加密隐藏在图片中，但是还是没有找到，接下来可以再kali中使用binwalk来进行测试一下，没有后门，猜测可能是F5隐写：</p>
 <p>从github上当下一份测试工具，开始进行测试：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/matthewgao/F5-steganography</div></pre></td></tr></table></figure>
 <p>然后cd到该目录下执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#密码123456是根据图片的名字猜测的，不然就只能猜测是弱密码，写脚本爆破</div><div class="line">java Extract ~/Desktop/123456.jpg -p 123456</div></pre></td></tr></table></figure>
 <p>解密之后就可以在output.txt中查看输出的flag了</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<h2 id="0x05-最低位的亲吻"><a class="markdownIt-Anchor" href="#0x05-最低位的亲吻"></a> 0x05-最低位的亲吻</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%889.46.07.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-17%20%E4%B8%8B%E5%8D%884.41.52.png" alt=""></p>
+<h2 id="0x05-最低位的亲吻"><a href="#0x05-最低位的亲吻" class="headerlink" title="0x05-最低位的亲吻"></a>0x05-最低位的亲吻</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%889.46.07.png" alt=""></p>
 <p>从题干中我们就可以理解到这应该是使用的LSB算法（最低位隐藏了信息），那么我们可以使用stegsolve去看看能不能发现其中隐藏的图片信息，但是发现只能隐约的看到一个二维码的一角，如果只是简单的获取最后一位然后画图，没有理由找不到啊，后来发现，这个是bmp的八位灰度图，可能是StegSolve在解析的时候存在问题？</p>
 <p>但后来经过查阅之后发现了在LSB算法来实现隐写的过程中，隐写的载体是png格式，jpg和bmp都是不行的：</p>
 <ul>
@@ -306,80 +268,42 @@
 <li>bmp图片是没有进行压缩的，所以bmp图片特别大的</li>
 </ul>
 <p>在导出为png格式之后找到了隐藏的二维码，拿到flag值(注意不要直接修改后缀，这样文件头依然没有改变)</p>
-<p>直接的修改文件后缀的后果：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.07.41.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
-<p>重新导出为png之后的头部：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.08.15.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<p>直接的修改文件后缀的后果：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.07.41.png" alt=""></p>
+<p>重新导出为png之后的头部：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8810.08.15.png" alt=""></p>
 <p>同时也可以使用编程的方式去解决，大神从来只使用自己的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">import</span> Image</div><div class="line">path = <span class="string">'01.bmp'</span></div><div class="line">img = Image.open(path)</div><div class="line">pix = img.load()</div><div class="line">str1 = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">550</span>):</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">737</span>):</div><div class="line">        <span class="keyword">if</span> pix[i,j]%<span class="number">2</span>==<span class="number">0</span>:</div><div class="line">            str1+=<span class="string">'0'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            str1+=<span class="string">'1'</span></div><div class="line">img1 = Image.new(<span class="string">"RGB"</span>,(<span class="number">550</span>, <span class="number">737</span>))</div><div class="line">k=<span class="number">0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">550</span>):</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">737</span>):</div><div class="line">        <span class="keyword">if</span> str1[k]==<span class="string">'1'</span>:</div><div class="line">            img1.putpixel([i,j],(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            img1.putpixel([i,j],(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</div><div class="line">        k+=<span class="number">1</span></div><div class="line">img1.show()</div></pre></td></tr></table></figure>
 <p>这里仅介绍了其中几例，CTF常见的隐写方式可以<a href="http://zjw.dropsec.xyz/uncategorized/2016/08/18/CTF%E4%B8%AD%E5%B8%B8%E8%A7%81%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99.html" target="_blank" rel="external">参考博客</a></p>
-<h2 id="0x06-低调的男神"><a class="markdownIt-Anchor" href="#0x06-低调的男神"></a> 0x06-低调的男神</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.08.36.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="0x06-低调的男神"><a href="#0x06-低调的男神" class="headerlink" title="0x06-低调的男神"></a>0x06-低调的男神</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.08.36.png" alt=""></p>
 <p>这道题已经告诉了我们要使用stegsolve工具去处理这两张图片，首先查看了两张图片，并没有什么奇特的地方，后来想到stegsolve还有一个神奇的功能就是合并两种图片，合并之后移动到SUB发现一个类似二维码的图片：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.10.58.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-18%20%E4%B8%8B%E5%8D%8811.10.58.png" alt=""></p>
 <p>扫一扫发现根本就没什么反应，和正常的二维码有一些区别，可以反色试一试，（在windows上自带的画图可以解决，Mac上可以使用预览中的调整颜色）</p>
 <p>打开反色之后的图片我们可以在红，蓝，绿三个plane找到三个二维码，信息分别是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DES</div><div class="line">6XaMMbM7</div><div class="line">U2FsdGVkX18IBEATgMBe8NqjIqp65CxRjjMxXIIUxIjBnAODJQRkSLQ/+lHBsjpv1BwwEawMo1c=</div></pre></td></tr></table></figure>
-<p>显然这告诉了你这是一个DES算法，密钥是第二个，加密过后的是第三个，解密之后就可以拿到flag值了。找一个可以解密DES的网站解密就可以得到答案了~Ps：如果解密不了，可以换个网站试试，毕竟Des加密时候的填充、编码方式都会影响结果（实测这个网站可以：<a href="http://encode.chahuo.com" target="_blank" rel="external">http://encode.chahuo.com</a>）</p>
-<h2 id="ox07-大雄与多啦"><a class="markdownIt-Anchor" href="#ox07-大雄与多啦"></a> ox07-大雄与多啦</h2>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%888.30.48.png" alt=""></p>
-<p>大雄和多啦A梦是很多人童年的记忆，那么面对这张图，会找到什么样的信息呢，下载之后首先使用binwalk扫一遍，发现有压缩包，提取之后有一个97FA.rar的压缩包，解压的时候发现需要密码，那么密码是什么呢，一般来说我们会在图片的结尾找到一个一句话木马：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%8810.09.19.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<p>显然这告诉了你这是一个DES算法，密钥是第二个，加密过后的是第三个，解密之后就可以拿到flag值了。找一个可以解密DES的网站解密就可以得到答案了~Ps：如果解密不了，可以换个网站试试，毕竟Des加密时候的填充、编码方式都会影响结果（实测这个网站可以：<a href="http://encode.chahuo.com）" target="_blank" rel="external">http://encode.chahuo.com）</a></p>
+<h2 id="ox07-大雄与多啦"><a href="#ox07-大雄与多啦" class="headerlink" title="ox07-大雄与多啦"></a>ox07-大雄与多啦</h2><p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%888.30.48.png" alt=""></p>
+<p>大雄和多啦A梦是很多人童年的记忆，那么面对这张图，会找到什么样的信息呢，下载之后首先使用binwalk扫一遍，发现有压缩包，提取之后有一个97FA.rar的压缩包，解压的时候发现需要密码，那么密码是什么呢，一般来说我们会在图片的结尾找到一个一句话木马：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8A%E5%8D%8810.09.19.png" alt=""></p>
 <p>提交之后发现密码不对，结合图片的名称可能是需要base64编码，然后又试了试，果然成功了，拿到了一个flag.txt的文件，其中就是我们所需要的flag值</p>
-<h2 id="0x08-小苹果"><a class="markdownIt-Anchor" href="#0x08-小苹果"></a> 0x08-小苹果</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.26.58.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="0x08-小苹果"><a href="#0x08-小苹果" class="headerlink" title="0x08-小苹果"></a>0x08-小苹果</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.26.58.png" alt=""></p>
 <p>这一题的通过率稍微要少一点了，点开图片是一个中国结，中间是一个二维码的样式，直接扫码之后得到了一串Unicode编码的字符串，通过工具解密之后得到了一串中文？？？：羊由大井夫大人王中工</p>
 <p>后来经过查阅之后才知道原来是当铺密码，这是一种将中文和数字转换的密码，汉字有多少个笔画出头就转换成数字几</p>
-<p>了解到了之后自然秒解密：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.33.44.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
-<p>那么我就开心的直接提交了，发现不对，修改格式依旧不对，这个时候在CTF中有一个很重要的事就是当一条路走不通的时候就要从头寻找有没有遗漏的线索，用binwalk扫了一下这张图片之后里面是含有压缩包的。</p>
+<p>了解到了之后自然秒解密：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%887.33.44.png" alt=""></p>
+<p>那么我就开心的直接提交了，发现不对，修改格式依旧不对，这个时候在CTF中有一个很重要的事就是当一条路走不通的时候就要从头寻找有没有遗漏的线索，用binwalk扫了一下这张图片之后里面是含有压缩包的。 </p>
 <p>打开之后是小苹果的音乐在那里洗脑循环，那么看来应该是使用MP3Stego了，刚才的数字就是密码。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%8810.24.12.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-19%20%E4%B8%8B%E5%8D%8810.24.12.png" alt=""></p>
 <p>最后得到了一串很像base64的，使用python的库转换之后直接提交，拿到flag值。(这个题居然只有十分，给太低了点)</p>
-<h2 id="0x09-我就是flag"><a class="markdownIt-Anchor" href="#0x09-我就是flag"></a> 0x09-我就是flag</h2>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.08.25.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="0x09-我就是flag"><a href="#0x09-我就是flag" class="headerlink" title="0x09-我就是flag"></a>0x09-我就是flag</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.08.25.png" alt=""></p>
 <p>这道题的难度从通过率就可见一斑，涉及到了AES算法，其中有很多的地方都非常的坑。首先看到这是一个被损坏的bmp图像，所以应该是缺失了文件头，但是在网上搜索的文件头放到这里大部分都是不能使用的，后来参考了p神的writeup得到bmp图像的头文件到底是如何去标识的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#得到bmp的头文件</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getBMPheader</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">#bmp是LITTLE-ENDIAN（小字节序、低字节序）</span></div><div class="line">	bfType=<span class="string">'424d'</span> <span class="comment">#文件类型</span></div><div class="line">	bfSize=<span class="string">'360c 3000'</span> <span class="comment">#文件大小，本题3148800+54</span></div><div class="line">	bfReserved1=<span class="string">'0000'</span> <span class="comment">#保留，为0</span></div><div class="line">	bfReserved2=<span class="string">'0000'</span> <span class="comment">#保留，为0</span></div><div class="line">	bfOffBits=<span class="string">'3600 0000'</span> <span class="comment">#数据离文件头偏离量</span></div><div class="line">	biSize=<span class="string">'2800 0000'</span> <span class="comment">#位图信息头的大小</span></div><div class="line">	biWidth=<span class="string">'5605 0000'</span> <span class="comment">#宽度，本题1366</span></div><div class="line">	biHeight=<span class="string">'0003 0000'</span> <span class="comment">#高度，本题768</span></div><div class="line">	biPlanes=<span class="string">'0100'</span> <span class="comment">#颜色平面数，为1</span></div><div class="line">	biBitCount=<span class="string">'1800'</span> <span class="comment">#比特数/像素，本题24位</span></div><div class="line">	biCompression=<span class="string">'0000 0000'</span> <span class="comment">#压缩类型，0为不压缩</span></div><div class="line">	biSizeImage=<span class="string">'0000 0000'</span> <span class="comment">#图像的大小，本题多少无所谓</span></div><div class="line">	biXPelsPerMeter=<span class="string">'0000 0000'</span> <span class="comment">#水平分辨率，缺省</span></div><div class="line">	biYPelsPerMeter=<span class="string">'0000 0000'</span> <span class="comment">#垂直分辨率，缺省</span></div><div class="line">	biClrUsed=<span class="string">'0000 0000'</span> <span class="comment">#使用的颜色索引数，本题多少无所谓</span></div><div class="line">	biClrImportant=<span class="string">'0000 0000'</span> <span class="comment">#重要的颜色索引数，本题多少无所谓</span></div><div class="line">	bmp_header=bfType+bfSize+bfReserved1+bfReserved2+bfOffBits</div><div class="line">	bmp_header+=biSize+biWidth+biHeight+biPlanes+biBitCount+biCompression+biSizeImage</div><div class="line">	bmp_header+=biXPelsPerMeter+biYPelsPerMeter+biClrUsed+biClrImportant</div><div class="line">	bmp_header=bmp_header.replace(<span class="string">' '</span>,<span class="string">''</span>)</div><div class="line">	<span class="keyword">return</span> bmp_header</div></pre></td></tr></table></figure>
-<p>加上头部信息之后发现得到了这样子的图片：<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.17.09.png" alt="" title="" class="">
-                <p></p>
-            </figure></p>
+<p>加上头部信息之后发现得到了这样子的图片：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8A%E5%8D%8812.17.09.png" alt=""></p>
 <p>使用stegsolve查看之后一无所获，结合题干中的我就是flag，并且文件名刚好是16位，可以推断是AES加密，然后手写一个python的脚本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">    ciphertext=open(<span class="string">'../Desktop/bestwing12345678.bmp'</span>,<span class="string">'rb'</span>).read() <span class="comment">#记得有'b'</span></div><div class="line">    key=<span class="string">'bestwing12345678'</span></div><div class="line">    obj=AES.new(key,AES.MODE_ECB)</div><div class="line">    message=obj.decrypt(ciphertext)</div><div class="line">    fsave=open(<span class="string">'out.bmp'</span>,<span class="string">'wb'</span>)</div><div class="line">    fsave.write(message)</div><div class="line">    fsave.close()</div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">	foo()</div><div class="line">	<span class="keyword">print</span> (<span class="string">'ok'</span>)</div></pre></td></tr></table></figure>
 <p>然后得到了一张图片，上面有着清晰的二维码，扫描之后终于得到了flag（注意，其中包含着许多的版本问题和加密和解密问题，需要读者自行解决）。</p>
-<h2 id="0x0a-黑与白"><a class="markdownIt-Anchor" href="#0x0a-黑与白"></a> 0x0A-黑与白</h2>
-<p>这一次我们找到P神出的隐写术的题目，同样是一张图片，打开是一个二维码，扫一扫之后的得到了一个博客的地址：</p>
+<h2 id="0x0A-黑与白"><a href="#0x0A-黑与白" class="headerlink" title="0x0A-黑与白"></a>0x0A-黑与白</h2><p>这一次我们找到P神出的隐写术的题目，同样是一张图片，打开是一个二维码，扫一扫之后的得到了一个博客的地址：</p>
 <blockquote>
-<p><strong><a href="HttP://pcat.cnbloGs.cOM?Hh" target="_blank" rel="external">HttP://pcat.cnbloGs.cOM?Hh</a></strong></p>
+<p><strong>HttP://pcat.cnbloGs.cOM?Hh</strong></p>
 </blockquote>
 <p>首先我们使用了三板斧—（stegsolve、binwalk、foremost）一无所获之后决定使用stegdetect去检测其隐写算法：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.02.31.png" alt=""></p>
 <p>一开始没有任何的反应，就奇了怪了…后来修改了敏感度之后才发现原来是jphide,那就是用对应的工具吧</p>
 <p>到那时我们首先需要的是这个图片的密码，根据推测，密码的来源应该就藏在大小不一的地址上了：</p>
 <p>将识别结果中的特殊字符去掉，可以得到HttPpcatcnbloGscOMHh，刚好20个字符，使用了2种字体（大写和小写），可以推断是培根加密</p>
@@ -389,31 +313,15 @@
 <p>bloGs→AAABA→c</p>
 <p>cOMHh→ABBBA→p</p>
 <p>得到密码之后，选择seek，输入并确认密码，然后选择输出文件保存的路径即可：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png" alt="" title="" class="">
-                <p></p>
-            </figure>
-<h2 id="0x0b-word隐写"><a class="markdownIt-Anchor" href="#0x0b-word隐写"></a> 0x0B-word隐写</h2>
-<p>写了这么多实例之后，再写那些三板斧解决的，或者在这之上加上一点密码学的题目的writeup已经没有什么意义了，所以现在可以去拓展一下知识的广度，这个例子就来说一下word的隐写：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-25%20%E4%B8%8B%E5%8D%8811.08.53.png" alt=""></p>
+<h2 id="0x0B-word隐写"><a href="#0x0B-word隐写" class="headerlink" title="0x0B-word隐写"></a>0x0B-word隐写</h2><p>写了这么多实例之后，再写那些三板斧解决的，或者在这之上加上一点密码学的题目的writeup已经没有什么意义了，所以现在可以去拓展一下知识的广度，这个例子就来说一下word的隐写：</p>
 <p>从题目中下载了一个word文件，其中什么都没有，一开始以为是格式问题（本人不太了解word），于是使用了winhex/hexfriend寻找看看有没有什么有用的信息；</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-26%20%E4%B8%8A%E5%8D%8812.22.08.png" alt=""></p>
 <p>然后就直接拿到了flag值，看起来轻松便捷，但其实还有一种做法就是打开这个word文档，然后在选项中选择打印隐藏文件，然后打印预览，那么flag值同样会跃然眼前。</p>
-<h2 id="0x0c-dark-star"><a class="markdownIt-Anchor" href="#0x0c-dark-star"></a> 0x0C-Dark star</h2>
-<h4 id="-33-"><a class="markdownIt-Anchor" href="#-33-"></a> <figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png" alt="" title="" class="">
-                <p></p>
-            </figure></h4>
-<p>下载了一个虚拟的磁盘映像文件，网上说什么要使用winRAR或者其他的去解压，我一想，太麻烦了，并不想再去鼓捣这玩意，于是乎直接用<code>binwalk</code>先扫了一扫，发现其中有很多的jpg文件还有一个png（png是无损压缩的，所以我就直接提取了），果断使用<code>foremost</code>,然后从output中找到了我们所需要的flag值。</p>
+<h2 id="0x0C-Dark-star"><a href="#0x0C-Dark-star" class="headerlink" title="0x0C-Dark star"></a>0x0C-Dark star</h2><h4 id=""><a href="#" class="headerlink" title=""></a><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.54.46.png" alt=""></h4><p>下载了一个虚拟的磁盘映像文件，网上说什么要使用winRAR或者其他的去解压，我一想，太麻烦了，并不想再去鼓捣这玩意，于是乎直接用<code>binwalk</code>先扫了一扫，发现其中有很多的jpg文件还有一个png（png是无损压缩的，所以我就直接提取了），果断使用<code>foremost</code>,然后从output中找到了我们所需要的flag值。</p>
 <p>思考：永远不要被传统的思路所束缚住，不要被后缀名所迷惑，从十六进制窥得真假。</p>
-<h2 id="0x13烦人de皮卡丘"><a class="markdownIt-Anchor" href="#0x13烦人de皮卡丘"></a> 0x13烦人DE皮卡丘</h2>
-<p>如果说你觉得上面的题目过于简单不够刺激，那么我们就来试试一道刺激的题目吧，下载下来是一张皮卡丘的图片；</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%881.54.23.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<h2 id="0x13烦人DE皮卡丘"><a href="#0x13烦人DE皮卡丘" class="headerlink" title="0x13烦人DE皮卡丘"></a>0x13烦人DE皮卡丘</h2><p>如果说你觉得上面的题目过于简单不够刺激，那么我们就来试试一道刺激的题目吧，下载下来是一张皮卡丘的图片；</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%881.54.23.png" alt=""></p>
 <p>首先要介绍一下所需要知道的知识，在杂项的可启动磁盘中我们了解到了png图片中第一个数据块叫做IHDR及其组成，那么png格式的图片中有没有其他的数据块呢，答案是肯定的，可以参考一下这个表：</p>
 <table>
 <thead>
@@ -571,318 +479,96 @@
 <p>今天要说的就是IDAT数据块，具体的png文件格式分析可以参考<a href="https://zhuanlan.zhihu.com/p/23890809" target="_blank" rel="external">知乎</a>，其中还讲了如何在不影响PNG文件的正常浏览下将payload以辅助数据块tEXt的格式插入到PNG文件中。</p>
 <p>IDAT数据块是用于存储图像像素数据，在数据流中可包含多个连续的图像数据块，采用L277的派生算法进行压缩的，我们可以使用zlib去解压缩。虽然这道题使用了LSB算法，但是单纯简单的使用binwalk和stegsolve可是完全无法做出来的。</p>
 <p>首先我们使用stdsolve打开这张图片，提取其中的最低位试试看，在BIt Plane Order选中RGB：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.05.36.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8B%E5%8D%882.05.36.png" alt=""></p>
 <p>由此我们可以大概判断一下这个是lsb加密，从github上当下一份工具之后进行解密，命令如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#123456指的是密码，这里是根据提示中的弱密码进行猜测，当然也可以写脚本去进行爆破</span></div><div class="line">python lsb.py extract <span class="number">1.</span>png <span class="number">1.</span>txt <span class="number">123456</span></div></pre></td></tr></table></figure>
 <p>最后打开1.txt就可以得到flag了，关于png文件中的LSB隐写还可以参考<a href="https://mp.weixin.qq.com/s?__biz=MzAxNTk5ODcxOQ==&amp;mid=2247484167&amp;idx=2&amp;sn=ae344c2f876b8003c5769fb0960d0bc9&amp;scene=0#wechat_redirect" target="_blank" rel="external">博客</a></p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.766Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/09/17/CTF-隐写术/" target="_blank" rel="external">http://yoursite.com/2017/09/17/CTF-隐写术/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=《CTF-信息隐藏技术》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=《CTF-信息隐藏技术》 — Peterpan's Blog&source=表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/18/CTF-安全杂项/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">CTF-MISC</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/14/Foundation框架/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Foundation框架</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#信息隐藏概述"><span class="toc-number">1.</span> <span class="toc-text">信息隐藏概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-女神"><span class="toc-number">1.1.</span> <span class="toc-text">0x00-女神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-愤怒的小鸟"><span class="toc-number">1.2.</span> <span class="toc-text">0x01-愤怒的小鸟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LSB介绍"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">LSB介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始实战"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">开始实战</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-缺失的文件头"><span class="toc-number">1.3.</span> <span class="toc-text">0x03-缺失的文件头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-快刷新"><span class="toc-number">1.4.</span> <span class="toc-text">0x04-快刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-最低位的亲吻"><span class="toc-number">1.5.</span> <span class="toc-text">0x05-最低位的亲吻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-低调的男神"><span class="toc-number">1.6.</span> <span class="toc-text">0x06-低调的男神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ox07-大雄与多啦"><span class="toc-number">1.7.</span> <span class="toc-text">ox07-大雄与多啦</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-小苹果"><span class="toc-number">1.8.</span> <span class="toc-text">0x08-小苹果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-我就是flag"><span class="toc-number">1.9.</span> <span class="toc-text">0x09-我就是flag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0A-黑与白"><span class="toc-number">1.10.</span> <span class="toc-text">0x0A-黑与白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0B-word隐写"><span class="toc-number">1.11.</span> <span class="toc-text">0x0B-word隐写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0C-Dark-star"><span class="toc-number">1.12.</span> <span class="toc-text">0x0C-Dark star</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.12.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x13烦人DE皮卡丘"><span class="toc-number">1.13.</span> <span class="toc-text">0x13烦人DE皮卡丘</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/09/17/CTF-隐写术/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/09/17/CTF-隐写术/&text=CTF-信息隐藏技术"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/09/17/CTF-隐写术/&is_video=false&description=CTF-信息隐藏技术"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CTF-信息隐藏技术&body=Check out this article: http://yoursite.com/2017/09/17/CTF-隐写术/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=CTF-信息隐藏技术"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/09/17/CTF-隐写术/&name=CTF-信息隐藏技术&description=&lt;p&gt;表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息隐藏概述"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 信息隐藏概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x00-女神"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 0x00-女神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x01-愤怒的小鸟"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 0x01-愤怒的小鸟</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#lsb介绍"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text"> LSB介绍</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开始实战"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text"> 开始实战</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x03-缺失的文件头"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> 0x03-缺失的文件头</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x04-快刷新"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> 0x04-快刷新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x05-最低位的亲吻"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"> 0x05-最低位的亲吻</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x06-低调的男神"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"> 0x06-低调的男神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ox07-大雄与多啦"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"> ox07-大雄与多啦</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x08-小苹果"><span class="post-toc-number">1.8.</span> <span class="post-toc-text"> 0x08-小苹果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x09-我就是flag"><span class="post-toc-number">1.9.</span> <span class="post-toc-text"> 0x09-我就是flag</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0a-黑与白"><span class="post-toc-number">1.10.</span> <span class="post-toc-text"> 0x0A-黑与白</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0b-word隐写"><span class="post-toc-number">1.11.</span> <span class="post-toc-text"> 0x0B-word隐写</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x0c-dark-star"><span class="post-toc-number">1.12.</span> <span class="post-toc-text"> 0x0C-Dark star</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#-33-"><span class="post-toc-number">1.12.0.1.</span> <span class="post-toc-text"> 
-                
-                
-            </span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x13烦人de皮卡丘"><span class="post-toc-number">1.13.</span> <span class="post-toc-text"> 0x13烦人DE皮卡丘</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=《CTF-信息隐藏技术》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/17/CTF-隐写术/&title=《CTF-信息隐藏技术》 — Peterpan's Blog&source=表面平平无奇的载体深处隐藏着的是打开另一个世界的钥匙（要入此门，必通古博今）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQW7DMAwEwP7/0+kDWru7YlLA0ugUOIat8YEgKX59xet1sX7+u3b//fW3LQwMjMcyXrdr7Z6fz796Tnv9koqBgXEA4yqCXd2TPPp+c8m7kr1hYGBgtI/OU8aWhIGBgbHG+CNdC+7BwMDAyBlJgTpJHJOt/1MtjoGB8UBG3nX//98fOd/AwMB4FONVriRcttvKw+vlrjAwMLZm5AEuwbQDE0WBmrwFAwPjSEbSRGvHKdaONqPrGBgYmzLy8ax2FKMN2aPDTgwMjK0Zn2v6L6Z3k38xMDA2ZczHs9pkcR6+f7kTAwPjAEY76NAWpWsJXzFUgYGBsTVj0mL7RDBtYZdPw8DA2IiRj1YkG01en5e+ReDGwMDYmtGOQbw3QLfDZIuZLwYGxhaMvDTNy9G17d6H4z8+EwYGxqaMPNlKEru1InYtWcTAwDiHcf+yZOUHA+0QRpukYmBg7MqYBLv2cLT9ZEmj7ZeuIQYGxnaMSbcqD6aT5lrb4MPAwNiVsTZCkSeXeVutXZddQwwMjMMYeWm6Nq4xGRrDwMA4k7H2oLattlYkL+a2GBgYD2fMC9Q8NVzr50fJJQYGxtaMSaN/PvLVJovtkAcGBsZOjHZzSTc++VqTgFt/aQwMjC0YbXHbNtQSUn0YgIGBgREw2jA9D+XFsAUGBsbxjPbO9mgzJ2FgYJzDeNeAxdoB59ogLAYGxjmMUek4aLFNWnWj8w0MDIwnMb4ByYCTYX+6GW4AAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

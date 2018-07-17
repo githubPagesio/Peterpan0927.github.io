@@ -1,199 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foundation框架">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/Foundation框架/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Foundation框架">
+<meta name="twitter:description" content="才发现居然没有发上来….这个算是必备技能吧">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/09/14/Foundation框架/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Foundation框架</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>Foundation框架 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="iOS开发">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>Foundation框架</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">Foundation框架</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-09-14T07:46:19.000Z" itemprop="datePublished" class="page-time">
-  2017-09-14
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/核心三大库/">核心三大库</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-Foundation框架"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">Foundation框架</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-09-14 15:46:19" datetime="2017-09-14T07:46:19.000Z"  itemprop="datePublished">2017-09-14</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/核心三大库/">核心三大库</a></li></ul>
-
-
-
-            
-	<span id="/2017/09/14/Foundation框架/" class="leancloud_visitors" data-flag-title="Foundation框架" title="Foundation框架">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/09/14/Foundation框架/#comment">
-            <span class="valine-comment-count" data-xid="/2017/09/14/Foundation框架/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/17/CTF-隐写术/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/03/TCP-IP-三/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/09/14/Foundation框架/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/09/14/Foundation框架/&text=Foundation框架"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/09/14/Foundation框架/&is_video=false&description=Foundation框架"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Foundation框架&body=Check out this article: http://yoursite.com/2017/09/14/Foundation框架/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/09/14/Foundation框架/&name=Foundation框架&description=&lt;p&gt;才发现居然没有发上来….这个算是必备技能吧&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">1.</span> <span class="toc-text">Foundation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#框架"><span class="toc-number">1.1.</span> <span class="toc-text">框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.2.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSString字符串"><span class="toc-number">1.3.</span> <span class="toc-text">NSString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableString字符串"><span class="toc-number">1.4.</span> <span class="toc-text">NSMutableString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray数组"><span class="toc-number">1.5.</span> <span class="toc-text">NSArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableArray数组"><span class="toc-number">1.6.</span> <span class="toc-text">NSMutableArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNumber"><span class="toc-number">1.7.</span> <span class="toc-text">NSNumber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.8.</span> <span class="toc-text">补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary"><span class="toc-number">1.9.</span> <span class="toc-text">NSDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary"><span class="toc-number">1.10.</span> <span class="toc-text">NSMutableDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合的内存管理"><span class="toc-number">1.11.</span> <span class="toc-text">集合的内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSFileManager"><span class="toc-number">1.12.</span> <span class="toc-text">NSFileManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGPoint"><span class="toc-number">1.13.</span> <span class="toc-text">CGPoint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGSize"><span class="toc-number">1.14.</span> <span class="toc-text">CGSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGRect"><span class="toc-number">1.15.</span> <span class="toc-text">CGRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSValue"><span class="toc-number">1.16.</span> <span class="toc-text">NSValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串和日期转换"><span class="toc-number">1.17.</span> <span class="toc-text">字符串和日期转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期计算"><span class="toc-number">1.18.</span> <span class="toc-text">日期计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到日期对象的各个部分"><span class="toc-number">1.19.</span> <span class="toc-text">得到日期对象的各个部分</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Foundation框架
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>才发现居然没有发上来…这个算是必备技能吧</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-09-14T07:46:19.000Z" itemprop="datePublished">2017-09-14</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>才发现居然没有发上来….这个算是必备技能吧</p>
 <a id="more"></a>
-<h1 id="foundation"><a class="markdownIt-Anchor" href="#foundation"></a> Foundation</h1>
-<h2 id="框架"><a class="markdownIt-Anchor" href="#框架"></a> 框架</h2>
-<p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
+<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>所谓的框架或库是指，常量，函数，类等东西的一个集合，所谓的Foundation框架就是苹果公司为了帮助开发者开发苹果上的程序所提供的类，方法，函数，常量等数据信息。</p>
 <p>核心三大库：字符串(NSString,NSMutableString)，集合(NSArray,NSMutableArray,键值对：NSDictionary,NSMutableDictionary)，文件(NSFileManager)</p>
 <p>推荐一个网站<a href="opensource.apple.com">苹果所有开源项目的托管网站</a></p>
 <p>学习构造方法和其他方法主要分为五类：增、删、改、查、其他</p>
-<h2 id="单例模式"><a class="markdownIt-Anchor" href="#单例模式"></a> 单例模式</h2>
-<p>1.单例的特点</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>1.单例的特点</p>
 <p>1个类的对象无论在何时何地创建，创建出来的都是同一个对象</p>
 <p>2.无论如何创建对象，都会调用alloc方法来创建对象</p>
 <ul>
@@ -209,8 +194,7 @@
 <p>5.什么时候需要让类变成单例</p>
 <p>比如要做一个游戏的面板的尺寸，如果直接写就把程序写死，宏在程序运行的时候无法更改</p>
 <p>如果程序需要被整个程序共享，将数据以属性的方式存储在单例对象中，也就是说在A类中改了尺寸，B类访问的时候就是那个修改过的，因为只有一个对象。</p>
-<h2 id="nsstring字符串"><a class="markdownIt-Anchor" href="#nsstring字符串"></a> NSString字符串</h2>
-<p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
+<h2 id="NSString字符串"><a href="#NSString字符串" class="headerlink" title="NSString字符串"></a>NSString字符串</h2><p>NSString是一个不可变的字符串，所以只有增、查、其他方法。</p>
 <p>1.构造方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">initWithUTF8String: //将C语言字符串转换为OC字符串，因为OC没有输入函数，所以如果要读入字符串要用这种方法转换</div><div class="line">initWithFormat:  //</div><div class="line">initWithContentsOfURL: //</div><div class="line">initWithContentsOfFile: 文件路径 encoding: 文件编码 error: 错误信息，先使用 nil//从文件中获取字符串</div><div class="line">//文件编码在mac上默认使用utf-8，或者用4</div></pre></td></tr></table></figure>
 <p>2.文件编码</p>
@@ -224,10 +208,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int main()&#123;</div><div class="line">    NSError *err;</div><div class="line">    NSString *file = [[NSString alloc] initWithContentsOfFile:@&quot;/Users/peterpan/Downloads/MARKDOWN_FORMAT_URLS.txt&quot; encoding:NSUTF8StringEncoding error:&amp;err];</div><div class="line">  //如果文件不存在，err中存放的的是错误的信息，如果文件存在，err中就没有数据</div><div class="line">  //如果正确，err中就是null也就是0</div><div class="line">  //如果出现了错误，err中就会被赋值，它就会指向一个错误的对象</div><div class="line">  	if(!err)&#123;</div><div class="line">    NSLog(@&quot;%@&quot;,file);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//函数参数是值传递，那么参数和外界变量之间没有关系</div><div class="line">//函数参数如果是引用传递，函数内和函数外访问的是同一个变量。</div></pre></td></tr></table></figure>
 <p>用一个内存图来方便理解</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-28%20%E4%B8%8B%E5%8D%884.30.01.png" alt=""></p>
 <p>总结的来说，想从文件中读取数据，需要三个参数：文件的路径、文件的编码格式、错误信息对象的指针（容器，如果出现了错误，在方法中会生成一个错误对象，赋值给该容器，如果没有出现读取错误，那么就正常执行返回读取的数据）</p>
 <blockquote>
 <p><strong>读取URL：</strong></p>
@@ -284,8 +265,7 @@
 <p>大小写转换</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSSString *str = @&quot;test&quot;;</div><div class="line">str = [str uppercaseString];</div><div class="line">str = [str lowercaseString];</div></pre></td></tr></table></figure>
-<h2 id="nsmutablestring字符串"><a class="markdownIt-Anchor" href="#nsmutablestring字符串"></a> NSMutableString字符串</h2>
-<blockquote>
+<h2 id="NSMutableString字符串"><a href="#NSMutableString字符串" class="headerlink" title="NSMutableString字符串"></a>NSMutableString字符串</h2><blockquote>
 <p>字符串的恒定性</p>
 </blockquote>
 <p>一旦创建一个字符串对象，那么这个字符串对象的内容就无法更改，我们修改字符串的时候，其实是重新创建了一个字符串对象，所以如果需要频繁的修改一个字符串，可以将其定义为NSMutableString，NSMutableString在父类NSString的基础之上做了扩展，存储在其中的字符串具有可变性，不会新创建对象。</p>
@@ -293,8 +273,7 @@
 <p>NSMutableString用法</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//直接追加字符串</div><div class="line">NSMutableString *str = [NSMutableString string];</div><div class="line">[str appendString:@&quot;sasa&quot;];</div><div class="line">//以拼接的方式追加内容</div><div class="line">int num = 1;</div><div class="line">[str appendFormat:@&quot;%d&quot;, num];</div><div class="line">//创建对象的时候，下面这种初始化方式是不行的</div><div class="line">NSMutableString *str = @&quot;hello&quot;;</div><div class="line">//因为@&quot;hello&quot;是一个NSString对象，子类指针指向父类对象，如果调用子类独有的方法就会运行出错。</div><div class="line">//剩下的因为继承的关系，和NSString的方法一致</div></pre></td></tr></table></figure>
-<h2 id="nsarray数组"><a class="markdownIt-Anchor" href="#nsarray数组"></a> NSArray数组</h2>
-<p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
+<h2 id="NSArray数组"><a href="#NSArray数组" class="headerlink" title="NSArray数组"></a>NSArray数组</h2><p>特点是只能存储OC对象，长度固定，一旦NSArray数组创建完毕之后，无法新增和删除，元素的类型是id类型的</p>
 <blockquote>
 <p>初始化方法</p>
 </blockquote>
@@ -311,28 +290,24 @@
 <p>字符串与数组</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将数组元素和字符串连接起来</div><div class="line">NSString *str =  [arr componentsJoinedByString:@&quot;#&quot;];</div><div class="line">//将字符串转换为数组,以‘,’作为分隔</div><div class="line">NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];</div></pre></td></tr></table></figure>
-<h2 id="nsmutablearray数组"><a class="markdownIt-Anchor" href="#nsmutablearray数组"></a> NSMutableArray数组</h2>
-<p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
+<h2 id="NSMutableArray数组"><a href="#NSMutableArray数组" class="headerlink" title="NSMutableArray数组"></a>NSMutableArray数组</h2><p>NSMutableArray仍然是一个数组，具备NSArray的特点，但是相对于父类做了扩展，NSMutableArray数组的元素可以动态的新增或者删掉，其他用法和NSArray一致。</p>
 <p>数组的创建可以参考NSSMutableArray</p>
 <p>可变数组添加元素的方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *arr = [NSMutableArray new];</div><div class="line">[arr addObject:@&quot;test&quot;];</div><div class="line">//将另一个数组作为可变数组的一个元素</div><div class="line">[arr addObject:arr1];</div><div class="line">//将另一个数组中的元素加进来</div><div class="line">[arr addObjectFromArray:arr1];</div><div class="line">//在可变数组指定的下标处加入一个元素</div><div class="line">[arr insertObject:@&quot;test&quot; atIndex:1];</div><div class="line">//删除指定下标的值</div><div class="line">[arr removeObjectAtIndex:1];</div><div class="line">//删除可变数组中所有的指定元素</div><div class="line">[arr removeObject@&quot;test&quot;];</div><div class="line">//删除指定范围内的元素</div><div class="line">[arr removeObject:@&quot;test&quot; inRange:NSMakeRange(0,3)];</div><div class="line">//删除最后一个元素</div><div class="line">[arr removeLastObject]</div><div class="line">//删除所有元素</div><div class="line">[arr removeAllObjects];</div></pre></td></tr></table></figure>
-<h2 id="nsnumber"><a class="markdownIt-Anchor" href="#nsnumber"></a> NSNumber</h2>
-<p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
+<h2 id="NSNumber"><a href="#NSNumber" class="headerlink" title="NSNumber"></a>NSNumber</h2><p>NSArray和NSMutableArray都只能存储OC对象，不能存储基本数据类型，NSNumber是Foundation框架中定义好的一个类，这个类的作用就是用来包装基本数据类型。</p>
 <blockquote>
 <p>基本数据类型存储到数组中的步骤</p>
 </blockquote>
 <p>1.先将基本数据类型包装到NSNumber对象中</p>
 <p>2.将NSNumber对象存储到NSArray数组中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSNumber *number = [NSNumber numberWithFloat:10.1f];</div><div class="line">NSArray *arr = @[number];</div><div class="line">//简写方式</div><div class="line">NSNumber *number1 = @10;</div><div class="line">//@10代表这个对象中包装的是整型数据10</div><div class="line">NSArray *arr1 = @[@10,@20,@30];</div><div class="line">//注意，如果后面的数据是一个变量，就要用小括弧扩起来</div><div class="line">int num  = 10;</div><div class="line">NSNumber *number2 = @(num);</div></pre></td></tr></table></figure>
-<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
-<p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>实现数组的数据持久化，因为程序执行完之后，内存就回来被释放，所以可以把数组中的元素写入文件中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = @[@&quot;test&quot;, @10];</div><div class="line">[arr writeToFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
 <p>然后下次想要调用的时候就可以直接从plist文件中读取：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSArray *arr = [NSArray arrayWithContentsOfFile:@&quot;/Users/peterpan/Desktop/test.plist&quot;];</div></pre></td></tr></table></figure>
-<h2 id="nsdictionary"><a class="markdownIt-Anchor" href="#nsdictionary"></a> NSDictionary</h2>
-<p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
+<h2 id="NSDictionary"><a href="#NSDictionary" class="headerlink" title="NSDictionary"></a>NSDictionary</h2><p>NSArray和NSMutableArray都可以存储数据，但是缺点是数组元素的下标不固定，无法通过下标来确定唯一数组中的元素，所以我们希望有一种存储方式，存储到数组当中，可以快速唯一的确定数组的元素。</p>
 <p>存储数据的时候，要为存储的数据取一个别名，用来确定这个别名对应的数据。</p>
-<p>这种存储数据的方式就叫做键值对的存储方式</p>
+<p>这种存储数据的方式就叫做键值对的存储方式 </p>
 <blockquote>
 <p>创建字典数组</p>
 </blockquote>
@@ -343,7 +318,7 @@
 <p>1.以键值对的形式存储数据</p>
 <p>2.字典数组一旦创建，其中的元素不能动态的新增和删除</p>
 <p>3.键：只能是遵守了NSCoping协议的对象,而NSString就是遵守了这个协议</p>
-<p>值：只能是OC对象</p>
+<p>   值：只能是OC对象</p>
 <p>4.当往字典数组中存入一个键值对的时候，并不是按照顺序挨个存储，而是根据键和数组的长度做一个哈希算法算出一个下标，再将这个键值对存入这个下标对应的空间。</p>
 <p>5.取值的时候，也可以通过键做一个哈希算法，算出下标，然后直接找到对应的数据取出即可</p>
 <blockquote>
@@ -355,18 +330,15 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//这样方法遍历出来的是字典中所有的键</div><div class="line">for(id item in dict)&#123;</div><div class="line">  NSLog(@&quot;%@ = %@&quot;, item, dict[item]);</div><div class="line">&#125;</div><div class="line">//使用block</div><div class="line">[dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) &#123;</div><div class="line">        NSLog(@&quot;%@ = %@&quot;, key, obj);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
 <p><strong>和NSArray对比，存储数据的效率是NSArray更高，不需要进行计算；在取数据的时候，如果是全部取出来，也是NSArray的效率更高，但是如果是取出指定的几个的数据，就是NSDictionary了，因为不需要遍历。</strong></p>
-<h2 id="nsmutabledictionary"><a class="markdownIt-Anchor" href="#nsmutabledictionary"></a> NSMutableDictionary</h2>
-<p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
+<h2 id="NSMutableDictionary"><a href="#NSMutableDictionary" class="headerlink" title="NSMutableDictionary"></a>NSMutableDictionary</h2><p>键值对可以动态的的新增、删除，其他的用法和其父类一致，只是注意子类指针不要指向父类对象</p>
 <p>新增和删除键值对</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//新增，如果添加的键有重复，后添加的就会覆盖原有的</div><div class="line">[dict setObject:@&quot;jack&quot; forKey:@&quot;name&quot;];</div><div class="line">//删除所有键值对</div><div class="line">[dict removeAllObjects];</div><div class="line">//根据键来删除</div><div class="line">[dict removeObjectForKey:@&quot;age&quot;];</div></pre></td></tr></table></figure>
 <p>字典数组的持久化</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[dict writeToFile:@&quot;/Users/peterpan/Downloads/dict.plist&quot; atomically:NO];</div><div class="line">//从plist文件中读取</div><div class="line">NSDictionary *dict = [NSDictionary dictWithContentsOfFile@&quot;/Users/peterpan/Downloads/dict.plist&quot;];</div></pre></td></tr></table></figure>
-<h2 id="集合的内存管理"><a class="markdownIt-Anchor" href="#集合的内存管理"></a> 集合的内存管理</h2>
-<p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
+<h2 id="集合的内存管理"><a href="#集合的内存管理" class="headerlink" title="集合的内存管理"></a>集合的内存管理</h2><p>1.MRC模式下，将对象存储到集合中，会为这个对象的引用计数器加一，集合销毁的时候，会向其中所有的对象发送一条release消息。</p>
 <p>2.使用@[]或@{}创建的集合是已经被autorelease过的，直接调用和类同名的类方法创建的对象也是。</p>
 <p>3.在ARC的模式下，集合的元素是一个强类型的指针。</p>
-<h2 id="nsfilemanager"><a class="markdownIt-Anchor" href="#nsfilemanager"></a> NSFileManager</h2>
-<p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
+<h2 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h2><p>这个类的对象是以单例模式创建的，调用其类方法就可以得到其单例对象</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSFileManager *manager = [NSFileManager defaultManager];</div></pre></td></tr></table></figure>
 <p>常用判断方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//判断文件夹或文件是否存在,返回值为BOOL类型</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的路径是否真实存储在我们的磁盘上，并且判断这个路径是一个文件夹还是文件</div><div class="line">BOOL flag = NO;</div><div class="line">//执行完后，如果flag是YES，那么给定路径是一个文件夹路径，否则就是文件路径</div><div class="line">[manager fileExistAtPath:@&quot;/Users/peterpan/test.py&quot; isDirectory:&amp;flag];</div><div class="line">//判断指定的文件或文件夹是否可以读取</div><div class="line">[manager isReadableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以写入</div><div class="line">[manager isWritableFileAtPath:@&quot;/Users/peterpan/test.py&quot;];</div><div class="line">//判断指定的文件或文件夹是否可以删除</div><div class="line">[manager isDeletableFilePath:@&quot;/Users/peterpan/test.py&quot;];</div></pre></td></tr></table></figure>
@@ -376,342 +348,119 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//存储在磁盘上的任何文件都是以二进制的形式存储的</div><div class="line">//第二个参数是文件的内容，要求是文件的二进制内容,第三个参数可以自定义文件的属性</div><div class="line">//NSData对象就是专门用来保护二进制数据的</div><div class="line">NSString *str1 = @&quot;saaasaxas&quot;;</div><div class="line">    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    NSFileManager *manager = [NSFileManager new];</div><div class="line">    BOOL res = [manager createFileAtPath:@&quot;/Users/peterpan/test.txt&quot; contents:data attributes:nil];</div><div class="line">//在指定目录下创建文件夹，第二个参数是是否允许一路创建，第三个属性是指定属性</div><div class="line"> [manager createDirectoryAtPath:@&quot;/Users/peterpan/test&quot; withIntermediateDirectories:YES attributes:nil error:nil];</div><div class="line">//拷贝文件</div><div class="line">[manager copyItemAtPath:@&quot;xxx&quot; toPath@&quot;xxx&quot; error:nil];</div><div class="line">//移动文件,重命名</div><div class="line">[manager moveItemAtPath:@&quot;xxx&quot; toPath:@&quot;xxx&quot;error:nil];</div><div class="line">//删除文件</div><div class="line">[manager removeItemAtPath:@&quot;xxx&quot; error:nil];</div></pre></td></tr></table></figure>
 <p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">while(1)&#123;</div><div class="line">	NSFileManager *manager = [NSManager defaultManager];</div><div class="line">	NSString *path = @&quot;/Users/peterpan/Desktop&quot;</div><div class="line">	NSArray *arr = [manager contentsOfFileDirectoryAtPath:path error:nil];</div><div class="line">	if(arr.count &gt; 0)&#123;</div><div class="line">		for(NSString *str in arr)&#123;</div><div class="line">          	NSString *str1 = [NSString stringWithFormat:@&quot;%@%@&quot;, path,str];</div><div class="line">  			if([manager isDeletableFileAtPath:str])</div><div class="line">              [manager removeItemAtPath:str1 error:nil];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  NSLog(@&quot;扫描完成&quot;);</div><div class="line">  //CPU暂停指定的时间</div><div class="line">  [NSThread sleepForTimeInterval:10];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="cgpoint"><a class="markdownIt-Anchor" href="#cgpoint"></a> CGPoint</h2>
-<p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
+<h2 id="CGPoint"><a href="#CGPoint" class="headerlink" title="CGPoint"></a>CGPoint</h2><p>定义一个变量来保存按钮在iOS界面上的位置，我们需要一个结构体来表示控件在界面上的坐标，就是CGPoint。</p>
 <p>CGPoint和NSPoint是同一个结构体，只不过定义了两个名字。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGPoint p1 = CGPointMake(20, 30);</div></pre></td></tr></table></figure>
-<h2 id="cgsize"><a class="markdownIt-Anchor" href="#cgsize"></a> CGSize</h2>
-<p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
+<h2 id="CGSize"><a href="#CGSize" class="headerlink" title="CGSize"></a>CGSize</h2><p>除了一个控件的位置，我们还需要一个结构体变量来保存一个控件的大小，这个变量就是CGSize</p>
 <p>NSSize和CGSize也是同一个结构体，只不过定义了两个名称</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGSize *s1 = CGSizeMake(20,20);</div></pre></td></tr></table></figure>
-<h2 id="cgrect"><a class="markdownIt-Anchor" href="#cgrect"></a> CGRect</h2>
-<p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
+<h2 id="CGRect"><a href="#CGRect" class="headerlink" title="CGRect"></a>CGRect</h2><p>CGRect同样也是一个结构体，这个结构体变量一般情况下存储一个控件的位置和大小。</p>
 <p>NSRect和CGRect同样也是一个结构体，定义了两个名称。</p>
 <blockquote>
 <p>初始化方式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//最常用方式</div><div class="line">CGRect *r1 = CGRectMake(10 ,20 ,30 ,40);</div></pre></td></tr></table></figure>
-<h2 id="nsvalue"><a class="markdownIt-Anchor" href="#nsvalue"></a> NSValue</h2>
-<p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
+<h2 id="NSValue"><a href="#NSValue" class="headerlink" title="NSValue"></a>NSValue</h2><p>NSValue类是用来包装结构体变量的,就像NSNumber类是用来包装基础数据类型一样，因为结构体变量是无法直接写入到数组中的，只有OC对象可以。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CGPoint *p1 = CGPointMake(20, 30);</div><div class="line">//下面代码还可以改成valueWithSize等等结构体</div><div class="line">NSValue *v1 = [NSValue valueWithPoint:p1];</div><div class="line">//v1的属性都存放在sizeValue之中</div><div class="line">NSLog(@&quot;%@&quot;, NSStringFromPoint(v1.sizeValue));</div></pre></td></tr></table></figure>
-<h2 id="字符串和日期转换"><a class="markdownIt-Anchor" href="#字符串和日期转换"></a> 字符串和日期转换</h2>
-<p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
+<h2 id="字符串和日期转换"><a href="#字符串和日期转换" class="headerlink" title="字符串和日期转换"></a>字符串和日期转换</h2><p>可以得到当前时间，创建一个NSDate对象即可，将这个对象输出就是当前系统的格林威治时间，如果要格式化输出日期，就要采取下面方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate new];</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">//代表显示年月日十分秒</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSString *str = [formatter stringFromDate:date];</div><div class="line">//这样输出的就是当前时区的格式化时间,可以在时间之间随意的添加自定义的效果,e.g-&gt;yyyy年MM月dd日</div><div class="line">NSLog(@&quot;%@&quot;, str);</div></pre></td></tr></table></figure>
 <p>将字符串转换为时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *str = @&quot;2016-09-27 12:12:12&quot;;</div><div class="line">NSDateFormatter *formatter = [NSDateFormatter new];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSDate *date = [formatter dateFromString:str];</div></pre></td></tr></table></figure>
-<h2 id="日期计算"><a class="markdownIt-Anchor" href="#日期计算"></a> 日期计算</h2>
-<p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
+<h2 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h2><p>在当前基础上，新增一个指定的时间，得到一个新的时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//获取的默认是零时区的时间，到东八区的时间就是加八个小时</div><div class="line">NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5000];</div><div class="line">//求两个时间之差</div><div class="line">NSDate *date1 = [NSDate new];</div><div class="line">NSDate *date2 = [NSDate new];</div><div class="line">double res = [date1 timeIntervalSinceDate:date2];</div></pre></td></tr></table></figure>
-<h2 id="得到日期对象的各个部分"><a class="markdownIt-Anchor" href="#得到日期对象的各个部分"></a> 得到日期对象的各个部分</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate date];</div><div class="line">//创建一个日历对象，可以从日历对象中取到日期的各个部分</div><div class="line">NSCalendar *calendar = [NSCalendar currentCalendar];</div><div class="line">NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];</div><div class="line">//可以直接使用成员运算符取出日期对象的各个部分</div><div class="line">NSLog(@&quot;%lu&quot;, com.year);</div></pre></td></tr></table></figure>
+<h2 id="得到日期对象的各个部分"><a href="#得到日期对象的各个部分" class="headerlink" title="得到日期对象的各个部分"></a>得到日期对象的各个部分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDate *date = [NSDate date];</div><div class="line">//创建一个日历对象，可以从日历对象中取到日期的各个部分</div><div class="line">NSCalendar *calendar = [NSCalendar currentCalendar];</div><div class="line">NSDateComponents *com = [calendar components:NSCalendarUnitYear fromDate:date];</div><div class="line">//可以直接使用成员运算符取出日期对象的各个部分</div><div class="line">NSLog(@&quot;%lu&quot;, com.year);</div></pre></td></tr></table></figure>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.855Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/09/14/Foundation框架/" target="_blank" rel="external">http://yoursite.com/2017/09/14/Foundation框架/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS开发/">iOS开发</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/14/Foundation框架/&title=《Foundation框架》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/14/Foundation框架/&title=《Foundation框架》 — Peterpan's Blog&source=才发现居然没有发上来…这个算是必备技能吧" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/09/17/CTF-隐写术/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">CTF-信息隐藏技术</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/09/03/TCP-IP-三/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">TCP/IP(三)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">1.</span> <span class="toc-text">Foundation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#框架"><span class="toc-number">1.1.</span> <span class="toc-text">框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.2.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSString字符串"><span class="toc-number">1.3.</span> <span class="toc-text">NSString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableString字符串"><span class="toc-number">1.4.</span> <span class="toc-text">NSMutableString字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray数组"><span class="toc-number">1.5.</span> <span class="toc-text">NSArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableArray数组"><span class="toc-number">1.6.</span> <span class="toc-text">NSMutableArray数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNumber"><span class="toc-number">1.7.</span> <span class="toc-text">NSNumber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.8.</span> <span class="toc-text">补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary"><span class="toc-number">1.9.</span> <span class="toc-text">NSDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary"><span class="toc-number">1.10.</span> <span class="toc-text">NSMutableDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合的内存管理"><span class="toc-number">1.11.</span> <span class="toc-text">集合的内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSFileManager"><span class="toc-number">1.12.</span> <span class="toc-text">NSFileManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGPoint"><span class="toc-number">1.13.</span> <span class="toc-text">CGPoint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGSize"><span class="toc-number">1.14.</span> <span class="toc-text">CGSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGRect"><span class="toc-number">1.15.</span> <span class="toc-text">CGRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSValue"><span class="toc-number">1.16.</span> <span class="toc-text">NSValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串和日期转换"><span class="toc-number">1.17.</span> <span class="toc-text">字符串和日期转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期计算"><span class="toc-number">1.18.</span> <span class="toc-text">日期计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#得到日期对象的各个部分"><span class="toc-number">1.19.</span> <span class="toc-text">得到日期对象的各个部分</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/09/14/Foundation框架/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/09/14/Foundation框架/&text=Foundation框架"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/09/14/Foundation框架/&is_video=false&description=Foundation框架"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Foundation框架&body=Check out this article: http://yoursite.com/2017/09/14/Foundation框架/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/09/14/Foundation框架/&title=Foundation框架"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/09/14/Foundation框架/&name=Foundation框架&description=&lt;p&gt;才发现居然没有发上来….这个算是必备技能吧&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#foundation"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Foundation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#框架"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单例模式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 单例模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsstring字符串"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> NSString字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsmutablestring字符串"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> NSMutableString字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsarray数组"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"> NSArray数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsmutablearray数组"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"> NSMutableArray数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsnumber"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"> NSNumber</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-number">1.8.</span> <span class="post-toc-text"> 补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsdictionary"><span class="post-toc-number">1.9.</span> <span class="post-toc-text"> NSDictionary</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsmutabledictionary"><span class="post-toc-number">1.10.</span> <span class="post-toc-text"> NSMutableDictionary</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合的内存管理"><span class="post-toc-number">1.11.</span> <span class="post-toc-text"> 集合的内存管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsfilemanager"><span class="post-toc-number">1.12.</span> <span class="post-toc-text"> NSFileManager</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cgpoint"><span class="post-toc-number">1.13.</span> <span class="post-toc-text"> CGPoint</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cgsize"><span class="post-toc-number">1.14.</span> <span class="post-toc-text"> CGSize</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cgrect"><span class="post-toc-number">1.15.</span> <span class="post-toc-text"> CGRect</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nsvalue"><span class="post-toc-number">1.16.</span> <span class="post-toc-text"> NSValue</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串和日期转换"><span class="post-toc-number">1.17.</span> <span class="post-toc-text"> 字符串和日期转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#日期计算"><span class="post-toc-number">1.18.</span> <span class="post-toc-text"> 日期计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#得到日期对象的各个部分"><span class="post-toc-number">1.19.</span> <span class="post-toc-text"> 得到日期对象的各个部分</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/14/Foundation框架/&title=《Foundation框架》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/14/Foundation框架/&title=《Foundation框架》 — Peterpan's Blog&source=才发现居然没有发上来…这个算是必备技能吧" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3ay47DIBAEwP3/n85eI0Vhu8GJ1lA+WZEflA8dYObnJz4eT8frL8+/j69/PR/fdfGBgYFxW8ZjeIwHnb9y5fnjezEwMM5hvHvxu2vGUZsH60o0Y2BgYLSMfNDjt2NgYGCsM+Ymdskytf00GBgYpzHmpmt/LCzjAB1ff/FaHAMD44aMfLPs++cfqW9gYGDcivEoj5UyZ17arEeFgYGxNaOdriXL0fHTrgpcDAyM0xjtXCvfdFtv3fhqoxgGBsa/ZOQvWLlrZdsuQWJgYOzNSGJuPLh2iHmY1v8YGBgYWzOuas/Kt+rya6I2CwwMjAMYn1h8jp/fbsNFsYuBgbEpY6VImQT0XJjW4YuBgbE1Y2Vw+VQv+UzJM6NKLAYGxqaMduGaN1IkwTpXzixW5BgYGDdnzG175QHaNoG1Y8DAwMBoz9sF6lzhIVqLY2BgbMRIIi8pD0wGZVxUiH7HwMA4mJEvXNc36doiQRG4GBgYN2fkBcj2xXlYr/wBYGBgnMBY2fBqo7ktPBTFAwwMjAMYeci2i9i5Tb36I2JgYBzDaBspVmL32vDFwMDYlTEXpnMhm0wWcyoGBsY5jPxoB/eJBou2/ImBgbETo11q5gvLr04fMTAwDmC0wbcygftEewcGBgZGshk3d01eDLisQw0DA+MARr6Jlkf2XKPG254RDAyMTRl5MSDBt5O/9SYzDAyMvRntvCtvGpubJrYfCAMDY2vGLwglapiv4uKGAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

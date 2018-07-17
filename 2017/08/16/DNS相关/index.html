@@ -1,545 +1,300 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS相关">
+<meta property="og:url" content="http://yoursite.com/2017/08/16/DNS相关/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS相关">
+<meta name="twitter:description" content="为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/08/16/DNS相关/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>DNS相关</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>DNS相关 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>DNS相关</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">DNS相关</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-08-16T06:30:02.000Z" itemprop="datePublished" class="page-time">
-  2017-08-16
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/github博客绑定个性域名-域名记录类型、解析/">github博客绑定个性域名 域名记录类型、解析</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-DNS相关"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">DNS相关</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-08-16 14:30:02" datetime="2017-08-16T06:30:02.000Z"  itemprop="datePublished">2017-08-16</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/github博客绑定个性域名-域名记录类型、解析/">github博客绑定个性域名 域名记录类型、解析</a></li></ul>
-
-
-
-            
-	<span id="/2017/08/16/DNS相关/" class="leancloud_visitors" data-flag-title="DNS相关" title="DNS相关">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/08/16/DNS相关/#comment">
-            <span class="valine-comment-count" data-xid="/2017/08/16/DNS相关/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/24/TCP:IP-一/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/15/计算机网络硬件/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/16/DNS相关/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/16/DNS相关/&text=DNS相关"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/16/DNS相关/&is_video=false&description=DNS相关"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DNS相关&body=Check out this article: http://yoursite.com/2017/08/16/DNS相关/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/16/DNS相关/&name=DNS相关&description=&lt;p&gt;为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下&lt;br&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS相关"><span class="toc-number">1.</span> <span class="toc-text">DNS相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DNS？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是DNS？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记录类型"><span class="toc-number">1.2.</span> <span class="toc-text">记录类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名解析"><span class="toc-number">1.3.</span> <span class="toc-text">域名解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他相关"><span class="toc-number">1.4.</span> <span class="toc-text">其他相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化域名"><span class="toc-number">1.4.1.</span> <span class="toc-text">国际化域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TTL值"><span class="toc-number">1.4.2.</span> <span class="toc-text">TTL值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于hexo博客重新关联域名"><span class="toc-number">1.4.3.</span> <span class="toc-text">关于hexo博客重新关联域名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考博客"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">参考博客</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        DNS相关
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下</p>
-<a id="more"></a>
-<h1 id="dns相关"><a class="markdownIt-Anchor" href="#dns相关"></a> DNS相关</h1>
-<h2 id="什么是dns"><a class="markdownIt-Anchor" href="#什么是dns"></a> 什么是DNS？</h2>
-<p>网域名称系统（Domain Name System）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够让人更方便访问互联网。DNS使用TCP、UDP，端口53.当前对于每一级域名长度的限制是63的字符，总长不能超过253个字符。</p>
-<h2 id="记录类型"><a class="markdownIt-Anchor" href="#记录类型"></a> 记录类型</h2>
-<ul>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-16T06:30:02.000Z" itemprop="datePublished">2017-08-16</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/程序员的自我修养/">程序员的自我修养</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下<br><a id="more"></a></p>
+<h1 id="DNS相关"><a href="#DNS相关" class="headerlink" title="DNS相关"></a>DNS相关</h1><h2 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h2><p>网域名称系统（Domain Name System）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够让人更方便访问互联网。DNS使用TCP、UDP，端口53.当前对于每一级域名长度的限制是63的字符，总长不能超过253个字符。</p>
+<h2 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h2><ul>
 <li>主机记录（A记录）：用来指定主机名对应的IP地址记录，用户可以将该域名下的网站服务器指向到自己的web server上。同时也可以设置您域名的二级域名。</li>
 <li>别名记录（CNAME）：这种记录允许你将多个名字映射到同一台计算机，通常用于同时提供WWW和MAIL服务的计算机。同样也可以应用到多个域名指向同一个服务器的IP，此时将一个域名做A记录指向服务器，其他的域名作别名（CNAME）到A记录的域名上，当服务器IP变更时，只需要修改A记录即可。</li>
 <li>IPv6主机记录（AAAA记录）：将特定的主机名映射到一个主机的IPv6地址</li>
 <li>服务位置记录（SRV记录）：用于定义提供特定服务的服务器的位置，如主机（hostname），端口（port number）等。</li>
 <li>NAPTR记录：NAPTR是以<a href="https://zh.wikipedia.org/wiki/%E4%BC%9A%E8%AF%9D%E5%8F%91%E8%B5%B7%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">SIP</a>为基础，泛化了对传输协议有要求的服务,它提供了正则表达式的方式去映射一个域名</li>
 </ul>
-<h2 id="域名解析"><a class="markdownIt-Anchor" href="#域名解析"></a> 域名解析</h2>
-<p>DNS的查询有两种方式：递归、迭代。DNS客户端设置使用的DNS服务器一般都是递归服务器，它负责全权处理客户端的DNS查询请求，直到返回最终结果。DNS服务器之间一般采用的都是迭代查询的方式。</p>
-<p>如果小明在浏览器中输入一段网址回车，域名解析过程如下：</p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>DNS的查询有两种方式：递归、迭代。DNS客户端设置使用的DNS服务器一般都是递归服务器，它负责全权处理客户端的DNS查询请求，直到返回最终结果。DNS服务器之间一般采用的都是迭代查询的方式。</p>
+<p>如果小明在浏览器中输入一段网址回车，域名解析过程如下： </p>
 <ol>
-<li>DNS 进程先检查自己的程序缓存（Cache），如果有&quot;<a href="http://xxxx.com" target="_blank" rel="external">xxxx.com</a>&quot;所对应的 IP，则直接告诉浏览器。如果缓存没有找到，进入下一步；</li>
+<li>DNS 进程先检查自己的程序缓存（Cache），如果有”xxxx.com”所对应的 IP，则直接告诉浏览器。如果缓存没有找到，进入下一步；</li>
 <li>检查本地 Host 文件，看看有没有，有则告诉浏览器。如果 Host 没有找到，进入下一步；</li>
 <li>检查本地的 DNS 服务器配置，得到 DNS Server = 10.10.10.10，发个消息给它，让 DNS 服务器帮助查找。此消息为 UDP 格式，目的 IP=10.10.10.10，小明电脑发现和自己不在一个网段，于是使用上一节提到的不同网段的通信，将 IP 包发给 DNS Server = 10.10.1 […]</li>
-<li>DNS Server （10.10.10.10）在自己的缓存里也没有发现，于是向互联网的上级 DNS Server （8.8.8.8）发送协查请求；DNS Server （8.8.8.8）发现了匹配项：<a href="HTTP://www.myorange.com2.2.2.2" target="_blank" rel="external">HTTP://www.myorange.com2.2.2.2</a>，于是将协查结果返回给小明公司 DNS 服务器（10.10.10.10），然后再返回到小明电脑（10.1.1.2）DNS 进程。（如果上层服务器也没有找到，就继续向上迭代查找）</li>
+<li>DNS Server （10.10.10.10）在自己的缓存里也没有发现，于是向互联网的上级 DNS Server （8.8.8.8）发送协查请求；DNS Server （8.8.8.8）发现了匹配项：HTTP://www.myorange.com2.2.2.2，于是将协查结果返回给小明公司 DNS 服务器（10.10.10.10），然后再返回到小明电脑（10.1.1.2）DNS 进程。（如果上层服务器也没有找到，就继续向上迭代查找）</li>
 </ol>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-15%20%E4%B8%8B%E5%8D%883.01.29.png" alt=""></p>
 <p>这个时候，整个DNS解析的过程就完毕了,小明可以将访问服务器的请求打包成http格式之后告诉TCP进程，同时告诉TCP进程的还有该域名的IP地址。</p>
-<h2 id="其他相关"><a class="markdownIt-Anchor" href="#其他相关"></a> 其他相关</h2>
-<h3 id="国际化域名"><a class="markdownIt-Anchor" href="#国际化域名"></a> 国际化域名</h3>
-<p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
-<h3 id="ttl值"><a class="markdownIt-Anchor" href="#ttl值"></a> TTL值</h3>
-<p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了,这个值其实并不是固定的，在不同情况下是不同的。</p>
-<h3 id="关于hexo博客重新关联域名"><a class="markdownIt-Anchor" href="#关于hexo博客重新关联域名"></a> 关于hexo博客重新关联域名</h3>
-<p>相信大部分初次搭建hexo博客的人都会选择使用github的那个免费域名,但是时间一久真的很丑的说…所以一定拥有一个自己的个性域名啊，那么基本上分为下面的三步就可以搞定了（以腾讯云为例，默默为被嫌弃的github默哀3秒）</p>
+<h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><h3 id="国际化域名"><a href="#国际化域名" class="headerlink" title="国际化域名"></a>国际化域名</h3><p><strong>Punycode</strong>是一个根据RFC 3492标准而制定的编码系统，主要用于把域名从地方语言所采用的<code>Unicode</code>编码转换成为可用于DNS系统的编码。而该编码是根据<a href="http://www.iana.org/domains/idn-tables/" target="_blank" rel="external">域名相异字表</a>（由<a href="https://zh.wikipedia.org/wiki/IANA" target="_blank" rel="external">IANA</a>制定），Punycode可以防止所谓的<a href="https://zh.wikipedia.org/wiki/IDN%E6%AC%BA%E9%A8%99" target="_blank" rel="external">IDN欺骗</a>。</p>
+<h3 id="TTL值"><a href="#TTL值" class="headerlink" title="TTL值"></a>TTL值</h3><p>全称是Time To Live，就是DNS记录在DNS服务器上的缓存时间。实质上也就是当TTL值过期之后，又要重复记录老化之后的域名解析过程了,这个值其实并不是固定的，在不同情况下是不同的。</p>
+<h3 id="关于hexo博客重新关联域名"><a href="#关于hexo博客重新关联域名" class="headerlink" title="关于hexo博客重新关联域名"></a>关于hexo博客重新关联域名</h3><p>相信大部分初次搭建hexo博客的人都会选择使用github的那个免费域名,但是时间一久真的很丑的说….所以一定拥有一个自己的个性域名啊，那么基本上分为下面的三步就可以搞定了（以腾讯云为例，默默为被嫌弃的github默哀3秒）</p>
 <ul>
 <li>购买一个域名，可以使用GoDaddy或者国内一些信得过的，我是因为优惠劵的缘故所以选了腾讯云…并且免费选了大天朝的cn域名，虽然审核很麻烦🐸的说。</li>
 <li>然后在云解析界面将我们的github添加到CNAME中去，将新买的域名指向原来的github域名，主机记录选择@，也就是直接解析主机名,如下图所示：</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.18.46.png" alt=""></p>
 <ul>
 <li>这个时候还没有结束，只在域名商处修改CNAME之后，输入的域名会被重定向到Github pages的页面，但是由于你这个域名github不知道，所以直接就果断拒绝并且给一你巴掌，上面写着404，所以还是乖乖的把名字告诉他：在<code>你博客的本地目录/source/</code>目录下创建一个CNAME文件，里面写上你买的域名，然后就可以推送了：</li>
 </ul>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-16%20%E4%B8%8B%E5%8D%882.27.26.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
-<h4 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h4>
-<ul>
+<h4 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h4><ul>
 <li><a href="http://blog.zfan.me/2015/09/03/%E4%B8%BA%E9%83%A8%E7%BD%B2%E5%9C%A8Github%E4%B8%8A%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D/" target="_blank" rel="external">参考博客</a></li>
 </ul>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.862Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/08/16/DNS相关/" target="_blank" rel="external">http://yoursite.com/2017/08/16/DNS相关/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/16/DNS相关/&title=《DNS相关》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/16/DNS相关/&title=《DNS相关》 — Peterpan's Blog&source=为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/08/24/TCP:IP-一/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">TCP/IP(一)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/15/计算机网络硬件/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">计算机网络硬件</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS相关"><span class="toc-number">1.</span> <span class="toc-text">DNS相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DNS？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是DNS？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记录类型"><span class="toc-number">1.2.</span> <span class="toc-text">记录类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名解析"><span class="toc-number">1.3.</span> <span class="toc-text">域名解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他相关"><span class="toc-number">1.4.</span> <span class="toc-text">其他相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化域名"><span class="toc-number">1.4.1.</span> <span class="toc-text">国际化域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TTL值"><span class="toc-number">1.4.2.</span> <span class="toc-text">TTL值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于hexo博客重新关联域名"><span class="toc-number">1.4.3.</span> <span class="toc-text">关于hexo博客重新关联域名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考博客"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">参考博客</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/16/DNS相关/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/16/DNS相关/&text=DNS相关"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/16/DNS相关/&is_video=false&description=DNS相关"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DNS相关&body=Check out this article: http://yoursite.com/2017/08/16/DNS相关/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/16/DNS相关/&title=DNS相关"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/16/DNS相关/&name=DNS相关&description=&lt;p&gt;为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下&lt;br&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#dns相关"><span class="post-toc-number">1.</span> <span class="post-toc-text"> DNS相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是dns"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 什么是DNS？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#记录类型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 记录类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#域名解析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> 域名解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他相关"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"> 其他相关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#国际化域名"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text"> 国际化域名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ttl值"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text"> TTL值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于hexo博客重新关联域名"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text"> 关于hexo博客重新关联域名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考博客"><span class="post-toc-number">1.4.3.1.</span> <span class="post-toc-text"> 参考博客</span></a></li></ol></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/16/DNS相关/&title=《DNS相关》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/16/DNS相关/&title=《DNS相关》 — Peterpan's Blog&source=为了让自己的博客开启友言评论…绑定域名的时候顺便了解了一下" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aW07FMAwFQPa/aVgAuuUc56EiTb8QSZvJ/bBsJ19f8fP96/n9/+f5yVvbHlxc3GXu9+PzaYFPo+3M3ICLi3uf+yliJHPyhZMt/WHDxcV9JTdZbPZNXFzc/8udFTnthnFxcd/AbQuYNjC1G9tQq+Hi4i5w8y7lub+P9HdxcXFH3JUWxvNiSUJTr46Li3uFmweU58PUWbtkuC4uLu4LuHkikhctyWh9yIqLi3uMmx+CtkEq30aR4uDi4h7gtgvkhVDS+qwPWnBxca9wZ6nJ7Lg0h0bFDy4u7mHueuKSX9FIEMXmcXFxD3DzgDIrk/LRKN3BxcW9wk2amG3DtL1yMUybcHFxj3Hb9CUpk1bmRHEXFxf3MLc9zMiTkpWAWLyFi4t7jNsiZkEtKY2SL+Di4t7krly3yhugyVvRISsuLu4VbnsNqw1bR7IwXFzcA9y95U07ml/7wMXFvcltg8tKy2PX1Q1cXNw73JW2SJ7oPBc5xSguLu5F7uw6xYy4IX3BxcV9GTdJXNrjliL/wsXFfTF3VrrktVd98oOLi3uAmxQ/eZBKGqP5T4CLi3ufu6vi2PW1WeDDxcXdxP0BgT8z0iKpe8UAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

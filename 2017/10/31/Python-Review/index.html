@@ -1,204 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="也算是几个月没正经写过python了，是时候重拾这把宝刀了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3-Review">
+<meta property="og:url" content="http://yoursite.com/2017/10/31/Python-Review/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="也算是几个月没正经写过python了，是时候重拾这把宝刀了">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.858Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3-Review">
+<meta name="twitter:description" content="也算是几个月没正经写过python了，是时候重拾这把宝刀了">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/10/31/Python-Review/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python3-Review</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>Python3-Review | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="Python">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>Python3-Review</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">Python3-Review</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-10-31T15:55:40.000Z" itemprop="datePublished" class="page-time">
-  2017-10-31
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/关键字参数-可变参数-lamada表达式/">关键字参数 可变参数 lamada表达式</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-Python-Review"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">Python3-Review</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-10-31 23:55:40" datetime="2017-10-31T15:55:40.000Z"  itemprop="datePublished">2017-10-31</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/关键字参数-可变参数-lamada表达式/">关键字参数 可变参数 lamada表达式</a></li></ul>
-
-
-
-            
-	<span id="/2017/10/31/Python-Review/" class="leancloud_visitors" data-flag-title="Python3-Review" title="Python3-Review">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/10/31/Python-Review/#comment">
-            <span class="valine-comment-count" data-xid="/2017/10/31/Python-Review/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/11/01/CTF-MISC-二/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/10/30/PIL学习-一/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/10/31/Python-Review/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/10/31/Python-Review/&text=Python3-Review"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/10/31/Python-Review/&is_video=false&description=Python3-Review"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python3-Review&body=Check out this article: http://yoursite.com/2017/10/31/Python-Review/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/10/31/Python-Review/&name=Python3-Review&description=&lt;p&gt;也算是几个月没正经写过python了，是时候重拾这把宝刀了&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-前言"><span class="toc-number">1.</span> <span class="toc-text">0X00-前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-Python基础部分"><span class="toc-number">2.</span> <span class="toc-text">0X01-Python基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码"><span class="toc-number">2.1.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">2.2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">2.3.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">2.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-Python高级特性"><span class="toc-number">3.</span> <span class="toc-text">0X02-Python高级特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#切片和列表生成式："><span class="toc-number">3.1.</span> <span class="toc-text">切片和列表生成式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成器和迭代器"><span class="toc-number">3.2.</span> <span class="toc-text">生成器和迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">3.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python3-Review
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>也算是几个月没正经写过python了，是时候重拾这把宝刀了</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-10-31T15:55:40.000Z" itemprop="datePublished">2017-10-31</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>也算是几个月没正经写过python了，是时候重拾这把宝刀了</p>
 <a id="more"></a>
-<h2 id="0x00-前言"><a class="markdownIt-Anchor" href="#0x00-前言"></a> 0X00-前言</h2>
-<p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
+<h2 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00-前言"></a>0X00-前言</h2><p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
 <hr>
-<h2 id="0x01-python基础部分"><a class="markdownIt-Anchor" href="#0x01-python基础部分"></a> 0X01-Python基础部分</h2>
-<h3 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码</h3>
-<p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
+<h2 id="0X01-Python基础部分"><a href="#0X01-Python基础部分" class="headerlink" title="0X01-Python基础部分"></a>0X01-Python基础部分</h2><h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
 <p>现在，捋一捋ASCII编码和Unicode编码的区别：ASCII编码是1个字节，而Unicode编码通常是2个字节。</p>
 <p>字母<code>A</code>用ASCII编码是十进制的<code>65</code>，二进制的<code>01000001</code>；</p>
-<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>'0'</code>和整数<code>0</code>是不同的；</p>
+<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>&#39;0&#39;</code>和整数<code>0</code>是不同的；</p>
 <p>汉字<code>中</code>已经超出了ASCII编码的范围，用Unicode编码是十进制的<code>20013</code>，二进制的<code>01001110 00101101</code>。</p>
 <p>你可以猜测，如果把ASCII编码的<code>A</code>用Unicode编码，只需要在前面补0就可以，因此，<code>A</code>的Unicode编码是<code>00000000 01000001</code>。</p>
 <p>新的问题又出现了：如果统一成Unicode编码，乱码问题从此消失了。但是，如果你写的文本基本上全部是英文的话，用Unicode编码比ASCII编码需要多一倍的存储空间，在存储和传输上就十分不划算。</p>
-<p>所以，本着节约的精神，又出现了把Unicode编码转化为&quot;可变长编码&quot;&quot;的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
+<p>所以，本着节约的精神，又出现了把Unicode编码转化为”可变长编码””的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
 <table>
 <thead>
 <tr>
@@ -227,14 +212,10 @@
 <p>搞清楚了ASCII、Unicode和UTF-8的关系，我们就可以总结一下现在计算机系统通用的字符编码工作方式：</p>
 <p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。</p>
 <p>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt=""></p>
 <p>那么这个时候可能会有人问为什么在内存中使用Unicode呢，全部使用UTF-8岂不是更好么，这个时候参照知乎上的答案来说应该是内存存储字节流的时候，字符不定长会给算法带来麻烦。比如说我们无法确定第2000个字符从哪里开始，所以会采用Unicode,而在存储的时候，自然是选择不定长的UTF-8了，这里还是扔出一个<a href="https://www.zhihu.com/question/52346583" target="_blank" rel="external">链接</a>。</p>
 <p>还有一点需要注意的就是python3和python2的字符串编码差别还是挺大的，可以自行查阅一番。</p>
-<h3 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h3>
-<p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
 <p>对于单个的字符串，python提供了<code>ord()</code>函数获取字符的整型表示，<code>chr()</code>函数将编码转换为对应的字符串</p>
 <p>如果知道字符的整数编码，还可以使用十六进制写：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'\u4e2d\u6587'</span></div><div class="line"><span class="string">'中文'</span></div></pre></td></tr></table></figure>
@@ -242,10 +223,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'ABC'</span>.encode(<span class="string">'ascii'</span>)</div><div class="line"><span class="string">b'ABC'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span></div></pre></td></tr></table></figure>
 <p>中文无法使用<code>ASCII</code>编码，因为这已经超过了其编码的范围，反过来，如果我们从网络或磁盘上读取了字节流，那么读到的数据就是<code>bytes</code>。要把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'ABC'</span>.decode(<span class="string">'ascii'</span>)</div><div class="line"><span class="string">'ABC'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'中文'</span></div></pre></td></tr></table></figure>
-<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>'xx.x%'</code>，只保留小数点后1位：</p>
+<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>&#39;xx.x%&#39;</code>，只保留小数点后1位：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">'%.1f%%'</span> %((s2-s1)/s1*<span class="number">100</span>))</div></pre></td></tr></table></figure>
-<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
-<p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</div></pre></td></tr></table></figure>
 <p>注意，传入的参数是一个list，只是表明这个set内部有这几个元素，现实的顺序也不表示set是有序的，重复的元素会在set中被自动过滤掉，使用<code>add(key)</code>方法可以添加元素到set中，<code>remove(key)</code>来删除元素，当然也可以重复添加，但是不会有效果：</p>
@@ -255,8 +235,7 @@
 <p>这里有一个在评论区需要注意的点，可以拿出来说一下，在给set函数传参的时候，以下几种情况：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set((<span class="number">1</span>,[<span class="number">2</span>, <span class="number">3</span>]))</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: unhashable type: <span class="string">'list'</span></div></pre></td></tr></table></figure>
 <p>那么这种情况到底是为什么呢？是因为set不接受可变参数，可能有人要问了，列表就是可变参数啊，列表在赋值给s的时候是将列表中的每个元素作为value赋值进去的，str是不可变对象，而在第三种情况下参数内有一个是列表，所以就会失败，如果把[2, 3]改为（2，3）就可以成功了。</p>
-<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
-<p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
 <ol>
 <li>可变参数</li>
 </ol>
@@ -268,7 +247,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(*numbers)</span>:</span></div><div class="line">    sum = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</div><div class="line">        sum = sum + n * n</div><div class="line">    <span class="keyword">return</span> sum</div><div class="line"><span class="comment">#执行函数</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line"><span class="number">14</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>)</div><div class="line"><span class="number">84</span></div></pre></td></tr></table></figure>
 <p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？虽然可以使用下标一个个传，但是这样未免过于麻烦，所以Python允许在列表或者元组前面加一个<code>*</code>，把list或turple作为可变参数传递进去：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(*nums)</div><div class="line"><span class="number">14</span></div></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li>关键字参数</li>
 </ol>
 <p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
@@ -283,7 +262,7 @@
 <p>当然，上面复杂的调用可以用简化的写法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>extra = &#123;<span class="string">'city'</span>: <span class="string">'Beijing'</span>, <span class="string">'job'</span>: <span class="string">'Engineer'</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>person(<span class="string">'Jack'</span>, <span class="number">24</span>, **extra)</div><div class="line">name: Jack age: <span class="number">24</span> other: &#123;<span class="string">'city'</span>: <span class="string">'Beijing'</span>, <span class="string">'job'</span>: <span class="string">'Engineer'</span>&#125;</div></pre></td></tr></table></figure>
 <p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
-<ol start="3">
+<ol>
 <li>命名关键字参数</li>
 </ol>
 <p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过<code>kw</code>检查。</p>
@@ -308,16 +287,14 @@
 <p>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<code>*</code>作为特殊分隔符。如果缺少<code>*</code>，Python解释器将无法识别位置参数和命名关键字参数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, city, job)</span>:</span></div><div class="line">    <span class="comment"># 缺少 *，city和job被视为位置参数</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
 <p>Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
-<ol start="4">
+<ol>
 <li>递归函数</li>
 </ol>
 <p>递归函数也就是在函数内部调用自身，这里使用一个汉诺塔问题帮助理解，丢个代码就跑：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(n, a, b, c)</span>:</span></div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</div><div class="line">        print(a, <span class="string">'--&gt;'</span>, c)    <span class="comment"># 这是汉诺塔的正确玩法! </span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        move(n - <span class="number">1</span>, a, c, b)</div><div class="line">        move(<span class="number">1</span>, a, b, c)</div><div class="line">        move(n - <span class="number">1</span>, b, a, c)</div><div class="line"><span class="comment">#其实写出这个函数只需要搞清楚三步即可</span></div><div class="line"><span class="comment">#1. 除最后一层移至B</span></div><div class="line"><span class="comment">#2. 最后一层移至C</span></div><div class="line"><span class="comment">#3. 复原至C</span></div></pre></td></tr></table></figure>
 <hr>
-<h2 id="0x02-python高级特性"><a class="markdownIt-Anchor" href="#0x02-python高级特性"></a> 0X02-Python高级特性</h2>
-<p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
-<h3 id="切片和列表生成式"><a class="markdownIt-Anchor" href="#切片和列表生成式"></a> 切片和列表生成式：</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>L = [<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>, <span class="string">'lanlanlu'</span>]</div></pre></td></tr></table></figure>
+<h2 id="0X02-Python高级特性"><a href="#0X02-Python高级特性" class="headerlink" title="0X02-Python高级特性"></a>0X02-Python高级特性</h2><p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
+<h3 id="切片和列表生成式："><a href="#切片和列表生成式：" class="headerlink" title="切片和列表生成式："></a>切片和列表生成式：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>L = [<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>, <span class="string">'lanlanlu'</span>]</div></pre></td></tr></table></figure>
 <p>对于这样的一个列表，我们需要取前三个元素应该怎么操作呢：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#第一种当然可以使用传统的方式</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>[ L[<span class="number">0</span>], L[<span class="number">1</span>], L[<span class="number">2</span>] ]</div><div class="line">[<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>]</div><div class="line"><span class="comment">#或者使用循环的方式</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>r = []</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = <span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line"><span class="meta">... </span>    r.append(L[i])</div></pre></td></tr></table></figure>
 <p>对这种经常取指定索引范围的操作用循环非常的繁琐，在学习完切片(Slice)之后我们会使用更简单的方式:</p>
@@ -344,13 +321,11 @@
 <p>我们还可以使用二层循环，并且加上判断，这样就可以完全代替了冗长的for循环语法了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>[m+n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABCDEFG'</span> <span class="keyword">if</span> m !=<span class="string">'D'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'!@$#%^*&amp;'</span> <span class="keyword">if</span> n != <span class="string">'^'</span>]</div><div class="line">[<span class="string">'A!'</span>, <span class="string">'A@'</span>, <span class="string">'A$'</span>, <span class="string">'A#'</span>, <span class="string">'A%'</span>, <span class="string">'A*'</span>, <span class="string">'A&amp;'</span>, <span class="string">'B!'</span>, <span class="string">'B@'</span>, <span class="string">'B$'</span>, <span class="string">'B#'</span>, <span class="string">'B%'</span>, <span class="string">'B*'</span>, <span class="string">'B&amp;'</span>, <span class="string">'C!'</span>, <span class="string">'C@'</span>, <span class="string">'C$'</span>, <span class="string">'C#'</span>, <span class="string">'C%'</span>, <span class="string">'C*'</span>, <span class="string">'C&amp;'</span>, <span class="string">'E!'</span>, <span class="string">'E@'</span>, <span class="string">'E$'</span>, <span class="string">'E#'</span>, <span class="string">'E%'</span>, <span class="string">'E*'</span>, <span class="string">'E&amp;'</span>, <span class="string">'F!'</span>, <span class="string">'F@'</span>, <span class="string">'F$'</span>, <span class="string">'F#'</span>, <span class="string">'F%'</span>, <span class="string">'F*'</span>, <span class="string">'F&amp;'</span>, <span class="string">'G!'</span>, <span class="string">'G@'</span>, <span class="string">'G$'</span>, <span class="string">'G#'</span>, <span class="string">'G%'</span>, <span class="string">'G*'</span>, <span class="string">'G&amp;'</span>]</div></pre></td></tr></table></figure>
 <p>还可以通过列表生成式将列表中的字母换成小写或者转换写法等等操作，根据需求可以灵活的调整。</p>
-<h3 id="生成器和迭代器"><a class="markdownIt-Anchor" href="#生成器和迭代器"></a> 生成器和迭代器</h3>
-<p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
+<h3 id="生成器和迭代器"><a href="#生成器和迭代器" class="headerlink" title="生成器和迭代器"></a>生成器和迭代器</h3><p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
 <p>而关于迭代器，我们可以了解到所有可以被<code>nex()</code>函数不断调用并返回下一个值的都是一个迭代器。这里有一个误区，那就是诸如list、tuple之类的虽然是可迭代对象，但不是迭代器。那么这是为什么呢</p>
 <p>这是因为Python的<code>Iterator</code>对象表示的是一个数据流，Iterator对象可以被<code>next()</code>函数调用并不断返回下一个数据，直到没有数据时抛出<code>StopIteration</code>错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过<code>next()</code>函数实现按需计算下一个数据，所以<code>Iterator</code>的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
 <p><code>Iterator</code>甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。</p>
-<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
-<ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
 <li>凡是可以作用于<code>for</code>循环的都是可迭代对象</li>
 <li>凡是可作用于<code>next()</code>函数的对象都是迭代器类型，它们表示一个惰性计算的序列。</li>
 <li>集合数据类型如<code>list</code>、<code>dict</code>、<code>str</code>等是<code>Iterable</code>但不是<code>Iterator</code>，不过可以通过<code>iter()</code>函数获得一个<code>Iterator</code>对象。</li>
@@ -360,307 +335,91 @@
 <p>实际上可以完全等价于：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先进行一次转换获得迭代器对象</span></div><div class="line">it = iter([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ,<span class="number">4</span>])</div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">  <span class="keyword">try</span>:</div><div class="line">    x = next(it)</div><div class="line">  <span class="keyword">except</span> StopIteration:</div><div class="line">    <span class="keyword">break</span></div></pre></td></tr></table></figure>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.858Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/10/31/Python-Review/" target="_blank" rel="external">http://yoursite.com/2017/10/31/Python-Review/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/31/Python-Review/&title=《Python3-Review》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/31/Python-Review/&title=《Python3-Review》 — Peterpan's Blog&source=也算是几个月没正经写过python了，是时候重拾这把宝刀了" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/11/01/CTF-MISC-二/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">CTF-MISC(二)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/10/30/PIL学习-一/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">PIL学习(一)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0X00-前言"><span class="toc-number">1.</span> <span class="toc-text">0X00-前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X01-Python基础部分"><span class="toc-number">2.</span> <span class="toc-text">0X01-Python基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码"><span class="toc-number">2.1.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">2.2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">2.3.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">2.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0X02-Python高级特性"><span class="toc-number">3.</span> <span class="toc-text">0X02-Python高级特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#切片和列表生成式："><span class="toc-number">3.1.</span> <span class="toc-text">切片和列表生成式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成器和迭代器"><span class="toc-number">3.2.</span> <span class="toc-text">生成器和迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">3.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/10/31/Python-Review/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/10/31/Python-Review/&text=Python3-Review"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/10/31/Python-Review/&is_video=false&description=Python3-Review"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python3-Review&body=Check out this article: http://yoursite.com/2017/10/31/Python-Review/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/10/31/Python-Review/&title=Python3-Review"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/10/31/Python-Review/&name=Python3-Review&description=&lt;p&gt;也算是几个月没正经写过python了，是时候重拾这把宝刀了&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x00-前言"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 0X00-前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x01-python基础部分"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 0X01-Python基础部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编码"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> 编码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> 字符串</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#set"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"> set</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"> 函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0x02-python高级特性"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 0X02-Python高级特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#切片和列表生成式"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"> 切片和列表生成式：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成器和迭代器"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"> 生成器和迭代器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"> 小结</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/10/31/Python-Review/&title=《Python3-Review》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/10/31/Python-Review/&title=《Python3-Review》 — Peterpan's Blog&source=也算是几个月没正经写过python了，是时候重拾这把宝刀了" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3awXKDMAyEYd7/pclMrwnO7grSsfRzyqTU8PWwlSwfh3ydf5d+5/v979+fy+t44oIBA8a2DGU55WH13736LFFhwIAxgLEO2fU9Vw/Wgzh7LgwYMGCsg8+tzdxYhwEDBowKQynm9M/unTBgwJjMUKJQD1m9rf2HXhwGDBgbMtzBwC8/PzjfgAEDxiaMSsOZNbfu99L7wIABozXD3VZzy7v6KNTYhoMBA0ZTRvYq+kiyMhw17ocBA0ZrxnqbvlK0ubGbvQkMGDAmMPSF3JiWho5CuSmFLwwYMAYw3O3450I2/CkMGDBaM7KDWe6oIBs2hE0vDBgw2jHcaKuUfdnRDWllGDBgDGBkg4FKIZg1z5crwIABYwBDLwfdV3G/d8eiMGDAmMDQF3V/6o5Cs8Nn9pELGDBgbMhwG8hK7CoRnL0JDBgwJjDcjXh3GFkpQMNeHAYMGI0Y+uBQORZWj9qsSIUBA0Zvhr59r2/luyGrkL48HQYMGK0Z9yZ3VibeO+CEAQNGP4b7cneVeutY11f70IvDgAGjHUNf9ImSzgWEDS0MGDA2Z5zmpbS4bvvqNsPS/w0YMGA0YrgB6hZq7h+igocBA0Zvxl0hm4VjJXBhwIAxjaGEaf0QWKW8+7I9BwMGDBjCplglst0nXpaGMGDAGM9QNvQrxyzWgNtKQxgwYGzLqDelLkDfqpMmsTBgwGjNcAcDLnUd6Hpw60UqDBgwGjFeRbR6wBb776kAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

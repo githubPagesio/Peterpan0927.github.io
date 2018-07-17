@@ -1,211 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于PVID和VID的研究">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/对于PVID和VID的研究/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
+<meta property="og:updated_time" content="2018-03-19T13:55:32.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对于PVID和VID的研究">
+<meta name="twitter:description" content="今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2018/03/19/对于PVID和VID的研究/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>对于PVID和VID的研究</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>对于PVID和VID的研究 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>对于PVID和VID的研究</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">对于PVID和VID的研究</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-03-19T09:50:31.000Z" itemprop="datePublished" class="page-time">
-  2018-03-19
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/交换机/">交换机</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/交换机/Vlan/">Vlan</a></li></ul></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-对于PVID和VID的研究"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">对于PVID和VID的研究</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-03-19 17:50:31" datetime="2018-03-19T09:50:31.000Z"  itemprop="datePublished">2018-03-19</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/交换机/">交换机</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/交换机/Vlan/">Vlan</a></li></ul></li></ul>
-
-
-
-            
-	<span id="/2018/03/19/对于PVID和VID的研究/" class="leancloud_visitors" data-flag-title="对于PVID和VID的研究" title="对于PVID和VID的研究">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/03/19/对于PVID和VID的研究/#comment">
-            <span class="valine-comment-count" data-xid="/2018/03/19/对于PVID和VID的研究/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/21/java蓝桥杯习题-二/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/16/ACM日常训练总结-二/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/19/对于PVID和VID的研究/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&text=对于PVID和VID的研究"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&is_video=false&description=对于PVID和VID的研究"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对于PVID和VID的研究&body=Check out this article: http://yoursite.com/2018/03/19/对于PVID和VID的研究/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&name=对于PVID和VID的研究&description=&lt;p&gt;今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#问题演变"><span class="toc-number">1.</span> <span class="toc-text">问题演变</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#交换机端口类型"><span class="toc-number">2.</span> <span class="toc-text">交换机端口类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问题解决"><span class="toc-number">3.</span> <span class="toc-text">问题解决</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置vlan的参考准则："><span class="toc-number">4.</span> <span class="toc-text">配置vlan的参考准则：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        对于PVID和VID的研究
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-19T09:50:31.000Z" itemprop="datePublished">2018-03-19</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/程序员的自我修养/">程序员的自我修养</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。</p>
 <a id="more"></a>
-<h1 id="问题演变"><a class="markdownIt-Anchor" href="#问题演变"></a> 问题演变</h1>
-<p>因为傻瓜其实是没有划分vlan的，但是核心交换机上的那个口是个trunk，所以其实相当于我们的PC直连了一个trunk，我们知道平时连接PC的都是Access类型的端口，所以我猜想是这里出了问题。网上众说纷纭，有的人说这样可以，有的人说不行，在我做了初步测试之后是不行的，但是这并非绝对，因为我在论坛上看到了有人在讨论Native vlan和vlan的时候，我才明白，这才是问题的关键所在，那么接下来就是我们对与vlan和Native vlan的研究了：</p>
-<h1 id="交换机端口类型"><a class="markdownIt-Anchor" href="#交换机端口类型"></a> 交换机端口类型</h1>
-<p>PVID称作<code>Port-base Vlan ID</code>，用形象的说法来看，PVID和VID就好像超市里的扫描器和商品标记一样，但是PVID不仅解析VID还会生成VID，说的有点玄乎，俺么就来根据交换机的端口类型来解释一下吧：</p>
+<h1 id="问题演变"><a href="#问题演变" class="headerlink" title="问题演变"></a>问题演变</h1><p>因为傻瓜其实是没有划分vlan的，但是核心交换机上的那个口是个trunk，所以其实相当于我们的PC直连了一个trunk，我们知道平时连接PC的都是Access类型的端口，所以我猜想是这里出了问题。网上众说纷纭，有的人说这样可以，有的人说不行，在我做了初步测试之后是不行的，但是这并非绝对，因为我在论坛上看到了有人在讨论Native vlan和vlan的时候，我才明白，这才是问题的关键所在，那么接下来就是我们对与vlan和Native vlan的研究了：</p>
+<h1 id="交换机端口类型"><a href="#交换机端口类型" class="headerlink" title="交换机端口类型"></a>交换机端口类型</h1><p>PVID称作<code>Port-base Vlan ID</code>，用形象的说法来看，PVID和VID就好像超市里的扫描器和商品标记一样，但是PVID不仅解析VID还会生成VID，说的有点玄乎，俺么就来根据交换机的端口类型来解释一下吧：</p>
 <ol>
 <li>Access:</li>
 </ol>
-<p>Access端口负责接终端设备，他收到一个帧的时候，如果帧这个没有标记他就用自己的pvid给他打上标记，他在发出一个帧时如果VID=PVID**就去掉标记(解标记)**以保证传送给终端设备的帧没有被变动过(中间设备添加了标记)，pvid是在划分vlan时候每个端口都有的属性，默认情况下思科交换机中每个端口初始pvid是1，表示他是vlan 1的成员们如果你给他划分了其他VLAN那么PVID相应会发生更改</p>
-<ol start="2">
+<p>Access端口负责接终端设备，他收到一个帧的时候，如果帧这个没有标记他就用自己的pvid给他打上标记，他在发出一个帧时如果VID=PVID<strong>就去掉标记(解标记)</strong>以保证传送给终端设备的帧没有被变动过(中间设备添加了标记)，pvid是在划分vlan时候每个端口都有的属性，默认情况下思科交换机中每个端口初始pvid是1，表示他是vlan 1的成员们如果你给他划分了其他VLAN那么PVID相应会发生更改</p>
+<ol>
 <li>Trunk:</li>
 </ol>
 <p>Trunk的意思是，它是一条<a href="http://baike.baidu.com/view/2365662.htm" target="_blank" rel="external">中继链路</a>，允许各种VLAN通过。它的规则和Access差不多，当收到一个没有tag的标记的时候就用自己的pvid给他标记，当发送一个帧时候如果vid=pvid则去掉pvid，<strong>与Access不同的是</strong>，Trunk有一个<strong>属于自己的本征VLAN(Native VLAN,也叫PVID)</strong>，用来发送一些<strong>cdp，bpdu</strong>等<a href="http://baike.baidu.com/view/1077.htm" target="_blank" rel="external"><strong>交换机</strong></a><strong>间</strong>联系的<strong>数据</strong>或者<strong>管理流量</strong>，从交换机<strong>自身</strong>产生的帧在发出去的时候<strong>是不会带标记的</strong>，<strong>因为VID=pvid所以标记被去掉</strong>，而<strong>对端接收</strong>到没有标记的帧时候就会用自身本征VLAN的信息给他<strong>加上标记</strong>，然后查看<strong>交换表</strong>如果<strong>发现目的地址</strong>是自己<strong>则去掉标记</strong>，如果发现目的mac地址不是自己则<strong>继续转发</strong>给<strong>其他Trunk同时去掉标记</strong>（因为一个<strong>交换机只有一个本征VLAN</strong>所有pvid=vid去掉标记）</p>
-<ol start="3">
+<ol>
 <li>Hybrid:</li>
 </ol>
 <p>它允许VID=pvid。Hybrid与Trunk一样，在该端口上可以传送多个vlan的包，一般用于交换机与交换机之间，或者交换机与服务器之间的链接。如果收到的<a href="http://baike.baidu.com/view/25880.htm" target="_blank" rel="external">数据包</a>不带vlan，则加上pvid进行转发；如果<strong>收到</strong>的数据包带vlan，则判断该端口是否允许该vlan<strong>进入</strong>，如果可以则进行<strong>转发</strong>，否则<strong>丢弃。</strong></p>
-<p>我们知道802.1Q的VLAN是在二层帧里加进VLAN标识，俗称打tag，而计算机不<strong>能解析</strong>这种二层的帧，所以交换机的<strong>一个端口在分到一个VLAN时有tag和untag属性两种属性</strong>，<strong>tag端口用来连接设备，untag端口用来连接计算机</strong>。Tag端口出去的帧一般都打上了tag，tag中的VID<strong>有的来自PVID</strong>，<strong>有的则来自其它tag端口中本身</strong>就含有tag的<strong>帧</strong>。<br>
-设备互连时，由tag中的VID决定了一个二层帧属于哪个VLAN，而计算机不具备打tag的功能，所以只有给<strong>连接</strong>计算机的<strong>端口添加一个属性</strong>，<strong>用来决定计算机发出的未标记的帧属于哪个VLAN，这个属性就是PVID</strong>。</p>
-<h1 id="问题解决"><a class="markdownIt-Anchor" href="#问题解决"></a> 问题解决</h1>
-<p>首先上一张表吧：</p>
+<p>我们知道802.1Q的VLAN是在二层帧里加进VLAN标识，俗称打tag，而计算机不<strong>能解析</strong>这种二层的帧，所以交换机的<strong>一个端口在分到一个VLAN时有tag和untag属性两种属性</strong>，<strong>tag端口用来连接设备，untag端口用来连接计算机</strong>。Tag端口出去的帧一般都打上了tag，tag中的VID<strong>有的来自PVID</strong>，<strong>有的则来自其它tag端口中本身</strong>就含有tag的<strong>帧</strong>。<br>设备互连时，由tag中的VID决定了一个二层帧属于哪个VLAN，而计算机不具备打tag的功能，所以只有给<strong>连接</strong>计算机的<strong>端口添加一个属性</strong>，<strong>用来决定计算机发出的未标记的帧属于哪个VLAN，这个属性就是PVID</strong>。</p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>首先上一张表吧：</p>
 <table>
 <thead>
 <tr>
@@ -249,8 +231,7 @@
 <li>那么如果我们的NAS发了数据帧出去呢？因为没有到达核心交换机的时候是没有tag的，现实生活中，在三层网络中这种包就会直接被丢掉了，所以它的数据同样也传不出去。</li>
 </ol>
 <p>在这里我们需要牢记的一点是在现实生活中由于成本问题，傻瓜交换机只会具有最简单的功能，就只是存储和转发而已。</p>
-<h1 id="配置vlan的参考准则"><a class="markdownIt-Anchor" href="#配置vlan的参考准则"></a> 配置vlan的参考准则：</h1>
-<ol>
+<h1 id="配置vlan的参考准则："><a href="#配置vlan的参考准则：" class="headerlink" title="配置vlan的参考准则："></a>配置vlan的参考准则：</h1><ol>
 <li><strong>对于untag端口，PVID要和所属VLAN的VID一致</strong></li>
 <li><strong>对于tag端口，PVID要不同于所有所属VLAN的VID；(使它原样发送)</strong></li>
 <li><strong>两台设备互联时，两端接口的PVID保持一致时，有弊也有利</strong></li>
@@ -261,307 +242,91 @@
 <li>TRUNK端口级联，VID=全部，PVID=1</li>
 </ol>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-19T13:55:32.869Z" itemprop="dateUpdated">2018-03-19 21:55:32</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2018/03/19/对于PVID和VID的研究/" target="_blank" rel="external">http://yoursite.com/2018/03/19/对于PVID和VID的研究/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=《对于PVID和VID的研究》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=《对于PVID和VID的研究》 — Peterpan's Blog&source=今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/03/21/java蓝桥杯习题-二/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">java蓝桥杯习题(二)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/03/16/ACM日常训练总结-二/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">ACM日常训练总结(二)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#问题演变"><span class="toc-number">1.</span> <span class="toc-text">问题演变</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#交换机端口类型"><span class="toc-number">2.</span> <span class="toc-text">交换机端口类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问题解决"><span class="toc-number">3.</span> <span class="toc-text">问题解决</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置vlan的参考准则："><span class="toc-number">4.</span> <span class="toc-text">配置vlan的参考准则：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/19/对于PVID和VID的研究/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&text=对于PVID和VID的研究"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&is_video=false&description=对于PVID和VID的研究"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对于PVID和VID的研究&body=Check out this article: http://yoursite.com/2018/03/19/对于PVID和VID的研究/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=对于PVID和VID的研究"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&name=对于PVID和VID的研究&description=&lt;p&gt;今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题演变"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 问题演变</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#交换机端口类型"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 交换机端口类型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题解决"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 问题解决</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置vlan的参考准则"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 配置vlan的参考准则：</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=《对于PVID和VID的研究》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/19/对于PVID和VID的研究/&title=《对于PVID和VID的研究》 — Peterpan's Blog&source=今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS24CMRAFwNz/0kTKKhuG99oDEnZ5hRBiXLNo9e/nJz6Pv5N8//h32u+f/ea2g4GB8bWMx+W5vm7CTi53/dyIioGBcQAjucr15zYqts96cWcMDAyMy6CZB+gkrGNgYGDcFXDzJDIpejEwMDASRh4K24ZaXrLmrwwDA+M0RjsY+OTnN843MDAwvoTxGJ081UvSu/WDgYGxN6NN6WaPb4cEbUGLgYFxAmO2ctG22PLiNr/0DZsjGBgYX8JoFyBmqWH7avK0EgMDY2/GbN2hXepKBgn5okYU0TEwMLZjtO34hN1ecWnJAwMDY2vGSgmah8hZOG4LbAwMjF0ZeShMmviz5v5sQwQDA+NMRjs4nKV0s1Ab9QsxMDA2Zay0vRJenhq2Y8sX8w0MDIyNGG3zq26BleOH4XoHBgbGYYw81VsvbvMC+MX/YGBgHMOYrW21w858qJD/MwYGxgmMtnTMv2mHkW2i+XSBFQMDYyPGrK2Wr1/MguzstWJgYJzAyEcCs6b/ygih37/AwMDYk3FX03+2kDFrz72oyDEwMDZitMPLZACZt/XzwBoFZQwMjO0YK22vJCjn4PxlPR1hYmBgbMr4TIWYF8Yrg08MDIy9GUmQzdO7NlDeFnAxMDAOYORBdiU1TALxsBbHwMDAGLXe8lRyJexiYGBg5IF1Fo7bRQ0MDIyTGest/pWitP0NBgbGaYx2MNCmgO8IwUMSBgbG9zF+AeUXIuA2WwB+AAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

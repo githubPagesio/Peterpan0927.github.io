@@ -1,197 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP/IP(二)">
+<meta property="og:url" content="http://yoursite.com/2017/08/27/TCP-IP-二/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/39ECBBCFAB9F236DE0E6B1792CC26AA3.png">
+<meta property="og:updated_time" content="2018-03-13T16:00:22.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP/IP(二)">
+<meta name="twitter:description" content="当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2017/08/27/TCP-IP-二/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>TCP/IP(二)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>TCP/IP(二) | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="程序员的自我修养">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-      </ul>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>TCP/IP(二)</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">TCP/IP(二)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-08-27T07:17:28.000Z" itemprop="datePublished" class="page-time">
-  2017-08-27
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息发送流程-数据包头部信息/">消息发送流程 数据包头部信息</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-TCP-IP-二"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">TCP/IP(二)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-08-27 15:17:28" datetime="2017-08-27T07:17:28.000Z"  itemprop="datePublished">2017-08-27</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/消息发送流程-数据包头部信息/">消息发送流程 数据包头部信息</a></li></ul>
-
-
-
-            
-	<span id="/2017/08/27/TCP-IP-二/" class="leancloud_visitors" data-flag-title="TCP/IP(二)" title="TCP/IP(二)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2017/08/27/TCP-IP-二/#comment">
-            <span class="valine-comment-count" data-xid="/2017/08/27/TCP-IP-二/"></span>
-        </a>
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+        
+      </ul>
     </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/28/Linux运维学习Day6/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/08/24/地狱少女/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/27/TCP-IP-二/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/27/TCP-IP-二/&text=TCP/IP(二)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/27/TCP-IP-二/&is_video=false&description=TCP/IP(二)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TCP/IP(二)&body=Check out this article: http://yoursite.com/2017/08/27/TCP-IP-二/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/27/TCP-IP-二/&name=TCP/IP(二)&description=&lt;p&gt;当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？&lt;br&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-二"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(二)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#协议分层模型"><span class="toc-number">1.1.</span> <span class="toc-text">协议分层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件、网络接口层"><span class="toc-number">1.1.1.</span> <span class="toc-text">硬件、网络接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互联网层（网络层）"><span class="toc-number">1.1.2.</span> <span class="toc-text">互联网层（网络层）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层"><span class="toc-number">1.1.3.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层及以上"><span class="toc-number">1.1.4.</span> <span class="toc-text">应用层及以上</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP通信示例"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP通信示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#发送处理"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">发送处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接受处理"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">接受处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主机的通信"><span class="toc-number">1.2.1.</span> <span class="toc-text">主机的通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ping"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">ping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#icmp"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">icmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发送过程"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">发送过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SNS通信（补充）"><span class="toc-number">1.2.2.</span> <span class="toc-text">SNS通信（补充）</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        TCP/IP(二)
+    </h1>
 
 
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？</p>
-<a id="more"></a>
-<h1 id="tcpip二"><a class="markdownIt-Anchor" href="#tcpip二"></a> TCP/IP(二)</h1>
-<h2 id="协议分层模型"><a class="markdownIt-Anchor" href="#协议分层模型"></a> 协议分层模型</h2>
-<h3 id="硬件-网络接口层"><a class="markdownIt-Anchor" href="#硬件-网络接口层"></a> 硬件、网络接口层</h3>
-<p>这一层主要是在硬件、设备驱动程序和网络接口层面上，在硬件方面TCP/IP没有一个既定的指标，至于网络接口层可以当作让NIC起作用的驱动程序。驱动程序是操作系统和硬件之间的桥梁，当我们添加硬件设备的时候，</p>
-<h3 id="互联网层网络层"><a class="markdownIt-Anchor" href="#互联网层网络层"></a> 互联网层（网络层）</h3>
-<ul>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-27T07:17:28.000Z" itemprop="datePublished">2017-08-27</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/程序员的自我修养/">程序员的自我修养</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？<br><a id="more"></a></p>
+<h1 id="TCP-IP-二"><a href="#TCP-IP-二" class="headerlink" title="TCP/IP(二)"></a>TCP/IP(二)</h1><h2 id="协议分层模型"><a href="#协议分层模型" class="headerlink" title="协议分层模型"></a>协议分层模型</h2><h3 id="硬件、网络接口层"><a href="#硬件、网络接口层" class="headerlink" title="硬件、网络接口层"></a>硬件、网络接口层</h3><p>这一层主要是在硬件、设备驱动程序和网络接口层面上，在硬件方面TCP/IP没有一个既定的指标，至于网络接口层可以当作让NIC起作用的驱动程序。驱动程序是操作系统和硬件之间的桥梁，当我们添加硬件设备的时候，</p>
+<h3 id="互联网层（网络层）"><a href="#互联网层（网络层）" class="headerlink" title="互联网层（网络层）"></a>互联网层（网络层）</h3><ul>
 <li>IP</li>
 </ul>
 <p>IP是跨越网络传送数据包，使整个互联网都能收到数据的协议。IP协议使数据可以发送到地球的另一端，这期间以IP地址作为主机的标识。</p>
@@ -205,8 +190,7 @@
 <li>ARP</li>
 </ul>
 <p>从分组数据包中的IP地址中解析出物理地址的一种协议。</p>
-<h3 id="传输层"><a class="markdownIt-Anchor" href="#传输层"></a> 传输层</h3>
-<p>传输层可以让应用之间进行通信，识别这些应用程序的是端口号。</p>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>传输层可以让应用之间进行通信，识别这些应用程序的是端口号。</p>
 <ul>
 <li>TCP</li>
 </ul>
@@ -216,8 +200,7 @@
 <li>UDP</li>
 </ul>
 <p>UDP是一种面向无连接的传输协议。如果要检测是否收到数据包或者是否连接到网络，要在应用程序中实现，UDP常用于分组数据较少或多播、广播通信及视频通信等。</p>
-<h3 id="应用层及以上"><a class="markdownIt-Anchor" href="#应用层及以上"></a> 应用层及以上</h3>
-<p>我们会发现TCP/IP分层中，应用层及以上的功能都集中到了应用程序中去实现。</p>
+<h3 id="应用层及以上"><a href="#应用层及以上" class="headerlink" title="应用层及以上"></a>应用层及以上</h3><p>我们会发现TCP/IP分层中，应用层及以上的功能都集中到了应用程序中去实现。</p>
 <ul>
 <li>WWW</li>
 </ul>
@@ -241,10 +224,8 @@
 </ul>
 <p>在TCP/IP中进行网络管理的时候，采用SNMP协议。使用SNMP管理的主机、网桥、路由器等称作SNMP代理。SNMP是管理器和代理之间所用到的协议。</p>
 <p>在SNMP的管理端，保存着网络接口信息、通信数据量、异常数据量、温度信息等。这些信息通过MIB访问。SNMP是应用层协议，MIB属于表示层协议。</p>
-<h2 id="tcpip通信示例"><a class="markdownIt-Anchor" href="#tcpip通信示例"></a> TCP/IP通信示例</h2>
-<p>同样是之前那个甲向乙发送邮件说早上好的例子，这一次不是从OSI模型层数上来进行分析：</p>
-<h4 id="发送处理"><a class="markdownIt-Anchor" href="#发送处理"></a> 发送处理</h4>
-<ul>
+<h2 id="TCP-IP通信示例"><a href="#TCP-IP通信示例" class="headerlink" title="TCP/IP通信示例"></a>TCP/IP通信示例</h2><p>同样是之前那个甲向乙发送邮件说早上好的例子，这一次不是从OSI模型层数上来进行分析：</p>
+<h4 id="发送处理"><a href="#发送处理" class="headerlink" title="发送处理"></a>发送处理</h4><ul>
 <li>应用程序处理</li>
 </ul>
 <p>在点击发送邮件之后，应用程序首先会进行编码的处理，比如日文邮件用ISO-2022-JP或者UTF-8进行编码。编码转换后，邮件不会立即被发出去，因为有的软件有一次行发送多个邮件的功能。像这种何时建立通信连接发送数据的功能，属于会话层。</p>
@@ -264,16 +245,12 @@
 </ul>
 <p>从IP传过来的IP包，以太网驱动给这数据附加上以太网首部并进行发送处理。以太网首部中包含接收端、发送端MAC地址以及标志以太网类型的以太网数据的协议。根据上述信息系产生的以太网数据包通过物理层发送给接收端，发送处理中的FCS由硬件计算，也是一种校验机制，添加到包的末尾。</p>
 <p>下面用一张分层中包的结构来表示：</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/137E996B0D74B3ACEE5CCA95D40F9F97.png" alt=""></p>
 <p>每个包首部都至少包括两个信息：一个是发送端和接收端地址，另一个是上一层协议的类型。</p>
 <p>其中发送端和接收端的地址在不同层上用不同的标识：</p>
 <p>以太网用MAC地址，IP用IP地址，TCP/UDP用端口号，在应用程序中，比如SMTP用电子邮件地址</p>
 <p>此外，每个分层的包首部还包含一个标识位，用来标识上一层协议的种类信息。</p>
-<h4 id="接受处理"><a class="markdownIt-Anchor" href="#接受处理"></a> 接受处理</h4>
-<ul>
+<h4 id="接受处理"><a href="#接受处理" class="headerlink" title="接受处理"></a>接受处理</h4><ul>
 <li>网络接口</li>
 </ul>
 <p>主机收到数据包之后，首先从以太网包首部找到MAC地址判断是否位发送自己的，否则丢掉。</p>
@@ -285,31 +262,24 @@
 <ul>
 <li>TCP模块的处理</li>
 </ul>
-<p>首先计算一下校验和，判断数据是否损坏，再检查是否是按序号发送数据包，最后检查端口号，确定具体程序。数据接收完毕后，会发送一个&quot;确认回执&quot;给发送端。如果这个回执信息没有到达发送端，那么发送端会认为接收端没有收到数据而一直反复发送。</p>
+<p>首先计算一下校验和，判断数据是否损坏，再检查是否是按序号发送数据包，最后检查端口号，确定具体程序。数据接收完毕后，会发送一个”确认回执”给发送端。如果这个回执信息没有到达发送端，那么发送端会认为接收端没有收到数据而一直反复发送。</p>
 <p>数据被接受后，会传给由端口号识别的应用程序</p>
 <ul>
 <li>应用程序的处理</li>
 </ul>
-<p>接收端应用程序会直接接受发送端发送的数据，通过解析数据找到乙的地址，如果接收端主机上没有乙的邮件信箱，那么就会返回发送端一个&quot;无收件地址的报错信息&quot;，如果有邮件未能保存或邮箱已满等问题也会返回异常给发送端，没有异常的话用户乙就可以喝完一杯清晨的咖啡后，舒适的阅读来自甲的邮件了～</p>
-<h3 id="主机的通信"><a class="markdownIt-Anchor" href="#主机的通信"></a> 主机的通信</h3>
-<h4 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> ping</h4>
-<p>首先说一下ping，这是操作系统中的一个小程序，可以用来检测两台主机的连通性，如果ping的通，表示网络可达，ping不同，证明需要排错:</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p>接收端应用程序会直接接受发送端发送的数据，通过解析数据找到乙的地址，如果接收端主机上没有乙的邮件信箱，那么就会返回发送端一个”无收件地址的报错信息”，如果有邮件未能保存或邮箱已满等问题也会返回异常给发送端，没有异常的话用户乙就可以喝完一杯清晨的咖啡后，舒适的阅读来自甲的邮件了～</p>
+<h3 id="主机的通信"><a href="#主机的通信" class="headerlink" title="主机的通信"></a>主机的通信</h3><h4 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h4><p>首先说一下ping，这是操作系统中的一个小程序，可以用来检测两台主机的连通性，如果ping的通，表示网络可达，ping不同，证明需要排错:</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-31%20%E4%B8%8A%E5%8D%8810.09.00.png" alt=""></p>
 <p>那么这个icmp报文是如何生成的呢？那么首先还要来说一下icmp</p>
-<h4 id="icmp"><a class="markdownIt-Anchor" href="#icmp"></a> icmp</h4>
-<p>icmp是一个网络控制协议，当网络发生一些或大或小的问题，通过该协议可以告知通信的发起方，比如，当一个IP包太大，比如1500字节，到达一个路由器的接口，接口最大传输单元MTU=1476字节，由于IP包1500&gt;MTU1476，这个IP包必须分成两片才可以从接口发送出去，问题来了，如果IP包里有一个标志位DF=1，意思就是说这个IP包不能进行分片，要么丢弃要么接受，那路由器只有无奈地丢弃这个IP包，如果没有消息告知这个IP发起者，会发生什么？IP包都被默默丢弃了，而IP包发起方并不知道，还以为数据已经到达了目的地，其实都被丢了，这就是流量黑洞，所以需要一种消息机制告知IP包的发起者，这个消息就是用ICMP来发送的，那发送什么样的消息呢？</p>
+<h4 id="icmp"><a href="#icmp" class="headerlink" title="icmp"></a>icmp</h4><p>icmp是一个网络控制协议，当网络发生一些或大或小的问题，通过该协议可以告知通信的发起方，比如，当一个IP包太大，比如1500字节，到达一个路由器的接口，接口最大传输单元MTU=1476字节，由于IP包1500&gt;MTU1476，这个IP包必须分成两片才可以从接口发送出去，问题来了，如果IP包里有一个标志位DF=1，意思就是说这个IP包不能进行分片，要么丢弃要么接受，那路由器只有无奈地丢弃这个IP包，如果没有消息告知这个IP发起者，会发生什么？IP包都被默默丢弃了，而IP包发起方并不知道，还以为数据已经到达了目的地，其实都被丢了，这就是流量黑洞，所以需要一种消息机制告知IP包的发起者，这个消息就是用ICMP来发送的，那发送什么样的消息呢？</p>
 <p>ICMP协议里有type字段，还有code字段，发送type=3，code=4，MTU=1476的消息就可以了，当这个ICMP消息到达IP包的发起者，发起者知道原来是IP太大了，那最大可以发送多大的呢？消息里有，那就MTU=1476，于是IP包的发起方只要发送小于等于1476字节的就可以了。</p>
-<h4 id="发送过程"><a class="markdownIt-Anchor" href="#发送过程"></a> 发送过程</h4>
-<p>在键盘上输入ping baidu.com这个命令之后，发生了什么事情呢：</p>
+<h4 id="发送过程"><a href="#发送过程" class="headerlink" title="发送过程"></a>发送过程</h4><p>在键盘上输入ping baidu.com这个命令之后，发生了什么事情呢：</p>
 <p>1、主机查找本地系统Hosts文件的DNS缓存，如果存在该域名对应的IP，则获取IP，跳转到第8步；如果不存在，则继续。</p>
 <p>2、主机向本网络路由器发起请求，查找路由DNS缓存，如果存在该域名对于的IP，则获取IP，跳转到第8步；如果不存在，则继续。</p>
 <p>3、路由器向本地ISP（互联网提供商）的DNS服务器发起请求，查找DNS服务器的缓存，如果存在该域名对应的IP，则跳转到第7步；如果不存在，则继续。</p>
 <p>4、本地DNS服务器向根域名服务器发起请求，根域名服务器告诉本地服务器，下一次应查询的顶级域名服务器dns.com的IP地址。</p>
 <p>5、本地域名服务器向顶级域名服务器dns.com进行查询，顶级域名服务器dns.com告诉本地域名服务器，下一步应查询的权限服务器dns.abc.com的IP地址。</p>
-<p>6、本地域名服务器向权限域名服务器dns.abc.com进行查询，权限域名服务器dns.abc.com告诉本地域名服务器，所查询的主机的IP地址。</p>
+<p>6、本地域名服务器向权限域名服务器dns.abc.com进行查询，权限域名服务器dns.abc.com告诉本地域名服务器，所查询的主机的IP地址。 </p>
 <p>7、本地域名服务器最后把查询结果——该域名对应的IP地址告诉给主机。</p>
 <p>8、至此，主机知道了该域名的IP地址。</p>
 <p>9、主机通过子网掩码判断该IP地址是本网段还是跨网段，由于本网段比较简单，我们以跨网段进行讲解。</p>
@@ -322,316 +292,96 @@
 <p>16、直到最后一个路由根据ARP协议，找到了主机想要访问的IP地址对应的主机的MAC地址，然后将ICMP报文封装成MAC帧发送给该域名主机。</p>
 <p>17、由于ARP协议具有相互学习性，域名主机接收到主机发送的ICMP回送请求报文之后，将向本网络路由发送ICMP回送回答报文，该路由又会转发下去…</p>
 <p>18、当主机收到域名主机发送的ICMP回送回答报文之后，这样就表明该主机到域名主机是连通可达的。</p>
-<h3 id="sns通信补充"><a class="markdownIt-Anchor" href="#sns通信补充"></a> SNS通信（补充）</h3>
-<p>SNS的中文叫做社交网络，是一种即使共享，发布消息给圈内特定联系人的一种服务，现在就来分析一下移动端发送或者接受SNS消息的过程：</p>
+<h3 id="SNS通信（补充）"><a href="#SNS通信（补充）" class="headerlink" title="SNS通信（补充）"></a>SNS通信（补充）</h3><p>SNS的中文叫做社交网络，是一种即使共享，发布消息给圈内特定联系人的一种服务，现在就来分析一下移动端发送或者接受SNS消息的过程：</p>
 <p>平板电脑、手机等进行分组数据的通信，在打开手机的那一刻，就会被通信运营商设定具体的IP地址。</p>
 <p>启动移动电话中的应用程序，会连接指定的服务器，通过一系列的验证，返回指定的信息，由手机终端显示具体内容。</p>
-<figure class="image-box">
-                <img src="http://omunhj2f1.bkt.clouddn.com/39ECBBCFAB9F236DE0E6B1792CC26AA3.png" alt="" title="" class="">
-                <p></p>
-            </figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/39ECBBCFAB9F236DE0E6B1792CC26AA3.png" alt=""></p>
 
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-03-13T16:00:22.783Z" itemprop="dateUpdated">2018-03-14 00:00:22</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2017/08/27/TCP-IP-二/" target="_blank" rel="external">http://yoursite.com/2017/08/27/TCP-IP-二/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员的自我修养/">程序员的自我修养</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=《TCP/IP(二)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=《TCP/IP(二)》 — Peterpan's Blog&source=当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
-        
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/08/28/Linux运维学习Day6/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Linux运维学习Day6</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2017/08/24/地狱少女/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">地獄少女</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
+  </div>
 </article>
 
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+      </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-二"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(二)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#协议分层模型"><span class="toc-number">1.1.</span> <span class="toc-text">协议分层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件、网络接口层"><span class="toc-number">1.1.1.</span> <span class="toc-text">硬件、网络接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互联网层（网络层）"><span class="toc-number">1.1.2.</span> <span class="toc-text">互联网层（网络层）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层"><span class="toc-number">1.1.3.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层及以上"><span class="toc-number">1.1.4.</span> <span class="toc-text">应用层及以上</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP通信示例"><span class="toc-number">1.2.</span> <span class="toc-text">TCP/IP通信示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#发送处理"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">发送处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接受处理"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">接受处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主机的通信"><span class="toc-number">1.2.1.</span> <span class="toc-text">主机的通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ping"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">ping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#icmp"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">icmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发送过程"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">发送过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SNS通信（补充）"><span class="toc-number">1.2.2.</span> <span class="toc-text">SNS通信（补充）</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/27/TCP-IP-二/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/27/TCP-IP-二/&text=TCP/IP(二)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/27/TCP-IP-二/&is_video=false&description=TCP/IP(二)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TCP/IP(二)&body=Check out this article: http://yoursite.com/2017/08/27/TCP-IP-二/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=TCP/IP(二)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/27/TCP-IP-二/&name=TCP/IP(二)&description=&lt;p&gt;当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？&lt;br&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#tcpip二"><span class="post-toc-number">1.</span> <span class="post-toc-text"> TCP/IP(二)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#协议分层模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 协议分层模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#硬件-网络接口层"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"> 硬件、网络接口层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#互联网层网络层"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"> 互联网层（网络层）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传输层"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text"> 传输层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用层及以上"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text"> 应用层及以上</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tcpip通信示例"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> TCP/IP通信示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送处理"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text"> 发送处理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#接受处理"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text"> 接受处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主机的通信"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"> 主机的通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ping"><span class="post-toc-number">1.2.1.1.</span> <span class="post-toc-text"> ping</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#icmp"><span class="post-toc-number">1.2.1.2.</span> <span class="post-toc-text"> icmp</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发送过程"><span class="post-toc-number">1.2.1.3.</span> <span class="post-toc-text"> 发送过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sns通信补充"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text"> SNS通信（补充）</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=《TCP/IP(二)》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/27/TCP-IP-二/&title=《TCP/IP(二)》 — Peterpan's Blog&source=当你指尖轻触屏幕，消息如何传达到了千里之外的那个她？" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABy0lEQVR42u3aQY4DIQwEwPz/06y01yikjQFNpOK0mmyYyqVlbF6veI3/9f4keT7e1qc9ty1cXNw2d0zX/JXzHzNnzff/9C5cXNyb3Op28//JUyg34OLiPpM7D51OiYOLi/vr3Pwn4eLi/jo3iaekrOkckDaf1XBxcRvcasP0xN8H+7u4uLhF7iiuaitk/rz8dlxc3CvcThOzM0ZNIqxQkeHi4h7gVguRvEzpfHdDzYWLi7vp8JNHUt7CyPdJrnrg4uKe5s6bm/mna/FUfS8uLu4dblKIREeRxtC0fIjCxcW9wu23PPKrWp2Yw8XFvcOtfjm/oJlf1CgEIi4u7hXuGigPvrUiaUP/BhcXt83Nr0tWr2OuXdyM0hcXF/cwNw+yTvlSHb1syF1cXNwlbmeLvAzq7BAlLi4u7jHuWmJUwy4forRmwri4uA1u/1ZD4bjSaNHi4uLe5I7iypukCas8lMXFxb3CzVfe6Myzc2/w4eLi7uVWwysvfToj1dbkBxcXdxO3GjR5EbMWml96Obi4uI/hrrVEq8eqaNSKi4v7MG4+/OgUT4XOLi4u7jFuv0laPQ7lhx9cXNz73GrDtHoBa+1AVR3M4OLibuL+AZe7CwnbFqBUAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>

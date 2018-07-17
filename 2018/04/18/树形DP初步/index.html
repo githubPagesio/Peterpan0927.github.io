@@ -1,499 +1,267 @@
 <!DOCTYPE html>
-<html>
+<html lang=Ch>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树形DP初步">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/树形DP初步/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移">
+<meta property="og:updated_time" content="2018-04-21T06:16:28.093Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树形DP初步">
+<meta name="twitter:description" content="树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移">
     
-    <link rel="canonical" href="www.peterpan980927.cn/2018/04/18/树形DP初步/">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>树形DP初步</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
     
     
-    <title>树形DP初步 | Peterpan&#39;s Blog | Mind over muscle.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="keywords" content="ACM">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="/css/style.css?v=1.0.7">
-    <script type="text/javascript">
-        // Data Center
-        var DC = {
-            reward:	true,
-            lv: JSON.parse('{"enable":true,"app_id":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","app_key":"xDGMWtxNt0aReJDVkuYmSqBd","icon":true}'),
-            v: JSON.parse('{"enable":true,"appid":"Ljd6bJFL9N4tWj6WnGcbYUd2-gzGzoHsz","appkey":"xDGMWtxNt0aReJDVkuYmSqBd","notify":false,"verify":false,"placeholder":"望不吝赐教","avatar":"wavatar"}')
-        };
-    </script>
-    <script type="text/javascript">
-        window.lazyScripts=[];
-    </script>
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/bg.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/miao_icon.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Peter pan</h5>
-          <a href="mailto:15d31f644fafee19d219f5d6b9ac590f" title="15d31f644fafee19d219f5d6b9ac590f" class="mail">15d31f644fafee19d219f5d6b9ac590f</a>
-        </hgroup>
-        
-        <ul class="menu-link">
-          
-              <li>
-                <a href="https://github.com/Peterpan0927" target="_blank">
-                  <i class="icon icon-lg icon-github"></i>
-                </a>
-              </li>
-            
-        </ul>
-        
-      </div>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                HOME
-              </a>
-            </li>
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                TAGS
-              </a>
-            </li>
+        <li><a class="icon" href="/2018/04/19/iOS加固之混淆-加密/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                ARCHIVES
-              </a>
-            </li>
         
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                ABOUT
-              </a>
-            </li>
+        <li><a class="icon" href="/2018/04/17/反动态调试保护的实现和破解/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Peterpan0927" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/18/树形DP初步/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/18/树形DP初步/&text=树形DP初步"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/18/树形DP初步/&is_video=false&description=树形DP初步"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=树形DP初步&body=Check out this article: http://yoursite.com/2018/04/18/树形DP初步/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/18/树形DP初步/&name=树形DP初步&description=&lt;p&gt;树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#POJ-2342"><span class="toc-number">1.</span> <span class="toc-text">POJ_2342</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉苹果树"><span class="toc-number">2.</span> <span class="toc-text">二叉苹果树</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        树形DP初步
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-18T12:30:02.000Z" itemprop="datePublished">2018-04-18</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ACM/">ACM</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移</p>
+<a id="more"></a>
+<h1 id="POJ-2342"><a href="#POJ-2342" class="headerlink" title="POJ_2342"></a>POJ_2342</h1><p>树形DP入门题，非常经典</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Memset(a,b) memset(a,b,sizeof(a))</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 6005</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> vis[maxn];</div><div class="line"><span class="keyword">int</span> father[maxn];</div><div class="line"><span class="keyword">int</span> n;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> i;</div><div class="line">  vis[node] = <span class="number">1</span>;</div><div class="line">  <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(father[i] == node &amp;&amp; !vis[i])&#123;</div><div class="line">      <span class="comment">//递归</span></div><div class="line">      dfs(i);</div><div class="line">      dp[node][<span class="number">1</span>] += dp[i][<span class="number">0</span>];</div><div class="line">      dp[node][<span class="number">0</span>] += max(dp[i][<span class="number">0</span>], dp[i][<span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> c,f,root;</div><div class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</div><div class="line">    Memset(father,<span class="number">0</span>);</div><div class="line">    Memset(vis,<span class="number">0</span>);</div><div class="line">    Memset(dp,<span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ;i++)</div><div class="line">      <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;dp[i][<span class="number">1</span>]);</div><div class="line">    root=<span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; c &gt;&gt; f &amp;&amp; (c || f))&#123;</div><div class="line">      father[c] = f;</div><div class="line">      root = f;</div><div class="line">    &#125;</div><div class="line">    dfs(root);</div><div class="line">    <span class="keyword">int</span> maxx = max(dp[root][<span class="number">0</span>], dp[root][<span class="number">1</span>]);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; maxx &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="二叉苹果树"><a href="#二叉苹果树" class="headerlink" title="二叉苹果树"></a>二叉苹果树</h1><p>这个题目就是转换为无向图的思想，将权值转移到边上就行了，网上的写法有的是利用前向星，但是这个太麻烦，所以我们可以直接利用<code>vector</code>数组来实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Node&#123;</div><div class="line">    <span class="keyword">int</span> next;</div><div class="line">    <span class="keyword">int</span> w;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;Node&gt;vec[<span class="number">110</span>];</div><div class="line"><span class="keyword">int</span> n,m;</div><div class="line"><span class="keyword">int</span> dp[<span class="number">110</span>][<span class="number">110</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> father)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;Node&gt;::iterator it;</div><div class="line">    <span class="keyword">for</span>(it = vec[u].begin() ; it != vec[u].end() ; it++)&#123;</div><div class="line">        Node node = *it;</div><div class="line">        <span class="keyword">int</span> v = node.next, w = node.w;</div><div class="line">        <span class="keyword">if</span>(v == father) <span class="keyword">continue</span>;</div><div class="line">        ans += dfs(v,u)+<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = min(ans,m) ; j &gt;= <span class="number">1</span>; j--)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(ans, j) ; k &gt;= <span class="number">1</span> ;k--)</div><div class="line">                dp[u][j] = max(dp[u][j], dp[u][j-k]+dp[v][k<span class="number">-1</span>]+w);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> u,v,w;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ;i++)&#123;</div><div class="line">            <span class="built_in">cin</span> &gt;&gt; u  &gt;&gt; v &gt;&gt; w;</div><div class="line">            Node node1,node2;</div><div class="line">            node1.next=v;</div><div class="line">            node1.w=node2.w=w;</div><div class="line">            node2.next=u;</div><div class="line">            vec[u].push_back(node1);</div><div class="line">            vec[v].push_back(node2);</div><div class="line">        &#125;</div><div class="line">        dfs(<span class="number">1</span>, <span class="number">-1</span>);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; dp[<span class="number">1</span>][m] &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
       </ul>
     </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#POJ-2342"><span class="toc-number">1.</span> <span class="toc-text">POJ_2342</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉苹果树"><span class="toc-number">2.</span> <span class="toc-text">二叉苹果树</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/18/树形DP初步/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/18/树形DP初步/&text=树形DP初步"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/18/树形DP初步/&is_video=false&description=树形DP初步"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=树形DP初步&body=Check out this article: http://yoursite.com/2018/04/18/树形DP初步/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/18/树形DP初步/&title=树形DP初步"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/18/树形DP初步/&name=树形DP初步&description=&lt;p&gt;树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row clearfix">
-        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">
-            <span>树形DP初步</span>
-            
-        </div>
-        
-        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
-            <i class="icon icon-lg icon-search"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">树形DP初步</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-04-18T12:30:02.000Z" itemprop="datePublished" class="page-time">
-  2018-04-18
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/树形DP/">树形DP</a></li></ul>
-
-            
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div id="site_search">
-    <div class="search-title clearfix">
-        <span class="pull-left">
-          <i class="icon icon-lg icon-search"></i>
-        </span>
-        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
-        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
-          <i class="icon icon-lg icon-close"></i>
-        </a>
-    </div>
-    <div id="local-search-result"></div>
 </div>
 
-
-<div class="container body-wrap">
-    <article id="post-树形DP初步"
-  class="post-article article-type-post fade" itemprop="blogPost">
-    <div class="post-card">
-        <h1 class="post-card-title">树形DP初步</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-04-18 20:30:02" datetime="2018-04-18T12:30:02.000Z"  itemprop="datePublished">2018-04-18</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/树形DP/">树形DP</a></li></ul>
-
-
-
-            
-	<span id="/2018/04/18/树形DP初步/" class="leancloud_visitors" data-flag-title="树形DP初步" title="树形DP初步">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-            
-    <span>
-        <i class="icon icon-comment-o"></i>
-        <a href="/2018/04/18/树形DP初步/#comment">
-            <span class="valine-comment-count" data-xid="/2018/04/18/树形DP初步/"></span>
-        </a>
-    </span>
-
-
-            
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移</p>
-<a id="more"></a>
-<h1 id="poj_2342"><a class="markdownIt-Anchor" href="#poj_2342"></a> POJ_2342</h1>
-<p>树形DP入门题，非常经典</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Memset(a,b) memset(a,b,sizeof(a))</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 6005</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> vis[maxn];</div><div class="line"><span class="keyword">int</span> father[maxn];</div><div class="line"><span class="keyword">int</span> n;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> i;</div><div class="line">  vis[node] = <span class="number">1</span>;</div><div class="line">  <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(father[i] == node &amp;&amp; !vis[i])&#123;</div><div class="line">      <span class="comment">//递归</span></div><div class="line">      dfs(i);</div><div class="line">      dp[node][<span class="number">1</span>] += dp[i][<span class="number">0</span>];</div><div class="line">      dp[node][<span class="number">0</span>] += max(dp[i][<span class="number">0</span>], dp[i][<span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> c,f,root;</div><div class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</div><div class="line">    Memset(father,<span class="number">0</span>);</div><div class="line">    Memset(vis,<span class="number">0</span>);</div><div class="line">    Memset(dp,<span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ;i++)</div><div class="line">      <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;dp[i][<span class="number">1</span>]);</div><div class="line">    root=<span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; c &gt;&gt; f &amp;&amp; (c || f))&#123;</div><div class="line">      father[c] = f;</div><div class="line">      root = f;</div><div class="line">    &#125;</div><div class="line">    dfs(root);</div><div class="line">    <span class="keyword">int</span> maxx = max(dp[root][<span class="number">0</span>], dp[root][<span class="number">1</span>]);</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; maxx &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="二叉苹果树"><a class="markdownIt-Anchor" href="#二叉苹果树"></a> 二叉苹果树</h1>
-<p>这个题目就是转换为无向图的思想，将权值转移到边上就行了，网上的写法有的是利用前向星，但是这个太麻烦，所以我们可以直接利用<code>vector</code>数组来实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Node&#123;</div><div class="line">    <span class="keyword">int</span> next;</div><div class="line">    <span class="keyword">int</span> w;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;Node&gt;vec[<span class="number">110</span>];</div><div class="line"><span class="keyword">int</span> n,m;</div><div class="line"><span class="keyword">int</span> dp[<span class="number">110</span>][<span class="number">110</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> father)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;Node&gt;::iterator it;</div><div class="line">    <span class="keyword">for</span>(it = vec[u].begin() ; it != vec[u].end() ; it++)&#123;</div><div class="line">        Node node = *it;</div><div class="line">        <span class="keyword">int</span> v = node.next, w = node.w;</div><div class="line">        <span class="keyword">if</span>(v == father) <span class="keyword">continue</span>;</div><div class="line">        ans += dfs(v,u)+<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = min(ans,m) ; j &gt;= <span class="number">1</span>; j--)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(ans, j) ; k &gt;= <span class="number">1</span> ;k--)</div><div class="line">                dp[u][j] = max(dp[u][j], dp[u][j-k]+dp[v][k<span class="number">-1</span>]+w);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> u,v,w;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ;i++)&#123;</div><div class="line">            <span class="built_in">cin</span> &gt;&gt; u  &gt;&gt; v &gt;&gt; w;</div><div class="line">            Node node1,node2;</div><div class="line">            node1.next=v;</div><div class="line">            node1.w=node2.w=w;</div><div class="line">            node2.next=u;</div><div class="line">            vec[u].push_back(node1);</div><div class="line">            vec[v].push_back(node2);</div><div class="line">        &#125;</div><div class="line">        dfs(<span class="number">1</span>, <span class="number">-1</span>);</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; dp[<span class="number">1</span>][m] &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-<blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2018-04-21T06:16:28.093Z" itemprop="dateUpdated">2018-04-21 14:16:28</time>
-</span><br>
-
-
-        
-        转载注明出处，原文地址：<a href="/2018/04/18/树形DP初步/" target="_blank" rel="external">http://yoursite.com/2018/04/18/树形DP初步/</a>
-        
-    </div>
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/miao_icon.jpg" alt="Peter pan">
-            Peter pan
-        </a>
-    </footer>
-</blockquote>
-
-        
-            <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-            
-        
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
-
-            <div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
       
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/18/树形DP初步/&title=《树形DP初步》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/18/树形DP初步/&title=《树形DP初步》 — Peterpan's Blog&source=树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-        </div>
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
         
-            
-    <div id="comment"></div>
-
-
-        
-    </div>
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/04/19/iOS加固之混淆-加密/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">iOS加固之混淆/加密</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/04/17/反动态调试保护的实现和破解/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">反动态调试保护的实现和破解</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-</article>
-
-    <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        我们一起来让这个世界有趣一点
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wc.png" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wc.png" data-alipay="/img/123.png">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-    
-
-</div>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#poj_2342"><span class="post-toc-number">1.</span> <span class="post-toc-text"> POJ_2342</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉苹果树"><span class="post-toc-number">2.</span> <span class="post-toc-text"> 二叉苹果树</span></a></li></ol>
-        </nav>
-    </aside>
-    
-        <footer class="footer">
-    
-    <div class="top">
-        
-        
-            <p>
-    <span>Links：</span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.github.com/Peterpan0927" target="_blank">github</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://bbs.iosre.com" target="_blank">iOSRE</a>
-    </span>
-    
-    <span class="blogroll-item">
-        <a href="https://www.coding.net" target="_blank">coding</a>
-    </span>
-    
-</p>
-
-        
-    </div>
-    
-    <div class="bottom">
-        <p>
-            <span>
-                Peter pan &copy; 2017 - 2018
-            </span>
-        		
-           	
-            
-            
-            <span>
-	            Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/codefine/hexo-theme-mellow" target="_blank">mellow</a>
-            </span>
-            
-            
-            
-        </p>
-    </div>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/18/树形DP初步/&title=《树形DP初步》 — Peterpan's Blog&pic=http://yoursite.com/img/miao_icon.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/18/树形DP初步/&title=《树形DP初步》 — Peterpan's Blog&source=树形DP是建立在树这种数据结构之上，通过dfs来维护根到叶子或者叶子到跟节点的状态转移" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQW7FIAxF0ex/0+kCItL7bPIl4DKq2iRwGLjY5rrwuB/j+dfR889nns+P3po8ZMiQsSzjfh3vDD4x2Qgy73BGGTJkHMAYTcyf+eIt/gUZMmTIKH66FKxlyJAhY1bAJUiydBkyZMjgDJLEvk/WCaCEPS0XlyFDxoIMXnX//c+f9DdkyJCxFOMOBw+L6dGwM2TIkLE3gwe4tFWZBm7+heF6ZMiQsTWjc4BLQycJ0Hz7ZMiQcTKDfJQXwtJNIchhUJYhQ8Z2DHLg61+SSEv5pAEwzMVlyJBxJIMkov0QjJY7QsqQIWNrBkkXawGXB9DONY6gDidDhozFGZ1EtH9RrJZO/5PKypAhYztG7SiWlsbS9mfaVJAhQ8Y5jDTV5DDeYOBtiVbOLUOGjKUYtcZALfXlwTQ+LMqQIeMYRpqgznqrthEyZMg4jVG7BBaUwNrNSxRwZciQcSRjVqE/5ZG/DvsbMmTI2I5BHk1/w0tm/JJZ0LyUIUPGdoza4a92JYIH1rR1IUOGjBMYafmeHxl5sE5bnvF/DBkyZCzO4Ekmf4ss6ApHcKNNhgwZWzDucKQpbn+D4nqhDBkytmPMCpT8mld65WvC0mXIkLEFIw2y/NpE7SDI1yBDhozTGLWmJm9JpltQzMVlyJAhozHNrOWi/oYMGTKOZ9RakmnbMm5LyJAh4wBGesjj5f4vQq0MGTJOY6SfriWu7+GSLDEuwMmQIWMHxh8P4APxj5pqmAAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-    
-    <!-- main-js -->
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.0.7"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-
-<script type="text/javascript" src="/js/method.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/blog.js?v=1.0.7"></script>
-
-<!-- third-party -->
-
-
-
-<script type="text/javascript" src="/js/plugins/local_search.js?v=1.0.7"></script>
-<script type="text/javascript">
-	var search_path = "search.xml";
-	if (search_path.length === 0) {
-		search_path = "search.xml";
-	}
-	var path = "/" + search_path;
-	searchFunc(path, "local-search-input", "local-search-result");
-</script>
-
-
-
-    
-        <script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript" src="/js/plugins/valine.js?v=1.0.7"></script>
-    
-
-
-
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.0.7"></script>
-
-
-
-    <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-            processEscapes: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
-
-    <script>
-    (function() {
-        var OriginTitile = document.title, titleTime;
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                document.title = '思维失去连接...';
-                clearTimeout(titleTime);
-            } else {
-                document.title = '(つェ⊂)咦!又好了!';
-                titleTime = setTimeout(function() {
-                    document.title = OriginTitile;
-                },2000);
-            }
-        });
-    })();
-</script>
-
-
-    
+    </div>
 </body>
 </html>
