@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.38.37.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.03.56.png">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-01%20%E4%B8%8A%E5%8D%8812.11.18.png">
-<meta property="og:updated_time" content="2018-03-13T16:00:22.777Z">
+<meta property="og:updated_time" content="2018-07-24T10:44:32.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈CPU的流水线">
 <meta name="twitter:description" content="在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。">
@@ -130,13 +130,13 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&name=浅谈CPU的流水线&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png&quot; height=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&name=浅谈CPU的流水线&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png&quot; height=&quot;350&quot; width=&quot;600&quot; alt/&gt;
 &lt;p&gt;在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU的发展"><span class="toc-number">1.</span> <span class="toc-text">CPU的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU指令流水线"><span class="toc-number">2.</span> <span class="toc-text">CPU指令流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#乱序执行流水线"><span class="toc-number">3.</span> <span class="toc-text">乱序执行流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#猜测执行"><span class="toc-number">4.</span> <span class="toc-text">猜测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">5.</span> <span class="toc-text">例子</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpu的发展"><span class="toc-number">1.</span> <span class="toc-text"> CPU的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpu指令流水线"><span class="toc-number">2.</span> <span class="toc-text"> CPU指令流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#乱序执行流水线"><span class="toc-number">3.</span> <span class="toc-text"> 乱序执行流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#猜测执行"><span class="toc-number">4.</span> <span class="toc-text"> 猜测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">5.</span> <span class="toc-text"> 例子</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -175,10 +175,11 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt=""></p>
+    <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png" height="350" width="600" alt="">
 <p>在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。</p>
 <a id="more"></a>
-<h1 id="CPU的发展"><a href="#CPU的发展" class="headerlink" title="CPU的发展"></a>CPU的发展</h1><p>因为是讲Intel的CPU架构，那么就不得不从8086开始说起，虽然这一代的CPU由于过渡的原因，存在着一些问题(计算地址偏移需要移位)，但是仍然是经典的一款。至今为止Intel推出了很多代的CPU架构，从早期的80386，到第奔腾，第酷睿，和最新的一代Haswell，性能上的上升也是很明显的：</p>
+<h1 id="cpu的发展"><a class="markdownIt-Anchor" href="#cpu的发展"></a> CPU的发展</h1>
+<p>因为是讲Intel的CPU架构，那么就不得不从8086开始说起，虽然这一代的CPU由于过渡的原因，存在着一些问题(计算地址偏移需要移位)，但是仍然是经典的一款。至今为止Intel推出了很多代的CPU架构，从早期的80386，到第奔腾，第酷睿，和最新的一代Haswell，性能上的上升也是很明显的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.08.02.png" alt=""></p>
 <p>经历了近四十年的风风雨雨，我们会发现其实在微机上，元器件所做的改变并不大，或者说CPU的主频并没有发生很大的变化，有时候甚至不生反降，但是处理器的多线程计算能力却是一直在上升，这其中的奥妙就要归功于我们的计算机系统结构的不断迭代了。</p>
 <p>一开始的处理器设计太过于简单，就好比我们的单道批处理系统一样，根本不涉及到任何的调度算法，我们只需要把作业提交，就会串行的去执行。最初的8086处理器执行过程可以简述为从当前指令指针(IP)取到指令，通过译码，然后执行退出。站在早期的角度来考虑我们可能会考虑消除内存和处理器来回的时间消耗，事实也正是如此，在82年的时候指令缓存被加入到处理器中，通过指令缓存处理器可以一次性从内存读取更多指令并放在指令缓存中，而不用每条指令都从内存中取。指令缓存仅有几个字节大小，只能容纳数条指令，但是因为消除了之后每次取指往返内存和处理器的时间，极大的提高的效率。</p>
@@ -189,12 +190,14 @@
 <p>…</p>
 <p>直到2013年的时候，第四代微结构Haswell被推出，此时就已经拥有14级流水线的乱序执行部件了。</p>
 <p>上文中的流水线和乱序执行部件搞得人眼花缭乱，但这并不是大事，接下来我们会做讲解。</p>
-<h1 id="CPU指令流水线"><a href="#CPU指令流水线" class="headerlink" title="CPU指令流水线"></a>CPU指令流水线</h1><p>根据之前描述的基础，指令进入流水线，通过流水线处理，从流水线出来的过程，对于我们程序员来说，是比较直观的。</p>
+<h1 id="cpu指令流水线"><a class="markdownIt-Anchor" href="#cpu指令流水线"></a> CPU指令流水线</h1>
+<p>根据之前描述的基础，指令进入流水线，通过流水线处理，从流水线出来的过程，对于我们程序员来说，是比较直观的。</p>
 <p>I486拥有五级流水线。分别是：取指(Fetch)，译码(D1, main decode)，转址(D2, translate)，执行(EX, execute)，写回(WB)。某个指令可以在流水线的任何一级。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%884.38.37.png" alt=""></p>
 <p>8086到386都没有流水线，所以就算执行有依赖关系的代码也是没有问题的，但是对于上图中的流水线来说，就有一个明显的缺陷，如果顺序执行的代码之间有依赖关系，也就是说前者完成后后者才能执行，举个例子就是说后者用到了前者计算的数据，这样就形成了一个必须的等待，这种情况下我们称作是流水线阻塞或者流水线气泡。</p>
 <p>这样子的问题在奔腾处理器的双流水线架构下更加明显了，有的指令执行的快，有的指令要慢，如果形成上述的阻塞效果，会严重的影响执行的速度，所以Intel推出了完全不同的流水线设计——乱序执行部件(Out-of-Order core)，接下来再来看看Intel为此做出的改变。</p>
-<h1 id="乱序执行流水线"><a href="#乱序执行流水线" class="headerlink" title="乱序执行流水线"></a>乱序执行流水线</h1><p>能够快速完成的指令需要等待前面执行慢的指令即使在并行流水线中也仍然是一个问题。流水线仍然是线性的，导致处理器面临性能瓶颈难以逾越。</p>
+<h1 id="乱序执行流水线"><a class="markdownIt-Anchor" href="#乱序执行流水线"></a> 乱序执行流水线</h1>
+<p>能够快速完成的指令需要等待前面执行慢的指令即使在并行流水线中也仍然是一个问题。流水线仍然是线性的，导致处理器面临性能瓶颈难以逾越。</p>
 <p>于是我们引入了乱序执行流水线，乱序执行部件和之前处理器设计中的线性通路有很大不同，它增加了一些复杂度，引入了非线性的通路。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.03.56.png" alt=""></p>
 <p>不同于之前的取指、译码、执行等过程，乱序执行从一开始就做了一些改变：</p>
@@ -248,16 +251,18 @@
 </tbody>
 </table>
 <p>那么寄存器重命名也就是上例中的R1映射为不同的物理寄存器，从而在硬件上提供了额外的并行能力，编译器会尽力检测出类似这样的问题，并把不同的寄存器分配给不同的指令使用。</p>
-<ol>
+<ol start="4">
 <li>当微指令翻译完成后，它们会进入一个重排序缓存(Reorder Buffer, ROB)，ROB可以存储最多128条微指令。在支持超线程的处理器上，ROB同样可以重排来自两个虚拟处理器的指令。两个虚拟处理器在ROB中将微指令汇集到一个共享的乱序执行部件中。</li>
 <li>接下来乱序执行就真正的开始了，不同的微指令在不同的执行单元中同时执行，而且每个执行单元都全速运行。只要当前微指令所需要的数据就绪，而且有空闲的执行单元，微指令就可以立即执行，有时甚至可以跳过前面还未就绪的微指令。通过这种方式，需要长时间运行的操作不会阻塞后面的操作，流水线阻塞带来的损失被极大的减小了。</li>
 <li>最终微指令会得到执行，在经过数个流水级之后，最终会退出流水线。这时，这条指令完成并且递增指令指针。但从程序员的角度来说，指令仅仅是从一端进入CPU，从另一端退出，就像老的8086一样。(就像黑盒一样，黑盒里面的过程对于我们来说是透明的 )</li>
 </ol>
-<h1 id="猜测执行"><a href="#猜测执行" class="headerlink" title="猜测执行"></a>猜测执行</h1><p>我们会注意到乱序执行对于取指部分做的改变是将跳转指令加入到指令缓存中，那么我们遇到跳转的时候会发生什么呢？对于老式的CPU来说，这可算是<code>生命不可承受之重</code>了，它会清空你的流水线，等待新的跳转目的指令的取指执行。当指令队列中存储了超过100条指令的时候，发生流水线阻塞对于性能损失是极为严重的，所有指令都被阻塞等待跳转目的指令的fetch然后重启流水线，这种情况的频繁发生对于处理器肯定是吃不消的，于是我们需要乱序执行部件的另外一个功能就是猜测执行。</p>
+<h1 id="猜测执行"><a class="markdownIt-Anchor" href="#猜测执行"></a> 猜测执行</h1>
+<p>我们会注意到乱序执行对于取指部分做的改变是将跳转指令加入到指令缓存中，那么我们遇到跳转的时候会发生什么呢？对于老式的CPU来说，这可算是<code>生命不可承受之重</code>了，它会清空你的流水线，等待新的跳转目的指令的取指执行。当指令队列中存储了超过100条指令的时候，发生流水线阻塞对于性能损失是极为严重的，所有指令都被阻塞等待跳转目的指令的fetch然后重启流水线，这种情况的频繁发生对于处理器肯定是吃不消的，于是我们需要乱序执行部件的另外一个功能就是猜测执行。</p>
 <p>猜测执行意味着当遇到一个分支指令后，乱序执行部件会将所有分支的指令都执行一遍。一旦分支指令的跳转方向确定后，错误跳转方向的指令都将被丢弃。通过同时执行两个跳转方向的指令，避免了由于分支跳转导致的阻塞。处理器设计者还发明了分支预测缓存，当面临多个分支时进行预测，进一步提高了性能。虽然CPU阻塞仍然会发生，但是这个解决方案将CPU发生阻塞的概率降到了一个可以接受的范围。</p>
 <p>最后，拥有超线程的处理器将两个虚拟的处理器暴露给共享的乱序执行部件。它们共享一个重排序缓存和乱序执行部件，让操作系统认为它们是两个独立的处理器，看上去就像这样：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-01%20%E4%B8%8A%E5%8D%8812.11.18.png" alt=""></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>例子参考的是一篇博客上的，觉得说的比较好就转载过来了，文章的地址是<a href="http://blog.jobbole.com/40844/" target="_blank" rel="external">CPU流水线的探索之谜</a>：</p>
+<h1 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h1>
+<p>例子参考的是一篇博客上的，觉得说的比较好就转载过来了，文章的地址是<a href="http://blog.jobbole.com/40844/" target="_blank" rel="external">CPU流水线的探索之谜</a>：</p>
 <p>这一切看上去有点令人感到困惑，那么我们举一个例子来让这一切变得清晰起来。</p>
 <p>从应用程序的角度来看，我们仍然是运行在指令流水线上，就想老的8086处理器那样。处理器就是一个黑盒子。黑盒子会处理指令指针指向的指令，当处理完之后，会在内存里找到处理的结果。</p>
 <p>但是从指令本身的角度来讲，这个过程可谓历经沧桑。我们下面介绍对于现今的处理器（大约在2008-2013年之间），一条指令在其内部的过程。</p>
@@ -299,7 +304,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU的发展"><span class="toc-number">1.</span> <span class="toc-text">CPU的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU指令流水线"><span class="toc-number">2.</span> <span class="toc-text">CPU指令流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#乱序执行流水线"><span class="toc-number">3.</span> <span class="toc-text">乱序执行流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#猜测执行"><span class="toc-number">4.</span> <span class="toc-text">猜测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">5.</span> <span class="toc-text">例子</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpu的发展"><span class="toc-number">1.</span> <span class="toc-text"> CPU的发展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cpu指令流水线"><span class="toc-number">2.</span> <span class="toc-text"> CPU指令流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#乱序执行流水线"><span class="toc-number">3.</span> <span class="toc-text"> 乱序执行流水线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#猜测执行"><span class="toc-number">4.</span> <span class="toc-text"> 猜测执行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">5.</span> <span class="toc-text"> 例子</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -313,7 +318,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&title=浅谈CPU的流水线"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&name=浅谈CPU的流水线&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png&quot; height=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/28/浅谈CPU的流水线/&name=浅谈CPU的流水线&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-28%20%E4%B8%8B%E5%8D%885.01.23.png&quot; height=&quot;350&quot; width=&quot;600&quot; alt/&gt;
 &lt;p&gt;在学习系统结构的时候对于CPU的流水线机制有些不解，于是从Intel的历史开始看起，从早期没有流水线的i386到后来的Core架构的CPU中间所发生的更新换代来切入，来谈谈系统架构对于一个电脑到底有着怎么样的影响，just like the trick，以我昨天看的一部诺兰的电影作为配图hhh。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

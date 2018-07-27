@@ -136,7 +136,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-介绍"><span class="toc-number">1.</span> <span class="toc-text">0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞利用"><span class="toc-number">2.</span> <span class="toc-text">0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text">泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text">获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text">获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text">泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00介绍"><span class="toc-number">1.</span> <span class="toc-text"> 0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01漏洞利用"><span class="toc-number">2.</span> <span class="toc-text"> 0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text"> 泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text"> 获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text"> 泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text"> 补充</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -177,7 +177,8 @@
   <div class="content" itemprop="articleBody">
     <p>漏洞挖掘知识填坑和MOXil学习同步进行ing…附赠好图一张</p>
 <a id="more"></a>
-<h1 id="0x00-介绍"><a href="#0x00-介绍" class="headerlink" title="0x00.介绍"></a>0x00.介绍</h1><p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
+<h1 id="0x00介绍"><a class="markdownIt-Anchor" href="#0x00介绍"></a> 0x00.介绍</h1>
+<p>首先对于格式化字符串不了解可以先看看<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="external">维基百科上的标准讲解</a>，原理介绍可以参见<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/fmtstr/fmtstr_intro/" target="_blank" rel="external">wiki</a>，在这里只是简单的做一下介绍，如果我们有下面这样一个语句:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"Hacking the %s, Hacking the %s"</span>);</div></pre></td></tr></table></figure>
 <p>此时我们可以发现我们并没有提供参数，那么程序会如何运行呢？程序照样会运行，会将栈上存储格式化字符串地址上面的三个变量分别解析为</p>
 <ol>
@@ -187,7 +188,10 @@
 </ol>
 <p>对于2，3来说倒还无妨，但是对于对于1来说，如果提供了一个不可访问地址，比如0，那么程序就会因此而崩溃。</p>
 <p>这基本就是格式化字符串漏洞的基本原理了。</p>
-<h1 id="0x01-漏洞利用"><a href="#0x01-漏洞利用" class="headerlink" title="0x01.漏洞利用"></a>0x01.漏洞利用</h1><h2 id="泄露栈内存"><a href="#泄露栈内存" class="headerlink" title="泄露栈内存"></a>泄露栈内存</h2><h3 id="获取栈变量数值"><a href="#获取栈变量数值" class="headerlink" title="获取栈变量数值"></a>获取栈变量数值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="0x01漏洞利用"><a class="markdownIt-Anchor" href="#0x01漏洞利用"></a> 0x01.漏洞利用</h1>
+<h2 id="泄露栈内存"><a class="markdownIt-Anchor" href="#泄露栈内存"></a> 泄露栈内存</h2>
+<h3 id="获取栈变量数值"><a class="markdownIt-Anchor" href="#获取栈变量数值"></a> 获取栈变量数值</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">char</span> s[<span class="number">100</span>];</div><div class="line">  <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">0x22222222</span>, c = <span class="number">-1</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%s\n"</span>, a, b, c, s);</div><div class="line">  <span class="built_in">printf</span>(s);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后我们通过命令编译一下，关掉栈保护和PIE：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc -fno-stack-protector -no-pie -o leakmemory leakmemory.c</div></pre></td></tr></table></figure>
 <p>然后我们用gdb来追踪调试看看：</p>
@@ -201,12 +205,14 @@
 <ol>
 <li>利用%x来获取对应栈的内存，但建议使用%p，可以不用考虑位数的区别。</li>
 <li>利用%s来获取变量所对应地址的内容，只不过有零截断。</li>
-<li>利用%order$x来获取指定参数的值，利用%order$s来获取指定参数对应地址的内容。</li>
+<li>利用%orderx来获取指定参数的值，利用%orders来获取指定参数对应地址的内容。</li>
 </ol>
 </blockquote>
-<h3 id="获取栈变量对应的字符串"><a href="#获取栈变量对应的字符串" class="headerlink" title="获取栈变量对应的字符串"></a>获取栈变量对应的字符串</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
+<h3 id="获取栈变量对应的字符串"><a class="markdownIt-Anchor" href="#获取栈变量对应的字符串"></a> 获取栈变量对应的字符串</h3>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-30%20%E4%B8%8B%E5%8D%889.20.01.png" alt="获取栈变量对应的字符串"></p>
 <p>解析到<code>%s</code>的时候，就会找栈上的第一个值对应的地址，然后以字符串的形式去解析，而这个值就是格式化字符串本身的地址，所以<code>%s</code>就被解析成了<code>%speterpan</code>，剩下的就是输出<code>peterpan</code>了</p>
-<h2 id="泄漏任意地址内存"><a href="#泄漏任意地址内存" class="headerlink" title="泄漏任意地址内存"></a>泄漏任意地址内存</h2><p>其实上述的例子只是帮助理解什么是格式化字符串的漏洞，这个漏洞应该可以是可以被我们控制去泄漏一些强力有效的东西，比如说去泄漏一个libc函数的<code>got</code>表内容，从而得到其他函数的地址，如果我们知道格式化字符串在输出函数调用的时候是第几个参数，如果是第<code>k</code>个，那么我们就可以使用：</p>
+<h2 id="泄漏任意地址内存"><a class="markdownIt-Anchor" href="#泄漏任意地址内存"></a> 泄漏任意地址内存</h2>
+<p>其实上述的例子只是帮助理解什么是格式化字符串的漏洞，这个漏洞应该可以是可以被我们控制去泄漏一些强力有效的东西，比如说去泄漏一个libc函数的<code>got</code>表内容，从而得到其他函数的地址，如果我们知道格式化字符串在输出函数调用的时候是第几个参数，如果是第<code>k</code>个，那么我们就可以使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">addr%k$s</div></pre></td></tr></table></figure>
 <p>来获取某个指定地址的内容，那么怎么知道格式化字符串是第几个呢？</p>
 <p>因为在之前的例子中我们就可以栈上的第一个参数就是格式化字符串的地址，然后我们会以字符串的形式去解析这个地方的值，那么如果我们传的字符串是：</p>
@@ -220,7 +226,8 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-12%20%E4%B8%8B%E5%8D%886.23.09.png" alt="泄漏scanf地址"></p>
 <p>如果地址不是偏移机器字长的整数倍，我们还需要手动填充，不然就会像找格式化字符串是第几个参数的那张图中描述的一样，被系统填充，这样就会跳转到其他的位置去了。</p>
 <p>但是我们不能直接将<code>got</code>表中的地址(<code>\x14\xa0\x0</code>)传进去，因为<code>scanf</code>不会将其识别为对应的字符串，而是分别作为一个字符读入，这样就会出错。</p>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>在intel平台上XNU对于<code>trap</code>和<code>interrupt</code>的描述</p>
+<h1 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h1>
+<p>在intel平台上XNU对于<code>trap</code>和<code>interrupt</code>的描述</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-02%20%E4%B8%8B%E5%8D%8811.43.43.png" alt="公共分发器"></p>
 
   </div>
@@ -246,7 +253,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-介绍"><span class="toc-number">1.</span> <span class="toc-text">0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-漏洞利用"><span class="toc-number">2.</span> <span class="toc-text">0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text">泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text">获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text">获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text">泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00介绍"><span class="toc-number">1.</span> <span class="toc-text"> 0x00.介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01漏洞利用"><span class="toc-number">2.</span> <span class="toc-text"> 0x01.漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泄露栈内存"><span class="toc-number">2.1.</span> <span class="toc-text"> 泄露栈内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量数值"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 获取栈变量数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取栈变量对应的字符串"><span class="toc-number">2.1.2.</span> <span class="toc-text"> 获取栈变量对应的字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泄漏任意地址内存"><span class="toc-number">2.2.</span> <span class="toc-text"> 泄漏任意地址内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充"><span class="toc-number">3.</span> <span class="toc-text"> 补充</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
