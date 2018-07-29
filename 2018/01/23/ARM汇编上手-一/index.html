@@ -9,7 +9,7 @@
     <meta name="description" content="今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARM汇编上手">
-<meta property="og:url" content="http://yoursite.com/2018/01/23/ARM汇编上手-一/index.html">
+<meta property="og:url" content="https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif">
@@ -119,16 +119,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/23/ARM汇编上手-一/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&text=ARM汇编上手"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&is_video=false&description=ARM汇编上手"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ARM汇编上手&body=Check out this article: http://yoursite.com/2018/01/23/ARM汇编上手-一/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&name=ARM汇编上手&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif&quot; alt&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&text=ARM汇编上手"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&is_video=false&description=ARM汇编上手"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARM汇编上手&body=Check out this article: https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&name=ARM汇编上手&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif&quot; alt&gt;
 &lt;p&gt;今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -300,16 +300,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/23/ARM汇编上手-一/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&text=ARM汇编上手"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&is_video=false&description=ARM汇编上手"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ARM汇编上手&body=Check out this article: http://yoursite.com/2018/01/23/ARM汇编上手-一/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/23/ARM汇编上手-一/&name=ARM汇编上手&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif&quot; alt&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&text=ARM汇编上手"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&is_video=false&description=ARM汇编上手"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARM汇编上手&body=Check out this article: https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&title=ARM汇编上手"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/01/23/ARM汇编上手-一/&name=ARM汇编上手&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif&quot; alt&gt;
 &lt;p&gt;今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

@@ -10,7 +10,7 @@
 在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS多线程之NSOperation">
-<meta property="og:url" content="http://yoursite.com/2017/11/14/iOS多线程之NSOperation/index.html">
+<meta property="og:url" content="https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。
 在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有">
@@ -123,16 +123,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&text=iOS多线程之NSOperation"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&is_video=false&description=iOS多线程之NSOperation"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=iOS多线程之NSOperation&body=Check out this article: http://yoursite.com/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&name=iOS多线程之NSOperation&description=&lt;p&gt;之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。&lt;br /&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&text=iOS多线程之NSOperation"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&is_video=false&description=iOS多线程之NSOperation"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS多线程之NSOperation&body=Check out this article: https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&name=iOS多线程之NSOperation&description=&lt;p&gt;之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。&lt;br /&gt;
 在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优势的。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -282,16 +282,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&text=iOS多线程之NSOperation"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&is_video=false&description=iOS多线程之NSOperation"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=iOS多线程之NSOperation&body=Check out this article: http://yoursite.com/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/14/iOS多线程之NSOperation/&name=iOS多线程之NSOperation&description=&lt;p&gt;之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。&lt;br /&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&text=iOS多线程之NSOperation"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&is_video=false&description=iOS多线程之NSOperation"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS多线程之NSOperation&body=Check out this article: https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&title=iOS多线程之NSOperation"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/11/14/iOS多线程之NSOperation/&name=iOS多线程之NSOperation&description=&lt;p&gt;之前的博客中说了GCD，GCD固然是一套强大的多线程解决方案，能够解决绝大多数的多线程问题，但是他易于上手难于精通且到处是坑的特点也注定了想熟练使用它有一定的难度。&lt;br /&gt;
 在现在的主流开发模式下，用到多线程的绝大多数就是网络数据请求和网络图片加载，这两点上AFNetwork+SDWebImage（两个主流框架）已经能满足几乎所有的需求。而剩下的一小部分，简单好用的NSOperation无疑是比GCD更有优势的。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

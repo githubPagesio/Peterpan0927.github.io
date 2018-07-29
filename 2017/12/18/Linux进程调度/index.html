@@ -9,7 +9,7 @@
     <meta name="description" content="关于进程的管理我们之前有一篇博客就已经说过，这次我们来说一下进程是如何进行调度的，这是确保进程能有效工作的一个内核子系统，让系统资源得到最大限度地发挥，同时这也是我们使用多线程并发执行的基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux进程调度">
-<meta property="og:url" content="http://yoursite.com/2017/12/18/Linux进程调度/index.html">
+<meta property="og:url" content="https://peterpan980927.cn/2017/12/18/Linux进程调度/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="关于进程的管理我们之前有一篇博客就已经说过，这次我们来说一下进程是如何进行调度的，这是确保进程能有效工作的一个内核子系统，让系统资源得到最大限度地发挥，同时这也是我们使用多线程并发执行的基础">
 <meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.49.24.png">
@@ -126,16 +126,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/18/Linux进程调度/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/18/Linux进程调度/&text=Linux进程调度"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/18/Linux进程调度/&is_video=false&description=Linux进程调度"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux进程调度&body=Check out this article: http://yoursite.com/2017/12/18/Linux进程调度/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/18/Linux进程调度/&name=Linux进程调度&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.49.24.png&quot; alt&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/12/18/Linux进程调度/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&text=Linux进程调度"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&is_video=false&description=Linux进程调度"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux进程调度&body=Check out this article: https://peterpan980927.cn/2017/12/18/Linux进程调度/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&name=Linux进程调度&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.49.24.png&quot; alt&gt;
 &lt;p&gt;关于进程的管理我们之前有一篇博客就已经说过，这次我们来说一下进程是如何进行调度的，这是确保进程能有效工作的一个内核子系统，让系统资源得到最大限度地发挥，同时这也是我们使用多线程并发执行的基础&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -422,16 +422,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/18/Linux进程调度/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/18/Linux进程调度/&text=Linux进程调度"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/18/Linux进程调度/&is_video=false&description=Linux进程调度"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux进程调度&body=Check out this article: http://yoursite.com/2017/12/18/Linux进程调度/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/18/Linux进程调度/&name=Linux进程调度&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.49.24.png&quot; alt&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/12/18/Linux进程调度/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&text=Linux进程调度"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&is_video=false&description=Linux进程调度"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux进程调度&body=Check out this article: https://peterpan980927.cn/2017/12/18/Linux进程调度/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&title=Linux进程调度"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/12/18/Linux进程调度/&name=Linux进程调度&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-25%20%E4%B8%8A%E5%8D%8812.49.24.png&quot; alt&gt;
 &lt;p&gt;关于进程的管理我们之前有一篇博客就已经说过，这次我们来说一下进程是如何进行调度的，这是确保进程能有效工作的一个内核子系统，让系统资源得到最大限度地发挥，同时这也是我们使用多线程并发执行的基础&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

@@ -10,7 +10,7 @@
 0x01.流程首先我还是按照惯例梳理了整个Poc的流程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用三叉戟漏洞实现本地提权">
-<meta property="og:url" content="http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/index.html">
+<meta property="og:url" content="https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/index.html">
 <meta property="og:site_name" content="Peterpan's Blog">
 <meta property="og:description" content="0x00.前言在对漏洞进行学习的时候，因为各方面细小知识点的缺少，导致踩了一些坑，这次来分析的是之前很多人已经说过的三叉戟漏洞的后两个来实现的本地提权，虽然有很多poc，但是其中的描述并不是很详细，所以我就通过自己的学习过程来做一些科普吧算是。在阅读之前需要对于这两个漏洞有一定的了解，资料我丢在链接部分了，完整的代码贴在我的github上了。
 0x01.流程首先我还是按照惯例梳理了整个Poc的流程">
@@ -123,16 +123,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&text=利用三叉戟漏洞实现本地提权"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&is_video=false&description=利用三叉戟漏洞实现本地提权"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=利用三叉戟漏洞实现本地提权&body=Check out this article: http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&name=利用三叉戟漏洞实现本地提权&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&text=利用三叉戟漏洞实现本地提权"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&is_video=false&description=利用三叉戟漏洞实现本地提权"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用三叉戟漏洞实现本地提权&body=Check out this article: https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&name=利用三叉戟漏洞实现本地提权&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -235,16 +235,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&text=利用三叉戟漏洞实现本地提权"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&is_video=false&description=利用三叉戟漏洞实现本地提权"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=利用三叉戟漏洞实现本地提权&body=Check out this article: http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/17/利用三叉戟漏洞实现本地提权/&name=利用三叉戟漏洞实现本地提权&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&text=利用三叉戟漏洞实现本地提权"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&is_video=false&description=利用三叉戟漏洞实现本地提权"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用三叉戟漏洞实现本地提权&body=Check out this article: https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&title=利用三叉戟漏洞实现本地提权"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/07/17/利用三叉戟漏洞实现本地提权/&name=利用三叉戟漏洞实现本地提权&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
