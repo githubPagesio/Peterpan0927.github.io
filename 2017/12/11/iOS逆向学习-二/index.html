@@ -99,6 +99,8 @@
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </span>
@@ -136,7 +138,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#class-dump"><span class="toc-number">1.</span> <span class="toc-text"> class-dump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#theos"><span class="toc-number">2.</span> <span class="toc-text"> Theos</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好玩的功能发掘"><span class="toc-number">3.</span> <span class="toc-text"> 好玩的功能发掘</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#class-dump"><span class="toc-number">1.</span> <span class="toc-text">class-dump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Theos"><span class="toc-number">2.</span> <span class="toc-text">Theos</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好玩的功能发掘"><span class="toc-number">3.</span> <span class="toc-text">好玩的功能发掘</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -177,8 +179,7 @@
   <div class="content" itemprop="articleBody">
     <p>iOS逆向工程中使用的一系列工具功能不同，主要是作为开发和调试的工作，这一次主要是介绍两种：<code>class-dump</code>和<code>Theos</code>，那么这这个工具是干什么的呢？</p>
 <a id="more"></a>
-<h1 id="class-dump"><a class="markdownIt-Anchor" href="#class-dump"></a> class-dump</h1>
-<p>这个工具从名字中我们大概也能猜出来这是一个去dump目标对象的class信息的工具。它利用的是OC的<code>runtime</code>特性，将存储于Mach-O文件中的头文件信息（@interface和@protocol信息）提取出来，并生成的对应的.h文件。官方的介绍其实是这样说的：</p>
+<h1 id="class-dump"><a href="#class-dump" class="headerlink" title="class-dump"></a>class-dump</h1><p>这个工具从名字中我们大概也能猜出来这是一个去dump目标对象的class信息的工具。它利用的是OC的<code>runtime</code>特性，将存储于Mach-O文件中的头文件信息（@interface和@protocol信息）提取出来，并生成的对应的.h文件。官方的介绍其实是这样说的：</p>
 <blockquote>
 <p>This is a command-line utility for examining the Objective-C runtime information stored in Mach-O files. It generates declarations for the classes, categories and protocols. This is the same information provided by using ‘otool -ov’, but presented as normal Objective-C declarations, so it is much more compact and readable</p>
 </blockquote>
@@ -191,8 +192,7 @@
 <p>接下来我们就会在目录下面找到我们所有的头文件了，经过对比之后，和源文件中的头文件是非常的相似的，除了一些参数类型被改成了id，类型名用arg1,arg2来表示之外，其他的基本都是一样的。通过这些头文件，那么闭源的App就会露出他们的马脚了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-11%20%E4%B8%8B%E5%8D%888.07.13.png" alt=""></p>
 <p>但是到这种程度还远远没有结束，因为现在App工程越来越庞大，而且引用了很多的第三方代码，所以我们使用class-dump的时候就会dump出成百上千个头文件，其实对于工程师的水平也是一种考验。之所以选择的是这个App是因为从App Store上下载的App都是经过加密的，直接使用class-dump就会失效，就像一个硬硬的核桃里面包着果肉，我们用镊子是不可能夹的出来的，首先干嘛？对了，锤子砸开它，在逆向工程中俗称砸壳，这个之后再介绍，下面说一下另一个工具。</p>
-<h1 id="theos"><a class="markdownIt-Anchor" href="#theos"></a> Theos</h1>
-<p>这是一个越狱开发工具包。它与其他的越狱开发工具相比，最大的特点就是简单:不管是下载安装还是Logos的语法还是编译发布都比较省事，既然比较起来就要提到另一个也就是整合在Xcode中的iOSOpenDev，作为一个经常使用Xcode的iOS工程师，本来我是打算使用这种工具的，但是逆向工程接触底层的知识比较多，很多东西无法自动化，工具太智能反而会坏了自己的根基，所以按照作者推荐选择了整合度不算太高的Theos。</p>
+<h1 id="Theos"><a href="#Theos" class="headerlink" title="Theos"></a>Theos</h1><p>这是一个越狱开发工具包。它与其他的越狱开发工具相比，最大的特点就是简单:不管是下载安装还是Logos的语法还是编译发布都比较省事，既然比较起来就要提到另一个也就是整合在Xcode中的iOSOpenDev，作为一个经常使用Xcode的iOS工程师，本来我是打算使用这种工具的，但是逆向工程接触底层的知识比较多，很多东西无法自动化，工具太智能反而会坏了自己的根基，所以按照作者推荐选择了整合度不算太高的Theos。</p>
 <p>工具安装的废话就不说了，但是一步一步的每个模块安装还是比较浪费时间的，所以我找到了一个在github上写了一个自动化配置脚本的友人，这里分享一个<a href="https://github.com/DaSens/Theos-Script" target="_blank" rel="external">链接</a>，同时也分享一个<a href="https://pan.baidu.com/s/1kTvex0r" target="_blank" rel="external">iOSOpenDev</a>的，来自一个具有开源精神的朋友。</p>
 <p>等到配置完成之后就可以开始创建工程了，启动NIC:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/theos/nic.pl</div></pre></td></tr></table></figure>
@@ -210,8 +210,7 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-11%20%E4%B8%8B%E5%8D%8811.11.21.png" alt=""></p>
 <p>我们可以看到其实在iphone中/etc和/var只不过是个符号链接，其实/private文件夹才是大权在握，最后经过修改之后才可以免密码登录，实现我们的一条龙服务，最后安装成功的效果是这样的：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/IMG_0056.PNG" alt=""></p>
-<h1 id="好玩的功能发掘"><a class="markdownIt-Anchor" href="#好玩的功能发掘"></a> 好玩的功能发掘</h1>
-<p>那么进入终端之后还可以做哪些好玩的事情呢，我今天尝试了一下，发现<code>open</code>这个命令其实非常的有意思，首先我们要安装<code>open</code>这个命令，然后通过<code>Erica Utilities</code>得到<code>plutil</code>，接下来我们就可以将手机交给别人玩了，接下来我们就悄悄的溜进终端，进行我们的秘密行动：</p>
+<h1 id="好玩的功能发掘"><a href="#好玩的功能发掘" class="headerlink" title="好玩的功能发掘"></a>好玩的功能发掘</h1><p>那么进入终端之后还可以做哪些好玩的事情呢，我今天尝试了一下，发现<code>open</code>这个命令其实非常的有意思，首先我们要安装<code>open</code>这个命令，然后通过<code>Erica Utilities</code>得到<code>plutil</code>，接下来我们就可以将手机交给别人玩了，接下来我们就悄悄的溜进终端，进行我们的秘密行动：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#首先我们可以通过命令查看当前的进程</div><div class="line">ps -A</div></pre></td></tr></table></figure>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-11%20%E4%B8%8B%E5%8D%8811.38.13.png" alt=""></p>
 <p>原来在刷微博啊，那么我们首先来干扰一下他吧，我们来打开照相机，如果不知道ID的话首先就查看一下：</p>
@@ -247,12 +246,14 @@
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#class-dump"><span class="toc-number">1.</span> <span class="toc-text"> class-dump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#theos"><span class="toc-number">2.</span> <span class="toc-text"> Theos</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好玩的功能发掘"><span class="toc-number">3.</span> <span class="toc-text"> 好玩的功能发掘</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#class-dump"><span class="toc-number">1.</span> <span class="toc-text">class-dump</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Theos"><span class="toc-number">2.</span> <span class="toc-text">Theos</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好玩的功能发掘"><span class="toc-number">3.</span> <span class="toc-text">好玩的功能发掘</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -297,6 +298,8 @@
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </nav>

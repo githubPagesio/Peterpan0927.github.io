@@ -94,6 +94,8 @@
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </span>
@@ -126,13 +128,13 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&name=ACM之神奇的位运算&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&name=ACM之神奇的位运算&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
 &lt;p&gt;位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#find-your-present"><span class="toc-number">1.</span> <span class="toc-text"> Find your present</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Find-your-present"><span class="toc-number">1.</span> <span class="toc-text">Find your present</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -171,34 +173,16 @@
   
 
   <div class="content" itemprop="articleBody">
-    <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
+    <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。</p>
 <a id="more"></a>
-<h1 id="find-your-present"><a class="markdownIt-Anchor" href="#find-your-present"></a> Find your present</h1>
-<p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=11" target="_blank" rel="external">传送门</a></p>
-<p><strong>Problem Description</strong><br>
-In the new year party, everybody will get a “special present”.Now it’s your turn to get your special present, a lot of presents now putting on the desk, and only one of them will be yours.Each present has a card number on it, and your present’s card number will be the one that different from all the others, and you can assume that only one number appear odd times.For example, there are 5 present, and their card numbers are 1, 2, 3, 2, <a href="http://1.so" target="_blank" rel="external">1.so</a> your present will be the one with the card number of 3, because 3 is the number that different from all the others.<br>
-<strong>Input</strong><br>
-The input file will consist of several cases.<br>
-Each case will be presented by an integer n (1&lt;=n&lt;1000000, and n is odd) at first. Following that, n positive integers will be given in a line, all integers will smaller than 2^31. These numbers indicate the card numbers of the presents.n = 0 ends the input.<br>
-<strong>Output</strong><br>
-For each case, output an integer in a line, which is the card number of your present.<br>
-<strong>Sample Input</strong><br>
-5<br>
-1 1 3 2 2<br>
-3<br>
-1 2 1<br>
-0<br>
-<strong>Sample Output</strong><br>
-3<br>
-2<br>
-<strong>Hint</strong><br>
-use scanf to avoid Time Limit Exceeded</p>
+<h1 id="Find-your-present"><a href="#Find-your-present" class="headerlink" title="Find your present"></a>Find your present</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=11" target="_blank" rel="external">传送门</a></p>
+<p><strong>Problem Description</strong><br>In the new year party, everybody will get a “special present”.Now it’s your turn to get your special present, a lot of presents now putting on the desk, and only one of them will be yours.Each present has a card number on it, and your present’s card number will be the one that different from all the others, and you can assume that only one number appear odd times.For example, there are 5 present, and their card numbers are 1, 2, 3, 2, 1.so your present will be the one with the card number of 3, because 3 is the number that different from all the others.<br><strong>Input</strong><br>The input file will consist of several cases.<br>Each case will be presented by an integer n (1&lt;=n&lt;1000000, and n is odd) at first. Following that, n positive integers will be given in a line, all integers will smaller than 2^31. These numbers indicate the card numbers of the presents.n = 0 ends the input.<br><strong>Output</strong><br>For each case, output an integer in a line, which is the card number of your present.<br><strong>Sample Input</strong><br>5<br>1 1 3 2 2<br>3<br>1 2 1<br>0<br><strong>Sample Output</strong><br>3<br>2<br><strong>Hint</strong><br>use scanf to avoid Time Limit Exceeded</p>
 <p>首先我们要知道异或的一些特性，然后看看能不解题有所启发：</p>
 <ol>
 <li>a^b = b^a</li>
-<li>(a<sup>b)</sup>c = a<sup>(b</sup>c)</li>
-<li>a<sup>b</sup>a = b</li>
+<li>(a^b)^c = a^(b^c)</li>
+<li>a^b^a = b</li>
 <li>0^n = n</li>
 <li>n^n = 0</li>
 </ol>
@@ -223,12 +207,14 @@ use scanf to avoid Time Limit Exceeded</p>
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#find-your-present"><span class="toc-number">1.</span> <span class="toc-text"> Find your present</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Find-your-present"><span class="toc-number">1.</span> <span class="toc-text">Find your present</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -242,7 +228,7 @@ use scanf to avoid Time Limit Exceeded</p>
   <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&title=ACM之神奇的位运算"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&name=ACM之神奇的位运算&description=&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/03/12/ACM之神奇的位运算/&name=ACM之神奇的位运算&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
 &lt;p&gt;位运算在很多领域中都有着广泛的应用，不管是在安全领域，如加解密，还是在开发领域，如寻址和嵌入式开发，还是在进行算法的优化上，都和位运算结合的非常紧密，今天就来看看ACM中巧妙用到位运算的一些经典题目吧。&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
@@ -274,6 +260,8 @@ use scanf to avoid Time Limit Exceeded</p>
           <li><a href="/archives/">Writing</a></li>
          
           <li><a href="https://github.com/Peterpan0927">Github</a></li>
+         
+          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
         
       </ul>
     </nav>
