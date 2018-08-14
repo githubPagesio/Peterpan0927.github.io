@@ -96,7 +96,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/about.html">
+                <a href="/about">
                     About
                 </a>
             </li>
@@ -165,17 +165,19 @@
         
 
         <!-- Post Content -->
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8810.40.46.png" height="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8810.40.46.png" height="350" width="600" alt="">
 <p>在初步上手了所有的工具之后，我们就需要来实战检测一下了，今天我以修改截屏功能和QQ的一些逆向经验来做一些小小的分享。</p>
 <a id="more"></a>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在开始学习iOS逆向的人一般都会有正向开发的基础，那么我们会发现大部分Tweak当中都是用的MRC去编译OC文件，我们写的一些Tweak同样也要遵守这样的规则，但是这样会对一些已经熟悉ARC的程序猿带来很大的困扰，这里就简述一下如何使用ARC去编译OC文件：</p>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>现在开始学习iOS逆向的人一般都会有正向开发的基础，那么我们会发现大部分Tweak当中都是用的MRC去编译OC文件，我们写的一些Tweak同样也要遵守这样的规则，但是这样会对一些已经熟悉ARC的程序猿带来很大的困扰，这里就简述一下如何使用ARC去编译OC文件：</p>
 <p>我们只需要在Theos工程的MakeFile中添加一句话即可：</p>
 <blockquote>
 <p>ADDITIONAL_OBJFLAGS = -fobjc-arc</p>
 </blockquote>
 <p>后面的参数其实和我之前在讲MRC的时候在Xcode中添加的编译参数其实是一样的，那么类比过来就很简单了。</p>
-<p>另外在熟悉了工具之后我也看过别人写的一些Tweak，主要是由C/C++、OC写的，其中所用的一些语法需要有一定的C++基础，比如说会经常出现<code>extern &quot;C&quot;...</code>这样的语句，所以推荐最好有扎实的C基础和C++入门并且具备一定的正向开发和汇编基础再去进行逆向的学习，不然一定会很痛苦的。</p>
-<h1 id="美化截屏"><a href="#美化截屏" class="headerlink" title="美化截屏"></a>美化截屏</h1><p>当我们看到手机截屏的时候，是否可以想到可以自动的调整保存图片或着不保存，有没有想过切屏的时候可以做一些自己的小DIY来去美化这个过程，那么我们就来一起看看吧。</p>
+<p>另外在熟悉了工具之后我也看过别人写的一些Tweak，主要是由C/C++、OC写的，其中所用的一些语法需要有一定的C<ins>基础，比如说会经常出现<code>extern &quot;C&quot;...</code>这样的语句，所以推荐最好有扎实的C基础和C</ins>入门并且具备一定的正向开发和汇编基础再去进行逆向的学习，不然一定会很痛苦的。</p>
+<h1 id="美化截屏"><a class="markdownIt-Anchor" href="#美化截屏"></a> 美化截屏</h1>
+<p>当我们看到手机截屏的时候，是否可以想到可以自动的调整保存图片或着不保存，有没有想过切屏的时候可以做一些自己的小DIY来去美化这个过程，那么我们就来一起看看吧。</p>
 <p>首先我们要知道截屏是SpringBoard在控制的，于是乎我们的第一步是从头文件开始分析，class-dump出头文件之后:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-04%20%E4%B8%8B%E5%8D%8811.03.45.png" alt=""></p>
 <p>可以看到有接近1300个头文件，如果我们每个每个看那还不得累死啊，于是乎我们想到因为是寻找截屏函数，在OC中的易读性是非常高的，所以我们选择使用<code>grep</code>去做一下模式匹配:</p>
@@ -199,7 +201,8 @@
 <p>注意如果我们用的是MRC去编译的话就必须采用上面这种写法，如果使用下面这种写法必须要在MakeFile中加入ARC的编译参数，不然每一次截屏都会调用的是同一个UIColor对象，那么颜色也会是一样的，就不是随机了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">%hook SBScreenFlash</div><div class="line"></div><div class="line">- (void)flashColor:(UIColor *)color withCompletion:(id)arg2&#123;</div><div class="line">  int R = (arc4random() % 256) ;</div><div class="line">  int G = (arc4random() % 256) ;</div><div class="line">  int B = (arc4random() % 256) ;</div><div class="line">  UIColor *to = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];</div><div class="line">  %orig(to, nil);</div><div class="line">&#125;</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure>
 <p>这是因为在MRC中用完一个对象之后要向他发送<code>release</code>消息，不然它将一直的滞留在内存之中，之后SpringBoard挂掉之后才会被回收。虽然不太清楚底层实现，所以我猜测MRC编译的时候每一次都会调用上一次的对象，第一次随机出来什么颜色就是什么颜色，之后respring之后才会改变，根据我的测试也确实如此，加了arc编译之后就可以正常的random啦。所以这是一个需要注意的小点，当然如果有谁知道了它的底层实现是如何导致这样的结果，可以在我的博客下方进行留言。</p>
-<h1 id="对QQ的逆向分析"><a href="#对QQ的逆向分析" class="headerlink" title="对QQ的逆向分析"></a>对QQ的逆向分析</h1><p>只是玩一下截屏当然不能满足我们的好奇心，于是我又将手伸向了企鹅，但是企鹅是从StoreApp中下载的应用，所以首先应该砸壳，砸壳之后才能dump出他的头文件，但是dump之后发现出来了两个根本没用的头文件，所以class-dump也不是万能的，这个时候并不能止步，因为之前写过类似的IM类App，加上还有Reveal对其UI分析，所以我决定硬刚：</p>
+<h1 id="对qq的逆向分析"><a class="markdownIt-Anchor" href="#对qq的逆向分析"></a> 对QQ的逆向分析</h1>
+<p>只是玩一下截屏当然不能满足我们的好奇心，于是我又将手伸向了企鹅，但是企鹅是从StoreApp中下载的应用，所以首先应该砸壳，砸壳之后才能dump出他的头文件，但是dump之后发现出来了两个根本没用的头文件，所以class-dump也不是万能的，这个时候并不能止步，因为之前写过类似的IM类App，加上还有Reveal对其UI分析，所以我决定硬刚：</p>
 <p>中间省略一长串在<code>cycript</code>中的测试过程，其实主要是测试控制器之间的关系，果然不出我所料，主界面是采用的抽屉控制器，然后是一个TabBarVc，里面有三个<code>UINavigationController</code>，然后每个Vc中又套着自定义的控制器，把这些都给撸顺了之后，就可以使用一下我们的黑魔法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMethods</span>(<span class="params">className</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> count = <span class="keyword">new</span> <span class="keyword">new</span> Type(<span class="string">"I"</span>);</div><div class="line">  <span class="keyword">var</span> methods = class_copyMethodList(objc_getClass(className), count);</div><div class="line">  <span class="keyword">var</span> methodsArray = [];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; *count; i++) &#123;</div><div class="line">    <span class="keyword">var</span> method = methods[i];</div><div class="line">    methodsArray.push(&#123;<span class="attr">selector</span>:method_getName(method), <span class="attr">implementation</span>:method_getImplementation(method)&#125;);</div><div class="line">  &#125;</div><div class="line">  free(methods);</div><div class="line">  free(count);</div><div class="line">  <span class="keyword">return</span> methodsArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>通过这个类我们可以获取一个类的所有方法，但是这个并不是万能的，随意使用会导致程序crash掉，在这里我就不对整个QQ做介绍了，只分析一下<code>DrawerViewController</code></p>
@@ -313,7 +316,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/peterpan980927">
+                        <a href="https://twitter.com/?lang=en">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>
@@ -398,7 +401,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="footer-copyright">
-                    @Untitled. All right res$erved | Design & Hexo
+                    @Untitled. All right reserved | Design & Hexo
                 </div>
             </div>
         </div>

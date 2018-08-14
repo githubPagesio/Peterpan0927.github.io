@@ -96,7 +96,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/about.html">
+                <a href="/about">
                     About
                 </a>
             </li>
@@ -167,7 +167,8 @@
         <!-- Post Content -->
         <p>学过汇编的同学都知道所谓的变量只是一段存储在内存空间中的数据，而它到底是什么类型取决于我们到底以什么样的角度去看他，那么在OC中，这些变量和值又是如何评判的，又是以什么样的方式进行着转换</p>
 <a id="more"></a>
-<h1 id="Type和value的本质"><a href="#Type和value的本质" class="headerlink" title="Type和value的本质"></a>Type和value的本质</h1><p>类型其实是个很虚的东西，因为这个东西的价值被我们人为赋予的，打个比方，如果我们大家都认为香奈儿值钱，那么它就值钱，如果大家都不用这个，那么它本身就是没有价值的。其实从头到尾这个物品的本身都没有改变过，只是我们看它的方式不同，同样，类型也是一样的：</p>
+<h1 id="type和value的本质"><a class="markdownIt-Anchor" href="#type和value的本质"></a> Type和value的本质</h1>
+<p>类型其实是个很虚的东西，因为这个东西的价值被我们人为赋予的，打个比方，如果我们大家都认为香奈儿值钱，那么它就值钱，如果大家都不用这个，那么它本身就是没有价值的。其实从头到尾这个物品的本身都没有改变过，只是我们看它的方式不同，同样，类型也是一样的：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> c=<span class="number">3</span>;</div><div class="line"><span class="keyword">char</span> a=(<span class="keyword">char</span>)c;</div></pre></td></tr></table></figure>
 <p>这个C语言中的强制类型转换从高层语言上来说是从一种类型转换成一种类型，那么底层是什么样的呢，首先我们从x86_64的汇编来一窥究竟：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">movl $123, -4(%rbp)</div><div class="line">movl -4(%rbp), %eax</div><div class="line">movb %al, %cl</div><div class="line">movb %cl, -5(%rbp)</div></pre></td></tr></table></figure>
@@ -176,7 +177,8 @@
 <p>然后我们将这个数转移到<code>eax</code>寄存器中，然后将低八位也就是代表着<code>char</code>类型的数据转移到<code>ecx</code>寄存器的低八位，最后将这个<code>char</code>类型的数据转移到栈基地址偏移5字节的位置处，这个时候内存图就是：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-04-15%20%E4%B8%8B%E5%8D%886.50.23.png" alt="强转之后"></p>
 <p>对于静态语言来说，可能这个类型就是提供给编译器检查，还包括寄存器选用，栈空间分配等功能，但是对于动态语言来说，这个类型需要保存到进行时，然后在用的时候再进行判断，所以在这里我们就需要引入一个新的概念就是<code>Type Encoding</code></p>
-<h1 id="Type-Encoding"><a href="#Type-Encoding" class="headerlink" title="Type Encoding"></a>Type Encoding</h1><p>首先我们知道OC中的<code>NSValue</code>类是用来存储一个C或者OC数据的容器，它可以保存<code>int</code>、<code>float</code>、<code>pointer</code>等类型的数据，对于它们进行一个封装，其实这个类可以称作是轻量级的包装冠军，因为上一章中我们说过OC是在C的基础上利用<code>SmallTalk</code>的思想的一次拓展，所以那些类其实是就是将C语言中的基础类型包装起来，而<code>NSNumber</code>用来包装的是标量，<code>NSValue</code>则都可以，我个人觉得可以参考一下<code>java</code>中的包装类。</p>
+<h1 id="type-encoding"><a class="markdownIt-Anchor" href="#type-encoding"></a> Type Encoding</h1>
+<p>首先我们知道OC中的<code>NSValue</code>类是用来存储一个C或者OC数据的容器，它可以保存<code>int</code>、<code>float</code>、<code>pointer</code>等类型的数据，对于它们进行一个封装，其实这个类可以称作是轻量级的包装冠军，因为上一章中我们说过OC是在C的基础上利用<code>SmallTalk</code>的思想的一次拓展，所以那些类其实是就是将C语言中的基础类型包装起来，而<code>NSNumber</code>用来包装的是标量，<code>NSValue</code>则都可以，我个人觉得可以参考一下<code>java</code>中的包装类。</p>
 <p>其中<code>NSValue</code>类有一个<code>+valueWithBytes:objCType:</code>方法，它的第二个参数需要用 Objective-C 的编译器指令 <code>@encode()</code> 来创建，比如我们首先来封装一个C语言的<code>int</code>类型，再将它赋值回去打印：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int b =1;</div><div class="line">int *a=&amp;b;</div><div class="line">NSValue *value = [NSValue valueWithBytes:a objCType:@encode(int)];</div><div class="line">int c;</div><div class="line">[value getValue:&amp;c];</div><div class="line">NSLog(@&quot;%d&quot;,c);</div></pre></td></tr></table></figure>
 <p>在这里可以说一个有意思的事情，如果我们是一个<code>char</code>类型的字符串，然后传递是这个字符串本身，然后encode是<code>char *</code>类型，那么它就会当作一个<code>char</code>类型的指针保存，也就是只有四个字节(根据具体系统)，后面的就会丢失，如果要保存完整性，我们就要传递这个字符串的地址，这样再还原的时候相当于是把那个字符串的地址给赋值回去，所以也不会出现什么问题了。</p>
@@ -189,7 +191,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">typedef struct example&#123;</div><div class="line">  id anObject;</div><div class="line">  char *aString;</div><div class="line">  int anInt;</div><div class="line">&#125;Example;</div><div class="line">//那么编码就可以表示成</div><div class="line">&#123;example=@*i&#125;</div></pre></td></tr></table></figure>
 <p>然而，对于动态语言，Type 不仅在编译期起到上述作用，<strong>还需要保留到运行时，让动态调用得以实现</strong>，被称作 <code>Type Encodings</code>，对于 Objective-C 所有 Type 的编码，都可以在<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html" target="_blank" rel="external">这个官方文档</a>中查到，里面的编码和用 <code>@encode()</code> 生成的一致，比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@encode(int) =&gt; &quot;i&quot;</div><div class="line">@encode(float) =&gt; &quot;f&quot;</div><div class="line">@encode(id) =&gt; &quot;@&quot;</div><div class="line">@encode(SEL) =&gt; &quot;:&quot;</div><div class="line">@encode(CGRect) =&gt; &quot;&#123;CGRect=&#123;CGPoint=dd&#125;&#123;CGSize=dd&#125;&#125;&quot; // 64</div></pre></td></tr></table></figure>
-<p>Objective-C Class 中每个实例变量的 Type 信息全部被编码，Runtime 也提供了 <code>ivar_getTypeEncoding</code> 来访问。<br>同时，为支持消息的转发和动态调用，Objective-C Method 的 Type 信息也被以 “返回值 Type + 参数 Types” 的形式<strong>组合编码</strong>，还需要考虑到 <code>self</code> 和 <code>_cmd</code> 这两个隐含参数：</p>
+<p>Objective-C Class 中每个实例变量的 Type 信息全部被编码，Runtime 也提供了 <code>ivar_getTypeEncoding</code> 来访问。<br>
+同时，为支持消息的转发和动态调用，Objective-C Method 的 Type 信息也被以 “返回值 Type + 参数 Types” 的形式<strong>组合编码</strong>，还需要考虑到 <code>self</code> 和 <code>_cmd</code> 这两个隐含参数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (void)foo; =&gt; &quot;v@:&quot;</div><div class="line">- (int)barWithBaz:(double)baz; =&gt; &quot;iv@:d&quot;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>注：上面的方法的 Encoding 使用新的格式，旧的格式中包含调用栈大小和布局信息，如 <code>i24@0:8i16i20</code>，表示调用栈帧共 24 字节大小，后面每个参数跟着的数字表示该参数在调用栈的偏移值，在 x86_64 和 ARM 成为主流后，调用的 Calling Conventions 发生巨大变化，开始借助寄存器传参，所以在“参数压栈”时代的这种编码方式逐渐被废弃。</p>
@@ -197,7 +200,8 @@
 <p>方法的编码可以使用 <code>method_getTypeEncoding</code> 获取，在 Cocoa 层，被 <code>NSMethodSignature</code> 封装，并提供了一些便捷的解析方法。</p>
 <p>多说一句，纯 Swift 声称自己是静态的语言，因为在编译后，任何结构都会被 <code>Name Mangling</code> 压缩成一个符号，比如下面的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class Sark &#123;</div><div class="line">    func foo(bar: Int) -&gt; Int &#123;</div><div class="line">        return bar;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><ul>
+<h1 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h1>
+<ul>
 <li><a href="http://blog.sunnyxx.com/2016/08/13/reunderstanding-runtime-1/" target="_blank" rel="external">sunny的技术博客</a></li>
 <li><a href="http://nshipster.cn/type-encodings/" target="_blank" rel="external">Type Encodings</a></li>
 </ul>
@@ -302,7 +306,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/peterpan980927">
+                        <a href="https://twitter.com/?lang=en">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>
@@ -387,7 +391,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="footer-copyright">
-                    @Untitled. All right res$erved | Design & Hexo
+                    @Untitled. All right reserved | Design & Hexo
                 </div>
             </div>
         </div>

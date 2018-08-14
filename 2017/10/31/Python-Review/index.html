@@ -96,7 +96,7 @@
             </li>
             
             <li class="menu-item">
-                <a href="/about.html">
+                <a href="/about">
                     About
                 </a>
             </li>
@@ -167,16 +167,19 @@
         <!-- Post Content -->
         <p>也算是几个月没正经写过python了，是时候重拾这把宝刀了</p>
 <a id="more"></a>
-<h2 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00-前言"></a>0X00-前言</h2><p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
+<h2 id="0x00-前言"><a class="markdownIt-Anchor" href="#0x00-前言"></a> 0X00-前言</h2>
+<p>首先就是python这个东西广度太大，其次也是当初学python的时候不是系统的学习，导致现在有些东西还是不清楚，所以从初级的到高级特性对着廖雪峰的博客重新看了一遍，并补充一下自己的遗漏点。</p>
 <hr>
-<h2 id="0X01-Python基础部分"><a href="#0X01-Python基础部分" class="headerlink" title="0X01-Python基础部分"></a>0X01-Python基础部分</h2><h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
+<h2 id="0x01-python基础部分"><a class="markdownIt-Anchor" href="#0x01-python基础部分"></a> 0X01-Python基础部分</h2>
+<h3 id="编码"><a class="markdownIt-Anchor" href="#编码"></a> 编码</h3>
+<p>为了解决各种之间转换而出现乱码的原因，Unicode应运而生，Unicode把所有的语言都统一到一套编码中，Unicode的标准也是在不断的发展，最常用的是两个字节表示一个字符（如果要用到非常偏僻的字符，就需要四个字节）</p>
 <p>现在，捋一捋ASCII编码和Unicode编码的区别：ASCII编码是1个字节，而Unicode编码通常是2个字节。</p>
 <p>字母<code>A</code>用ASCII编码是十进制的<code>65</code>，二进制的<code>01000001</code>；</p>
-<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>&#39;0&#39;</code>和整数<code>0</code>是不同的；</p>
+<p>字符<code>0</code>用ASCII编码是十进制的<code>48</code>，二进制的<code>00110000</code>，注意字符<code>'0'</code>和整数<code>0</code>是不同的；</p>
 <p>汉字<code>中</code>已经超出了ASCII编码的范围，用Unicode编码是十进制的<code>20013</code>，二进制的<code>01001110 00101101</code>。</p>
 <p>你可以猜测，如果把ASCII编码的<code>A</code>用Unicode编码，只需要在前面补0就可以，因此，<code>A</code>的Unicode编码是<code>00000000 01000001</code>。</p>
 <p>新的问题又出现了：如果统一成Unicode编码，乱码问题从此消失了。但是，如果你写的文本基本上全部是英文的话，用Unicode编码比ASCII编码需要多一倍的存储空间，在存储和传输上就十分不划算。</p>
-<p>所以，本着节约的精神，又出现了把Unicode编码转化为”可变长编码””的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
+<p>所以，本着节约的精神，又出现了把Unicode编码转化为&quot;可变长编码&quot;&quot;的<code>UTF-8</code>编码。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。如果你要传输的文本包含大量英文字符，用UTF-8编码就能节省空间：</p>
 <table>
 <thead>
 <tr>
@@ -208,7 +211,8 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-31%20%E4%B8%8B%E5%8D%885.11.16.png" alt=""></p>
 <p>那么这个时候可能会有人问为什么在内存中使用Unicode呢，全部使用UTF-8岂不是更好么，这个时候参照知乎上的答案来说应该是内存存储字节流的时候，字符不定长会给算法带来麻烦。比如说我们无法确定第2000个字符从哪里开始，所以会采用Unicode,而在存储的时候，自然是选择不定长的UTF-8了，这里还是扔出一个<a href="https://www.zhihu.com/question/52346583" target="_blank" rel="external">链接</a>。</p>
 <p>还有一点需要注意的就是python3和python2的字符串编码差别还是挺大的，可以自行查阅一番。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
+<h3 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h3>
+<p>接下来再来说说字符串的问题,python3中字符串使用的是Uncode编码，python2是ASCII，但是可以在配置做修改。</p>
 <p>对于单个的字符串，python提供了<code>ord()</code>函数获取字符的整型表示，<code>chr()</code>函数将编码转换为对应的字符串</p>
 <p>如果知道字符的整数编码，还可以使用十六进制写：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'\u4e2d\u6587'</span></div><div class="line"><span class="string">'中文'</span></div></pre></td></tr></table></figure>
@@ -216,9 +220,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'ABC'</span>.encode(<span class="string">'ascii'</span>)</div><div class="line"><span class="string">b'ABC'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span></div></pre></td></tr></table></figure>
 <p>中文无法使用<code>ASCII</code>编码，因为这已经超过了其编码的范围，反过来，如果我们从网络或磁盘上读取了字节流，那么读到的数据就是<code>bytes</code>。要把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'ABC'</span>.decode(<span class="string">'ascii'</span>)</div><div class="line"><span class="string">'ABC'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'中文'</span></div></pre></td></tr></table></figure>
-<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>&#39;xx.x%&#39;</code>，只保留小数点后1位：</p>
+<p>关于格式修饰符部分就用一个小demo来代替吧，用字符串格式化显示出<code>'xx.x%'</code>，只保留小数点后1位：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">'%.1f%%'</span> %((s2-s1)/s1*<span class="number">100</span>))</div></pre></td></tr></table></figure>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
+<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
+<p>set和dict类似，也是一组key的集合。但是不存储value。而且key值不能重复</p>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</div></pre></td></tr></table></figure>
 <p>注意，传入的参数是一个list，只是表明这个set内部有这几个元素，现实的顺序也不表示set是有序的，重复的元素会在set中被自动过滤掉，使用<code>add(key)</code>方法可以添加元素到set中，<code>remove(key)</code>来删除元素，当然也可以重复添加，但是不会有效果：</p>
@@ -228,7 +233,8 @@
 <p>这里有一个在评论区需要注意的点，可以拿出来说一下，在给set函数传参的时候，以下几种情况：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = set((<span class="number">1</span>,[<span class="number">2</span>, <span class="number">3</span>]))</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: unhashable type: <span class="string">'list'</span></div></pre></td></tr></table></figure>
 <p>那么这种情况到底是为什么呢？是因为set不接受可变参数，可能有人要问了，列表就是可变参数啊，列表在赋值给s的时候是将列表中的每个元素作为value赋值进去的，str是不可变对象，而在第三种情况下参数内有一个是列表，所以就会失败，如果把[2, 3]改为（2，3）就可以成功了。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
+<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
+<p>函数部分只有两个想说的，一个就是函数参数的问题，还有一个就是递归：</p>
 <ol>
 <li>可变参数</li>
 </ol>
@@ -240,7 +246,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(*numbers)</span>:</span></div><div class="line">    sum = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</div><div class="line">        sum = sum + n * n</div><div class="line">    <span class="keyword">return</span> sum</div><div class="line"><span class="comment">#执行函数</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line"><span class="number">14</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>)</div><div class="line"><span class="number">84</span></div></pre></td></tr></table></figure>
 <p>如果已经有一个list或者tuple，要调用一个可变参数怎么办？虽然可以使用下标一个个传，但是这样未免过于麻烦，所以Python允许在列表或者元组前面加一个<code>*</code>，把list或turple作为可变参数传递进去：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>calc(*nums)</div><div class="line"><span class="number">14</span></div></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>关键字参数</li>
 </ol>
 <p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：</p>
@@ -255,7 +261,7 @@
 <p>当然，上面复杂的调用可以用简化的写法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>extra = &#123;<span class="string">'city'</span>: <span class="string">'Beijing'</span>, <span class="string">'job'</span>: <span class="string">'Engineer'</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>person(<span class="string">'Jack'</span>, <span class="number">24</span>, **extra)</div><div class="line">name: Jack age: <span class="number">24</span> other: &#123;<span class="string">'city'</span>: <span class="string">'Beijing'</span>, <span class="string">'job'</span>: <span class="string">'Engineer'</span>&#125;</div></pre></td></tr></table></figure>
 <p><code>**extra</code>表示把<code>extra</code>这个dict的所有key-value用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个dict，注意<code>kw</code>获得的dict是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
-<ol>
+<ol start="3">
 <li>命名关键字参数</li>
 </ol>
 <p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过<code>kw</code>检查。</p>
@@ -280,14 +286,16 @@
 <p>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<code>*</code>作为特殊分隔符。如果缺少<code>*</code>，Python解释器将无法识别位置参数和命名关键字参数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, city, job)</span>:</span></div><div class="line">    <span class="comment"># 缺少 *，city和job被视为位置参数</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
 <p>Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
-<ol>
+<ol start="4">
 <li>递归函数</li>
 </ol>
 <p>递归函数也就是在函数内部调用自身，这里使用一个汉诺塔问题帮助理解，丢个代码就跑：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(n, a, b, c)</span>:</span></div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</div><div class="line">        print(a, <span class="string">'--&gt;'</span>, c)    <span class="comment"># 这是汉诺塔的正确玩法! </span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        move(n - <span class="number">1</span>, a, c, b)</div><div class="line">        move(<span class="number">1</span>, a, b, c)</div><div class="line">        move(n - <span class="number">1</span>, b, a, c)</div><div class="line"><span class="comment">#其实写出这个函数只需要搞清楚三步即可</span></div><div class="line"><span class="comment">#1. 除最后一层移至B</span></div><div class="line"><span class="comment">#2. 最后一层移至C</span></div><div class="line"><span class="comment">#3. 复原至C</span></div></pre></td></tr></table></figure>
 <hr>
-<h2 id="0X02-Python高级特性"><a href="#0X02-Python高级特性" class="headerlink" title="0X02-Python高级特性"></a>0X02-Python高级特性</h2><p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
-<h3 id="切片和列表生成式："><a href="#切片和列表生成式：" class="headerlink" title="切片和列表生成式："></a>切片和列表生成式：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>L = [<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>, <span class="string">'lanlanlu'</span>]</div></pre></td></tr></table></figure>
+<h2 id="0x02-python高级特性"><a class="markdownIt-Anchor" href="#0x02-python高级特性"></a> 0X02-Python高级特性</h2>
+<p>说到python的高级特性，那么就不得不提他的切片和列表生成式了，众所周知，python以它简洁的语法和广泛的用途而闻名。那么python到底能如何去优化我们的代码呢？首先就来说一下切片吧，取一个列表或者元组的部分元素是我们经常会使用到的操作：</p>
+<h3 id="切片和列表生成式"><a class="markdownIt-Anchor" href="#切片和列表生成式"></a> 切片和列表生成式：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>L = [<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>, <span class="string">'lanlanlu'</span>]</div></pre></td></tr></table></figure>
 <p>对于这样的一个列表，我们需要取前三个元素应该怎么操作呢：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#第一种当然可以使用传统的方式</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>[ L[<span class="number">0</span>], L[<span class="number">1</span>], L[<span class="number">2</span>] ]</div><div class="line">[<span class="string">'Tom'</span>, <span class="string">'Jerry'</span>, <span class="string">'阿福'</span>]</div><div class="line"><span class="comment">#或者使用循环的方式</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>r = []</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = <span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line"><span class="meta">... </span>    r.append(L[i])</div></pre></td></tr></table></figure>
 <p>对这种经常取指定索引范围的操作用循环非常的繁琐，在学习完切片(Slice)之后我们会使用更简单的方式:</p>
@@ -314,11 +322,13 @@
 <p>我们还可以使用二层循环，并且加上判断，这样就可以完全代替了冗长的for循环语法了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>[m+n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABCDEFG'</span> <span class="keyword">if</span> m !=<span class="string">'D'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'!@$#%^*&amp;'</span> <span class="keyword">if</span> n != <span class="string">'^'</span>]</div><div class="line">[<span class="string">'A!'</span>, <span class="string">'A@'</span>, <span class="string">'A$'</span>, <span class="string">'A#'</span>, <span class="string">'A%'</span>, <span class="string">'A*'</span>, <span class="string">'A&amp;'</span>, <span class="string">'B!'</span>, <span class="string">'B@'</span>, <span class="string">'B$'</span>, <span class="string">'B#'</span>, <span class="string">'B%'</span>, <span class="string">'B*'</span>, <span class="string">'B&amp;'</span>, <span class="string">'C!'</span>, <span class="string">'C@'</span>, <span class="string">'C$'</span>, <span class="string">'C#'</span>, <span class="string">'C%'</span>, <span class="string">'C*'</span>, <span class="string">'C&amp;'</span>, <span class="string">'E!'</span>, <span class="string">'E@'</span>, <span class="string">'E$'</span>, <span class="string">'E#'</span>, <span class="string">'E%'</span>, <span class="string">'E*'</span>, <span class="string">'E&amp;'</span>, <span class="string">'F!'</span>, <span class="string">'F@'</span>, <span class="string">'F$'</span>, <span class="string">'F#'</span>, <span class="string">'F%'</span>, <span class="string">'F*'</span>, <span class="string">'F&amp;'</span>, <span class="string">'G!'</span>, <span class="string">'G@'</span>, <span class="string">'G$'</span>, <span class="string">'G#'</span>, <span class="string">'G%'</span>, <span class="string">'G*'</span>, <span class="string">'G&amp;'</span>]</div></pre></td></tr></table></figure>
 <p>还可以通过列表生成式将列表中的字母换成小写或者转换写法等等操作，根据需求可以灵活的调整。</p>
-<h3 id="生成器和迭代器"><a href="#生成器和迭代器" class="headerlink" title="生成器和迭代器"></a>生成器和迭代器</h3><p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
+<h3 id="生成器和迭代器"><a class="markdownIt-Anchor" href="#生成器和迭代器"></a> 生成器和迭代器</h3>
+<p>最后介绍的一点就是生成器和迭代器了，关于生成器(generator)要记住的只有一点就是一般函数是顺序执行，遇到<code>return</code>语句或者最后一行函数语句就返回。而变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从<strong>上次</strong>返回的<code>yield</code>语句处继续执行，for循环的本质就是在不断的调用<code>next()</code>函数。</p>
 <p>而关于迭代器，我们可以了解到所有可以被<code>nex()</code>函数不断调用并返回下一个值的都是一个迭代器。这里有一个误区，那就是诸如list、tuple之类的虽然是可迭代对象，但不是迭代器。那么这是为什么呢</p>
 <p>这是因为Python的<code>Iterator</code>对象表示的是一个数据流，Iterator对象可以被<code>next()</code>函数调用并不断返回下一个数据，直到没有数据时抛出<code>StopIteration</code>错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过<code>next()</code>函数实现按需计算下一个数据，所以<code>Iterator</code>的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
 <p><code>Iterator</code>甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
+<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
+<ol>
 <li>凡是可以作用于<code>for</code>循环的都是可迭代对象</li>
 <li>凡是可作用于<code>next()</code>函数的对象都是迭代器类型，它们表示一个惰性计算的序列。</li>
 <li>集合数据类型如<code>list</code>、<code>dict</code>、<code>str</code>等是<code>Iterable</code>但不是<code>Iterator</code>，不过可以通过<code>iter()</code>函数获得一个<code>Iterator</code>对象。</li>
@@ -428,7 +438,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/peterpan980927">
+                        <a href="https://twitter.com/?lang=en">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>
@@ -513,7 +523,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="footer-copyright">
-                    @Untitled. All right res$erved | Design & Hexo
+                    @Untitled. All right reserved | Design & Hexo
                 </div>
             </div>
         </div>
