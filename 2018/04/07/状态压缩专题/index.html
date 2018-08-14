@@ -1,179 +1,141 @@
 <!DOCTYPE html>
-<html lang=Ch>
+<html lang="en">
+
+<!-- Head tag -->
 <head>
-    <!-- so meta -->
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)">
-<meta property="og:type" content="article">
-<meta property="og:title" content="状态压缩专题">
-<meta property="og:url" content="https://peterpan980927.cn/2018/04/07/状态压缩专题/index.html">
-<meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
-<meta property="og:updated_time" content="2018-04-08T15:19:00.132Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="状态压缩专题">
-<meta name="twitter:description" content="在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)">
-<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
     
+        <meta name="description" content="how to reach the steins gate?">
     
-        
-          
-              <link rel="shortcut icon" href="/images/P.png">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
+
+    <!--Author-->
     
-    <!-- title -->
-    <title>状态压缩专题</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+        <meta name="author" content="Peter pan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="状态压缩专题"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="how to reach the steins gate?" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Peterpan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>状态压缩专题 - Peterpan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <!-- rss -->
+
+    <!-- Google Analytics -->
     
-    
-    <!-- jquery -->
-    <script src="/lib/jquery/jquery.min.js"></script>
+
+
 </head>
 
+
 <body>
-    <div class="banner">
-<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
-<ul id="wrapper" class="wrapper">
-  <div class="sun">
-    <div class="star"></div>
-  </div>
-  <div class="mercury">
-    <div class="planet">
-      <div class="shadow"></div>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+        </ul>
     </div>
-  </div>
-  <div class="venus">
-    <div class="planet">
-      <div class="shadow"></div>
-    </div>
-  </div>
-  <div class="earth">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-  <div class="mars">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-  <div class="jupiter">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-</ul>
 </div>
 
-    <div class="background">
-      
-        <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2018/04/11/数位dp/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
-        
-        
-        <li><a class="icon" href="/2018/04/02/背包专题/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/04/07/状态压缩专题/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&text=状态压缩专题"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&is_video=false&description=状态压缩专题"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=状态压缩专题&body=Check out this article: https://peterpan980927.cn/2018/04/07/状态压缩专题/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&name=状态压缩专题&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
-&lt;p&gt;在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
 
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa " aria-hidden="true"></i></a>
+        
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#状压之铺砖块"><span class="toc-number">1.</span> <span class="toc-text">状压之铺砖块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#状态压缩之牛吃草"><span class="toc-number">2.</span> <span class="toc-text">状态压缩之牛吃草</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#状态压缩之炮兵阵地"><span class="toc-number">3.</span> <span class="toc-text">状态压缩之炮兵阵地</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#POJ-1234"><span class="toc-number">4.</span> <span class="toc-text">POJ_1234</span></a></li></ol>
-    </div>
-  </span>
-</div>
+</header>
 
-      
-      <div class="content index width mx-auto px2 my4">
-          
-          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        状态压缩专题
-    </h1>
+        <section class="main">
+            
+<div class="post">
 
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Peterpan's Blog</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2018-04-07T07:58:38.000Z" itemprop="datePublished">2018-04-07</time>
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/04/07/状态压缩专题/">
+                状态压缩专题
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-07</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/状态压缩/">状态压缩</a>
+                </span>
+            
+        </div>
     </div>
 
+    <div class="content">
 
-      
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/ACM/">ACM</a>
-    </div>
+        <!-- Gallery -->
+        
 
-
-    </div>
-  </header>
-  
-
-  <div class="content" itemprop="articleBody">
-    <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+        <!-- Post Content -->
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
 <p>在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)</p>
 <a id="more"></a>
 <h1 id="状压之铺砖块"><a href="#状压之铺砖块" class="headerlink" title="状压之铺砖块"></a>状压之铺砖块</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">有一个N*M(N&lt;=5,M&lt;=1000)的棋盘，现在有1*2及2*1的小木块无数个，要盖满整个棋盘，有多少种方式？答案只需要mod1,000,000,007即可。</div><div class="line"></div><div class="line">例如：对于一个2*2的棋盘，有两种方法，一种是使用2个1*2的，一种是使用2个2*1的。</div></pre></td></tr></table></figure>
@@ -189,92 +151,136 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">int</span> n,m,sta[<span class="number">105</span>];</div><div class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">105</span>];</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">105</span>][<span class="number">65</span>][<span class="number">65</span>];</div><div class="line"><span class="keyword">char</span> s[<span class="number">15</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span>((x&amp;(x&lt;&lt;<span class="number">1</span>))!=<span class="number">0</span> || (x&amp;(x&lt;&lt;<span class="number">2</span>))!=<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> su = <span class="number">0</span>;</div><div class="line">  x = sta[x];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)</div><div class="line">    <span class="keyword">if</span>(((<span class="number">1</span>&lt;&lt;i)&amp;x)!=<span class="number">0</span>) su++;</div><div class="line">  <span class="keyword">return</span> su;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (s[j]==<span class="string">'H'</span>)</div><div class="line">            <span class="built_in">map</span>[i]+=(<span class="number">1</span>&lt;&lt;j);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  <span class="keyword">int</span> tot = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; (<span class="number">1</span> &lt;&lt; m) ; i++)&#123;</div><div class="line">    <span class="keyword">if</span>(judge(i))&#123;</div><div class="line">      tot++;</div><div class="line">      sta[tot] = i;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">memset</span>(dp, <span class="number">0</span> , <span class="keyword">sizeof</span>(dp));</div><div class="line">  <span class="comment">//初始化dp数组第一行</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= tot ; i++)</div><div class="line">    <span class="keyword">if</span>((<span class="built_in">map</span>[<span class="number">1</span>]&amp;sta[i])==<span class="number">0</span>)</div><div class="line">      dp[<span class="number">1</span>][i][<span class="number">1</span>] = sum(i);</div><div class="line">  </div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)</div><div class="line">    <span class="comment">//i-2行的状态</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= tot ; j++)&#123;</div><div class="line">      <span class="keyword">if</span>((<span class="built_in">map</span>[i<span class="number">-2</span>]&amp;sta[j])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">      <span class="comment">//i-1行的状态</span></div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= tot ; k++)&#123;</div><div class="line">        <span class="keyword">if</span>((<span class="built_in">map</span>[i<span class="number">-1</span>]&amp;sta[k])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">if</span>((sta[k]&amp;sta[j])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="comment">//i行的状态</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">1</span> ; w&lt;= tot ; w++)&#123;</div><div class="line">          <span class="keyword">if</span>((<span class="built_in">map</span>[i]&amp;sta[w])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">          <span class="keyword">if</span>((sta[w]&amp;sta[k])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">          <span class="keyword">if</span>((sta[w]&amp;sta[j])!=<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">          dp[i][w][k] = max(dp[i][w][k], dp[i<span class="number">-1</span>][k][j]+sum(w));</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= tot ;i++ )</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j&lt;= tot ;j++ )&#123;</div><div class="line">      ans = max(dp[n][j][i],ans);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="POJ-1234"><a href="#POJ-1234" class="headerlink" title="POJ_1234"></a>POJ_1234</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxr = <span class="number">21</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxc = <span class="number">21</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> vis[maxr][maxc][<span class="number">1</span> &lt;&lt; <span class="number">14</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> maze[maxr][maxc];</div><div class="line"></div><div class="line"><span class="keyword">int</span> R,C;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Node&#123;</div><div class="line">  <span class="keyword">int</span> x,y;</div><div class="line">  <span class="keyword">int</span> st, dist;</div><div class="line">  Node(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> st, <span class="keyword">int</span> dist):x(x), y(y), st(st), dist(dist)&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">queue</span>&lt;Node&gt;Q;</div><div class="line"><span class="keyword">int</span> L;  </div><div class="line"><span class="keyword">int</span> kase=<span class="number">0</span>; </div><div class="line"><span class="keyword">int</span> dir[<span class="number">10</span>]; </div><div class="line"><span class="keyword">int</span> dx[]=&#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>&#125;; </div><div class="line"><span class="keyword">int</span> dy[]=&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, Node node)</span></span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=L<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)  </div><div class="line">    &#123;  </div><div class="line">        dir[i]=node.st&amp;<span class="number">3</span>;<span class="comment">//提取相对方向  </span></div><div class="line">        node.st&gt;&gt;=<span class="number">2</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">int</span> xx=node.x,yy=node.y;  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;L;i++)  </div><div class="line">    &#123;  </div><div class="line">        xx+= dx[dir[i]];  </div><div class="line">        yy+= dy[dir[i]];  </div><div class="line">        <span class="keyword">if</span>(xx==x&amp;&amp;yy==y) <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//表示冲突  </span></div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//表示无冲突  </span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">(Node node)</span></span>&#123;</div><div class="line">  kase++;</div><div class="line">  <span class="keyword">if</span>(node.x == <span class="number">1</span> &amp;&amp; node.y == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(!Q.empty()) Q.pop();</div><div class="line">  Q.push(node);</div><div class="line">  vis[node.x][node.y][node.st] = kase;</div><div class="line">  <span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">    Node node = Q.front();</div><div class="line">    Q.pop();</div><div class="line">    <span class="keyword">int</span> x = node.x, y=node.y, st=node.st,dist=node.dist;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> d = <span class="number">0</span> ; d &lt; <span class="number">4</span> ;d++)&#123;</div><div class="line">      <span class="keyword">int</span> nx = x+dx[d],ny = y+dy[d];</div><div class="line">      <span class="keyword">if</span>(nx == <span class="number">1</span> &amp;&amp; ny == <span class="number">1</span>) <span class="keyword">return</span> dist+<span class="number">1</span>;</div><div class="line">      <span class="keyword">if</span>(nx &lt; <span class="number">1</span> || nx&gt; R || ny &lt; <span class="number">1</span> || ny &gt; C || maze[nx][ny] == <span class="number">1</span> || check(nx, ny, node)) <span class="keyword">continue</span>;</div><div class="line">      <span class="keyword">int</span> ndist = dist + <span class="number">1</span>, nst = (st&gt;&gt;<span class="number">2</span>)+( ((d+<span class="number">2</span>)%<span class="number">4</span>)&lt;&lt;(<span class="number">2</span>*(L<span class="number">-2</span>)));</div><div class="line">      <span class="keyword">if</span>(vis[nx][ny][nst]==kase) <span class="keyword">continue</span>;</div><div class="line">      Q.push(Node(nx,ny,nst,ndist));</div><div class="line">      vis[nx][ny][nst]=kase;  </div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;R,&amp;C,&amp;L)==<span class="number">3</span>)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span>(R==<span class="number">0</span>&amp;&amp;C==<span class="number">0</span>&amp;&amp;L==<span class="number">0</span>) <span class="keyword">break</span>;  </div><div class="line">        <span class="keyword">int</span> x,y,nx,ny;  </div><div class="line">        <span class="function">Node <span class="title">node</span><span class="params">(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span></span>;  </div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;node.x,&amp;node.y);  </div><div class="line">        x=node.x,y=node.y;  </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;L;i++)  </div><div class="line">        &#123;  </div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;nx,&amp;ny);  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">0</span>;d&lt;<span class="number">4</span>;d++)  </div><div class="line">            &#123;  </div><div class="line">                <span class="keyword">if</span>(x+dx[d]==nx &amp;&amp; y+dy[d]==ny)  </div><div class="line">                &#123;  </div><div class="line">                    node.st = (node.st&lt;&lt;<span class="number">2</span>)+d;  </div><div class="line">                    <span class="keyword">break</span>;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">            x=nx,y=ny;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">int</span> blocks;  </div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;blocks);  </div><div class="line">        <span class="built_in">memset</span>(maze,<span class="number">0</span>,<span class="keyword">sizeof</span>(maze));  </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=blocks;i++)  </div><div class="line">        &#123;  </div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);  </div><div class="line">            maze[x][y]=<span class="number">1</span>;  </div><div class="line">        &#125;  </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: %d\n"</span>,kase,BFS(node));  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-  </div>
-</article>
-
-
-
-      </div>
-      
-       <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
-        
-      </ul>
     </div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#状压之铺砖块"><span class="toc-number">1.</span> <span class="toc-text">状压之铺砖块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#状态压缩之牛吃草"><span class="toc-number">2.</span> <span class="toc-text">状态压缩之牛吃草</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#状态压缩之炮兵阵地"><span class="toc-number">3.</span> <span class="toc-text">状态压缩之炮兵阵地</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#POJ-1234"><span class="toc-number">4.</span> <span class="toc-text">POJ_1234</span></a></li></ol>
-    </div>
+    
 
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2018/04/07/状态压缩专题/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&text=状态压缩专题"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&is_video=false&description=状态压缩专题"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=状态压缩专题&body=Check out this article: https://peterpan980927.cn/2018/04/07/状态压缩专题/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&title=状态压缩专题"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2018/04/07/状态压缩专题/&name=状态压缩专题&description=&lt;p&gt;&lt;img src=&quot;http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png&quot; heigtht=&quot;350&quot; width=&quot;600&quot; alt/&gt;&lt;/p&gt;
-&lt;p&gt;在计算机编程中，经常的会表示某个事物的状态，通常我们会使用数组去存储，而当我们的数据量极其庞大而且空间有限的时候，我们就需要通过更巧妙的方式来描述我们的状态来完成我们对于空间的优化，这个就是状态压缩。(纯属个人理解)&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/ACM/">#ACM</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
 
     </div>
-
-    <div id="actions-footer">
-      <ul>
-        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
-        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
-        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
-        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
-      </ul>
-    </div>
-
-  </div>
 </div>
 
-      
-      <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Peter pan
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/06/05/在High-Serria上编译XNU内核/">在High Serria上编译XNU内核</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
         
-      </ul>
-    </nav>
-  </div>
+        <li>
+            <a class="footer-post" href="/categories/ROP/">ROP</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
-      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
 <script src="/js/main.js"></script>
-<!-- Google Analytics -->
 
 <!-- Disqus Comments -->
 
 
-    </div>
+
 </body>
+
 </html>

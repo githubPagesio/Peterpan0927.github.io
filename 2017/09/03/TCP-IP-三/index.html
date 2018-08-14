@@ -1,190 +1,141 @@
 <!DOCTYPE html>
-<html lang=Ch>
+<html lang="en">
+
+<!-- Head tag -->
 <head>
-    <!-- so meta -->
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）">
-<meta property="og:type" content="article">
-<meta property="og:title" content="TCP/IP(三)">
-<meta property="og:url" content="https://peterpan980927.cn/2017/09/03/TCP-IP-三/index.html">
-<meta property="og:site_name" content="Peterpan's Blog">
-<meta property="og:description" content="接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/87F25A0FF68DC378B41BBCCA8356DCB5.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/C357D54BE16FA2D3D8AEA0F923C958BF.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/7D3BB828435CFFD1C9A90EECB73F5792.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8A%E5%8D%8810.13.58.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/11CB028F403A47C3FB4083FFB89D8CF2.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/5B393B9F59B4BD914AE16343323387FE.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/358886AC7DEC0B850831B644FAC15141.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/EF5E051776872AA6E25EF5A4AC10A12E.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/1FFD2B3F7FB03C2172E51E954D3CE88A.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/D3D6F10A4F65BC720EB725BDD44D71C6.png">
-<meta property="og:image" content="http://omunhj2f1.bkt.clouddn.com/77F5D3A7D0E0D78B5EF4A40E97DD2E85.png">
-<meta property="og:updated_time" content="2018-03-13T16:00:22.844Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP/IP(三)">
-<meta name="twitter:description" content="接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）">
-<meta name="twitter:image" content="http://omunhj2f1.bkt.clouddn.com/9868C928C25D057A6E967EC5A49BADF1.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
     
+        <meta name="description" content="how to reach the steins gate?">
     
-        
-          
-              <link rel="shortcut icon" href="/images/P.png">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
+
+    <!--Author-->
     
-    <!-- title -->
-    <title>TCP/IP(三)</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+        <meta name="author" content="Peter pan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="TCP/IP(三)"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="how to reach the steins gate?" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Peterpan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>TCP/IP(三) - Peterpan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <!-- rss -->
+
+    <!-- Google Analytics -->
     
-    
-    <!-- jquery -->
-    <script src="/lib/jquery/jquery.min.js"></script>
+
+
 </head>
 
+
 <body>
-    <div class="banner">
-<div id="blogtitel" class="blogtitel">Peterpan&#39;s Blog</div>
-<ul id="wrapper" class="wrapper">
-  <div class="sun">
-    <div class="star"></div>
-  </div>
-  <div class="mercury">
-    <div class="planet">
-      <div class="shadow"></div>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+        </ul>
     </div>
-  </div>
-  <div class="venus">
-    <div class="planet">
-      <div class="shadow"></div>
-    </div>
-  </div>
-  <div class="earth">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-  <div class="mars">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-  <div class="jupiter">
-    <div class="planet"><div class="shadow"></div></div>
-  </div>
-</ul>
 </div>
 
-    <div class="background">
-      
-        <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2017/09/14/Foundation框架/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
-        
-        
-        <li><a class="icon" href="/2017/08/31/iOS沙盒与模态/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/09/03/TCP-IP-三/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&text=TCP/IP(三)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&is_video=false&description=TCP/IP(三)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=TCP/IP(三)&body=Check out this article: https://peterpan980927.cn/2017/09/03/TCP-IP-三/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&name=TCP/IP(三)&description=&lt;p&gt;接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）&lt;/p&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
 
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa " aria-hidden="true"></i></a>
+        
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-三"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(三)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP即网际协议"><span class="toc-number">1.1.</span> <span class="toc-text">IP即网际协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP初探"><span class="toc-number">1.1.1.</span> <span class="toc-text">IP初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层与数据链路层的关系"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP基础知识"><span class="toc-number">1.2.</span> <span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制"><span class="toc-number">1.2.1.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP地址基础知识"><span class="toc-number">1.3.</span> <span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP地址的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播和多播"><span class="toc-number">1.3.2.</span> <span class="toc-text">广播和多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码"><span class="toc-number">1.3.3.</span> <span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIDR和VLSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">CIDR和VLSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局地址和私有地址"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局地址和私有地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制-1"><span class="toc-number">1.3.6.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP分割与再构成处理"><span class="toc-number">1.4.</span> <span class="toc-text">IP分割与再构成处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP报文分片与重组"><span class="toc-number">1.4.1.</span> <span class="toc-text">IP报文分片与重组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU发现"><span class="toc-number">1.4.2.</span> <span class="toc-text">路径MTU发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU工作原理"><span class="toc-number">1.4.3.</span> <span class="toc-text">路径MTU工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">1.5.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6特点"><span class="toc-number">1.5.1.</span> <span class="toc-text">IPv6特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6地址结构"><span class="toc-number">1.5.2.</span> <span class="toc-text">IPv6地址结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局单播地址"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">全局单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#链路单播地址"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">链路单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#唯一本地地址"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4、IPv6首部"><span class="toc-number">1.6.</span> <span class="toc-text">IPv4、IPv6首部</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-number">1.6.1.</span> <span class="toc-text">IPv4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">IPv6</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.7.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码的算法"><span class="toc-number">1.7.1.</span> <span class="toc-text">子网掩码的算法</span></a></li></ol></li></ol></li></ol>
-    </div>
-  </span>
-</div>
+</header>
 
-      
-      <div class="content index width mx-auto px2 my4">
-          
-          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        TCP/IP(三)
-    </h1>
+        <section class="main">
+            
+<div class="post">
 
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Peterpan's Blog</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2017-09-03T12:56:33.000Z" itemprop="datePublished">2017-09-03</time>
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2017/09/03/TCP-IP-三/">
+                TCP/IP(三)
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2017-09-03</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/路由控制表-公私IP-CIDR与VLSM/">路由控制表 公私IP CIDR与VLSM</a>
+                </span>
+            
+        </div>
     </div>
 
+    <div class="content">
 
-      
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/程序员的自我修养/">程序员的自我修养</a>
-    </div>
+        <!-- Gallery -->
+        
 
-
-    </div>
-  </header>
-  
-
-  <div class="content" itemprop="articleBody">
-    <p>接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）</p>
+        <!-- Post Content -->
+        <p>接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）</p>
 <a id="more"></a>
 <h1 id="TCP-IP-三"><a href="#TCP-IP-三" class="headerlink" title="TCP/IP(三)"></a>TCP/IP(三)</h1><h2 id="IP即网际协议"><a href="#IP即网际协议" class="headerlink" title="IP即网际协议"></a>IP即网际协议</h2><h3 id="IP初探"><a href="#IP初探" class="headerlink" title="IP初探"></a>IP初探</h3><p>TCP/IP的心脏是网络层，这一层主要由IP和ICMP两个协议组成，鉴于目前的IP协议已经无法满足互联网的需求，所以出现了更高级的IP协议（也就是IPv6协议）。</p>
 <p>IP协议处于OSI模型中的网络层，网络层的主要作用是实现端对端之间的通信，而它的上一层数据链路层是用来实现同一种数据链路相连的节点之间通信，如果是要在不同的数据节点之间进行通信，就必须要经过网络层，下面用一张图作例子：</p>
@@ -385,91 +336,136 @@
 <p>故事中的小鱼，换成主机，故事中的池子，换成网段，就是网络掩码与网段的故事。<br>养鱼场有 32 位养鱼人，每个养鱼人养了 256 条鱼，对于养鱼场的营业者来说，只关心养鱼人鱼塘的编号即可：<br>1.1.0.0/24 老张<br>1.1.1.0/24 老王<br>1.1.2.0/24 老李<br>1.1.3.0/24 老黄<br>……<br>1.1.31.0/24 老某<br>至于老王、老张将鱼塘划分成若干鱼池，虹桥养鱼场并不关心，那不过是老王他们用来编号的方法，所以虹桥养鱼场只需要以上 32 行就可以区分彼此，而不需要更加明晰化区分 1.1.1.64/26 、1.1.1.128/26 是谁的。</p>
 <p>这个具体可以参考车小胖的—<a href="https://read.douban.com/reader/ebook/33499415/" target="_blank" rel="external">计算机是如何聊天的</a></p>
 
-  </div>
-</article>
-
-
-
-      </div>
-      
-       <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
-        
-      </ul>
     </div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP-三"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP(三)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP即网际协议"><span class="toc-number">1.1.</span> <span class="toc-text">IP即网际协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP初探"><span class="toc-number">1.1.1.</span> <span class="toc-text">IP初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层与数据链路层的关系"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络层与数据链路层的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP基础知识"><span class="toc-number">1.2.</span> <span class="toc-text">IP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制"><span class="toc-number">1.2.1.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP地址基础知识"><span class="toc-number">1.3.</span> <span class="toc-text">IP地址基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP地址的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播和多播"><span class="toc-number">1.3.2.</span> <span class="toc-text">广播和多播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码"><span class="toc-number">1.3.3.</span> <span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIDR和VLSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">CIDR和VLSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局地址和私有地址"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局地址和私有地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由控制-1"><span class="toc-number">1.3.6.</span> <span class="toc-text">路由控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP分割与再构成处理"><span class="toc-number">1.4.</span> <span class="toc-text">IP分割与再构成处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP报文分片与重组"><span class="toc-number">1.4.1.</span> <span class="toc-text">IP报文分片与重组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU发现"><span class="toc-number">1.4.2.</span> <span class="toc-text">路径MTU发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径MTU工作原理"><span class="toc-number">1.4.3.</span> <span class="toc-text">路径MTU工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6"><span class="toc-number">1.5.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6特点"><span class="toc-number">1.5.1.</span> <span class="toc-text">IPv6特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6地址结构"><span class="toc-number">1.5.2.</span> <span class="toc-text">IPv6地址结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局单播地址"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">全局单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#链路单播地址"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">链路单播地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#唯一本地地址"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">唯一本地地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv4、IPv6首部"><span class="toc-number">1.6.</span> <span class="toc-text">IPv4、IPv6首部</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-number">1.6.1.</span> <span class="toc-text">IPv4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">IPv6</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.7.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子网掩码的算法"><span class="toc-number">1.7.1.</span> <span class="toc-text">子网掩码的算法</span></a></li></ol></li></ol></li></ol>
-    </div>
+    
 
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://peterpan980927.cn/2017/09/03/TCP-IP-三/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&text=TCP/IP(三)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&is_video=false&description=TCP/IP(三)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=TCP/IP(三)&body=Check out this article: https://peterpan980927.cn/2017/09/03/TCP-IP-三/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&title=TCP/IP(三)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://peterpan980927.cn/2017/09/03/TCP-IP-三/&name=TCP/IP(三)&description=&lt;p&gt;接着上一节说的OSI七层模型中传输的过程，这一次我们来了解一下IP协议（不讲数据链路）&lt;/p&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/程序员的自我修养/">#程序员的自我修养</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
 
     </div>
-
-    <div id="actions-footer">
-      <ul>
-        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
-        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
-        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
-        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
-      </ul>
-    </div>
-
-  </div>
 </div>
 
-      
-      <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Peter pan
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://github.com/Peterpan0927">Github</a></li>
-         
-          <li><a href="https://weibo.com/p/1005055999539768?is_all=1">Weibo</a></li>
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/06/05/在High-Serria上编译XNU内核/">在High Serria上编译XNU内核</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
         
-      </ul>
-    </nav>
-  </div>
+        <li>
+            <a class="footer-post" href="/categories/ROP/">ROP</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
-      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
 <script src="/js/main.js"></script>
-<!-- Google Analytics -->
 
 <!-- Disqus Comments -->
 
 
-    </div>
+
 </body>
+
 </html>
