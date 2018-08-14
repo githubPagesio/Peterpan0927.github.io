@@ -5,7 +5,9 @@
     <entry>
       <title><![CDATA[绕过SMAP提权(Mac移植)]]></title>
       <url>/2018/08/06/%E7%BB%95%E8%BF%87SMAP%E6%8F%90%E6%9D%83-Mac%E7%A7%BB%E6%A4%8D/</url>
-      <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
+      <content type="html"><![CDATA[<p>通用提权</p>
+<a id="more"></a>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
 <p>整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中<code>ipc_kmsg</code>这个结构体显得尤为重要。</p>
 <h1 id="0x01-ipc-kmsg"><a href="#0x01-ipc-kmsg" class="headerlink" title="0x01.ipc_kmsg"></a>0x01.ipc_kmsg</h1><p>这个结构体的代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> ipc_kmsg &#123;</div><div class="line">  <span class="keyword">mach_msg_size_t</span> ikm_size;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_next;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_prev;</div><div class="line">  <span class="keyword">mach_msg_header_t</span> * ikm_header;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_prealloc;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_voucher;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos_override</div><div class="line">  <span class="keyword">struct</span> ipc_importance_elem * ikm_importance;</div><div class="line">  <span class="keyword">queue_chain_t</span> ikm_inheritance;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
@@ -79,7 +81,8 @@
     <entry>
       <title><![CDATA[通过堆风水绕过内核保护提权]]></title>
       <url>/2018/07/29/%E9%80%9A%E8%BF%87%E5%A0%86%E9%A3%8E%E6%B0%B4%E7%BB%95%E8%BF%87%E5%86%85%E6%A0%B8%E4%BF%9D%E6%8A%A4%E6%8F%90%E6%9D%83/</url>
-      <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>这次提权利用的是<code>mach_voucher_extract_attr_recipe_trap</code>存在的一个漏洞，而利用方法的核心就是通过<code>MACH_MSG_OOL_PORTS_DESCRIPTOR</code>消息。 </p>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>这次提权利用的是<code>mach_voucher_extract_attr_recipe_trap</code>存在的一个漏洞，而利用方法的核心就是通过<code>MACH_MSG_OOL_PORTS_DESCRIPTOR</code>消息。 </p>
 <p>关于<code>mach_msg ool</code>简单来说当发送一个包含<code>ool descriptor</code>的<code>msg</code>时，内核会将指定的数据从用户空间复制到内核空间，并且内核会一直保持这部分数据，直到目标 task 处理了消息。同样，当目标进程接收一个包含<code>ool descriptor</code>的消息时，内核会将数据从内核空间复制到用户空间（不一定是真正的复制）。因此可以利用这个技术点向内核堆中写入数据或者从内核读取数据。</p>
 <p>由于这个漏洞的利用比三叉戟要复杂得多，所以我就一步步的慢慢去剖析了，从漏洞的产生点到一步步的利用，代码可以参考我的<a href="https://github.com/Peterpan0927/CVE-2017-2370" target="_blank" rel="external">github</a></p>
 <h1 id="0x01-漏洞产生点"><a href="#0x01-漏洞产生点" class="headerlink" title="0x01.漏洞产生点"></a>0x01.漏洞产生点</h1><p>在iOS 10和macOS 10.12中添加的新功能中有一个函数叫做<code>mach_voucher_extract_attr_recipe_trap</code>，是一个可以在沙盒内调用的<code>Mach trap</code>，下面是这个函数的源代码：</p>
@@ -156,7 +159,9 @@
     <entry>
       <title><![CDATA[利用三叉戟漏洞实现本地提权]]></title>
       <url>/2018/07/17/%E5%88%A9%E7%94%A8%E4%B8%89%E5%8F%89%E6%88%9F%E6%BC%8F%E6%B4%9E%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83/</url>
-      <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在对漏洞进行学习的时候，因为各方面细小知识点的缺少，导致踩了一些坑，这次来分析的是之前很多人已经说过的三叉戟漏洞的后两个来实现的本地提权，虽然有很多poc，但是其中的描述并不是很详细，所以我就通过自己的学习过程来做一些科普吧算是。<br>在阅读之前需要对于这两个漏洞有一定的了解，资料我丢在链接部分了，完整的代码贴在我的<a href="https://github.com/Peterpan0927/PegasusZero" target="_blank" rel="external">github</a>上了。</p>
+      <content type="html"><![CDATA[<p>苹果三叉戟漏洞</p>
+<a id="more"></a>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在对漏洞进行学习的时候，因为各方面细小知识点的缺少，导致踩了一些坑，这次来分析的是之前很多人已经说过的三叉戟漏洞的后两个来实现的本地提权，虽然有很多poc，但是其中的描述并不是很详细，所以我就通过自己的学习过程来做一些科普吧算是。<br>在阅读之前需要对于这两个漏洞有一定的了解，资料我丢在链接部分了，完整的代码贴在我的<a href="https://github.com/Peterpan0927/PegasusZero" target="_blank" rel="external">github</a>上了。</p>
 <h1 id="0x01-流程"><a href="#0x01-流程" class="headerlink" title="0x01.流程"></a>0x01.流程</h1><p>首先我还是按照惯例梳理了整个Poc的流程画了一张流程图，可以结合poc看看：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/macOS10.11.6%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%20%281%29.jpg" alt="macOS10.11.6本地提权 (1).jpg"></p>
 <p>在这个流程中我们为了触发反序列化需要用到一些IOKit的私有API，所以首先需要对整个流程有一定的了解：</p>

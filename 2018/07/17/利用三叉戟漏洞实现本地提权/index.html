@@ -135,7 +135,9 @@
         
 
         <!-- Post Content -->
-        <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在对漏洞进行学习的时候，因为各方面细小知识点的缺少，导致踩了一些坑，这次来分析的是之前很多人已经说过的三叉戟漏洞的后两个来实现的本地提权，虽然有很多poc，但是其中的描述并不是很详细，所以我就通过自己的学习过程来做一些科普吧算是。<br>在阅读之前需要对于这两个漏洞有一定的了解，资料我丢在链接部分了，完整的代码贴在我的<a href="https://github.com/Peterpan0927/PegasusZero" target="_blank" rel="external">github</a>上了。</p>
+        <p>苹果三叉戟漏洞</p>
+<a id="more"></a>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在对漏洞进行学习的时候，因为各方面细小知识点的缺少，导致踩了一些坑，这次来分析的是之前很多人已经说过的三叉戟漏洞的后两个来实现的本地提权，虽然有很多poc，但是其中的描述并不是很详细，所以我就通过自己的学习过程来做一些科普吧算是。<br>在阅读之前需要对于这两个漏洞有一定的了解，资料我丢在链接部分了，完整的代码贴在我的<a href="https://github.com/Peterpan0927/PegasusZero" target="_blank" rel="external">github</a>上了。</p>
 <h1 id="0x01-流程"><a href="#0x01-流程" class="headerlink" title="0x01.流程"></a>0x01.流程</h1><p>首先我还是按照惯例梳理了整个Poc的流程画了一张流程图，可以结合poc看看：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/macOS10.11.6%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%20%281%29.jpg" alt="macOS10.11.6本地提权 (1).jpg"></p>
 <p>在这个流程中我们为了触发反序列化需要用到一些IOKit的私有API，所以首先需要对整个流程有一定的了解：</p>
