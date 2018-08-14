@@ -135,7 +135,7 @@
         
 
         <!-- Post Content -->
-        <p>通用提权</p>
+        <p>using the pipe</p>
 <a id="more"></a>
 <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
 <p>整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中<code>ipc_kmsg</code>这个结构体显得尤为重要。</p>

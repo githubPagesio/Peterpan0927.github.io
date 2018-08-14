@@ -135,7 +135,8 @@
         
 
         <!-- Post Content -->
-        <a id="more"></a>
+        <p>heap feng shui</p>
+<a id="more"></a>
 <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>这次提权利用的是<code>mach_voucher_extract_attr_recipe_trap</code>存在的一个漏洞，而利用方法的核心就是通过<code>MACH_MSG_OOL_PORTS_DESCRIPTOR</code>消息。 </p>
 <p>关于<code>mach_msg ool</code>简单来说当发送一个包含<code>ool descriptor</code>的<code>msg</code>时，内核会将指定的数据从用户空间复制到内核空间，并且内核会一直保持这部分数据，直到目标 task 处理了消息。同样，当目标进程接收一个包含<code>ool descriptor</code>的消息时，内核会将数据从内核空间复制到用户空间（不一定是真正的复制）。因此可以利用这个技术点向内核堆中写入数据或者从内核读取数据。</p>
 <p>由于这个漏洞的利用比三叉戟要复杂得多，所以我就一步步的慢慢去剖析了，从漏洞的产生点到一步步的利用，代码可以参考我的<a href="https://github.com/Peterpan0927/CVE-2017-2370" target="_blank" rel="external">github</a></p>
