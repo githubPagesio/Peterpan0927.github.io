@@ -167,26 +167,22 @@
         <!-- Post Content -->
         <p>今天将NAS迁移到IDC的时候，在机柜通过傻瓜交换机连接到核心交换机，然后两台NAS连接到傻瓜，但是网络怎么也通不了，后来临时将傻瓜的上行换成了另一个机柜的中兴，然后网络就通了，对于这个问题我感到十分困惑，于是展开了研究。</p>
 <a id="more"></a>
-<h1 id="问题演变"><a class="markdownIt-Anchor" href="#问题演变"></a> 问题演变</h1>
-<p>因为傻瓜其实是没有划分vlan的，但是核心交换机上的那个口是个trunk，所以其实相当于我们的PC直连了一个trunk，我们知道平时连接PC的都是Access类型的端口，所以我猜想是这里出了问题。网上众说纷纭，有的人说这样可以，有的人说不行，在我做了初步测试之后是不行的，但是这并非绝对，因为我在论坛上看到了有人在讨论Native vlan和vlan的时候，我才明白，这才是问题的关键所在，那么接下来就是我们对与vlan和Native vlan的研究了：</p>
-<h1 id="交换机端口类型"><a class="markdownIt-Anchor" href="#交换机端口类型"></a> 交换机端口类型</h1>
-<p>PVID称作<code>Port-base Vlan ID</code>，用形象的说法来看，PVID和VID就好像超市里的扫描器和商品标记一样，但是PVID不仅解析VID还会生成VID，说的有点玄乎，俺么就来根据交换机的端口类型来解释一下吧：</p>
+<h1 id="问题演变"><a href="#问题演变" class="headerlink" title="问题演变"></a>问题演变</h1><p>因为傻瓜其实是没有划分vlan的，但是核心交换机上的那个口是个trunk，所以其实相当于我们的PC直连了一个trunk，我们知道平时连接PC的都是Access类型的端口，所以我猜想是这里出了问题。网上众说纷纭，有的人说这样可以，有的人说不行，在我做了初步测试之后是不行的，但是这并非绝对，因为我在论坛上看到了有人在讨论Native vlan和vlan的时候，我才明白，这才是问题的关键所在，那么接下来就是我们对与vlan和Native vlan的研究了：</p>
+<h1 id="交换机端口类型"><a href="#交换机端口类型" class="headerlink" title="交换机端口类型"></a>交换机端口类型</h1><p>PVID称作<code>Port-base Vlan ID</code>，用形象的说法来看，PVID和VID就好像超市里的扫描器和商品标记一样，但是PVID不仅解析VID还会生成VID，说的有点玄乎，俺么就来根据交换机的端口类型来解释一下吧：</p>
 <ol>
 <li>Access:</li>
 </ol>
-<p>Access端口负责接终端设备，他收到一个帧的时候，如果帧这个没有标记他就用自己的pvid给他打上标记，他在发出一个帧时如果VID=PVID**就去掉标记(解标记)**以保证传送给终端设备的帧没有被变动过(中间设备添加了标记)，pvid是在划分vlan时候每个端口都有的属性，默认情况下思科交换机中每个端口初始pvid是1，表示他是vlan 1的成员们如果你给他划分了其他VLAN那么PVID相应会发生更改</p>
-<ol start="2">
+<p>Access端口负责接终端设备，他收到一个帧的时候，如果帧这个没有标记他就用自己的pvid给他打上标记，他在发出一个帧时如果VID=PVID<strong>就去掉标记(解标记)</strong>以保证传送给终端设备的帧没有被变动过(中间设备添加了标记)，pvid是在划分vlan时候每个端口都有的属性，默认情况下思科交换机中每个端口初始pvid是1，表示他是vlan 1的成员们如果你给他划分了其他VLAN那么PVID相应会发生更改</p>
+<ol>
 <li>Trunk:</li>
 </ol>
 <p>Trunk的意思是，它是一条<a href="http://baike.baidu.com/view/2365662.htm" target="_blank" rel="external">中继链路</a>，允许各种VLAN通过。它的规则和Access差不多，当收到一个没有tag的标记的时候就用自己的pvid给他标记，当发送一个帧时候如果vid=pvid则去掉pvid，<strong>与Access不同的是</strong>，Trunk有一个<strong>属于自己的本征VLAN(Native VLAN,也叫PVID)</strong>，用来发送一些<strong>cdp，bpdu</strong>等<a href="http://baike.baidu.com/view/1077.htm" target="_blank" rel="external"><strong>交换机</strong></a><strong>间</strong>联系的<strong>数据</strong>或者<strong>管理流量</strong>，从交换机<strong>自身</strong>产生的帧在发出去的时候<strong>是不会带标记的</strong>，<strong>因为VID=pvid所以标记被去掉</strong>，而<strong>对端接收</strong>到没有标记的帧时候就会用自身本征VLAN的信息给他<strong>加上标记</strong>，然后查看<strong>交换表</strong>如果<strong>发现目的地址</strong>是自己<strong>则去掉标记</strong>，如果发现目的mac地址不是自己则<strong>继续转发</strong>给<strong>其他Trunk同时去掉标记</strong>（因为一个<strong>交换机只有一个本征VLAN</strong>所有pvid=vid去掉标记）</p>
-<ol start="3">
+<ol>
 <li>Hybrid:</li>
 </ol>
 <p>它允许VID=pvid。Hybrid与Trunk一样，在该端口上可以传送多个vlan的包，一般用于交换机与交换机之间，或者交换机与服务器之间的链接。如果收到的<a href="http://baike.baidu.com/view/25880.htm" target="_blank" rel="external">数据包</a>不带vlan，则加上pvid进行转发；如果<strong>收到</strong>的数据包带vlan，则判断该端口是否允许该vlan<strong>进入</strong>，如果可以则进行<strong>转发</strong>，否则<strong>丢弃。</strong></p>
-<p>我们知道802.1Q的VLAN是在二层帧里加进VLAN标识，俗称打tag，而计算机不<strong>能解析</strong>这种二层的帧，所以交换机的<strong>一个端口在分到一个VLAN时有tag和untag属性两种属性</strong>，<strong>tag端口用来连接设备，untag端口用来连接计算机</strong>。Tag端口出去的帧一般都打上了tag，tag中的VID<strong>有的来自PVID</strong>，<strong>有的则来自其它tag端口中本身</strong>就含有tag的<strong>帧</strong>。<br>
-设备互连时，由tag中的VID决定了一个二层帧属于哪个VLAN，而计算机不具备打tag的功能，所以只有给<strong>连接</strong>计算机的<strong>端口添加一个属性</strong>，<strong>用来决定计算机发出的未标记的帧属于哪个VLAN，这个属性就是PVID</strong>。</p>
-<h1 id="问题解决"><a class="markdownIt-Anchor" href="#问题解决"></a> 问题解决</h1>
-<p>首先上一张表吧：</p>
+<p>我们知道802.1Q的VLAN是在二层帧里加进VLAN标识，俗称打tag，而计算机不<strong>能解析</strong>这种二层的帧，所以交换机的<strong>一个端口在分到一个VLAN时有tag和untag属性两种属性</strong>，<strong>tag端口用来连接设备，untag端口用来连接计算机</strong>。Tag端口出去的帧一般都打上了tag，tag中的VID<strong>有的来自PVID</strong>，<strong>有的则来自其它tag端口中本身</strong>就含有tag的<strong>帧</strong>。<br>设备互连时，由tag中的VID决定了一个二层帧属于哪个VLAN，而计算机不具备打tag的功能，所以只有给<strong>连接</strong>计算机的<strong>端口添加一个属性</strong>，<strong>用来决定计算机发出的未标记的帧属于哪个VLAN，这个属性就是PVID</strong>。</p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>首先上一张表吧：</p>
 <table>
 <thead>
 <tr>
@@ -230,8 +226,7 @@
 <li>那么如果我们的NAS发了数据帧出去呢？因为没有到达核心交换机的时候是没有tag的，现实生活中，在三层网络中这种包就会直接被丢掉了，所以它的数据同样也传不出去。</li>
 </ol>
 <p>在这里我们需要牢记的一点是在现实生活中由于成本问题，傻瓜交换机只会具有最简单的功能，就只是存储和转发而已。</p>
-<h1 id="配置vlan的参考准则"><a class="markdownIt-Anchor" href="#配置vlan的参考准则"></a> 配置vlan的参考准则：</h1>
-<ol>
+<h1 id="配置vlan的参考准则："><a href="#配置vlan的参考准则：" class="headerlink" title="配置vlan的参考准则："></a>配置vlan的参考准则：</h1><ol>
 <li><strong>对于untag端口，PVID要和所属VLAN的VID一致</strong></li>
 <li><strong>对于tag端口，PVID要不同于所有所属VLAN的VID；(使它原样发送)</strong></li>
 <li><strong>两台设备互联时，两端接口的PVID保持一致时，有弊也有利</strong></li>
@@ -309,15 +304,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/ROP/">ROP</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/sumup/">sumup</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>
@@ -342,7 +337,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
+                        <a href="https://twitter.com/peterpan980927">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>

@@ -165,16 +165,14 @@
         
 
         <!-- Post Content -->
-        <p>using the pipe</p>
+        <p>try to use the pipe but failed, learing about kexts for the rop.</p>
 <a id="more"></a>
-<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
-<p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>上一篇写过的利用严格意义来说是不完美的，因为我们构造的<code>fake port</code>是在用户空间，在引入了<code>SMAP</code>机制之后，这样的做法毫无疑问就会失效了，所以我们需要去寻找新的出路，<code>lan Beer</code>曾经描述过如何在<code>iOS</code>上进行绕过，我们就来看看这个利用是如何进行的，并将其移植到<code>Mac</code>上</p>
 <p>整个利用的过程几乎是完全不同的，下面的利用过程简单的来说就是通过一次堆溢出来进行另一次溢出，其中<code>ipc_kmsg</code>这个结构体显得尤为重要。</p>
-<h1 id="0x01ipc_kmsg"><a class="markdownIt-Anchor" href="#0x01ipc_kmsg"></a> 0x01.ipc_kmsg</h1>
-<p>这个结构体的代码如下：</p>
+<h1 id="0x01-ipc-kmsg"><a href="#0x01-ipc-kmsg" class="headerlink" title="0x01.ipc_kmsg"></a>0x01.ipc_kmsg</h1><p>这个结构体的代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> ipc_kmsg &#123;</div><div class="line">  <span class="keyword">mach_msg_size_t</span> ikm_size;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_next;</div><div class="line">  <span class="keyword">struct</span> ipc_kmsg * ikm_prev;</div><div class="line">  <span class="keyword">mach_msg_header_t</span> * ikm_header;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_prealloc;</div><div class="line">  <span class="keyword">ipc_port_t</span> ikm_voucher;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos;</div><div class="line">  <span class="keyword">mach_msg_priority_t</span> ikm_qos_override</div><div class="line">  <span class="keyword">struct</span> ipc_importance_elem * ikm_importance;</div><div class="line">  <span class="keyword">queue_chain_t</span> ikm_inheritance;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-01%20%E4%B8%8B%E5%8D%887.16.53.png" alt="ipc_kmsg结构"></p>
-<p>我们可以其中有一个<code>ikm_size</code>，而且这不是一个指针，我们在代码中寻找对<code>ikm_size</code>的交叉引用，我们可以看到它仅在少数几个地方使用：</p>
+<p>我们可以其中有一个<code>ikm_size</code>，而且这不是一个指针，我们在代码中寻找对<code>ikm_size</code>的交叉引用，我们可以看到它仅在少数几个地方使用： </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ipc_kmsg_free</span><span class="params">(<span class="keyword">ipc_kmsg_t</span> kmsg)</span></span>;</div></pre></td></tr></table></figure>
 <p>此函数使用<code>kmsg-&gt;ikm_size</code> 将kmsg 释放回正确的kalloc区域。<code>zone allocator</code>将检测到错误区域的释放并<code>panic</code>，因此我们必须小心，我们不会在没有先确认合适大小的情况下释放<code>ipc_kmsg</code>。</p>
 <p><code>ikm_size</code>字段通过一个宏来设置：</p>
@@ -188,15 +186,13 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(IP_VALID(dest_port)&amp;&amp; IP_PREALLOC(dest_port))&#123;</div><div class="line">    <span class="keyword">mach_msg_size_t</span> max_desc = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    kmsg = dest_port-&gt; ip_premsg;</div><div class="line">    <span class="keyword">if</span>(ikm_prealloc_inuse(kmsg))&#123;</div><div class="line">      ip_unlock(dest_port);</div><div class="line">      <span class="keyword">return</span> MACH_SEND_NO_BUFFER;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(msg_and_trailer_size&gt; kmsg-&gt; ikm_size  -  max_desc)&#123;</div><div class="line">      ip_unlock(dest_port);</div><div class="line">      <span class="keyword">return</span> MACH_SEND_TOO_LARGE;</div><div class="line">    &#125;</div><div class="line">    ikm_prealloc_set_inuse(kmsg，dest_port);</div><div class="line">    ikm_set_header(kmsg，msg_and_trailer_size);</div><div class="line">    ip_unlock(dest_port);</div><div class="line">...  </div><div class="line">  (<span class="keyword">void</span>)<span class="built_in">memcpy</span>((<span class="keyword">void</span> *)kmsg-&gt; ikm_header，(<span class="keyword">const</span> <span class="keyword">void</span> *)msg，size);</div></pre></td></tr></table></figure>
 <p>上面的代码检查了<code>kmsg-&gt;ikm_size</code>的值，将缓冲区标记为<code>in-use</code>，然后调用<code>ikm_set_header</code>宏将消息对齐到缓冲区的末尾处最后调用<code>memcpy</code>将消息拷贝到缓冲区。</p>
 <p>这个时候我们不禁想到，如果我们可以修改<code>ikm_size</code>的值，这就意味着我们可以欺骗内核，让他认为这个缓冲区比它事实的大小要大，这样就意味着会产生溢出，我们可以在超过缓冲区的地方去构造消息，这也是为什么上面说的是这个利用是从一个堆溢出到另一个溢出。</p>
-<h1 id="0x01控制数据"><a class="markdownIt-Anchor" href="#0x01控制数据"></a> 0x01.控制数据</h1>
-<p>这个消息利用起来还有一些难处，因为它只会在<code>kernel</code>给我们发消息的时候使用，所以我们要做的就是控制<code>kernel</code>给我们发送的消息，这听起来有些不可思议。</p>
+<h1 id="0x01-控制数据"><a href="#0x01-控制数据" class="headerlink" title="0x01.控制数据"></a>0x01.控制数据</h1><p>这个消息利用起来还有一些难处，因为它只会在<code>kernel</code>给我们发消息的时候使用，所以我们要做的就是控制<code>kernel</code>给我们发送的消息，这听起来有些不可思议。</p>
 <p>内核只会在屈指可数的时候给用户空间发送<code>Mach message</code>，而且消息的长度必须合适，不能太短，所以<code>IODataQueue</code>这样类似的通知就不在我们的考虑范畴内，唯一能包含我们控制的数据的应该只有异常消息了。</p>
 <p>当一个线程<code>fault</code>的时候，比如说访问没有映射的内存或者软中断的时候，内核就会给线程注册的异常端口发送异常消息，如果线程没有异常处理端口，内核就会发给<code>task</code>的异常处理端口，如果这仍然失败，异常消息就会被发给一个全局的主机异常端口：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">routine <span class="title">thread_set_exception_ports</span><span class="params">(</span></span></div><div class="line">          thread:<span class="keyword">thread_act_t</span>;</div><div class="line">          exception_mask:<span class="keyword">exception_mask_t</span>;</div><div class="line">          new_port:<span class="keyword">mach_port_t</span>;</div><div class="line">          behavior:<span class="keyword">exception_behavior_t</span>;</div><div class="line">          new_flavor:<span class="keyword">thread_state_flavor_t</span>);</div></pre></td></tr></table></figure>
 <p>这是<code>thread_set_exception_ports</code>的MIG定义。<code>new_port</code>应该是新异常端口的发送权限。<code>exception_mask</code>允许我们限制我们想要处理的异常类型。<code>behavior</code>定义了我们想要接收的异常消息类型，new_flavor 允许我们指定要在消息中包含哪种进程状态。</p>
 <p>这样异常消息就会包含<code>X86</code>通用目标寄存器的状态，这也正是我们要向<code>ipc_kmsg</code>的缓冲区末尾写入的内容。</p>
-<h1 id="0x02固定地址读写"><a class="markdownIt-Anchor" href="#0x02固定地址读写"></a> 0x02.固定地址读写</h1>
-<p>最关键的问题是我们并不知道我们控制的数据到底在哪里，我们可以将它放在用户空间，那么这样的话就和之前的做法没什么大的区别了，同样绕不开<code>x86</code>上的<code>SMAP</code>和<code>iPhone7</code>上的<code>AMCC</code>。因此我们要构造一个新的原语来找到<code>ipc_kmsg</code>在内核中的位置。</p>
+<h1 id="0x02-固定地址读写"><a href="#0x02-固定地址读写" class="headerlink" title="0x02.固定地址读写"></a>0x02.固定地址读写</h1><p>最关键的问题是我们并不知道我们控制的数据到底在哪里，我们可以将它放在用户空间，那么这样的话就和之前的做法没什么大的区别了，同样绕不开<code>x86</code>上的<code>SMAP</code>和<code>iPhone7</code>上的<code>AMCC</code>。因此我们要构造一个新的原语来找到<code>ipc_kmsg</code>在内核中的位置。</p>
 <p>之前说过要通过一个堆溢出到另一个溢出，因此我们要保证的一点就是<code>ipc_kmsg</code>的连续，我们知道<code>freelist</code>随机化之后要得到一片连续的端口是比较困难的，但是通过观察<code>zalloc</code>堆的演变，我们可以通过一种极限的方式来实现目标。通过耗尽特定区域，我们可以强制zalloc获取新页面，如果我们的分配大小接近页面大小，我们将立即返回该页面。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> prealloc_size = <span class="number">0x900</span>; <span class="comment">// kalloc.4096</span></div><div class="line"> <span class="comment">//耗尽kalloc.4096的页面</span></div><div class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">2000</span>; i++)&#123;</div><div class="line">   prealloc_port(prealloc_size);</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="comment">//现在这些都是连续的</span></div><div class="line"> <span class="keyword">mach_port_t</span> holder = prealloc_port(prealloc_size);</div><div class="line"> <span class="keyword">mach_port_t</span> first_port = prealloc_port(prealloc_size);</div><div class="line"> <span class="keyword">mach_port_t</span> second_port = prealloc_port(prealloc_size);</div></pre></td></tr></table></figure>
 <p>这样我们新请求的堆布局应该长这个样子：</p>
@@ -293,15 +289,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/ROP/">ROP</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/sumup/">sumup</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>
@@ -326,7 +322,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
+                        <a href="https://twitter.com/peterpan980927">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>

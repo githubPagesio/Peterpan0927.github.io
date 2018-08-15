@@ -167,9 +167,7 @@
         <!-- Post Content -->
         <p>由于密码学在CTF的各个领域都有广泛的应用，尤其是在隐写术和安全杂项中尤为突出，除此之外，密码学也是CTF中一个单独的领域，今天就来专门的去了解一下密码学。(挣脱栅栏的束缚、从维吉尼亚的囚禁中获得重生)</p>
 <a id="more"></a>
-<h2 id="密码学概述与发展历程"><a class="markdownIt-Anchor" href="#密码学概述与发展历程"></a> 密码学概述与发展历程</h2>
-<h3 id="古典密码的璀璨"><a class="markdownIt-Anchor" href="#古典密码的璀璨"></a> 古典密码的璀璨</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt=""></p>
+<h2 id="密码学概述与发展历程"><a href="#密码学概述与发展历程" class="headerlink" title="密码学概述与发展历程"></a>密码学概述与发展历程</h2><h3 id="古典密码的璀璨"><a href="#古典密码的璀璨" class="headerlink" title="古典密码的璀璨"></a>古典密码的璀璨</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.10.06.png" alt=""></p>
 <p>看到这张图大家就可能猜到这是爱丽丝梦游仙境(不知道的百度，这可是经典) ，今天通过一个全新的解释去描述它：</p>
 <ol>
 <li>爱丽丝使用纸飞机告诉兔子，红皇后要对他不利</li>
@@ -181,17 +179,14 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%881.21.30.png" alt=""></p>
 <p>在中国的古代也有类似的例子，比如说藏头诗就是其中的一种，这既可以称作隐写术也可以称作古典密码的起源：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.07.35.png" alt=""></p>
-<h4 id="近代密码的发展"><a class="markdownIt-Anchor" href="#近代密码的发展"></a> 近代密码的发展</h4>
-<p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
+<h4 id="近代密码的发展"><a href="#近代密码的发展" class="headerlink" title="近代密码的发展"></a>近代密码的发展</h4><p>可以说战争虽然给人类带来了许多的痛苦，但同时人类的技术也得到了飞速的发展,在过去的时间里，我们一直采取的都是手工加密的模式，直到<a href="https://baike.baidu.com/item/%E6%81%A9%E5%B0%BC%E6%A0%BC%E7%8E%9B%E5%AF%86%E7%A0%81%E6%9C%BA" target="_blank" rel="external">恩尼格玛机</a>（1920年早期被使用于商业，在二战中德国大放光芒）的出现，才改变了这一状况：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%882.58.32.png" alt=""></p>
 <p>正是因为这个机械密码机德军在二战时期才成为了通信强国，还有一点不得不提的就是降服恩尼格玛机的图灵炸弹，我们都知道图灵被称作计算机之父，因为他的理论才奠定了现代计算机的基础，在当时为了对付德军的恩尼格玛机，图灵制作了图灵炸弹来破解德军的密文，从下图中可以看到齿轮数远多于德军的机械密码机：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.46.13.png" alt=""></p>
 <p>之后在二十世纪四十年代美国终于造出了第一台计算机，并凭借其精密的计算使日本在中途岛海战中一败涂地，从此密码学也迈入了一个新的领域。人们可以使用更加复杂的加密方式了。同时也因为军事机密对于其要求很高，所以密码学在战争中得到了飞速的发展。</p>
-<h3 id="出现公钥密码学"><a class="markdownIt-Anchor" href="#出现公钥密码学"></a> 出现公钥密码学</h3>
-<p>1976年Diffie$Hellman提出了不对称密码（公钥密码）1977年Rivest,Shamir&amp;Aleman提出了RSA公钥算法，1977年DES正式成为了标准，纵观密码学的发展，我们可以发现：</p>
+<h3 id="出现公钥密码学"><a href="#出现公钥密码学" class="headerlink" title="出现公钥密码学"></a>出现公钥密码学</h3><p>1976年Diffie$Hellman提出了不对称密码（公钥密码）1977年Rivest,Shamir&amp;Aleman提出了RSA公钥算法，1977年DES正式成为了标准，纵观密码学的发展，我们可以发现：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%885.58.05.png" alt=""></p>
-<h3 id="密码学基本概念"><a class="markdownIt-Anchor" href="#密码学基本概念"></a> 密码学基本概念</h3>
-<ul>
+<h3 id="密码学基本概念"><a href="#密码学基本概念" class="headerlink" title="密码学基本概念"></a>密码学基本概念</h3><ul>
 <li>明文（消息）（PlainText）:被隐蔽消息。</li>
 <li>密文（Ciphertext）或密报（Cryptogram）:明文经密码变换成的一种隐蔽形式</li>
 <li>加密（Encryption）：将明文变换成密文的过程</li>
@@ -200,14 +195,12 @@
 <li>解密算法：接受这对密文进行解密时所采用的一种规则</li>
 <li>密钥：控制加密和解密算法操作的数据处理，分别称作加密密钥和解密密钥</li>
 </ul>
-<h2 id="古典密码的发展"><a class="markdownIt-Anchor" href="#古典密码的发展"></a> 古典密码的发展</h2>
-<p>之前我们曾经说过凯撒密码，栅栏密码，培根密码，甚至将其按类划分成了置换密码，代换密码等。还有一个很重要的点就是维吉尼亚密码，在这里出现了密钥的雏形：</p>
+<h2 id="古典密码的发展"><a href="#古典密码的发展" class="headerlink" title="古典密码的发展"></a>古典密码的发展</h2><p>之前我们曾经说过凯撒密码，栅栏密码，培根密码，甚至将其按类划分成了置换密码，代换密码等。还有一个很重要的点就是维吉尼亚密码，在这里出现了密钥的雏形：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.16.12.png" alt=""></p>
 <p>至于置换密码之前没有多做讲解，在这里举一个列置换的例子就比较好理解了，这个是根据数字列的顺序对明文重新排序</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%886.18.05.png" alt=""></p>
 <p>说了这么多，接下来来几个案例来演示一下吧！</p>
-<h3 id="困在栅栏里的凯撒"><a class="markdownIt-Anchor" href="#困在栅栏里的凯撒"></a> 困在栅栏里的凯撒</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png" alt=""></p>
+<h3 id="困在栅栏里的凯撒"><a href="#困在栅栏里的凯撒" class="headerlink" title="困在栅栏里的凯撒"></a>困在栅栏里的凯撒</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.13.53.png" alt=""></p>
 <p>这道题的题干中首先说了是困在栅栏中的凯撒，所以我们首先应该解决的应该就是栅栏，在比赛中我们为了追求效率，一般都不会自己重新去造轮子，所以直接用CTFCrackTools这个工具就好(github中自寻)。首先跑一次栅栏：</p>
 <blockquote>
 <p>1：NEQ{etlydsf}</p>
@@ -217,14 +210,12 @@
 </blockquote>
 <p>根据题目中说的很六的字符，有两种可能，一种是分了六个栅栏，或者是一个栅栏有6个字符，这一题显然是后者，果断的选择第一个之后，再跑一次凯撒：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/80177C31-7D91-4D00-BBDA-A71DD6EB1E47.png" alt=""></p>
-<h3 id="传统知识加古典密码"><a class="markdownIt-Anchor" href="#传统知识加古典密码"></a> 传统知识加古典密码</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png" alt=""></p>
+<h3 id="传统知识加古典密码"><a href="#传统知识加古典密码" class="headerlink" title="传统知识加古典密码"></a>传统知识加古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.34.48.png" alt=""></p>
 <p>传统知识应该指的就是天干地址所代表的数字，至于古典密码经典的凯撒和栅栏感觉应该是没跑的，通过查询资料得到了天干地址对应的数字，再加上60（一甲子）之后进行ASCII码转换得到了XZSDMFLZ</p>
 <p>emm，首先使用凯撒发现不通，再使用栅栏：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.37.27.png" alt=""></p>
 <p>解出来两个，第一个代换之后并没有规律。接着试试第二个，果断跑通：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.40.36.png" alt=""></p>
 <p>ps:绕是如此，找这个破玩意还是花费了我不少时间。</p>
-<h3 id="古典密码"><a class="markdownIt-Anchor" href="#古典密码"></a> 古典密码</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png" alt=""></p>
+<h3 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8B%E5%8D%8811.52.31.png" alt=""></p>
 <p>第一反应就是十进制转ASCII码，不要问我为什么，这都做不到就可以卸甲归田了。然后得到一串字符串：</p>
 <blockquote>
 <p>OCU{CFTELXOUYDECTNGAHOHRNFIENM}IOTA</p>
@@ -239,12 +230,10 @@
 <p>NM}IOTA</p>
 </blockquote>
 <p>按照2，7，6，4，5，1，3重新排列一下，也就是CTF{xx}的形式，至于中间xx两列的顺序都尝试一下，最后发现有规律的就是flag了：CTF{COULDYOUEXCHANGETHEINFORMATION}</p>
-<h3 id="杯酒人生"><a class="markdownIt-Anchor" href="#杯酒人生"></a> 杯酒人生</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png" alt=""></p>
+<h3 id="杯酒人生"><a href="#杯酒人生" class="headerlink" title="杯酒人生"></a>杯酒人生</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%8812.45.17.png" alt=""></p>
 <p>在古典密码中涉及到密钥的应该就是维吉尼亚密码了，首先这里有一个自己加密过的密钥，使用凯撒和栅栏试一次之后得到了密钥：COMPUTER，那么接下来就是对密码进行加密就完成了，可以参照上面的对照表，也可以直接使用工具。</p>
 <p>有一点需要注意的是，实验吧上的题目格式并不统一，所以提交的时候如果不对转换一下格式就好。</p>
-<h3 id="他的情书"><a class="markdownIt-Anchor" href="#他的情书"></a> 他的情书</h3>
-<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png" alt=""></p>
+<h3 id="他的情书"><a href="#他的情书" class="headerlink" title="他的情书"></a>他的情书</h3><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.03.31.png" alt=""></p>
 <p>做完题目之后才发现这个出题者似乎是个超级英雄（原谅绿帽侠、或者单思狂魔），这里有一个解题链接，点进去之后跳转到一个网站，点击是没有用的，上面写着不要相信眼睛相信爱，然后我选择了<code>view-source</code>:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.08.38.png" alt=""></p>
 <p>那么我们就选择相信眼睛吧，通过escape解码之后得到了一串代码：</p>
@@ -254,64 +243,24 @@
 <p>跑一次之后得到了一串网址，链接过去发现了一串base64字符串，解码之后得到：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8A%E5%8D%881.11.46.png" alt=""></p>
 <p>因为最后的答案是ctf{}的格式，最后再跑一次凯撒/栅栏吧–ctf{intwo_is_big_sb}(题主节哀)</p>
-<h3 id="凯撒和某某加密"><a class="markdownIt-Anchor" href="#凯撒和某某加密"></a> 凯撒和某某加密</h3>
-<p>先看题目提示是“凯撒和某某加密”，首先确定一下有凯撒加密(ps:你这不是说废话麼)，然后还有一种加密方式是未知的。</p>
+<h3 id="凯撒和某某加密"><a href="#凯撒和某某加密" class="headerlink" title="凯撒和某某加密"></a>凯撒和某某加密</h3><p>先看题目提示是“凯撒和某某加密”，首先确定一下有凯撒加密(ps:你这不是说废话麼)，然后还有一种加密方式是未知的。</p>
 <p>看下密文：aZZg/x\ZbavpZiEZp+n)o+ 密文中有很多的符号/+)+根据这些可以确定，首先另外一种加密方式不是MD5和base64，原因就是：字母过多，而没有数字，并且通过移位以后符号也不能全部变成字母或者数字。</p>
 <p>到这里觉得要不先解决一下凯撒加密，看看结果字符串是一个什么样的格式吧。这么多的符号，应该不是按照字母序来移动字母了，并且里面也没有代表flag{}格式的字符，可能是按照ascii码表来移动的，并且字母和符号都进行移动。那应该移动多少位呢？既然是ascii码表移动的，那就先把字符转化成ascii码吧。（其实是先用工具试了一波）</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-28%20%E4%B8%8B%E5%8D%883.10.57.png" alt=""></p>
 <p>可以看出，其中ascii最大的是120，对应的字符是X，ascii最大是126，那如果向ascii增加的方向移动的话，移动的位数应该是小于6的；其中最小的是41，如果向ascii减小的方向去移动的话，移动位数应该小于9。</p>
-<p>这里先选择向ascii增加的方向移动，因为我看到了&quot;X&quot;移动5位会变成&quot;}&quot;，那么写一个C语言就可以实现了：</p>
+<p>这里先选择向ascii增加的方向移动，因为我看到了”X”移动5位会变成”}”，那么写一个C语言就可以实现了：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">true<span class="keyword">char</span> a[<span class="number">1000</span>];</div><div class="line">true<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,a)!=EOF)&#123;</div><div class="line">truetrue<span class="keyword">int</span> i;</div><div class="line">truetrue<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(a);i++)</div><div class="line">truetrue&#123;</div><div class="line">truetruetruea[i]=a[i]+<span class="number">5</span>;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="built_in">printf</span>(<span class="string">"%s"</span>,a);</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>然后得到了一串类似栅栏的密码：<code>f__14}a_ggf{u_nJ_u0s.t0</code>，用栅栏密码解不出来，后来发现其实这是一个变异版的栅栏，三三两两而不是每个栅栏都同样的。</p>
 <p>所以从这道题中我们可以学到要发散自己的思维，不能总是停留在常规的加密方式，有时候要大胆的去猜想一下。</p>
-<h3 id="zip伪加密"><a class="markdownIt-Anchor" href="#zip伪加密"></a> zip伪加密</h3>
-<p>下载下来一个压缩包，根据题目名去查找了一下相关资料，在这里就讲一下zip文件的组成，一个zip文件由三个部分组成：压缩源文件数据区、压缩源文件目录区、压缩源文件目录结束标志。下面通过一个实例讲解：</p>
+<h3 id="zip伪加密"><a href="#zip伪加密" class="headerlink" title="zip伪加密"></a>zip伪加密</h3><p>下载下来一个压缩包，根据题目名去查找了一下相关资料，在这里就讲一下zip文件的组成，一个zip文件由三个部分组成：压缩源文件数据区、压缩源文件目录区、压缩源文件目录结束标志。下面通过一个实例讲解：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.24.21.png" alt=""></p>
-<h4 id="压缩源文件数据区"><a class="markdownIt-Anchor" href="#压缩源文件数据区"></a> <strong>压缩源文件数据区：</strong></h4>
-<p>50 4B 03 04：这是头文件标记（0x04034b50）<br>
-14 00：解压文件所需 pkware 版本<br>
-00 00：全局方式位标记（有无加密）<br>
-08 00：压缩方式<br>
-5A 7E：最后修改文件时间<br>
-F7 46：最后修改文件日期<br>
-16 B5 80 14：CRC-32校验（1480B516）<br>
-19 00 00 00：压缩后尺寸（25）<br>
-17 00 00 00：未压缩尺寸（23）<br>
-07 00：文件名长度<br>
-00 00：扩展记录长度<br>
-6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500</p>
-<h4 id="压缩源文件目录区"><a class="markdownIt-Anchor" href="#压缩源文件目录区"></a> <strong>压缩源文件目录区：</strong></h4>
-<p>50 4B 01 02：目录中文件文件头标记(0x02014b50)<br>
-3F 00：压缩使用的 pkware 版本<br>
-14 00：解压文件所需 pkware 版本<br>
-00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br>
-08 00：压缩方式<br>
-5A 7E：最后修改文件时间<br>
-F7 46：最后修改文件日期<br>
-16 B5 80 14：CRC-32校验（1480B516）<br>
-19 00 00 00：压缩后尺寸（25）<br>
-17 00 00 00：未压缩尺寸（23）<br>
-07 00：文件名长度<br>
-24 00：扩展字段长度<br>
-00 00：文件注释长度<br>
-00 00：磁盘开始号<br>
-00 00：内部文件属性<br>
-20 00 00 00：外部文件属性<br>
-00 00 00 00：局部头部偏移量 6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001</p>
-<h4 id="压缩源文件目录结束标志"><a class="markdownIt-Anchor" href="#压缩源文件目录结束标志"></a> <strong>压缩源文件目录结束标志：</strong></h4>
-<p>50 4B 05 06：目录结束标记<br>
-00 00：当前磁盘编号<br>
-00 00：目录区开始磁盘编号<br>
-01 00：本磁盘上纪录总数<br>
-01 00：目录区中纪录总数<br>
-59 00 00 00：目录区尺寸大小<br>
-3E 00 00 00：目录区对第一张磁盘的偏移量<br>
-00 00：ZIP 文件注释长度</p>
+<h4 id="压缩源文件数据区："><a href="#压缩源文件数据区：" class="headerlink" title="压缩源文件数据区："></a><strong>压缩源文件数据区：</strong></h4><p>50 4B 03 04：这是头文件标记（0x04034b50）<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>00 00：扩展记录长度<br>6B65792E7478740BCECC750E71ABCE48CDC9C95728CECC2DC849AD284DAD0500 </p>
+<h4 id="压缩源文件目录区："><a href="#压缩源文件目录区：" class="headerlink" title="压缩源文件目录区："></a><strong>压缩源文件目录区：</strong></h4><p>50 4B 01 02：目录中文件文件头标记(0x02014b50)<br>3F 00：压缩使用的 pkware 版本<br>14 00：解压文件所需 pkware 版本<br>00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）<br>08 00：压缩方式<br>5A 7E：最后修改文件时间<br>F7 46：最后修改文件日期<br>16 B5 80 14：CRC-32校验（1480B516）<br>19 00 00 00：压缩后尺寸（25）<br>17 00 00 00：未压缩尺寸（23）<br>07 00：文件名长度<br>24 00：扩展字段长度<br>00 00：文件注释长度<br>00 00：磁盘开始号<br>00 00：内部文件属性<br>20 00 00 00：外部文件属性<br>00 00 00 00：局部头部偏移量 6B65792E7478740A00200000000000010018006558F04A1CC5D001BDEBDD3B1CC5D001BDEBDD3B1CC5D001 </p>
+<h4 id="压缩源文件目录结束标志："><a href="#压缩源文件目录结束标志：" class="headerlink" title="压缩源文件目录结束标志："></a><strong>压缩源文件目录结束标志：</strong></h4><p>50 4B 05 06：目录结束标记<br>00 00：当前磁盘编号<br>00 00：目录区开始磁盘编号<br>01 00：本磁盘上纪录总数<br>01 00：目录区中纪录总数<br>59 00 00 00：目录区尺寸大小<br>3E 00 00 00：目录区对第一张磁盘的偏移量<br>00 00：ZIP 文件注释长度</p>
 <p>根据以上的知识我们可以合理的猜想如果把一个zip文件的文件头或者加密标志位进行适当修改，那就可能会改变文件的可读性，比如下面这个例子中，我们就可以将一个无密码压缩包修改为一个有密码压缩包：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.30.22.png" alt=""></p>
 <p>于是这样就达到了zip伪加密的目的，可是这里又有一个疑问了，你可能会问，为什么改成09，而不是其他的数呢，其实改成09只是举的一个例子，只要末位是奇数，就代表加密，反之，末位是偶数代表未加密(这是一个经过验证的猜想)。但是如果想要修改头文件标志位的朋友时肯定会报错的。</p>
-<h3 id="ook和brainfuck"><a class="markdownIt-Anchor" href="#ook和brainfuck"></a> Ook!和Brainfuck</h3>
-<p>题目中丢出了一些不知所谓的符号，看起来没有什么很大的规律，使用移位、栅栏、列置换都没有很清晰的结果，后来我就去搜索了一下这些奇怪的字符组合，然后在Wiki上找到了答案：</p>
+<h3 id="Ook-和Brainfuck"><a href="#Ook-和Brainfuck" class="headerlink" title="Ook!和Brainfuck"></a>Ook!和Brainfuck</h3><p>题目中丢出了一些不知所谓的符号，看起来没有什么很大的规律，使用移位、栅栏、列置换都没有很清晰的结果，后来我就去搜索了一下这些奇怪的字符组合，然后在Wiki上找到了答案：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-06%20%E4%B8%8B%E5%8D%885.49.30.png" alt=""></p>
 <p>原来这两个是两种计算机编程语言的语法，这种语言被统称为esolang，旨在尝试各种奇怪的想法，难以编程，一般不会做为实际使用，所以这里只需要去搜索对应的网站进行解密即可。这里丢个<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="external">传送门</a></p>
 
@@ -382,15 +331,15 @@ F7 46：最后修改文件日期<br>
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/ROP/">ROP</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/sumup/">sumup</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>
@@ -415,7 +364,7 @@ F7 46：最后修改文件日期<br>
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
+                        <a href="https://twitter.com/peterpan980927">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>

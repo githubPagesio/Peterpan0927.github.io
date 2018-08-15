@@ -165,13 +165,11 @@
         
 
         <!-- Post Content -->
-        <img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt="">
+        <p><img src="http://omunhj2f1.bkt.clouddn.com/746171_500acl66acq5pji.gif" alt=""></p>
 <p>今天稍微折腾了一下树莓派，想在上面学习一下ARM架构的汇编代码，给逆向稍微打点底子，同时也是把CISC和RISC两种不同的CPU架构做一个对比，看看有什么不同之处。</p>
 <a id="more"></a>
-<h1 id="cisc和risc"><a class="markdownIt-Anchor" href="#cisc和risc"></a> CISC和RISC</h1>
-<p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
-<h3 id="load-store体系结构"><a class="markdownIt-Anchor" href="#load-store体系结构"></a> load-store体系结构</h3>
-<p>RISC使用的是load-store结构。load-store结构的本质，在于RISC技术的CPU只处理（指逻辑，算术运算处理）寄存器中的数据。相反，X86却能够直接处理存储器中的数据。</p>
+<h1 id="CISC和RISC"><a href="#CISC和RISC" class="headerlink" title="CISC和RISC"></a>CISC和RISC</h1><p>这两种一个是精简指令集，一个是复杂指令集，在大学的微机课上我们应该会学到x86处理器的汇编指令，这个是属于复杂指令集，而我们生活中最常见的其实是精简指令集系统，如ARM/MIPS，我们的手机等就是用的这个。下面我们从体系结构的方面来对比一下。</p>
+<h3 id="load-store体系结构"><a href="#load-store体系结构" class="headerlink" title="load-store体系结构"></a>load-store体系结构</h3><p>RISC使用的是load-store结构。load-store结构的本质，在于RISC技术的CPU只处理（指逻辑，算术运算处理）寄存器中的数据。相反，X86却能够直接处理存储器中的数据。</p>
 <p>RISC体系架构的CPU，存储器和寄存器之间的数据交互，由专门的load和store指令负责。存储器是指内存或者Flash（NOR Flash）等可以被CPU直接寻址的存储单元。CPU要将某个地址的数据放入寄存器中，只能够使用load指令；要将寄存器中的值存放到存储器中，只能够使用store指令。</p>
 <p>CISC体系架构的CPU对存储器数据操作则要复杂得多。在X86下，数据的传送都是使用MOV指令。MOV指令既负责寄存器和寄存器之间数据的交互，又负责寄存器和存储器之间的数据交互。X86能够直接处理存储器中的数据，而这一点在RISC体系的CPU中是无法做到的。</p>
 <p>将存储器单元0x00000020中的数加上8，结果存放到该存储单元中。假设存储单元的地址0x00000020已经存放在寄存器reg中，即reg=0x00000020，下文中，(reg)表示reg地址处的值，即存储单元中的值。下面我们看看在X86下和ARM/MIPS下分别是如何操作的。</p>
@@ -180,17 +178,13 @@
 <p>ARM/MIPS只能够处理寄存器中的数据，所以需要将该存储器中的值用load命令加载到寄存器中，然后对寄存器中的值进行算术运算，最后使用store命令将运算结果送回存储单元中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ld reg2 (reg)		;将存储器单元(reg)中的值加载到寄存器reg2中 </div><div class="line">add reg2 0x08		;将寄存器reg2中的值加0x08，结果存到在寄存器reg2中 </div><div class="line">store (reg) reg2	;将寄存器reg2中的值放回存储器单元(reg)中</div></pre></td></tr></table></figure>
 <p>硬币有两面，精简指令集也有它的优势和劣势。其中一个重要的优势是指令可以被更快的执行（RISC处理器通过引入流水线机制，减少每个指令的占用的CPU的时钟周期来缩短执行时间）。它的劣势也很明显，较少的指令增加了软件（事实上是编译器）的复杂性。另一个重要的事实是，ARM具有两种运行模式（可以类比x86的实模式和保护模式），ARM模式和Thumb模式。</p>
-<h1 id="初识arm"><a class="markdownIt-Anchor" href="#初识arm"></a> 初识ARM</h1>
-<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
-<p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
+<h1 id="初识ARM"><a href="#初识ARM" class="headerlink" title="初识ARM"></a>初识ARM</h1><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在ARM结构中，数据类型只有字和字节(又分为有符号和无符号类型的)，下面是一些数据加载和存储的例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ldr =加载字</div><div class="line">ldr h =加载无符号半字</div><div class="line">ldr sh =加载有符号半字</div><div class="line">ldr b =加载无符号字节</div><div class="line">ldr sb =加载有符号字节</div><div class="line"></div><div class="line">str =存储字符</div><div class="line">str h =存储无符号半字符</div><div class="line">str sh =存储有符号半字符</div><div class="line">str b =存储未签名的字节</div><div class="line">str sb =存储已签名的字节</div></pre></td></tr></table></figure>
-<h3 id="大端和小端"><a class="markdownIt-Anchor" href="#大端和小端"></a> 大端和小端</h3>
-<p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
+<h3 id="大端和小端"><a href="#大端和小端" class="headerlink" title="大端和小端"></a>大端和小端</h3><p>我们在查看内存中的字节的时候有两种基本的方法就是大端和小端。区别在于对象的每个字节在内存中的存储顺序</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%8811.53.47.png" alt=""></p>
 <p>以ARMv6为例，指令是固定的小端，数据的访问可以是由程序状态寄存器（CPSR）的第九位来控制的小端或大端。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-23%20%E4%B8%8B%E5%8D%888.40.27.png" alt=""></p>
-<h3 id="arm中的寄存器"><a class="markdownIt-Anchor" href="#arm中的寄存器"></a> ARM中的寄存器</h3>
-<p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
+<h3 id="ARM中的寄存器"><a href="#ARM中的寄存器" class="headerlink" title="ARM中的寄存器"></a>ARM中的寄存器</h3><p>我们知道在8086中有14个寄存器，而在ARM中寄存器中要更多一些，我们通过一张表将我们熟悉的x86和ARM联系起来</p>
 <table>
 <thead>
 <tr>
@@ -257,8 +251,7 @@
 <p>然后执行下一条之后我们再看看寄存器中的值，r0中是多少，是0x10408么？让我们拭目以待</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">(gdb) next</div><div class="line"></div><div class="line">Breakpoint 7, main () at hello.s:28</div><div class="line">28	 	mov r1, #2</div><div class="line">(gdb) info registers</div><div class="line">r0             0x10410	66576</div><div class="line">r1             0x7efff344	2130703172</div><div class="line">r2             0x7efff34c	2130703180</div><div class="line">r3             0x10408	66568</div><div class="line">r4             0x1041c	66588</div><div class="line">r5             0x0	0</div><div class="line">r6             0x102e0	66272</div><div class="line">r7             0x0	0</div><div class="line">r8             0x0	0</div><div class="line">r9             0x0	0</div><div class="line">r10            0x76fff000	1996484608</div><div class="line">r11            0x0	0</div><div class="line">r12            0x7efff270	2130702960</div><div class="line">sp             0x7efff1f0	0x7efff1f0</div><div class="line">lr             0x76e7a678	1994892920</div><div class="line">pc             0x1040c	0x1040c &lt;main+4&gt;</div><div class="line">cpsr           0x60000010	1610612752</div></pre></td></tr></table></figure>
 <p>我们发现r0寄存器中的值是main函数入口的地址+8，在我们直接观察pc的时候，它指向的是下一条指令的地址，但是在调试的时候，我们发现是pc中的值+8，那么为什么会有这样的结果呢，这个涉及到CPU流水线的问题，我们放在之后再讨论。</p>
-<h1 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h1>
-<ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li>看雪安全论坛</li>
 <li><a href="https://azeria-labs.com" target="_blank" rel="external">外国友人博客</a></li>
 <li><a href="https://www.anquanke.com/post/id/86536" target="_blank" rel="external">gdb使用方式</a></li>
@@ -331,15 +324,15 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/ROP/">ROP</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
             <a class="footer-post" href="/categories/sumup/">sumup</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>
@@ -364,7 +357,7 @@
                     
                     
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/?lang=en">
+                        <a href="https://twitter.com/peterpan980927">
                             <span class="footer-icon-container">
                                 <i class="fa fa-twitter"></i>
                             </span>
