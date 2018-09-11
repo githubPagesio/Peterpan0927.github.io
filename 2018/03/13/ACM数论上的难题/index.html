@@ -165,19 +165,20 @@
         
 
         <!-- Post Content -->
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-13%20%E4%B8%8B%E5%8D%8810.51.24.png" heigtht="350" width="600" alt="">
 <p>比赛中没有那么多的时间去对每一个数学问题进行相关的公式推导，所以这里记载一些可能会用到而又不是板子的题目</p>
 <a id="more"></a>
-<h1 id="Cake"><a href="#Cake" class="headerlink" title="Cake"></a>Cake</h1><p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=4" target="_blank" rel="external">传送门</a></p>
+<h1 id="cake"><a class="markdownIt-Anchor" href="#cake"></a> Cake</h1>
+<p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=4" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem</strong> <strong>Description</strong></p>
-<p>一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食. </p>
+<p>一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食.</p>
 <p><strong>Input</strong></p>
 <p>每行有两个数p和q.</p>
 <p><strong>Output</strong></p>
 <p>输出最少要将蛋糕切成多少块.</p>
 <p><strong>Sample Input</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2 3</div></pre></td></tr></table></figure>
-<p>2 3 </p>
+<p>2 3</p>
 <p><strong>Sample Output</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4</div></pre></td></tr></table></figure>
 <p><strong>Hint</strong></p>
@@ -189,9 +190,10 @@
 <p>再看8和4,分割线是7和3,重合数是最大公约数减1为3，因此由(p+q-2)-gcd(p,q)-1得到不重合的切割线数是7,即最小块数为8。所以答案就是p+q-gcd(p,q)。</p>
 <p>用代码表示就是一个gcd，然后输出即可：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> b ? gcd(b, a%b) : a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">        <span class="keyword">int</span> p,q;</div><div class="line">        <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;p,&amp;q))</div><div class="line">        &#123;</div><div class="line">        	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,p+q-gcd(p,q));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Big-Number"><a href="#Big-Number" class="headerlink" title="Big Number"></a>Big Number</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1018" target="_blank" rel="external">传送门</a></p>
+<h1 id="big-number"><a class="markdownIt-Anchor" href="#big-number"></a> Big Number</h1>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1018" target="_blank" rel="external">传送门</a></p>
 <p><strong>Problem</strong> <strong>Description</strong></p>
-<p>In many applications very large integers numbers are required. Some of these applications are using keys for secure transmission of data, encryption, etc. In this problem you are given a number, you have to determine the number of digits in the factorial of the number. </p>
+<p>In many applications very large integers numbers are required. Some of these applications are using keys for secure transmission of data, encryption, etc. In this problem you are given a number, you have to determine the number of digits in the factorial of the number.</p>
 <p><strong>Input</strong></p>
 <p>Input consists of several lines of integer numbers. The first line contains an integer n, which is the number of cases to be tested, followed by n lines, one integer 1 ≤ n ≤ 107 on each line.</p>
 <p><strong>Output</strong></p>
@@ -200,9 +202,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2</div><div class="line">10</div><div class="line">20</div></pre></td></tr></table></figure>
 <p><strong>Sample</strong> <strong>Output</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">7</div><div class="line">19</div></pre></td></tr></table></figure>
-<p>因为我们求的是十进制的数的位数，所以我们可以使用<code>log10()</code>函数来求解，将n!表示成10的次幂,即n!=10^M(10的M次方，10^2是3位，M+1就代表位数)则不小于M的最小整数就是n!的位数，对该式两边取对数，有M=log10^n!即：  </p>
+<p>因为我们求的是十进制的数的位数，所以我们可以使用<code>log10()</code>函数来求解，将n!表示成10的次幂,即n!=10<sup>M(10的M次方，10</sup>2是3位，M+1就代表位数)则不小于M的最小整数就是n!的位数，对该式两边取对数，有M=log10^n!即：</p>
 <blockquote>
-<p>M = log10^1+log10^2+log10^3…+log10^n</p>
+<p>M = log10<sup>1+log10</sup>2+log10<sup>3…+log10</sup>n</p>
 </blockquote>
 <p>循环求和,就能算得M值，该M是n!的精确位数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"> <span class="keyword">int</span> count,var,j;</div><div class="line"> <span class="keyword">double</span> sum;</div><div class="line"> <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;count);</div><div class="line"> <span class="keyword">while</span>(count--)</div><div class="line"> &#123;</div><div class="line">  sum=<span class="number">0</span>;</div><div class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;var);</div><div class="line">  <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=var;j++)</div><div class="line">   sum+=<span class="built_in">log10</span>(j);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)sum+<span class="number">1</span>);</div><div class="line"> &#125;</div><div class="line"> <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -252,6 +254,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
             </li>
             
@@ -261,10 +267,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
             </li>
             
         </ul>
@@ -278,11 +280,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a>
+            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
@@ -290,7 +292,7 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/ARM64/">ARM64</a>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
         </li>
         
     </ul>

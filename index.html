@@ -145,6 +145,45 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2018/09/10/empty-list分析/">
+                empty_list分析
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-09-10</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/Poc/">Poc</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <a id="more"></a>
+<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
+<p>这是lan Beer在2018年写的一个Poc，利用的方式十分的巧妙，充分的利用了CPU的调度来提升成功率，如创建大量的闲置线程去抢占CPU，从而维护堆空间的稳定，虽然成功率只有不到50%，但是其中对于仅仅溢出8个零字节的方式就达到提权的目的还是非常值得我们去学习的。</p>
+<p>漏洞的产生点就在我们没有对于参数的下界进行检查，所以我们可以传递一个很小的<code>buffer</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  * Allocate a target buffer for attribute results.</div><div class="line">  * Note that since we won't ever copy out more than the caller requested,</div><div class="line">  * we never need to allocate more than they offer.</div><div class="line">  */</div><div class="line"> ab.allocated = ulmin(bufferSize, fixedsize + varsize);</div><div class="line"> <span class="keyword">if</span> (ab.allocated &gt; ATTR_MAX_BUFFER) &#123;</div><div class="line">   error = ENOMEM;</div><div class="line">   VFS_DEBUG(ctx, vp, <span class="string">"ATTRLIST - ERROR: buffer size too large (%d limit %d)"</span>, ab.allocated, ATTR_MAX_BUFFER);</div><div class="line">   <span class="keyword">goto</span> out;</div><div class="line"> &#125;</div><div class="line"> MALLOC(ab.base, <span class="keyword">char</span> *, ab.allocated, M_TEMP, M_ZERO | M_WAITOK);</div></pre></td></tr></table></figure>
+<p>但是溢出的数据是并不受我们控制的，至于为什么，我们来看一下函数原型就知道了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"> <span class="title">getattrlist_internal</span><span class="params">(<span class="keyword">vnode_t</span> vp, <span class="keyword">struct</span> getattrlist_args *uap, <span class="keyword">proc_t</span> p, <span class="keyword">vfs_context_t</span> ctx)</span></div><div class="line"> &#123;</div><div class="line"> ...</div><div class="line"> ...</div><div class="line"> ...</div><div class="line"> <span class="keyword">if</span> (al.volattr) &#123;</div><div class="line"> <span class="keyword">if</span> (al.fileattr || al.dirattr || al.forkattr) &#123;</div><div class="line"> error = EINVAL;</div><div class="line"> VFS_DEBUG(ctx, vp, <span class="string">"ATTRLIST - ERROR: mixed volume/file/directory/fork attributes"</span>);</div><div class="line"> <span class="keyword">goto</span> out;</div><div class="line"> &#125;</div><div class="line"> error = getvolattrlist(vp, uap, &amp;al, ctx, proc_is64);</div><div class="line"> <span class="keyword">goto</span> out;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>从<code>if</code>的判断条件来看，<code>al</code>的<code>volattr</code>不为0之后，其他的三个属性如果不是0就会进入错误的分支，所以我们只能溢出8个字节的<code>0</code>，那么这个偏移是如何计算的呢，重点就在最后的<code>bcopy</code>函数了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bcopy(&amp;ab.actual, ab.base + <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>), <span class="keyword">sizeof</span>(ab.actual));</div></pre></td></tr></table></figure>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2018/08/29/ZipperDown漏洞的新一轮分析/">
                 ZipperDown漏洞的新一轮分析
             </a>
@@ -249,7 +288,7 @@
             
             
                 <span class="category">
-                    <a href="/categories/poc/">poc</a>
+                    <a href="/categories/Poc/">Poc</a>
                 </span>
             
         </div>
@@ -419,37 +458,6 @@
 
 </div>
             
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/05/01/iOS的降级限制/">
-                iOS的降级限制
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-05-01</span>
-            
-            
-            
-                <span class="category">
-                    <a href="/categories/系统校验/">系统校验</a>
-                </span>
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>What if we can go back to the past?</p>
-        </div>
-        <a href="/2018/05/01/iOS的降级限制/" class="read-more">Read More</a>
-    
-
-</div>
-            
         </section>
     </div>
 </div>
@@ -492,6 +500,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
             </li>
             
@@ -501,10 +513,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
             </li>
             
         </ul>
@@ -518,11 +526,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a>
+            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
@@ -530,7 +538,7 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/ARM64/">ARM64</a>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
         </li>
         
     </ul>

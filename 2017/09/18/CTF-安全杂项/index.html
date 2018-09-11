@@ -167,14 +167,17 @@
         <!-- Post Content -->
         <p>赛前抱佛脚刷题的安全杂项系列，不用花松果就可以看到的write up岂不美哉</p>
 <a id="more"></a>
-<h1 id="安全杂项-misc"><a href="#安全杂项-misc" class="headerlink" title="安全杂项(misc)"></a>安全杂项(misc)</h1><p>网络安全是一个非常广泛的部分，除了web安全，隐写术，逆向工程这种主要的部分之外，其他的一些没有具体特性的问题被统称为安全杂项，今天就来说一下安全杂项的问题，其中包含着各种奇奇怪怪的安全实例，那么就系好安全带，要发车了～</p>
-<h2 id="0X00-base64"><a href="#0X00-base64" class="headerlink" title="0X00-base64"></a>0X00-base64</h2><p>这是一道非常经典的题目了，讲述了一个动(cao)人(dan)的故事:</p>
+<h1 id="安全杂项misc"><a class="markdownIt-Anchor" href="#安全杂项misc"></a> 安全杂项(misc)</h1>
+<p>网络安全是一个非常广泛的部分，除了web安全，隐写术，逆向工程这种主要的部分之外，其他的一些没有具体特性的问题被统称为安全杂项，今天就来说一下安全杂项的问题，其中包含着各种奇奇怪怪的安全实例，那么就系好安全带，要发车了～</p>
+<h2 id="0x00-base64"><a class="markdownIt-Anchor" href="#0x00-base64"></a> 0X00-base64</h2>
+<p>这是一道非常经典的题目了，讲述了一个动(cao)人(dan)的故事:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%887.09.36.png" alt=""></p>
 <p>首先当然是把文件下载下来啦～，点击获取邮件，会下载一个后缀名为.rar的压缩包，解压缩之后会有一个txt文件，打开呈现的是下面这个样子：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%887.11.48.png" alt=""></p>
 <p>发现邮件的正文部分已经被加密了，凭借我们的经验可以看出这个是base64编码的，将正文部分复制出来解码得到了一串html的代码，将html代码保存在记事本中，并保存为html格式。</p>
 <p>在浏览器中打开后，发现是乱码，这个时候调整一下浏览器的编码问题，于是得到了最终的flag值，帅帅同学成功阅读了来自女朋友的邮件（快把这种女盆友打死吧！）</p>
-<h2 id="0X01-misc50"><a href="#0X01-misc50" class="headerlink" title="0X01-misc50"></a>0X01-misc50</h2><p>这个题需要我们从日志中分析出我们所需要的flag值到底是多少，这道题的难度就已经上升了许多，下载了文件之后打开发现是首部为rar的乱码，判断为一个压缩包，修改后缀名之后解压缩得到一个log文件：</p>
+<h2 id="0x01-misc50"><a class="markdownIt-Anchor" href="#0x01-misc50"></a> 0X01-misc50</h2>
+<p>这个题需要我们从日志中分析出我们所需要的flag值到底是多少，这道题的难度就已经上升了许多，下载了文件之后打开发现是首部为rar的乱码，判断为一个压缩包，修改后缀名之后解压缩得到一个log文件：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%887.27.08.png" alt=""></p>
 <p>往下查看的时候发现了有sqlmap的payload，将文本用sublime打开之后想要搜索一下会不会有我们想要的flag，结果发现了有一些行中包含了这个关键字：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%887.31.01.png" alt=""></p>
@@ -188,7 +191,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">f = open(<span class="string">'log3'</span>)</div><div class="line">s = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> f.readlines():</div><div class="line">  start = i.index(<span class="string">'))!='</span>)</div><div class="line">  end = i.index(<span class="string">'),'</span>, start)</div><div class="line">  s += (chr(int(i[start+<span class="number">4</span>:end])))</div><div class="line"><span class="keyword">print</span> s</div></pre></td></tr></table></figure>
 <p>输出之后的结果是：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%888.06.16.png" alt=""></p>
 <p>花括号内就是我们的flag值了，呼～真是心累，虽然过程没写多少，但是还是一道比较综合的题目</p>
-<h2 id="0X02-破损的磁带"><a href="#0X02-破损的磁带" class="headerlink" title="0X02-破损的磁带"></a>0X02-破损的磁带</h2><p>照例是点击链接，然后跳转到一个网站：</p>
+<h2 id="0x02-破损的磁带"><a class="markdownIt-Anchor" href="#0x02-破损的磁带"></a> 0X02-破损的磁带</h2>
+<p>照例是点击链接，然后跳转到一个网站：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%888.18.56.png" alt=""></p>
 <p>我们可以发现一共八行，应该是对应了八个字符，第三行和第五行是一样的，代表的都是字符<code>i</code>,那么这个破损的磁带必定是通过一种编码的方式，根据o和_首先统计出一共有7个标识位</p>
 <p>那么我们不禁想到会不会代表的是二进制呢，敢想就敢做，将o位当成1，_位视作0，发现B对应的二进制数是1000010，转换为十进制就是66，这恰好就是B所对应的ASCII表中的数字，于是继续验证下去，发现果然是使用的ASCII编码，那么就可以开始来解题了：</p>
@@ -198,18 +202,20 @@
 <p>然后用python脚本将这些二进制数转为十进制，再转换成ASCII的模式，最终得到flag;</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">f = open(<span class="string">'brokenDisk'</span>)</div><div class="line">s=<span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> f.readlines():</div><div class="line">  i = int(i, <span class="number">10</span>)</div><div class="line">  s += chr(i)</div><div class="line"><span class="keyword">print</span> s</div></pre></td></tr></table></figure>
 <p>我们的flag值已经拿到了！！！—&gt;Where there is a will,there is a way.</p>
-<h2 id="0X03-功夫秘籍"><a href="#0X03-功夫秘籍" class="headerlink" title="0X03-功夫秘籍"></a>0X03-功夫秘籍</h2><p>这一次我们在点击网页之后下载了一个名为kungfu.rar的压缩包，点击一下，果断打不开，正常情况，于是猜想是其他的格式，试了一下图片类，然后成功了。还以为是其中JSB算法，很开心的使用stegsolve扫了扫，发现并不是。</p>
+<h2 id="0x03-功夫秘籍"><a class="markdownIt-Anchor" href="#0x03-功夫秘籍"></a> 0X03-功夫秘籍</h2>
+<p>这一次我们在点击网页之后下载了一个名为kungfu.rar的压缩包，点击一下，果断打不开，正常情况，于是猜想是其他的格式，试了一下图片类，然后成功了。还以为是其中JSB算法，很开心的使用stegsolve扫了扫，发现并不是。</p>
 <p>没办法，使用binwalk一扫，我擦，原来是png格式的，其中还包着一个zlib压缩包，使用命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">binwalk -e kungfu.png</div></pre></td></tr></table></figure>
 <p>出来一个目录，其中有一个4D.zlib的压缩包，反正是打不开的，再也不会上当了！！！</p>
 <p>查看后取出key值：</p>
-<p>果断使用base64解码得到一串字符串：T_ysK9_5rhk__uFMt}3El{nu@E </p>
+<p>果断使用base64解码得到一串字符串：T_ysK9_5rhk__uFMt}3El{nu@E</p>
 <p>看样子应该是个栅栏密码，使用栅栏密码破解工具（python编写）进行破解获得flag</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-18%20%E4%B8%8B%E5%8D%889.55.39.png" alt=""></p>
 <p>提交括号内的值成功，大功告成！</p>
 <p>这里提供一个暴力破解栅栏密码的python脚本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python3</span></div><div class="line">e = raw_input(<span class="string">'please input the string\n'</span>)</div><div class="line">elen = len(e)</div><div class="line">field=[]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,elen):</div><div class="line">    <span class="keyword">if</span>(elen%i == <span class="number">0</span>):</div><div class="line">        field.append(i)</div><div class="line"></div><div class="line"><span class="keyword">for</span> f <span class="keyword">in</span> field:</div><div class="line">    b = elen / f</div><div class="line">    result = &#123;x:<span class="string">''</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(b)&#125;</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(elen):</div><div class="line">        a = i % b;</div><div class="line">        result.update(&#123;a:result[a] + e[i]&#125;)</div><div class="line">    d = <span class="string">''</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(b):</div><div class="line">        d = d + result[i]</div><div class="line">    <span class="keyword">print</span> (<span class="string">'num:\t'</span>+str(f)+<span class="string">'\t'</span>+<span class="string">'result:\t'</span>+d)</div><div class="line">raw_input()</div></pre></td></tr></table></figure>
-<h2 id="0X04-图片里的动漫"><a href="#0X04-图片里的动漫" class="headerlink" title="0X04-图片里的动漫"></a>0X04-图片里的动漫</h2><p>经历前面的题目之后，我们对于CTF中坑爹的尿性有了一定的了解，这次我们又拿到了一张图片，表面上看起来是一副非常优美的风景呀（谁关心这种问题呀，魂淡！！！）</p>
+<h2 id="0x04-图片里的动漫"><a class="markdownIt-Anchor" href="#0x04-图片里的动漫"></a> 0X04-图片里的动漫</h2>
+<p>经历前面的题目之后，我们对于CTF中坑爹的尿性有了一定的了解，这次我们又拿到了一张图片，表面上看起来是一副非常优美的风景呀（谁关心这种问题呀，魂淡！！！）</p>
 <p>当然标准的步骤自然是先用我们的神器binwalk扫一扫，果然不出所料，出来了一个压缩包，虽然知道事情并没有那么的简单，但是还是手贱的点了一下，好了，加密的rar压缩包，打不开，暴力破解后无果。</p>
 <p>那么试着用文本格式打开看一下，从头部看出果然是个A货，这玩意其实是个jpg图片呀！转换之后发现是一张倒置的七龙珠图片：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8A%E5%8D%8811.48.01.png" alt=""></p>
@@ -220,28 +226,32 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">touch 1.rar.xml</div><div class="line">#开多线程破解</div><div class="line">rarcrack --threads 28 --type rar 1.rar</div></pre></td></tr></table></figure>
 <p>我也没有等到成功，而是又去搜了一下（怨念太深，为什么不是七龙珠，明明说了是一个动漫的小写字母啊），然后在百度百科上发现还有一种说法叫做dragonball！</p>
 <p>于是乎就使用CTF{逆置的dragonball}成功夺旗，这个题就分享到这吧。</p>
-<h2 id="0X05-藏在图片里的秘密"><a href="#0X05-藏在图片里的秘密" class="headerlink" title="0X05-藏在图片里的秘密"></a>0X05-藏在图片里的秘密</h2><p>这么多图片题你干脆叫隐写术好了，干嘛叫misc。到这里也算是有点套路了，下载图片，打开后，图片上面写着16 06 68 88。先记下来，说不定后面有个加密的压缩包等着我。</p>
+<h2 id="0x05-藏在图片里的秘密"><a class="markdownIt-Anchor" href="#0x05-藏在图片里的秘密"></a> 0X05-藏在图片里的秘密</h2>
+<p>这么多图片题你干脆叫隐写术好了，干嘛叫misc。到这里也算是有点套路了，下载图片，打开后，图片上面写着16 06 68 88。先记下来，说不定后面有个加密的压缩包等着我。</p>
 <p>然后也是使用binwalk扫一下，但是只发现了zip压缩文件的尾，没有发现头，使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">binwalk -e 1.jpg</div></pre></td></tr></table></figure>
 <p>也是无法分离的，难道是要让我补全头部之类的操作，用sublime打开之后搜索504B0304发现其实是存在的，好吧binwalk还需要提高，那我们既然找到了就自己抠出来保存为out.zip吧，但是这种方式感觉过于麻烦，在kali linux下我们可以直接使用foremost:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foremost 1.jpg</div></pre></td></tr></table></figure>
-<p>果然是个加密压缩吧，难道密码为16 06 68 88？肯定不是，这么简单做个毛啊！将图片反转之后发现原来是88 89 90 91，对应的ASCII码是”XYZ[“这4个字符，嘿嘿，还是被我发现了，输入之后仍然不对，好吧，直接上工具怼：</p>
+<p>果然是个加密压缩吧，难道密码为16 06 68 88？肯定不是，这么简单做个毛啊！将图片反转之后发现原来是88 89 90 91，对应的ASCII码是&quot;XYZ[&quot;这4个字符，嘿嘿，还是被我发现了，输入之后仍然不对，好吧，直接上工具怼：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#先将对应的xml的初始密码设置为XYZ[吧，也许会有用</div><div class="line">rarcrack --threads 28 --type zip 1.zip</div></pre></td></tr></table></figure>
-<p>一怼就怼出来了，原来是’XZY[‘，得到数字42433331，难道他就是让我们再使用一趟工具么？反正得到了答案就算了吧，不计较了。</p>
+<p>一怼就怼出来了，原来是’XZY[’，得到数字42433331，难道他就是让我们再使用一趟工具么？反正得到了答案就算了吧，不计较了。</p>
 <p>你以为这样就结束了吗？？？愚蠢的人类，不管是直接输入还是ASCII码都不是flag值，蛤蛤蛤，到这里是不是就想放弃了，在一直寻找未果之后还是要回到源头，那个包含压缩包的图片，在十六进制编辑器中惊奇的发现其中有一串类似摩斯电码的玩意：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.56.12.png" alt=""></p>
 <p>不得不说作者是真的恶心，在使用winhex或者Mac上的hex friend的时候都会出现如下情况：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8812.58.01.png" alt="">这个时候就更难发现其中的秘密了。</p>
-<p>接下来应该怎么解读呢？这个时候已经比较简单了，用到我们刚才的数字42433331，不正是对摩斯电码进行分隔么？按照分隔得到了摩斯电码：…./.-/.-../—/.–/—/-../.</p>
+<p>接下来应该怎么解读呢？这个时候已经比较简单了，用到我们刚才的数字42433331，不正是对摩斯电码进行分隔么？按照分隔得到了摩斯电码：…/.-/.-…/—/.–/—/-…/.</p>
 <p>使用工具转换后得到字母HALOWODE，使用格式CTF{HALOWODE}提交，终于成功。</p>
 <p>ps:摩斯电码的脑洞是参考了别人的Writeup,太坑了</p>
-<h2 id="0X05-理查德"><a href="#0X05-理查德" class="headerlink" title="0X05-理查德"></a>0X05-理查德</h2><p>其实真的不想吐槽这个名字了…这到底是什么鬼名字，这么随便真的好么？？？</p>
+<h2 id="0x05-理查德"><a class="markdownIt-Anchor" href="#0x05-理查德"></a> 0X05-理查德</h2>
+<p>其实真的不想吐槽这个名字了…这到底是什么鬼名字，这么随便真的好么？？？</p>
 <p>算了，首先下载文件，扩展名为flac，搜索一下发现是音频文件，然后用音频分析文件打开：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-19%20%E4%B8%8B%E5%8D%8810.45.52.png" alt=""></p>
 <p>显然是摩斯密码，按照表解密之后得到flag值</p>
-<h2 id="0X06-WTF？"><a href="#0X06-WTF？" class="headerlink" title="0X06-WTF？"></a>0X06-WTF？</h2><p>打开之后，发现是全屏的字符，直接下滑到底，出现了两个等号，一看是base64编码，解码之后全屏的0、1，看的头都要大了，并没有什么头绪，苦死未果之后去看了一下write up，居然是二维码…可以使用python的PIL库，或者使用其他的二维码生成工具，来生成二维码：</p>
+<h2 id="0x06-wtf"><a class="markdownIt-Anchor" href="#0x06-wtf"></a> 0X06-WTF？</h2>
+<p>打开之后，发现是全屏的字符，直接下滑到底，出现了两个等号，一看是base64编码，解码之后全屏的0、1，看的头都要大了，并没有什么头绪，苦死未果之后去看了一下write up，居然是二维码…可以使用python的PIL库，或者使用其他的二维码生成工具，来生成二维码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#注意txt文件中是要有256行和256列，避免列表越界</span></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line">im=Image.new(<span class="string">'RGB'</span>,(<span class="number">256</span>,<span class="number">256</span>))</div><div class="line">pix = im.load()</div><div class="line"><span class="keyword">with</span> open(<span class="string">'code.txt'</span>) <span class="keyword">as</span> f:</div><div class="line">    txt=f.read()</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(txt)):</div><div class="line">        <span class="keyword">if</span> txt[x] == <span class="string">'1'</span>:</div><div class="line">            pix[x/<span class="number">256</span>,x%<span class="number">256</span>]=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pix[x/<span class="number">256</span>,x%<span class="number">256</span>]=(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>)</div><div class="line">im.show()</div><div class="line">im.save(<span class="string">'1.png'</span>)</div></pre></td></tr></table></figure>
-<p>最后得到二维码：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8A%E5%8D%8812.31.21.png" alt=""> </p>
-<h2 id="0X07-A记录"><a href="#0X07-A记录" class="headerlink" title="0X07-A记录"></a>0X07-A记录</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%884.32.55.png" alt=""></p>
+<p>最后得到二维码：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8A%E5%8D%8812.31.21.png" alt=""></p>
+<h2 id="0x07-a记录"><a class="markdownIt-Anchor" href="#0x07-a记录"></a> 0X07-A记录</h2>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%884.32.55.png" alt=""></p>
 <p>从题目中可以看出应该答案就藏在数据包中，并且是A记录的第一条，点击链接之后下载了这个cap包</p>
 <p>首先使用的我的kali下面的工具进行一下测试：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aircrack-ng shipin.cap</div></pre></td></tr></table></figure>
@@ -251,30 +261,35 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%884.40.29.png" alt=""></p>
 <p>在目录下面生成了一个解密的报文，用wireshark打开时候直接搜索DNS，第一条A记录即为我们所需</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%884.41.09.png" alt=""></p>
-<h2 id="0X08-紧急报文"><a href="#0X08-紧急报文" class="headerlink" title="0X08-紧急报文"></a>0X08-紧急报文</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%887.35.45.png" alt=""></p>
+<h2 id="0x08-紧急报文"><a class="markdownIt-Anchor" href="#0x08-紧急报文"></a> 0X08-紧急报文</h2>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%887.35.45.png" alt=""></p>
 <p>从 题目的FA XX DD AG FF XG FD XG DD DG GA XF FA 的两个大写字母 看出这是ADFGVX加密方式，这是德军在第一次世界大战中使用的栏块密码，简单来说就是直接看表：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%887.37.40.png" alt=""></p>
 <p>那么FA XX DD AG FF XG FD XG DD DG GA XF FA</p>
 <p>翻译过来就是flagxidianctf  -&gt; flag_Xd{hSh_ctf:flagxidianctf}</p>
-<h2 id="0X09-Canon"><a href="#0X09-Canon" class="headerlink" title="0X09-Canon"></a>0X09-Canon</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%888.03.32.png" alt=""></p>
+<h2 id="0x09-canon"><a class="markdownIt-Anchor" href="#0x09-canon"></a> 0X09-Canon</h2>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%888.03.32.png" alt=""></p>
 <p>这道题…用到的是音频隐写，下载的压缩包打开之后是一个加密压缩包和一个mp3文件，猜想密码应该就是在音频文件当中了。其实一开始想的Aobe Audition看看是不是又藏了什么摩斯密码之类的，发现没有，那么就试试mp3的隐写。</p>
 <p>之前还没有用过这种工具 ，这里推荐一下可以是用MP3Stego，名字和那个图片隐写工具stegsolve长的非常的相似，接下来就开始解密了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">decode -X -p Canon music.mp3</div></pre></td></tr></table></figure>
 <p>解密之后拿到密码，解开压缩包之后有个叫走pic_png.txt文件，打开之后似乎是base64编码的，转换成图片之后显示损坏，绝逼是又把PNG头给偷走了，写个脚本加上去：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf8 -*-</span></div><div class="line"><span class="keyword">import</span> base64</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addHead</span><span class="params">()</span>:</span></div><div class="line">truef=open(<span class="string">'pic_png.txt'</span>).read()</div><div class="line">truefsave=open(<span class="string">'pic.png'</span>,<span class="string">'wb'</span>)</div><div class="line">true<span class="comment">#添加的png头部</span></div><div class="line">trueaddHeader=<span class="string">"89 50 4E 47 0D 0A 1A 0A"</span>.replace(<span class="string">' '</span>,<span class="string">''</span>).decode(<span class="string">'hex'</span>)</div><div class="line">truefsave.write(addHeader)</div><div class="line">truefsave.write(base64.b64decode(f))</div><div class="line">truefsave.close()</div><div class="line">true<span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">trueaddHead()</div><div class="line">true<span class="keyword">print</span> <span class="string">'ok'</span></div><div class="line">true<span class="keyword">pass</span></div></pre></td></tr></table></figure>
 <p>然后拿到了flag值：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-09-20%20%E4%B8%8B%E5%8D%888.13.43.png" alt=""></p>
-<h2 id="0X0A-SOS"><a href="#0X0A-SOS" class="headerlink" title="0X0A-SOS"></a>0X0A-SOS</h2><p>首先这种所谓的外太空的文件，用linux来判断就好，用file命令，会得到linux rev 1.0 ext2 filesystem data，这里可以用mount命令来挂载该文件，就会看到里面那些文件了。</p>
+<h2 id="0x0a-sos"><a class="markdownIt-Anchor" href="#0x0a-sos"></a> 0X0A-SOS</h2>
+<p>首先这种所谓的外太空的文件，用linux来判断就好，用file命令，会得到linux rev 1.0 ext2 filesystem data，这里可以用mount命令来挂载该文件，就会看到里面那些文件了。</p>
 <p>而我用得比较熟悉还是binwalk，直接binwalk -e sos即可把sos解开，打开_sos.extracted文件夹，发现有编号为1到242的小文件，而且文件大小都是1字节，然后随便抽几个去查看内容，发现是可视字符，于是就好办了。</p>
 <p>用下面那个py程序，读取242个文件的内容，组合到一起就是一段话，flag就在其中。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf8 -*-</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></div><div class="line">truepath=<span class="string">r".\_sos.extracted\%d"</span></div><div class="line">trues=<span class="string">""</span></div><div class="line">true<span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">242</span>+<span class="number">1</span>):</div><div class="line">truetruef=open(path % i).read()</div><div class="line">truetrues+=f</div><div class="line">true<span class="keyword">print</span> s</div><div class="line">true<span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">truefoo()</div><div class="line">true<span class="keyword">print</span> <span class="string">'ok'</span></div></pre></td></tr></table></figure>
 <p>⚠️友情提示：python的版本需在2.7.9及以下</p>
-<h2 id="0X0B-黑客攻击数据包"><a href="#0X0B-黑客攻击数据包" class="headerlink" title="0X0B-黑客攻击数据包"></a>0X0B-黑客攻击数据包</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8A%E5%8D%8812.20.31.png" alt=""></p>
+<h2 id="0x0b-黑客攻击数据包"><a class="markdownIt-Anchor" href="#0x0b-黑客攻击数据包"></a> 0X0B-黑客攻击数据包</h2>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8A%E5%8D%8812.20.31.png" alt=""></p>
 <p>首先拿到了一个压缩包，解压缩之后有一个数据包文件，这个时候就需要考察一下我们对于wireshark的使用了，首先使用过滤语法过滤掉其中大量的tcp三次握手包：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http and ip.addr == 192.168.30.170 and tcp.port == 80</div></pre></td></tr></table></figure>
 <p>然后搜索Administrator，找到http包，里面有一个表单，再base64_decode一波就拿到答案了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-27%20%E4%B8%8A%E5%8D%8812.22.59.png" alt=""></p>
 <p>并不知道为社么这道题目算在难里面，如果把题干读清楚了其实不算难。</p>
-<h2 id="0X0C-可启动磁盘镜像"><a href="#0X0C-可启动磁盘镜像" class="headerlink" title="0X0C-可启动磁盘镜像"></a>0X0C-可启动磁盘镜像</h2><p>下载下来这个磁盘镜像之后发现无法挂载，使用strings查看之后发现flag也是不可见的，说明这个文件头应该是存在问题的，于是我使用了HexFriend打开了这个磁盘镜像，然后对照着<a href="http://www.doc88.com/p-9783379297030.html" target="_blank" rel="external">DOS的引导扇区</a>详解修复扇区：</p>
+<h2 id="0x0c-可启动磁盘镜像"><a class="markdownIt-Anchor" href="#0x0c-可启动磁盘镜像"></a> 0X0C-可启动磁盘镜像</h2>
+<p>下载下来这个磁盘镜像之后发现无法挂载，使用strings查看之后发现flag也是不可见的，说明这个文件头应该是存在问题的，于是我使用了HexFriend打开了这个磁盘镜像，然后对照着<a href="http://www.doc88.com/p-9783379297030.html" target="_blank" rel="external">DOS的引导扇区</a>详解修复扇区：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-29%20%E4%B8%8A%E5%8D%8812.23.03.png" alt=""></p>
 <p>修复好引导扇区之后终于可以正常的打开了，从里面我们可以找到一个flag文件，拖到HexFriend中发现是一张png图片，但是却少了文件头部，补上之后正满心欢喜的准备提交flag，却发现flag并不在途中，接下来开始一顿分析；</p>
 <ol>
@@ -294,7 +309,8 @@
 <ul>
 <li>前四个字节<strong>00 00 00 0D</strong>（即为十进制的13）代表数据块的长度为13，数据块包含了png图片的宽高等信息，<strong>该段格式是固定的</strong></li>
 <li>之后的四个字节<strong>49 48 44 52</strong>（即为ASCII码的IHDR）是文件头数据块的标示，<strong>该段格式也是固定的</strong></li>
-<li>之后进入13位数据块，前8个字节<strong>00 00 05 56 00 00 03 00</strong>中：<ul>
+<li>之后进入13位数据块，前8个字节<strong>00 00 05 56 00 00 03 00</strong>中：
+<ul>
 <li>前四个字节<strong>00 00 05 56</strong>（即为十进制的1366），代表该图片的宽，<strong>该段数据是由图片的实际宽决定的</strong></li>
 <li>后四个字节<strong>00 00 03 00</strong>（即为十进制的768），代表该图片的高，<strong>该段数据是由图片的实际高度决定的</strong></li>
 </ul>
@@ -358,18 +374,21 @@
 <p>同时我们联想到如果一个图片无法正常的显示，如果不是在windows系统上，除了有可能是缺失文件头，还可能是因为crc校验错误。这个时候我们就需要去通过crc码去爆破出修改前的宽和高去修复图片了，这里丢一个脚本(爆破高度)：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> binascii</div><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line"><span class="comment">#\x49\x48\x44\x52\x00\x00\x01\xF4\x00\x00\x01\xA4\x08\x06\x00\x00\x00</span></div><div class="line"></div><div class="line">crc32key = <span class="number">0xCBD6DF8A</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">65535</span>):</div><div class="line">  height = struct.pack(<span class="string">'&gt;i'</span>, i)</div><div class="line">  <span class="comment">#CRC: CBD6DF8A</span></div><div class="line">  data = <span class="string">'\x49\x48\x44\x52\x00\x00\x01\xF4'</span> + height + <span class="string">'\x08\x06\x00\x00\x00'</span></div><div class="line"></div><div class="line">  crc32result = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></div><div class="line"></div><div class="line">  <span class="keyword">if</span> crc32result == crc32key:</div><div class="line">    <span class="keyword">print</span> <span class="string">''</span>.join(map(<span class="keyword">lambda</span> c: <span class="string">"%02X"</span> % ord(c), height))</div></pre></td></tr></table></figure>
 <p>不过其实利用windows的特性是最快的方法，但是在有的条件下就只能使用脚本爆破了。</p>
-<h2 id="0X0D-异性相吸"><a href="#0X0D-异性相吸" class="headerlink" title="0X0D-异性相吸"></a>0X0D-异性相吸</h2><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8812.33.44.png" alt=""></p>
+<h2 id="0x0d-异性相吸"><a class="markdownIt-Anchor" href="#0x0d-异性相吸"></a> 0X0D-异性相吸</h2>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8812.33.44.png" alt=""></p>
 <p>下载压缩包之后解压出来两个txt文件，一个是明文.txt，一个是密文.txt，根据题目中的提示，这两个文件之间一定有着某种关系，异性相吸，那么应该是对两个文件做一次异或：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%8812.48.40.png" alt=""></p>
 <p>如果只是对付这道题，直接写一个脚本更加简单：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># !usr/bin/env python</span></div><div class="line"><span class="comment">#  _*_ coding:utf-8 _*_</span></div><div class="line"></div><div class="line">a = open(<span class="string">'input1.txt'</span>,<span class="string">'rb'</span>).read()</div><div class="line">b = open(<span class="string">'input2.txt'</span>,<span class="string">'rb'</span>).read()</div><div class="line">oxstr =<span class="string">''</span> </div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(a)):</div><div class="line">trueres = ord(list(a)[i]) ^ ord(list(b)[i])</div><div class="line">trueoxstr += chr(res)</div><div class="line"><span class="keyword">print</span> oxstr</div></pre></td></tr></table></figure>
-<h2 id="0x0E-雌黄出其唇吻"><a href="#0x0E-雌黄出其唇吻" class="headerlink" title="0x0E-雌黄出其唇吻"></a>0x0E-雌黄出其唇吻</h2><p>这道题进去之后是一长串随机的字符串，并且刷新之后就改变了，首先看看源代码，似乎没有什么问题。题目中的提示是：怎么好像就是在随机产生？莫非不是这个？</p>
+<h2 id="0x0e-雌黄出其唇吻"><a class="markdownIt-Anchor" href="#0x0e-雌黄出其唇吻"></a> 0x0E-雌黄出其唇吻</h2>
+<p>这道题进去之后是一长串随机的字符串，并且刷新之后就改变了，首先看看源代码，似乎没有什么问题。题目中的提示是：怎么好像就是在随机产生？莫非不是这个？</p>
 <p>那么我们可以查看一下其他的文件，看看有没有别的目录下文件之类的，可以首先试试robots.txt</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%882.05.55.png" alt=""></p>
 <p>这里列举了一堆目录不允许爬取，尝试访问之后发现也都是失败的，结果一下滑看到了一个xml:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-10-30%20%E4%B8%8B%E5%8D%882.07.06.png" alt=""></p>
 <p>访问之后其中有一个包含着flag的php文件，直接链接过去发现是base64编码的，解码之后成功拿到flag.</p>
-<h2 id="0x0F-Paint-amp-Scan"><a href="#0x0F-Paint-amp-Scan" class="headerlink" title="0x0F-Paint&amp;Scan"></a>0x0F-Paint&amp;Scan</h2><p>直接下载了一个压缩包打开时txt文件，其中都是坐标的信息，结合题目的名字应该是需要根据这些点画出一个二维码：</p>
+<h2 id="0x0f-paintscan"><a class="markdownIt-Anchor" href="#0x0f-paintscan"></a> 0x0F-Paint&amp;Scan</h2>
+<p>直接下载了一个压缩包打开时txt文件，其中都是坐标的信息，结合题目的名字应该是需要根据这些点画出一个二维码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python3</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval <span class="keyword">as</span> make_tuple</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw</div><div class="line"></div><div class="line">f = open(<span class="string">'p&amp;s.txt'</span>, <span class="string">'r'</span>)</div><div class="line">points = [make_tuple(line) <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</div><div class="line">f.close()</div><div class="line"></div><div class="line">image = Image.new(<span class="string">'RGB'</span>, (<span class="number">270</span>, <span class="number">270</span>), <span class="string">'#ffffff'</span>)</div><div class="line">draw = ImageDraw.Draw(image)</div><div class="line"></div><div class="line"><span class="keyword">for</span> point <span class="keyword">in</span> points:</div><div class="line">truedraw.point(point, fill=<span class="string">"#000000"</span>)</div><div class="line"></div><div class="line">image.save(<span class="string">'qrcode.png'</span>)</div></pre></td></tr></table></figure>
 <p>打开生成的二维码图片之后扫描就可以获得flag值了。</p>
 
@@ -414,6 +433,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
             </li>
             
@@ -423,10 +446,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
             </li>
             
         </ul>
@@ -440,11 +459,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a>
+            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
@@ -452,7 +471,7 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/ARM64/">ARM64</a>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
         </li>
         
     </ul>

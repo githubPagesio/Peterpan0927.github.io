@@ -165,22 +165,33 @@
         
 
         <!-- Post Content -->
-        <p>关于应用程序的启动原理，你是不是真的了解了呢？<br><a id="more"></a></p>
-<h2 id="应用程序启动原理"><a href="#应用程序启动原理" class="headerlink" title="应用程序启动原理"></a>应用程序启动原理</h2><h3 id="应用程序对象（UIApplication）"><a href="#应用程序对象（UIApplication）" class="headerlink" title="应用程序对象（UIApplication）"></a>应用程序对象（UIApplication）</h3><blockquote>
+        <p>关于应用程序的启动原理，你是不是真的了解了呢？</p>
+<a id="more"></a>
+<h2 id="应用程序启动原理"><a class="markdownIt-Anchor" href="#应用程序启动原理"></a> 应用程序启动原理</h2>
+<h3 id="应用程序对象uiapplication"><a class="markdownIt-Anchor" href="#应用程序对象uiapplication"></a> 应用程序对象（UIApplication）</h3>
+<blockquote>
 <p>对象的作用：</p>
 <p>1.属性：保存一些值</p>
 <p>2.方法：可以执行的功能</p>
+</blockquote>
+<blockquote>
 <p>sharedApplication 返回应用程序的单例对象</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">UIApplication *app1 = [UIApplication sharedApplication];</div><div class="line">UIApplication *app2 = [UIApplication sharedApplication];</div><div class="line">//打印出来了两者的内存地址是相同的</div><div class="line">NSLog(@&quot;%@,%@&quot;, app1 ,app1);</div></pre></td></tr></table></figure>
 <blockquote>
 <p>openURL 可以打电话，还可以发邮件，以及应用之间的跳转</p>
+</blockquote>
+<blockquote>
 <p>keywindow:应用程序的主窗口</p>
+</blockquote>
+<blockquote>
 <p>networkActivityIndicatorVisible:网络连接</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//联网指示器</div><div class="line">app1.networkAcivityIndicatorVisible = !app1.networkActivityIndicatorVisible;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>applicationSupportsShakeToEdit:摇晃设备恢复/取消键入</p>
+</blockquote>
+<blockquote>
 <p>applicationIconBadgeNumber:应用头像上的数字</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// ios8以后，在设置数字之前，应用必须注册</div><div class="line">app1.applicationIconBadgeBumber = 10;</div></pre></td></tr></table></figure>
@@ -193,38 +204,40 @@
 <p>状态栏的隐藏</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//ios9以后不建议使用下面这种方式</div><div class="line">- （BOOL）prefersStatusBarHidden&#123;</div><div class="line">  return YES;</div><div class="line">&#125;</div><div class="line">//建议使用后下面这种</div><div class="line">app1.statusBarHidden = YES;</div></pre></td></tr></table></figure>
-<h3 id="应用程序代理对象"><a href="#应用程序代理对象" class="headerlink" title="应用程序代理对象"></a>应用程序代理对象</h3><blockquote>
+<h3 id="应用程序代理对象"><a class="markdownIt-Anchor" href="#应用程序代理对象"></a> 应用程序代理对象</h3>
+<blockquote>
 <p>AppDelegate类型的对象</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#pragma mark - 应用程序加载完成</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - 即将非活跃状态（即将失去焦点）</div><div class="line">- (void)applicationWillResignActive:(UIApplication *)application &#123;</div><div class="line"> </div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - 应用程序进入后台</div><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - 即将进入前台</div><div class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - 成为活跃状态（获取焦点）可以让用户操作</div><div class="line">- (void)applicationDidBecomeActive:(UIApplication *)application &#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - 应用即将被销毁时</div><div class="line">- (void)applicationWillTerminate:(UIApplication *)application &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>启动：<br>&gt;</p>
+<p>启动：</p>
 <blockquote>
 <p>应用加载完成</p>
 <p>成为活跃状态（获取焦点）可以让用户操作</p>
 </blockquote>
-<p>进入后台：<br>&gt;</p>
+<p>进入后台：</p>
 <blockquote>
 <p>即将非活跃状态</p>
 <p>应用程序进入后台</p>
 </blockquote>
-<p>进入前台：<br>&gt;</p>
+<p>进入前台：</p>
 <blockquote>
 <p>即将进入前台</p>
 <p>成为活跃状态（获取焦点）可以让用户操作</p>
 </blockquote>
-<p>直接销毁的操作：<br>&gt;</p>
+<p>直接销毁的操作：</p>
 <blockquote>
 <p>即将非活跃状态</p>
 <p>应用程序进入后台</p>
 <p>即将被销毁时调用</p>
 </blockquote>
-<p>先进入后台再销毁：<br>&gt;</p>
+<p>先进入后台再销毁：</p>
 <blockquote>
 <p>即将非活跃状态</p>
 <p>应用程序进入后台</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/011084494EB3A0BDFFD530CD149F75ED.jpg" alt=""></p>
 </blockquote>
-<h3 id="应用程序启动过程"><a href="#应用程序启动过程" class="headerlink" title="应用程序启动过程"></a>应用程序启动过程</h3><p>1.程序启动先执行main.m中的main函数</p>
+<h3 id="应用程序启动过程"><a class="markdownIt-Anchor" href="#应用程序启动过程"></a> 应用程序启动过程</h3>
+<p>1.程序启动先执行main.m中的main函数</p>
 <p>2.在main函数内部根据第三个参数,创建UIApplication对象</p>
 <p>3.根据第四个参数</p>
 <blockquote>
@@ -235,7 +248,9 @@
 <p>4.有了应用程序和应用代理对象，再创建一个窗口（就是AppDelegate 中的window）作为应用程序的主窗口</p>
 <p>5.应用程序根据配置的信息去加载默认的storyboard文件里面的控制器</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/442199927B054B99C62C2660FF77A51A.jpg" alt=""></p>
-<h2 id="加载自定义控制器"><a href="#加载自定义控制器" class="headerlink" title="加载自定义控制器"></a>加载自定义控制器</h2><h3 id="加载自定义控制器-1"><a href="#加载自定义控制器-1" class="headerlink" title="加载自定义控制器"></a>加载自定义控制器</h3><blockquote>
+<h2 id="加载自定义控制器"><a class="markdownIt-Anchor" href="#加载自定义控制器"></a> 加载自定义控制器</h2>
+<h3 id="加载自定义控制器-2"><a class="markdownIt-Anchor" href="#加载自定义控制器-2"></a> 加载自定义控制器</h3>
+<blockquote>
 <p>1.将系统提供的viewController.h/.m和main.storyboard删除</p>
 <p>2.在应用加载完毕方法内实现加载自定义控制器</p>
 <blockquote>
@@ -245,18 +260,23 @@
 <p>3.将这个窗口作为主窗口显示并显示</p>
 </blockquote>
 </blockquote>
-<h3 id="控制器的View是懒加载的"><a href="#控制器的View是懒加载的" class="headerlink" title="控制器的View是懒加载的"></a>控制器的View是懒加载的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//在第一次使用控制器的view的时候会加载</div><div class="line">- (void)loadView&#123;</div><div class="line">  [super loadView];</div><div class="line">&#125;</div><div class="line">//在上面这个方法执行完成之后才会有view，才能对view进行设置</div></pre></td></tr></table></figure>
-<h3 id="控制器的3种创建方式"><a href="#控制器的3种创建方式" class="headerlink" title="控制器的3种创建方式"></a>控制器的3种创建方式</h3><blockquote>
+<h3 id="控制器的view是懒加载的"><a class="markdownIt-Anchor" href="#控制器的view是懒加载的"></a> 控制器的View是懒加载的</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//在第一次使用控制器的view的时候会加载</div><div class="line">- (void)loadView&#123;</div><div class="line">  [super loadView];</div><div class="line">&#125;</div><div class="line">//在上面这个方法执行完成之后才会有view，才能对view进行设置</div></pre></td></tr></table></figure>
+<h3 id="控制器的3种创建方式"><a class="markdownIt-Anchor" href="#控制器的3种创建方式"></a> 控制器的3种创建方式</h3>
+<blockquote>
 <p>纯代码的方式</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//首先要将项目中将main作为主界面的选项清空</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    // Override point for customization after application launch.</div><div class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    //设置窗口的根控制器为自定义控制器</div><div class="line">    PController *customVc = [[PController alloc] init];</div><div class="line">    self.window.rootViewController = customVc;</div><div class="line">    </div><div class="line">    //将窗口作为主窗口显示</div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line"></div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>&gt;</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//首先要将项目中将main作为主界面的选项清空</div><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    // Override point for customization after application launch.</div><div class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    //设置窗口的根控制器为自定义控制器</div><div class="line">    PController *customVc = [[PController alloc] init];</div><div class="line">    self.window.rootViewController = customVc;</div><div class="line">    </div><div class="line">    //将窗口作为主窗口显示</div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line"></div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>通过storyboard的方式创建</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">     // Override point for customization after application launch.</div><div class="line">     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">     //设置窗口的根控制器为自定义控制器</div><div class="line">     //先加载storyboard文件</div><div class="line">     UIStoryboard *sb = [UIStoryboard storyboardWithName:@&quot;Pzp&quot; bundle:nil];</div><div class="line">   	//这是在设置storyboard的时候将其作为initialController</div><div class="line">     UIViewController *sbVc = [sb instantiateInitialViewController];</div><div class="line">     //也可以使用重用标识符</div><div class="line">   UIViewController *sbVc = [sb instantiateViewControllerWithIdentifier:@&quot;sb&quot;];</div><div class="line">     self.window.rootViewController = sbVc;</div><div class="line">     </div><div class="line">     [self.window makeKeyAndVisible];</div><div class="line">     return YES;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>通过xib创建控制器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line"> /**</div><div class="line">  1.在创建控制器的时候直接指定要加载的xib作为控制器的view，名称不相干</div><div class="line">     &gt; 需要修改xib文件的fileowner(共同操作)</div><div class="line">     &gt; 需要将fileowner中的view指向xib里面的view(共同操作，拖线)</div><div class="line">  2.xib文件的名称和控制器相似但是不同名</div><div class="line">  3.xib文件的名称与控制器的名称同名</div><div class="line"> */</div><div class="line">     </div><div class="line">     //创建窗口</div><div class="line">     //brightness 可以调节屏幕的亮度</div><div class="line">     self.window = [[UIWindow alloc] initWithFrame:[UIScreen</div><div class="line">                                                    mainScreen].bounds];</div><div class="line">     //第一种</div><div class="line">     PController *xibVc = [[PController alloc] initWithNibName:@&quot;Pzp.xib&quot; bundle:nil];</div><div class="line">     //第二种</div><div class="line">     PController *xibVc2 = [[PController alloc] init];</div><div class="line">     //第三种</div><div class="line">     PController *xibVc3 = [[PController alloc] init];</div><div class="line">     //设置窗口的根控制器</div><div class="line">     self.window.rootViewController = xibVc;</div><div class="line">     //让窗口作为主窗口并可见</div><div class="line">     [self.window makeKeyAndVisible];</div><div class="line">     return YES;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="导航控制器"><a href="#导航控制器" class="headerlink" title="导航控制器"></a>导航控制器</h2><p>UINavigationController的基本使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">     // Override point for customization after application launch.</div><div class="line">     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">     //设置窗口的根控制器为自定义控制器</div><div class="line">     //先加载storyboard文件</div><div class="line">     UIStoryboard *sb = [UIStoryboard storyboardWithName:@&quot;Pzp&quot; bundle:nil];</div><div class="line">   	//这是在设置storyboard的时候将其作为initialController</div><div class="line">     UIViewController *sbVc = [sb instantiateInitialViewController];</div><div class="line">     //也可以使用重用标识符</div><div class="line">   UIViewController *sbVc = [sb instantiateViewControllerWithIdentifier:@&quot;sb&quot;];</div><div class="line">     self.window.rootViewController = sbVc;</div><div class="line">     </div><div class="line">     [self.window makeKeyAndVisible];</div><div class="line">     return YES;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>通过xib创建控制器</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line"> /**</div><div class="line">  1.在创建控制器的时候直接指定要加载的xib作为控制器的view，名称不相干</div><div class="line">     &gt; 需要修改xib文件的fileowner(共同操作)</div><div class="line">     &gt; 需要将fileowner中的view指向xib里面的view(共同操作，拖线)</div><div class="line">  2.xib文件的名称和控制器相似但是不同名</div><div class="line">  3.xib文件的名称与控制器的名称同名</div><div class="line"> */</div><div class="line">     </div><div class="line">     //创建窗口</div><div class="line">     //brightness 可以调节屏幕的亮度</div><div class="line">     self.window = [[UIWindow alloc] initWithFrame:[UIScreen</div><div class="line">                                                    mainScreen].bounds];</div><div class="line">     //第一种</div><div class="line">     PController *xibVc = [[PController alloc] initWithNibName:@&quot;Pzp.xib&quot; bundle:nil];</div><div class="line">     //第二种</div><div class="line">     PController *xibVc2 = [[PController alloc] init];</div><div class="line">     //第三种</div><div class="line">     PController *xibVc3 = [[PController alloc] init];</div><div class="line">     //设置窗口的根控制器</div><div class="line">     self.window.rootViewController = xibVc;</div><div class="line">     //让窗口作为主窗口并可见</div><div class="line">     [self.window makeKeyAndVisible];</div><div class="line">     return YES;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="导航控制器"><a class="markdownIt-Anchor" href="#导航控制器"></a> 导航控制器</h2>
+<p>UINavigationController的基本使用</p>
 <ul>
 <li>初始化UINavigationController</li>
 <li>设置UIWindow的rootViewController为UINavigationController</li>
@@ -273,19 +293,23 @@
 <p>控制器销毁的顺序：</p>
 <p>如果在第三个控制器之中，然后返回根控制器，销毁的顺序是：Two控制器-&gt;Three控制器</p>
 <p>因为首先断开的是One控制器指向Two控制器的强指针，所以Two控制器首先被回收。</p>
-<h3 id="设置导航栏的内容"><a href="#设置导航栏的内容" class="headerlink" title="设置导航栏的内容"></a>设置导航栏的内容</h3><p>设置导航栏的文字：</p>
+<h3 id="设置导航栏的内容"><a class="markdownIt-Anchor" href="#设置导航栏的内容"></a> 设置导航栏的内容</h3>
+<p>设置导航栏的文字：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.navigationItem.title = @&quot;hello&quot;;</div></pre></td></tr></table></figure>
 <p>设置导航栏左侧的按钮</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//当左侧和右侧按钮相同的时候，跳转回来的时候左侧的会消失</div><div class="line">self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addClick)];</div><div class="line">//默认是有拖拽返回功能的，如果左侧添加了按钮就没有了</div></pre></td></tr></table></figure>
-<h3 id="通过代码跳转后的传值问题："><a href="#通过代码跳转后的传值问题：" class="headerlink" title="通过代码跳转后的传值问题："></a>通过代码跳转后的传值问题：</h3><blockquote>
+<h3 id="通过代码跳转后的传值问题"><a class="markdownIt-Anchor" href="#通过代码跳转后的传值问题"></a> 通过代码跳转后的传值问题：</h3>
+<blockquote>
 <p>在红色控制器中，有一个文本框</p>
 <p>在跳转到绿色控制器的时候将文本框的内容设置为绿色控制器的标题</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (IBAction)gotoGreen:(id)sender &#123;</div><div class="line">    </div><div class="line">    Pzp1ViewController *greenViewController = [[Pzp1ViewController alloc] init];</div><div class="line">    </div><div class="line">    greenViewController.name = self.textField.text;</div><div class="line">    </div><div class="line">    [self.navigationController pushViewController:greenViewController animated:YES];   </div><div class="line">&#125;</div><div class="line">//绿色控制器中</div><div class="line">- (void)setName&#123; </div><div class="line">  _name = name;</div><div class="line">  </div><div class="line">  self.navigationItem.title = name;</div><div class="line">&#125; </div><div class="line">//如果是赋值给其中的一个label,因为view是懒加载的，赋值的时候只有一个控制器，根本就没有label,所以不会显示</div><div class="line">- (void)setName&#123;</div><div class="line">  _name = name;</div><div class="line">  </div><div class="line">  self.lbl.text = name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="通过storyboard使用导航控制器"><a href="#通过storyboard使用导航控制器" class="headerlink" title="通过storyboard使用导航控制器"></a>通过storyboard使用导航控制器</h3><p>将main.storyboard中的控制器替换为导航控制器，通过控制器连线可以选中根控制器，如果要点击button进行控制器的跳转，也可以通过button连线，选择show。可以用代码改变的在storyboard中修改更方便。</p>
-<p>但是要注意的一点是，只有根控制器才有<code>navigation Item</code>,其他的控制器需要手动拖进去。还有一点就是button中没有pop的选项，所以如果要通过button实现pop的话需要和类进行关联实现。 </p>
+<h3 id="通过storyboard使用导航控制器"><a class="markdownIt-Anchor" href="#通过storyboard使用导航控制器"></a> 通过storyboard使用导航控制器</h3>
+<p>将main.storyboard中的控制器替换为导航控制器，通过控制器连线可以选中根控制器，如果要点击button进行控制器的跳转，也可以通过button连线，选择show。可以用代码改变的在storyboard中修改更方便。</p>
+<p>但是要注意的一点是，只有根控制器才有<code>navigation Item</code>,其他的控制器需要手动拖进去。还有一点就是button中没有pop的选项，所以如果要通过button实现pop的话需要和类进行关联实现。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-08-13%20%E4%B8%8A%E5%8D%889.51.46.png" alt=""></p>
-<h3 id="通过storyboard传值"><a href="#通过storyboard传值" class="headerlink" title="通过storyboard传值"></a>通过storyboard传值</h3><p>通过控件拖线的方式实现控制器的跳转，不会对按钮的事件进行判断，是无法实现传值的，只能进行基本的跳转操作。</p>
+<h3 id="通过storyboard传值"><a class="markdownIt-Anchor" href="#通过storyboard传值"></a> 通过storyboard传值</h3>
+<p>通过控件拖线的方式实现控制器的跳转，不会对按钮的事件进行判断，是无法实现传值的，只能进行基本的跳转操作。</p>
 <p>但是通过拖线的方式会调用下面这个方法，可以在这个方法中进行传值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender&#123;</div><div class="line">    //获取目标控制器</div><div class="line">    PController *greenVc = segue.destinationViewController;</div><div class="line">    </div><div class="line">    greenVc.navigationItem.title = self.textField.text;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
@@ -330,6 +354,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
             </li>
             
@@ -339,10 +367,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/17/利用三叉戟漏洞实现本地提权/">利用三叉戟漏洞实现本地提权</a>
             </li>
             
         </ul>
@@ -356,11 +380,11 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/串-并行队列-GCD实现单例/">串/并行队列 GCD实现单例</a>
+            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
         </li>
         
         <li>
@@ -368,7 +392,7 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/ARM64/">ARM64</a>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
         </li>
         
     </ul>
