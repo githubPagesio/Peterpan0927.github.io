@@ -17,6 +17,38 @@
 <p>这个地方我们最多只能溢出八个字节的原因是因为<code>ab.actual</code>的大小为<code>0x14</code>，<code>sizeof(uint32_t)</code>为4字节，所以最多只会溢出<code>0x14+0x4-0x10=8</code>个字节的数据，并且建立在buffer在<code>kalloc.16</code>的区间内。</p>
 <p>接下来就是如何一步步通过这个溢出来达到提权的过程</p>
 <p>#0x02.漏洞利用</p>
+<p>目前还没有对所有的细节看的非常清楚，但是<code>lan Beer</code>做的一连串的操作已经让我目瞪口呆了，我就从宏观上来说一下大概做了什么事情：</p>
+<p><code>lan Beer</code>采用的是tfp0的方式来实现任意地址读写，这意味着我们需要拿到一个拥有内核权限的端口，他尝试在内存空间分配了一连串的连续页面，形如下面的样子：</p>
+<blockquote>
+<p>kalloc.16 | ipc_ports | kalloc.16 | ipc_ports … </p>
+</blockquote>
+<p>这个时候我们在<code>kalloc.16</code>的那个页面上想要尝试做溢出，但是如果我们溢出到了<code>freelist</code>只会导致内核<code>panic</code>，那么怎样才能将我们溢出的8个字节控制到页面的边界，从而覆盖<code>ipc ports</code>的那个页面呢？</p>
+<p>这里我们可以发现<code>free list</code>其实采取的是一种半随机化的模式：</p>
+<blockquote>
+<p>| 9 8 6 5 2 1 3 4 7 10 | &lt;– example “randomized” allocation order from a fresh all-free page </p>
+</blockquote>
+<p>也就是说我们通过将页面里面的所有<code>kalloc.16</code>全部释放之后，<code>free list</code>就会反向，那么重新申请的<code>kalloc.16</code>就是从两边往中间扩散，如果重新申请<code>kalloc.16</code>的在页面的最右边，然后我们触发漏洞，就能将<code>ipc port</code>页面的前八个字节给覆盖成0，这个操作显然是非常的精髓了。<code>lan Beer</code>的做法就是这个样子：</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">\</th>
+<th style="text-align:center">1 4 - - - - - 5 3 2 \</th>
+<th></th>
+<th>\</th>
+<th>2 5 - - - - - 4 3 1 \</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">kalloc.16</td>
+<td style="text-align:center">ipc_ports</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>在反向的<code>freelist</code>中，如果我们从边界开始做溢出的话，很可能就会溢出到<code>-</code>，也就是<code>free list</code>中，所以我们会先剪去一个值，比如说我们从<code>3</code>开始做溢出，在溢出之后再申请一个内存占位，这样循环只会溢出到<code>kalloc 16 chunk</code>，或者到<code>ipc ports</code>，也就是我们希望达到的效果。这样一来就保证了我们的漏洞触发并不会崩溃，并且最后一定会溢出到一个<code>ipc port</code>。</p>
 ]]></content>
       
         <categories>
