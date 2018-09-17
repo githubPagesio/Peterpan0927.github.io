@@ -167,12 +167,10 @@
         <!-- Post Content -->
         <p>开始开发稍微大型一点的项目之后用到的第三方库就会变多，所以就需要用到了iOS的第三方库管理</p>
 <a id="more"></a>
-<h1 id="ios第三方和权限问题"><a class="markdownIt-Anchor" href="#ios第三方和权限问题"></a> iOS第三方和权限问题</h1>
-<p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
+<h1 id="iOS第三方和权限问题"><a href="#iOS第三方和权限问题" class="headerlink" title="iOS第三方和权限问题"></a>iOS第三方和权限问题</h1><p>很多时候我们作为菜鸟想从github上当下大神的代码实践的时候。兴高采烈的准备编译的时候，就会爆出一堆红色的错误，说我们没有相应的库，或者xxx文件找不到的问题，就算安装了之后，再次编译也会爆出类似：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8A%E5%8D%888.32.40.png" alt=""></p>
 <p>这样的错误，这个时候我们就需要对Apple的一些机制做一些了解，还有一个很重要的东西就是Cocoapods。</p>
-<h2 id="cocoapods"><a class="markdownIt-Anchor" href="#cocoapods"></a> Cocoapods</h2>
-<p>CocoaPods是OS X和iOS下的一个第三类库管理工具，通过CocoaPods工具我们可以为项目添加被称为<code>Pods</code>的依赖库（这些类库必须是CocoaPods本身所支持的），并且可以轻松管理其版本。比如说我们会经常使用的SDWebImage之类的框架，都可以使用它来进行管理。</p>
+<h2 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h2><p>CocoaPods是OS X和iOS下的一个第三类库管理工具，通过CocoaPods工具我们可以为项目添加被称为<code>Pods</code>的依赖库（这些类库必须是CocoaPods本身所支持的），并且可以轻松管理其版本。比如说我们会经常使用的SDWebImage之类的框架，都可以使用它来进行管理。</p>
 <p>那么这个工具究竟该如何的去使用呢？下面就来简单的介绍一下，安装的过程就不说了。在Mac上非常的简单。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#首先来搜索一下第三方的库吧</div><div class="line">pod search AFNetworking</div></pre></td></tr></table></figure>
 <p>如果这个时候出现：</p>
@@ -189,33 +187,28 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">use_frameworks!</div><div class="line">target &apos;TestProject&apos; do</div><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 3.1.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <blockquote>
 <p>解释一下</p>
-<p>platform :ios, '8.0’代表当前AFNetworking支持的iOS最低版本是iOS 8.0,</p>
-<p>'TestProject’就是你自己的工程名字</p>
+<p>platform :ios, ‘8.0’代表当前AFNetworking支持的iOS最低版本是iOS 8.0,</p>
+<p>‘TestProject’就是你自己的工程名字</p>
 <p>pod ‘AFNetworking’, ‘~&gt; 3.1.0’代表要下载的AFNetworking版本是3.1.0及以上版本，还可以去掉后面的’~&gt; 3.1.0’，直接写pod ‘AFNetworking’，这样代表下载的AFNetworking是最新版。</p>
 </blockquote>
 <p>现在我们只是完成了配置，还没有去真正的下载这些第三方的库，还要执行一次：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
-<p>同时我们还可以通过<code>pod update</code>命令去更新我们的第三方框架。</p>
-<h2 id="xcworkspace"><a class="markdownIt-Anchor" href="#xcworkspace"></a> xcworkspace</h2>
-<ol>
+<p> 同时我们还可以通过<code>pod update</code>命令去更新我们的第三方框架。</p>
+<h2 id="xcworkspace"><a href="#xcworkspace" class="headerlink" title="xcworkspace"></a>xcworkspace</h2><ol>
 <li>简单介绍</li>
 </ol>
 <p>在Cocoapods安装后，项目文件里都会多一个后缀为.xcworkspace的文件，打开这个文件就相当于打开最初常见的项目。这个文件也就是用来管理项目的，它包含你创建的项目和Cocoapods项目。</p>
 <p>.xcworkspace文件可以是我们在<code>pod install</code>之后生成的新文件也可以是我们手动去创建的，这个文件在我们的项目根目录下，接下来就是使用.xcworkspace去打开我们的文件而不是.xcodeproj了，从中可以看到类似下面的目录结构：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-04%20%E4%B8%8B%E5%8D%8811.18.07.png" alt=""></p>
-<p>其中红色部分就是我们通过pods下载的类库了，以AFNetworking类库为例，可以通过<code>#import AFNetworking.h</code>引入下载后的类库。<br>
-另外CocoaPods支持搜索命令，例如在终端中输入命令<code>pod search AFNetworking</code>，便可以获得AFNetworking类库的各版本信息，这一点和命令<code>npm search</code>功能相同。</p>
-<ol start="2">
+<p>其中红色部分就是我们通过pods下载的类库了，以AFNetworking类库为例，可以通过<code>#import AFNetworking.h</code>引入下载后的类库。<br>另外CocoaPods支持搜索命令，例如在终端中输入命令<code>pod search AFNetworking</code>，便可以获得AFNetworking类库的各版本信息，这一点和命令<code>npm search</code>功能相同。</p>
+<ol>
 <li>使用总结</li>
 </ol>
 <p>Podfile中的列表，大家可以看到下载了很多类库，但如果下载后的类库都添加到svn版本库中，这无疑会使我们的项目过于庞大，并且不利于其他人checkout和管理，但我们可以不将下载后的类库添加到<code>git</code>或者<code>svn</code>版本库中，只需添加PodFile到版本库中，这样需要checkout项目的同事就可以根据PodFile了解项目中使用的类库并通过pod命令下载依赖的类库。</p>
 <p>同样这样是为什么我们从github上下载一个文件的时候需要首先<code>pod install</code>一下，就是去下载这些依赖类库，正如大家所知，github的服务器在国外，如果把一个完整的项目都上传上去，不仅我们的时间久，想要clone的天朝同学更是想要自刎了，又解决了一个问题啦～</p>
-<h2 id="账号管理和配置id"><a class="markdownIt-Anchor" href="#账号管理和配置id"></a> 账号管理和配置ID</h2>
-<h3 id="账号管理"><a class="markdownIt-Anchor" href="#账号管理"></a> 账号管理</h3>
-<p><code>Xcode-&gt;preferences-&gt;Accounts</code>管理项目用到的所有账户,包括用于管理代码签署的资产的Apple ID。通过添加一个Apple ID账户,选择加入苹果开发者计划（Apple Developer Program）,并将项目分配给一个团队,你提供Xcode的凭证管理证书,标识符和概要文件。如果你没有一个苹果ID,您可以创建一个免费的。然而,如果你不加入苹果开发者计划，您的应用程序可以使用的功能是有限的</p>
+<h2 id="账号管理和配置ID"><a href="#账号管理和配置ID" class="headerlink" title="账号管理和配置ID"></a>账号管理和配置ID</h2><h3 id="账号管理"><a href="#账号管理" class="headerlink" title="账号管理"></a>账号管理</h3><p><code>Xcode-&gt;preferences-&gt;Accounts</code>管理项目用到的所有账户,包括用于管理代码签署的资产的Apple ID。通过添加一个Apple ID账户,选择加入苹果开发者计划（Apple Developer Program）,并将项目分配给一个团队,你提供Xcode的凭证管理证书,标识符和概要文件。如果你没有一个苹果ID,您可以创建一个免费的。然而,如果你不加入苹果开发者计划，您的应用程序可以使用的功能是有限的</p>
 <p>账号的添加删除操作都是在Xcode的Preference中进行的，这一部分的操作太简单就不说了。</p>
-<h3 id="bundle-id配置"><a class="markdownIt-Anchor" href="#bundle-id配置"></a> bundle ID配置</h3>
-<p>接下来就是关于配置Xcode项目中的Bundle ID的问题了，bundle ID可以精确的识别单个app，用于在开发过程中提供设备和在操作系统分发app给客户。</p>
+<h3 id="bundle-ID配置"><a href="#bundle-ID配置" class="headerlink" title="bundle ID配置"></a>bundle ID配置</h3><p>接下来就是关于配置Xcode项目中的Bundle ID的问题了，bundle ID可以精确的识别单个app，用于在开发过程中提供设备和在操作系统分发app给客户。</p>
 <p>bundle ID必须是一个统一类型标识符(UTI)的字符串，只包含字母数字字符(a -z、a - z、0 - 9)、连字符(-)和点(.)。在开发过程中，我们会有很多地方都会用到它去识别app:</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%8812.48.33.png" alt=""></p>
 <p>具体来说，bundleID的位置和使用如下：</p>
@@ -224,47 +217,35 @@
 <li>在iTunes Connect,您输入bundle ID来识别你的应用。在你第一个构建版本上传到iTunes Connect之后,你不能改变你的bundle ID或删除相关的明确App ID。·</li>
 <li>在Member Center，您创建一个与应用程序的bundle ID相匹配的AppID。如果AppID是一个显式的App ID,它完全匹配bundle ID。然而,与域名不同, bundle ID是区分大小写的。 如果应用程序ID是小写,你的包ID必须是小写的。·在iCloud,您所指定的容器id在Xcode项目是基于一个或多个应用程序的bundle ID</li>
 </ol>
-<h3 id="证书"><a class="markdownIt-Anchor" href="#证书"></a> 证书</h3>
-<p>ios certificates就是证书。它的作用就是证明你的mac具有开发或发布某个开发者账号下应用的权限。而且证书还分成两种，一种是开发证书，也叫Development certificate; 另一种是发布证书或叫生产证书，英文名叫Production  certificate。</p>
+<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p>ios certificates就是证书。它的作用就是证明你的mac具有开发或发布某个开发者账号下应用的权限。而且证书还分成两种，一种是开发证书，也叫Development certificate; 另一种是发布证书或叫生产证书，英文名叫Production  certificate。</p>
 <ul>
-<li>
-<p>development certificate</p>
+<li><p>development certificate</p>
 <p>开发证书是证明你的mac具有开发和真机调试你的程序的东西。但是每个证书关联着一个开发者账号，也就是说，你只能使用这个证书开发这个账号底下的应用，它是通过bundle id来知道该应用是不是属于自己的账号。所以，每次为一个开发者帐号开发应用，就得需要这个账号创建的开发证书。</p>
 </li>
-<li>
-<p>Production certificate</p>
+<li><p>Production certificate</p>
 <p>生产证书是证明你的mac是否具有发布应用的权限。在archive到appstore的时候，必须有生产证书，否则时上传不成功的。</p>
 </li>
-<li>
-<p>根证书</p>
+<li><p>根证书</p>
 <p>无论是开发证书还是生产证书，都必须从根证书上派生。根证书就是根mac产生的证书，menber center上保存的那个证书就是根证书，它只能安装在创建它的那台mac上，其他的开发mac必须从那台根mac上导出证书使用。也就是所有的子证书都只能从根证书派生而来。</p>
 </li>
 </ul>
-<h3 id="描述文件"><a class="markdownIt-Anchor" href="#描述文件"></a> 描述文件</h3>
-<p>iOS Provisioning Profiles也叫描述文件，它用来标识某个设备是否具有安装某个应用的权限。描述文件分为开发描述文件和发布描述文件。其中发布描述文件又分为临时发布描述文件和正式发布描述文件。</p>
+<h3 id="描述文件"><a href="#描述文件" class="headerlink" title="描述文件"></a>描述文件</h3><p>iOS Provisioning Profiles也叫描述文件，它用来标识某个设备是否具有安装某个应用的权限。描述文件分为开发描述文件和发布描述文件。其中发布描述文件又分为临时发布描述文件和正式发布描述文件。</p>
 <ol>
-<li>
-<p>开发描述文件(develop provisioning profile)<br>
-开发描述文件，创建它需要<code>bundle ID + 开发证书 ＋ 测试设备(在devices中添加)</code>; 编译的时候必须三者对应，否则编译器会报错。</p>
+<li><p>开发描述文件(develop provisioning profile)<br>开发描述文件，创建它需要<code>bundle ID + 开发证书 ＋ 测试设备(在devices中添加)</code>; 编译的时候必须三者对应，否则编译器会报错。</p>
 </li>
-<li>
-<p>临时发布描述文件(distribution ad hoc)<br>
-临时发布描述文件是用来在有限设备上发布的。创建它需要<code>bundle ID ＋发布证书＋发布设备</code>，编译时也必须三者对应。</p>
+<li><p>临时发布描述文件(distribution ad hoc)<br>临时发布描述文件是用来在有限设备上发布的。创建它需要<code>bundle ID ＋发布证书＋发布设备</code>，编译时也必须三者对应。</p>
 </li>
-<li>
-<p>正式发布描述文件(distribution appstore/distribution ad house)</p>
+<li><p>正式发布描述文件(distribution appstore/distribution ad house)</p>
 <p>个人账号和企业账号创建的正式发布描述文件是不同的。因为个人账号是在appstrore上发布，所以创建的是distribution appstore描述文件，而企业账号只能内部发布，所以创建的叫distribution ad house描述文件。但是它们创建所需要的东西都是一样的：bundle ID + 发布证书。 因为他们是在不确定的设备上安装的，所以不需要选择设备。</p>
 </li>
 </ol>
-<h3 id="xcode项目分配"><a class="markdownIt-Anchor" href="#xcode项目分配"></a> Xcode项目分配</h3>
-<p>每个Xcode项目与一个单独团队关联。如果你注册作为个人开发者,你被看做一个单人团队。团队账户用于存储应用程序需要的证书,标识符,和描述文件。所有的应用程序在设备上运行和使用某些应用程序服务都需要代码签名。Xcode会在需要的时候为你创建这些资产，但是你现在设置团队可以以后的避免警告对话框。</p>
+<h3 id="Xcode项目分配"><a href="#Xcode项目分配" class="headerlink" title="Xcode项目分配"></a>Xcode项目分配</h3><p>每个Xcode项目与一个单独团队关联。如果你注册作为个人开发者,你被看做一个单人团队。团队账户用于存储应用程序需要的证书,标识符,和描述文件。所有的应用程序在设备上运行和使用某些应用程序服务都需要代码签名。Xcode会在需要的时候为你创建这些资产，但是你现在设置团队可以以后的避免警告对话框。</p>
 <p>所有的iOS、watchOS之类的应用程序在设备上启动都需要代码签名，在进行Xcode项目分配的时候，Xcode将会使用你的信息去创建一个团队描述文件。例如Xcode会自动创建你的开发证书和注册一个链接设备或者你的Mac。Xcode使用这些信息来创建一个最终安装在设备上描述文件。如果设备在描述文件中，Xcode在这个设备上运行app。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-05%20%E4%B8%8A%E5%8D%881.18.36.png" alt=""></p>
 <p>如果代码签名和描述文件都有了，那么在真机运行的时候很快就好了，不然为了解决代码签名的问题可能会报一堆的警告</p>
 <p>还有一个小点需要注意一下的就是还要对文件夹分配权限，有时候从别人U盘中读取的文件由于权限设置的不同会导致有些文件没有可执行权限。</p>
 <p>所以当我们从github上下载代码之后，还需要对团队和bundle ID进行更改，创建了新的描述文件之后我们才能在自己的电脑上去运行这些程序。讲到这里，基本上一些普遍的问题也都包括了，之后遇到别的问题会继续补充。</p>
-<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
-<ol>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
 <li><a href="http://www.jianshu.com/p/0c5e856a2c88" target="_blank" rel="external">Doris_Lee的博客</a></li>
 <li><a href="http://www.jianshu.com/p/0c5e856a2c88" target="_blank" rel="external">前端学习之iOS开发</a></li>
 <li><a href="http://www.jianshu.com/p/21ebca8cadf6" target="_blank" rel="external">huangman的博客</a></li>
@@ -341,11 +322,11 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Intel/">Intel</a>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/sumup/">sumup</a>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>

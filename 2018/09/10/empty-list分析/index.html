@@ -176,8 +176,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bcopy(&amp;ab.actual, ab.base + <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>), <span class="keyword">sizeof</span>(ab.actual));</div></pre></td></tr></table></figure>
 <p>这个地方我们最多只能溢出八个字节的原因是因为<code>ab.actual</code>的大小为<code>0x14</code>，<code>sizeof(uint32_t)</code>为4字节，所以最多只会溢出<code>0x14+0x4-0x10=8</code>个字节的数据，并且建立在buffer在<code>kalloc.16</code>的区间内。</p>
 <p>接下来就是如何一步步通过这个溢出来达到提权的过程</p>
-<p>#0x02.漏洞利用</p>
-<p>目前还没有对所有的细节看的非常清楚，但是<code>lan Beer</code>做的一连串的操作已经让我目瞪口呆了，我就从宏观上来说一下大概做了什么事情：</p>
+<h1 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02.漏洞利用"></a>0x02.漏洞利用</h1><p>目前还没有对所有的细节看的非常清楚，但是<code>lan Beer</code>做的一连串的操作已经让我目瞪口呆了，我就从宏观上来说一下大概做了什么事情：</p>
 <p><code>lan Beer</code>采用的是tfp0的方式来实现任意地址读写，这意味着我们需要拿到一个拥有内核权限的端口，他尝试在内存空间分配了一连串的连续页面，形如下面的样子：</p>
 <blockquote>
 <p>kalloc.16 | ipc_ports | kalloc.16 | ipc_ports … </p>
@@ -281,11 +280,11 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Intel/">Intel</a>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/sumup/">sumup</a>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
         </li>
         
         <li>
