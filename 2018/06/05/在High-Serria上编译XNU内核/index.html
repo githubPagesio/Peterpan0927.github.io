@@ -167,7 +167,8 @@
         <!-- Post Content -->
         <p>在进行MOXil学习的时候，第九章我们需要通过编译内核来对XNU有进一步的了解，那么如何在最近的系统上编译XNU呢？今天就一起踩坑吧</p>
 <a id="more"></a>
-<h1 id="资源工作"><a href="#资源工作" class="headerlink" title="资源工作"></a>资源工作</h1><p>这里我们的内核版本和系统对应，首先看看是什么系统：</p>
+<h1 id="资源工作"><a class="markdownIt-Anchor" href="#资源工作"></a> 资源工作</h1>
+<p>这里我们的内核版本和系统对应，首先看看是什么系统：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-06-05%20%E4%B8%8B%E5%8D%886.33.03.png" alt="系统版本"></p>
 <p>那么我们从<a href="https://opensource.apple.com/" target="_blank" rel="external">苹果开源代码</a>网站上找到自己版本对应的XNU内核，对于我们来说，对应的是<code>xnu-4570.20.62</code></p>
 <p>如果下载了内核源码之后直接编译你就会遇到一大堆的<code>error</code>然后痛苦的<code>go die</code>，这是因为缺少很多头文件，库等等，首先我们需要安装<code>Xcode</code>的<code>Command line Tool</code>，这会帮我们解决很多麻烦，然后我们需要下载几个包，为了简便起见，我们直接通过脚本来做：</p>
@@ -175,17 +176,26 @@
 <p>脚本的内容为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget https://opensource.apple.com/tarballs/libplatform/libplatform-126.1.2.tar.gz</div><div class="line">wget https://opensource.apple.com/tarballs/libdispatch/libdispatch-703.1.4.tar.gz</div><div class="line">wget https://opensource.apple.com/tarballs/xnu/xnu-4570.20.62.tar.gz</div><div class="line">wget https://opensource.apple.com/tarballs/dtrace/dtrace-262.tar.gz</div><div class="line">wget https://opensource.apple.com/tarballs/AvailabilityVersions/AvailabilityVersions-32.tar.gz</div></pre></td></tr></table></figure>
 <p>这样我们的下载过程就完成，接下来就是解压然后逐个编译，并配置好环境</p>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h3 id="AvailabilityVersions"><a href="#AvailabilityVersions" class="headerlink" title="AvailabilityVersions"></a>AvailabilityVersions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p dst</div><div class="line">$ make install SRCROOT=$PWD DSTROOT=$PWD/dst</div><div class="line">$ sudo ditto $PWD/dst/usr/local `xcrun -sdk macosx -show-sdk-path`/usr/local</div></pre></td></tr></table></figure>
-<h3 id="dtrace"><a href="#dtrace" class="headerlink" title="dtrace"></a>dtrace</h3><p>只需要编译 <strong>dtrace</strong> 项目中的 <strong>ctfconvert</strong>、<strong>ctfdump</strong>、<strong>ctfmerge</strong>。</p>
+<h1 id="环境准备"><a class="markdownIt-Anchor" href="#环境准备"></a> 环境准备</h1>
+<h2 id="编译"><a class="markdownIt-Anchor" href="#编译"></a> 编译</h2>
+<h3 id="availabilityversions"><a class="markdownIt-Anchor" href="#availabilityversions"></a> AvailabilityVersions</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p dst</div><div class="line">$ make install SRCROOT=$PWD DSTROOT=$PWD/dst</div><div class="line">$ sudo ditto $PWD/dst/usr/local `xcrun -sdk macosx -show-sdk-path`/usr/local</div></pre></td></tr></table></figure>
+<h3 id="dtrace"><a class="markdownIt-Anchor" href="#dtrace"></a> dtrace</h3>
+<p>只需要编译 <strong>dtrace</strong> 项目中的 <strong>ctfconvert</strong>、<strong>ctfdump</strong>、<strong>ctfmerge</strong>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p obj sym dst</div><div class="line">$ xcodebuild install -target ctfconvert -target ctfdump -target ctfmerge ARCHS=&quot;x86_64&quot; SRCROOT=$PWD OBJROOT=$PWD/obj SYMROOT=$PWD/sym DSTROOT=$PWD/dst</div><div class="line">$ sudo ditto $PWD/dst/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain</div></pre></td></tr></table></figure>
-<h3 id="XNU头文件"><a href="#XNU头文件" class="headerlink" title="XNU头文件"></a>XNU头文件</h3><p>在编译 <strong>libdispatch</strong> 之前，需要将XNU的头文件复制到SDK文件夹下，因为编译 <strong>libdispatch</strong> 时需要用到这些头文件。</p>
+<h3 id="xnu头文件"><a class="markdownIt-Anchor" href="#xnu头文件"></a> XNU头文件</h3>
+<p>在编译 <strong>libdispatch</strong> 之前，需要将XNU的头文件复制到SDK文件夹下，因为编译 <strong>libdispatch</strong> 时需要用到这些头文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p BUILD.h/obj BUILD.h/sym BUILD.h/dst</div><div class="line">$ make installhdrs SDKROOT=macosx ARCH_CONFIGS=X86_64 SRCROOT=$PWD OBJROOT=$PWD/BUILD.h/obj SYMROOT=$PWD/BUILD.h/sym DSTROOT=$PWD/BUILD.h/dst</div><div class="line">$ sudo xcodebuild installhdrs -project libsyscall/Libsyscall.xcodeproj -sdk macosx ARCHS=&quot;x86_64&quot; SRCROOT=$PWD/libsyscall OBJROOT=$PWD/BUILD.h/obj SYMROOT=$PWD/BUILD.h/sym DSTROOT=$PWD/BUILD.h/dst</div><div class="line">$ sudo ditto BUILD.h/dst `xcrun -sdk macosx -show-sdk-path`</div></pre></td></tr></table></figure>
-<p><strong>注</strong>：<strong>xnu-4570.1.46</strong> 版本的内核源码因为 <strong>缺失thread_self_restrict.h头文件</strong>，所以此处必定会编译失败。<br>需要在 <strong>xcodebuild</strong> 前先创建一个空的文件来使编译通过。</p>
+<p><strong>注</strong>：<strong>xnu-4570.1.46</strong> 版本的内核源码因为 <strong>缺失thread_self_restrict.h头文件</strong>，所以此处必定会编译失败。<br>
+需要在 <strong>xcodebuild</strong> 前先创建一个空的文件来使编译通过。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ touch libsyscall/os/thread_self_restrict.h</div></pre></td></tr></table></figure>
-<h3 id="libplatform"><a href="#libplatform" class="headerlink" title="libplatform"></a>libplatform</h3><p>编译 <strong>libdispatch</strong> 时同样需要用到 <strong>libplatform</strong> 的头文件。</p>
+<h3 id="libplatform"><a class="markdownIt-Anchor" href="#libplatform"></a> libplatform</h3>
+<p>编译 <strong>libdispatch</strong> 时同样需要用到 <strong>libplatform</strong> 的头文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo ditto $PWD/include `xcrun -sdk macosx -show-sdk-path`/usr/local/include</div></pre></td></tr></table></figure>
-<h3 id="libdispatch"><a href="#libdispatch" class="headerlink" title="libdispatch"></a>libdispatch</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p obj sym dst</div><div class="line">$ sudo xcodebuild install -project libdispatch.xcodeproj -target libfirehose_kernel -sdk macosx ARCHS=&quot;x86_64&quot; SRCROOT=$PWD OBJROOT=$PWD/obj SYMROOT=$PWD/sym DSTROOT=$PWD/dst</div><div class="line">$ sudo ditto $PWD/dst/usr/local `xcrun -sdk macosx -show-sdk-path`/usr/local</div></pre></td></tr></table></figure>
-<h3 id="XNU"><a href="#XNU" class="headerlink" title="XNU"></a>XNU</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># KERNEL_CONFIGS: RELEASE / DEVELOPMENT / DEBUG</div><div class="line">$ make SDKROOT=macosx ARCH_CONFIGS=X86_64 KERNEL_CONFIGS=&quot;RELEASE&quot;</div></pre></td></tr></table></figure>
+<h3 id="libdispatch"><a class="markdownIt-Anchor" href="#libdispatch"></a> libdispatch</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p obj sym dst</div><div class="line">$ sudo xcodebuild install -project libdispatch.xcodeproj -target libfirehose_kernel -sdk macosx ARCHS=&quot;x86_64&quot; SRCROOT=$PWD OBJROOT=$PWD/obj SYMROOT=$PWD/sym DSTROOT=$PWD/dst</div><div class="line">$ sudo ditto $PWD/dst/usr/local `xcrun -sdk macosx -show-sdk-path`/usr/local</div></pre></td></tr></table></figure>
+<h3 id="xnu"><a class="markdownIt-Anchor" href="#xnu"></a> XNU</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># KERNEL_CONFIGS: RELEASE / DEVELOPMENT / DEBUG</div><div class="line">$ make SDKROOT=macosx ARCH_CONFIGS=X86_64 KERNEL_CONFIGS=&quot;RELEASE&quot;</div></pre></td></tr></table></figure>
 <p>编译成功后，即可在BUILD/obj目录下找到内核文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># KERNEL_CONFIGS: RELEASE</div><div class="line">$ cd BUILD/obj/RELEASE_X86_64</div><div class="line">$ file kernel</div><div class="line">kernel: Mach-O 64-bit executable x86_64</div><div class="line"></div><div class="line"># KERNEL_CONFIGS: DEVELOPMENT</div><div class="line">$ cd BUILD/obj/DEVELOPMENT_X86_64</div><div class="line">$ file kernel.development</div><div class="line">kernel: Mach-O 64-bit executable x86_64</div><div class="line"></div><div class="line"># KERNEL_CONFIGS: DEBUG</div><div class="line">$ cd BUILD/obj/DEBUG_X86_64</div><div class="line">$ file kernel.debug</div><div class="line">kernel: Mach-O 64-bit executable x86_64</div></pre></td></tr></table></figure>
 <p>最后可以看到我们编译成功的图：</p>
@@ -234,6 +244,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
             </li>
             
@@ -243,10 +257,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
             </li>
             
         </ul>
@@ -260,7 +270,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
         </li>
         
         <li>

@@ -165,17 +165,19 @@
         
 
         <!-- Post Content -->
-        <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-02%20%E4%B8%8A%E5%8D%8810.19.42.png" height="350" width="600" alt=""></p>
+        <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-02%20%E4%B8%8A%E5%8D%8810.19.42.png" height="350" width="600" alt="">
 <p>上一次我们简介了OS X上的工具集，这次我们通过iOS上的工具来学习Logos语法的底层以及被称作Objective-javaScript的Cycript</p>
 <a id="more"></a>
-<h1 id="CydiaSubstrate"><a href="#CydiaSubstrate" class="headerlink" title="CydiaSubstrate"></a>CydiaSubstrate</h1><p>曾几何时，在我们编写Tweak的时候，有没有考虑到它正常运行的基础是什么呢？正如我们在写编译型语言的时候，会知道编译器作为我们程序正常运行的基础，在写诸如python的解释型语言的时候，会知道有解释器作为我们的基础，那么Tweak之所以可以改变我们正常进程运行的基础就是CydiaSubstrate。它由三个部分来构成：</p>
+<h1 id="cydiasubstrate"><a class="markdownIt-Anchor" href="#cydiasubstrate"></a> CydiaSubstrate</h1>
+<p>曾几何时，在我们编写Tweak的时候，有没有考虑到它正常运行的基础是什么呢？正如我们在写编译型语言的时候，会知道编译器作为我们程序正常运行的基础，在写诸如python的解释型语言的时候，会知道有解释器作为我们的基础，那么Tweak之所以可以改变我们正常进程运行的基础就是CydiaSubstrate。它由三个部分来构成：</p>
 <ol>
 <li>MobileHooker</li>
 <li>MobileLoader</li>
 <li>Safe Mode</li>
 </ol>
 <p>下面我们就来一个个的阐述他们为Tweak的正常执行和维护起了什么样的作用：</p>
-<h2 id="MobileHooker"><a href="#MobileHooker" class="headerlink" title="MobileHooker"></a>MobileHooker</h2><p>它的作用就是<code>狸猫换太子</code>，这个说法是比较抽象的的，那么用程序语言来描述可以用两个函数来形象介绍：</p>
+<h2 id="mobilehooker"><a class="markdownIt-Anchor" href="#mobilehooker"></a> MobileHooker</h2>
+<p>它的作用就是<code>狸猫换太子</code>，这个说法是比较抽象的的，那么用程序语言来描述可以用两个函数来形象介绍：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSHookMessageEx</span><span class="params">(Class <span class="keyword">class</span>, SEL selector, IMP replacement, IMP *result)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSHookFunction</span><span class="params">(<span class="keyword">void</span>* function, <span class="keyword">void</span>* replacement, <span class="keyword">void</span> *p_original)</span></span>;</div></pre></td></tr></table></figure>
 <p>第一个函数<code>MSHookMessageEx</code>是作用于<code>Objective-C</code>函数的：</p>
 <blockquote>
@@ -183,7 +185,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">NSString *(*oldDescription)(id self, SEL _cmd);</div><div class="line"></div><div class="line">// implicit self and _cmd are explicit with IMP ABI</div><div class="line">NSString *newDescription(id self, SEL _cmd) &#123;</div><div class="line">    NSString *description = (*oldDescription)(self, _cmd);</div><div class="line">    description = [description stringByAppendingString:@&quot;!&quot;];</div><div class="line">    return description;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MSHookMessageEx(</div><div class="line">    [NSObject class], @selector(description),</div><div class="line">    &amp;newDescription, &amp;oldDescription</div><div class="line">);</div></pre></td></tr></table></figure>
 <p>我们在之前提到了Logos语法实质上就是在此函数上做了一层封装，让语法变得更加友好化，平时的时候我们还是推荐使用封装以后的，这样更加方便快捷一些。</p>
-<p>第二个函数<code>MSHookFunction</code>是作用于C/C++函数，因为C/C++并不提供<code>runtime</code>这种高级的API来直接替换方法实现，所以我们通过编写汇编指令，在进程执行到function时转到执行replacement，同时保存了function的指令和返回地址，学过汇编的同学应该会发现其实这和<code>call</code>指令有点像，<code>call</code>跳转之后原来的地址保存在栈的前4个字节(8086汇编体系结构)，而指令是在EIP寄存器中。这样的话，我们就可以选择性的执行function，并且执行replacement之后我们的程序依旧可以不中断的正常运行。</p>
+<p>第二个函数<code>MSHookFunction</code>是作用于C/C<ins>函数，因为C/C</ins>并不提供<code>runtime</code>这种高级的API来直接替换方法实现，所以我们通过编写汇编指令，在进程执行到function时转到执行replacement，同时保存了function的指令和返回地址，学过汇编的同学应该会发现其实这和<code>call</code>指令有点像，<code>call</code>跳转之后原来的地址保存在栈的前4个字节(8086汇编体系结构)，而指令是在EIP寄存器中。这样的话，我们就可以选择性的执行function，并且执行replacement之后我们的程序依旧可以不中断的正常运行。</p>
 <blockquote>
 <p>其中第一个参数为所要Hook的函数地址，值得注意的是该地址不一定限于函数头，也可以是函数内部的任一代码地址；第二个参数为Hook后要替换的函数地址；第三个参数为指向Hook地址的指针，用来保存被Hook函数替换掉的汇编指令方便执行完自己的代码逻辑后能够继续执行原函数的逻辑，若不需要调用原函数，则此处可以设为“NULL”。MSHookFunction官方给出的使用方法如下：</p>
 </blockquote>
@@ -193,15 +195,18 @@
 <p>这个时候我们就会有疑问了，这个命名规则是从哪里来的呢？为什么是connect？其实这是一个symbol，这个symbol是根据<code>MSFindSymbol</code>函数根据名称和地址的映射关系在内存中找到的，也就是通过名字来找地址的函数，一般我们的用法是像下面这样:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MSImageRe image = MSGetImageByName(<span class="string">"函数及其实现所存在的二进制文件全路径"</span>);</div><div class="line"><span class="comment">//之后调用MSHookFunction的时候传递的第一个参数就是(void *)symbol了</span></div><div class="line"><span class="keyword">void</span> *symbol = MSFindSymbol(image, <span class="string">"symbol"</span>);</div></pre></td></tr></table></figure>
 <p>我们还可以通过IDA逆向App之后点击对应函数名进去同样可以发现，上面的只是Demo罢了，用在我们自导自演的戏中，在实战中，我们无法知道返回值，也不会知道有几个参数，这个时候就需要更加高级的逆向工程的技巧了，在之后会继续讲解。</p>
-<h2 id="MobileLoader"><a href="#MobileLoader" class="headerlink" title="MobileLoader"></a>MobileLoader</h2><p>该组件的作用就是让应用程序加载第三方的dylib，theos工程编译后生成的dylib就是由这个MobileLoader来加载。</p>
+<h2 id="mobileloader"><a class="markdownIt-Anchor" href="#mobileloader"></a> MobileLoader</h2>
+<p>该组件的作用就是让应用程序加载第三方的dylib，theos工程编译后生成的dylib就是由这个MobileLoader来加载。</p>
 <p>MobileLoader的原理主要是在系统启动时由launchd进程将MobileLoader加载进内存，随后MobileLoader会利用DYLD_INSERT_LIBRARIES环境变量将自己加载进设备的各个进程中，并会遍历<code>/Library/MobileSubstrate/DynamicLibraries/</code>目录下的文件，根据和每个dylib同名的plist文件来确定该dylib的作用范围，若当前进程满足该作用范围，则会使用dlopen函数动态加载对应的dylib。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-02%20%E4%B8%8A%E5%8D%8811.48.59.png" alt=""></p>
 <p>比如我们来查看一下WatchDog的plist文件：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">key</span>&gt;</span>Filter<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">truetrue<span class="tag">&lt;<span class="name">key</span>&gt;</span>Bundles<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">truetrue<span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">truetruetrue<span class="tag">&lt;<span class="name">string</span>&gt;</span>com.apple.springboard<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">truetrue<span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line">true<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">key</span>&gt;</span>version<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">string</span>&gt;</span>5.4<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这其中的string指定的是<code>SpringBoard</code>的bundle identifier，也就是说进程SpringBoard会加载这个dylib,值得注意的是，MobileLoader加载完每个dylib后会首先调用dylib中用<code>__attribute__((constructor))</code>声明的入口函数，这个函数的作用可以参考<a href="https://www.jianshu.com/p/dd425b9dc9db" target="_blank" rel="external">博客</a>。这个操作在Logos语法中的%hook已经封装过该声明了。</p>
-<h2 id="Safe-Mode"><a href="#Safe-Mode" class="headerlink" title="Safe Mode"></a>Safe Mode</h2><p>顾名思义安全模式是为了保护我们的手机，我们的程序总会有崩溃的时候，因为Tweak的本质就是dylib，崩溃的时候就会导致整个进程都崩溃掉，昨天我在写代码的时候不小心多了一个<code>release</code>，导致访问未知内存，整个Tweak都crash掉了，更要命的是，这个dylib是寄生在SpringBoard上的，所以整个iphone的界面也崩掉了。</p>
+<h2 id="safe-mode"><a class="markdownIt-Anchor" href="#safe-mode"></a> Safe Mode</h2>
+<p>顾名思义安全模式是为了保护我们的手机，我们的程序总会有崩溃的时候，因为Tweak的本质就是dylib，崩溃的时候就会导致整个进程都崩溃掉，昨天我在写代码的时候不小心多了一个<code>release</code>，导致访问未知内存，整个Tweak都crash掉了，更要命的是，这个dylib是寄生在SpringBoard上的，所以整个iphone的界面也崩掉了。</p>
 <p>这个时候系统就会提示进入安全模式，让我们重启SpringBoard，在安全模式下，所有基于CydiaSubstrate的第三方dylib都会被禁用，等到修复完成之后，就可以继续使用了。它会捕获<code>SUGTRAP</code>、<code>SIGILL</code>等六种信号作为判断是否进入安全模式的条件。有时候安全模式也不顶用的时候，就需要我们硬重启，然后按住音量+禁用CydiaSubstrate，等到修复之后再重启一次就可以重新启用。</p>
-<h1 id="Cycript"><a href="#Cycript" class="headerlink" title="Cycript"></a>Cycript</h1><p>这是由Cydia创始人Saurik推出的一款脚本语言，<em>Cycript</em>混合了Objective-C与javascript语法的解释器，这意味着我们能够在一个命令中用Objective-C或者javascript，甚至两者兼用。它能够挂钩正在运行的进程，能够在运行时修改应用的很多东西。这里我就稍微提一下昨天遇到的一个问题，gdb同样可以附着于进程之上进行调试，但是直接调试的话会出现：</p>
+<h1 id="cycript"><a class="markdownIt-Anchor" href="#cycript"></a> Cycript</h1>
+<p>这是由Cydia创始人Saurik推出的一款脚本语言，<em>Cycript</em>混合了Objective-C与javascript语法的解释器，这意味着我们能够在一个命令中用Objective-C或者javascript，甚至两者兼用。它能够挂钩正在运行的进程，能够在运行时修改应用的很多东西。这里我就稍微提一下昨天遇到的一个问题，gdb同样可以附着于进程之上进行调试，但是直接调试的话会出现：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-02%20%E4%B8%8B%E5%8D%881.32.00.png" alt=""></p>
 <p>这样的错误，这是因为Mac及其衍生系统上的一个安全机制,如果一个进程想要访问其他的进程，必须有签名(非root用户)，这个签名的制作方法可以参考<a href="http://blog.afantree.com/unixlinux/gdb-prompt-signature-under-mac-error-please-check-gdb-is-codesigned-see-taskgated-8.html" target="_blank" rel="external">博客</a>，如果发现还是有问题的话在本用户目录下面创建一个.gdbinit的文件，会在运行gdb的时候自行加载，在里面加上一行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set startup-with-shell off</div></pre></td></tr></table></figure>
@@ -216,14 +221,16 @@
 <p>而且这是即时显示的，作为函数功能检测的工具实在是再好不过了，如果我们知道一个类对象存在于当前进程中，但是又不知道如何去获取到这个类和相关方法怎么办呢？那么就不妨试试choose命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cy# choose(SBScreenShotter)</div><div class="line">[#&quot;&lt;SBScreenShotter: 0x166e0201&gt;&quot;]</div><div class="line">cy# choose(SBViewController)</div><div class="line">[#&quot;&lt;SBViewController: 0x3e4a6b02&gt;&quot;]</div></pre></td></tr></table></figure>
 <p>只需要choose一个类，Cycript就可以在内存中帮你找出它的对象，当然这也不是绝对的。相反的，如果我们知道了一个对象在内存中的地址，可以通过<code>#</code>操作符来获取这个对象。关于这个就先介绍到这里了，其他好玩的使用方式就看不同的App来搭配不同的脑洞了(虽然这是一个测试工具，但也可以作为我们的玩具，想想别人在玩手机的时候突然蹦出一个鬼头是不是很有意思呢？？？)</p>
-<h1 id="debugserver和lldb"><a href="#debugserver和lldb" class="headerlink" title="debugserver和lldb"></a>debugserver和lldb</h1><p>安装什么的浪费时间就不说了，网上有一堆，那么就直接切入正题，关于偏移地址我们首先拿例子来看看：</p>
+<h1 id="debugserver和lldb"><a class="markdownIt-Anchor" href="#debugserver和lldb"></a> debugserver和lldb</h1>
+<p>安装什么的浪费时间就不说了，网上有一堆，那么就直接切入正题，关于偏移地址我们首先拿例子来看看：</p>
 <p>在手机上我们通过命令对MobileSMS进行debug，并开放1234端口可供连接，这里允许任意的IP连接：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">debugserver -x backboard *:1234 /Application/MobileSMS.app/MobileSMS</div></pre></td></tr></table></figure>
 <p>然后在我们的本机上开启lldb并连接过去：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/usr/bin/lldb</div><div class="line">process connect connect://192.168.1.129:1234</div></pre></td></tr></table></figure>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-02%20%E4%B8%8B%E5%8D%887.31.34.png" alt=""></p>
 <p>我们首先通过<code>image</code>来列举当前进程中的所有模块，我们会发现最前面有一个地址，后面的括号中有一个十六进制数也是地址，这分别代表的是什么意思呢？</p>
-<h2 id="偏移地址"><a href="#偏移地址" class="headerlink" title="偏移地址"></a>偏移地址</h2><p>首先要介绍一下ASLR，它意味着同一个进程的所有模块在虚拟内存中的起始地址都会发生偏移，并且这个偏移是随机的，上图中的第一个地址指的是产生的随机偏移，第二个地址则是偏移之后的起始地址，所以基地址就为:</p>
+<h2 id="偏移地址"><a class="markdownIt-Anchor" href="#偏移地址"></a> 偏移地址</h2>
+<p>首先要介绍一下ASLR，它意味着同一个进程的所有模块在虚拟内存中的起始地址都会发生偏移，并且这个偏移是随机的，上图中的第一个地址指的是产生的随机偏移，第二个地址则是偏移之后的起始地址，所以基地址就为:</p>
 <blockquote>
 <p>偏移后模块基地址 = 偏移前模块基地址 + ASLR地址</p>
 </blockquote>
@@ -235,7 +242,8 @@
 <p>(偏移后/偏移前)符号基地址 = 符号相对于模块的相对位置 + (偏移后/偏移前)模块的基地址</p>
 </blockquote>
 <p>上面的两个式子都是可以计算的，对于这两个概念一定要撸顺了，不然之后就更加是一团浆糊了。</p>
-<h2 id="打断点"><a href="#打断点" class="headerlink" title="打断点"></a>打断点</h2><p>我们结合上面的偏移地址，还是以SpringBoard为例，首先我们用IDA查看一下偏移前的基地址，在function window中搜索一下<code>[SpringBoard _menuButtonDown:]</code>，然后按空格转换为TextView观察：</p>
+<h2 id="打断点"><a class="markdownIt-Anchor" href="#打断点"></a> 打断点</h2>
+<p>我们结合上面的偏移地址，还是以SpringBoard为例，首先我们用IDA查看一下偏移前的基地址，在function window中搜索一下<code>[SpringBoard _menuButtonDown:]</code>，然后按空格转换为TextView观察：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8A%E5%8D%8810.51.16.png" alt=""></p>
 <p>然后我们再打开lldb找到ASLR的值，将两者相加得到最后的偏移后地址：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8A%E5%8D%8810.54.07.png" alt=""></p>
@@ -252,7 +260,8 @@
 <p>执行这条命令之后，lldb会要求我们输入一系列的指令，以<code>DONE</code>结束，注意一定要是大写：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8A%E5%8D%8811.29.51.png" alt=""></p>
 <p>这些指令就是我们接下来要说的打印指令了。</p>
-<h2 id="打印和下一步"><a href="#打印和下一步" class="headerlink" title="打印和下一步"></a>打印和下一步</h2><p>lldb的主要功能之一就是在程序停止的时候检查程序内部发生的事，之前用过gdb的肯定知道，打印的参数就是各个寄存器之中的值，语法参见上图，除了简单的<code>print</code>之外，还有一个是用来打印对象的：</p>
+<h2 id="打印和下一步"><a class="markdownIt-Anchor" href="#打印和下一步"></a> 打印和下一步</h2>
+<p>lldb的主要功能之一就是在程序停止的时候检查程序内部发生的事，之前用过gdb的肯定知道，打印的参数就是各个寄存器之中的值，语法参见上图，除了简单的<code>print</code>之外，还有一个是用来打印对象的：</p>
 <blockquote>
 <p>po [$x0 class]</p>
 <p>po $x0</p>
@@ -260,12 +269,13 @@
 <p>上面的命令是用来打印OC对象，如果想要打印C语言基本数据类型对象的话可以使用强转</p>
 <p>最后，可以用x打印一个地址处存放的值，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(lldb) x/10 $sp</div><div class="line">0x006e838c: 0x0065837c 0x006e433c 0x005e838c 0x006f848c</div><div class="line">0x006e838c: 0x006e838c 0x006e83cc 0x006e8d8c 0x006e858c</div><div class="line">0x006e838c: 0x006e8a8c 0x006e83ac</div></pre></td></tr></table></figure>
-<p>我们通过这条指令打印出这个指针指向的连续十个字节。  </p>
+<p>我们通过这条指令打印出这个指针指向的连续十个字节。</p>
 <p>然后我们介绍两个执行下一步机器指令的命令:<code>nexti</code>和<code>stepi</code>，我们可以简写为<code>ni</code>和 <code>si</code>，这两者的区别就是前者不会进入函数体，但后者会，这两兄弟是在调试中用的最多的指令之一了。那么对于是否进入函数体这种说法我们仍然抱有疑问，我们通过IDA来说明一下：</p>
-<p> <img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8B%E5%8D%884.11.41.png" alt=""></p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8B%E5%8D%884.11.41.png" alt=""></p>
 <p>我们会看到有一个BL跳转指令，如果我们使用的是<code>ni</code>进行下一步，那么就会跳到下一条语句<code>CBZ</code>，如果我们选择的是<code>si</code>来进行下一步，我们就会跳转到这个函数内部，所处地址也就是函数内部的第一条指令地址了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8B%E5%8D%884.13.59.png" alt=""></p>
-<h2 id="寄存器赋值"><a href="#寄存器赋值" class="headerlink" title="寄存器赋值"></a>寄存器赋值</h2><p><code>register write</code>是用于给寄存器赋值，它可以修改程序执行的结果，举个最简单的例子，因为所有的判断语句在底层都是汇编，在ARM汇编中的体现就是<code>CMP</code>和<code>CMN</code>，然后加上一个条件跳转就构成了简单的<code>if-else</code>，如果我们可以修改判断时的那个寄存器的值，就可以让整个程序按照我们既定的方向去进行了：</p>
+<h2 id="寄存器赋值"><a class="markdownIt-Anchor" href="#寄存器赋值"></a> 寄存器赋值</h2>
+<p><code>register write</code>是用于给寄存器赋值，它可以修改程序执行的结果，举个最简单的例子，因为所有的判断语句在底层都是汇编，在ARM汇编中的体现就是<code>CMP</code>和<code>CMN</code>，然后加上一个条件跳转就构成了简单的<code>if-else</code>，如果我们可以修改判断时的那个寄存器的值，就可以让整个程序按照我们既定的方向去进行了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CMN		X8, #1</div><div class="line">BNE		loc_10026B440</div></pre></td></tr></table></figure>
 <p>那么这个语句也就是说将X8寄存器的值和立即数1相加，如果结果不是0，就会跳转到代码中的那一段地址</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-02-03%20%E4%B8%8B%E5%8D%884.45.48.png" alt=""></p>
@@ -312,6 +322,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
             </li>
             
@@ -321,10 +335,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
             </li>
             
         </ul>
@@ -338,7 +348,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
         </li>
         
         <li>

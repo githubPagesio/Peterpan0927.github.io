@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="how to reach the steins gate?">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Peter pan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="iPhone中新引入的保护机制"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="how to reach the steins gate?" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Peterpan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>iPhone中新引入的保护机制 - Peterpan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/09/20/iPhone中新引入的保护机制/">
+                iPhone中新引入的保护机制
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-09-20</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/新特性/">新特性</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>After Apple announce their next generation of iPhones,What’s different about the protection?</p>
+<a id="more"></a>
+<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
+<p>在苹果的发布会上放出了大家期待已久的新产品，而对于安全人员来说，肯定关心的是有没有加入新的防护机制，果不其然，苹果在新的产品上用了新的ARM架构–<code>ARMv8.3</code>，新架构中引入了一个被称作<code>Pointer Authentiction Code</code>的内存保护机制。这个东西可以参考一下<code>Message Authentication Code</code>：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%884.35.43.png" alt="MAC"></p>
+<p>PAC也是差不多的机制，只是把<code>Message</code>给替换为了指针，维护指针的完整性。</p>
+<h1 id="0x01pac介绍"><a class="markdownIt-Anchor" href="#0x01pac介绍"></a> 0x01.PAC介绍</h1>
+<p>之前我们用到的漏洞大多数都是缓冲区溢出、整数溢出，然后结合ROP做提权，注入<code>amfid</code>去bypass签名校验等等，加入了PAC之后，相当于把以前的方式都给通杀掉了。毫无疑问对于我们带来了新的挑战，不过这也是一件令人兴奋的事情，如果总是相同的套路，我想大部分的<code>Hacker</code>最后都会离开这个领域。</p>
+<p>下面就来介绍一下PAC的具体实现：</p>
+<ul>
+<li>因为64位的机器并没有用到64位地址，所以我们可以使用多余的bit来作为PAC</li>
+<li>因为指针在程序中的不同作用，引入了一个新变量<code>context</code></li>
+<li>根据指针的作用不同，有五种不同的PAC可以选择</li>
+<li>指令的encoding取决于使用的key</li>
+<li><code>context</code>变量就是为了防止<code>pointers</code>使用相同的key</li>
+<li>有两个重要的操作需要校验指针：计算和添加PAC，校验PAC和存储指针的值</li>
+<li>高通公司为其PAC构建设计了自己的分组密码<a href="https://eprint.iacr.org/2016/444.pdf" target="_blank" rel="external">QARMA</a></li>
+</ul>
+<p>高通基本上是在指令的未使用位上添加完整性信息（PAC），在指针跳转之前，它们会检查这些PAC，如果验证失败，则抛出<code>authentication failure</code>错误，程序将不执行下一条指令。具体可以看看 <a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">关于指针认证代码</a>的<a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">论文</a>。也可以阅读<a href="http://www.newosxbook.com/forum/viewtopic.php?f=11&amp;t=19557" target="_blank" rel="external">Jonathan Levin的帖子</a>。</p>
+<p>既然采用了和MAX类似的加密方式，那么也就意味着攻击MAC的方式同样可以拿来作为攻击PAC的参考：</p>
+<ul>
+<li>密钥管理攻击：他们生成PAC密钥的方式必须正常工作，攻击者不应该能够预测密钥。</li>
+<li>在从系统获得<strong>许多</strong>有效的PAC 之后，攻击者不应该能够生成有效的PAC 。</li>
+<li>定时攻击：对于不同的标签和相同的标签，验证算法需要花费<strong>相同的时间</strong>。</li>
+<li>侧通道攻击：攻击者无法通过监视（例如，使用不同类型的指针执行指令所花费的时间）来检索密钥。</li>
+</ul>
+<p>目前来说不仅要对内核的内存了解的很熟悉，还需要学习密码学方面，才能继续去攻破iOS的系统(PS:一开始CTF就是刷crypto的，虽然已经都忘了)。</p>
+<p>我在Twitter上看到关注的人都摩拳擦掌想要去干掉这个新的保护了，建立了相关github：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%885.01.37.png" alt="xerub"></p>
+<p>团队老大也在学习这个，emm，我也要加把劲了：</p>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%885.02.20.png" alt="Proteas"></p>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/漏洞挖掘/">#漏洞挖掘</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    Hacking to the gate
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/peterpan0927">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/peterpan980927">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

@@ -165,31 +165,39 @@
         
 
         <!-- Post Content -->
-        <p>OC特有语法<br><a id="more"></a></p>
-<h2 id="子类在内存中的存储和方法调用过程"><a href="#子类在内存中的存储和方法调用过程" class="headerlink" title="子类在内存中的存储和方法调用过程"></a>子类在内存中的存储和方法调用过程</h2><p>1.子类对象中有自己的属性和所有父类的属性</p>
+        <p>OC特有语法</p>
+<a id="more"></a>
+<h2 id="子类在内存中的存储和方法调用过程"><a class="markdownIt-Anchor" href="#子类在内存中的存储和方法调用过程"></a> 子类在内存中的存储和方法调用过程</h2>
+<p>1.子类对象中有自己的属性和所有父类的属性</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-17%20%E4%B8%8B%E5%8D%8811.23.35.png" alt=""></p>
 <p>2.除去NSObject类之外代码段中的每一个类都有一个isa指针指向它的父类，在继承中，代码段中也是通过这样的指针来调用父类的方法和属性。</p>
 <p>在调用方法的时候，根据isa指针一层一层的往上寻找，一直到NSObject为止，如果NSObject也没有就会报错。</p>
 <hr>
-<h2 id="结构体和类的不同点"><a href="#结构体和类的不同点" class="headerlink" title="结构体和类的不同点"></a>结构体和类的不同点</h2><ul>
+<h2 id="结构体和类的不同点"><a class="markdownIt-Anchor" href="#结构体和类的不同点"></a> 结构体和类的不同点</h2>
+<ul>
 <li>结构体只能封装数据，而类不仅可以封装数据还可以封装行为</li>
 <li>结构体变量分配在栈中（如果是一个局部变量的情况下）而对象分配在堆中</li>
 </ul>
 <p>​        栈的特点：空间相对较小，但是存储在栈中的数据访问效率更高一些</p>
-<p>​    堆的特点：空间相对较大，但是存储在堆中的数据访问效率更低一些</p>
+<p>​	堆的特点：空间相对较大，但是存储在堆中的数据访问效率更低一些</p>
 <ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//赋值对比</div><div class="line">//值赋值</div><div class="line">Student s1 = &#123;&quot;jack&quot;,19&#125;;</div><div class="line">Student s2 = s1;</div><div class="line">//地址赋值</div><div class="line">Person *p1 = [Person new];</div><div class="line">Person *p2 = p1;</div></pre></td></tr></table></figure>
+<li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//赋值对比</div><div class="line">//值赋值</div><div class="line">Student s1 = &#123;&quot;jack&quot;,19&#125;;</div><div class="line">Student s2 = s1;</div><div class="line">//地址赋值</div><div class="line">Person *p1 = [Person new];</div><div class="line">Person *p2 = p1;</div></pre></td></tr></table></figure>
 <p>​</p>
 <hr>
 <p>​</p>
 </li>
 </ul>
-<h2 id="类的存储"><a href="#类的存储" class="headerlink" title="类的存储"></a>类的存储</h2><ul>
-<li><p>类在第一次被访问的时候，类就会被加载到代码段存储，被称为类加载。</p>
+<h2 id="类的存储"><a class="markdownIt-Anchor" href="#类的存储"></a> 类的存储</h2>
+<ul>
+<li>
+<p>类在第一次被访问的时候，类就会被加载到代码段存储，被称为类加载。</p>
 </li>
-<li><p>类在被加载到代码段之后，除非程序结束不然不会被回收</p>
+<li>
+<p>类在被加载到代码段之后，除非程序结束不然不会被回收</p>
 </li>
-<li><p>类存储在代码段中的形式：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-18%20%E4%B8%8B%E5%8D%8812.34.56.png" alt=""></p>
+<li>
+<p>类存储在代码段中的形式：<img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-18%20%E4%B8%8B%E5%8D%8812.34.56.png" alt=""></p>
 <p>1.先在代码段中创建一个Class对象，Class是Foundation框架中的一个类，</p>
 <p>这个Class对象就是用来存储类信息。</p>
 <p>2.将类的信息存储在这个Class对象当中</p>
@@ -203,15 +211,17 @@
 </li>
 </ul>
 <hr>
-<h2 id="类对象的使用"><a href="#类对象的使用" class="headerlink" title="类对象的使用"></a>类对象的使用</h2><p>1.调用类的类方法 class 就可以得到存储类的类对象地址</p>
+<h2 id="类对象的使用"><a class="markdownIt-Anchor" href="#类对象的使用"></a> 类对象的使用</h2>
+<p>1.调用类的类方法 class 就可以得到存储类的类对象地址</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//声明Class指针的时候不需要加* ，因为在typedef的时候已经加上了*</div><div class="line">Class c1 = [Person class];</div><div class="line">NSLog(@&quot;%p&quot;,c1);</div></pre></td></tr></table></figure>
 <p>2.调用对象的对象方法class就可以得到存储这个对象所属的类的Class对象的地址</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">Class c2 = [p1 class];</div><div class="line">NSLog(@&quot;%p&quot;,c2);</div></pre></td></tr></table></figure>
 <p>3.对象中的isa指针的值其实就是代码段中存储类的类对象的地址</p>
-<p>4.类对象的使用 </p>
+<p>4.类对象的使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Class c1 = [Person class];</div><div class="line">//此时c1就是指向了Person这个类,可以直接调用类方法。</div><div class="line">[c1 sayHi];</div><div class="line">//可以使用使用类对象来调用new方法，创建存储在类对象中的类的对象</div><div class="line">c1 *p2 = [c1 new];</div><div class="line">//类对象不能用来调用实例方法，但是可以用来调用类方法</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="方法本质是SEL消息"><a href="#方法本质是SEL消息" class="headerlink" title="方法本质是SEL消息"></a>方法本质是SEL消息</h2><p>SEL的全称是叫做selector 选择器，是一个数据类型，所以要在内存中申请空间存储数据。</p>
+<h2 id="方法本质是sel消息"><a class="markdownIt-Anchor" href="#方法本质是sel消息"></a> 方法本质是SEL消息</h2>
+<p>SEL的全称是叫做selector 选择器，是一个数据类型，所以要在内存中申请空间存储数据。</p>
 <p>SEL其实是一个类，SEL对象是用来存储方法的</p>
 <p>由此可知方法在类对象中的存储方式：</p>
 <p>1.创建一个SEL对象</p>
@@ -219,9 +229,11 @@
 <p>3.SEL对象再作为Class对象的一个属性</p>
 <p><strong>拿到存储方法的SEL对象</strong></p>
 <ul>
-<li><p>因为SEL是个typedef类型，在自定义的时候已经加<em>了，所以我们在声明SEL指针的时候，不需要加 </em>。</p>
+<li>
+<p>因为SEL是个typedef类型，在自定义的时候已经加*了，所以我们在声明SEL指针的时候，不需要加 *。</p>
 </li>
-<li><p>取到存储方法的SEL 对象</p>
+<li>
+<p>取到存储方法的SEL 对象</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SEL s1 = @selector(方法名);</div></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -242,7 +254,8 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Person p1 = [Person new];</div><div class="line">SEL s1 = @selector(sayHi);</div><div class="line">[p1 performSelector:s1];</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="点语法"><a href="#点语法" class="headerlink" title="点语法"></a>点语法</h2><p>点语法的原理</p>
+<h2 id="点语法"><a class="markdownIt-Anchor" href="#点语法"></a> 点语法</h2>
+<p>点语法的原理</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p1.age = 18;</div><div class="line">//这句话的本质不是直接把18赋值给p1对象的_age属性</div></pre></td></tr></table></figure>
 <ul>
 <li>当使用点语法赋值的时候，编译器会将点语法转换为调用setter方法的代码：</li>
@@ -255,12 +268,13 @@
 <p>⚠️：在getter、setter方法中慎用点语法，因为有可能会造成无限递归 而程序崩溃:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)setAge:(int)age&#123;</div><div class="line">  self.age = age;</div><div class="line">  //[self setAge:age];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="property和-synthesize"><a href="#property和-synthesize" class="headerlink" title="@property和@synthesize"></a>@property和@synthesize</h2><p>语法：</p>
+<h2 id="property和synthesize"><a class="markdownIt-Anchor" href="#property和synthesize"></a> @property和@synthesize</h2>
+<p>语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@interface Person: NSObject</div><div class="line">  &#123;</div><div class="line">    int _age;</div><div class="line">  &#125;</div><div class="line">@property int age;</div><div class="line">@end</div><div class="line">----</div><div class="line">@implementation Person</div><div class="line">  </div><div class="line">@synthesize age;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>@property只是对属性的getter和setter方法做了一个声明，还要在.m文件中通过@synthesize来实现。</p>
 <p><strong>@synthesize的作用</strong></p>
 <p>1.生成一个真私有属性方法，属性的类型名字都和它对应的@property一致。</p>
-<p>2.自动生成setter方法，将参数赋给那个自动生成的私有属性 </p>
+<p>2.自动生成setter方法，将参数赋给那个自动生成的私有属性</p>
 <p>3.自动生成getter方法，将生成的属性的值返回</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//@synthesize做的事情等价于下面的代码</div><div class="line">@implementation Person</div><div class="line">  &#123;</div><div class="line">    int age;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">-(void)setAge&#123;</div><div class="line">  self-&gt;age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(int)age&#123;</div><div class="line">  return self-&gt;age;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>这就意味着之前声明的私有属性没有任何的作用了，可以去掉，现在是直接在@property中声明属性，然后在@synthesize中生成getter和setter方法。</p>
@@ -276,7 +290,8 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//在子类中访问父类的属性</div><div class="line">- (void)test&#123;</div><div class="line">  [super setName:@&quot;jack&quot;];</div><div class="line">  //或者使用</div><div class="line">  self.name = @&quot;jack&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="静态类型和动态类型"><a href="#静态类型和动态类型" class="headerlink" title="静态类型和动态类型"></a>静态类型和动态类型</h2><p>OC是一门弱语言</p>
+<h2 id="静态类型和动态类型"><a class="markdownIt-Anchor" href="#静态类型和动态类型"></a> 静态类型和动态类型</h2>
+<p>OC是一门弱语言</p>
 <p>编译器在编译的时候，检查没有那么严格</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num = <span class="number">12.12</span>;</div></pre></td></tr></table></figure>
 <p>但是在运行的时候会报错</p>
@@ -297,7 +312,8 @@
 <p>实际上任意的指针可以执行任意的对象，编译器是不会报错的。</p>
 <p>当一个子类指针执行父类对象的时候，编译器运行通过子类指针去调用子类独有的方法，但是在运行的时候会出问题。</p>
 <hr>
-<h2 id="NSObject和id指针"><a href="#NSObject和id指针" class="headerlink" title="NSObject和id指针"></a>NSObject和id指针</h2><p><strong>1.NSObject</strong></p>
+<h2 id="nsobject和id指针"><a class="markdownIt-Anchor" href="#nsobject和id指针"></a> NSObject和id指针</h2>
+<p><strong>1.NSObject</strong></p>
 <p>是所有类的基类，根据LSP，NSObject可以指向任意的OC对象，所以NSObject指针是一个万能指针</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//声明一个NSObject指针，然后让指针的类型改变成为Person类型的</div><div class="line">NSObject *obj = [Person new];</div><div class="line">//需要做一个类型转换，不然无法通过编译检查</div><div class="line">[(Person *)obj sayHi];</div></pre></td></tr></table></figure>
 <p><strong>2.id指针</strong></p>
@@ -317,7 +333,8 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)person&#123;</div><div class="line">  return [self new];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="动态类型检测"><a href="#动态类型检测" class="headerlink" title="动态类型检测"></a>动态类型检测</h2><p>我们写的程序就算是编译通过了，不意味着可以完美执行，所以我们希望可以判断一下对象中是否有这个方法，如果有再执行。</p>
+<h2 id="动态类型检测"><a class="markdownIt-Anchor" href="#动态类型检测"></a> 动态类型检测</h2>
+<p>我们写的程序就算是编译通过了，不意味着可以完美执行，所以我们希望可以判断一下对象中是否有这个方法，如果有再执行。</p>
 <p>1.判断指针指向的对象是否有这个方法可以执行（只能判断对象方法）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Person *p1 = [Person new];</div><div class="line">BOOL b1 = [p1 respondsToSelector:@selector(length)];</div><div class="line">if(b1)&#123;</div><div class="line">  [p1 sayHi];</div><div class="line">&#125;else&#123;</div><div class="line">  NSLog(@&quot;NO。。。。。&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>2.判断指定的对象是不是指定的类或者指定的类的子类的实例</p>
@@ -329,7 +346,8 @@
 <p>5.判断指定的类中有没有对应的类方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Student instancetypeRespondToSelector:@selector(sayHi)];</div></pre></td></tr></table></figure>
 <hr>
-<h2 id="构造方法概述"><a href="#构造方法概述" class="headerlink" title="构造方法概述"></a>构造方法概述</h2><p><strong>new方法</strong>：</p>
+<h2 id="构造方法概述"><a class="markdownIt-Anchor" href="#构造方法概述"></a> 构造方法概述</h2>
+<p><strong>new方法</strong>：</p>
 <p>new方法的内部，其实是先调用alloc方法，再调用的init方法。</p>
 <p>alloc 是一个类方法，那一个类的调用的这个方法，就创建哪一个类的对象，并将其返回</p>
 <p>init方法是一个对象方法，用来初始化对象。</p>
@@ -404,6 +422,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
             </li>
             
@@ -413,10 +435,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
             </li>
             
         </ul>
@@ -430,7 +448,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
         </li>
         
         <li>

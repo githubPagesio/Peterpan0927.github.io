@@ -167,24 +167,31 @@
         <!-- Post Content -->
         <p>What if we can go back to the past?</p>
 <a id="more"></a>
-<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>我们的人生在被历史的车轮驱赶着向前前进，很多时候只有经历过之后才会明白后悔的滋味，可惜这个世界上没有后悔药可以吃。生活中我们也许常常会有这样类似的感叹，人生是回不到过去的，但是我们的手中的手机却可以。但是万恶的苹果却剥夺了我们的这个重新去追求美好的权利，甚至我们的手机还会因此变成一块砖头，只有在苹果“大发善心”开放降级通道的时候才能得到这样的机会，那么这样防止降级的手段是什么呢？就一起来了解一下吧。</p>
-<h1 id="0x01-安全特性介绍"><a href="#0x01-安全特性介绍" class="headerlink" title="0x01.安全特性介绍"></a>0x01.安全特性介绍</h1><p>在允许离线升级的时候，这种手段是不存在的，防降级是在强制在线升级之后出现的。</p>
+<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
+<p>我们的人生在被历史的车轮驱赶着向前前进，很多时候只有经历过之后才会明白后悔的滋味，可惜这个世界上没有后悔药可以吃。生活中我们也许常常会有这样类似的感叹，人生是回不到过去的，但是我们的手中的手机却可以。但是万恶的苹果却剥夺了我们的这个重新去追求美好的权利，甚至我们的手机还会因此变成一块砖头，只有在苹果“大发善心”开放降级通道的时候才能得到这样的机会，那么这样防止降级的手段是什么呢？就一起来了解一下吧。</p>
+<h1 id="0x01安全特性介绍"><a class="markdownIt-Anchor" href="#0x01安全特性介绍"></a> 0x01.安全特性介绍</h1>
+<p>在允许离线升级的时候，这种手段是不存在的，防降级是在强制在线升级之后出现的。</p>
 <p>其实要说防止降级的手段，能够施展拳脚的地方也只有那么几处。因为各个版本的固件基本网上都流传遍了，所以它要做手段只能在升级的时候进行校验的时候做了。我们会注意到我们每次手机更新系统的时候都会连接到苹果的一个服务器，进行安装权限的校验，这个工作在我们的手机上是通过itunes来完成，它会加密发送你更新的内容信息的摘要，一个防止重放攻击的随机数，设备的ECID。</p>
 <p>然后服务端就会对你的信息进行校验，如果你的手机本来是低版本，升级的高版本，那么就会对安装包签名返回，如果不是的话就不会被允许，因为我们的终端版本信息都在服务端存着，而且还防了一手重放攻击。</p>
 <p>这个功能叫做<code>System software personalization</code>，就是它阻止了我们回到过去的脚步，那么我们对着一个没有签名的安装包怎么办呢，到底能不能安装呢？就要了解一下固件下载下来的安装过程到底发生了什么。</p>
-<h1 id="0x02-固件安装流程"><a href="#0x02-固件安装流程" class="headerlink" title="0x02.固件安装流程"></a>0x02.固件安装流程</h1><p>从网上下载的固件是<code>.ipsw</code>后缀的，标准步骤是打开itunes连接手机安装，这其中的流程其实是这样：</p>
+<h1 id="0x02固件安装流程"><a class="markdownIt-Anchor" href="#0x02固件安装流程"></a> 0x02.固件安装流程</h1>
+<p>从网上下载的固件是<code>.ipsw</code>后缀的，标准步骤是打开itunes连接手机安装，这其中的流程其实是这样：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-01%20%E4%B8%8B%E5%8D%882.06.05.png" alt="刷机过程中的数据流动"></p>
-<p> 关键的步骤就在第三步CPU能否奖固件写进<code>Flash/eMMc</code>中，也就决定了我们刷机能不能成功，所以关键在于CPU，而且这个暂时想不出办法绕开，因为iOS设备全盘加密，加密密钥在CPU的内部，而且每台设备不同，没有密钥就无法写入合法数据，所以关键就卡在了这一步上。</p>
+<p>关键的步骤就在第三步CPU能否奖固件写进<code>Flash/eMMc</code>中，也就决定了我们刷机能不能成功，所以关键在于CPU，而且这个暂时想不出办法绕开，因为iOS设备全盘加密，加密密钥在CPU的内部，而且每台设备不同，没有密钥就无法写入合法数据，所以关键就卡在了这一步上。</p>
 <p>那么这个CPU是怎么判定能不能刷机呢？这个条件就是我们上一步中说的服务器端的签名，苹果的服务器根据固件的真假，版本号还有你的终端版本来决定是否提供签名，所以这样一来，如果我们没有苹果提供的固件签名，CPU就无法将固件写入，那么我们所说的刷机就是一个笑话了。</p>
 <p>但是在之前的时候还是可以利用重放攻击来实现的，虽然数字签名没有办法伪造，因为我们可以拿到之前的旧签名，然后将这个旧签名给CPU，也是可以通过的，但是这个很好避免，所以现在苹果的签名中还会包含一串随机数，所以目前还是道高一尺，没有什么很好的解决方案。</p>
 <p>但是如果我们能破解iTunes和苹果的通讯协议的话还是可以伪造服务器，那么就可以刷任意的版本了。</p>
-<h1 id="0x03iOS的安全启动"><a href="#0x03iOS的安全启动" class="headerlink" title="0x03iOS的安全启动"></a>0x03iOS的安全启动</h1><p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-01%20%E4%B8%8B%E5%8D%882.37.14.png" alt="系统安全架构"></p>
+<h1 id="0x03ios的安全启动"><a class="markdownIt-Anchor" href="#0x03ios的安全启动"></a> 0x03iOS的安全启动</h1>
+<p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-05-01%20%E4%B8%8B%E5%8D%882.37.14.png" alt="系统安全架构"></p>
 <p>先上一张图再说，之前说了刷机的一些事情，和这个密切相关的就是iOS的系统完整性校验了，了解的也不是很多，简单的说一下。</p>
 <p>苹果的系统完整性校验主要包括：bootloaders, kernel, kernel extensions, and baseband firmware.Boot ROM先启动，里面内置了Root CA public key，然后验证  Low-Level Bootloader (LLB) ，LLB是苹果签名的.  LLB 又去验证next-stage bootloader, iBoot, iboot验证kernel.如果上述有验证的某个环节没通过，手机会显示 “Connect to iTunes” .越狱的朋友深有体会。其实就是进入了 recovery mode.。如果Boot ROM 加载或者验证LLB都失败了，那就进入了 DFU (Device Firmware Upgrade) mode.</p>
 <p>在这个模式下可以允许你的苹果设备在没有加载操作系统或导入加载程序的情况下连接<code>iTunes</code>。玩越狱的应该都知道如果恢复模式也崩了，就只能祭出DFU了(我之前的手机中文库就崩了…)。</p>
-<h1 id="0x04-补充-amp-参考博客"><a href="#0x04-补充-amp-参考博客" class="headerlink" title="0x04.补充&amp;参考博客"></a>0x04.补充&amp;参考博客</h1><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>因为安全知识点比较零散，为了防止之后忘记，但是点又不长不方便开一篇文章，所以就在普通博客中偶尔插播一下，这里补充一个防止<code>tweak</code>依附的方式，之前看到过。</p>
+<h1 id="0x04补充参考博客"><a class="markdownIt-Anchor" href="#0x04补充参考博客"></a> 0x04.补充&amp;参考博客</h1>
+<h2 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h2>
+<p>因为安全知识点比较零散，为了防止之后忘记，但是点又不长不方便开一篇文章，所以就在普通博客中偶尔插播一下，这里补充一个防止<code>tweak</code>依附的方式，之前看到过。</p>
 <p>就是通过<code>__RESTRICT</code>字段来完成的，在这种情况下我们会发现不管是动态调试还是dylib的注入都会失败，破解的方式也很简单，我直接用<code>Hex Friend</code>修改掉里面所有的这种字段，<code>dyld</code>找不到这种字段，那么动态链接器就不会忽略掉我们的<code>DYLD_INSERT_LIBRARIES</code>了，但是这样相当于做了一个静态<code>patch</code>，签名失效，所以我们要么逆向修改掉签名校验，要么偷懒直接使用<code>AppSync</code>禁用掉所有App的签名校验。</p>
-<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
+<h2 id="参考博客"><a class="markdownIt-Anchor" href="#参考博客"></a> 参考博客</h2>
+<ol>
 <li><a href="http://iosre.com/t/tweak-app-app-tweak/438" target="_blank" rel="external">snakeninny的技术分享</a></li>
 <li><a href="https://bbs.pediy.com/thread-174935.htm" target="_blank" rel="external">iOS安全团队对iOS安全的认识</a></li>
 </ol>
@@ -230,6 +237,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
             </li>
             
@@ -239,10 +250,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/07/29/通过堆风水绕过内核保护提权/">通过堆风水绕过内核保护提权</a>
             </li>
             
         </ul>
@@ -256,7 +263,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/代理-图片轮播器-模块化/">代理 图片轮播器 模块化</a>
+            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
         </li>
         
         <li>
