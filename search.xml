@@ -7,12 +7,10 @@
       <url>/2018/09/20/iPhone%E4%B8%AD%E6%96%B0%E5%BC%95%E5%85%A5%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>After Apple announce their next generation of iPhones,What’s different about the protection?</p>
 <a id="more"></a>
-<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
-<p>在苹果的发布会上放出了大家期待已久的新产品，而对于安全人员来说，肯定关心的是有没有加入新的防护机制，果不其然，苹果在新的产品上用了新的ARM架构–<code>ARMv8.3</code>，新架构中引入了一个被称作<code>Pointer Authentiction Code</code>的内存保护机制。这个东西可以参考一下<code>Message Authentication Code</code>：</p>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在苹果的发布会上放出了大家期待已久的新产品，而对于安全人员来说，肯定关心的是有没有加入新的防护机制，果不其然，苹果在新的产品上用了新的ARM架构–<code>ARMv8.3</code>，新架构中引入了一个被称作<code>Pointer Authentiction Code</code>的内存保护机制。这个东西可以参考一下<code>Message Authentication Code</code>：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%884.35.43.png" alt="MAC"></p>
-<p>PAC也是差不多的机制，只是把<code>Message</code>给替换为了指针，维护指针的完整性。</p>
-<h1 id="0x01pac介绍"><a class="markdownIt-Anchor" href="#0x01pac介绍"></a> 0x01.PAC介绍</h1>
-<p>之前我们用到的漏洞大多数都是缓冲区溢出、整数溢出，然后结合ROP做提权，注入<code>amfid</code>去bypass签名校验等等，加入了PAC之后，相当于把以前的方式都给通杀掉了。毫无疑问对于我们带来了新的挑战，不过这也是一件令人兴奋的事情，如果总是相同的套路，我想大部分的<code>Hacker</code>最后都会离开这个领域。</p>
+<p>PAC也是差不多的机制，只是把<code>Message</code>给替换为了指针，维护指针的完整性，虽然说的简单，但是PAC的引入就我浅薄的知识来看把我之前写的所有poc都给干掉了。</p>
+<h1 id="0x01-PAC介绍"><a href="#0x01-PAC介绍" class="headerlink" title="0x01.PAC介绍"></a>0x01.PAC介绍</h1><p>之前我们用到的漏洞大多数都是缓冲区溢出、整数溢出，然后结合ROP做提权，注入<code>amfid</code>去bypass签名校验等等，而加入了PAC之后，基本相当于把以前的利用方式都给通杀掉了。毫无疑问对于我们带来了新的挑战，不过这也是一件令人兴奋的事情，如果总是相同的套路，我想大部分的<code>Hacker</code>最后都会离开这个领域。</p>
 <p>下面就来介绍一下PAC的具体实现：</p>
 <ul>
 <li>因为64位的机器并没有用到64位地址，所以我们可以使用多余的bit来作为PAC</li>
@@ -23,7 +21,7 @@
 <li>有两个重要的操作需要校验指针：计算和添加PAC，校验PAC和存储指针的值</li>
 <li>高通公司为其PAC构建设计了自己的分组密码<a href="https://eprint.iacr.org/2016/444.pdf" target="_blank" rel="external">QARMA</a></li>
 </ul>
-<p>高通基本上是在指令的未使用位上添加完整性信息（PAC），在指针跳转之前，它们会检查这些PAC，如果验证失败，则抛出<code>authentication failure</code>错误，程序将不执行下一条指令。具体可以看看 <a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">关于指针认证代码</a>的<a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">论文</a>。也可以阅读<a href="http://www.newosxbook.com/forum/viewtopic.php?f=11&amp;t=19557" target="_blank" rel="external">Jonathan Levin的帖子</a>。</p>
+<p>高通基本上是在指令的未使用位上添加完整性信息（PAC），在指针跳转之前，它们会检查这些PAC，如果验证失败，则抛出<code>authentication failure</code>错误，程序将不执行下一条指令。具体可以看看 <a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">关于指针认证代码</a>的<a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf" target="_blank" rel="external">论文</a>。也可以阅读<a href="http://www.newosxbook.com/forum/viewtopic.php?f=11&amp;t=19557" target="_blank" rel="external">Jonathan Levin的帖子</a>。</p>
 <p>既然采用了和MAX类似的加密方式，那么也就意味着攻击MAC的方式同样可以拿来作为攻击PAC的参考：</p>
 <ul>
 <li>密钥管理攻击：他们生成PAC密钥的方式必须正常工作，攻击者不应该能够预测密钥。</li>
@@ -36,6 +34,8 @@
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%885.01.37.png" alt="xerub"></p>
 <p>团队老大也在学习这个，emm，我也要加把劲了：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-09-20%20%E4%B8%8B%E5%8D%885.02.20.png" alt="Proteas"></p>
+<h1 id="0x02-参考链接"><a href="#0x02-参考链接" class="headerlink" title="0x02.参考链接"></a>0x02.参考链接</h1><p><a href="https://ivrodriguez.com/pointer-authentication-on-armv8-3/" target="_blank" rel="external">玄武实验室推送博客</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Message_authentication_code" target="_blank" rel="external">Message Authentication Code</a></p>
 ]]></content>
       
         <categories>
