@@ -167,19 +167,15 @@
         <!-- Post Content -->
         <p>ZipperDown can be used by another way,SSZipArchive’s fix is not proper</p>
 <a id="more"></a>
-<h1 id="0x00前言"><a class="markdownIt-Anchor" href="#0x00前言"></a> 0x00.前言</h1>
-<p>ZipperDown漏洞爆出来之后，官方库虽然做了修补，但是只是对<code>../</code>这种做了校验，还是可以通过符号链接来绕过，首先在本地环境使用最近的库进行测试：</p>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>ZipperDown漏洞爆出来之后，官方库虽然做了修补，但是只是对<code>../</code>这种做了校验，还是可以通过符号链接来绕过，首先在本地环境使用最近的库进行测试：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-08-29%20%E4%B8%8B%E5%8D%886.59.43.png" alt="ZipperDown"></p>
 <p>可以看到确实是存在问题，symlink.zip解压出来的gen-zip.py穿越到了上级目录，这就是因为没有对<code>PDIR</code>做检查的缘故</p>
-<h1 id="0x01测试"><a class="markdownIt-Anchor" href="#0x01测试"></a> 0x01.测试</h1>
-<h2 id="新浪微博"><a class="markdownIt-Anchor" href="#新浪微博"></a> 新浪微博</h2>
-<p>一开始盘古团队是拿新浪微博做的例子，所以我这次也是从新浪微博开始新一轮的排查，应用审计发现了攻击点，在<code>response</code>的地方会得到一个zip的url作为类的属性存下来，并在之后解压缩。</p>
+<h1 id="0x01-测试"><a href="#0x01-测试" class="headerlink" title="0x01.测试"></a>0x01.测试</h1><h2 id="新浪微博"><a href="#新浪微博" class="headerlink" title="新浪微博"></a>新浪微博</h2><p>一开始盘古团队是拿新浪微博做的例子，所以我这次也是从新浪微博开始新一轮的排查，应用审计发现了攻击点，在<code>response</code>的地方会得到一个zip的url作为类的属性存下来，并在之后解压缩。</p>
 <p>首先逆向定位到最终调用的函数，新浪微博中是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+[SSZipArchive unzipFileAtPath:toDestination:overwrite:password:error:delegate:];</div></pre></td></tr></table></figure>
 <p>可以看得出来新浪是自己对这个库进行了修改，接下来用<code>cycript</code>测一波，发现我们的恶意zip包并没有生效，在<code>console</code>中发现构造的路径穿越位置被干掉了.</p>
 <p>符号链接被当成了一个文本去解析，所以没办法利用</p>
-<h2 id="网易云音乐"><a class="markdownIt-Anchor" href="#网易云音乐"></a> 网易云音乐</h2>
-<p>这里是成功的，但是很不幸的是并没有找到有下载zip的地方，通过<code>Burp</code>抓到的全部都是上传的zip包，虽然使用的<code>SSZipArchive</code>，但是并没有用来解压缩，只是用来打压缩包</p>
+<h2 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h2><p>这里是成功的，但是很不幸的是并没有找到有下载zip的地方，通过<code>Burp</code>抓到的全部都是上传的zip包，虽然使用的<code>SSZipArchive</code>，但是并没有用来解压缩，只是用来打压缩包</p>
 <p>想要逆向看看是不是真的没有地方引用到解压缩的函数，然后发现ida分析出奇地快，原来符号表被<code>strip</code>掉了，顺便加了混淆，好吧，那就算了。</p>
 <p>后来在本机装了证书去看，发现根本就不下<code>zip</code>包，所以没有办法让它解压缩我们的恶意zip。</p>
 <table>
@@ -205,12 +201,9 @@
 </tbody>
 </table>
 <p>通过lldb对解压缩的函数下断点，在手上把玩了半天也没触发，所以一直以来都应该只用到了<code>SSZipArchive</code>的压缩功能</p>
-<h2 id="qq音乐-陌陌"><a class="markdownIt-Anchor" href="#qq音乐-陌陌"></a> QQ音乐、陌陌</h2>
-<p>经过上次的事件之后，已经把这个不安全的第三方库给干掉了，目前不存在威胁</p>
-<h2 id="快手"><a class="markdownIt-Anchor" href="#快手"></a> 快手</h2>
-<p>同上面新浪微博的情况</p>
-<h2 id="其他应用"><a class="markdownIt-Anchor" href="#其他应用"></a> 其他应用</h2>
-<p>因为没什么名气也没啥意义</p>
+<h2 id="QQ音乐、陌陌"><a href="#QQ音乐、陌陌" class="headerlink" title="QQ音乐、陌陌"></a>QQ音乐、陌陌</h2><p>经过上次的事件之后，已经把这个不安全的第三方库给干掉了，目前不存在威胁</p>
+<h2 id="快手"><a href="#快手" class="headerlink" title="快手"></a>快手</h2><p>同上面新浪微博的情况</p>
+<h2 id="其他应用"><a href="#其他应用" class="headerlink" title="其他应用"></a>其他应用</h2><p>因为没什么名气也没啥意义</p>
 
     </div>
 
@@ -253,6 +246,10 @@
         <ul>
             
             <li>
+                <a class="footer-post" href="/2018/10/08/基于CVE-2017-7047的利用分析/">基于CVE-2017-7047d的利用分析</a>
+            </li>
+            
+            <li>
                 <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
             </li>
             
@@ -262,10 +259,6 @@
             
             <li>
                 <a class="footer-post" href="/2018/08/29/ZipperDown漏洞的新一轮分析/">ZipperDown漏洞的新一轮分析</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2018/08/06/绕过SMAP提权-Mac移植/">绕过SMAP提权(Mac移植)</a>
             </li>
             
         </ul>
@@ -279,7 +272,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/安全防护/">安全防护</a>
+            <a class="footer-post" href="/categories/UI学习-基础/">UI学习 基础</a>
         </li>
         
         <li>
