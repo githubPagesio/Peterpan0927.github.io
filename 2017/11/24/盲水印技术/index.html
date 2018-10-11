@@ -167,14 +167,17 @@
         <!-- Post Content -->
         <p>我们都知道在网上寻找图片的时候，有时候会有可见的该死水印影响了我们的图片完整性，但是还有有一种我们看不见却真实存在的水印，你知道是什么吗？</p>
 <a id="more"></a>
-<h2 id="0X00引言"><a href="#0X00引言" class="headerlink" title="0X00引言"></a>0X00引言</h2><p>在这里先举一个例子来介绍一下吧，之前有个阿里的员工外泄信息被捕获的的报道。这个事情大概也就是在内部使用办公软件截图，使用PS工具修掉截图上可见的水印，然后传播出去，但是阿里通过了图片携带的不可见水印，解读了截图员工的员工编码，于是顺利的找到了这名员工。</p>
+<h2 id="0x00引言"><a class="markdownIt-Anchor" href="#0x00引言"></a> 0X00引言</h2>
+<p>在这里先举一个例子来介绍一下吧，之前有个阿里的员工外泄信息被捕获的的报道。这个事情大概也就是在内部使用办公软件截图，使用PS工具修掉截图上可见的水印，然后传播出去，但是阿里通过了图片携带的不可见水印，解读了截图员工的员工编码，于是顺利的找到了这名员工。</p>
 <p>一时间图片的盲水印技术也到了广泛的关注。为了了解这个技术我建议大家首先去看一下关于各种域之间的转换和诸如傅立叶变换之类的数学基础–<a href="http://www.elecfans.com/engineer/blog/20140527344277.html" target="_blank" rel="external">传送门</a>。关于傅立叶变换有一点需要记住的就是任何的周期函数，都可以看作是不同振幅，不同相位的正弦波的叠加。这是一个贯穿了时域和频域的方法，就像某首诗所作：</p>
 <blockquote>
 <p>你眼中看似落叶缤纷变换无常的世界，其实只是躺在上帝怀中早已铺好的乐章</p>
 </blockquote>
-<h2 id="0X01概述"><a href="#0X01概述" class="headerlink" title="0X01概述"></a>0X01概述</h2><p>数字水印技术也就是将一些标识信息，就好比宣示主权一样，直接嵌入数字载体，如图片，音频等。但显然不会影响这个载体的使用，从视觉或者听觉上都处于人可以识别的范畴以外，只有通过特殊的检测器或者阅读器才能读取到，除了我们常见的隐写术之外，这是一种新的信息隐藏技术。</p>
+<h2 id="0x01概述"><a class="markdownIt-Anchor" href="#0x01概述"></a> 0X01概述</h2>
+<p>数字水印技术也就是将一些标识信息，就好比宣示主权一样，直接嵌入数字载体，如图片，音频等。但显然不会影响这个载体的使用，从视觉或者听觉上都处于人可以识别的范畴以外，只有通过特殊的检测器或者阅读器才能读取到，除了我们常见的隐写术之外，这是一种新的信息隐藏技术。</p>
 <p>所以这个时候我们就要提高警惕了，不光是我们看得到的水印，看不到的盲水印才是最致命的威胁，虽然不会让我们觉得难看，但是却关乎到知识产权的问题，虽然这个在天朝看的不太重就是emmm。</p>
-<h2 id="0X02水印技术评判"><a href="#0X02水印技术评判" class="headerlink" title="0X02水印技术评判"></a>0X02水印技术评判</h2><p>既然有这个技术在这里，肯定会有一个好坏、高下之分，那么如何去衡量一个水印的好坏呢？我们可以从两个方面去看一下（隐蔽性和鲁棒性）：</p>
+<h2 id="0x02水印技术评判"><a class="markdownIt-Anchor" href="#0x02水印技术评判"></a> 0X02水印技术评判</h2>
+<p>既然有这个技术在这里，肯定会有一个好坏、高下之分，那么如何去衡量一个水印的好坏呢？我们可以从两个方面去看一下（隐蔽性和鲁棒性）：</p>
 <ul>
 <li>隐蔽性</li>
 </ul>
@@ -183,41 +186,48 @@
 <li>鲁棒性</li>
 </ul>
 <p>鲁棒性是指在经历多种有意或者无意的信号处理之后，数字水印仍能保持完整性或仍能被准确鉴别。可以利用信号处理过程包括信道噪、滤波、数字信号和模拟信号之间的转换、重采样，剪切、位移、尺度变化及有损压缩编码等。所以我们有时候可以根据这些点对图像进行攻击，导致图像的辨识度大幅度下降</p>
-<h2 id="0X03水印分类"><a href="#0X03水印分类" class="headerlink" title="0X03水印分类"></a>0X03水印分类</h2><ul>
-<li>按水印的特性来分<ul>
+<h2 id="0x03水印分类"><a class="markdownIt-Anchor" href="#0x03水印分类"></a> 0X03水印分类</h2>
+<ul>
+<li>按水印的特性来分
+<ul>
 <li>鲁棒性数字水印：要求嵌入的水印能够经受各种常用的编辑处理</li>
 <li>脆弱数字水印：需要对信号的改动足够敏感，人们可以根据脆弱水印判断数据是否被篡改</li>
 </ul>
 </li>
-<li>按水印的检测过程<ul>
+<li>按水印的检测过程
+<ul>
 <li>明文水印：检测过程中，需要原始数据</li>
 <li>盲水印：只需要密钥，不需要原始数据</li>
 </ul>
 </li>
-<li>按水印的内容<ul>
+<li>按水印的内容
+<ul>
 <li>有意义水印：水印是商标等</li>
 <li>无意义水印：序列号，仅作为普通标识</li>
 </ul>
 </li>
-<li>按水印的隐藏位置<ul>
+<li>按水印的隐藏位置
+<ul>
 <li>空域</li>
 <li>频域</li>
 <li>时域</li>
 </ul>
 </li>
 </ul>
-<h2 id="0X04盲水印的实现"><a href="#0X04盲水印的实现" class="headerlink" title="0X04盲水印的实现"></a>0X04盲水印的实现</h2><p>在这里可以先丢出一个<a href="https://github.com/chishaxie/BlindWaterMark/blob/master/bwm.py" target="_blank" rel="external">传送门</a>，这是在github上的一个盲水印实现，在这里po出一个encode的代码：</p>
+<h2 id="0x04盲水印的实现"><a class="markdownIt-Anchor" href="#0x04盲水印的实现"></a> 0X04盲水印的实现</h2>
+<p>在这里可以先丢出一个<a href="https://github.com/chishaxie/BlindWaterMark/blob/master/bwm.py" target="_blank" rel="external">传送门</a>，这是在github上的一个盲水印实现，在这里po出一个encode的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> cmd == <span class="string">'encode'</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'image&lt;%s&gt; + watermark&lt;%s&gt; -&gt; image(encoded)&lt;%s&gt;'</span> % (fn1, fn2, fn3)</div><div class="line">    img = cv2.imread(fn1)</div><div class="line">    wm = cv2.imread(fn2)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        plt.subplot(<span class="number">231</span>), plt.imshow(bgr_to_rgb(img)), plt.title(<span class="string">'image'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line">        plt.subplot(<span class="number">234</span>), plt.imshow(bgr_to_rgb(wm)), plt.title(<span class="string">'watermark'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">    <span class="comment"># print img.shape # 高, 宽, 通道</span></div><div class="line">    h, w = img.shape[<span class="number">0</span>], img.shape[<span class="number">1</span>]</div><div class="line">    hwm = np.zeros((int(h * <span class="number">0.5</span>), w, img.shape[<span class="number">2</span>]))</div><div class="line">    <span class="keyword">assert</span> hwm.shape[<span class="number">0</span>] &gt; wm.shape[<span class="number">0</span>]</div><div class="line">    <span class="keyword">assert</span> hwm.shape[<span class="number">1</span>] &gt; wm.shape[<span class="number">1</span>]</div><div class="line">    hwm2 = np.copy(hwm)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(wm.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(wm.shape[<span class="number">1</span>]):</div><div class="line">            hwm2[i][j] = wm[i][j]</div><div class="line"></div><div class="line">    random.seed(seed)</div><div class="line">    m, n = range(hwm.shape[<span class="number">0</span>]), range(hwm.shape[<span class="number">1</span>])</div><div class="line">    random.shuffle(m)</div><div class="line">    random.shuffle(n)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(hwm.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(hwm.shape[<span class="number">1</span>]):</div><div class="line">            hwm[i][j] = hwm2[m[i]][n[j]]</div><div class="line"></div><div class="line">    rwm = np.zeros(img.shape)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(hwm.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(hwm.shape[<span class="number">1</span>]):</div><div class="line">            rwm[i][j] = hwm[i][j]</div><div class="line">            rwm[rwm.shape[<span class="number">0</span>] - i - <span class="number">1</span>][rwm.shape[<span class="number">1</span>] - j - <span class="number">1</span>] = hwm[i][j]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        plt.subplot(<span class="number">235</span>), plt.imshow(bgr_to_rgb(rwm)), \</div><div class="line">            plt.title(<span class="string">'encrypted(watermark)'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">    f1 = np.fft.fft2(img)</div><div class="line">    f2 = f1 + alpha * rwm</div><div class="line">    _img = np.fft.ifft2(f2)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        plt.subplot(<span class="number">232</span>), plt.imshow(bgr_to_rgb(np.real(f1))), \</div><div class="line">            plt.title(<span class="string">'fft(image)'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">    img_wm = np.real(_img)</div><div class="line"></div><div class="line">    <span class="keyword">assert</span> cv2.imwrite(fn3, img_wm, [int(cv2.IMWRITE_JPEG_QUALITY), <span class="number">100</span>])</div><div class="line"></div><div class="line">    <span class="comment"># 这里计算下保存前后的(溢出)误差</span></div><div class="line">    img_wm2 = cv2.imread(fn3)</div><div class="line">    sum = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(img_wm.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(img_wm.shape[<span class="number">1</span>]):</div><div class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> xrange(img_wm.shape[<span class="number">2</span>]):</div><div class="line">                sum += np.power(img_wm[i][j][k] - img_wm2[i][j][k], <span class="number">2</span>)</div><div class="line">    miss = np.sqrt(sum) / (img_wm.shape[<span class="number">0</span>] * img_wm.shape[<span class="number">1</span>] * img_wm.shape[<span class="number">2</span>]) * <span class="number">100</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Miss %s%% in save'</span> % miss</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        plt.subplot(<span class="number">233</span>), plt.imshow(bgr_to_rgb(np.uint8(img_wm))), \</div><div class="line">            plt.title(<span class="string">'image(encoded)'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">    f2 = np.fft.fft2(img_wm)</div><div class="line">    rwm = (f2 - f1) / alpha</div><div class="line">    rwm = np.real(rwm)</div><div class="line"></div><div class="line">    wm = np.zeros(rwm.shape)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(int(rwm.shape[<span class="number">0</span>] * <span class="number">0.5</span>)):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(rwm.shape[<span class="number">1</span>]):</div><div class="line">            wm[m[i]][n[j]] = np.uint8(rwm[i][j])</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(int(rwm.shape[<span class="number">0</span>] * <span class="number">0.5</span>)):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(rwm.shape[<span class="number">1</span>]):</div><div class="line">            wm[rwm.shape[<span class="number">0</span>] - i - <span class="number">1</span>][rwm.shape[<span class="number">1</span>] - j - <span class="number">1</span>] = wm[i][j]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        <span class="keyword">assert</span> cv2.imwrite(<span class="string">'_bwm.debug.wm.jpg'</span>, wm)</div><div class="line">        plt.subplot(<span class="number">236</span>), plt.imshow(bgr_to_rgb(wm)), plt.title(<span class="string">u'watermark'</span>)</div><div class="line">        plt.xticks([]), plt.yticks([])</div><div class="line"></div><div class="line">    <span class="keyword">if</span> debug:</div><div class="line">        plt.show()</div></pre></td></tr></table></figure>
 <p>中了一记源码大招之后是不是已经感觉奄奄一息了hhh，接下来还是从宏观上来讨论一下，赶快收起你们的西瓜刀。</p>
 <p>添加盲水印的方法简单可以分为频域方法和空域方法，这两种方法添加了冗余信息，但在编码和压缩情况不变的情况下，不会使原始图像大小产生变化（原来是10MB添加盲水印之后还是10MB）</p>
 <p>空域是指空间域，我们日常所见的图像就是空域。空域添加数字水印的方法是在空间域直接对图像操作（之所以说的这么绕，是因为不仅仅原图是空域，原图的差分等等也是空域），比如将水印直接叠加在图像上。</p>
-<p>我们常说一个音有多高，这个音高是指频率；同样，<strong>图像灰度变化强烈的情况，</strong>也可以视为<strong>图像的频率</strong>。频域添加数字水印的方法，是指通过<strong>某种变换手段</strong>（傅里叶变换，离散余弦变换，小波变换等）将图像变换到<strong>频域（小波域）</strong>，在频域对图像添加水印，再通过<strong>逆变换</strong>，将图像转换为空间域。相对于空域手段，<strong>频域手段隐匿性更强，抗攻击性更高</strong>。</p>
-<p>所谓对水印的攻击，是指破坏水印，包括<strong>涂抹，剪切，放缩，旋转，压缩，加噪，滤波等。</strong>数字盲水印不仅仅要敏捷性高（不被人抓到），也要防御性强（抗打）。就像Dota的敏捷英雄往往是脆皮，<strong>数字盲水印的隐匿性和鲁棒性</strong>是互斥的。（鲁棒性是抗攻击性的学术名字）</p>
-<h2 id="0X05频域制作盲水印的方法"><a href="#0X05频域制作盲水印的方法" class="headerlink" title="0X05频域制作盲水印的方法"></a>0X05频域制作盲水印的方法</h2><p>由于信号是有频率的，一个信号可以看作是无数个不同阶的正弦信号的叠加。</p>
+<p>我们常说一个音有多高，这个音高是指频率；同样，<strong>图像灰度变化强烈的情况，<strong>也可以视为</strong>图像的频率</strong>。频域添加数字水印的方法，是指通过<strong>某种变换手段</strong>（傅里叶变换，离散余弦变换，小波变换等）将图像变换到<strong>频域（小波域）</strong>，在频域对图像添加水印，再通过<strong>逆变换</strong>，将图像转换为空间域。相对于空域手段，<strong>频域手段隐匿性更强，抗攻击性更高</strong>。</p>
+<p>所谓对水印的攻击，是指破坏水印，包括**涂抹，剪切，放缩，旋转，压缩，加噪，滤波等。**数字盲水印不仅仅要敏捷性高（不被人抓到），也要防御性强（抗打）。就像Dota的敏捷英雄往往是脆皮，<strong>数字盲水印的隐匿性和鲁棒性</strong>是互斥的。（鲁棒性是抗攻击性的学术名字）</p>
+<h2 id="0x05频域制作盲水印的方法"><a class="markdownIt-Anchor" href="#0x05频域制作盲水印的方法"></a> 0X05频域制作盲水印的方法</h2>
+<p>由于信号是有频率的，一个信号可以看作是无数个不同阶的正弦信号的叠加。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-27%20%E4%B8%8B%E5%8D%8810.11.22.png" alt=""></p>
 <p>上式为傅里叶变换公式，<img src="https://www.zhihu.com/equation?tex=f%28t%29" alt="">是指时域信号（对于信号我们说时域，因为是与时间有关的，而图像我们往往说空域，与空间有关），ω是指频率。想要对傅里叶变换有深入了解的同学，建议看一下《信号与系统》或者《数字信号处理》的教材，里面系统介绍了傅里叶变换、快速傅里叶变换、拉普拉斯变换、z变换等。</p>
-<p>简而言之，我们有方法将时域信号转换成为频域，同样，<strong>我们也能将二维信号（图像）转换为频域。</strong>在上文中提到，<strong>图像的频率是指图像灰度变换的强烈情况</strong>。关于此方面更系统的知识，参见冈萨雷斯的《图像处理》。</p>
-<p>下面以傅里叶变换为例，介绍通过频域给图像添加数字盲水印的方法。<strong>注意，</strong>因为图像是<strong>离散信号</strong>，我们实际用的是<strong>离散傅里叶变换</strong>，在本文采用的都是<a href="https://www.zhihu.com/question/22611929" target="_blank" rel="external"><strong>二维快速傅里叶变换</strong></a>，快速傅里叶变换与离散时间傅里叶变换等价，通过蝶型归并的手段，速度更快。下文中傅里叶变换均为二维快速傅里叶变换。</p>
+<p>简而言之，我们有方法将时域信号转换成为频域，同样，**我们也能将二维信号（图像）转换为频域。**在上文中提到，<strong>图像的频率是指图像灰度变换的强烈情况</strong>。关于此方面更系统的知识，参见冈萨雷斯的《图像处理》。</p>
+<p>下面以傅里叶变换为例，介绍通过频域给图像添加数字盲水印的方法。<strong>注意，<strong>因为图像是</strong>离散信号</strong>，我们实际用的是<strong>离散傅里叶变换</strong>，在本文采用的都是<a href="https://www.zhihu.com/question/22611929" target="_blank" rel="external"><strong>二维快速傅里叶变换</strong></a>，快速傅里叶变换与离散时间傅里叶变换等价，通过蝶型归并的手段，速度更快。下文中傅里叶变换均为二维快速傅里叶变换。</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-28%20%E4%B8%8A%E5%8D%881.02.18.png" alt=""></p>
 <p>接下来我们就算对图像做一系列的处理之后我们仍然可以分离出水印图像，但是分离之后的水印图像是对称的，那么这是为什么呢？那么这就是属于数学部分的知识了。</p>
 <p>在这里要借用一个知乎大神对于盲水印的鲁棒性实验，接下来会对加了水印的图片进行各种攻击，看看复原之后的水印效果如何：</p>
@@ -225,12 +235,14 @@
 <p>接下来还进行了剪切攻击、饱和度攻击等十几种手段，但对于提取之后的盲水印的影响其实并不大，最后才发现屏摄会导致盲水印的失效：</p>
 <p><img src="http://omunhj2f1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-11-30%20%E4%B8%8B%E5%8D%885.15.40.png" alt=""></p>
 <p>经过屏摄之后的图片调整水印系数基本是无效的，因为在屏摄中不仅加入了椒盐噪声、乘性噪声、还有有规律的雪花纹理（摩尔纹），就算使用了多抽样滤波的方式也滤不掉屏摄引入的噪声。</p>
-<h2 id="0X06总结"><a href="#0X06总结" class="headerlink" title="0X06总结"></a>0X06总结</h2><ol>
+<h2 id="0x06总结"><a class="markdownIt-Anchor" href="#0x06总结"></a> 0X06总结</h2>
+<ol>
 <li>我们从上面的例子中可以看出来盲水印的技术的鲁棒性还是很强的，但是鲁棒性越强，即证明利用了人眼的冗余信息越多，如果破坏了信息冗余部分也就破坏了水印，但是如果只是做信息传递，信息冗余定义的就要宽泛很多。不过也可以通过图像的位深度转换和加干扰来达到目的。</li>
 <li>最后显然更关心的是如何去防护这种盲水印，其实一般来说都不会涉及到什么版权问题，截图肯定是不安全的，用手机拍或者用屏摄都是不错的选择。或者只截图其中一小部分，那么频域算法也是会失效的。</li>
 <li>学习了盲水印之后才感觉在隐写术这一方面初窥门径，之前的那些隐写的方法其实没有什么新奇之处，稍微上了一点档次的也就是隐藏了一个png的IDAT数据块，直到和滤波、数学部分结合在一起的时候，才是隐写术真正的魅力所在。</li>
 </ol>
-<h2 id="0X07参考博客"><a href="#0X07参考博客" class="headerlink" title="0X07参考博客"></a>0X07参考博客</h2><ul>
+<h2 id="0x07参考博客"><a class="markdownIt-Anchor" href="#0x07参考博客"></a> 0X07参考博客</h2>
+<ul>
 <li><a href="https://www.zhihu.com/question/50735753" target="_blank" rel="external">阿里巴巴员工泄漏信息追查技术–知乎</a></li>
 <li><a href="http://blog.jobbole.com/70549/" target="_blank" rel="external">傅立叶变换通俗易懂讲解</a></li>
 <li>github盲水印工具</li>
@@ -303,11 +315,7 @@
     <ul>
         
         <li>
-            <a class="footer-post" href="/categories/多种代理方法-cell重用-数据模型嵌套/">多种代理方法 cell重用 数据模型嵌套</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+            <a class="footer-post" href="/categories/UI学习-基础/">UI学习 基础</a>
         </li>
         
         <li>
@@ -315,7 +323,11 @@
         </li>
         
         <li>
-            <a class="footer-post" href="/categories/Intel/">Intel</a>
+            <a class="footer-post" href="/categories/动态规划/">动态规划</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/ARC自动回收机制/">ARC自动回收机制</a>
         </li>
         
     </ul>
