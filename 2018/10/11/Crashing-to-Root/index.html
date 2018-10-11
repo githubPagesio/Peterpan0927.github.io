@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="how to reach the steins gate?">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Peter pan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Crashing to Root"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="how to reach the steins gate?" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Peterpan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Crashing to Root - Peterpan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2018/10/11/Crashing-to-Root/">
+                Crashing to Root
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-10-11</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/poc/">poc</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p> Mach port replacement vulnerability in launchd on iOS 11.2.6 leading to sandbox escape, privilege escalation, and codesigning bypass.</p>
+<a id="more"></a>
+<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00.前言"></a>0x00.前言</h1><p>在玄武实验室的日推中发现了这个漏洞，发现又是个没见过的<code>bypass</code>姿势，于是就来研究一下吧，这个是利用了<code>launchd</code>的一个漏洞，通过向他发送恶意消息可以将对应的进程<code>dealloc</code>掉，然后伪造这个进程，相当于做<code>port</code>间的中间人的攻击，就可以拿到其他进程的<code>send right</code>，在这一点的基础上进行沙盒逃逸，提权和绕过签名。</p>
+<p>通过Brandon的写的文章我们来对整个的利用过程进行一个剖析，其实也可以视为是对他的文章的翻译，因为原文已经说的比较清楚了。</p>
+<h1 id="0x01-漏洞产生处"><a href="#0x01-漏洞产生处" class="headerlink" title="0x01.漏洞产生处"></a>0x01.漏洞产生处</h1><p>Brandon在进行iOS上的crash报告研究的时候，发现了这个漏洞，可以一种特殊的<code>crash</code>方式，可以让内核向<code>launchd</code>发送一个<code>Mach message</code>，从而使<code>launchd</code>将这个进程的<code>send right</code>在他的<code>ipc_space</code>中<code>over-dealloced</code>掉。那么我们就可以冒充这个进程。</p>
+<p>这个漏洞在<code>macOS</code>上也出现了，只不过在iOS上触发条件更为严格，因为在iOS上要求这个<code>Mach message</code>    从内核发送。</p>
+<h2 id="launchd在处理EXC-CRASH异常消息时的over-deallocation"><a href="#launchd在处理EXC-CRASH异常消息时的over-deallocation" class="headerlink" title="launchd在处理EXC_CRASH异常消息时的over-deallocation"></a>launchd在处理EXC_CRASH异常消息时的over-deallocation</h2><p>当一个进程发送<code>mach_exception_raise</code> 或者 <code>mach_exception_raise_state_identity</code>消息给他的<code>bootstap port</code>的时候，<code>launchd</code>将会把这个异常消息作为一个<code>host level</code>的异常去接收。</p>
+<p>不幸的是，<code>launchd</code>去处理这些代码的方式是有问题的，当异常的类型是<code>EXC_CRASH</code>的时候，<code>launchd</code>会销毁掉消息中的<code>thread</code>和<code>task port</code>并返回<code>KERN_FAILURE</code>，接下来MIG系统会把这些再次销毁(这样的原因是因为如果返回的是<code>KERN_SUCCESS</code>，就意味着launchd持有着这个消息中的资源，如果是<code>KERN_FAILURE</code>，就意味着它并没有这些资源的所有权)</p>
+<p>下面就是处理部分的代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">kern_return_t</span> __<span class="function">fastcall</span></div><div class="line"><span class="title">catch_mach_exception_raise</span><span class="params">(                             <span class="comment">// (a) The service routine is</span></span></div><div class="line">        <span class="keyword">mach_port_t</span>            exception_port,          <span class="comment">//     called with values directly</span></div><div class="line">        <span class="keyword">mach_port_t</span>            thread,                  <span class="comment">//     from the Mach message</span></div><div class="line">        <span class="keyword">mach_port_t</span>            task,                    <span class="comment">//     sent by the client. The</span></div><div class="line">        <span class="keyword">exception_type_t</span>       exception,               <span class="comment">//     thread and task ports could</span></div><div class="line">        <span class="keyword">mach_exception_data_t</span>  code,                    <span class="comment">//     be arbitrary send rights.</span></div><div class="line">        <span class="keyword">mach_msg_type_number_t</span> codeCnt)</div><div class="line">&#123;</div><div class="line">    __int64 __stack_guard;                 <span class="comment">// ST28_8@1</span></div><div class="line">    <span class="keyword">kern_return_t</span> kr;                      <span class="comment">// w0@1 MAPDST</span></div><div class="line">    <span class="keyword">kern_return_t</span> result;                  <span class="comment">// w0@4</span></div><div class="line">    __int64 codes_left;                    <span class="comment">// x25@6</span></div><div class="line">    <span class="keyword">mach_exception_data_type_t</span> code_value; <span class="comment">// t1@7</span></div><div class="line">    <span class="keyword">int</span> pid;                               <span class="comment">// [xsp+34h] [xbp-44Ch]@1</span></div><div class="line">    <span class="keyword">char</span> codes_str[<span class="number">1024</span>];                  <span class="comment">// [xsp+38h] [xbp-448h]@7</span></div><div class="line"></div><div class="line">    __stack_guard = *__stack_chk_guard_ptr;</div><div class="line">    pid = <span class="number">-1</span>;</div><div class="line">    kr = pid_for_task(task, &amp;pid);</div><div class="line">    <span class="keyword">if</span> ( kr )</div><div class="line">    &#123;</div><div class="line">        _os_assumes_log(kr);</div><div class="line">        _os_avoid_tail_call();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ( current_audit_token.val[<span class="number">5</span>] )                   <span class="comment">// (b) 如果发送这个消息的进程pid不是0</span></div><div class="line">    &#123;                                                   <span class="comment">//     (不是内核进程)</span></div><div class="line">        result = KERN_FAILURE;                          <span class="comment">//     那么就会被拒绝</span></div><div class="line">    &#125;                                                        </div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ( codeCnt )</div><div class="line">        &#123;</div><div class="line">            codes_left = codeCnt;</div><div class="line">            <span class="keyword">do</span></div><div class="line">            &#123;</div><div class="line">                code_value = *code;</div><div class="line">                ++code;</div><div class="line">                __snprintf_chk(codes_str, <span class="number">0x400</span>uLL, <span class="number">0</span>, <span class="number">0x400</span>uLL, <span class="string">"0x%llx"</span>, code_value);</div><div class="line">                --codes_left;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">while</span> ( codes_left );</div><div class="line">        &#125;</div><div class="line">        launchd_log_2(</div><div class="line">            <span class="number">0L</span>L,</div><div class="line">            <span class="number">3L</span>L,</div><div class="line">            <span class="string">"Host-level exception raised: pid = %d, thread = 0x%x, "</span></div><div class="line">                <span class="string">"exception type = 0x%x, codes = &#123; %s &#125;"</span>,</div><div class="line">            pid,</div><div class="line">            thread,</div><div class="line">            exception,</div><div class="line">            codes_str);</div><div class="line">        kr = deallocate_port(thread);                   <span class="comment">// (c) 消息中的"thread" port</span></div><div class="line">        <span class="keyword">if</span> ( kr )                                       <span class="comment">//     被deallocate掉了</span></div><div class="line">        &#123;</div><div class="line">            _os_assumes_log(kr);</div><div class="line">            _os_avoid_tail_call();</div><div class="line">        &#125;</div><div class="line">        kr = deallocate_port(task);                     <span class="comment">// (d) 消息中的"task" port</span></div><div class="line">        <span class="keyword">if</span> ( kr )                                       <span class="comment">//     被deallocat掉了</span></div><div class="line">        &#123;</div><div class="line">            _os_assumes_log(kr);</div><div class="line">            _os_avoid_tail_call();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> ( exception == EXC_CRASH )                   <span class="comment">// (e) 如果异常的类型是</span></div><div class="line">            result = KERN_FAILURE;                      <span class="comment">//     EXC_CRASH, 就会返回</span></div><div class="line">        <span class="keyword">else</span>                                            <span class="comment">//     KERN_FAILURE，MIG</span></div><div class="line">            result = <span class="number">0</span>;                                 <span class="comment">//     就会再次deallocate这些port</span></div><div class="line">    &#125;</div><div class="line">    *__stack_chk_guard_ptr;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/漏洞利用/">#漏洞利用</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    Hacking to the gate
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/10/11/Crashing-to-Root/">Crashing to Root</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/10/08/基于CVE-2017-7047的利用分析/">基于CVE-2017-7047的利用分析</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/09/20/iPhone中新引入的保护机制/">iPhone中新引入的保护机制</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2018/09/10/empty-list分析/">empty_list分析</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/多种代理方法-cell重用-数据模型嵌套/">多种代理方法 cell重用 数据模型嵌套</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/交换机/Vlan/">Vlan</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/sumup/">sumup</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Intel/">Intel</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/peterpan0927">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/peterpan980927">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
