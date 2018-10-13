@@ -185,7 +185,15 @@
 <li>调用<code>abort</code>，内核就会生成<code>EXC_CRASH</code>类型的异常消息发送给<code>launchd</code></li>
 <li><code>launchd</code>解析异常消息释放掉目标服务</li>
 </ol>
-
+<h2 id="在crash之后继续运行"><a href="#在crash之后继续运行" class="headerlink" title="在crash之后继续运行"></a>在crash之后继续运行</h2><p>因为调用<code>abort</code>之后我们的进程就会被杀掉了，我们想要继续运行接下来的代码就需要新的方法</p>
+<p>如果是其他的异常类型进程是可以恢复的，只需要将其<code>thread exception handler</code>设置为<code>launchd</code>，而<code>task</code>级别的设置为他自己。那么在<code>launchd</code>无法处理这个异常的时候，就会交给它自身了，从而线程状态并告知内核异常消息已经被处理。但是一个进程不能捕捉到它自身的<code>EXC_CRASH</code>消息，所以我们需要两个进程。</p>
+<p>一个策略就是首先在另一个进程中触发漏洞，强制设置<code>kernel port</code>并<code>crash</code>掉，然而，用<code>App extension</code>是一个更好的方式。</p>
+<p><code>App extension</code>在iOS 8中引入，它提供了将应用的一些功能打包，运行在应用之外的能力，它的代码运行在一个隔离的沙盒进程中，本来是和<code>App extension</code>通信的API，但是Ian McDowell写了一个<a href="https://ianmcdowell.net/blog/nsextension/" target="_blank" rel="external">文章</a>描述如何通过私有API<code>NSExtension</code>去启动应用扩展并和它通信，我们也就是通过向<code>launchd</code>注册应用扩展服务的那个端口和应用扩展进程之间通信。</p>
+<h2 id="避免launchd中的端口复用"><a href="#避免launchd中的端口复用" class="headerlink" title="避免launchd中的端口复用"></a>避免launchd中的端口复用</h2><p>这里就是说了一个老生常谈的技巧，为了防止端口被其他的服务给抢占了，我们可以注册大量的服务，持有这些端口的<code>recv right</code>，那么等我们<code>abort</code>的时候，这些端口也被释放掉了，构造出一长串的<code>freelist</code>，而且我们最先释放的就是我们的目标服务，所以之后注册的服务就不大可能会复用到它头上来了。</p>
+<p>这个方法的局限性就在于我们需要<code>com.apple.security.application-groups</code>的<code>entitlement</code>去向<code>launchd</code>注册服务，虽然还有其他方式，但这种毫无疑问是最简单的了。</p>
+<h2 id="伪装成被释放的服务"><a href="#伪装成被释放的服务" class="headerlink" title="伪装成被释放的服务"></a>伪装成被释放的服务</h2><p>在我们的应用扩展释放了<code>launchd</code>中的目标服务的<code>send right</code>，我们需要占有那个<code>port name</code>，从而可以做<code>port</code>之间的中间人攻击，截获所有客户端和<code>service</code>通信的消息。</p>
+<p>这里因为已经使用了应用组的<code>entitlement</code>，所以我们就注册大量的服务直到他们其中的一个重用到了之前的那个<code>port name</code>，那么其他的客户端寻找目标服务的时候<code>launchd</code>就会将客户端的<code>send right</code>返回给我们的端口，而不是原先的服务。</p>
+<h1 id="0x02-攻击步骤"><a href="#0x02-攻击步骤" class="headerlink" title="0x02.攻击步骤"></a>0x02.攻击步骤</h1><h2 id="步骤1-获取host-priv端口"><a href="#步骤1-获取host-priv端口" class="headerlink" title="步骤1.获取host-priv端口"></a>步骤1.获取<code>host-priv</code>端口</h2>
     </div>
 
     
